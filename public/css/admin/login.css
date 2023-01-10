@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+
+}
+
+.login{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-image: url("http://localhost/Sobawitha_MVC/public/img/Login/login.jpg");
+    background-size: 1750px 810px;
+    overflow: hidden;
+}
+
+.loginContent{
+    width: 30%;
+    height: 55%;
+    margin-left: 120px;
+}
+
+.loginContent h1{
+    color: white;
+    text-align: center;
+}
+
+.loginContent form{
+    margin-top: 20px;
+    width: 100%;
+    height:100%;
+    display: flex;
+    padding: 7% 5%;
+    justify-content: space-around;
+    border-radius: 20px;
+    font-weight: 500;
+    color:white;
+    box-shadow:2px 2px 12px #00000033,-1px -1px 8px #00000033;
+}
+
+.loginContent form label,input{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    float: left;
+    font-size: 20px;
+}
+
+.loginContent form input , #user_role{
+    border: none;
+    padding: 3px 5px;
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    color: black;
+    background: #78996a;
+    font-weight: 600;
+}
+
+.loginContent form button{
+    width: 50%;
+    height: 50px;
+    margin-top: 30px;
+    padding: 5px;
+    border-radius: 15px;
+    color: #ffffff;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: 700;
+    transform:translateX(110px);
+    font-size: 20px;
+}
+
+.loginContent form button:hover{
+    background: white;
+    color: #58BD53;
+}
+
+.loginContent form #user_role{
+    border: none;
+    padding: 3px 5px;
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #78996a;
+    color: #000000;
+    font-weight: 600;
+    font-size: 18px;
+    
+
+}
+/*for responsive site*/
+@media only screen and(max-width:600px){
+    
+    body{
+        padding-left:0%;
+        padding-right:0%;
+        transform:translateX(0%);
+    }
+    #back1{
+        position:absolute;
+        top:100px;
+        left:-150px;
+        transform:translateY(-100%)
+    }
+    input{
+        padding-left:80px;
+    }
+    login{
+        width:100%;
+    }
+}
+
+/* 
+.popup{
+    width:200px;
+    background-color:white;
+    border-radius:6px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(1);
+    text-align:center;
+    color:#333;
+    z-index:5000;
+    font-weight:bold;
+    font-size:12px;
+    padding:0 30px 30px;
+}
+
+#overlap1{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color:rgba(0, 0, 0, 0.5);
+    transition: opacity 500ms;
+    opacity:1;
+    z-index: 1;
+}
+
+#fail{
+    color:red;
+    font-size: 30px;
+    transform: translateY(-10px);
+    z-index:50000;
+} */
