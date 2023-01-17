@@ -1,22 +1,6 @@
 /*css library*/
 @import url('component/topnavbar.css');
-@import url('component/adminSidebar.css');
-@import url('component/buttons_styles.css');
+@import url('component/sidebar.css');
 @import url('footer.css');
 @import url('header.css');
-@import url('admin/login.css');
-@import url('admin/adminRegister.css');
-@import url('admin/admin_dashboard.css');
-
-/*FONTS*/
-@font-face {
-    font-family: Poppins-Regular;
-    src: url(fonts/Poppins-Regular.ttf);
-}
-
-body{
-    margin: 0;
-    font-family: Poppins-Regular ;
-    font-size: small;
-    text-align: left;
-}
+@import url('users/login.css');
