@@ -77,5 +77,19 @@
             return false;
         }
     }
+
+    public function view_profile(){
+        $data=[
+            'title' => 'Sobawitha'
+        ];
+        $this->view('Admin/v_view_profile', $data);
+       }
+
+       public function change_pwd(){
+        $data=[
+            'title' => 'Sobawitha'
+        ];
+        $this->view('Admin/v_change_pwd', $data);
+       }
 }
 ?>

@@ -7,6 +7,11 @@
 @import url('admin/login.css');
 @import url('admin/adminRegister.css');
 @import url('admin/admin_dashboard.css');
+@import url('admin/admin_user_management.css');
+@import url('admin/add_agri_o_n_admin.css');
+@import url('admin/view_profile.css');
+@import url('admin/change_pwd.css');
+@import url('admin/user_view_more_info.css');
 
 /*FONTS*/
 @font-face {

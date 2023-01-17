@@ -1,0 +1,236 @@
+.aum_maincontent{
+    margin-top: 3.8%;
+    margin-left: 19%;
+}
+
+.aum_maincontent hr{
+    border-width: 1px;
+    color: #75e968;
+}
+.aum_maincontent h1{
+    font-size: 30px;
+    color: #004100 ;
+}
+  #searchbar{
+    padding: 6px 10px;
+    margin-top: 12px;
+    background: #E8EFFF ;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  #searchbtn{
+  background-color: #00C88B;
+  position: absolute;
+  margin-top: -5px;
+  margin-left: 5px;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+
+  #addNewUser{
+    position: absolute;
+    margin-left: 1230px;
+    margin-top: -40px;
+    background-color: #00C88B;
+    border: none;
+    color: white;
+    padding: 9px 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+  #userstable{
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  #userstable td, #userstable th {
+    border: 1px solid #D9D9D9;
+    padding: 8px;
+    color: #004100;
+  }
+
+  #userstable tr{
+    background-color: #e6ede6; 
+    color: #004100;
+  }
+
+#userstable tr:hover {
+  background-color: #ddd;
+  cursor: pointer;
+  color: rgb(149, 136, 136);}
+
+#userstable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #00C88B;
+  color: white;
+}
+.deleteButton {
+  background-color: #FF0000 ;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.deleteButton a{
+   text-decoration: none;
+   color: white;
+}
+
+.userRoleButton{
+  background-color: black ;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 8px;
+}
+
+.viewMoreButton{
+    background-color: #00C88B ;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* popup */
+
+  #overlap{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color:rgba(0, 0, 0, 0.5);
+    transition: opacity 500ms;
+    visibility: visible; 
+    opacity:0;
+    z-index: 2500;
+}
+
+#overlap:target{
+    visibility:visible;
+    opacity:1;
+}
+
+.contact_us_form{
+    margin:2% 28%;
+    padding:20px;
+    padding-right:0px;
+    border-radius:10px;
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    background-color:rgb(247, 255, 255);
+    width:40%;
+}
+
+.contact_form_discription{
+    font-size:12px;
+    text-align:center;
+    margin-bottom:50px;
+    line-height: 20px;
+    transform: translateX(30px);
+}
+
+.contact_us_form #users{
+    font-size: 40px;
+    transform: translateX(270px);
+    margin-bottom:10px;
+}
+
+.closebtn{
+    position:relative;
+    font-size:20px;
+    font-weight:bold;
+    color:#ff0000;
+    cursor:pointer;
+    padding-left:120%;
+}
+
+form{
+    width:100%;
+    align-items: center;
+}
+
+form .label{
+    font-size:14px;
+}
+
+form .input_field{
+    width:120%;
+    height:20px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom:2px solid green;
+    background-color:transparent;
+    font-family: 'Montserrat', sans-serif; 
+    margin-top:15px;
+}
+
+form .input_field:focus{
+    outline:none;
+}
+
+form .discription{
+    width:120%;
+    height:200px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom:2px solid green;
+    background-color:transparent;
+
+}
+
+form .discription:focus{
+    outline:none;
+}
+
+.send{
+    border:none;
+    background-color:black;
+    color:white;
+    padding:8px;
+    font-size:12px;
+    font-weight:500px; 
+    font-family:'Montserrat';
+    width:75px;
+    cursor:pointer;
+}
+
+
+/* Choose_add_user*/
+/*form*/
