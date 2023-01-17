@@ -8,7 +8,7 @@ body {
   position: fixed; 
   top: 0; 
   background-color: rgb(5,35,35) ;
-  height: 8%;
+  height: 65px;
   width: 100%;
   z-index:1001;
 }

@@ -1,0 +1,39 @@
+ /*sidebar*/
+ .sidebar {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    padding-top: 120px;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-left:35px;
+    
+}
+
+.sidebar ul{
+    list-style-type:none;
+}
+
+.sidebar ul a{
+    display:block;
+    width:100%;
+    line-height:50px;
+    font-size:15px;
+    color:rgb(5, 35, 35);
+    padding-left:10px;
+    padding-right:10px;
+    text-decoration:none;
+    transition:.4s;
+    font-weight:bold;
+}
+
+.sidebar ul li:hover a{
+    padding-left:15px;
+    color:rgb(78, 222, 78);
+}
+
+.sidebar ul li  .active{
+    color:rgb(78, 222, 78);
+}
