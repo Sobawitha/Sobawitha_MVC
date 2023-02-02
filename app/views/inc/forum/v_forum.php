@@ -66,25 +66,32 @@
         <div class="section_3">
                 <!-- add forum -->
                 <div class="new_discussion_button">
-                        <button class="new_discussion" onclick="close_add_new_discussion_form()">Start New Discussion <i class="fa-solid fa-circle-check" id="correct"></i></button>
+                        <button class="new_discussion" onclick="add_new_discussion()">Start New Discussion <i class="fa-solid fa-circle-check" id="correct"></i></button>
                 </div>
                 <div class="add_forum" >
-                        <label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label><br>
-                        <p class="topic">Add a new discussion topic</p>
+                        <label for="" class="closebtn" onclick="close_add_new_discussion_form()"><i class="fa fa-times-circle" aria-hidden="true"></i></label><br>
                         <div class="forum_body">
                                 <form>
                                         <label for="subject" class="label"><b>Subject</b></label><br>
                                         <textarea name="subject" class="input_field" placeholder="" required></textarea><br><br>
-                                
+
+                                        <label for="type" class="label"><b>Type</b></label><br>
+                                        <div class="f_filter_section">
+                                                <label for="faq" id="filter_label"> <input type="radio" id="faq" name="diss_type" value="faq">FAQ's</label>
+                                                <label for="feedback" id="filter_label"> <input type="radio" id="feedback" name="diss_type" value="feedback">Feedback</label><br>
+                                                <label for="annousments" id="filter_label"><input type="radio" id="annousments" name="diss_type" value="annousments">Annousments</label>
+                                                <label for="jobs" id="filter_label"><input type="radio" id="jobs" name="diss_type" value="jobs">Jobs</label><br>
+                                                <label for="introductions" id="filter_label"><input type="radio" id="introductions" name="diss_type" value="introductions">Introductions</label>
+                                        </div>
 
                                         <label for="message" class="label"><b>Message</b></label><br>
                                         <textarea width="250px" height="500px" class="message" name="message" required></textarea>
                                 </form>
                                 <div class="attachment">
-                                        <div id="image_att"><a href=""><i class="fa-solid fa-image"></i></a></div><span id="link_label_for_image">Image</span></br>
-                                        <div id="file_att"><a href=""><i class="fa-solid fa-file"></i></a></div><span id="link_label_for_file">File</span><br>
-                                        <div id="link_att"><a href=""><i class="fa-solid fa-link"></i></a></div><span id="link_label_for_link">Link</span><br>
-                                        <div id="voice_att"><a href=""><i class="fa-solid fa-microphone"></i></div></a><span id="link_label_for_voice">Voice</span>
+                                        <div id="image_att"><a href=""><i class="fa-solid fa-image" id="f_image"></i></a></div><span id="link_label_for_image">Image</span></br>
+                                        <div id="file_att"><a href=""><i class="fa-solid fa-file" id="f_pdf"></i></a></div><span id="link_label_for_file">File</span><br>
+                                        <div id="link_att"><a href=""><i class="fa-solid fa-link" id="f_attachment"></i></a></div><span id="link_label_for_link">Link</span><br>
+                                        <div id="voice_att"><a href=""><i class="fa-solid fa-microphone" id="f_voice"></i></div></a><span id="link_label_for_voice">Voice</span>
                                 </div>
                         </div>
                         <div class="button">

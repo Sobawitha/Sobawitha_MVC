@@ -189,7 +189,7 @@
 
 .card_section{
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap:20px;
 }
 .flash_card{
@@ -476,7 +476,9 @@ hr{
     color:salmon;
 }
 
-
+#forward_bracket, #backword_bracket{
+    transform: translateY(2px);
+}
 
 
 /*  #seperate_category_colors{

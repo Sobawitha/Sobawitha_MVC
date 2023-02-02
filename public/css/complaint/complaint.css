@@ -58,7 +58,7 @@
 /*search section*/
 .search_bar{
     margin-top:20px;
-    width:96%;
+    width:130%;
 }
 .search_bar .search_content{
     border:2px solid rgb(41, 171, 56);
@@ -88,6 +88,38 @@
     border:none;
     cursor:pointer;
 }
+.search_bar .search_content{
+    border:2px solid rgb(41, 171, 56);
+    border-radius:20px;
+    padding:5px;
+    padding-left:15px;
+}
+
+.search_bar input{
+    width:94%;
+    border-radius: 20px;
+    border:none;
+    font-family:'Montserrat', sans-serif;
+}
+
+#search{
+    color:rgb(41, 171, 56);
+}
+
+.search_bar input:focus{
+    outline:none;
+}
+
+.search_btn{
+    background-color:transparent;
+    border:none;
+    cursor:pointer;
+}
+
+#cansel{
+    display:none;
+}
+
 
 /*complaint list*/
 
@@ -142,9 +174,6 @@
     margin-left:25px;
 }
 
-#circle{
-    color:crimson;
-}
 
 .section_divide_hr{
     margin-top:30px;
@@ -177,7 +206,7 @@
 #circle3{
     font-size:12px;
     margin-right:15px;
-    color:rgb(151,66,80);
+    color:salmon;
 }
 
 #circle4{
@@ -192,5 +221,69 @@
     color:rgb(254, 252, 234);
 }
 
+#circle6{
+    font-size:12px;
+    margin-right:15px;
+    color:rgb(248, 241, 184);
+}
 
+/*set colors for category*/
+.set-purple{
 
+    color:rgb(228, 196, 244);
+    padding:4px;
+    border-radius:10px;
+    font-size:8px;
+    
+}
+
+.set-blue{
+    color:rgb(200, 241, 241);
+    padding:4px;
+    border-radius:10px;
+    font-size:8px;
+}
+
+.set-brown{
+
+    color:salmon;
+    padding:4px;
+    border-radius:10px;
+    font-size:8px;
+}
+
+.set-pink{
+    color:rgb(241, 219, 219);
+    padding:4px;
+    border-radius:10px;
+    font-size:8px;
+    
+}
+
+.set-white{
+    color:rgb(254, 252, 234);
+    padding:4px;
+    border-radius:10px;
+    font-size:8px;
+    
+}
+
+.filter_section{
+    font-size:12px;
+    list-style: none; 
+    font-weight:bold;
+    color:rgb(65, 64, 64);
+    margin-left:30px;
+    line-height: 25px;
+}
+
+#all{
+    accent-color: crimson;
+}
+
+#completed{
+    accent-color: rgb(90, 90, 125);
+}
+#pending{
+    accent-color:  rgb(134, 134, 53);
+}

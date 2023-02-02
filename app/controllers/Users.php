@@ -96,6 +96,11 @@
                 return false;
             }
         }
+
+        public function view_profile(){
+            $data=[];
+            $this->view('users/v_view_profile', $data);
+        }
 }
 
 ?>

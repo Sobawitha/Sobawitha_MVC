@@ -82,28 +82,31 @@
 
         <div id="wrapper">
         <div class="contact_us_form">
-        <form method="POST" action="<?php echo URLROOT?>/complaint/contact_us">
+        <form method="POST" action="<?php echo URLROOT?>/complaint/add_complaint" enctype="multipart/form-data">
 
                     <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a><br>
                     <i class="fa-solid fa-users" id='users'></i><br>
                     <p class="contact_form_discription">Please select a topic below related to your inquiry. We'll show blog posts that provide answers to some most common quections. If you dont find what you need, click 
                         through the prompts to access our contact form. </p>
-                    <label for="title" class="label"><b>Your Email Address</b></label><br>
-                    <input type="text" name="title"  class="input_field" placeholder="you@gmail.com"  required></input><br><br>
+                    <label for="email" class="label"><b>Your Email Address</b></label><br>
+                    <input type="text" name="email"  class="input_field" placeholder="you@gmail.com"  required></input><br><br>
+
+                    <label for="type" class="label"><b>Type</b></label><br>
+                    <input type="text" name="type" class="input_field" placeholder=""   required></input><br><br>
                     
 
-                    <label for="tags" class="label"><b>Subject</b></label><br>
-                    <input type="text" name="tag" class="input_field" placeholder=""   required></input><br><br>
+                    <label for="subject" class="label"><b>Subject</b></label><br>
+                    <input type="text" name="subject" class="input_field" placeholder=""   required></input><br><br>
                     
 
                     <label for="discription" class="label"><b>How can we help</b></label><br>
-                    <textarea width="250px" height="500px" class="discription" name="discription"  value="<?php echo $data1['discription']?>" required></textarea>
+                    <textarea width="250px" height="500px" class="discription" name="discription" required></textarea>
                     
 
                     <div class="foot">
-                        <input type="submit" class="send" name="send" value="send"/>
+                        <input type="submit" class="send" name="submit" value="submit"/>
                     </div>
-                </form>
+        </form>
         </div>
         </div>
 

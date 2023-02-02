@@ -1,7 +1,7 @@
 
 .body{
     display:grid;
-    grid-template-columns:20% 60% 20%;
+    grid-template-columns:20% 65% 15%;
     height:100%;
     padding-top:150px;
     
@@ -57,7 +57,7 @@
 
 #blog_icon, #forum_icon, #complain_icon{
     transform:translate(120px, -100px);
-    font-size:60px;
+    font-size:50px;
     color:rgb(16, 152, 16);
 }
 

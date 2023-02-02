@@ -82,12 +82,41 @@ class blog_post extends Controller {
     }
 
     public function display_all_blogposts(){
-        $blogpost = $this->blog_post_model->display_all_posts(); //data object array
-        $data = [
-            'blogpost' => $blogpost
-        ];
 
-        $this->view('inc/blog_post/v_create_blog',$data);
+        unset($_SESSION['search_cont']);
+        $_SESSION['search_cont'] = "Search by key-word";
+
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $search_cont = trim($_POST['search_text']);
+            $search_post = $this->blog_post_model->search_bar($search_cont);
+            $blogpost = $this->blog_post_model->display_all_posts(); //data object array
+
+            if($search_cont == ''){
+                $data = [
+                    'blogpost' => $blogpost,
+                ];    
+            }
+            else{
+
+                $_SESSION['search_cont'] = $search_cont;
+                $data = [
+                    'blogpost' => $search_post
+                ];
+            }
+
+            $this->view('inc/blog_post/v_create_blog',$data);
+        }
+        else{
+            $blogpost = $this->blog_post_model->display_all_posts(); //data object array
+            $data = [
+                'blogpost' => $blogpost
+            ];
+
+            $this->view('inc/blog_post/v_create_blog',$data);
+        }
+        
     }
 
 }

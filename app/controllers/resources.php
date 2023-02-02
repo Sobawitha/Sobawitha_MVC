@@ -19,6 +19,7 @@ class resources extends Controller
         $num_per_page = 4;
         $start_from = ($page - 1) * $num_per_page;
 
+        unset($_SESSION['search_cont']);
         $_SESSION['search_cont'] = "Search by key-word";
         $_SESSION['category'] = "All categories";
         $_SESSION['row_count'] = $this->resources_model->count_num_of_rows();
@@ -150,58 +151,22 @@ class resources extends Controller
 
     public function like_post(){
         if(isset($_POST['like'])){
+
+            echo "like post";
             $id = trim($_GET['blog_post_id']);
-            $no_of_likes = $this->resource_mode->count_previous_like($id);
+            // $no_of_likes = $this->resource_model->count_previous_like($id);
+            $no_of_likes = 0;
 
             if($no_of_likes==0){
-                $this->resource_mode->like($id);
+                $this->resources_model->like($id);
             }
             else{
-                $this->resource_mode->dislike($id);
+                $this->resources_model->dislike($id);
             }
-            $this->view('inc/resources/individual_resource');
+            redirect('resources/view_individual_resource');
         }
     }
 
-    // public function filter_post(){
-    //     $category = trim($_GET['category']);
-    //     $category_related_posts = $this->resources_model->filter_post($category);
-    //     $data = [
-    //             'resources' => $category_related_posts
-    //     ];
-    //     $this->view('inc/resources/v_resources', $data);
-        
-    // }
-
-
-
-
-
-    // public function search_bar(){
-
-    //     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-    //         $resources = $this->resources_model->display_all_resources(); //data object array
-    //         $best_resources = $this->resources_model->find_populerfeed();
-    //         $search_cont = trim($_POST['search_text']);
-    //         $search_resources = $this->resources_model->search_bar( $search_cont);
-
-    //         if($search_cont == ''){
-    //             $data = [
-    //                 'resources' => $resources,
-    //                 'best_resources' => $best_resources
-    //             ];    
-    //         }
-    //         else{
-    //             $data = [
-    //                 'resources' => $search_resources,
-    //                 'best_resources' => $best_resources
-    //             ]; 
-    //         }
-
-    //         $this->view('inc/resources/v_resources', $data);
-    //     }
-    // }
 
 
 

@@ -44,7 +44,7 @@
     <div class="like_section">
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
             <button type="submit" name="like" class="heart_btn"> <span id="heart_icon"><i class="fa-regular fa-heart" onclick="count_like_dislike()"></i></span>  Like <span id="like_count"><?php echo $resource->no_of_likes; ?></span></button>
-        </p>
+        </form>
     </div>
 
     <div class="comment_section">

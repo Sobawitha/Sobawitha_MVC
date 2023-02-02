@@ -10,6 +10,11 @@ class dashboard extends Controller{
         $data = [];
         $this->view('inc/dashboards/v_officer_dashboard', $data);
     }
+
+    public function supplier_dashboard(){
+        $data = [];
+        $this->view('inc/dashboards/v_supplier_dashboard', $data);
+    }
 }
 
 ?>

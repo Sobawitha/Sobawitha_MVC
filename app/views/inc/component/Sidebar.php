@@ -14,9 +14,9 @@
 
 
     <ul>
-        <li><a href="<?php echo URLROOT?>/dashboard/dashboard" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Dashboard</a></li><hr>
-        <li><a href="<?php echo URLROOT?>/blog_post/create_posts" class=""><i class="fas fa-book"></i>&nbsp;&nbsp;Manage Resources</a></li> <hr>
-        <li><a href="<?php echo URLROOT?>/complaint/complaint" class=""><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;Complaints</a></li> 
+        <li><a href="<?php echo URLROOT?>/dashboard/dashboard" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Dashboard</a></li><hr class="sidebar_hr">
+        <li><a href="<?php echo URLROOT?>/blog_post/create_posts" class=""><i class="fas fa-book"></i>&nbsp;&nbsp;Manage Resources</a></li> <hr class="sidebar_hr">
+        <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint" class=""><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;Complaints</a></li> 
     </ul>
 </div>
     

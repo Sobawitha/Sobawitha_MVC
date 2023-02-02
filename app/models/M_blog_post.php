@@ -36,6 +36,12 @@ class M_blog_post
         $this->db->bind(':userid', $_SESSION['user_id']);
         return $this->db->resultSet();
     }
+
+    public function search_bar($search_cont){
+        $this->db->query('SELECT * from blogpost where (upper(title) like upper(concat("%", :search_content , "%")))');
+        $this->db->bind(":search_content", $search_cont);
+        return $this->db->resultset();
+    }
 }
 
 

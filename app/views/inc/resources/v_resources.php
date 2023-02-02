@@ -119,7 +119,7 @@ function set_filterbtn_Color($tag){
     }
 
     if($page>1){ 
-        echo "<a href='?page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true'></i></span></a>" ;
+        echo "<a href='?page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
     }
 
     for($i=1; $i<$total_pages;$i++){
@@ -127,7 +127,7 @@ function set_filterbtn_Color($tag){
     }
 
     if($i>$page){
-        echo "<a href='?page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true'></i></span></a>";
+        echo "<a href='?page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
     }
     
     ?>

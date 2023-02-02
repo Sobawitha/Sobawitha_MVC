@@ -10,6 +10,11 @@ class pages extends Controller {
         $data = [];
         $this->view('inc/home', $data);
     }
+
+    public function individual_item(){
+        $data = [];
+        $this->view('inc/individual_item', $data);
+    }
 }
 
 ?>

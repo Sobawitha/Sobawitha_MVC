@@ -24,6 +24,7 @@ body {
 
 .nav-link a {
   margin: 0 10px;
+  
   color: rgba(255, 255, 255, 0.781);
   padding: 10px;
   text-decoration: none;
@@ -32,6 +33,9 @@ body {
   font-weight: bold;
 }
 
+.nav-link{
+  float:right;
+}
 .nav-link a:hover {
   color: white;
 }
@@ -67,7 +71,6 @@ body {
 
 
 
-    
 .dropdown-content {
   position: absolute;
   top:67px;
@@ -89,7 +92,7 @@ body {
   text-decoration: none;
   display:inline-block;
   margin: 0;
-  font-size:15px;
+  font-size:13px;
 }
 
 .dropdown-content a:hover {
@@ -97,6 +100,101 @@ body {
 }
 
 
+#bell{
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.781);
+  padding: 10px;
+  font-size:15px;
+  cursor:pointer;
+
+}
+
+#bell:hover{
+  color:white;
+}
+
+
+.notification-dropdown-content {
+  position: absolute;
+  top:67px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap:5px;
+  background-color: #fff;
+  padding:20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 5px #00000031;
+  z-index: 8000;
+  border-top:45px solid crimson;
+}
+
+.notification_section_header{
+  font-size:14px;
+  position: absolute;
+  top:-30px;
+  font-weight:bold;
+  color:rgba(255, 255, 255, 0.781);
+}
+
+#gear{
+  margin-left:90px;
+}
+
+.notification-dropdown-content span {
+  color: black;
+  padding: 18px 21px;
+  text-decoration: none;
+  display:inline-block;
+  margin: 0;
+  font-size:13px;
+}
+
+.notification-dropdown-content span:hover {
+  color: #004100;
+}
+
+.notification_line{
+
+}
+
+#mail, #forum, #messages{
+  padding:5px; 
+  border-radius: 25px;
+}
+
+#mail{
+  color:rgb(188, 251, 188);
+  border:1px solid rgb(188, 251, 188);
+
+  color:rgb(107, 103, 80);;
+  border:1px solid rgb(107, 103, 80);;
+}
+
+#forum{
+  color:rgb(81, 111, 143);
+  border:1px solid rgb(81, 111, 143);
+}
+
+#messages{
+  padding:5px;
+  color:rgb(228, 196, 244);
+  border:1px solid rgb(228, 196, 244);
+}
+
+.notification_hr{
+  border-top:1px solid rgb(237, 235, 235);
+}
+
+.see_more{
+  font-size:12px;
+  color:rgb(187, 184, 184);
+  margin-top:50px;
+  margin-left:75px;
+  text-align: center;
+  cursor:pointer;
+}
 
 
 
@@ -106,16 +204,20 @@ body {
 
 
 
+#leaf1{
+  color:rgb(246, 246, 206);
+  transform: translate(95px, -18px);
+}
 
 #part_a_nav{
-  font-weight:bold;
-  color:rgb(187, 241, 189);
-  transform: translate(200px,0px);
+  font-weight:bolder;
+  color:rgb(235, 251, 236);
+  transform: translate(-10px,0px);
 }
 #part_b_nav{
-  color:rgb(33, 235, 33);
-  transform: translate(-199px,0px);
-  font-weight: bold;
+  color:rgb(235, 251, 236);
+  transform: translate(-398px,0px);
+  font-weight: bolder;
 } 
 
 
