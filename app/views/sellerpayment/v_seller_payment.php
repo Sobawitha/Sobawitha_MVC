@@ -20,8 +20,9 @@
 &nbsp<div class="aum_maincontent">
   <h1>Payments Details</h1>
   <hr><hr>
-     <div class="above_table">
-       <a href="#overlap"><button type="button" id="generateReport"><i class="fa-solid fa-file-invoice-dollar"></i> Generate Payment Report</button></a><br><br>
+     
+  <div class="above_table">
+       <a href="#overlap"><button type="button" id="generateReport"><i class="fa-solid fa-file-invoice-dollar"></i> Generate Payment Report</button></a>
      </div>       
             <table id ="userstable">
                         <thead>

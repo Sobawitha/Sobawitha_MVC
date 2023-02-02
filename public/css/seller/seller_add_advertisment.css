@@ -94,3 +94,8 @@
   background: white;
   color: #00C88B ;
 }
+
+
+.searchform {
+  display: flex;
+}

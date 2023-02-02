@@ -2,20 +2,105 @@
 <?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
 <?php require APPROOT.'/views/inc/component/sellerSidebar.php'; ?>
 <link rel="stylesheet" href="../css/seller/seller_dashboard.css"></link>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
-</head>
-
 <body> 
+
 <section class="s_dashboard">
-<div class="s_dashmaincontent" >
+  
+  <h1>Dashboard</h1>
+
+    <div class="btn_container">
+      <a href="" class="btn"> Add new</a>
+    </div>
+
+
+
+  <div class="s_dashmaincontent">
+    
+    <div class="s_card">
+      
+    <div class="s_cardimg">
+        <i class="fa-solid fa-sack-dollar"></i>
+      </div>
+      
+      <div class="s_cardcontent">
+        <h3>RS. 125000.00</h3>
+        <p>Total income last month</p>
+      </div>
+      
+
+    </div>
+
+    <div class="s_card">
+      <div class="s_cardimg">
+        <i class="fa-solid fa-sack-dollar"></i>
+      </div>
+      <div class="s_cardcontent">
+        <h3>RS. 125000.00</h3>
+        <p>Total income last month</p>
+      </div>
+      
+    </div>
+
+    <div class="s_card">
+      <div class="s_cardimg">
+        <i class="fa-solid fa-sack-dollar"></i>
+      </div>
+      <div class="s_cardcontent">
+        <h3>RS. 125000.00</h3>
+        <p>Total income last month</p>
+      </div>
+      
+    </div>
+
+    <div class="s_card">
+      <div class="s_cardimg">
+        <i class="fa-solid fa-sack-dollar"></i>
+      </div>
+      <div class="s_cardcontent">
+        <h3>RS. 125000.00</h3>
+        <p>Total income last month</p>
+      </div>
+      
+    </div>
+
+    <div class="s_card">
+      <div class="s_cardimg">
+        <i class="fa-solid fa-sack-dollar"></i>
+      </div>
+      <div class="s_cardcontent">
+        <h3>RS. 125000.00</h3>
+        <p>Total income last month</p>
+      </div>
+      
+    </div>
+
+    <div class="s_card">
+      <div class="s_cardimg">
+        <i class="fa-solid fa-sack-dollar"></i>
+      </div>
+      <div class="s_cardcontent">
+        <h3>RS. 125000.00</h3>
+        <p>Total income last month</p>
+      </div>
+      
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="s_dashmaincontent" >
    <br>
    <h1>Dashboard</h1>
    <hr>
@@ -73,7 +158,7 @@
    
    
 
-   </div>
+   </div> -->
 
 
 </body>

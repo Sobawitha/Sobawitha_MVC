@@ -10,7 +10,7 @@
     define('APPROOT',dirname(dirname(__FILE__)));
     //URL Root
     define('URLROOT','http://localhost/Sobawitha_MVC');
-    define('URL','http://localhost/Sobawitha_MVC1');
+    // define('URL','http://localhost/Sobawitha_MVC1');
 
     //WEB site name
     define('SITENAME','Sobawitha');

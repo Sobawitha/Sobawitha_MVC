@@ -1,7 +1,7 @@
 .aum_maincontent {
   margin-top:4.0%;
   margin-left: 19%;
-
+  margin-right: 2rem;
 }
 
 #ongoingAdds{
@@ -61,6 +61,7 @@ color: white;
   border-radius: 5px;
   cursor: pointer;
   margin-right: 16px;
+  text-decoration: none;
 }
 
 .editButton,.deleteButton, #searchbtn {

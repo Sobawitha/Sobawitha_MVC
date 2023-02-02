@@ -12,11 +12,11 @@
   <h1>Add Fertilizer Advertisements</h1>
   <hr><hr>
     <form class="searchform" action="" method="GET">
-                  <input type="text" name="search"  id="searchbar" placeholder="Search by Advertisement"><br><br>
-                  <button type="submit" id="searchbtn">Search</button><br>
-            </form><br>
+                  <input type="text" name="search"  id="searchbar" placeholder="Search by Advertisement">
+                  <button type="submit" id="searchbtn">Search</button>
+            </form>
 
-             <a href="<?php echo URL?>/seller_ad_management/add_listing" id="addNew" onclick ="addNew()">Add New Advertisement</a><br><br>
+             <a href="<?php echo URLROOT?>/seller_ad_management/add_listing" id="addNew" onclick ="addNew()">Add New Advertisement</a><br><br>
 
              <table id ="fertilizertable">
                         <thead>
