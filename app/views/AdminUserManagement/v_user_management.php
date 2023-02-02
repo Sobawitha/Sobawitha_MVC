@@ -14,7 +14,7 @@
 <body >
 
 <section class="registerUser">
-<div class="aum_maincontent">
+&nbsp<div class="aum_maincontent">
   <h1>User Management</h1>
   <hr><hr>
     <form class="searchform" action="" method="GET">
@@ -22,9 +22,9 @@
                   <button type="submit" id="searchbtn">Search</button><br>
             </form><br>
 
-             <a href="#overlap"><button type="button" id="addNewUser"><i class="fa fa-solid fa-user-plus"></i> Add New User</button></a>
+             <a href="<?php echo URLROOT?>/Admin_user_management/add_agri"><button type="button" id="addNewUser"><i class="fa fa-solid fa-user-plus"></i> Add New User</button></a>
         
-            <table id ="userstable">
+            <table id ="userstble">
                         <thead>
                           <th>User Id</th>
                           <th>User Name</th>
@@ -109,7 +109,7 @@
           </table>
 </div>
 </section>
-<div id="overlap">
+<!-- <div id="overlap">
         <div class="contact_us_form">
         <form method="POST" action="<?php echo URLROOT?>/complaint/contact_us">
 
@@ -134,7 +134,7 @@
                     </div>
                 </form>
         </div>
-        </div>
+        </div> -->
 
 </body>
 </html>

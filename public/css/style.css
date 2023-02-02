@@ -12,6 +12,16 @@
 @import url('admin/view_profile.css');
 @import url('admin/change_pwd.css');
 @import url('admin/user_view_more_info.css');
+@import url('admin/admin_ad_manage_reviewed.css');
+@import url('admin/admin_ad_manage_pending.css');
+@import url('admin/admin_feedback_published.css');
+@import url('admin/admin_feedback_pending.css');
+@import url('admin/admin_complaints_manage_pending.css');
+@import url('admin/admin_comp_solved.css');
+@import url('admin/admin_payments.css');
+@import url('admin/admin_forum_management.css');
+@import url('seller/seller_dashboard.css');
+@import url('seller/seller_feedback.css');
 
 /*FONTS*/
 @font-face {

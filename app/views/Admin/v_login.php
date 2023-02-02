@@ -9,7 +9,7 @@
         <a href="<?php echo URLROOT?>/Pages/home"><button class="home" name="home"><i class="fa fa-home" aria-hidden="true" id="homeImg"></i></button></a> -->
 
            
-        <?php
+        <!-- <?php
         if(($data['login_err']) != ''){
             ?>
             <div id="overlap1">
@@ -20,7 +20,7 @@
             </div>
             <?php
         }
-        ?>
+        ?> -->
         
             
 
@@ -28,7 +28,7 @@
         </div>
         <section class="login">
         <div class="loginContent">
-            <form method="POST" action="<?php echo URLROOT?>/Admin/login">
+            <form method="POST" action="<?php echo URLROOT?>/Admin_dashboard/main_view">
            
             <div>
             <h1>WELCOME TO SOBAWITHA</h1>
@@ -46,7 +46,7 @@
 
                 <label>Password</label>
                 <input type="password" id="password" required="true" name="password" placeholder="Enter your password..">
-                <button type="submit" name="submit">Log In</button>
+                <a href = "<?php echo URLROOT?>/Admin_dashboard/main_view"><button type="submit" name="submit">Log In</button></a>
 
             </div>
         </form>

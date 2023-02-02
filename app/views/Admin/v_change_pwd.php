@@ -31,7 +31,7 @@
           </div>
         </div>
           <div class="button">
-          <input type="submit" value="Change Password">
+          <button type="submit" id="change_pwd"   >Change Password</button>
         </div>
       </form>
     </div>

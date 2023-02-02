@@ -14,7 +14,7 @@
   #searchbar{
     padding: 6px 10px;
     margin-top: 12px;
-    background: #E8EFFF ;
+    background: #faffff ;
     font-size: 17px;
     border: none;
     cursor: pointer;
@@ -39,12 +39,12 @@
 
   #addNewUser{
     position: absolute;
-    margin-left: 1230px;
-    margin-top: -40px;
+    margin-left: 1370px;
+    margin-top: -42px;
     background-color: #00C88B;
     border: none;
     color: white;
-    padding: 9px 15px;
+    padding: 6px 15px;
     text-align: center;
     font-size: 14px;
     font-weight: bold;
@@ -52,28 +52,28 @@
     cursor: pointer;
   }
 
-  #userstable{
+  #userstble{
     border-collapse: collapse;
     width: 100%;
   }
 
-  #userstable td, #userstable th {
+  #userstble td, #userstble th {
     border: 1px solid #D9D9D9;
     padding: 8px;
     color: #004100;
   }
 
-  #userstable tr{
+  #userstble tr{
     background-color: #e6ede6; 
     color: #004100;
   }
 
-#userstable tr:hover {
+#userstble tr:hover {
   background-color: #ddd;
   cursor: pointer;
   color: rgb(149, 136, 136);}
 
-#userstable th {
+#userstble th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;

@@ -2,10 +2,7 @@
     margin-top: 3.6%;
     margin-left: 19%;
   }
-  
-  body{
-    background: linear-gradient(135deg, #e6ede6, #004100);
-  }
+
   .container{
     margin-left: 200px;
     margin-top: 40px;
@@ -95,36 +92,7 @@
    form input[type="radio"]{
      display: none;
    }
-   form #update_btn{
-     height: 45px;
-     width:25%;
-     margin-left: 20px;
-     margin-top: 35px;
-     border-radius: 5px;
-     cursor: pointer;
-     font-size: 18px;
-     font-weight: 500;
-     letter-spacing: 1px;
-     transition: all 0.3s ease;
-     background: linear-gradient(135deg, #e6ede6, #004100);
-  
-   }
-  
-   form #change_pwd{
-      height: 45px;
-      width:25%;
-      margin-top:-45px;
-      margin-left: 310px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      background: linear-gradient(135deg, #e6ede6, #004100);
-  
-    }
-  
+
     form #delete{
       height: 45px;
       width:25%;
@@ -136,13 +104,14 @@
       font-weight: 500;
       letter-spacing: 1px;
       transition: all 0.3s ease;
-      background: linear-gradient(135deg, #e6ede6, #d11406);
+      background:#d11406;
+      color: white;
   
     }
     
   form .button input:hover{
     /* transform: scale(0.99); */
-    background: linear-gradient(-135deg, #e6ede6, #004100);
+    background:  #faffff;
     }
    @media(max-width: 584px){
    .container{

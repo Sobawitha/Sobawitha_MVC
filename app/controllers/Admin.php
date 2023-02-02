@@ -51,6 +51,11 @@
     }
 }
 
+    public function logint(){
+        $data=[];
+        $this->view('Admin/v_login',$data);
+    }
+
     public function forgot_password(){
         $data=[];
         $this->view('Admin/v_forgotpw', $data);
@@ -68,6 +73,11 @@
         unset($_SESSION['username']);
         session_destroy();
         redirect();
+    }
+
+    public function tlogout(){
+        $data=[];
+        $this->view('Admin/v_login', $data);
     }
 
     public function isLoggedIn(){

@@ -80,7 +80,7 @@
           </label>
           </div>
         </div>
-        <div class="button">
+        <div class="reg_button">
           <input type="submit" value="Register">
         </div>
       </form>

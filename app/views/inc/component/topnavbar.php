@@ -6,9 +6,9 @@
 <div class="topnav" id="navbar">
   <div class="topnav-content">
     <div class="dropdown-content" >
-      <a href="#">View Profile</a>
-      <a href="#">Dashboard</a>
-      <a href="<?php echo URLROOT?>/Users/logout">Log Out</a>
+      <a href="<?php echo URLROOT?>/Admin/view_profile">View Profile</a>
+      <a href="<?php echo URLROOT?>/Admin_dashboard/main_view">Dashboard</a>
+      <a href="<?php echo URLROOT?>/Admin/tlogout">Log Out</a>
     </div>
     
     <img src="../img/TopNavBar/logorem.png" alt="Logo of the System" class="img">

@@ -12,14 +12,16 @@
     align-items: center;
     justify-content: left;
     background-image: url("http://localhost/Sobawitha_MVC/public/img/Login/login.jpg");
-    background-size: 1750px 810px;
+    background-size: cover;
     overflow: hidden;
+    background-repeat: no-repeat;
+
 }
 
 .loginContent{
     width: 30%;
     height: 55%;
-    margin-left: 120px;
+    margin-left: 180px;
 }
 
 .loginContent h1{

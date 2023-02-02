@@ -4,7 +4,7 @@
   }
   
   body{
-    background: linear-gradient(135deg, #e6ede6, #004100);
+    background: linear-gradient(150deg, #FAFFFB);
   }
   .container{
     margin-left: 200px;
@@ -70,7 +70,7 @@
      height: 45px;
      margin: 35px 0
    }
-   form .button input{
+   form .button #change_pwd{
      height: 100%;
      width: 35%;
      border-radius: 5px;
@@ -88,8 +88,10 @@
    }
    form .button input:hover{
     /* transform: scale(0.99); */
-    background: linear-gradient(-135deg, #e6ede6, #004100);
-    }
+    opacity: 75%;    
+  }
+
+
    @media(max-width: 584px){
    .container{
     max-width: 100%;

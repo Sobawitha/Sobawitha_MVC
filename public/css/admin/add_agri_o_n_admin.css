@@ -4,7 +4,8 @@
 }
 
 body{
-  background: linear-gradient(135deg, #e6ede6, #004100);
+  background: linear-gradient(135deg, #e6ede6, white);
+
 }
 .add_container{
   margin-left: 200px;
@@ -95,11 +96,11 @@ form .input-box span.details{
  form input[type="radio"]{
    display: none;
  }
- form .button{
+ form .reg_button{
    height: 45px;
    margin: 35px 0
  }
- form .button input{
+ form .reg_button input{
    height: 100%;
    width: 100%;
    border-radius: 5px;
@@ -111,11 +112,14 @@ form .input-box span.details{
    letter-spacing: 1px;
    cursor: pointer;
    transition: all 0.3s ease;
-   background: linear-gradient(135deg, #e6ede6, #004100);
+   background:  #004100;
  }
- form .button input:hover{
+ form .reg_button input:hover{
   /* transform: scale(0.99); */
-  background: linear-gradient(-135deg, #e6ede6, #004100);
+  background:  #faffff;
+  color: #004100;
+  border-color: #004100;
+  border: 2px solid;
   }
  @media(max-width: 584px){
  .add_container{

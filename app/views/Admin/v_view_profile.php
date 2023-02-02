@@ -77,7 +77,7 @@
           <input type="radio" name="gender" checked="checked" id="dot-1">
           <input type="radio" name="gender" id="dot-2">
           <span class="gender-title">Gender</span>
-          <div class="category">
+          <div class="avp_category">
             <label for="dot-1">
             <span class="dot one"></span>
             <span class="gender" >Male</span>
@@ -90,13 +90,17 @@
         </div>
         <div class="three_btns">
         <div class="button" >
-          <input type="submit" id="update_btn" value="Update">
+        <button type="submit" id="avf_update_btn">Update</button> 
+      
+        </div>
+         <div class="button" >
+        <a href="<?php echo URLROOT?>/Admin/change_pwd"><button type="button" id="avf_change_pwd_btn">Chnage Password</button></a>
+
         </div>
         <div class="button" >
-          <input type="submit" id="change_pwd" value="Change Password">
-        </div>
-        <div class="button" >
-          <input type="submit" id="delete" value="Delete">
+          <!-- <input type="submit" id="delete" value="Delete"> -->
+          <button type="submit" id="avf_delete_btn">Delete</button> 
+
         </div>
         </div>
       </form>
