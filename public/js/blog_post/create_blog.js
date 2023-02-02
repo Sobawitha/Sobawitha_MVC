@@ -12,3 +12,4 @@
         document.querySelector(".search_cont").value='';
         document.getElementById("cansel").style.display='none';
     }
+

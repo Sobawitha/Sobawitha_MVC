@@ -12,6 +12,7 @@ function setColor($tag){
     if($tag == 'Other') return 'set-purple';
 }
 
+
 function set_filterbtn_Color($tag){
     if($tag == 'All categories') return 'set-filterbtn-yellow';
     if($tag == 'Production') return 'set-filterbtn-green';
@@ -19,6 +20,7 @@ function set_filterbtn_Color($tag){
     if($tag == 'Innovations') return 'set-filterbtn-orange';
     if($tag == 'Other') return 'set-filterbtn-purple';
 }
+
 
 ?>
 
@@ -40,6 +42,7 @@ function set_filterbtn_Color($tag){
                 <span class="filterbtn"><a href="<?php echo URLROOT?>/resources/resource_page?&category=All categories"><span class="<?php echo set_filterbtn_Color($_SESSION['category']);?>" id="filter" onclick="set_default()"> <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="discription"><?php echo $_SESSION['category']?></span></span></a></span>
                 <div id="category_filter">Category filter</div>
             </form>
+
         </div>     
 </div>
 
@@ -53,8 +56,7 @@ function set_filterbtn_Color($tag){
                         <img class='card_image' src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($resources->image);?>"/>
                             <div class='ccontent'>
                                     <div class='header'>
-                                        <a href='' class='uname'><?php echo  $resources->first_name?></a> <!--change-->
-                                        
+                                        <a href='' class='uname'><?php echo  $resources->first_name?></a> <!--change-->                                  
                                         <a href="<?php echo URLROOT?>/resources/resource_page?category=<?php echo $resources->tag?>"><span class="<?php echo setColor($resources->tag);?>" id="tag" > <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="tag_discription-<?php echo $resources->post_id?>"><?php echo $resources->tag ?></span></span></a>
                                         
                                         <!---->
@@ -64,16 +66,13 @@ function set_filterbtn_Color($tag){
                                         <div class='card_discription'><p> <?php echo $resources->discription?></P></div>
                                         <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $resources->post_id?>&category=<?php echo $resources->tag?>" class='read_more'>Read more>></a>
                                         
+
                                         <hr>
                                     </div>
                                     <div class='card_footer'>
                                         <p class='date'><?php echo $resources->created ?></P>
-                                        
                                         <p class='comment'><i class="fa-regular fa-comments" id="comment_icon"></i><span id="no_of_comments"><?php echo $resources->count_comment?></span></P> <!--change-->
-
-
                                         <p class="heart_btn" id="heart"><i class="fa-regular fa-heart" id="heart_icon"></i>Like <span id="like_count"><?php echo  $resources->no_of_likes?></span></p>
-                                    
                                     
                                     </div>
                             </div>
@@ -131,6 +130,7 @@ function set_filterbtn_Color($tag){
     }
     
     ?>
+
 </div>
 
 <?php require APPROOT.'/views/inc/Footer.php'?>

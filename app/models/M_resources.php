@@ -8,7 +8,7 @@ class M_resources
     {
         $this->db = new Database();
     }
-
+    
     public function count_num_of_rows(){
         $this->db->query('SELECT count(post_id) FROM view_post ');
         return $this->db->single();
@@ -118,8 +118,6 @@ class M_resources
         $this->db->bind(":postid", $data['resource_id']);
         return $this->db->resultset();
     }
-
-
 
 }
 

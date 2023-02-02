@@ -9,8 +9,7 @@
     overflow-x: hidden;
     transition: 0.5s;
     padding-left:5px; /*change*/
-    /* background-color: rgb(254, 254, 245); */
-    
+    /* background-color: rgb(254, 254, 245); */    
 }
 
 .sidebar ul{
@@ -62,16 +61,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
 .user_detail{
     line-height: 20px;
 }
@@ -86,4 +75,5 @@
 
 .sidebar_hr{
     border-top:1px solid rgb(237, 235, 235);
+
 }

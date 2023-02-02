@@ -9,6 +9,7 @@
 .button_section .search_bar, #open_sidebar, .filter_section{
     padding-top:50px;
     width:127%;
+
 }
 .search_bar .search_content{
     border:2px solid rgb(41, 171, 56);
@@ -38,17 +39,17 @@
     cursor:pointer;
 }
 
+
 #cansel{
     display:none;
 }
-
-
 
 /*filter*/
 .filter_section{
     font-size:15px;
     margin-left:75px;
 }
+
 
 #filter{
     font-family:'Montserrat', sans-serif;
@@ -127,6 +128,7 @@
 
 .filterbtn:hover + #category_filter{
     display:block;
+
 }
 
 .tag{
@@ -237,8 +239,6 @@
     margin-left:10%;    
 }
 
-
-
 #tag:hover{
     cursor:pointer;
 }
@@ -255,8 +255,7 @@ h4{
     text-align:justify;
     transform: translateY(-20px);
     color:rgb(50, 52, 52);
-    line-height: 17px;
-    
+    line-height: 17px;    
 }
 
 .read_more{
@@ -298,13 +297,11 @@ hr{
 
 /*set colors for category*/
 .set-green{
-
     color:rgb(97, 179, 97);
     border:1px solid rgb(102, 182, 102);
     padding:4px;
     border-radius:10px;
     font-size:8px;
-    
 }
 
 .set-yellow{
@@ -316,7 +313,6 @@ hr{
 }
 
 .set-orange{
-
     color:crimson;
     border:1px solid crimson;
     padding:4px;
@@ -329,11 +325,8 @@ hr{
     border:1px solid rgb(9, 10, 84);
     padding:4px;
     border-radius:10px;
-    font-size:8px;
-    
+    font-size:8px;    
 }
-
-/**/
 
 .category_search{
     width:20%;
@@ -342,7 +335,6 @@ hr{
     justify-content:center;
 
 }
-
 
 .feeds{
     height:350px;
@@ -385,8 +377,7 @@ hr{
     cursor:pointer;
     /* color:rgb(11, 157, 79); */
     color:rgb(152, 196, 194);
-    /* color:salmon; */
-    
+    /* color:salmon; */    
 }
 
 
@@ -456,8 +447,6 @@ hr{
     box-shadow:0px 8px 16px 0px rgba(0,0,0,0.1);
 
 }
-
-
 
 .pagination{
     margin-left:50%;
@@ -530,4 +519,5 @@ hr{
     margin-right:25px;
     color:rgb(254, 252, 234);
 } */
+
 

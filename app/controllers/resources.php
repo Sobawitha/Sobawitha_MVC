@@ -166,11 +166,6 @@ class resources extends Controller
             redirect('resources/view_individual_resource');
         }
     }
-
-
-
-
-    
 }
 
 

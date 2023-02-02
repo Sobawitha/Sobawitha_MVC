@@ -1,3 +1,4 @@
+
 // function filter_change(id){
 //     var category=document.getElementById(`tag_discription-${id}`).innerHTML;
 //     var filterbtn=document.querySelector(".filter_btn");
@@ -26,9 +27,7 @@ var filterbtn=document.getElementById("filter");
 document.getElementById('discription').innerHTML="All categories";
 filterbtn.style.color='rgb(162, 162, 89)';
 filterbtn.style.border='1px solid rgb(162, 162, 89)';
-
 }
-
 
 function open_cansel_btn(){
     document.getElementById("cansel").style.display='block';
@@ -41,4 +40,5 @@ function clear_search_bar(){
 
 function setcolor(){
     document.querySelector(".search_cont").style.color='salmon';
+
 }

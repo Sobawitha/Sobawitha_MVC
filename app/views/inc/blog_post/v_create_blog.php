@@ -10,17 +10,19 @@
 
 <?php
 // $data1['form_submit_message'] = 'Your post has been successfully added!';
-// echo $data['title'];
 if($data['form_submit_message']=='Your post has been successfully added!'){
+
     ?>
     <div id="overlap1">
     <div class="popup" id="pop_up">
         <i class="fa fa-check-circle" aria-hidden="true" id="ok" ></i>
         <p><?php echo $data['form_submit_message']?></P>
+
     </div>
     </div>
 <?php
 }
+
 else if(!empty($data['form_submit_message'])){
     ?>
     <p><?php echo $data['title']?></P>
@@ -33,12 +35,14 @@ else if(!empty($data['form_submit_message'])){
 <?php
 }
 
+
 function setColor($tag){
     if($tag == 'Production') return 'set-green';
     if($tag == 'Knowledge') return 'set-yellow';
     if($tag == 'Innovations') return 'set-orange';
     if($tag == 'Other') return 'set-purple';
 }
+
 ?>
 
 
@@ -46,6 +50,7 @@ function setColor($tag){
         <div class="section_1">
             
         </div>
+
 
         <div class="section_2">
 
@@ -99,6 +104,7 @@ function setColor($tag){
                     <li><i class="fa-solid fa-circle" id="circle3"></i>New technique</li>
                     <li><i class="fa-solid fa-circle" id="circle4"></i>Production</li>
                 </ul>
+        
             </div>
 
         </div>
@@ -111,6 +117,7 @@ function setColor($tag){
                 <form method="POST" action="<?php echo URLROOT?>/blog_post/create_posts" enctype="multipart/form-data">
                     <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a><br>
                     <label for="title" class="label"><b>Title</b></label><br>
+
                     <input type="text" name="title"  class="input_field" placeholder=""  required></input><br><br>
                     
 
@@ -122,6 +129,7 @@ function setColor($tag){
                         <label for="new_technique" id="filter_label"><input type="radio" id="new_technique" name="diss_type" value="new_technique">New technique</label>
                         <label for="production" id="filter_label"><input type="radio" id="production" name="diss_type" value="production">Production</label><br>
                     </div>
+
                     
 
                     <label for="discription" class="label"><b>Discription</b></label><br>
@@ -131,6 +139,7 @@ function setColor($tag){
                     <div class="foot">
                         <input type="file" class="upload_file" name="image"></input>
                         <input type="submit" class="publish" name="submit" value="submit"/>
+
                     </div>
                 </form>
             </div>

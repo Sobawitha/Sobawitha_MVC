@@ -8,6 +8,7 @@ class blog_post extends Controller {
     public function create_posts(){
 
         redirect('blog_post/resource_page_create');
+
         if($_SERVER['REQUEST_METHOD']=='POST'){
             //form is submitted
 
@@ -38,7 +39,9 @@ class blog_post extends Controller {
                     'title' => trim($_POST['title']),
                     'tag' => trim($_POST['tag']),
                     'discription' => trim($_POST['discription']),
+
                     'image' => $imgContent,
+
                     'officer_id' => ($_SESSION['user_id']),
                     'no_of_likes' => 0,
                     'form_submit_message' => '',
@@ -65,6 +68,7 @@ class blog_post extends Controller {
                 'tag' => '',
                 'discription' => '',
                 'image' => '',
+
                 'officer_id'=>'',
                 'no_of_likes' => '',
                 'form_submit_message' => ''
@@ -73,8 +77,7 @@ class blog_post extends Controller {
             
         }
     
-        $this->view('inc/blog_post/v_create_blog',$data1);
-        
+        $this->view('inc/blog_post/v_create_blog',$data1);        
     }
 
     public function resource_page_create(){
@@ -116,7 +119,7 @@ class blog_post extends Controller {
 
             $this->view('inc/blog_post/v_create_blog',$data);
         }
-        
+
     }
 
 }
