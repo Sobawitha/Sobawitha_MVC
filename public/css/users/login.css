@@ -22,8 +22,7 @@ body{
     cursor:pointer;
 }
 
-
-.content{
+.login_content{
     position:relative;
     width:50%;
     height:auto;
@@ -48,7 +47,8 @@ form{
     margin:30px;
     margin-bottom: 0px;
 }
-.title{
+
+.form_head .title{
     position:relative;
     padding-top:16%;
     font-size:27px;
@@ -68,7 +68,7 @@ form{
     font-family: 'Montserrat', sans-serif;
 }
 
-.icon{
+.form_body .icon{
     position:relative;
     padding-left: 0px;
     padding-top:0px;
@@ -128,7 +128,6 @@ form{
     background-color:azure;
     color:black;
 }
-
 .image_sec{
     position:relative;
     width:100%;
@@ -136,7 +135,6 @@ form{
     left:20%;
     box-shadow:0 0 20px 0px rgba(212, 69, 69, 0.1);
 }
-
 .image{
     padding-top:0%;
     width:300px;

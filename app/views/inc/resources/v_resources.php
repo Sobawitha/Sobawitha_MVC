@@ -12,18 +12,37 @@ function setColor($tag){
     if($tag == 'Other') return 'set-purple';
 }
 
+
+function set_filterbtn_Color($tag){
+    if($tag == 'All categories') return 'set-filterbtn-yellow';
+    if($tag == 'Production') return 'set-filterbtn-green';
+    if($tag == 'Knowledge') return 'set-filterbtn-yellow';
+    if($tag == 'Innovations') return 'set-filterbtn-orange';
+    if($tag == 'Other') return 'set-filterbtn-purple';
+}
+
+
 ?>
 
 <div class="button_section">
         <div class=""></div>
+        <form method="POST">
         <div class="search_bar">
             <div class="search_content">
-                <input type="text" name="search_text" placeholder="Search by key-word" require/>
-                <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                
             </div>
         </div>
+        </form>
         <div class="filter_section" >
-            <button class="filter_btn" onclick="set_default()"><i class='fa fa-tags' aria-hidden='true' class="tag"></i>&nbsp;&nbsp;<span id="discription">All categories</span></i></button>
+            <form>
+                <span class="filterbtn"><a href="<?php echo URLROOT?>/resources/resource_page?&category=All categories"><span class="<?php echo set_filterbtn_Color($_SESSION['category']);?>" id="filter" onclick="set_default()"> <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="discription"><?php echo $_SESSION['category']?></span></span></a></span>
+                <div id="category_filter">Category filter</div>
+            </form>
+
         </div>     
 </div>
 
@@ -37,42 +56,81 @@ function setColor($tag){
                         <img class='card_image' src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($resources->image);?>"/>
                             <div class='ccontent'>
                                     <div class='header'>
-                                        <a href='' class='uname'><?php echo "Ruwandi" ?></a> <!--change-->
-                                        <span class="<?php echo setColor($resources->tag);?>" id="tag" onclick="filter_change(<?php echo $resources->post_id?>)"> <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="tag_discription-<?php echo $resources->post_id?>"><?php echo $resources->tag ?></span></span>
+                                        <a href='' class='uname'><?php echo  $resources->first_name?></a> <!--change-->                                  
+                                        <a href="<?php echo URLROOT?>/resources/resource_page?category=<?php echo $resources->tag?>"><span class="<?php echo setColor($resources->tag);?>" id="tag" > <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="tag_discription-<?php echo $resources->post_id?>"><?php echo $resources->tag ?></span></span></a>
+                                        
                                         <!---->
                                     </div>
                                     <div class='card_content'>
                                         <h4><?php echo $resources->title ?></h4>
                                         <div class='card_discription'><p> <?php echo $resources->discription?></P></div>
-                                        <a href="Individual_Blog.php?blog_post_id=<?php echo $resources->post_id?>" class='read_more'>Read more>></a>
+                                        <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $resources->post_id?>&category=<?php echo $resources->tag?>" class='read_more'>Read more>></a>
+                                        
+
                                         <hr>
                                     </div>
                                     <div class='card_footer'>
                                         <p class='date'><?php echo $resources->created ?></P>
-                                        
-                                        <p class='comment'><i class="fa-regular fa-comments" id="comment_icon"></i><span id="no_of_comments"><?php echo 0?></span></P> <!--change-->
-
-
+                                        <p class='comment'><i class="fa-regular fa-comments" id="comment_icon"></i><span id="no_of_comments"><?php echo $resources->count_comment?></span></P> <!--change-->
                                         <p class="heart_btn" id="heart"><i class="fa-regular fa-heart" id="heart_icon"></i>Like <span id="like_count"><?php echo  $resources->no_of_likes?></span></p>
-                                    
                                     
                                     </div>
                             </div>
             </div>
-        <?php endforeach;?>
-
-
+            <?php endforeach;?>
     </div>
+
+    <div class="category_search">
+            <!-- popuer_feeds -->
+            <div class="feeds">
+                <p class="choice_topic">Populer Feeds</p>
+                <?php foreach($data['best_resources'] as $best_resource):?>
+                <div class="feed_discription">
+                    <i class="fa-regular fa-bookmark" id="ok"></i>
+                    <p class="topic"> <?php echo $best_resource->title?><span class="feed_category"></p>
+                    <p class="author">By <?php echo $best_resource->first_name?> </p>
+                    <p class="feedback"><?php echo $best_resource->no_of_likes?>-Likes <?php echo $best_resource->count_comment?>-comment </p>
+                    <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $best_resource->post_id?>&category=<?php echo $best_resource->tag?>"><i class="fa-solid fa-arrow-up-right-from-square" id="visit"></i></a>
+                </div>
+                <?php endforeach ?>
+            </div>
+            
+            </div>
 </div>
 
 <div class="pagination">
-                <ul class="pages">
-                    <li><i class="fa fa-angle-double-left" aria-hidden="true"></i></li>
-                    <li id="active">1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li><i class="fa fa-angle-double-right" aria-hidden="true"></i></li>
-                </ul>
+                
+
+    <?php
+
+    // $total_row_count = $_SESSION['row_count'];
+    $total_row_count = 5;
+    $uri = $_SERVER['REQUEST_URI'];
+
+
+    $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
+
+    if(isset($_GET['page'])){
+        $page = $_GET['page'];
+    }
+    else{
+        $page = 1;
+    }
+
+    if($page>1){ 
+        echo "<a href='?page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
+    }
+
+    for($i=1; $i<$total_pages;$i++){
+        echo "<a href='?page=".($i)." '><span class='pagination_number'>$i</span></a>";
+    }
+
+    if($i>$page){
+        echo "<a href='?page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
+    }
+    
+    ?>
+
 </div>
 
 <?php require APPROOT.'/views/inc/Footer.php'?>

@@ -1,0 +1,78 @@
+
+.body{
+    display:grid;
+    grid-template-columns:20% 65% 15%;
+    height:100%;
+    padding-top:150px;
+    
+}
+
+.section_1{
+    background-color:bisque;
+}
+
+.dashboard{
+    background-color:rgb(255, 255, 255);
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    padding:20px;    
+}
+.section_2{
+    grid-template-rows: repeat(auto-fit,minmax(250px,1fr));
+    background-color:rgb(235, 246, 229);
+}
+
+.demo{
+    background-color: rgb(228, 242, 255);
+    padding:20px;
+}
+
+.card{
+    box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
+    height:150px;
+    width:250px;
+    border-radius:10px;
+
+}
+#card3, #card1, #card2{
+    background-color:rgb(247, 255, 255);
+}
+
+.card:hover{
+    box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.last{
+    background-color:beige;
+}
+
+.card .content{
+    padding:20px;
+}
+
+.count{
+    font-weight:bolder;
+    font-size:17px;
+}
+
+#blog_icon, #forum_icon, #complain_icon{
+    transform:translate(120px, -100px);
+    font-size:50px;
+    color:rgb(16, 152, 16);
+}
+
+.time_period{
+    font-size:10px;
+    font-weight:bold;
+}
+
+.topic{
+    font-size:15px;
+}
+
+#demo{
+    transform: translate(130px, -50px);
+    color:rgb(203, 203, 134);
+    cursor:pointer;
+    font-size:18px;
+}

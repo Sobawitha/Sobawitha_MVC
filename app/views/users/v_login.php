@@ -22,11 +22,8 @@
         }
         ?>
         
-            
-
-
         </div>
-        <div class="content">
+        <div class="login_content">
             <form method="POST" action="<?php echo URLROOT?>/Users/login">
                 <div class="form_head">
                     <div class="title">LOG IN</div>
