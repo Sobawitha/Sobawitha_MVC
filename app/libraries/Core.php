@@ -9,8 +9,6 @@ class core{
     protected $params=[];
 
     public function __construct(){
-
-      // print_r($this->getURL());
          
         $url=$this->getURL();
 
