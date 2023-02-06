@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../css/raw_material_supplier/view_sales.css"></link>
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/supplier_topnavbar.php'?>
 <?php require APPROOT.'/views/inc/component/Supplier_Sidebar.php'?>
 <script src="../js/sales/view_sales.js"></script> 
 
@@ -10,6 +10,12 @@
         </div>
 
         <div class="section_2">
+
+        <h3>Supplier sales</h3>
+        <hr>
+
+        <br><br>
+
         <div class="search_bar">
             <div class="search_content">
                 

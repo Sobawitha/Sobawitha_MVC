@@ -1,5 +1,5 @@
 <?php require APPROOT.'/views/inc/header.php'; ?>
-<?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
+<?php require APPROOT.'/views/inc/component/supplier_topnavbar.php'; ?>
 <?php require APPROOT.'/views/inc/component/Supplier_Sidebar.php'; ?>
 <link rel="stylesheet" href="../css/raw_material_supplier/feedback.css"></link>
 
@@ -13,8 +13,8 @@
           <section class="customerFeed">
 
             <div class="scf_maincontent">
-              <h4>Customer Feedbacks</h4>
-              <hr> <br>
+              <h3>Customer Feedbacks</h3>
+              <hr> <br><br>
 
               <span class="cf_heading">Seller Rating</span>
               <span class="fa fa-star checked"></span>

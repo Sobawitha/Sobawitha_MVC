@@ -2,7 +2,7 @@
   display:grid;
   grid-template-columns:20% 70% 10%;
   height:100%;
-  padding-top:150px;  
+  padding-top:80px;  
 }
 
 #back{

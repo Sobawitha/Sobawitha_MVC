@@ -8,7 +8,7 @@
     display:grid;
     grid-template-columns:20% 70% 10%;
     height:100%;
-    padding-top:150px;
+    padding-top:80px;
     
 }
 
@@ -30,7 +30,7 @@
 
 /*search section*/
 .search_bar{
-    margin-top:20px;
+    /* margin-top:20px; */
     width:100%;
 }
 .search_bar .search_content{
@@ -74,7 +74,7 @@
 }
 
 .order_list_table{
-    margin-top:40px;
+    margin-top:20px;
     align-items: center;
     border-collapse:collapse; /*make common border between adjecent cell */
     width:100%;
@@ -123,9 +123,10 @@ tr{
     font-size:12px;
     border:1px solid rgb(204, 204, 232);
     padding:15px; 
-    margin:10px 0px 10px 50px;
+    margin:0px 0px 25px 50px;
     line-height: 15px;
     color:rgb(90, 90, 125);
+    width:445%;
 }
 #right{
     font-size: 25px;

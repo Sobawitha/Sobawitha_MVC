@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../css/complaint/contact_us.css"></link>
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
-<?php require APPROOT.'/views/inc/component/Sidebar.php'?>
+<?php require APPROOT.'/views/inc/component/officer_topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/Officer_Sidebar.php'?>
 
 
 

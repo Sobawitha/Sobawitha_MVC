@@ -75,7 +75,11 @@
         <span class="second_part_discription">is an online platform driven by agriculture nature by involving more people in their people in their in</span>
 
         <div class="recent_product_card_section">
-            <div class="adv_card">
+            
+        <?php
+            for($i=1; $i<=4; $i++){
+                ?>
+                <div class="adv_card">
                 <div class="card_image">
                     <div class="product_detail">
                         <span class="product_name">Tea fertilizer</span><br>
@@ -96,108 +100,48 @@
                 </div>
 
             </div>
+                <?php
+            }?>
+            
 
-            <div class="adv_card">
-                <div class="card_image">
-
-                </div>
-
-                <div class="discription">
-
-            </div>
-
-            </div>
-
-            <div class="adv_card">
-                <div class="card_image">
-                    <img src=""></img>
-                </div>
-
-                <div class="discription">
-
-            </div>
-
-            </div>
-
-            <div class="adv_card">
-                <div class="card_image">
-
-                </div>
-
-                <div class="discription">
-
-            </div>
-
-            </div>
+            
     </div>
 
     <div class="fourth_part">
         <span class="fourth_part_header">Collection</span>
         <div class="collection_product_card_setion">
 
-            <div class="adv_card">
-                    <div class="card_image">
-
+        <?php
+            for($i=1; $i<=12; $i++){
+                ?>
+                <div class="adv_card">
+                <div class="card_image">
+                    <div class="product_detail">
+                        <span class="product_name">Tea fertilizer</span><br>
+                        <span class="owner">By ABC production</span>
                     </div>
+                </div>
 
-                    <div class="discription">
+                <i class="fa-regular fa-heart" id="heart"></i>
 
-                    </div>
+                <div class="discription">
+                    <i class="fa-solid fa-star" id="star"></i>
+                    <i class="fa-solid fa-star" id="star"></i>
+                    <i class="fa-solid fa-star" id="star"></i>
+                    <i class="fa-regular fa-star" id="star"></i>
+                    <i class="fa-regular fa-star" id="star"></i>
+                    <span class="price"> Rs. 500.00</span>
+                    
+                </div>
+
             </div>
+                <?php
+            }?>
 
-            <div class="adv_card">
-                    <div class="card_image">
-
-                    </div>
-
-                    <div class="discription">
-
-                    </div>
-            </div>
-
-            <div class="adv_card">
-                    <div class="card_image">
-
-                    </div>
-
-                    <div class="discription">
-
-                    </div>
-            </div>
-
-            <div class="adv_card">
-                    <div class="card_image">
-
-                    </div>
-
-                    <div class="discription">
-
-                    </div>
-            </div>
-
-            <div class="adv_card">
-                    <div class="card_image">
-
-                    </div>
-
-                    <div class="discription">
-
-                    </div>
-            </div>
-
-            <div class="adv_card">
-                    <div class="card_image">
-
-                    </div>
-
-                    <div class="discription">
-
-                    </div>
-            </div>    
         </div>
         
         <div class="show_more">
-                <span class="show_more_text">show more <i class="fa-solid fa-angles-right"></i> </span>
+                <a href="<?php echo URLROOT?>/Pages/product_page" class=""><span class="show_more_text">show more <i class="fa-solid fa-angles-right"></i></span></a> 
         </div>
     </div>
 

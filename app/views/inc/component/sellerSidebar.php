@@ -1,19 +1,30 @@
 <link rel="stylesheet" href="../css/component/sidebar.css"></link>
-
+<script src="../js/component/sidebar.js"></script> 
 <div class="sidebar">
-   <img src="../img/Sidebar/dp1.jpeg" alt="user_image" id="userprofileimage"><br>
-    <div class="user_detail">
-        <span class="uname"> Punsara Deshan </span><br>
-        <span class="position">Seller</span>
+    <div class="logo">
+        <i class="fa-solid fa-leaf" id="leaf"></i>
+        <span class="logo">SOBAWITHA</span>
+        <i class="fa-solid fa-bars" id="equal"></i>
+        <i class="fa-solid fa-play" id="shape"></i>
+    </div>
+    <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($_SESSION['profile_image']);?>" id="userprofileimage"/>
+     <div class="user_detail">
+     <span class="uname"> <?php echo $_SESSION['username'] ," ",$_SESSION['lastname'] ?>  </span><br>
+    <span class="position"><?php echo $_SESSION['position'] ?></span>
     </div>
     <ul>
-        <li><a href="<?php echo URLROOT?>/seller_dashboard/view_dash" class="activeN"><i class="fas fa-table"></i>&nbsp;Dashboard</a></li>
-        <li><a href="<?php echo URLROOT?>/seller_ad_management/view_listing" class="activeN"><i class="fa-sharp fa-solid fa-rectangle-ad" aria-hidden="true"></i>&nbsp;Advertisement Management</a></li>
-        <li><a href="<?php echo URLROOT?>/seller_order_list/view_orders"><i class="fa-solid fa-sack-dollar"></i>&nbsp;Orders</a></li>
-        <li><a href="#" class="activeN"><i class="fa-solid fa-shop"></i>&nbsp;Buy Raw Materials</a></li>
-
-        <li><a href="<?php echo URLROOT?>/seller_feedback/view_feed" class="activeN"><i class="fa-solid fa-message" aria-hidden="true"></i>&nbsp;Feedbacks</a></li>
-        <li><a href="<?php echo URLROOT?>/seller_complaints/view_complaints" class="activeN"><i class="fa-solid fa-file" aria-hidden="true"></i>&nbsp;Complaints</a></li>
-        <li><a href="<?php echo URLROOT?>/seller_payment/view_payment" class="activeN"><i class="fa-solid fa-credit-card"></i>&nbsp;Payments</a></li>
+        <li><a href="<?php echo URLROOT?>/Pages/home"><i class="fa-solid fa-house"></i>&nbsp;&nbsp;Home</a></li>
+        <li><a href="<?php echo URLROOT?>/resources/resource_page"><i class="fa-solid fa-file-signature"></i>&nbsp;&nbsp;Resources</a></li>
+        <li><a href="<?php echo URLROOT?>/forum/forum"><i class="fa-brands fa-forumbee"></i>&nbsp;&nbsp;Forum</a></li>
+        <li><a href="#sell"><i class="fa-brands fa-sellsy"></i>&nbsp;&nbsp;Sell</a></li>
+        <li><a href=""><i class="fas fa-table"></i>&nbsp;Dashboard</a></li>
+        <li><a href="<?php echo URLROOT?>/blog_post/create_posts"><i class="fas fa-book"></i>&nbsp;Manage Resources</a></li> 
+        <li><a href=""><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;Complaints</a></li> 
     </ul>
 </div>
+
+
+
+
+
+    

@@ -15,6 +15,11 @@ class Pages extends Controller {
         $data = [];
         $this->view('inc/individual_item', $data);
     }
+
+    public function product_page(){
+        $data = [];
+        $this->view('inc/v_product_page', $data);
+    }
 }
 
 ?>

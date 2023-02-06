@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="../css/dashboards/supplier_dashboard.css"></link>
+<link rel="stylesheet" href="../css/dashboards/dashboard.css"></link>
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/supplier_topnavbar.php'?>
 <?php require APPROOT.'/views/inc/component/Supplier_Sidebar.php'?>
 
 
@@ -58,7 +58,7 @@
         </div>
 
         <div class="demo">
-            Demostration here
+            <!-- Demostration here -->
         </div>
 
     </div>

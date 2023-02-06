@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="../css/component/alert_box.css"></link>
 <script src="../js/blog_post/create_blog.js"></script> 
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
-<?php require APPROOT.'/views/inc/component/Sidebar.php'?>
+<?php require APPROOT.'/views/inc/component/officer_topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/Officer_Sidebar.php'?>
     
 
 <!--button_section-->

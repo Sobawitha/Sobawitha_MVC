@@ -77,13 +77,34 @@
         public function create_user_session($user){
             $_SESSION['user_id'] = $user->user_id;
             $_SESSION['username'] = $user->first_name;
-            $_SESSION['gender'] = $user->gender;
+            $_SESSION['lastname'] = $user->last_name;
+            $_SESSION['profile_image'] = $user->profile_picture;
+
+            $flag = $user->user_flag;
+            if($flag==1){
+                $_SESSION['position'] = "Admin";
+            }
+            else if($flag==2){
+                $_SESSION['position'] = "Seller";
+            }
+            else if($flag==3){
+                $_SESSION['position'] = "Buyer";
+            }
+            else if($flag==4){
+                $_SESSION['position'] = "Supplier";
+            }
+            else if($flag==5){
+                $_SESSION['position'] = "Agri-officer";
+            }
+            
             redirect('blog_post/create_posts');
         }
 
         public function logout(){
             unset($_SESSION['user_id']);
             unset($_SESSION['username'] );
+            unset($_SESSION['lastname']);
+            unset($_SESSION['position']);
             session_destroy();
             redirect('Users/login');
         }
@@ -97,10 +118,31 @@
             }
         }
         
-        public function view_profile(){
+        public function admin_view_profile(){
             $data=[];
-            $this->view('users/v_view_profile', $data);
+            $this->view('users/v_admin_view_profile', $data);
         }
+
+        public function officer_view_profile(){
+            $data=[];
+            $this->view('users/v_officer_view_profile', $data);
+        }
+
+        public function seller_view_profile(){
+            $data=[];
+            $this->view('users/v_seller_view_profile', $data);
+        }
+
+        public function buyer_view_profile(){
+            $data=[];
+            $this->view('users/v_buyer_view_profile', $data);
+        }
+
+        public function supplier_view_profile(){
+            $data=[];
+            $this->view('users/v_supplier_view_profile', $data);
+        }
+
 
 }
 
