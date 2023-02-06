@@ -4,19 +4,7 @@ body{
     padding:0px;
     font-family: 'Montserrat';
 }
-/* .follow_us{
-    height:5%;
-    display:flex;
-}
-.follow_us .icon{
-    display:flex;
-}
-.login #user{
-    color:black;
-}
-.login .join_us{
-    color:black;
-}*/
+
 #part_a{
     position:absolute;
     color:white;
@@ -252,7 +240,7 @@ nav{
     width:380px;
     height:200px;
     /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
-    background-image:url(../images/background2.jpg);
+    background-image:url(../images/buying.jpg);
 }
 
 .img12{
@@ -261,8 +249,8 @@ nav{
     background-position:center;
     width:210px;
     height:390px;
-    background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg);
-    /* background-image:url(../images/background7.jpg); */
+    /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
+    background-image:url(../images/selling.jpg);
 }
 .img21{
     background-size: cover;
@@ -271,7 +259,7 @@ nav{
     width:190px;
     height:180px;
     /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
-    background-image:url(../images/background9.jpg);
+    background-image:url(../images/instructing.jpg);
 }
 .img22{
     background-size: cover;
@@ -280,7 +268,7 @@ nav{
     width:180px;
     height:180px;
     /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
-    background-image:url(../images/background6.jpg);
+    background-image:url(../images/qestioning.jpg);
 }
 .td_text{
     color:azure;
@@ -385,17 +373,21 @@ nav{
 
 .collection_product_card_setion{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap:20px;
-    padding:50px 100px 50px 100px;
+    padding:50px 150px 50px 150px;
 }
 
 .show_more_text{
     position:relative;
-    margin-left:85%;
+    margin-left:84%;
     color:rgb(98, 144, 98);
-    font-size:13x;
-    /* font-weight:bold; */
+    font-size:15px;
+    
+}
+
+.show_more a{
+    text-decoration:none;
 }
 
 /*fifth part*/

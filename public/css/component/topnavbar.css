@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     font-family: 'Montserrat';
@@ -6,11 +5,10 @@ body {
  
 .topnav{
   position: fixed; 
-  top: 0; 
-  background-color: rgb(5,35,35) ;
+  padding-top:20px; 
   height: 65px;
   width: 100%;
-  z-index:1001;
+  border-bottom-left-radius: 500px;
 }
 
 .topnav-content {
@@ -20,35 +18,24 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transform:translateY(10px);
 }
 
 .nav-link a {
   margin: 0px 10px;
-  
-  color: rgba(255, 255, 255, 0.781);
-  padding: 10px;
-  text-decoration: none;
-  /* font-size: 17px; */
-  font-size:15px;
-  font-weight: bold;
+  padding: 7px;
+  font-size:14px;
+  color:rgb(174, 169, 158);
+  text-decoration:none;
 }
 
 .nav-link{
   float:right;
 }
 .nav-link a:hover {
-  color: white;
+  color:rgb(230, 160, 19);
+  font-weight:bold;
 }
-
-/* .topnav .img {
-  width: 65px;
-  height: 55px;
-}  */
-
-.topnav .img {
-  width: 120px;
-  height: 40px;
-} 
 
 
 .dis{
@@ -61,12 +48,13 @@ body {
 
 
  #dots{
-  background: linear-gradient(rgba(62, 62, 62, 0.6),rgba(103, 102, 102, 0.6));
-  color:rgb(255, 255, 255);
-  padding:8px 13px;
+  background: linear-gradient(rgba(226, 222, 222, 0.6),rgba(216, 213, 213, 0.6));
+  color:rgb(58, 54, 54);
+  padding:5px 10px;
   border-radius: 25px;
   font-size:12px;
   cursor:pointer;
+  margin:0px 50px 0px 0px;
 }
 
 
@@ -99,14 +87,16 @@ body {
   color: #004100;
 }
 
+#cart{
+  /* font-size:20px; */
+}
 
 #bell{
   margin: 0 10px;
-  color: rgba(255, 255, 255, 0.781);
   padding: 10px;
-  font-size:15px;
+  /* font-size:20px; */
   cursor:pointer;
-
+  color:rgb(174, 169, 158);
 }
 
 #bell:hover{
@@ -188,12 +178,18 @@ body {
 }
 
 .see_more{
+  text-decoration: none;
   font-size:12px;
   color:rgb(187, 184, 184);
   margin-top:50px;
   margin-left:75px;
   text-align: center;
   cursor:pointer;
+  
+}
+
+.see_more_txt{
+  text-decoration: none;
 }
 
 
@@ -203,22 +199,6 @@ body {
 
 
 
-
-#leaf1{
-  color:rgb(246, 246, 206);
-  transform: translate(95px, -18px);
-}
-
-#part_a_nav{
-  font-weight:bolder;
-  color:rgb(235, 251, 236);
-  transform: translate(-10px,0px);
-}
-#part_b_nav{
-  color:rgb(235, 251, 236);
-  transform: translate(-398px,0px);
-  font-weight: bolder;
-} 
 
 
 

@@ -5,32 +5,41 @@ body{
     position:relative;
     margin-top:100px;
     margin-bottom:0px;
-    z-index: 2001;
+    z-index: 1000;
     font-family: 'Montserrat';
     justify-content: center;
     height:fit-content;
 }
 .footer_content{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap:110px;
     background-color: rgb(0, 0, 0);
-    padding-left:60px;
+    padding-left:18%;
     padding-right:60px;
     padding-top:40px;
     padding-bottom: 20px;
     color:rgb(228, 225, 225);
 }
+
+
 .logo_footer{
-    width:75px;
-    height:70px;
+    font-weight: bold;
+    text-align:center;
+    padding-bottom:0rem;
+    font-size:20px;
 }
-.logo_discription{
-    width:180px;
-    height:40px;
-    transform: translate(-32px,-20px);
+
+#leaf_footer{
+    font-size:20px;
+    position:absolute;
+    /* color:rgb(246, 246, 206); */
+    color:rgb(37, 215, 37);
+    transform: translate(88px, -20px);
 }
+
 .about_us{
+    margin-top:2rem;
     font-size:11px;
     text-align: justify;
     
@@ -67,7 +76,7 @@ body{
 .sign_up{
     font-size: 12px;
     padding:10px;
-    padding-right:50px;
+    padding-right:10px;
     border:1px solid green;
    
 }

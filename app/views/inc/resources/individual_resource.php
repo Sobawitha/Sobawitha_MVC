@@ -1,6 +1,7 @@
 <script src="../js/resources/individual_resource.js"></script> 
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/officer_topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/Officer_Sidebar.php'?>
 <link rel="stylesheet" href="../css/resources/individual_resource.css"></link>
 
 
@@ -8,8 +9,6 @@
 <div class="body">
 
 <div class="section_1">
-    <span class="back_resources"><a href="<?php echo URLROOT?>/resources/resource_page"><i class="fa-solid fa-backward" id="backicon"></i></a></span>
-    <div id="to_resources">Resource Page</div>
 </div>
 
 

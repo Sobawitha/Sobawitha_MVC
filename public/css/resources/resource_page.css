@@ -2,19 +2,20 @@
     display:grid;
     grid-template-columns: 20% 60% 20%;
     height:150px;
-    padding-top:80px;
+    padding-top:50px;
+    overflow-x: hidden;
 
 }
 
 .button_section .search_bar, #open_sidebar, .filter_section{
     padding-top:50px;
-    width:127%;
+    width:128%;
 
 }
 .search_bar .search_content{
-    border:2px solid rgb(41, 171, 56);
+    border:2px solid rgb(139, 137, 121);
     border-radius:20px;
-    padding:5px;
+    padding:6px;
     padding-left:15px;
 }
 
@@ -26,7 +27,8 @@
 }
 
 #search{
-    color:rgb(41, 171, 56);
+    color:rgb(74, 74, 63);
+    font-size:15px;
 }
 
 .search_bar input:focus{
@@ -417,7 +419,7 @@ hr{
     display:flex;
     list-style:none;
     justify-content: center;
-    transform: translateX(-15px);
+    transform: translateX(-25px);
 }
 
 .pages li{

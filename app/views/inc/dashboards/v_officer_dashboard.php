@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="../css/dashboards/officer_dashboard.css"></link>
+<link rel="stylesheet" href="../css/dashboards/dashboard.css"></link>
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
-<?php require APPROOT.'/views/inc/component/Sidebar.php'?>
+<?php require APPROOT.'/views/inc/component/officer_topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/Officer_Sidebar.php'?>
 
 
 
@@ -40,11 +40,21 @@
                 </div>
             </div>
 
+            <div class='card' id="card3">
+                <div class='content'>
+                    <p class="count">10</p>
+                    <p class="topic">System usage</p>
+                    <p class="time_period">For previous month</P>
+                    <i class="fa-solid fa-user-gear" id="usage_icon"></i>
+                    <i class="fa-sharp fa-solid fa-circle-info" id="demo" onclick=()></i>
+                </div>
+            </div>
+
 
         </div>
 
         <div class="demo">
-            Demostration here
+            <!-- Demostration here -->
         </div>
 
     </div>

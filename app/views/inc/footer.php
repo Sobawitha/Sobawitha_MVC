@@ -5,8 +5,8 @@ require APPROOT. '/views/inc/Header.php';
 <div class="footer_section">
     <div class="footer_content">
         <div class="coloumn-1">
-            <img src="../images/logo.png" class="logo_footer"/>
-            <img src="../images/Name21.png" class="logo_discription"/>
+        <i class="fa-solid fa-leaf" id="leaf_footer"></i>
+        <span class="logo_footer">SOBAWITHA</span>
             <p class="about_us">We are a young company always looking for new and creative ideas to help you with our product ain your
                 everyday work.</p>
         </div>

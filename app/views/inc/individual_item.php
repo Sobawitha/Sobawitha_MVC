@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../css/individual_item.css"></link>
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/officer_topnavbar.php'?>
 <script src="../js/individual_item.js"></script> 
 
 

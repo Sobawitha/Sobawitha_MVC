@@ -15,6 +15,11 @@ class dashboard extends Controller{
         $data = [];
         $this->view('inc/dashboards/v_supplier_dashboard', $data);
     }
+
+    public function buyer_dashboard(){
+        $data = [];
+        $this->view('inc/dashboards/v_buyer_dashboard', $data);
+    }
 }
 
 ?>

@@ -2,7 +2,7 @@
 <script src="../js/blog_post/create_blog.js"></script> 
 <?php require APPROOT.'/views/inc/Header.php'?>
 <?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
-<?php require APPROOT.'/views/inc/component/Supplier_Sidebar.php'?>
+<?php require APPROOT.'/views/inc/component/Officer_Sidebar.php'?>
     
 
 

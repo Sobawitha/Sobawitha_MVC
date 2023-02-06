@@ -1,68 +1,70 @@
- /*sidebar*/
- .sidebar {
+/*sidebar*/
+.sidebar {
     height: 100%;
-    width: 240px;
     position: fixed;
-    padding-top: 120px;
-    left: 0;
-    background-color: rgb(255, 255, 255);
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-left:5px; /*change*/
-    /* background-color: rgb(254, 254, 245); */    
+    background-color:black;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+    padding-top: 2rem;
+    padding-inline: 0.78rem;
+    margin-top: 0;
+    line-height: 2rem;
+    z-index: 2000;
+    color:white;
+    width:14%;
 }
 
 .sidebar ul{
     list-style-type:none;
-    margin-top:60px;
 }
 
-.sidebar ul a{
+.sidebar li a:is(:link, :active, :visited){
     display:block;
-    line-height:40px;
     font-size:14px;
-    color:rgb(5, 35, 35);
-    padding-left:10px;
-    padding-right:10px;
     text-decoration:none;
     font-weight:bold;
-    margin-top:0%;
-    padding-top:0%;
-    margin-bottom:10px;
+    padding: 0.2rem 0.4rem;
+    color: var(--clr-sidetext);
+    text-decoration: none;
+    transition: 0.4s;
 }
 
-.sidebar ul li:hover a{
-    color:rgb(0, 0, 0);
-    background-color: rgb(246, 246, 233);
-    margin-right:10px;
+.sidebar li a:is(:link, :active, :visited):hover{
+    background-color: rgb(237, 237, 226);
+    font-weight: 700;
+    border-radius: 5px;
+    color:rgb(230, 160, 19);
+}
+
+li a:is(:link, :active, :visited).active{
+    background-color: rgb(237, 237, 226);
+    font-weight: 700;
+    border-radius: 5px;
+    color:rgb(230, 160, 19);
 }
 
 
 #userprofile{
-    margin-left:30%;
-    text-align:center;
-    color:lavender;
-    font-size: 105px;
     margin-bottom:18px;
 }
 
 .user_detail .uname{
-    position:absolute;
     font-size:12px;
     font-weight:bold;
-    padding-left:60px;
+    text-align: center;
 }
 .position{
-    position:absolute;
     font-size:12px;
-    color:rgb(107, 103, 80);
+    color:rgb(230, 160, 19);
     font-weight:bold;
-    padding-left:80px;
+    text-align: center;
 }
 
 
 .user_detail{
     line-height: 20px;
+    text-align: center;;
 }
 
 
@@ -70,10 +72,32 @@
     width:100px;
     height:100px;
     border-radius:70px;
-    margin-left:25%;
+    align-self: center;
 }
 
-.sidebar_hr{
-    border-top:1px solid rgb(237, 235, 235);
+.logo{
+    font-weight: bold;
+    text-align:center;
+    padding-bottom:2.5rem;
+}
 
+#shape{
+    position:absolute;
+    transform: translate(40px,-16px);
+    font-size: 70px;
+    color:black;
+}
+
+#equal{
+    position:absolute;
+    transform: translate(65px,13px);
+    font-size: 13px;
+    color:white;
+    z-index: 100;
+}
+
+#leaf{
+    position:absolute;
+    color:rgb(246, 246, 206);
+    transform: translate(70px, -11px);
 }

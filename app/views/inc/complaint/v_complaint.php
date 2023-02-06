@@ -1,8 +1,8 @@
 <script src="../js/complaint/complaint.js"></script>
 <link rel="stylesheet" href="../css/complaint/complaint.css"></link>
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
-<?php require APPROOT.'/views/inc/component/Sidebar.php'?>
+<?php require APPROOT.'/views/inc/component/officer_topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/Officer_Sidebar.php'?>
 
 <?php
 function setColor($type){

@@ -1,9 +1,9 @@
 
 .body{
     display:grid;
-    grid-template-columns:20% 55% 25%;
-    height:100%;
-    padding-top:150px;
+    grid-template-columns:20% 60% 20%;
+    padding-top:100px;
+    overflow-x: hidden;
     
 }
 
@@ -22,13 +22,13 @@
 }
 
 .new_discussion_button{
-    padding:20px;
-    width:100%;
+    padding:30px 0px 0px 0px ;
+    width:50%;
 }
 
 .new_discussion{
     background-color: rgb(246, 255, 220);
-    color:green;
+    color:rgb(225, 226, 197);
     font-size:13px;
     font-family:'Montserrat';
     border:none;
@@ -40,9 +40,10 @@
     cursor:pointer;
 }
 
-#correct{
-    color:green;
-    padding-left:10px;
+#add{
+    color:rgb(225, 226, 197);
+    font-size:15px;
+    padding:7px 20px 10px 10px;
 }
 
 .filter_section{
@@ -113,43 +114,39 @@
     color:rgb(81, 111, 143);
 }
 
-
+/*form*/
 .add_forum{
-    margin:20px;
+    margin-top:30px;
     padding:20px;
     padding-right:0px;
     border-radius:10px;
     box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
-    background-color:rgb(247, 255, 255);
+    background-color:rgb(255, 255, 255);
+    width:95%;
     display:none;
-
 }
-
 
 .add_forum .forum_body{
     display:grid;
-    grid-template-columns:75% 25%;
+    grid-template-columns:92% 8%;
 }
 
-
-/*form*/
 form{
-    width:100%;
     transition: 20ms;
 }
 
-form label{
+form .label{
     font-size:14px;
+    margin-bottom:20px;
+    color:darkolivegreen;
 }
 
 form .input_field{
-    width:110%;
-    height:20px;
-    border-top:none;
-    border-left:none;
-    border-right:none;
-    border-bottom:2px solid green;
+    width:127%;
+    height:30px;
+    border:2px solid rgb(222, 245, 222);
     background-color:transparent;
+    border-radius:10px;
 }
 
 form .input_field:focus{
@@ -157,47 +154,62 @@ form .input_field:focus{
 }
 
 form .message{
-    width:110%;
-    height:200px;
-    border-top:none;
-    border-left:none;
-    border-right:none;
-    border-bottom:2px solid green;
+    width:127%;
+    height:50px;
+    border:2px solid rgb(222, 245, 222);
+    border-radius:10px;
     background-color:transparent;
-
 }
 
 form .message:focus{
     outline:none;
 }
 
-.add_forum .topic{
-    padding-left: 10px;
-    padding-bottom:10px;
-    font-size: 14px;
-    font-weight: bold;
+.f_filter_section{
+    color:rgb(62, 62, 38);
+    margin-bottom: 15px;;
+    margin-top: 15px;
+    display:flex;
+    gap:20px;
+}
+
+
+#filter_label{
+    font-size:11px;
+}
+
+#faq{
+    accent-color: rgb(210, 250, 210);
+}
+#feedback{
+    accent-color: rgb(134, 134, 53);
+}
+#annousments{
+    accent-color: crimson;
+}
+#jobs{
+    accent-color: rgb(228, 196, 244);
+}
+#introductions{
+    accent-color: rgb(81, 111, 143);
 }
 
 .forum_body .attachment{
-    margin-right:0px;
-    padding-top: 135px;
-    padding-left:3px;
+    padding-top: 55px;
+}
+
+.attachment a i{
+    color:rgb(74, 78, 95);;
+    font-size:13px;
 }
 
 #image_att, #file_att, #link_att, #voice_att{
     width:25px;
     height:25px;
     cursor:pointer;
-    border:2px solid rgb(122, 122, 57);;
+    border:2px solid rgb(74, 78, 95);;
     border-radius: 28px;
 }
-
-
-.attachment a i{
-    color:rgb(147, 147, 102);;
-    font-size:13px;
-}
-
 #f_image{
     transform: translate(6.5px,6px);
 }
@@ -218,8 +230,8 @@ form .message:focus{
     padding:5px;
     padding-bottom:4px;
     margin-left:25px;
-    background-color: rgb(245, 253, 215);
-    color:green;
+    background-color: rgb(235, 248, 235);
+    color:rgb(74, 78, 95);
 }
 
 #image_att:hover +#link_label_for_image{
@@ -238,14 +250,13 @@ form .message:focus{
     visibility:visible;
 }
 
-
 .button{
     padding-left:10px;
 }
 .submit{
     border:none;
-    background-color:black;
-    color:white;
+    background-color:rgb(94, 134, 118);
+    color:rgb(249, 250, 254);
     padding:8px;
     font-size:12px;
     font-weight:500px; 
@@ -263,13 +274,20 @@ form .message:focus{
 
 }
 
+.submit, .cancel :hover{
+    cursor:pointer;
+}
+
 .closebtn{
     position:relative;
-    font-size:20px;
-    font-weight:bold;
-    color:#ff0000;
+    font-size:17px;
+    color:rgb(74, 78, 95);
     cursor:pointer;
-    padding-left:87%;
+    padding-left:95%;
+}
+
+.message{
+    margin-top:20px;
 }
 
 
@@ -326,7 +344,7 @@ form .message:focus{
 }
 .forum_content{
     padding:20px;
-
+    z-index: 20000;
 }
 
 
@@ -337,12 +355,13 @@ form .message:focus{
 }
 .forum_content .topic{
     font-size:15px;
-    font-weight:bold;
+    font-weight:900px;
     margin-left:10px;
 }
 .author{
     font-size:10px;
     margin-left:38px;
+    color:rgb(151, 186, 139);
 }
 .discription{
     margin-top:10px;
@@ -403,7 +422,7 @@ form .message:focus{
     margin-top:15px;
     margin-left:40px;
     margin-right:10px;
-    color:green;
+    color:rgb(2, 60, 47);
     font-size:14px;
 }
 
@@ -533,34 +552,4 @@ form .message:focus{
 
 
 
-.f_filter_section{
-    
-    color:rgb(42, 42, 25);
-    margin-bottom: 15px;;
-    margin-top: 15px;
-    line-height: 20px;
-}
 
-#filter_label{
-    font-size:11px;
-}
-
-#feedback{
-    margin-left:52px;
-}
-
-#faq{
-    accent-color: rgb(210, 250, 210);
-}
-#feedback{
-    accent-color: rgb(134, 134, 53);
-}
-#annousments{
-    accent-color: crimson;
-}
-#jobs{
-    accent-color: rgb(228, 196, 244);
-}
-#introductions{
-    accent-color: rgb(81, 111, 143);
-}
