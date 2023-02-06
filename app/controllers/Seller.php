@@ -14,11 +14,11 @@
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
-                'username' => trim($_POST['username']),       
+                'username' => trim($_POST['username']),
                 'password' => trim($_POST['password']),
 
                 'login_err' => ''
-            
+
             ];
             if($this -> usermodel->findUserByUsername($data['username'])){
                 redirect();
@@ -28,7 +28,7 @@
 
         if(empty($data['login_err'])){
 
-            $loggeduser = $this -> userModel->login($data['username'],$data['password']);   
+            $loggeduser = $this -> userModel->login($data['username'],$data['password']);
 
             if($loggeduser){
                 $this->create_user_session($loggeduser);

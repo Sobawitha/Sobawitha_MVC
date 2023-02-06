@@ -9,13 +9,13 @@ class core{
     protected $params=[];
 
     public function __construct(){
-         
+
         $url=$this->getURL();
 
          if(file_exists('../app/controllers/'.ucwords($url[0]).'.php')){
             //if controller exist then loard it
             $this->currentController = ucwords($url[0]); // get controller part from array
-            
+
             //unset the controller in url
             unset($url[0]);
 
@@ -24,7 +24,7 @@ class core{
 
             //Instentiate the controller
             $this->currentController = new $this->currentController;
-        
+
         }
 
         //chaeck whether method exist controller or not
@@ -33,13 +33,13 @@ class core{
             $this->currentMethod=$url[1];
 
             unset($url[1]);
-           } 
+           }
         }
 
         $this->params = $url ? array_values($url):[];
 
-        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
-        //echo $this->currentMethod;
+       $this->params =$url ? array_values($url):[];
+       call_user_func_array([$this->currentController,$this->currentMethod], $this->params);
 
     }
 

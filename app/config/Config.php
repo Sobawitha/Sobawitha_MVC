@@ -16,6 +16,9 @@
     define('SITENAME','Sobawitha');
     
 
+ // PUBLIC ROOT
+ define('PUBROOT', dirname(dirname(dirname(__FILE__))).'/public');
+
 
     
 ?>

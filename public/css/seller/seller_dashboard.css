@@ -112,7 +112,6 @@
   border: 2px solid;
   border-color: #ffffff;
 
- 
 }
 
 .s_dash_card_two {
@@ -182,8 +181,8 @@
 
 }
 
-.name{
-  font-size:35px;
+.s_name{
+  font-size:30px;
   font-weight: bold;
   margin-left: 10px;
 }

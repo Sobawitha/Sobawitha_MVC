@@ -1,5 +1,4 @@
-<html>
-    <head>
+ <head>
         <title><?php echo SITENAME;?></title>
 
         <!--select font-->
@@ -19,6 +18,8 @@
         <!--the width of the webpage feep always fit-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
         <link rel="stylesheet" href="Header.css"></link>
 
         <link rel="shortcut icon" type="image/png" href="../images/logo.png"> 

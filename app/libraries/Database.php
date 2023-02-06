@@ -19,9 +19,8 @@
             //Instantiate PDO
             try{
                 $this->dbh=new PDO($dsn, $this->user, $this->password,$options);
-            }
-            catch(PDOException $e){
-                $this->error = $e->getMessage();
+            }catch(PDOException $e){
+                $this->error = $e ->getMessage();
                 echo $this->error;
             }
 
@@ -33,26 +32,25 @@
                 $this->statement = $this->dbh->prepare($sql);
             }
 
-            public function bind($param,$value,$type=NULL){
+            //Bind parameters
+            public function bind($param, $value, $type=NULL){
                 if(is_null($type)){
                     switch(true){
-                    case is_int($value):
-                        $type = PDO::PARAM_INT;
-                        break;
-                    case is_bool($value):
-                        $type = PDO::PARAM_BOOL;
-                        break;
-                    case is_null($value):
-                        $type = PDO::PARAM_NULL;
-                        break;
-                    default:
-                        $type = PDO::PARAM_STR;
+                        case is_int($value):
+                            $type = PDO::PARAM_INT;
+                            break;
+                        case is_bool($value):
+                            $type = PDO::PARAM_BOOl;
+                            break;
+                        case is_null($value):
+                            $type = PDO::PARAM_NULL;
+                            break;
+                        default:
+                            $type= PDO::PARAM_STR;
                     }
                 }
             $this->statement->bindValue($param, $value, $type);
             }
-
-            //execute the prepare statement
             public function execute(){
                 return $this->statement->execute();
             }
