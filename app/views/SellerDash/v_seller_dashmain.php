@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../css/seller/seller_dashboard.css"></link>
 <?php require APPROOT.'/views/inc/header.php'; ?>
 <?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
 <?php require APPROOT.'/views/inc/component/sellerSidebar.php'; ?>

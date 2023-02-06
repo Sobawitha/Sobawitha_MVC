@@ -1,27 +1,5 @@
 /*css library*/
-@import url('component/topnavbar.css');
-@import url('component/adminSidebar.css');
-@import url('component/buttons_styles.css');
-@import url('footer.css');
 @import url('header.css');
-@import url('admin/login.css');
-@import url('admin/adminRegister.css');
-@import url('admin/admin_dashboard.css');
-@import url('admin/admin_user_management.css');
-@import url('admin/add_agri_o_n_admin.css');
-@import url('admin/view_profile.css');
-@import url('admin/change_pwd.css');
-@import url('admin/user_view_more_info.css');
-@import url('admin/admin_ad_manage_reviewed.css');
-@import url('admin/admin_ad_manage_pending.css');
-@import url('admin/admin_feedback_published.css');
-@import url('admin/admin_feedback_pending.css');
-@import url('admin/admin_complaints_manage_pending.css');
-@import url('admin/admin_comp_solved.css');
-@import url('admin/admin_payments.css');
-@import url('admin/admin_forum_management.css');
-@import url('seller/seller_dashboard.css');
-@import url('seller/seller_feedback.css');
 
 /*FONTS*/
 @font-face {
@@ -34,4 +12,14 @@ body{
     font-family: Poppins-Regular ;
     font-size: small;
     text-align: left;
+} 
+
+//removing autofill colors
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/component/sidebar.css"></link>
+<link rel="stylesheet" href="../css/component/adminSidebar.css"></link>
 
 <div class="sidebar">
    <img src="../img/Sidebar/DevOne.jpg" alt="user_image" id="userprofileimage"><br>

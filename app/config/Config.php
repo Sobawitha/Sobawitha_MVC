@@ -11,5 +11,8 @@ define('URLROOT','http://localhost/Sobawitha_MVC');
 
 define('SITENAME','Sobawitha');
 
+ // PUBLIC ROOT
+ define('PUBROOT', dirname(dirname(dirname(__FILE__))).'/public');
+
 
 ?>

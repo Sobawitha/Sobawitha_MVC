@@ -1,10 +1,12 @@
 
 .afm_content{
     display:grid;
-    grid-template-columns:20% 60% 19%;
+    grid-template-columns:25% 60% 15%;
     height:100%;
-    padding-top:100px;
+    margin-top: 3.6%;
+    margin-right: 2rem;
     overflow: hidden;
+  
 }
 
 .section_1{
@@ -13,6 +15,7 @@
 
 .section_2{
     /* background-color:azure; */
+    margin-top: 40px;
 }
 
 

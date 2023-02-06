@@ -1,15 +1,16 @@
-.aum_maincontent{
+.afmp_maincontent{
     margin-top: 3.8%;
-    margin-left: 19%;
+    margin-left: 360px;
 }
 
-.aum_maincontent hr{
-    border-width: 1px;
-    color: #75e968;
+.afmp_maincontent hr{
+  height: 2px;
+  background-color: #004100;
 }
-.aum_maincontent h1{
+.afmp_maincontent h1{
     font-size: 30px;
     color: #004100 ;
+    margin-bottom: 0;
 }
 
 

@@ -1,36 +1,60 @@
 .aum_maincontent{
     margin-top: 3.8%;
-    margin-left: 19%;
+    margin-left: 360px;
+    margin-right: 2rem;
 }
 
 .aum_maincontent hr{
-    border-width: 1px;
-    color: #75e968;
+    height: 2px;
+    background-color: #004100;
+
 }
 .aum_maincontent h1{
     font-size: 30px;
     color: #004100 ;
+    margin-bottom: 0;
 }
-  #searchbar{
-    padding: 6px 10px;
-    margin-top: 12px;
+
+.user_table_top_content{
+  display: flex;
+  height: 5vh;
+  /* justify-content:center ;
+  align-items: center; */
+
+
+
+}
+
+.item{
+  font-size: 15px;
+}
+
+.searchbar{
+  flex-basis: 40%;
+}
+.searchbtn{
+  flex-basis:40%;
+}
+
+.add_user{
+  flex-basis:20%;
+
+}
+  #search_bar{
+    padding: 10px;
+    padding-right: 280px;
     background: #faffff ;
-    font-size: 17px;
-    border: none;
+    border: 1px solid #004100;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 50px;
   }
 
-  #searchbtn{
+  #search_btn{
+  padding: 10px 25px;
   background-color: #00C88B;
-  position: absolute;
-  margin-top: -5px;
-  margin-left: 5px;
   border: none;
   color: white;
-  padding: 8px 15px;
   text-align: center;
-  font-size: 14px;
   font-weight: bold;
   border-radius: 50px;
   cursor: pointer;
@@ -38,15 +62,11 @@
 
 
   #addNewUser{
-    position: absolute;
-    margin-left: 1370px;
-    margin-top: -42px;
     background-color: #00C88B;
     border: none;
     color: white;
-    padding: 6px 15px;
+    padding: 10px 25px;
     text-align: center;
-    font-size: 14px;
     font-weight: bold;
     border-radius: 50px;
     cursor: pointer;
@@ -126,111 +146,167 @@
     cursor: pointer;
   }
 
-  /* popup */
+/* Choose_add_user*/
+/*form*/
 
-  #overlap{
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    background-color:rgba(0, 0, 0, 0.5);
-    transition: opacity 500ms;
-    visibility: visible; 
-    opacity:0;
-    z-index: 2500;
+/* new */
+#addUserPopup {
+  border: none;
+  padding: 0;
+  border-radius: 10px;
+}
+
+#addUserPopup::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+.addUserPopup { 
+  min-height: 200px;
+  padding:1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.dialog__heading button {
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+
+.dialog__content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  align-items: center;
+}
+
+.dialog__content a {
+  text-align: center;
+  width: 120px;
+  height: 30px;
+  padding: 0.5rem 1rem;
+  background-color: #00c88b;
+  color: #fff;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  opacity: 0.8;
+  transform: opacity 0.2s ease-in-out;
+}
+
+.dialog__content a:hover {
+  opacity: 1;
+}
+
+
+
+
+
+
+/* old */
+#overlap{
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:rgba(0, 0, 0, 0.5);
+  transition: opacity 500ms;
+  visibility:hidden;
+  opacity:0;
+  z-index: 2500;
+
 }
 
 #overlap:target{
-    visibility:visible;
-    opacity:1;
+  visibility:visible;
+  opacity:1;
 }
 
-.contact_us_form{
-    margin:2% 28%;
-    padding:20px;
-    padding-right:0px;
-    border-radius:10px;
-    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
-    background-color:rgb(247, 255, 255);
-    width:40%;
+.wrapper{
+  margin:7% 35%;
+  padding:20px;
+  padding-right:0px;
+  border-radius:10px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+  background-color:rgb(247, 255, 255);
+  width:50%;
+  transition: all 0.5s ease-in-out;
+  border:4px double green;
 }
 
-.contact_form_discription{
-    font-size:12px;
-    text-align:center;
-    margin-bottom:50px;
-    line-height: 20px;
-    transform: translateX(30px);
+.btn_main_container{
+    display: flex;
+    justify-content: center;
+    /* background:yellow; */
+    flex-direction: column;
+
 }
 
-.contact_us_form #users{
-    font-size: 40px;
-    transform: translateX(270px);
-    margin-bottom:10px;
+.popup_heading{
+    /* background:blue; */
+    display:flex;
+    justify-content: space-between;
+    padding: 10px 3px;
+
 }
 
+.user_choose_btns{
+  display:flex;
+  height:40vh;
+  justify-content:space-around;
+  align-items:center;
+  /* background:green; */
+  padding:30px 10px;
+
+}
 .closebtn{
-    position:relative;
-    font-size:20px;
-    font-weight:bold;
-    color:#ff0000;
-    cursor:pointer;
-    padding-left:120%;
+  position:relative;
+  font-size:20px;
+  font-weight:bold;
+  color:#ff0000;
+  cursor:pointer;
 }
 
-form{
-    width:100%;
-    align-items: center;
+a{
+  text-decoration:none;
 }
 
-form .label{
-    font-size:14px;
+#user_add_heading{
+  align-text:center;
+  font-size:30px;
+  font-weight:bold;
+  color:green;
 }
 
-form .input_field{
-    width:120%;
-    height:20px;
-    border-top:none;
-    border-left:none;
-    border-right:none;
-    border-bottom:2px solid green;
-    background-color:transparent;
-    font-family: 'Montserrat', sans-serif; 
-    margin-top:15px;
-}
-
-form .input_field:focus{
-    outline:none;
-}
-
-form .discription{
-    width:120%;
-    height:200px;
-    border-top:none;
-    border-left:none;
-    border-right:none;
-    border-bottom:2px solid green;
-    background-color:transparent;
+.publish{
+  border:2px solid trasparent;
+  background-color:e6ede6;
+  color:black;
+  padding:100px 80px;
+  font-size:22px;
+  font-weight:bold;
+  font-family:'Montserrat';
+  cursor:pointer;
+  text-align:center;
+  border-radius:20px;
 
 }
 
-form .discription:focus{
-    outline:none;
+.publish:hover{
+  background:#004000;
+  color:#fff;
+  box-shadow: 5px 10px 18px #888888;
 }
-
-.send{
-    border:none;
-    background-color:black;
-    color:white;
-    padding:8px;
-    font-size:12px;
-    font-weight:500px; 
-    font-family:'Montserrat';
-    width:75px;
-    cursor:pointer;
+.foot{
+   flex-basis:50%;
 }
-
-
-/* Choose_add_user*/
-/*form*/

@@ -8,7 +8,7 @@
     $data=[
         'title' => 'Sobawitha'
     ];
-    $this->view('AdminAdManage/v_ad_manage_reviewed', $data);
+    $this->view('Admin/AdminAdManage/v_ad_manage_reviewed', $data);
   
    }
 
@@ -16,7 +16,7 @@
     $data=[
         'title' => 'Sobawitha'
     ];
-    $this->view('AdminAdManage/v_ad_manage_pending', $data);
+    $this->view('Admin/AdminAdManage/v_ad_manage_pending', $data);
   
    }
 }

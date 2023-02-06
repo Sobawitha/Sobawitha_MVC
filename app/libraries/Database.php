@@ -19,7 +19,8 @@
 
             try{
                 $this->dbh=new PDO($dsn, $this->user, $this->password,$options);
-            }catch(PDOException $e){
+            }
+            catch(PDOException $e){
                 $this->error = $e ->getMessage();
                 echo $this->error;
             }
@@ -29,14 +30,15 @@
                 $this->statement = $this ->dbh ->prepare($sql);
             }
 
-            public function bind($param,$value,$type=NULL){
+            //Bind parameters
+            public function bind($param, $value, $type=NULL){
                 if(is_null($type)){
                     switch(true){
                         case is_int($value):
                             $type = PDO::PARAM_INT;
                             break;
                         case is_bool($value):
-                            $type = PDO::PARAM_BOOl;
+                            $type = PDO::PARAM_BOOL;
                             break;
                         case is_null($value):
                             $type = PDO::PARAM_NULL;
@@ -47,6 +49,7 @@
                 }
                 $this->statement -> bindValue($param,$value,$type);
             }
+            
             public function execute(){
                 return $this->statement ->execute();
             }

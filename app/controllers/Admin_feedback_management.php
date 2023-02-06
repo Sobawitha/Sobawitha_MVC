@@ -8,7 +8,7 @@
     $data=[
         'title' => 'Sobawitha'
     ];
-    $this->view('AdminFeedbackManage/v_admin_feedback_published', $data);
+    $this->view('Admin/AdminFeedbackManage/v_admin_feedback_published', $data);
   
    }
 
@@ -16,7 +16,7 @@
     $data=[
         'title' => 'Sobawitha'
     ];
-    $this->view('AdminFeedbackManage/v_admin_feedback_pending', $data);
+    $this->view('Admin/AdminFeedbackManage/v_admin_feedback_pending', $data);
   
    }
 }

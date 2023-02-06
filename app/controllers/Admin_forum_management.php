@@ -8,7 +8,7 @@
     $data=[
         'title' => 'Sobawitha'
     ];
-    $this->view('AdminForumManage/v_admin_forum_view', $data);
+    $this->view('Admin/AdminForumManage/v_admin_forum_view', $data);
   
    }
 

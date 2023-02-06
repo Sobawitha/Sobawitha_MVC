@@ -8,7 +8,7 @@
     <div class="dropdown-content" >
       <a href="<?php echo URLROOT?>/Admin/view_profile">View Profile</a>
       <a href="<?php echo URLROOT?>/Admin_dashboard/main_view">Dashboard</a>
-      <a href="<?php echo URLROOT?>/Admin/tlogout">Log Out</a>
+      <a href="<?php echo URLROOT?>/Login/logout">Log Out</a>
     </div>
     
     <img src="../img/TopNavBar/logorem.png" alt="Logo of the System" class="img">

@@ -8,7 +8,7 @@
         $data=[
             'title' => 'Sobawitha'
         ];
-        $this->view('AdminCompManage/v_admin_comp_pending', $data);
+        $this->view('Admin/AdminCompManage/v_admin_comp_pending', $data);
       
        }
 
@@ -16,7 +16,7 @@
         $data=[
             'title' => 'Sobawitha'
         ];
-        $this->view('AdminCompManage/v_admin_comp_solved', $data);
+        $this->view('Admin/AdminCompManage/v_admin_comp_solved', $data);
       
        }
 

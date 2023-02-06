@@ -1,16 +1,18 @@
-.aum_maincontent{
+.aumr_maincontent{
     margin-top: 3.8%;
-    margin-left: 19%;
+    margin-left: 360px;
+    margin-right: 2rem;
 }
 
-.aum_maincontent hr{
+.aumr_maincontent hr{
     
-    border-width: 1px;
-    color: #75e968;
+  height: 2px;
+  background-color: #004100;
 }
-.aum_maincontent h1{
+.aumr_maincontent h1{
     font-size: 30px;
     color: #004100 ;
+    margin-bottom: 0;
 }
 
   #adManageTableRevA{

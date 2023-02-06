@@ -1,5 +1,7 @@
 <?php
     class Admin extends Controller{
+        private $userModel;
+
         public function __construct(){
             $this->userModel = $this->model('M_Admin');
     }
@@ -9,64 +11,60 @@
         $this->view('Admin/v_regsiter',$data);
     }
 
-    public function login(){
-        if($_SERVER['REQUEST_METHOD']=='POST'){
+//     public function login(){
+//         if($_SERVER['REQUEST_METHOD']=='POST'){
 
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $data = [
-                'username' => trim($_POST['username']),       
-                'password' => trim($_POST['password']),
+//             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+//             $data = [
+//                 'username' => trim($_POST['username']),       
+//                 'password' => trim($_POST['password']),
 
-                'login_err' => ''
+//                 'login_err' => ''
             
-            ];
-            if($this -> usermodel->findUserByUsername($data['username'])){
-                redirect();
-            }else{
-                $data['login_err'] = 'Invalid username or password.';
-            }
+//             ];
+//             if($this -> usermodel->findUserByUsername($data['username'])){
+//                 redirect();
+//             }else{
+//                 $data['login_err'] = 'Invalid username or password.';
+//             }
 
-        if(empty($data['login_err'])){
+//         if(empty($data['login_err'])){
 
-            $loggeduser = $this -> userModel->login($data['username'],$data['password']);   
+//             $loggeduser = $this -> userModel->login($data['username'],$data['password']);   
 
-            if($loggeduser){
-                $this->create_user_session($loggeduser);
-            }else{
-                $data['login_err'] = 'Invalid username or password.';
-                $this ->view('Admin/v_login', $data);
-            }
-        }else{
-            $this->view('Admin/v_login', $data);
-        }
-    }else{
-        $data = [
-            'username' =>'',
-            'password' =>'',
+//             if($loggeduser){
+//                 $this->create_user_session($loggeduser);
+//             }else{
+//                 $data['login_err'] = 'Invalid username or password.';
+//                 $this ->view('Admin/v_login', $data);
+//             }
+//         }else{
+//             $this->view('Admin/v_login', $data);
+//         }
+//     }else{
+//         $data = [
+//             'username' =>'',
+//             'password' =>'',
 
-            'login_err' =>''
-        ];
+//             'login_err' =>''
+//         ];
 
-        $this->view('Admin/v_login', $data);
-    }
-}
+//         $this->view('Admin/v_login', $data);
+//     }
+// }
 
-    public function logint(){
-        $data=[];
-        $this->view('Admin/v_login',$data);
-    }
-
+   
     public function forgot_password(){
         $data=[];
         $this->view('Admin/v_forgotpw', $data);
     }
 
-    public function create_user_session($user){
-        $_SESSION['user_id'] = $user->user_id;
-        $_SESSION['usernames'] = $user->first_name;
-        $_session['Gender'] = $user->gender;
-        redirect();
-    }
+    // public function create_user_session($user){
+    //     $_SESSION['user_id'] = $user->user_id;
+    //     $_SESSION['usernames'] = $user->first_name;
+    //     $_session['Gender'] = $user->gender;
+    //     redirect();
+    // }
 
     public function logout(){
         unset($_SESSION['user_id']);
@@ -75,10 +73,7 @@
         redirect();
     }
 
-    public function tlogout(){
-        $data=[];
-        $this->view('Admin/v_login', $data);
-    }
+    
 
     public function isLoggedIn(){
         if(isset($_SESSION['user_id'])){

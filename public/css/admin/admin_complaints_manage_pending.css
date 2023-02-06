@@ -1,15 +1,17 @@
-.acm_maincontent{
+.acmp_maincontent{
     margin-top: 3.8%;
-    margin-left: 19%;
+    margin-left: 360px;
+    margin-right: 2rem;
 }
 
-.acm_maincontent hr{
-    border-width: 1px;
-    color: #75e968;
+.acmp_maincontent hr{
+  height: 2px;
+  background-color: #004100;
 }
-.acm_maincontent h1{
+.acmp_maincontent h1{
     font-size: 30px;
     color: #004100 ;
+    margin-bottom: 0;
 }
 
   #userstable{

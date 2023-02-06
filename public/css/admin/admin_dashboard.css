@@ -1,17 +1,22 @@
 .a_dashmaincontent{
-    margin-top: 3.6%;
-    margin-left: 19%;
+    margin-top: 2.5%;
+    margin-left: 360px;
     margin-right: 2rem;
+    /* display: grid;
+    margin-top: 50px;
+    grid-template-columns: 20% 70% 10%;
     display: column;
+    height:100%; */
 }
 
 .a_dashmaincontent hr{
-    border-width: 1px;
-    color: #75e968;
+  height: 2px;
+  background-color: #004100;
 }
 .a_dashmaincontent h1{
     font-size: 30px;
     color: #004100 ;
+    margin-bottom: 0;
 }
 
 .a_dash_content{
