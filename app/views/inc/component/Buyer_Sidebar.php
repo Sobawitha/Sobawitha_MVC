@@ -20,7 +20,7 @@
         <li><a href="#sell"><i class="fa-brands fa-sellsy"></i>&nbsp;&nbsp;Sell</a></li>
         <li><a href="<?php echo URLROOT?>/dashboard/buyer_dashboard" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Dashboard</a></li>
         <li><a href="<?php echo URLROOT?>" class=""><i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;Previous Deals</a></li>
-        <li><a href="<?php echo URLROOT?>" class=""><i class="fa-solid fa-heart-circle-check"></i>&nbsp;&nbsp;Wish List</a></li>
+        <li><a href="<?php echo URLROOT?>/order/wish_list" class=""><i class="fa-solid fa-heart-circle-check"></i>&nbsp;&nbsp;Wish List</a></li>
         <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Complaint</a></li>
     </ul>
 </div>

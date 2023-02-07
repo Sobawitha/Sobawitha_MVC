@@ -13,42 +13,37 @@
 
     <div class="section_2">
 
-    <h3>Wishlist</h3>
-    <hr>
+    <!-- <h3>Wishlist</h3>
+    <hr> -->
 
     <br><br>
 
     <div class="shop-items">
 
+    <?php
+        for($i=1; $i<=8; $i++){
+            ?>
         <div class="wishlist-item">
+            <i class="fa-solid fa-xmark" id="xmark"></i>
+            <span id="remove">Remove</span>
+            <div class="pic">
+            <img src="../public/images/background2.jpg" class="wisthlist_image">
+            </div>
 
-        <div class="pic">
-        <img src="../public/images/wishlist_1.jpg" class="wisthlist_image">
-        </div>
+            <div class="info">
+            <span class="title">Organic fertilizer</span>
+            <span class="producer">From abc production</span>
+            </div>
 
-        <div class="info">
-        <span class="title">Organic fertilizer for vegitables</span>
-        <span class="producer">From abc production</span>
-        </div>
+            <div class="currPrice">Rs. 500.00</div>
+            <span class="wishlist_button">
+                <button class="add_to_cart">Add to cart</button>    
+            </span>  
+            </div>
+        <?php
+        }?>
 
-        <div class="currPrice">Rs. 500.00</div>
-
-
-        <span class="wishlist_button">
-            <button class="add_to_cart"><i class="fa-solid fa-cart-plus" id="wishlist_cart"></i></button>
-            <div class="add_to_wishlist">Add wishlist</div>
-            <button class="delete_item"><i class="fa-solid fa-trash" id="remove"></i></button>
-            <div class="delete_item_msg">Delete item</div>
-        </span>
-        
-        </div>
-        </div>
-
-
-
-
-
-
+    </div>
     <div class="last">
 
     </div>

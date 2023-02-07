@@ -297,7 +297,7 @@ form .message:focus{
     width:96%;
 }
 .search_bar .search_content{
-    border:2px solid rgb(41, 171, 56);
+    border:2px solid rgb(0, 0, 0);
     border-radius:20px;
     padding:5px;
     padding-left:15px;
@@ -312,7 +312,7 @@ form .message:focus{
 }
 
 #search{
-    color:rgb(41, 171, 56);
+    color:rgb(0, 0, 0);
 }
 
 .search_bar input:focus{

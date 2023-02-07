@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../css/users/view_profile.css"></link>
 <?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/Topnavbar.php'?>
+<?php require APPROOT.'/views/inc/component/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/inc/component/Officer_Sidebar.php'?>
 
 <div class="body">

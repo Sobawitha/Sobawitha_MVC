@@ -91,7 +91,7 @@
 .search_bar .search_content{
     border:2px solid rgb(41, 171, 56);
     border-radius:20px;
-    padding:5px;
+    padding:6px;
     padding-left:15px;
 }
 
@@ -134,6 +134,7 @@
     border-left:4px solid green;
     width:95%;
     margin-bottom:15px;
+    border-radius:5px;
 }
 
 #circle{
