@@ -4,10 +4,15 @@
             $this->userModel = $this->model('M_Seller');
     }
 
-    public function register(){
-        $data=[];
-        $this->view('Admin/v_regsiter',$data);
-    }
+    public function seller_register(){
+       
+        $data=[
+               'title' => 'Sobawitha'
+           ];
+           $this->view('Seller/v_seller_register', $data);
+         
+          
+   }
 
     public function login(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
