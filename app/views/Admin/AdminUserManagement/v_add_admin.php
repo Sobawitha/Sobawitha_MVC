@@ -1,5 +1,9 @@
 
 <link rel="stylesheet" href="../css/admin/add_agri_o_n_admin.css"></link><?php require APPROOT.'/views/inc/header.php'; ?>
+<?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
+<?php require APPROOT.'/views/inc/component/adminSidebar.php'; ?>
+<?php require APPROOT.'/views/inc/header.php'?>
+
 
 
 <!DOCTYPE html>
@@ -14,7 +18,7 @@
   <div class="add_container">
     <div class="title">Register Admin</div>
     <div class="add_content">
-      <form method="POST" action="<?php echo URLROOT?>/Admin_user_management/add_new_admin" >
+      <form method="POST" action="<?php echo URLROOT?>/Admin_user_management/add_new_admin" enctype="multipart/form-data">
         <div class="user-details">
           
           <div class="input-box">
@@ -87,8 +91,8 @@
 
           <div class="input-box">
             <span class="details">Choose Profile Picture</span>
-            <input type="file" name="admin_pro_pic" id="admin_pro_pic"   >
-            <span class="error_msg"><?php echo $data['profile_pic_err'] ?></span>
+            <input type="file" name="propic" id="propic">
+            <span class="error_msg"><?php echo $data['propic_err'] ?></span>
           </div>
 
           <div class="input-box">
