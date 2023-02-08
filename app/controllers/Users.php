@@ -120,27 +120,27 @@
         
         public function admin_view_profile(){
             $data=[];
-            $this->view('users/v_admin_view_profile', $data);
+            $this->view('Admin/Admin/v_admin_view_profile', $data);
         }
 
         public function officer_view_profile(){
             $data=[];
-            $this->view('users/v_officer_view_profile', $data);
+            $this->view('Agri_officer/Agri_officer/v_officer_view_profile', $data);
         }
 
         public function seller_view_profile(){
             $data=[];
-            $this->view('users/v_seller_view_profile', $data);
+            $this->view('Seller/Seller/v_seller_view_profile', $data);
         }
 
         public function buyer_view_profile(){
             $data=[];
-            $this->view('users/v_buyer_view_profile', $data);
+            $this->view('Buyer/Buyer/v_buyer_view_profile', $data);
         }
 
         public function supplier_view_profile(){
             $data=[];
-            $this->view('users/v_supplier_view_profile', $data);
+            $this->view('Raw_material_supplier/Raw_material_supplier/v_supplier_view_profile', $data);
         }
 
 

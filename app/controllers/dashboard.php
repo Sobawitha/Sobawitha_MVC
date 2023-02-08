@@ -6,19 +6,19 @@ class dashboard extends Controller{
         $this->dashboard_mode = $this->model('M_dashboard');
     }
 
-    public function dashboard(){
+    public function officer_dashboard(){
         $data = [];
-        $this->view('inc/dashboards/v_officer_dashboard', $data);
+        $this->view('Agri_officer/Dashboard/v_officer_dashboard', $data);
     }
 
     public function supplier_dashboard(){
         $data = [];
-        $this->view('inc/dashboards/v_supplier_dashboard', $data);
+        $this->view('Raw_material_supplier/Dashboard/v_supplier_dashboard', $data);
     }
 
     public function buyer_dashboard(){
         $data = [];
-        $this->view('inc/dashboards/v_buyer_dashboard', $data);
+        $this->view('Buyer/Dashboard/v_buyer_dashboard', $data);
     }
 }
 

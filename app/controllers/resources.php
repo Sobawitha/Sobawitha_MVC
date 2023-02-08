@@ -67,7 +67,7 @@ class resources extends Controller
                 ]; 
             }
 
-            $this->view('inc/resources/v_resources', $data);
+            $this->view('Agri_officer/Resources/v_resources', $data);
         }
         else{
 
@@ -96,7 +96,7 @@ class resources extends Controller
                 ];
             }
 
-            $this->view('inc/resources/v_resources', $data);
+            $this->view('Agri_officer/Resources/v_resources', $data);
 
         }
 
@@ -125,7 +125,7 @@ class resources extends Controller
                 'count_comment' => $count_comment,
                 'comments_for_reply' => $comments_for_reply
             ];
-            $this->view('inc/resources/individual_resource', $data1);
+            $this->view('Agri_officer/Resources/individual_resource', $data1);
     }
 
     //save comment
@@ -144,7 +144,7 @@ class resources extends Controller
             ];
 
             if($this->resources_model->post_comment($data2)){
-                $this->view('inc/resources/individual_resource');
+                $this->view('Agri_officer/Resources/individual_resource');
             }
         }
     }
