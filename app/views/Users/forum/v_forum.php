@@ -1,9 +1,27 @@
 <link rel="stylesheet" href="../css/Users/component/forum.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
-<?php require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php'?>
-<?php require APPROOT.'/views/Agri_officer/Agri_officer/Officer_Sidebar.php'?>
-<script src="../js/Users/component/forum.js"></script> 
-
+<script src="../js/Users/forum/forum.js"></script>
+<?php
+if($_SESSION['user_flag'] == 1){
+    require APPROOT.'/views/Admin/Admin/admin_topnavbar.php';
+    require APPROOT . '/views/Admin/Admin/admin_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 2){
+    require APPROOT.'/views/Seller/Seller/seller_topnavbar.php';
+    require APPROOT . '/views/Seller/Seller/seller_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 3){
+    require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php';
+    require APPROOT . '/views/Buyer/Buyer/buyer_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 4){
+    require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php';
+    require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 5){
+    require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php';
+    require APPROOT . '/views/Agri_officer/Agri_officer/Officer_Sidebar.php';
+}?>
 <?php
     function setColor($tag){
         if($tag == 'Production') return 'set-green';
@@ -113,7 +131,7 @@
                 <div class="filter_section">
                         <i class="fa-regular fa-message" id="message"></i><span class="category_type">All discussion</span><i class="fa-solid fa-check" id="only_correct"></i><br>
                         <i class="fa-regular fa-star" id="star"></i><span class="followings">Followings</span>
-                        <hr>
+                        <hr class="forum_hr">
 
                         <div class="categories">
                                 <ul type="" class="category">
@@ -131,4 +149,4 @@
 </div>
 
 
-<?php require APPROOT.'/views/inc/Footer.php'?>
+<?php require APPROOT.'/views/Users/component/Header.php'?>

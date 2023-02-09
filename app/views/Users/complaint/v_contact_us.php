@@ -1,7 +1,28 @@
-<link rel="stylesheet" href="../css/complaint/contact_us.css"></link>
-<?php require APPROOT.'/views/inc/Header.php'?>
-<?php require APPROOT.'/views/inc/component/officer_topnavbar.php'?>
-<?php require APPROOT.'/views/inc/component/Officer_Sidebar.php'?>
+<script src="../js/complaint/complaint.js"></script>
+<link rel="stylesheet" href="../css/Users/complaint/contact_us.css"></link>
+<?php require APPROOT.'/views/Users/component/Header.php'?>
+
+<?php
+if($_SESSION['user_flag'] == 1){
+    require APPROOT.'/views/Admin/Admin/admin_topnavbar.php';
+    require APPROOT . '/views/Admin/Admin/admin_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 2){
+    require APPROOT.'/views/Seller/Seller/seller_topnavbar.php';
+    require APPROOT . '/views/Seller/Seller/seller_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 3){
+    require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php';
+    require APPROOT . '/views/Buyer/Buyer/buyer_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 4){
+    require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php';
+    require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 5){
+    require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php';
+    require APPROOT . '/views/Agri_officer/Agri_officer/Officer_Sidebar.php';
+}?>
 
 
 
@@ -120,7 +141,7 @@
     </div>
 </div>
 
-<?php require APPROOT.'/views/inc/Footer.php'?>
+<?php require APPROOT.'/views/Users/component/Header.php'?>
 
 
 

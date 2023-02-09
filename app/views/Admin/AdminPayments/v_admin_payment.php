@@ -1,108 +1,106 @@
-Devin Aiya CS, [2/7/2023 7:18 PM]
 <link rel="stylesheet" href="../css/admin/admin_payments.css"></link>
-<?php require APPROOT.'/views/inc/header.php'; ?>
-<?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
-<?php require APPROOT.'/views/inc/component/adminSidebar.php'; ?>
+<?php require APPROOT.'/views/Users/component/Header.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
+<script src="../js/Admin/Add_management/add_management.js"></script>
 
+<div class="body">
+        <div class="section_1">
+            
+        </div>
 
-<body >
+        <div class="section_2">
 
-<section class="registerUser">
-&nbsp<div class="apm_maincontent">
-  <h1>Payments Details</h1>
-  <hr>
-     <div class="above_table">
-       <a href="#overlap"><button type="button" id="generateReport"><i class="fa-solid fa-file-invoice-dollar"></i> Generate Payment Report</button></a>
-     </div>       
-            <table id ="userstable">
-                        <thead>
-                          <th>#</th>
-                          <th>Type</th>
-                          <th>Full Name</th>
-                          <th>Address</th>
-                          <th>City</th>
-                          <th>Postal Code</th>
-                          <th>Amount(Rs.)</th>
-                          <th>Options</th>
-                        </thead>
-                  <tr>
-                  <td>
-                  <b>1</b>
-                  </td>
-                  
-                  <td>
-                    <b>Debit</b>
-                  </td>
-                  
-                  <td>
-                    <b>Dasun Shanaka</b>
-                  </td>
+        <h3>Payment Detail</h3>
+        <hr>
 
-                  <td>
-                    <b>No 21, Flower street, Colombo</b>
-                  </td>
+        <br><br>
+        <form method="POST">
+        <div class="search_bar">
+            <div class="search_content">
+                
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                
+            </div>
+        </div>
+        </form>
 
-                  <td>
-                    <b>Colombo</b>
-                  </td>
-                  <td>
-                    <b>81000</b>
-                  </td>
-                  <td>
-                    <b>150.00</b>
-                  </td>
-             
-             
-                  <td>
-  
-                  <form action="./includes/deleteUser.inc.php" method="post">
-                          <button class="deleteButton" onclick="return checkDelete()" value="<?php echo $row["user_id"] ?>" name="DeleteU"><i class="fa-solid fa-trash-can"></i> Delete</button>
-                   </form>
-  
-                  </td>
-                </tr>
+                <div class="filter_section">
+                        <label for="all" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing" checked>All types</label>
+                        <label for="credit_card" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Visa</label>
+                        <label for="debit_card" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Debit</label>
+                </div>
 
-                <tr>
-                  <td>
-                  <b>2</b>
-                  </td>
-                  
-                  <td>
-                    <b>Visa</b>
-                  </td>
-                  
-                  <td>
-                    <b>Yasith Perera</b>
-                  </td>
+                <div class="order_list">
+                <div class="orders">
 
-                  <td>
-                    <b>No 21, Galle Road, Nupe, Matara</b>
-                  </td>
+                <table class="order_list_table">
+                        <tr class="table_head">
+                                <td>#</td>
+                                <td>Type</td>
+                                <td>Full Name</td>
+                                <td>Adress</td>
+                                <td>City</td>
+                                <td>Postal Code</td>
+                                <td>Amount</td>
+                                <td>Option</td>
+                        </tr>
 
-                  <td>
-                    <b>Matara</b>
-                  </td>
-                  <td>
-                    <b>71000</b>
-                  </td>
-                  <td>
-                    <b>1450.00</b>
-                  </td>
-             
-             
-                  <td>
-  
-                  <form action="./includes/deleteUser.inc.php" method="post">
-                          <button class="deleteButton" onclick="return checkDelete()" value="<?php echo $row["user_id"] ?>" name="DeleteU"><i class="fa-solid fa-trash-can"></i> Delete</button>
-                   </form>
-  
-                  </td>
-                </tr>
+                        <tr class="order">
+                                <div class="order_detail">
+                                        <td><span class="p_name">1</span></td>
+                                        <td><span class="p_name">Debit</span></td>
+                                        <td><span class="amount">Dasun Shanaka</span></td>
+                                        <td class="unit">Matara</td>
+                                        <td class="unit">Colombo</td>
+                                        <td><span class="price">81000</span></td>
+                                        <td><span class="payment_status">Rs. 150.00</span></td>
+                                        <td><span class="delete">Delete</span></td>
+                                </div>
 
+                        </tr>
 
-          </table>
+                        <tr class="order">
+                                <div class="order_detail">
+                                        <td><span class="p_name">1</span></td>
+                                        <td><span class="p_name">Debit</span></td>
+                                        <td><span class="amount">Dasun Shanaka</span></td>
+                                        <td class="unit">Matara</td>
+                                        <td class="unit">Colombo</td>
+                                        <td><span class="price">81000</span></td>
+                                        <td><span class="payment_status">Rs. 150.00</span></td>
+                                        <td><span class="delete">Delete</span></td>
+                                </div>
+
+                        </tr>
+
+                        <tr class="order">
+                                <div class="order_detail">
+                                        <td><span class="p_name">1</span></td>
+                                        <td><span class="p_name">Debit</span></td>
+                                        <td><span class="amount">Dasun Shanaka</span></td>
+                                        <td class="unit">Matara</td>
+                                        <td class="unit">Colombo</td>
+                                        <td><span class="price">81000</span></td>
+                                        <td><span class="payment_status">Rs. 150.00</span></td>
+                                        <td><span class="delete">Delete</span></td>
+                                </div>
+
+                        </tr>
+
+                </table>
+
+                </div>
+                </div>
+        </div>
+
+        <div class="section_3">
+                <!-- add forum -->
+                
+                
+        </div>
 </div>
-</section>
 
-</body>
-</html>
+<?php require APPROOT.'/views/Users/component/Header.php'?>

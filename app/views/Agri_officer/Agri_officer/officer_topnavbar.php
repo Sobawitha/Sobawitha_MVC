@@ -9,9 +9,7 @@
   <div class="drop_down">
     <div class="dropdown-content" >
       
-      <!-- <a href="<?php echo URLROOT?>/Users/view_profile">View Profile</a>
-      <a href="<?php echo URLROOT?>/dashboard/dashboard">Dashboard</a> -->
-      <a href="<?php echo URLROOT?>/Users/logout">Log Out</a>
+      <a href="<?php echo URLROOT?>/Login/logout">Log Out</a>
 
     </div>
 

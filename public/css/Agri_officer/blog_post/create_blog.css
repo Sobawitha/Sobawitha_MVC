@@ -20,17 +20,19 @@
 /*crete post button*/
 .createpost{
     background-color:rgb(0, 0, 0);
-    width:100px;
-    height:50px;
-    margin-right:100px;
+    width:150px;
+    height:40px;
+    margin-right:120px;
+    margin-top:17px;
     color:white;
     font-weight:bold;
     font-family: 'Montserrat', sans-serif;  
     border:none;
     cursor:pointer;
     position:relative;
-    top:40%;
-    left:32%;
+    top:55%;
+    left:25%;
+    border-radius:40px;
 }
 
 .add_new_post{
@@ -331,7 +333,7 @@ input[type=file]::file-selector-button:hover{
 .search_bar .search_content{
     border:2px solid rgb(41, 171, 56);
     border-radius:20px;
-    padding:8px;
+    padding:10px;
     padding-left:15px;
     width:75%;
 }

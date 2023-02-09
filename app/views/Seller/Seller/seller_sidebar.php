@@ -17,10 +17,12 @@
         <li><a href="<?php echo URLROOT?>/Pages/home"><i class="fa-solid fa-house"></i>&nbsp;&nbsp;Home</a></li>
         <li><a href="<?php echo URLROOT?>/resources/resource_page"><i class="fa-solid fa-file-signature"></i>&nbsp;&nbsp;Resources</a></li>
         <li><a href="<?php echo URLROOT?>/forum/forum"><i class="fa-brands fa-forumbee"></i>&nbsp;&nbsp;Forum</a></li>
-        <li><a href="#sell"><i class="fa-brands fa-sellsy"></i>&nbsp;&nbsp;Sell</a></li>
-        <li><a href=""><i class="fas fa-table"></i>&nbsp;Dashboard</a></li>
-        <li><a href="<?php echo URLROOT?>/"><i class="fas fa-book"></i>&nbsp;Manage Ads</a></li> 
-        <li><a href=""><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;Complaints</a></li> 
+        <li><a href="<?php echo URLROOT?>/seller_ad_management/View_listing"><i class="fa-solid fa-rectangle-ad"></i>&nbsp;&nbsp;Manage Ads</a></li> 
+        <li><a href="<?php echo URLROOT?>/seller_order_list/view_orders"><i class="fa-sharp fa-solid fa-store"></i>&nbsp;&nbsp;Orders</a></li> 
+        <li><a href="<?php echo URLROOT?>/"><i class="fa-solid fa-cart-shopping"></i></i>&nbsp;&nbsp;Buy Raw-material</a></li> 
+        <li><a href="<?php echo URLROOT?>/feedback/seller_feedback"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;Feedback</a></li> 
+        <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;Complaints</a></li> 
+        <li><a href="<?php echo URLROOT?>/seller_payment/view_payment"><i class="fa-solid fa-coins"></i></i>&nbsp;&nbsp;Payments</a></li> 
     </ul>
 </div>
 

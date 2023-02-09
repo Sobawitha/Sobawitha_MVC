@@ -3,7 +3,7 @@
     display:grid;
     grid-template-columns:20% 60% 20%;
     height:100%;
-    padding-top:100px;
+    padding-top:80px;
     
 }
 
@@ -58,7 +58,7 @@
 /*search section*/
 .search_bar{
     margin-top:20px;
-    width:130%;
+    width:96%;
 }
 .search_bar .search_content{
     border:2px solid rgb(41, 171, 56);

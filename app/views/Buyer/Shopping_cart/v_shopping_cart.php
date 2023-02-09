@@ -1,8 +1,28 @@
 <link rel="stylesheet" href="../css/Buyer/shopping_cart/shopping_cart.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
-<?php require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php'?>
-<?php require APPROOT.'/views/Buyer/Buyer/buyer_sidebar.php'?>
-    
+
+
+<?php
+if($_SESSION['user_flag'] == 1){
+    require APPROOT.'/views/Admin/Admin/admin_topnavbar.php';
+    require APPROOT . '/views/Admin/Admin/admin_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 2){
+    require APPROOT.'/views/Seller/Seller/seller_topnavbar.php';
+    require APPROOT . '/views/Seller/Seller/seller_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 3){
+    require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php';
+    require APPROOT . '/views/Buyer/Buyer/buyer_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 4){
+    require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php';
+    require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 5){
+    require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php';
+    require APPROOT . '/views/Agri_officer/Agri_officer/Officer_Sidebar.php';
+}?>
 
 
 <div class="body">
@@ -102,4 +122,4 @@
 </div>
 
 
-<?php require APPROOT.'/views/inc/Footer.php'?>
+<?php require APPROOT.'/views/Users/component/Header.php'?>

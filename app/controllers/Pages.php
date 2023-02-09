@@ -20,6 +20,11 @@ class Pages extends Controller {
         $data = [];
         $this->view('Users/component/v_product_page', $data);
     }
+
+    public function select_user_for_login(){
+        $data=[];
+        $this->view('Users/component/select_user_for_login', $data);
+    }
 }
 
 ?>

@@ -154,4 +154,4 @@
 
     </div>
 </div>
-<?php require APPROOT.'/views/inc/Footer.php'?>
+<?php require APPROOT.'/views/Users/component/Header.php'?>

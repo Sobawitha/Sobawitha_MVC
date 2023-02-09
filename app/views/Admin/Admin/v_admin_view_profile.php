@@ -3,6 +3,7 @@
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
 
+
 <div class="body">
     <div class="section_1">
 
@@ -154,4 +155,5 @@
 
     </div>
 </div>
-<?php require APPROOT.'/views/inc/Footer.php'?>
+
+<?php require APPROOT.'/views/Users/component/footer.php'?>

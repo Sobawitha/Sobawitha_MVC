@@ -16,7 +16,7 @@ body{
     transform: translate(293px,30px);
 } 
 header{
-    background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg);
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(..public/images/background2.jpg);
     background-size: cover;
     height:77vh;
     -webkit-background-size:cover ;

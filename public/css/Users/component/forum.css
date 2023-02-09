@@ -2,7 +2,7 @@
 .body{
     display:grid;
     grid-template-columns:20% 60% 20%;
-    padding-top:100px;
+    padding-top:80px;
     overflow-x: hidden;
     
 }
@@ -142,7 +142,7 @@ form .label{
 }
 
 form .input_field{
-    width:127%;
+    width:98%;
     height:30px;
     border:2px solid rgb(222, 245, 222);
     background-color:transparent;
@@ -154,7 +154,7 @@ form .input_field:focus{
 }
 
 form .message{
-    width:127%;
+    width:98%;
     height:50px;
     border:2px solid rgb(222, 245, 222);
     border-radius:10px;
@@ -550,6 +550,10 @@ form .message:focus{
     font-size:8px;
 }
 
+.forum_hr{
+    color:rgb(176, 172, 172);
+    border-top:0.1px solid rgb(230, 225, 225);
+}
 
 
 

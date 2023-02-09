@@ -19,11 +19,11 @@
         <li><a href="<?php echo URLROOT?>/forum/forum"><i class="fa-brands fa-forumbee"></i>&nbsp;&nbsp;Forum</a></li>
         <li><a href="#sell"><i class="fa-brands fa-sellsy"></i>&nbsp;&nbsp;Sell</a></li>
         <li><a href="<?php echo URLROOT?>/dashboard/supplier_dashboard" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Dashboard</a></li>
-        <li><a href="<?php echo URLROOT?>/order/order_list" class=""><i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;View orderlist</a></li>
+        <li><a href="<?php echo URLROOT?>/order/supplier_order_list" class=""><i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;View orderlist</a></li>
         <li><a href="<?php echo URLROOT?>/sales/sales_list" class=""><i class="fa-solid fa-list"></i>&nbsp;&nbsp;View sales</a></li>
         <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Complaint</a></li>
         <li><a href="<?php echo URLROOT?>/feedback/supplire_feedback" class=""><i class="fa-regular fa-comments"></i>&nbsp;&nbsp;Feedback</a></li>
-        <li><a href="<?php echo URLROOT?>" class=""><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Manage ads</a></li>
+        <li><a href="<?php echo URLROOT?>/supplier_ad_management/view_advertisment" class=""><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Manage ads</a></li>
     </ul>
 </div>
 

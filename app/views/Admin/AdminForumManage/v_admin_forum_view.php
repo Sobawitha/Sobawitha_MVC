@@ -1,8 +1,8 @@
 <script src="../js/forum/forum.js"></script> 
 <link rel="stylesheet" href="../css/admin/admin_forum_management.css"></link>
-<?php require APPROOT.'/views/inc/header.php'; ?>
-<?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
-<?php require APPROOT.'/views/inc/component/adminSidebar.php'; ?>
+<?php require APPROOT.'/views/Users/component/Header.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
 
 
 <?php
@@ -67,7 +67,6 @@
                 </div>
         </div>
 
-Devin Aiya CS, [2/7/2023 7:15 PM]
 <div class="section_3">
                 <!-- add forum -->
                 <div class="new_discussion_button">

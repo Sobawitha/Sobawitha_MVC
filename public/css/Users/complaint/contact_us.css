@@ -170,7 +170,8 @@
     text-align:center;
     margin-bottom:50px;
     line-height: 20px;
-    transform: translateX(30px);
+    padding:20px;
+    /* transform: translateX(30px); */
 }
 
 .contact_us_form #users{
@@ -185,7 +186,7 @@
     font-weight:bold;
     color:#ff0000;
     cursor:pointer;
-    padding-left:120%;
+    padding-left:95%;
 }
 
 form{
@@ -198,7 +199,7 @@ form .label{
 }
 
 form .input_field{
-    width:120%;
+    width:95%;
     height:20px;
     border-top:none;
     border-left:none;
@@ -214,7 +215,7 @@ form .input_field:focus{
 }
 
 form .discription{
-    width:120%;
+    width:95%;
     height:150px;
     border-top:none;
     border-left:none;
