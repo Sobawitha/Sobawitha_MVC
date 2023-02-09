@@ -9,7 +9,7 @@
          $data=[
                 'title' => 'Sobawitha'
             ];
-            $this->view('Supplier/v_supplier_register', $data);
+            $this->view('Raw_material_supplier/Raw_material_supplier/v_supplier_register', $data);
           
            
     }

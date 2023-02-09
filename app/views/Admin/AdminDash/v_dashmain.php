@@ -1,70 +1,67 @@
-<!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <link rel="stylesheet" href="../css/admin/admin_dashboard.css"></link>
-      <?php require APPROOT.'/views/inc/header.php'; ?>
-      <?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
-      <?php require APPROOT.'/views/inc/component/adminSidebar.php'; ?>
-      <title>Admin Dashboard</title>
-    </head>
-<body>
-<section class="a_dashboard">
-<div class="a_dashmaincontent" >
-   <br>
-   <h1>Dashboard</h1><hr>
+<link rel="stylesheet" href="../css/Users/dashboards/dashboard.css"></link>
+<?php require APPROOT.'/views/Users/component/Header.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_Sidebar.php'?>
 
 
-   <div class="a_dash_content">
 
-          <div class="a_dash_card">
-            <h3>Rs. 500000.00</h3>
-            <div class="a_icon">
-              <i class="fa-solid fa-sack-dollar"></i>
+<div class="body">
+    <div class="section_1">
+
+    </div>
+    <div class="section_2">
+        <div class="dashboard">
+            <div class='card' id="card1">
+                <div class='content'>
+                    <p class="count">10</p>
+                    <p class="topic">Blog Posts</p>
+                    <p class="time_period">For previous year</P>
+                    <i class="fa-sharp fa-solid fa-blog" id="blog_icon"></i>
+                    <i class="fa-sharp fa-solid fa-circle-info" id="demo"  onclick=()></i>
+                </div>
             </div>
-            <p>Last Month Total Income</p>
-          </div>
 
-          <div class="a_dash_card">
-            <h3>105</h3>
-            <div class="a_icon">
-              <i class="fa-sharp fa-solid fa-chart-column"></i>
+            <div class='card' id="card2">
+                <div class='content'>
+                    <p class="count">10</p>
+                    <p class="topic">Forum Topics</p>
+                    <p class="time_period">For previous year</P>
+                    <i class="fa-brands fa-forumbee" id="forum_icon"></i>
+                    <i class="fa-sharp fa-solid fa-circle-info" id="demo"  onclick=()></i>
+                </div>
             </div>
-            <p>Total Fertilizer Ads</p>
-          </div>
+            <div class='card' id="card3">
+                <div class='content'>
+                    <p class="count">10</p>
+                    <p class="topic">Complaints</p>
+                    <p class="time_period">For previous month</P>
+                    <i class="fa fa-file-text" aria-hidden="true" id="complain_icon"></i>
+                    <i class="fa-sharp fa-solid fa-circle-info" id="demo" onclick=()></i>
+                </div>
+            </div>
 
-          <div class="a_dash_card">
-            <h3>05</h3>
-            <div class="a_icon">
-              <i class="fa-solid fa-message"></i>
+            <div class='card' id="card3">
+                <div class='content'>
+                    <p class="count">10</p>
+                    <p class="topic">System usage</p>
+                    <p class="time_period">For previous month</P>
+                    <i class="fa-solid fa-user-gear" id="usage_icon"></i>
+                    <i class="fa-sharp fa-solid fa-circle-info" id="demo" onclick=()></i>
+                </div>
             </div>
-            <p>Last Month Complaints</p>
-          </div>
 
-          <div class="a_dash_card">
-            <h3>125</h3>
-            <div class="a_icon">
-              <i class="fa-sharp fa-solid fa-chart-column"></i>
-            </div>
-            <p>Total Sellers</p>
-          </div>
 
-          <div class="a_dash_card">
-            <h3>25</h3>
-            <div class="a_icon">
-              <i class="fa-sharp fa-solid fa-registered"></i>
-            </div>
-            <p>Registered Raw Material <br>Suppliers</p>
-          </div>
+        </div>
 
-          <div class="a_dash_card">
-            <h3>21</h3>
-            <div class="a_icon">
-              <i class="fa-solid fa-user-tie"></i>
-            </div>
-            <p>Total Agri Officers</p>
-          </div>
+        <div class="demo">
+            <!-- Demostration here -->
+        </div>
+
     </div>
 
+    <div class="last">
+
+    </div>
 </div>
-</body>
-</html>
+<?php require APPROOT.'/views/Users/component/Header.php'?>
+    

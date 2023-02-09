@@ -8,8 +8,7 @@
     $data=[
         'title' => 'Sobawitha'
     ];
-    $this->view('Admin/AdminFeedbackManage/v_admin_feedback_published', $data);
-  
+    $this->view('Admin/AdminFeedbackManage/v_admin_feedback_publish', $data);
    }
 
    public function feed_review_pending(){

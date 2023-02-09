@@ -55,13 +55,13 @@
                         $data['password_err'] = 'Invalid email or password';
                         
                         // Load view
-                         $this->view('User/v_login_user', $data);
+                         $this->view('Users/user/v_login_user', $data);
                     }
            
                 }
                 else{
                     // Load view
-                    $this->view('User/v_login_user', $data);
+                    $this->view('Users/user/v_login_user', $data);
                 }
               
             }else{
@@ -76,43 +76,53 @@
                 ];
 
                 //load view
-                $this->view('User/v_login_user', $data);
+                $this->view('Users/user/v_login_user', $data);
             }
     } 
 
     public function createUserSession($loggeduser) {
         $_SESSION['user_id']=$loggeduser->user_id;
-        $_SESSION['user_name']=$loggeduser->first_name;
+        $_SESSION['username']=$loggeduser->first_name;
         $_SESSION['user_email']=$loggeduser->email; 
         $_SESSION['user_flag']=$loggeduser->user_flag;
+        $_SESSION['lastname'] = $loggeduser->last_name;
+        $_SESSION['profile_image'] = $loggeduser->profile_picture;
         
-        if($loggeduser->gender=='m'){
-           $_SESSION['user_gender']='Mr.';
-        }else if($loggeduser->gender=='f'){
-            $_SESSION['user_gender']='Ms.';
-        } 
-        
-      
-        if($loggeduser->user_flag=='1'){
-            redirect('Admin_dashboard/main_view');
-        }else if($loggeduser->user_flag=='2'){
-            redirect('Admin_ad_management/reviewed_ads');
-        }else if($loggeduser->user_flag=='3'){
-            redirect('Admin_complaints_management/comp_solved');
-        }else if($loggeduser->user_flag=='4'){
-            redirect('Admin_feedback_management/feed_reviewed');
-        }else if($loggeduser->user_flag=='5'){
-            redirect('Admin_payments/view_payments');
-        }
+
+            $flag = $_SESSION['user_flag'];
+            if($flag==1){
+                $_SESSION['position'] = "Admin";
+                redirect('Admin_dashboard/main_view');
+            }
+            else if($flag==2){
+                $_SESSION['position'] = "Seller";
+                redirect('dashboard/seller_dashboard');
+            }
+            else if($flag==3){
+                $_SESSION['position'] = "Buyer";
+                redirect('dashboard/buyer_dashboard');
+            }
+            else if($flag==4){
+                $_SESSION['position'] = "Supplier";
+                redirect('dashboard/supplier_dashboard');
+            }
+            else if($flag==5){
+                $_SESSION['position'] = "Agri-officer";
+                redirect('dashboard/officer_dashboard');
+            }
     }
 
     public function logout() {
         if(isset($_SESSION['user_id'])){  
              unset($_SESSION['user_id']);
              unset($_SESSION['user_email']);
-             unset($_SESSION['user_name']);
+             unset($_SESSION['username']);
              unset($_SESSION['user_gender']);
              unset($_SESSION['user_flag']);
+            unset($_SESSION['lastname']);
+            unset($_SESSION['position']);
+            session_destroy();
+            redirect('Users/login');
 
              // session_destroy();
 

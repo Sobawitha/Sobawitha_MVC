@@ -14,13 +14,6 @@
   
    }
 
-   public function choose_user(){
-    $data=[
-        'title' => 'Sobawitha'
-    ];
-    $this->view('Admin/AdminUserManagement/v_choose_add_user', $data);
-  
-   }
 
    public function add_new_agri(){
     $data=[
@@ -36,28 +29,6 @@
   
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
-            
-
-            // $file_name = $_FILES['admin_pro_pic']['name'];
-            // $file_size = $_FILES['admin_pro_pic']['size'];
-            // $tmp_name = $_FILES['admin_pro_pic']['tmp_name'];
-            // $error = $_FILES['admin_pro_pic']['error'];
-
-            // if ($error == 0) {
-
-            //   $fileType = pathinfo($file_name, PATHINFO_EXTENSION);
-            //   $fileType_lc = strtolower($fileType);
-      
-            //   $allowedFileTypes = array("jpg", "jpeg", "png");
-      
-            // //  if (in_array($fileType, $allowedFileTypes)) {
-      
-            //       $new_img_name = uniqid("IMG-", true) . '.' . $fileType_lc;
-            //       $img_upload_path = APPROOT . '/../public/upload/user_profile_pics/' . $new_img_name;
-            //       move_uploaded_file($tmp_name, $img_upload_path);                  
-            //  // }
-            // }
             $data=[
                 'first_name'=>trim($_POST['first_name']),
                 'last_name'=>trim($_POST['last_name']),
@@ -77,7 +48,6 @@
                 'branch'=>trim($_POST['branch']),
                 'password'=>trim($_POST['password']),
                 'confirm_password'=>trim($_POST['confirm_password']),
-                // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
                 'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['propic']['name'],
    
         

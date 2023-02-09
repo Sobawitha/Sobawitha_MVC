@@ -1,124 +1,106 @@
-<link rel="stylesheet" href="../css/admin/admin_ad_manage_pending.css"></link>
-<?php require APPROOT.'/views/inc/header.php'; ?>
-<?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
-<?php require APPROOT.'/views/inc/component/adminSidebar.php'; ?>
+<link rel="stylesheet" href="../css/Admin/admin_ad_manage_pending.css"></link>
+<?php require APPROOT.'/views/Users/component/Header.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
+<script src="../js/Admin/Add_management/add_management.js"></script>
 
-<body >
+<div class="body">
+        <div class="section_1">
+            
+        </div>
 
-<section class="registerUser">
-$nbsp<div class="aump_maincontent">
-  <h1>Advertisement Management</h1>
-  <hr>
-           <div class="am_above_table">
-              <a href="<?php echo URLROOT?>/Admin_ad_management/reviewed_ads" id="reviewedAdds" >Reviewed Adds</a>&nbsp &nbsp 
-              <a href="#" id="pendingAdds">Pending Adds</a>
-           </div>
-                  
-            <table id ="adManageTablePenA">
-                        <thead>
-                          <th>Image</th>
-                          <th>Title</th>
-                          <th>Category</th>
-                          <th>Manufacturer</th>
-                          <th>Price</th>
-                          <th>Quantity</th>
-                          <th>Options</th>
-                        </thead>
-                  <tr>
-                  <td>
-                    <img src="../img/AdminAdManage/AdOne.jpg" id ="adimg">
-                  </td>
-                  
-                  <td>
-                    <b>Urea Fertilizer for Paddy</b>
-                  </td>
-                  
-                  <td>
-                    <b>Paddy</b>
-                  </td>
-                  
-                  <td>
-                    <b>Hayleys</b>
-                  </td>
-                  
-                  <td>
-                    <b>1200.00</b>
-                  </td>
-                  <td>
-                  <b>10</b>
-                  </td>
-                  <td>
-  
+        <div class="section_2">
 
-                   <form action="#" method="post">
-                          <button class="reviewButton" value="<?php echo $row["user_id"] ?>" > Review<i class="fa-sharp fa-solid fa-square-chevron-down"></i></button>
-                   </form>
-  
-                  </td>
-                </tr>
+        <h3>Advertisment Management</h3>
+        <hr>
 
-                <tr>
-                  <td>
-                     <img src="../img/AdminAdManage/AdTwo.jpg" id ="adimg">
-                  </td>
-                  
-                  <td>
-                    <b>Chillie Fertilizer</b>
-                  </td>
-                  
-                  <td>
-                    <b>Vegetables</b>
-                  </td>
-                  
-                  <td>
-                    <b>Agro PLC</b>
-                  </td>
-                  
-                  <td>
-                    <b>650.00</b>
-                  </td>
-                  <td>
-                    <b>05</b>
-                  </td>
-                  <td>
+        <br><br>
+        <form method="POST">
+        <div class="search_bar">
+            <div class="search_content">
+                
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                
+            </div>
+        </div>
+        </form>
 
-                   <form action="#" method="post">
-                          <button class="reviewButton" value="<?php echo $row["user_id"] ?>" > Review<i class="fa-sharp fa-solid fa-square-chevron-down"></i></button>
-                   </form>
-  
-                  </td>
-                </tr>
+                <div class="filter_section">
+                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Reviewed Ads</label>
+                        <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Pending Ads</label>
+                </div>
 
-          </table>
-</body>
+                <div class="order_list">
+                <div class="orders">
+
+                <table class="order_list_table">
+                        <tr class="table_head">
+                                <td>Image</td>
+                                <td>Title</td>
+                                <td>Discription</td>
+                                <td>Category</td>
+                                <td>Manufacture</td>
+                                <td>Price</td>
+                                <td>Quantity</td>
+                                <td>Option</td>
+                        </tr>
+
+                        <tr class="order">
+                                <div class="order_detail">
+                                        <td><span ><img src="../images/background2.jpg" class="add_image"></span></td>
+                                        <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
+                                        <td><span class="amount">Urea Fertilizer for paddy</span></td>
+                                        <td class="unit">Paddy</td>
+                                        <td><span class="price">Hayleys</span></td>
+                                        <td><span class="payment_status">Rs. 1200.00</span></td>
+                                        <td class="unit"><span class="value">5</span></td>
+                                        <td><span class="delete">Review</span></td>
+                                </div>
+
+                        </tr>
+
+
+                        <tr class="order">
+                                <div class="order_detail">
+                                        <td><span ><img src="../images/background3.jpg" class="add_image"></span></td>
+                                        <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
+                                        <td><span class="amount">Urea Fertilizer for paddy</span></td>
+                                        <td class="unit">Paddy</td>
+                                        <td><span class="price">Hayleys</span></td>
+                                        <td><span class="payment_status">Rs. 1200.00</span></td>
+                                        <td class="unit"><span class="value">2</span></td>
+                                        <td><span class="delete">Review</span></td>
+                                </div>
+
+                        </tr>
+
+                        <tr class="order">
+                                <div class="order_detail">
+                                        <td><span ><img src="../images/background7.jpg" class="add_image"></span></td>
+                                        <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
+                                        <td><span class="amount">Urea Fertilizer for paddy</span></td>
+                                        <td class="unit">Paddy</td>
+                                        <td><span class="price">Hayleys</span></td>
+                                        <td><span class="payment_status">Rs. 1200.00</span></td>
+                                        <td class="unit"><span class="value">4</span></td>
+                                        <td><span class="delete">Review</span></td>
+                                </div>
+
+                        </tr>
+
+                </table>
+
+                </div>
+                </div>
+        </div>
+
+        <div class="section_3">
+                <!-- add forum -->
+                
+                
+        </div>
 </div>
 
-<!-- <div id="overlap">
-        <div class="contact_us_form">
-        <form method="POST" action="<?php echo URLROOT?>/complaint/contact_us">
-
-                    <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a><br>
-                    <i class="fa-solid fa-users" id='users'></i><br>
-                    <p class="contact_form_discription">Please select a topic below related to your inquiry. We'll show blog posts that provide answers to some most common quections. If you dont find what you need, click 
-                        through the prompts to access our contact form. </p>
-                    <label for="title" class="label"><b>Your Email Address</b></label><br>
-                    <input type="text" name="title"  class="input_field" placeholder="you@gmail.com"  required></input><br><br>
-                    
-
-                    <label for="tags" class="label"><b>Subject</b></label><br>
-                    <input type="text" name="tag" class="input_field" placeholder=""   required></input><br><br>
-                    
-
-                    <label for="discription" class="label"><b>How can we help</b></label><br>
-                    <textarea width="250px" height="500px" class="discription" name="discription"  value="<?php echo $data1['discription']?>" required></textarea>
-                    
-
-                    <div class="foot">
-                        <input type="submit" class="send" name="send" value="send"/>
-                    </div>
-                </form>
-        </div>
-        </div> -->
-        </section>
-
-</html>
+<?php require APPROOT.'/views/Users/component/Header.php'?>

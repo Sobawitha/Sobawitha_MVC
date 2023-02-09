@@ -49,15 +49,15 @@ class blog_post extends Controller {
 
                 if($this->blog_post_model->create_posts($data1)){
                     $data1 = ['form_submit_message' => 'Your post has been successfully added!'];
-                    $this->view('inc/blog_post/v_create_blog',$data1);
+                    $this->view('Agri_officer/Blog_post/v_create_blog',$data1);
                 }
                 else{
                     $data1 = ['form_submit_message' => 'Post submitted fail.'];
-                    $this->view('inc/blog_post/v_create_blog',$data1);
+                    $this->view('Agri_officer/Blog_post/v_create_blog',$data1);
                 }
             }
             else{
-                $this->view('inc/blog_post/v_create_blog',$data1);
+                $this->view('Agri_officer/Blog_post/v_create_blog',$data1);
             }
 
             
@@ -77,7 +77,7 @@ class blog_post extends Controller {
             
         }
     
-        $this->view('inc/blog_post/v_create_blog',$data1);        
+        $this->view('Agri_officer/Blog_post/v_create_blog',$data1);        
     }
 
     public function resource_page_create(){
@@ -109,7 +109,7 @@ class blog_post extends Controller {
                 ];
             }
 
-            $this->view('inc/blog_post/v_create_blog',$data);
+            $this->view('Agri_officer/Blog_post/v_create_blog',$data);
         }
         else{
             $blogpost = $this->blog_post_model->display_all_posts(); //data object array
@@ -117,7 +117,7 @@ class blog_post extends Controller {
                 'blogpost' => $blogpost
             ];
 
-            $this->view('inc/blog_post/v_create_blog',$data);
+            $this->view('Agri_officer/Blog_post/v_create_blog',$data);
         }
 
     }

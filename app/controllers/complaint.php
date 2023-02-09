@@ -9,7 +9,7 @@ class complaint extends Controller
 
     public function contact_us(){
         $data = [];
-        $this->view('inc/complaint/v_contact_us', $data);
+        $this->view('Users/complaint/v_contact_us', $data);
     }
 
     public function add_complaint(){
@@ -78,7 +78,7 @@ class complaint extends Controller
             $data = [
                 'complaint' => $complaint,
             ];
-            $this->view('inc/complaint/v_complaint', $data);
+            $this->view('Users/complaint/v_complaint', $data);
         }
     
     }
