@@ -9,7 +9,7 @@ class forum extends Controller {
         $data = [
         ];
 
-        $this->view('Users/forum/v_forum',$data);
+        $this->view('inc/forum/v_forum',$data);
     }
 
 }

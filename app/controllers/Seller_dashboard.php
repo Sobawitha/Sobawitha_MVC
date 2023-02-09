@@ -1,12 +1,15 @@
 <?php
-    class seller_dashboard extends Controller{
+    class Seller_dashboard extends Controller{
         public function __construct(){
-            $this->userModel = $this->model('M_seller_dashboard');
+            $this->userModel = $this->model('M_Seller_dashboard');
     }
-
-    public function view_dash(){
-        $data=[];
-        $this->view('sellerDash/v_seller_dashboard',$data);
-    }
+   
+   public function s_main_view(){
+    $data=[
+        'title' => 'Sobawitha'
+    ];
+    $this->view('SellerDash/v_seller_dashmain', $data);
+  
+   }
 }
 ?>

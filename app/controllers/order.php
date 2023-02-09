@@ -5,11 +5,11 @@ class order extends Controller {
         $this-> order_model =$this->model('M_order');
     }
 
-    public function supplier_order_list(){
+    public function order_list(){
         $data = [
         ];
 
-        $this->view('Raw_material_supplier/Supplier_order_list/v_order_list',$data);
+        $this->view('raw_material_supplier/v_order_list',$data);
     }
 
     /** remove */
@@ -17,14 +17,14 @@ class order extends Controller {
         $data = [
         ];
 
-        $this->view('Buyer/shopping_cart/v_shopping_cart',$data);
+        $this->view('shopping_cart/v_shopping_cart',$data);
     }
 
     public function wish_list(){
         $data = [
         ];
 
-        $this->view('Buyer/Buyer_wish_list/v_wish_list',$data);
+        $this->view('buyer_wish_list/v_wish_list',$data);
     }
 
 }

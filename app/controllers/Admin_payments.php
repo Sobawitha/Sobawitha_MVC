@@ -8,7 +8,7 @@
         $data=[
             'title' => 'Sobawitha'
         ];
-        $this->view('Admin/AdminPayments/v_admin_payment', $data);
+        $this->view('Admin/AdminPayments/v_admin_payments', $data);
       
        }
 

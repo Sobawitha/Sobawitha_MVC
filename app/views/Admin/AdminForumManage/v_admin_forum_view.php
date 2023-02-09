@@ -1,8 +1,8 @@
 <script src="../js/forum/forum.js"></script> 
 <link rel="stylesheet" href="../css/admin/admin_forum_management.css"></link>
-<?php require APPROOT.'/views/Users/component/Header.php'?>
-<?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
-<?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
+<?php require APPROOT.'/views/inc/header.php'; ?>
+<?php require APPROOT.'/views/inc/component/topnavbar.php'; ?>
+<?php require APPROOT.'/views/inc/component/adminSidebar.php'; ?>
 
 
 <?php
@@ -67,7 +67,7 @@
                 </div>
         </div>
 
-<div class="section_3">
+        <div class="section_3">
                 <!-- add forum -->
                 <div class="new_discussion_button">
                         <button class="new_discussion" onclick="close_add_new_discussion_form()">Start New Discussion <i class="fa-solid fa-circle-check" id="correct"></i></button>
@@ -117,3 +117,4 @@
 </div>
 
 </body>
+

@@ -9,7 +9,7 @@ class sales extends Controller {
         $data = [
         ];
 
-        $this->view('Raw_material_supplier/Supplier_sales/v_view_sales',$data);
+        $this->view('raw_material_supplier/v_view_sales',$data);
     }
 
 }

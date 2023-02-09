@@ -1,38 +1,29 @@
-
-.body{
-  display:grid;
-  grid-template-columns:20% 60% 20%;
-  height:100%;
-  padding-top:50px;
-  font-size:14px;
-  
-}
-
-.section_1{
-  /* background-color:bisque; */
-}
-
 .a_add_admin_maincontent{
+  margin-left: 360px;
   margin-right: 2rem;
 }
 
+body{
+  background: linear-gradient(135deg, #e6ede6, white);
+
+}
 
 .add_container{
-  margin-left: 100px;
+  margin-left: 200px;
+  margin-top: 40px;
   max-width: 900px;
   box-sizing: border-box;
-  font-family:'Montserrat', sans-serif ;
+  font-family: 'Poppins',sans-serif;
   width: 100%;
-  /* background-color: #e6ede6; */
+  background-color: #e6ede6;
   padding: 25px 30px;
   border-radius: 5px;
-  /* box-shadow: 0 5px 10px rgba(0,0,0,0.15); */
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
 }
 .add_container .title{
-  font-size: 25px;
+  font-size: 35px;
   font-weight: 500;
   position: relative;
-  font-weight:bold;
 }
 .add_container .title::before{
   content: "";
@@ -42,7 +33,7 @@
   height: 3px;
   width: 30px;
   border-radius: 5px;
-  /* background: linear-gradient(135deg, #e6ede6, #004100); */
+  background: linear-gradient(135deg, #e6ede6, #004100);
 }
 
 .add_content form .user-details{
@@ -69,8 +60,7 @@ form .input-box span.details{
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  /* border: 1px solid #ccc; */
-  border:1px solid lavender;
+  border: 1px solid #ccc;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
@@ -127,13 +117,14 @@ form .input-box span.details{
    letter-spacing: 1px;
    cursor: pointer;
    transition: all 0.3s ease;
-   background:  #000000;
+   background:  #004100;
  }
  form .reg_button input:hover , #agri_reg_button:hover{
   /* transform: scale(0.99); */
   background:  #faffff;
-  color: #000000;
-  border:none;
+  color: #004100;
+  border-color: #004100;
+  border: 2px solid;
   }
 
 #agri_reg_button {
@@ -143,11 +134,9 @@ form .input-box span.details{
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background:  #000000;
+  background:  #004100;
   padding:10px;
   margin-top:10px;
-  border:none;
-  font-family: 'Montserrat', sans-serif;
 
 }
 
@@ -180,26 +169,3 @@ form .user-details .input-box{
     flex-direction: column;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
