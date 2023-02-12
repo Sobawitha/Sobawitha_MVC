@@ -3,9 +3,10 @@
 
 <div class="signup_seller_container">
     <div class="signup_seller_intro">
-    <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a>
-        <h2>SOBAWITHA </h2>
-        <span class="sign_up">Seller Sign Up<span>
+    <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a><br>
+    <i class="fa-solid fa-leaf" id="leaf"></i>    
+    <h2>Sobawitha </h2>
+        <span class="sign_up">Buyer Sign Up<span>
         <br><br>
         <p>Join Sobawitha and become a part 
             of our growing community of fertilizer sellers! Our 
@@ -27,7 +28,7 @@
         
        
         <div class="s_input_box">
-        <h1 id="sign_up_word"> Seller Sign Up  </h1>
+        <!-- <h1 id="sign_up_word"> Seller Sign Up  </h1> -->
         </div>
 
         <div class="s_input-box">

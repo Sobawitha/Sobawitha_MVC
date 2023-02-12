@@ -122,4 +122,4 @@ else if($_SESSION['user_flag'] == 5){
 </div>
 
 
-<?php require APPROOT.'/views/Users/component/Header.php'?>
+<?php require APPROOT.'/views/Users/component/footer.php'?>

@@ -1,4 +1,7 @@
-
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
 .body{
     display:grid;
     grid-template-columns:20% 60% 20%;
@@ -24,9 +27,7 @@
     height:40px;
     margin-right:120px;
     margin-top:17px;
-    color:white;
-    font-weight:bold;
-    font-family: 'Montserrat', sans-serif;  
+    color:white;  
     border:none;
     cursor:pointer;
     position:relative;
@@ -129,7 +130,6 @@ form .input_field{
     border-right:none;
     border-bottom:2px solid green;
     background-color:transparent;
-    font-family: 'Montserrat', sans-serif; 
     margin-top:15px;
 }
 
@@ -342,7 +342,6 @@ input[type=file]::file-selector-button:hover{
     width:94%;
     border-radius: 20px;
     border:none;
-    font-family:'Montserrat', sans-serif;
     background-color:transparent;
 }
 
@@ -370,7 +369,6 @@ input[type=file]::file-selector-button:hover{
     width:94%;
     border-radius: 20px;
     border:none;
-    font-family:'Montserrat', sans-serif;
 }
 
 #search{

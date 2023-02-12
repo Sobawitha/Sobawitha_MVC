@@ -103,4 +103,5 @@
         </div>
 </div>
 
-<?php require APPROOT.'/views/Users/component/Header.php'?>
+
+<?php require APPROOT.'/views/Users/component/footer.php'?>

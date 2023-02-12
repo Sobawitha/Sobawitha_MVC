@@ -1,3 +1,7 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
 .button_section{
     display:grid;
     grid-template-columns: 20% 60% 20%;
@@ -194,8 +198,8 @@
 
 .card_section{
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap:20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap:30px;
 }
 .flash_card{
     background-color:white;
@@ -367,6 +371,7 @@ hr{
     padding-top:7px;
     padding-bottom:10px;
     padding-left:30px;
+    padding-right:10px;
 }
 
 .feed_discription:hover{
@@ -453,7 +458,7 @@ hr{
 
 .pagination{
     margin-left:50%;
-    margin-top:4%;
+    margin-top:2%;
     display:inline-block;
 }
 
@@ -461,66 +466,21 @@ hr{
     float:left;
     padding:8px 10px;
     text-decoration: none;
-    color:rgb(89, 157, 123);
+    color:rgb(26, 57, 12);
+    width:20px;
+    height:20px;
+    background-color: rgb(218, 239, 210);
+    margin-left:3px;
+    margin-right:3px;
+    text-align:center;
+    border-radius: 10px;;
 }
 
 .pagination_number:hover{
-    color:salmon;
+    background-color: rgb(132, 162, 120);
 }
 
 #forward_bracket, #backword_bracket{
     transform: translateY(2px);
 }
-
-
-/*  #seperate_category_colors{
-    margin-top:0px;
-    margin-left:40px;
-    margin-right:20px;
-    transform: translateY(-30px); 
-} */
-/* 
-.category_colors{
-    margin-left:45px;
-    line-height: 30px;
-}
-
-.category_type{
-    font-size:12px;
-    list-style: none;
-    transform: translateX(-40px);
-    font-weight:bold;
-    color:rgb(65, 64, 64)
-}
-
-#circle1{
-    font-size:12px;
-    margin-right:25px;
-    color:rgb(228, 196, 244);
-}
-
-#circle2{
-    font-size:12px;
-    margin-right:25px;
-    color:rgb(200, 241, 241);
-}
-
-#circle3{
-    font-size:12px;
-    margin-right:25px;
-    color:antiquewhite;
-}
-
-#circle4{
-    font-size:12px;
-    margin-right:25px;
-    color:rgb(241, 219, 219);
-}
-
-#circle5{
-    font-size:12px;
-    margin-right:25px;
-    color:rgb(254, 252, 234);
-} */
-
 

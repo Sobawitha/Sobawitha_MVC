@@ -1,4 +1,7 @@
-setTimeout(()=> {
-        document.querySelector(".popup").style.display='none';
-        document.getElementById("overlap1").style.display='none';
-}, 2000)
+
+// alert();
+function popUpOpen() {
+        const addUserPopup = document.getElementById('addUserPopup')
+          document.getElementById('sign_up').addEventListener('click',() => addUserPopup.showModal());
+          document.getElementById('closebtn').addEventListener('click',() => addUserPopup.close());
+}

@@ -3,28 +3,27 @@
 
 
 <div class="signup_supplier_container">
-    <div class="signup_supplier_intro">
-        <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a>
-        <h2>SOBAWITHA <h2>
-        <span class="supplier_sign_up">Supplier Sign Up<span>
-          <br><br>
-        <p>Join Sobawitha as a raw material supplier and become a 
-            part of a thriving community of suppliers and buyers in 
-            the fertilizer industry. Our e-commerce platform provides
-             a seamless and efficient way for you to showcase your 
-             products and reach new customers. Whether you're a 
-             producer of raw materials used in fertilizer production 
-             or a supplier of essential ingredients, Sobawitha can 
-             help you grow your business and reach your goals. Sign 
-             up now to take advantage of all the benefits that 
-             Sobawitha has to offer and start connecting with 
-             potential buyers today!</p>
+<div class="signup_supplier_intro">
+    <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a><br>
+    <i class="fa-solid fa-leaf" id="leaf"></i>    
+    <h2>Sobawitha </h2>
+        <span class="sign_up">Supplier Sign Up<span>
+        <br><br>
+        <p>Join Sobawitha and become a part 
+            of our growing community of fertilizer sellers! Our 
+            e-commerce platform provides a reliable and efficient 
+            way for you to reach new customers and sell your 
+            products. With Sobawitha, you can easily manage your 
+            sales, deliveries and orders all in one place. Sign up 
+            now to gain access to our platform and start expanding 
+            your reach in the fertilizer industry. Maximize your 
+            potential as a seller and join Sobawitha today!</p>
     </div>
     <div class="signup_supplier_content">
         <div class="supplier_signup_part_one">
         
         <div class="s_input_box">
-        <h1 id="sign_up_word">  Supplier Sign Up  </h1>
+        <!-- <h1 id="sign_up_word">  Supplier Sign Up  </h1> -->
         </div>
 
         <div class="s_input-box">

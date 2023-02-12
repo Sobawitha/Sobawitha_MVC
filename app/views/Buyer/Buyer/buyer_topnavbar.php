@@ -43,7 +43,7 @@
       <a href="<?php echo URLROOT?>/dashboard/buyer_dashboard">Dashboard</a>
       <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a> <!--change-->
       <i class="fa fa-solid fa-bell" id="bell" onclick="openNotificationMenu()"></i>
-      <i class="fa-solid fa-ellipsis-vertical" id="dots" onclick="openProfileMenu()"></i>
+      <a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="dots"></i></a>
     </div>
   </div>
 

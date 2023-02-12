@@ -10,7 +10,7 @@
                     <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
                     <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
                     <li><a href="">Sell</a></li>
-                    <li><a href=""><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
+                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
                 </ul>
             </nav>
             <hr class="home_hr">
@@ -127,7 +127,12 @@
                 ?>
                 
                 <div class="adv_card">
-                <div class="card_image">
+                <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
+                                                height:75%;
+                                                -webkit-background-size:cover ;
+                                                background-position:center;
+                                                margin:0px;
+                                                padding:0px;">
                     <div class="product_detail">
                         <span class="product_name">Tea fertilizer</span><br>
                         <span class="owner">By ABC production</span>
@@ -159,3 +164,6 @@
 
     </div>
 </div>
+
+
+<?php require APPROOT.'/views/Users/component/footer.php'?>

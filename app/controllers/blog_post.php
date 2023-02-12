@@ -7,7 +7,7 @@ class blog_post extends Controller {
 
     public function create_posts(){
 
-        redirect('blog_post/resource_page_create');
+        redirect('blog_post/display_all_blogposts');
 
         if($_SERVER['REQUEST_METHOD']=='POST'){
             //form is submitted
@@ -39,9 +39,8 @@ class blog_post extends Controller {
                     'title' => trim($_POST['title']),
                     'tag' => trim($_POST['tag']),
                     'discription' => trim($_POST['discription']),
-
-                    'image' => $imgContent,
-
+                    // 'image' => $imgContent,
+                    // 'created'=>'',
                     'officer_id' => ($_SESSION['user_id']),
                     'no_of_likes' => 0,
                     'form_submit_message' => '',
@@ -49,15 +48,17 @@ class blog_post extends Controller {
 
                 if($this->blog_post_model->create_posts($data1)){
                     $data1 = ['form_submit_message' => 'Your post has been successfully added!'];
-                    $this->view('Agri_officer/Blog_post/v_create_blog',$data1);
+                    
+                    redirect('blog_post/create_posts');
+                    $this->view('inc/blog_post/v_create_blog',$data1);
                 }
                 else{
                     $data1 = ['form_submit_message' => 'Post submitted fail.'];
-                    $this->view('Agri_officer/Blog_post/v_create_blog',$data1);
+                    $this->view('inc/blog_post/v_create_blog',$data1);
                 }
             }
             else{
-                $this->view('Agri_officer/Blog_post/v_create_blog',$data1);
+                $this->view('inc/blog_post/v_create_blog',$data1);
             }
 
             
@@ -67,8 +68,8 @@ class blog_post extends Controller {
                 'title' => '',
                 'tag' => '',
                 'discription' => '',
-                'image' => '',
-
+                // 'image' => '',
+                // 'created'=>'',
                 'officer_id'=>'',
                 'no_of_likes' => '',
                 'form_submit_message' => ''
@@ -77,38 +78,35 @@ class blog_post extends Controller {
             
         }
     
-        $this->view('Agri_officer/Blog_post/v_create_blog',$data1);        
+        $this->view('Agri_officer/Blog_post/v_create_blog',$data1);
     }
 
-    public function resource_page_create(){
-        redirect('blog_post/display_all_blogposts');
-    }
 
     public function display_all_blogposts(){
 
         unset($_SESSION['search_cont']);
         $_SESSION['search_cont'] = "Search by key-word";
-
-
+    
+    
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $search_cont = trim($_POST['search_text']);
             $search_post = $this->blog_post_model->search_bar($search_cont);
             $blogpost = $this->blog_post_model->display_all_posts(); //data object array
-
+    
             if($search_cont == ''){
                 $data = [
                     'blogpost' => $blogpost,
                 ];    
             }
             else{
-
+    
                 $_SESSION['search_cont'] = $search_cont;
                 $data = [
                     'blogpost' => $search_post
                 ];
             }
-
+    
             $this->view('Agri_officer/Blog_post/v_create_blog',$data);
         }
         else{
@@ -116,11 +114,12 @@ class blog_post extends Controller {
             $data = [
                 'blogpost' => $blogpost
             ];
-
+    
             $this->view('Agri_officer/Blog_post/v_create_blog',$data);
         }
-
+    
     }
+    
 
 }
 

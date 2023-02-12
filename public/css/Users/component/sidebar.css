@@ -1,4 +1,8 @@
 /*sidebar*/
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
 .sidebar {
     height: 100%;
     position: fixed;

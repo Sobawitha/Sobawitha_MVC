@@ -1,3 +1,7 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
 body{
     margin:0px;
 }
@@ -34,7 +38,7 @@ body{
     font-size:20px;
     position:absolute;
     /* color:rgb(246, 246, 206); */
-    color:rgb(37, 215, 37);
+    color:rgb(230, 160, 19);
     transform: translate(88px, -20px);
 }
 
@@ -77,14 +81,14 @@ body{
     font-size: 12px;
     padding:10px;
     padding-right:10px;
-    border:1px solid green;
+    border:1px solid rgb(230, 160, 19);
    
 }
 .signup_btn{
     width:80px;
     height:37px;
     margin:10px;
-    background-color:rgb(31, 182, 31) ;
+    background-color:rgb(230, 160, 19) ;
     border:none;
     font-family:'Montserrat';
     font-weight: bold;
@@ -116,6 +120,6 @@ hr{
     margin-right:5px;
 }
 .developers{
-    color:rgb(31, 245, 31);
+    color:rgb(230, 160, 19);
     margin-left: 5px;
 }

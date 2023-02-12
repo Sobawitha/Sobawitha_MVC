@@ -1,4 +1,8 @@
 /*horizontal navbar*/
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
 body{
     margin:0px;
     padding:0px;
@@ -16,13 +20,13 @@ body{
     transform: translate(293px,30px);
 } 
 header{
-    background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(..public/images/background2.jpg);
+    /* background-image: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url("..public/images/background2.jpg");
     background-size: cover;
     height:77vh;
     -webkit-background-size:cover ;
     background-position:center;
     margin:0px;
-    padding:0px;
+    padding:0px; */
 }
 nav{
     top:0;
@@ -240,7 +244,7 @@ nav{
     width:380px;
     height:200px;
     /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
-    background-image:url(../images/buying.jpg);
+    /* background-image:url(../public/images/buying.jpg); */
 }
 
 .img12{
@@ -250,7 +254,7 @@ nav{
     width:210px;
     height:390px;
     /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
-    background-image:url(../images/selling.jpg);
+    /* background-image:url("localhost/Sobawitha_MVC/public/images/selling.jpg"); */
 }
 .img21{
     background-size: cover;
@@ -259,7 +263,7 @@ nav{
     width:190px;
     height:180px;
     /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
-    background-image:url(../images/instructing.jpg);
+    /* background-image:url(../images/instructing.jpg); */
 }
 .img22{
     background-size: cover;
@@ -268,7 +272,7 @@ nav{
     width:180px;
     height:180px;
     /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
-    background-image:url(../images/qestioning.jpg);
+    /* background-image:url(../images/qestioning.jpg); */
 }
 .td_text{
     color:azure;
@@ -319,7 +323,6 @@ nav{
 }
 
 .card_image{
-    background: url(../images/background3.jpg);
     background-size: cover;
     height:75%;
     -webkit-background-size:cover ;

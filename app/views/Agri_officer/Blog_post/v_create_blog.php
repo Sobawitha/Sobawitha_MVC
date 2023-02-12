@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../css/Agri_officer/blog_post/create_blog.css"></link>
 <link rel="stylesheet" href="../css/Users/component/alert_box.css"></link>
-<script src="../js/blog_post/create_blog.js"></script> 
+<script src="../js/Agri_officer/blog_post/create_blog.js"></script> 
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php'?>
 <?php require APPROOT.'/views/Agri_officer/Agri_officer/Officer_Sidebar.php'?>
@@ -9,38 +9,11 @@
 <!--button_section-->
 
 <?php
-// $data1['form_submit_message'] = 'Your post has been successfully added!';
-if($data['form_submit_message']=='Your post has been successfully added!'){
-
-    ?>
-    <div id="overlap1">
-    <div class="popup" id="pop_up">
-        <i class="fa fa-check-circle" aria-hidden="true" id="ok" ></i>
-        <p><?php echo $data['form_submit_message']?></P>
-
-    </div>
-    </div>
-<?php
-}
-
-else if(!empty($data['form_submit_message'])){
-    ?>
-    <p><?php echo $data['title']?></P>
-    <div id="overlap1">
-    <div class="popup" id="pop_up">
-        <i class="fa fa-times-circle" aria-hidden="true" id="fail" ></i>
-        <p><?php echo $data['form_submit_message']?></P>
-    </div>
-    </div>
-<?php
-}
-
-
 function setColor($tag){
     if($tag == 'Production') return 'set-green';
     if($tag == 'Knowledge') return 'set-yellow';
     if($tag == 'Innovations') return 'set-orange';
-    if($tag == 'Other') return 'set-purple';
+    if($tag == 'New_technique') return 'set-purple';
 }
 
 ?>
@@ -124,10 +97,10 @@ function setColor($tag){
                     <label for="tags" class="label"><b>Tags/category</b></label><br>
                     <!-- <input type="text" name="tag" class="input_field" placeholder=""   required></input><br><br> -->
                     <div class="f_filter_section">
-                        <label for="innovations" id="filter_label"> <input type="radio" id="innovations" name="diss_type" value="innovations">Innovations</label>
-                        <label for="knowledge" id="filter_label"> <input type="radio" id="knowledge" name="diss_type" value="knowledge">Knowledge</label><br>
-                        <label for="new_technique" id="filter_label"><input type="radio" id="new_technique" name="diss_type" value="new_technique">New technique</label>
-                        <label for="production" id="filter_label"><input type="radio" id="production" name="diss_type" value="production">Production</label><br>
+                        <label for="innovations" id="filter_label"> <input type="radio" id="innovations" name="tag" value="Innovations">Innovations</label>
+                        <label for="knowledge" id="filter_label"> <input type="radio" id="knowledge" name="tag" value="Knowledge">Knowledge</label><br>
+                        <label for="new_technique" id="filter_label"><input type="radio" id="new_technique" name="tag" value="New_technique">New technique</label>
+                        <label for="production" id="filter_label"><input type="radio" id="production" name="tag" value="Production">Production</label><br>
                     </div>
 
                     

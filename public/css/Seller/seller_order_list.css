@@ -1,5 +1,8 @@
 /*side bar*/
-
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
 .position{
     transform: translateX(-20px);
 }

@@ -1,7 +1,7 @@
 *{
-    font-family:'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
-
 .body{
     display:grid;
     grid-template-columns:20% 75% 5%;
@@ -198,6 +198,7 @@ nav{
     font-size:13px;
     text-transform: uppercase;
     color:rgb(230, 160, 19);
+    color:rgb(213, 200, 176);
     padding-bottom:50px;
     font-weight: bold;
 }

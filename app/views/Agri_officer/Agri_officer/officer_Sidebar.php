@@ -17,7 +17,7 @@
         <li><a href="<?php echo URLROOT?>/Pages/home"><i class="fa-solid fa-house"></i>&nbsp;&nbsp;Home</a></li>
         <li><a href="<?php echo URLROOT?>/resources/resource_page"><i class="fa-solid fa-file-signature"></i>&nbsp;&nbsp;Resources</a></li>
         <li><a href="<?php echo URLROOT?>/forum/forum"><i class="fa-brands fa-forumbee"></i>&nbsp;&nbsp;Forum</a></li>
-        <li><a href="#sell"><i class="fa-brands fa-sellsy"></i>&nbsp;&nbsp;Sell</a></li>
+        <!-- <li><a href="#sell"><i class="fa-brands fa-sellsy"></i>&nbsp;&nbsp;Sell</a></li> -->
         <li><a href="<?php echo URLROOT?>/dashboard/officer_dashboard" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Dashboard</a></li>
         <li><a href="<?php echo URLROOT?>/blog_post/create_posts" class=""><i class="fas fa-book"></i>&nbsp;&nbsp;Manage Resources</a></li> 
         <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint" class=""><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;Complaints</a></li> 

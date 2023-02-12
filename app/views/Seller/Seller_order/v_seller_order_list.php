@@ -15,15 +15,17 @@
         <hr>
 
 
+        <form method="POST">
         <div class="search_bar">
             <div class="search_content">
                 
-                    <!-- <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span> -->
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel"></i></button>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
         </div>
+        </form>
 
                 <div class="filter_section">
                         <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Ongoing (in-progress)</label>
@@ -103,3 +105,6 @@
                 
         </div>
 </div>
+
+
+<?php require APPROOT.'/views/Users/component/footer.php'?>

@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 <?php
 
 class M_blog_post
@@ -12,13 +20,12 @@ class M_blog_post
     public function create_posts($data)
     {
     
-
-                $this->db->query('INSERT into blogpost (title, tag, discription,image,created,officer_id,no_of_likes) VALUES ( :title, :tag ,:discription,:image,:now , :officer_id ,:no_of_likes)');
+                $this->db->query('INSERT into blogpost (title, tag, discription,created,officer_id,no_of_likes) VALUES ( :title, :tag ,:discription,:now , :officer_id ,:no_of_likes)');
                 $this->db->bind(":title", $data['title']);
                 $this->db->bind(":tag", $data['tag']);
                 $this->db->bind(":discription", $data['discription']);
-                $this->db->bind(":image", $data['image']);
-
+                // $this->db->bind(":image", $data['image']);
+                // $this->db->bind(":created", $data['created']);
                 $this->db->bind(":now",date('Y-m-d') );
                 $this->db->bind(":officer_id", $data['officer_id']);
                 $this->db->bind(":no_of_likes", $data['no_of_likes']);
@@ -44,8 +51,22 @@ class M_blog_post
         $this->db->bind(":search_content", $search_cont);
         return $this->db->resultset();
     }
-
 }
 
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

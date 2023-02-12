@@ -35,7 +35,7 @@ function setColor($tag){
     if($tag == 'Production') return 'set-green';
     if($tag == 'Knowledge') return 'set-yellow';
     if($tag == 'Innovations') return 'set-orange';
-    if($tag == 'Other') return 'set-purple';
+    if($tag == 'New_technique') return 'set-purple';
 }
 
 
@@ -64,11 +64,18 @@ function set_filterbtn_Color($tag){
         </div>
         </form>
         <div class="filter_section" >
-            <form>
+            <!-- <form>
                 <span class="filterbtn"><a href="<?php echo URLROOT?>/resources/resource_page?&category=All categories"><span class="<?php echo set_filterbtn_Color($_SESSION['category']);?>" id="filter" onclick="set_default()"> <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="discription"><?php echo $_SESSION['category']?></span></span></a></span>
                 <div id="category_filter">Category filter</div>
+            </form> -->
+            <form>
+                <select name="category" id="category_type">
+                    <option value="Innovations">Innovations</option>
+                    <option value="Knowledge">Knowledge</option>
+                    <option value="New technology">New technology</option>
+                    <option value="Production">Production</option>
+                </select>
             </form>
-
         </div>     
 </div>
 
@@ -159,4 +166,5 @@ function set_filterbtn_Color($tag){
 
 </div>
 
-<?php require APPROOT.'/views/Users/component/Header.php'?>
+
+<?php require APPROOT.'/views/Users/component/footer.php'?>

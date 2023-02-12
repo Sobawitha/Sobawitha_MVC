@@ -65,4 +65,7 @@
 
     </div>
 </div>
-<?php require APPROOT.'/views/Users/component/Header.php'?>
+
+<br><br><br><br>
+
+<?php require APPROOT.'/views/Users/component/footer.php'?>

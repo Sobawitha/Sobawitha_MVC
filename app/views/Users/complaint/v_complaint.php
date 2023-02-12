@@ -1,4 +1,4 @@
-<script src="../js/complaint/complaint.js"></script>
+<script src="../js/Users/complaint/complaint.js"></script>
 <link rel="stylesheet" href="../css/Users//complaint/complaint.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
@@ -110,4 +110,6 @@ function setColor($type){
 
     </div>
 </div>
-<?php require APPROOT.'/views/Users/component/Header.php'?>
+
+
+<?php require APPROOT.'/views/Users/component/footer.php'?>

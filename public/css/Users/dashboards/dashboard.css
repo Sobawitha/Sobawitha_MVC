@@ -1,4 +1,7 @@
-
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
 .body{
     display:grid;
     grid-template-columns:20% 70% 10%;
@@ -55,6 +58,18 @@
 
 #blog_icon, #forum_icon, #complain_icon, #usage_icon, #complete_icon, #cart, #item, #deals, #review, #wishlist{
     transform:translate(120px, -100px);
+    font-size:50px;
+    color:rgb(9, 142, 91);
+}
+
+#supplier_icon, #ad_icon{
+    transform:translate(150px, -100px);
+    font-size:50px;
+    color:rgb(9, 142, 91);
+}
+
+#officer_icon{
+    transform:translate(160px, -100px);
     font-size:50px;
     color:rgb(9, 142, 91);
 }

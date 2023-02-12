@@ -1,7 +1,8 @@
 *{
     margin: 0;
     padding: 0;
-    font-family:'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .login{
@@ -32,9 +33,9 @@
 }
 
 .login_details{
-    background-color: #000000;
+    /* background-color: #000000; */
     /* border:1px solid black; */
-    flex-basis: 50%;
+    flex-basis: 60%;
     display: flex;
     height: 100%;
     align-items: center;
@@ -45,7 +46,7 @@
     /* border:1px solid black; */
     flex-basis: 50%;
     display: flex;
-    padding: 0px 10px;
+    padding: 100px 80px;
     height: 100%;
     align-content: center;
     justify-content: space-between;
@@ -62,28 +63,48 @@
     flex-basis: 100%;
 }
 
-.login_intro h1{
-    color: green;
+.login_intro{
+    padding:50px 50px 50px 50px;
+}
+.login_intro h1, #back_home{
+    color: rgb(191, 236, 191);
     text-align: left;
+    font-weight:bold;
+    font-size:18px;
+    text-decoration:none;
 }
 
 .login_intro p{
-    color: #ffffff;
-    font-size: 20px;
+    color: #c0baba;
+    font-size: 14px;
+    text-align: justify;
+    line-height:20px;
 }
 
 .login_intro h2{
     color: #ffffff;
-    font-size:60px;
+    font-size:50px;
+}
+
+#leaf{
+    transform: translate(505px,15px);
+    color: rgb(255, 255, 255);
+    font-size:22px;
 }
 
 .login_form_content{
     padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    justify-content: space-around;
+    align-content: center;
 }
 
 .login_form_content h1{
-    font-size: 50px;
+    font-size: 40px;
     color: #000000;
+    font-weight:bold;
 }
 
 .login_form_content p{
@@ -104,7 +125,7 @@
 }
 
 .login_inputs{
-    padding: 10px 80px;
+    padding: 0px 80px;
 
 }
 
@@ -125,8 +146,19 @@
     flex-direction: column;
     margin-top: 10px;
     float: left; */
-    font-size: 20px;
+    font-size: 18px;
     color: #000000;
+    font-weight:bold;
+}
+
+.login_header p{
+    font-size:14px;
+    color:gray;
+}
+
+#sign_up, #forget_pw{
+    font-weight:bold;
+    color:rgb(135, 187, 135);
 }
 
 .loginContent form input {
@@ -141,27 +173,36 @@
     font-weight: 600;
     border: 1px solid black;
     width: 400px;
+    
 }
 
-.loginContent form button{
+.loginContent form input:focus{
+    outline:none;
+}
+
+.loginContent form #login_btn{
     /*
     height: 50px;
     margin-top: 30px; */
-    padding: 3px 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     color: white;
-    background-color: #004100;
+    background-color: #000000;
     cursor: pointer;
     transition: 0.3s ease;
     font-weight: 700;
     transform:translateY(20px);
     font-size: 20px;
     width: 400px;
+    border-radius:25px;
+    border:none;
+    font-size: 17px;
 }
 
-.loginContent form button:hover{
-    background: #004100;
-    color: #58BD53;
+.loginContent form #login_btn
+    :hover{
+    background: #ffffff;
+    color: #000000;
 }
 
 .error_msg{
@@ -201,6 +242,16 @@ input:-webkit-autofill:active{
     }
 }
 
+#password, #email{
+    font-size:15px;
+    color:gray;
+    font-weight:200px;
+}
+
+#sign_up{
+    cursor:pointer;
+}
+
 /* 
 .popup{
     width:200px;
@@ -237,3 +288,81 @@ Devin Aiya CS, [2/8/2023 11:16 AM]
     transform: translateY(-10px);
     z-index:50000;
 } */
+
+
+
+#addUserPopup {
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:30%;
+    margin-top:15%;
+  }
+  
+  #addUserPopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  .addUserPopup { 
+    min-height: 250px;
+    padding:2rem;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .addUserPopup h2{
+    font-size:15px;
+    color:rgb(2, 55, 46);
+  }
+  
+  .dialog__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .dialog__heading button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.2rem;
+  }
+  
+  .dialog__content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .dialog__content a {
+    text-align: center;
+    width: 160px;
+    height: 150px;
+    color: #000000;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    opacity: 0.8;
+    transform: opacity 0.2s ease-in-out;
+    background-color:rgb(247, 255, 255);
+    box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
+  }
+  
+  .dialog__content a:hover {
+    opacity: 1;
+  }
+  
+  #seller_reg, #buyer_reg, #supplier_reg{
+    font-size:15px;
+    font-weight:bold;
+    text-decoration:none;
+  }
+
+  #icon_reg{
+    font-size:45px;
+    color:rgb(7, 82, 66);
+  }

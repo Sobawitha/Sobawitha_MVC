@@ -49,4 +49,5 @@
     </div>
 </div>
 
-<?php require APPROOT.'/views/Users/component/Header.php'?>
+</div>
+<?php require APPROOT.'/views/Users/component/footer.php'?>

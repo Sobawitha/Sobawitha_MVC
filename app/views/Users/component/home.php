@@ -1,7 +1,13 @@
 <link rel="stylesheet" href="../css/Users/component/home.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <body>
-    <header>
+    <header style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../public/images/background2.jpg);
+                                background-size: cover;
+                                height:77vh;
+                                -webkit-background-size:cover ;
+                                background-position:center;
+                                margin:0px;
+                                padding:0px;">
         <div class="nav">
             <nav>
                 <span class="site_name" id="part_a">SOBA</span><span id="part_b">WITHA</span>
@@ -10,7 +16,7 @@
                     <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
                     <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
                     <li><a href="">Sell</a></li>
-                    <li><a href=""><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
+                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
                 </ul>
             </nav>
             <hr class="home_hr">
@@ -57,12 +63,12 @@
         
         <table style="width:40%">
         <tr>
-            <th colspan="2" class="img11" ><span class="td_text">buying</span></td>
-            <th rowspan="2" class="img12"><span class="td_text">selling</span></td>
+            <th colspan="2" class="img11" background="../public/images/buying.jpg" ><span class="td_text">buying</span></td>
+            <th rowspan="2" class="img12" background="../public/images/selling.jpg"><span class="td_text">selling</span></td>
         </tr>
         <tr>
-            <th  class="img21"><span class="td_text">Instructing</span></td>
-            <th class="img22"><span class="td_text">Questioning</span></td>
+            <th  class="img21"  background="../public/images/instructing.jpg"><span class="td_text">Instructing</span></td>
+            <th class="img22" background="../public/images/qestioning.jpg"><span class="td_text" >Questioning</span></td>
         </tr>
         </table>
    
@@ -80,7 +86,12 @@
             for($i=1; $i<=4; $i++){
                 ?>
                 <div class="adv_card">
-                <div class="card_image">
+                <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
+                                                height:75%;
+                                                -webkit-background-size:cover ;
+                                                background-position:center;
+                                                margin:0px;
+                                                padding:0px;">
                     <div class="product_detail">
                         <span class="product_name">Tea fertilizer</span><br>
                         <span class="owner">By ABC production</span>
@@ -115,7 +126,12 @@
             for($i=1; $i<=12; $i++){
                 ?>
                 <div class="adv_card">
-                <div class="card_image">
+                <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
+                                                height:75%;
+                                                -webkit-background-size:cover ;
+                                                background-position:center;
+                                                margin:0px;
+                                                padding:0px;">
                     <div class="product_detail">
                         <span class="product_name">Tea fertilizer</span><br>
                         <span class="owner">By ABC production</span>

@@ -77,35 +77,35 @@
                 $data['email_err']='Email is already exists';
             } 
 
-            if(empty($data['propic'])){
-                $data['propic_err']='profile picture cannot be empty';
+            // if(empty($data['propic'])){
+            //     $data['propic_err']='profile picture cannot be empty';
             
-            }
-            else{
-                $fileExt=explode('.',$_FILES['propic']['name']);
-                $fileActualExt=strtolower(end($fileExt));
-                $allowed=array('jpg','jpeg','png');
+            // }
+            // else{
+            //     $fileExt=explode('.',$_FILES['propic']['name']);
+            //     $fileActualExt=strtolower(end($fileExt));
+            //     $allowed=array('jpg','jpeg','png');
   
               
-                if(!in_array($fileActualExt,$allowed)){
-                  $data['propic_err']='You cannot upload files of this type';
+            //     if(!in_array($fileActualExt,$allowed)){
+            //       $data['propic_err']='You cannot upload files of this type';
   
-                }
+            //     }
           
   
-                if($data['propic']['size']>0){
-                  if(uploadFile($data['propic']['tmp_name'],$data['propic_name'],'/upload/')){
+            //     if($data['propic']['size']>0){
+            //       if(uploadFile($data['propic']['tmp_name'],$data['propic_name'],'/upload/')){
                             
-                  }else{  
-                  $data['propic_err']='Unsuccessful propic uploading';
+            //       }else{  
+            //       $data['propic_err']='Unsuccessful propic uploading';
                   
-                  }
-                }else{
-                  $data[ 'propic_err'] ="qualification file size is empty";
+            //       }
+            //     }else{
+            //       $data[ 'propic_err'] ="qualification file size is empty";
                 
-                }
+            //     }
       
-            }
+            // }
 
 
             if(empty($data['first_name'])){

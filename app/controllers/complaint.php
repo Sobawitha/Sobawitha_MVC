@@ -71,7 +71,7 @@ class complaint extends Controller
                 ];
             }
 
-            $this->view('inc/complaint/v_complaint', $data);
+            $this->view('Users/complaint/v_complaint', $data);
         }
         else{
             $complaint = $this->complaint_model->display_all_complaint(); //data object array
