@@ -1,0 +1,132 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+.signup_supplier_container{
+    display: flex;
+    height: 100%;
+}
+
+.signup_supplier_container .signup_supplier_intro{
+    flex-basis: 30%;
+    background-color:black;
+    padding: 160px 70px;
+}
+
+.signup_supplier_container .signup_supplier_intro h1{
+    color: rgb(222, 255, 222);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup_supplier_container .signup_supplier_intro a{
+    text-decoration: none;
+}
+
+.signup_supplier_container .signup_supplier_intro h2{
+    color: white;
+    font-size: 50px;
+}
+
+.signup_supplier_container .signup_supplier_intro p{
+    color: white;
+    font-size: 14px;
+    text-align: justify;
+    line-height:25px;
+}
+.signup_supplier_container .signup_supplier_content{
+    flex-basis: 70%;
+}
+.signup_supplier_container .signup_supplier_content h1{
+    color: white;
+}
+
+
+/* Sign Up Part */
+
+.signup_supplier_content{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+.supplier_signup_part_one{
+    /* border: 1px solid rgb(0, 0, 0); */
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    padding: 0px 100px;
+}
+
+.supplier_signup_part_two{
+    /* border: 1px solid rgb(0, 0, 0); */
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    padding: 0px 100px;
+    margin-top: 88px;
+}
+
+.s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn{
+    border-radius: 10px;
+    width: 300px;
+    padding: 5px;
+    border: 1px solid lavender;
+
+}
+
+.ssu_details{
+    font-weight: bold;
+}
+
+.s_input_box h1{
+    color: black;
+}
+
+#sign_up_word{
+    color: #004000;
+}
+
+#sign_up_sell_btn{
+    /* width: 100%; */
+    background-color: #000000;
+    opacity: 80%;
+    color: white;
+    font-weight: bold;
+    padding:10px;
+    border-radius:40px;
+}
+
+#sign_up_sell_btn:hover{
+    background-color: #ffffff;
+    opacity: 100%;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.s_input-box #pro_pic{
+    cursor: pointer;
+}
+
+.supplier_sign_up{
+    font-size:30px;
+    color:white;
+}
+
+#leaf{
+    color:white;
+    transform: translate(180px,14px);
+}
+
+.sign_up{
+    font-size:25px;
+    color:rgb(207, 237, 224);
+}

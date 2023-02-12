@@ -1,0 +1,166 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+.body{
+    display:grid;
+    grid-template-columns:20% 60% 20%;
+    height:100%;
+    padding-top:75px;
+    
+}
+
+.section_1{
+    /* background-color:bisque; */
+}
+
+.section_2{
+    /* background-color:rgb(235, 246, 229); */
+}
+
+.section_3{
+    /* background-color:rgb(216, 237, 238); */
+}
+
+
+
+.order_list{
+    margin-top:0px;
+}
+
+.order_list_table{
+    margin-top:40px;
+    align-items: center;
+    border-collapse:collapse; /*make common border between adjecent cell */
+    width:98%;
+    height:200px;
+}
+
+tr{
+    height:60px;
+}
+
+.order{
+    font-size: 14px;
+    border-top:1px solid lavender;
+    border-radius: 20px;
+}
+
+
+.table_head{
+    font-size: 14px;
+    color:rgb(205, 224, 198);
+    /* font-weight:bold; */
+}
+
+.cart_image{
+    width:100px;
+    height:80px;
+}
+#minus, #plus, .value{
+    margin-left:20px;
+    font-size:12px;
+    color:slategrey;
+
+}
+
+.value{
+    font-size:13px;
+    padding:3px 5px 3px 5px;
+    border:1px solid rgb(205, 224, 198);
+}
+
+#cancel_order{
+    color:slategray;
+    transform: translate(0px,-65px);
+}
+
+#cancel_order:hover{
+    cursor:pointer;
+    color:salmon;
+}
+
+.product_detail{
+    line-height:20px;
+    margin-bottom:30px;
+}
+
+.order_p_id, .size{
+    font-size: 11px;
+    color:rgb(116, 130, 93);
+    font-weight: 800px;
+}
+
+.order_p_name{
+    font-weight: bold;
+    color:rgb(4, 51, 4);
+}
+
+.price, .tot_price{
+    font-size: 12px;
+    color:rgb(116, 130, 93);
+}
+
+#cart_toatal_section_hr{
+    margin:15px 30px 50px 30px;
+    border:2px solid black;
+}
+
+.total_price_section{
+    padding:30px;
+    margin:20px 20px 20px 0px;
+    background-color:rgb(241, 251, 237);
+    text-align: center;
+    line-height: 30px;
+}
+
+.cart_total{
+    font-size:13px; 
+    text-transform:uppercase;  
+}
+
+.total_value{
+    font-weight: bold;
+    margin-left:20px;
+    font-size:13px;
+}
+
+.total_price_section .discription{
+    font-size: 10px;
+}
+
+.agreement{
+    font-size: 13px;
+}
+
+.term{
+     /* font-weight: bold; */
+     color:salmon;
+}
+
+.checkout{
+    margin-top:30px;
+    background-color: salmon;
+    color:white;
+    font-weight: bold;
+    border:none;
+    padding:10px 20px 10px 20px ;
+    border-radius: 5px;
+}
+
+.paypal{
+    margin-top:10px;
+    background-color: rgb(255, 255, 255);
+    color:rgb(8, 1, 1);
+    font-weight: bold;
+    border:none;
+    padding:10px 30px 10px 30px;
+    border-radius: 5px;
+}
+
+#bag{
+    font-size: 100px;
+    margin-top:50px;
+    color:rgb(217, 246, 206);
+    margin-bottom:30px;
+}
