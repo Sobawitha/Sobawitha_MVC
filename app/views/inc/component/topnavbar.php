@@ -1,4 +1,3 @@
-    
 <!--top navbar-->
 <link rel="stylesheet" href="../css/component/topnavbar.css"></link>
 <script src="../js/component/topnavbar.js"></script> 
@@ -8,9 +7,11 @@
 
   <div class="drop_down">
     <div class="dropdown-content" >
-      <a href="<?php echo URLROOT?>/Admin/view_profile">View Profile</a>
-      <a href="<?php echo URLROOT?>/Admin_dashboard/main_view">Dashboard</a>
+      
+      <!-- <a href="<?php echo URLROOT?>/Users/view_profile">View Profile</a>
+      <a href="<?php echo URLROOT?>/dashboard/dashboard">Dashboard</a> -->
       <a href="<?php echo URLROOT?>/Login/logout">Log Out</a>
+
     </div>
 
     <div class="notification-dropdown-content" >
@@ -31,22 +32,18 @@
         <hr class="notification_hr">
       </div>
 
-      <div class="see_more">See More </div>
+      <div class="see_more"><a href="<?php echo URLROOT?>/Users/view_profile" class="see_more_txt">See More</a> </div>
 
     </div>
     </div>
 
     <span class="site_name_nav" id="part_a_nav"><i class="fa-solid fa-leaf" id="leaf1"></i></i>SOBA</span><span id="part_b_nav">WITHA</span>
-
     <div class="nav-link">
-      <a href="<?php echo URLROOT?>/Pages/home">Home</a>
-      <a href="<?php echo URLROOT?>/resources/resource_page">Resources</a>
-      <a href="<?php echo URLROOT?>/forum/forum">Forum</a>
-      <a href="#sell">Sell</a>
-      <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a> <!--change-->
+      <a href="<?php echo URLROOT?>/Users/admin_view_profile">Profile</a>
+      <a href="">Dashboard</a>
+      <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a> <!--change-->
       <i class="fa fa-solid fa-bell" id="bell" onclick="openNotificationMenu()"></i>
       <i class="fa-solid fa-ellipsis-vertical" id="dots" onclick="openProfileMenu()"></i>
-
     </div>
   </div>
 
