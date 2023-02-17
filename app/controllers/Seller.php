@@ -76,7 +76,7 @@
               
       
                     if($data['propic']['size']>0){
-                      if(uploadFile($data['propic']['tmp_name'],$data['propic_name'],'/upload/')){
+                      if(uploadFile($data['propic']['tmp_name'],$data['propic_name'],'/upload/user_profile_pics')){
                                 
                       }else{  
                       $data['propic_err']='Unsuccessful propic uploading';
@@ -95,7 +95,7 @@
                 }
 
 
-if(empty($data['last_name'])){
+                if(empty($data['last_name'])){
                     $data['last_name_err']='last name cannot be empty';
                 }
     
@@ -135,7 +135,7 @@ if(empty($data['last_name'])){
                 $data['confirm_password_err']='confirm password cannot be empty';
                 }
           
-                if(empty($data['ssu_gender'])){
+                if(empty($data['gender'])){
                 $data['gender_err']='gender cannot be empty';
                 }
     
@@ -154,11 +154,16 @@ if(empty($data['last_name'])){
                 if(empty($data['branch'])){
                     $data['branch_err']='bank branch cannot be empty';
                 }
+
+                if($data['password']!=$data['confirm_password']){
+                    $data['password_err']='passwords do not match';
+                   }
     
       
               if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err'])&& empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])&& empty($data['gender_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err']) && empty($data['propic_err']) && empty($data['address_line_four_err'])){
-                  if($this->sellerModel->addSeller($data)){
-                      flash('post_msg', 'add new admin successfully');
+                $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  
+                if($this->sellerModel->addSeller($data)){
+                    //   flash('post_msg', 'add new seller successfully');
                            redirect('Login/login'); 
                   }else{
                     die('Error creating');
@@ -194,9 +199,7 @@ if(empty($data['last_name'])){
                 'branch'=>'',
                 'password'=>'',
                 'confirm_password'=>'',
-
-
-'propic'=>'',
+                'propic'=>'',
             
             
                 'first_name_err'=>'',

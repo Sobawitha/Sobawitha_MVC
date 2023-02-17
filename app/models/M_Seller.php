@@ -21,7 +21,7 @@
       }
     }
 
-    // Add Admin
+    // Add Seller
 
     public function  addSeller($data)
     {
@@ -29,7 +29,7 @@
         $this->db->bind(':first_name',$data['first_name']);
         $this->db->bind(':last_name', $data['last_name']);
         $this->db->bind(':email', $data['email']);
-        $this->db->bind(':user_flag', 1);
+        $this->db->bind(':user_flag', 3);
         $this->db->bind(':contact_no',$data['contact_number']);
         $this->db->bind(':nic', $data['nic']);
         $this->db->bind(':dob',$data['birthday']);
@@ -41,13 +41,12 @@
         $this->db->bind(':address_line_three', $data['address_line_three']);
         $this->db->bind(':address_line_four', $data['address_line_four']);
         $this->db->bind(':qualifications','');
-        $this->db->bind(':gender', $data['admin_gender']);
+        $this->db->bind(':gender', $data['gender']);
         $this->db->bind(':bank_account_no', $data['bank_account_no']);
         $this->db->bind(':bank', $data['bank']);
         $this->db->bind(':password',$data['password']);
         $this->db->bind(':branch', $data['branch']);
         $this->db->bind(':bank_account_name',$data['bank_account_name']);
-        // $this->db->bind(':account_number',$data['account_number']);
        
         if($this->db->execute()){
             return true;

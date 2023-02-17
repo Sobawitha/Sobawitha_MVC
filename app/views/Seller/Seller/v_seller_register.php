@@ -6,7 +6,7 @@
     <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a><br>
     <i class="fa-solid fa-leaf" id="leaf"></i>    
     <h2>Sobawitha </h2>
-        <span class="sign_up">Buyer Sign Up<span>
+        <span class="sign_up">Seller Sign Up<span>
         <br><br>
         <p>Join Sobawitha and become a part 
             of our growing community of fertilizer sellers! Our 
@@ -64,25 +64,25 @@
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 01</span><br>
-            <input type="text"  name="address_line_one"><br>
+            <input type="text"  placeholder="Enter your house no: " name="address_line_one"><br>
             <span class="error_msg"><?php echo $data['address_line_one_err'] ?></span>          
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 02</span><br>
-            <input type="text"  name="address_line_two"><br>
+            <input type="text"  placeholder="Enter your street name: " name="address_line_two"><br>
             <span class="error_msg"><?php echo $data['address_line_two_err'] ?></span>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 03</span><br>
-            <input type="text"  name="address_line_three"><br>
+            <input type="text"  placeholder="Enter your city: " name="address_line_three"><br>
             <span class="error_msg"><?php echo $data['address_line_three_err'] ?></span>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 04</span><br>
-            <input type="text"  name="address_line_four"><br>
+            <input type="text"  placeholder="Enter your district: " name="address_line_four"><br>
           </div>
 
         </div>
@@ -91,11 +91,12 @@
         <div class="seller_signup_part_two">
 
         <div class="s_input-box">
-            <span class="ssu_details" >Birthday</span><br>
+            <span class="ssu_details" >Birthday</span>
             <input type="date" name="birthday"><br>
             <span class="error_msg"><?php echo $data['birthday_err'] ?></span>
-          </div>
-<div class="s_input-box">
+        </div>
+
+        <div class="s_input-box">
             <span class="ssu_details">Choose Profile Picture</span><br>
             <input type="file" id="propic" name="propic"><br>
             <span class="error_msg"><?php echo $data['propic_err'] ?></span>
@@ -136,13 +137,13 @@
           <div class="s_input-box">
             <span class="ssu_details">Password</span><br>
             <input type="password" placeholder="Enter your password" name="password"><br>
-            <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>          
+            <span class="error_msg"><?php echo $data['password_err'] ?></span>          
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Confirm Your Password</span><br>
-            <input type="text" placeholder="Confirm your Password" name="confirm_password"><br>
-            <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>
+            <input type="password" placeholder="Confirm your Password" name="confirm_password"><br>
+            <span class="error_msg"><?php echo $data['confirm_password_err'] ?></span>
           </div>
 
           <div class="sign_up_seller_btn">

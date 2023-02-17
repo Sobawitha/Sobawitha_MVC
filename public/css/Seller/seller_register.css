@@ -79,7 +79,7 @@
     flex-direction: column;
     height: 80vh;
     padding: 0px 100px;
-    margin-top: 88px;
+    margin-top: 40px;
 }
 
 .s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn{
@@ -109,6 +109,7 @@
     color: white;
     font-weight: bold;
     padding:10px;
+    margin-top:10px;
     border-radius:40px;
 }
 
@@ -125,7 +126,7 @@
 }
 
 .error_msg{
-    font-size: 15px;
+    font-size: 14px;
     color: #FF0000;
 }
 
