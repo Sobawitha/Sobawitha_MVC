@@ -23,12 +23,14 @@
         $this->db->query('SELECT * FROM user WHERE email=:email');
         $this->db->bind(':email',$email);
         
-        $row= $this->db->single();  
-        $pwd = $row->password;
-        if($password==$pwd){
-            return $row;
-        }else{
-            return false;
+        $row= $this->db->single(); 
+
+        $hashed_pw = $row->password;
+        if(password_verify($password, $hashed_pw)) {
+                return $row;
+        }
+        else {
+                return false;
         }
     }  
 

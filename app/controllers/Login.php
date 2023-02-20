@@ -87,6 +87,7 @@
         $_SESSION['user_flag']=$loggeduser->user_flag;
         $_SESSION['lastname'] = $loggeduser->last_name;
         $_SESSION['profile_image'] = $loggeduser->profile_picture;
+        $_SESSION['profile_image_path'] = "upload/user_profile_pics/" .  $_SESSION['profile_image'];
         
 
             $flag = $_SESSION['user_flag'];

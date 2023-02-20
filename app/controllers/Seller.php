@@ -76,7 +76,7 @@
               
       
                     if($data['propic']['size']>0){
-                      if(uploadFile($data['propic']['tmp_name'],$data['propic_name'],'/upload/user_profile_pics')){
+                      if(uploadFile($data['propic']['tmp_name'],$data['propic_name'],'/upload/user_profile_pics/')){
                                 
                       }else{  
                       $data['propic_err']='Unsuccessful propic uploading';

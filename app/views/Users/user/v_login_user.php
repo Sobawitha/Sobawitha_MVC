@@ -61,11 +61,11 @@
 
                             <div class="login_inputs">
                                 <label>Email</label><br>
-                                <input type="text" id="email"  name="email" placeholder = "Enter your email.."><br>
+                                <input type="text"  name="email" id="email"  placeholder = "Enter your email.."><br>
                                 <span class="error_msg"><?php echo $data['email_err'] ?></span>
                 
                                 <br><label>Password</label><br>
-                                <input type="password" id="password"  name="password" placeholder="Enter your password.."><br>
+                                <input type="password" name="password" id="password" placeholder="Enter your password.."><br>
                                 <span class="error_msg"><?php echo $data['password_err'] ?></span><br>
                 
                                 <br><p id="forget_pw">Forgot password?</p> 
