@@ -21,36 +21,66 @@
                   <!-- <input type="file"></input> -->
                   <br><br>
                   <div class="input-box">
-                    <span class="details">Name of the product</span>
-                    <input type="text" placeholder="Enter name of the product" required>
+                    <span class="details">Name of the raw material</span>
+                    <input type="text" placeholder="Enter name of the raw material" required>
+                  </div>
+
+                  <div class="input-box unit-price">
+                    <span class="details">Unit Price (Rs.)</span>
+                    <input type="text" placeholder="Enter unit price" required>
+                    <span class="details">per</span>
+                    <input type="text" placeholder="Enter amount" required>
+                    <select name="category" id="category">
+                              <option value="mg">mg</option>
+                              <option value="g">g</option>
+                              <option value="kg">kg</option>
+                              <option value="ml">ml</option>
+                              <option value="l">l</option>
+                              <option value="packet">packets</option>
+                              <option value="others">others</option>
+                    </select>
                   </div>
                   
-                  <div class="input-box">
-                    <span class="details">Category</span>
+                  <!-- <div class="input-box unit">
+                    <span class="details">per</span>
                     <select name="category" id="category">
-                              <option value="Paddy">Paddy</option>
-                              <option value="Vegetables">Vegetables</option>
-                              <option value="Tea">Tea</option>
-                              <option value="Coconut">Coconut</option>
-                              <option value="Flowers">Flowers</option>
-                              <option value="Rubber">Rubber</option>
-                              <option value="Othercrops">Other Crops</option>
+                              <option value="mg">mg</option>
+                              <option value="g">g</option>
+                              <option value="kg">kg</option>
+                              <option value="ml">ml</option>
+                              <option value="l">l</option>
+                              <option value="packet">packets</option>
+                              <option value="others">others</option>
                     </select>
-                </div>
+                </div> -->
 
                   <div class="input-box">
-                    <span class="details">Cirtificate Number</span>
+                    <span class="details">Type</span>
                     <input type="text" placeholder="" required>
                   </div>
-                  <div class="input-box">
-                    <span class="details">Manufacture</span>
+                  <div class="input-box available-quantity">
+                    <span class="details">Available quantity</span>
                     <input type="text" placeholder="" required>
+                    <select name="category" id="category">
+                              <option value="mg">mg</option>
+                              <option value="g">g</option>
+                              <option value="kg">kg</option>
+                              <option value="ml">ml</option>
+                              <option value="l">l</option>
+                              <option value="packet">packets</option>
+                              <option value="others">others</option>
+                    </select>
                   </div>
+
                   <div class="input-box">
-                    <span class="details">Discription</span>
-                    <input type="text" placeholder="" required>
+                    <span class="details">Additional information</span>
+                    <textarea
+                      id="additional-info"
+                      name="additional-info"
+                      style="height: 200px"
+                    ></textarea>
                   </div>
-                  <div class="input-box">
+                  <!-- <div class="input-box">
                     <span class="details">Price</span>
                     <input type="text" placeholder="" >
                   </div>
@@ -89,7 +119,7 @@
                               <option value="vavuniya">Vavuniya</option>
 
                           </select>
-                  </div>
+                  </div> -->
                 </div>
 
 
