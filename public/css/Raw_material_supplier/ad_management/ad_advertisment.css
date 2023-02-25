@@ -175,6 +175,23 @@ form .user-details .input-box{
 }
 
 
+/* changed on 23.02.21 */
+
+.unit-price {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.available-quantity {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.input-box textarea {
+  width: 100%;
+}
 
 
 
