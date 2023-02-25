@@ -4,7 +4,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
-<link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_advertisment.css"></link>
+<link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/update_advertisement.css"></link>
 <div class="body">
     <div class="section_1">
 
@@ -12,9 +12,9 @@
     <div class="section_2">
         &nbsp<div class="a_add_admin_maincontent">
           &nbsp<div class="add_container">
-            <div class="title">Add advertisment</div>
+            <div class="title">Update advertisment</div>
             <div class="add_content">
-              <form action="<?php echo URLROOT?>/supplier_ad_management/add_advertisment" method="POST" enctype="multipart/form-data">
+              <form action="<?php echo URLROOT;?>/supplier_ad_management/update_advertisement/<?php echo $data['product_id']; ?>" method="POST">
 
                 <div class="advertisment-details">
                 <i class="fa-solid fa-image" id="uploard_image"></i>
@@ -22,12 +22,12 @@
                   <br><br>
                   <div class="input-box">
                     <span class="details">Name of the raw material</span>
-                    <input type="text" placeholder="Enter name of the raw material" name="name" required>
+                    <input type="text" name="name" placeholder="Enter name of the raw material" value="<?php echo $data['product_name']; ?>" required>
                   </div>
 
                   <div class="input-box unit-price">
                     <span class="details">Unit Price (Rs.)</span>
-                    <input type="text" placeholder="Enter unit price" name="price" required>
+                    <input type="text" name="price" placeholder="Enter unit price" value="<?php echo $data['price']; ?>" required>
                     <span class="details">per</span>
                     <input type="text" placeholder="Enter amount" required>
                     <select name="category" id="category">
@@ -56,11 +56,11 @@
 
                   <div class="input-box">
                     <span class="details">Type</span>
-                    <input type="text" placeholder="" name="type" required>
+                    <input type="text" placeholder="" required>
                   </div>
                   <div class="input-box available-quantity">
                     <span class="details">Available quantity</span>
-                    <input type="text" placeholder="" name="quantity" required>
+                    <input type="text" name="quantity" placeholder="" value="<?php echo $data['quantity']; ?>" required>
                     <select name="category" id="category">
                               <option value="mg">mg</option>
                               <option value="g">g</option>
@@ -78,7 +78,7 @@
                       id="additional-info"
                       name="additional-info"
                       style="height: 200px"
-                    ></textarea>
+                    ><?php echo $data['product_description']; ?></textarea>
                   </div>
                   <!-- <div class="input-box">
                     <span class="details">Price</span>
@@ -124,7 +124,7 @@
 
 
                 <div class="input-box">
-                  <input type="submit" value="Publish" id="publish_btn" name="add" >
+                  <input type="submit" value="Publish" id="publish_btn">
                 </div>
 
               </form>

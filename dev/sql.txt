@@ -1,0 +1,11 @@
+CREATE VIEW v_supplier_ads AS
+    SELECT
+    raw_material.Product_id as product_id,
+    raw_material_supplier.supplier_id as user_id,
+    raw_material_supplier.first_name as user_name,
+    raw_material.product_name as product_name,
+    raw_material.quantity as quantity,
+    raw_material.price as price,
+    raw_material.product_description as product_description
+    FROM raw_material INNER JOIN raw_material_supplier_supply
+    ON raw_material.Product_id = raw_material_supplier_supply.Product_id INNER JOIN raw_material_supplier ON raw_material_supplier_supply.supplier_id = raw_material_supplier.supplier_id;
