@@ -68,6 +68,19 @@ class M_supplier_advertisment
         }
     }
 
+    public function delete($productId) {
+        $this->db->query('DELETE FROM raw_material WHERE Product_id = :id');
+        $this->db->bind(':id', $productId);
+        
+        // Execute
+        if($this->db->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
 
 
