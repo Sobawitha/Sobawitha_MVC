@@ -72,7 +72,7 @@
                                                 
                                                 <span class="edit"><a href="<?php echo URLROOT?>/supplier_ad_management/update_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-pen-to-square"></i></a></span>                                                
                                                 
-                                                <span class="delete"><i class="fa-solid fa-trash-can"></i></span>
+                                                <span class="delete"><a href="<?php echo URLROOT?>/supplier_ad_management/delete_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-trash-can"></i></a></span>
                                                 
                                         </td>
                                 </div>
