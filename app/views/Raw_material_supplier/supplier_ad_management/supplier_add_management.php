@@ -62,14 +62,15 @@
                                         <td><img src="../public/images/other_image_2.jpg" alt="Girl in a jacket" id="fertilizer_img" ></td>
                                         <td><span class="title"><?php echo $ad->product_name ?></span></td>
                                         <td><span class="category"><?php echo $ad->price ?></span></td>
+
                                         <td><span class="certificate No<"><?php echo $ad->quantity ?></span></td>
+
                                         <td><span class="manufacture"><?php echo $ad->product_description ?></span></td>
 
 
                                         <td id="option">
                                                 
-                                                <span class="edit"><a href="<?php echo URLROOT?>/supplier_ad_management/update_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-pen-to-square"></i></a></span>
-                                                
+                                                <span class="edit"><a href="<?php echo URLROOT?>/supplier_ad_management/update_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-pen-to-square"></i></a></span>                                                
                                                 
                                                 <span class="delete"><i class="fa-solid fa-trash-can"></i></span>
                                                 
