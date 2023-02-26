@@ -171,5 +171,24 @@
             $this->view('Raw_material_supplier/supplier_ad_management/v_supplier_update_advertisement', $data);
         }
     }
+
+    // DELETE
+    public function delete_advertisement($productId) {
+        $post = $this->supplier_ad->getPostById($productId);
+
+        // Check owner
+        if($post->user_id != $_SESSION['user_id']) {
+            redirect('supplier_ad_management/index');
+        }
+        else {
+            if($this->supplier_ad->delete($productId)) {
+                // flash('post_msg', 'Post is deleted');
+                redirect('supplier_ad_management/index');
+            }
+            else {
+                die('Something went wrong');
+            }
+        }
+    }
 }
 ?>
