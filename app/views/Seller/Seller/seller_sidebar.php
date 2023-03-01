@@ -20,7 +20,7 @@
         <li><a href="<?php echo URLROOT?>/seller_ad_management/View_listing"><i class="fa-solid fa-rectangle-ad"></i>&nbsp;&nbsp;Manage Ads</a></li> 
         <li><a href="<?php echo URLROOT?>/seller_order_list/view_orders"><i class="fa-sharp fa-solid fa-store"></i>&nbsp;&nbsp;Orders</a></li> 
         <li><a href="<?php echo URLROOT?>/"><i class="fa-solid fa-cart-shopping"></i></i>&nbsp;&nbsp;Buy Raw-material</a></li> 
-        <li><a href="<?php echo URLROOT?>/feedback/seller_feedback"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;Feedback</a></li> 
+        <li><a href="<?php echo URLROOT?>/feedback/seller_feedback"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;Feedbacks</a></li> 
         <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;Complaints</a></li> 
         <li><a href="<?php echo URLROOT?>/seller_payment/view_payment"><i class="fa-solid fa-coins"></i></i>&nbsp;&nbsp;Payments</a></li> 
     </ul>

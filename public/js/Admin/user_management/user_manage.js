@@ -5,11 +5,24 @@ const addUserPopup = document.getElementById('addUserPopup')
   document.getElementById('closebtn').addEventListener('click',() => addUserPopup.close());
 }
 
-function open_cansel_btn(){
-  document.getElementById("cansel").style.display='block';
+function popUpOpenDelete() {
+  const deactivateUserPopup = document.getElementById('deactivateUserPopup')
+    document.getElementById('deactive_user_button').addEventListener('click',() => deactivateUserPopup.showModal());
+    document.getElementById('closebtntwo').addEventListener('click',() => deactivateUserPopup.close());
+}
+
+
+function open_cancel_btn(){
+  document.getElementById("cancel").style.display='block';
+
 }
 
 function clear_search_bar(){
-  document.querySelector(".search_cont").value='';
-  document.getElementById("cansel").style.display='none';
+  document.getElementById("searchBar").value = "";
+  document.getElementById("cancel").style.display='none';
 }
+
+
+
+     
+

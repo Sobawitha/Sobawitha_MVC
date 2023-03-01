@@ -133,7 +133,7 @@ form .input-box span.details{
   /* transform: scale(0.99); */
   background:  #faffff;
   color: #000000;
-  border:none;
+  border:1px solid #000000;
   }
 
 #agri_reg_button {

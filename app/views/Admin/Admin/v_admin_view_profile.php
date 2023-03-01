@@ -2,7 +2,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
-
+<script src="../js/Admin/Profile/profile.js"></script>
 
 <div class="body">
     <div class="section_1">
@@ -13,14 +13,36 @@
         <div class="three_btns">
                 <h4>Settings</h4>
                 <div class="button" >
-                <input type="submit" id="update_btn" value="Update">
+                <a href="<?php echo URLROOT?>/Admin/updateProfile"><input type="button" id="update_btn" value="Update Profile"></a>
                 </div>
+
+               
                 <div class="button" >
-                <input type="submit" id="change_pwd" value="Change Password">
+                <a href="<?php echo URLROOT?>/Users/changePW"><input type="button" id="change_pwd"  value="Change Password"></a>
                 </div>
-                <div class="button" >
-                <input type="submit" id="delete" value="Delete">
-                </div>
+                
+
+                <form method="GET" >
+                    <div class="button" >
+                    <input type="button" onclick="popUpOpenDelete()" id="delete" value="Delete">
+                    </div>
+                   
+                </form>
+                <dialog id="deactivateUserPopup">
+                    <div class="deactivateUserPopup">
+                      <div class="dialog__heading">
+                        <h2>Are you sure you want to delete your account ?</h2>
+                        <button id="closebtntwo" type="button">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                        
+                      <div class="dialog__content">
+                        <a href="<?php echo URLROOT?>/Admin/deactivateAccount/<?php echo $_SESSION['user_id'] ?>" id="yes">Yes</a>
+                        <a href="<?php echo URLROOT?>/Admin/profile " id="no">No</a>
+                      </div>
+                    </div>
+                    </dialog>
                 </div>
         </div>
         <hr class="profile_hr">
@@ -28,9 +50,14 @@
         <div class="container">
             <div class="title">Account Information</div>
             <div class="profile_image">
-                <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($_SESSION['profile_image']);?>" id="userprofileimage_for_viewprofile"/>
+                <img  src="./../public/upload/user_profile_pics/<?php echo $_SESSION['profile_image']?>" id="userprofileimage_for_viewprofile"/>
                 <div class="image_change_button">
-                    <button id="change_img">change picture</button>
+                
+                <form method="POST" action="<?php echo URLROOT ?>/Admin/change_profile_pic" enctype="multipart/form-data">
+                    <button type ="submit" id="change_img">change picture<input type="file" name="propic" id="propic"  /></button><br>
+                    <span class="error_msg"><?php echo $data['propic_err'] ?></span>
+                </form> 
+
                     <button id="delete_img">delete picture</button>
                 </div>
             </div>
@@ -39,65 +66,62 @@
                 <div class="user-details">
                 <div class="input-box">
                     <span class="details">First Name</span>
-                    <input type="text" placeholder="Enter your fisrt name" value="Devin" readonly>
+                    <input type="text" placeholder="Enter your fisrt name" value="<?php echo $data['first_name']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Last Name</span>
-                    <input type="text" placeholder="Enter your last name" value="Yapa" readonly>
+                    <input type="text" placeholder="Enter your last name" value="<?php echo $data['last_name']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Address Line 01</span>
-                    <input type="text" placeholder="" value="58/B" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['address_line_one']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Address Line 02</span>
-                    <input type="text" placeholder="" value="Yehiya Road" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['address_line_two']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Address Line 03</span>
-                    <input type="text" placeholder="" value="Issadeen Town" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['address_line_three']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Address Line 04</span>
-                    <input type="text" placeholder=""  value="Matara">
+                    <input type="text" placeholder=""  value="<?php echo $data['address_line_four']?>">
                 </div>
                 <div class="input-box">
                     <span class="details">Email</span>
-                    <input type="text" placeholder="Enter your email" value="yapadevin@gmail.com" readonly>
+                    <input type="text" placeholder="Enter your email" value="<?php echo $data['email']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Phone Number</span>
-                    <input type="text" placeholder="Enter your number" value="071 1234567"readonly>
+                    <input type="text" placeholder="Enter your number" value="<?php echo $data['contact_number']?>"readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">NIC No</span>
-                    <input type="text" placeholder="Enter your NIC no" value="992142200V"readonly>
+                    <input type="text" placeholder="Enter your NIC no" value="<?php echo $data['nic']?>"readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Birthday</span>
-                    <input type="text" placeholder="" value="1999.08.01" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['dob']?>" readonly>
                 </div>
                 <div class="input-box">
-                    <span class="details">Bank Account Name</span>
-                    <input type="text" placeholder="" value="D.P.D Yapa"readonly>
+                    <span class="details">Bank Account Holder Name</span>
+                    <input type="text" placeholder="" value="<?php echo $data['account_holder_name']?>"readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Bank Account Number</span>
-                    <input type="text" placeholder="" value="123456789" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['account_number']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Bank Name</span>
-                    <input type="text" placeholder="" value="Sampath" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['bank_name']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Branch of Bank</span>
-                    <input type="text" placeholder="" value="Matara - Super" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['branch']?>" readonly>
                 </div>
                 </div>
-                <div class="gender-details">
-                <input type="radio" name="gender" checked="checked" id="dot-1">
-                <input type="radio" name="gender" id="dot-2">
-                </div>
+          
                 
 
 

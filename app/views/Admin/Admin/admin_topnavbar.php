@@ -38,7 +38,7 @@
 
     <span class="site_name_nav" id="part_a_nav"><i class="fa-solid fa-leaf" id="leaf1"></i></i>SOBA</span><span id="part_b_nav">WITHA</span>
     <div class="nav-link">
-      <a href="<?php echo URLROOT?>/Users/admin_view_profile">Profile</a>
+      <a href="<?php echo URLROOT?>/Admin/profile">Profile</a>
       <a href="<?php echo URLROOT?>/admin_dashboard/main_view">Dashboard</a>
       <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a> 
       <i class="fa fa-solid fa-bell" id="bell" onclick="openNotificationMenu()"></i>

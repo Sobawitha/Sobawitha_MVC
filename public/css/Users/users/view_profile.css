@@ -159,16 +159,6 @@
 }
 
 
-
-
-
-
-
-.a_add_admin_maincontent{
-    /* margin-top: 3.6%;
-    margin-left: 19%; */
-  }
-  
   .container{
     /* margin-left: 200px; */
     margin-top: 20px;
@@ -228,6 +218,7 @@
     border-radius:10px;
     cursor:pointer;
     font-size:12px;
+    width:100%;
   }
 
   #delete_img{
@@ -238,6 +229,7 @@
     border-radius:10px;
     cursor:pointer;
     font-size:12px;
+    width:100%;
   }
 
   .content form .user-details{
@@ -301,14 +293,8 @@
     border: 5px solid transparent;
     transition: all 0.3s ease;
   }
-   #dot-1:checked ~ .avp_category label .one,
-   #dot-2:checked ~ .avp_category label .two{
-     background: black;
-     border-color: #d9d9d9;
-   }
-   form input[type="radio"]{
-     display: none;
-   }
+ 
+ 
 
    /*setting*/
 
@@ -360,78 +346,7 @@
    }
 
 
-   /* .three_btns{
-    display:flex;
-    gap:0px;
-
-   }
-   form #update_btn{
-     height: 35px;
-     border-radius: 5px;
-     cursor: pointer;
-     font-size: 13px;
-     font-family: 'Montserrat', sans-serif; 
-     font-weight: 500;
-     transition: all 0.3s ease;
-     background-color: transparent;
-     text-align: center;
-     color:rgb(9, 75, 70);
-     padding-inline: 10px;
-     border:1px solid rgb(239, 244, 243);
-  
-   }
-  
-   form #change_pwd{
-      height: 35px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 13px;
-      font-family: 'Montserrat', sans-serif; 
-      font-weight: 500;
-      transition: all 0.3s ease;
-      background-color: transparent;
-      text-align: center;
-      color:rgb(9, 75, 70);
-      padding-inline: 10px;
-      border:1px solid rgb(239, 244, 243); 
-    }
-  
-    form #delete{
-      height: 35px;
-     border-radius: 5px;
-     cursor: pointer;
-     font-size: 13px;
-     font-family: 'Montserrat', sans-serif; 
-     font-weight: 500;
-     transition: all 0.3s ease;
-     background-color: transparent;
-     text-align: center;
-     color:rgb(161, 112, 112);
-     padding-inline: 10px;
-     border:1px solid rgb(239, 244, 243);
-  
-    }
-
-    form #update_btn:hover{
-      color:rgb(9, 75, 70);
-      border:1px solid rgb(9, 75, 70);
-    }
-
-    form #change_pwd:hover{
-      color:rgb(9, 75, 70);
-      border:1px solid rgb(9, 75, 70);
-    }
-
-    form #delete:hover{
-      color:rgb(161, 112, 112);
-      border:1px solid rgb(252, 168, 168);
-    }
-  
-    .three_btns{
-      display: flex;
-      justify-content: space-around;
-      padding-left:100px;
-    } */
+   
 
     .section_2{
       display:flex;
@@ -478,3 +393,137 @@
     padding-left:10px;
   }
   
+  .qualification{
+    height: 40px;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif; 
+    background-color: #094b46 ;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .qualification a{
+    text-decoration: none;
+    color: #ccc;
+  }
+
+  /* confirm deactivation popup */
+  .dialog__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.dialog__heading button {
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+
+.dialog__content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  align-items: center;
+}
+
+.dialog__content a {
+  text-align: center;
+  width: 120px;
+  height: 30px;
+  padding: 0.5rem 0.5rem;
+  background-color: #06543c;
+  color: #fff;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  opacity: 0.8;
+  transform: opacity 0.2s ease-in-out;
+}
+
+.dialog__content a:hover {
+  opacity: 1;
+}
+
+#deactivateUserPopup {
+  border: none;
+  padding: 0;
+  border-radius: 10px;
+}
+
+#deactivateUserPopup::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+.deactivateUserPopup { 
+  min-height: 200px;
+  padding:1rem;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.deactivateUserPopup h2{
+  font-size:15px;
+}
+
+.dialog__content a:hover {
+  opacity: 1;
+}
+
+#yes, #no{
+  font-size:13px;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+#yes{
+   background-color: crimson;
+   color: #ccc;
+}
+
+#no{
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+}
+
+#propic{
+   width: 1px; 
+    border-radius: 50px;
+}
+
+input[type="file"] {
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+input[type="file"]::before {
+  content:"\270E";
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  line-height: 1;
+  padding: 2px 5px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.error_msg{
+  font-size: 15px;
+  color: #FF0000;
+}

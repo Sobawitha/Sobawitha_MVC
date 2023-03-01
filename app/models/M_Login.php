@@ -19,6 +19,18 @@
         }
     }
 
+    public function checkUserFlag($email){
+        $this->db->query('SELECT * FROM user WHERE email= :email');
+        $this->db->bind(':email',$email);
+
+        $row = $this->db->single();
+        if($row->active_status == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function login($email,$password){
         $this->db->query('SELECT * FROM user WHERE email=:email');
         $this->db->bind(':email',$email);

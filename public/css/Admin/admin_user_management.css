@@ -1,7 +1,7 @@
 
 .body{
   display:grid;
-  grid-template-columns:20% 70% 10%;
+  grid-template-columns:20% 70% 5%;
   height:100%;
   padding-top:80px;
   
@@ -26,25 +26,30 @@
 /*search section*/
 .search_bar{
   /* margin-top:20px; */
-  width:100%;
+  width:102%;
 }
 .search_bar .search_content{
   border:2px solid rgb(55, 100, 98);
   border-radius:20px;
-  padding:7px;
+  padding:5px;
   padding-left:15px;
 }
 
 .search_bar input{
-  width:94%;
+  width:90%;
   border-radius: 20px;
   border:none;
   font-family:'Montserrat', sans-serif;
   background-color:transparent;
 }
 
+#searchBar{
+  color:#376462;
+}
+
 #search{
-  color:rgb(55, 100, 98);
+    color:rgb(74, 74, 63);
+    font-size:15px;
 }
 
 .search_bar input:focus{
@@ -58,7 +63,7 @@
 }
 
 
-#cansel{
+#cancel{
   display:none;
 }
 
@@ -78,6 +83,7 @@
 
 tr{
   height:40px;
+  text-align:center;
 }
 
 .order{
@@ -93,6 +99,14 @@ tr{
   font-weight:bold;
 }
 
+.action{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  height: 15vh;
+  align-items: center;
+  padding: 10px;
+}
 .delete{
   color:rgb(191, 29, 29);
   font-size:12px;
@@ -100,6 +114,12 @@ tr{
   font-weight: bold;
 }
 
+.viewmore{
+  color:green;
+  font-size:12px;
+  cursor:pointer;
+  font-weight: bold;
+}
 
 .value{
   border:1px solid rgb(225, 200, 200);
@@ -206,9 +226,6 @@ input[type=radio]{
 }
 
 
-
-
-
 #addUserPopup {
   border: none;
   padding: 0;
@@ -275,4 +292,83 @@ input[type=radio]{
   font-size:13px;
   font-weight:bold;
   text-decoration:none;
+}
+
+.error_msg{
+  font-size: 25px;
+  font-weight: 500px;
+  text-align: center;
+}
+
+/* .error_msg_name{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  color:crimson ;
+} */
+
+/* Delete Button */
+#deactive_user_button{
+   color: crimson;
+   background-color: transparent; 
+   border: none;
+   cursor: pointer;
+}
+
+#view_more{
+   color: 06543c ;
+   background-color: transparent; 
+   border: none;
+   cursor: pointer;
+}
+
+.user_role{
+  background-color: black;
+  color: #ccc;
+  border-radius: 50px;
+  width: 100px;
+}
+
+/* Deactivate User Popup */
+#deactivateUserPopup {
+  border: none;
+  padding: 0;
+  border-radius: 10px;
+}
+
+#deactivateUserPopup::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+.deactivateUserPopup { 
+  min-height: 200px;
+  padding:1rem;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.deactivateUserPopup h2{
+  font-size:15px;
+}
+
+.dialog__content a:hover {
+  opacity: 1;
+}
+
+#yes, #no{
+  font-size:13px;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+#yes{
+   background-color: crimson;
+   color: #ccc;
+}
+
+#no{
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
 }

@@ -28,7 +28,7 @@
                 }
                 else {
                     //check for existing emails
-                    if($this->userModel->findUserByEmail($data['email'])) {
+                    if($this->userModel->findUserByEmail($data['email']) && $this->userModel->checkUserFlag($data['email']) ) {
                         // User found
                     } else {
                         // User not found
@@ -87,6 +87,7 @@
         $_SESSION['user_flag']=$loggeduser->user_flag;
         $_SESSION['lastname'] = $loggeduser->last_name;
         $_SESSION['profile_image'] = $loggeduser->profile_picture;
+        $_SESSION['user_gender'] = $loggeduser->gender;
         $_SESSION['profile_image_path'] = "upload/user_profile_pics/" .  $_SESSION['profile_image'];
         
 
@@ -96,12 +97,12 @@
                 redirect('Admin_dashboard/main_view');
             }
             else if($flag==2){
-                $_SESSION['position'] = "Seller";
-                redirect('dashboard/seller_dashboard');
+                $_SESSION['position'] = "Customer";
+                redirect('dashboard/buyer_dashboard');
             }
             else if($flag==3){
-                $_SESSION['position'] = "Buyer";
-                redirect('dashboard/buyer_dashboard');
+                $_SESSION['position'] = "Seller";
+                redirect('dashboard/seller_dashboard');
             }
             else if($flag==4){
                 $_SESSION['position'] = "Supplier";

@@ -1,5 +1,6 @@
 <?php
     class users extends Controller {
+        private $userModel;
         public function __construct(){
             $this-> userModel =$this->model('M_Users');
         }
@@ -8,98 +9,115 @@
             $data=[];
             $this->view('/users/v_register', $data);
         }
+        
+        public function changePW()
+        {
+        
+            if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1||2||3||4||5 ) {
+        
+            //  $user= $this->userModel->changeUserPW($_SESSION['admin_id']);
+            $data=[                      
+                'current_password_err'=>'',
+                'retype_new_password_err'=>'' ,
+                'new_password_err'=>''
+            ];
+            $this->view('Users/user/v_changePW',$data);
 
-        public function login(){
-            if($_SERVER['REQUEST_METHOD']=='POST'){
-                //forum is submitted
-
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $data = [
-                    'username' => trim($_POST['username']),
-                    'password' => trim($_POST['password']),
-    
-                    'login_err'=>''
-                    
-                ];
-
-                if($this-> userModel ->findUserByusername($data['username'])){
-                            //user found
-                            //validate pw
-                            redirect('blog_post/create_posts');
-                }
-                else{
-                    $data['login_err'] = 'Invalid username or password.';
-                }
-
-            if (empty($data['login_err'])) {
-                //log the user
-                $loggeduser = $this-> userModel ->login( $data['username'],$data['password']);
-
-                if ($loggeduser) {
-                    //user authenticated
-                    //create SESSION
-                    $this->create_user_session($loggeduser);
-                }
-                else {
-                    $data['login_err'] = 'Invalid username or password.';
-                    //show error
-                    //load view
-                    $this->view('users/v_login', $data);
-                }
-            }
-            else{
-                $this->view('users/v_login', $data); 
-            }
-                
-
-            }
-            else{
-                //initial form
-
-                $data = [
-                    'username' => '',
-                    'password' => '',
-
-                    'login_err'=>''
-                ];
-
-                //load view
-                $this->view('users/v_login', $data);
-            }
+        }else{
+            redirect('Login/login');  
         }
+        }
+
+        public function updatePW($id){
+            if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==1||2||3||4||5) {
+              if($_SERVER["REQUEST_METHOD"] == 'POST'){
+               $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+         
+               $data = [
+                 'user_id' => $id,  
+                 'current_password'=>trim($_POST['current_password']),
+                 'new_password'=>trim($_POST['new_password']),      
+                 'retype_new_password'=>trim($_POST['retype_new_password']),      
+               
+                 'current_password_err'=>'',
+                 'retype_new_password_err'=>'' ,
+                 'new_password_err'=>'' 
+                ];      
+                
+        
+               if(empty($data['current_password'])){
+                 $data['current_password_err']='Please enter your current password';
+               }else{
+                  if($this->userModel->findUserPWMatch($id,$data['current_password'])){
+             
+                 }else{
+                        $data['current_password_err']='Current password is incorrect';
+                  }  
+                
+               }
+
+               if($data['new_password']!=$data['retype_new_password']){
+                $data['new_password_err']='New password and retype new password is incorrect';
+               } 
+        
+               if(empty($data['new_password'])){
+                  $data['new_password_err']='Please enter a new password';
+               } 
+               
+               if(empty($data['retype_new_password'])){
+                $data['retype_new_password_err']='Please retype your new password';
+             } 
+        
+               if(empty($data['current_password_err']) && empty($data['retype_new_password_err']) && empty($data['new_password_err'])){
+             
+                $data['password']=password_hash($data['new_password'],PASSWORD_DEFAULT);
+                $changeUserPW=$this->userModel->changePW($data);
+        
+                  if($changeUserPW){
+                    $_SESSION['profileUpdatePassword']="true";
+                    if($_SESSION['user_flag']==1){
+                        redirect('Admin/profile');      
+                    }else if($_SESSION['user_flag']==2){
+                        redirect('Buyer/profile');
+                    }else if($_SESSION['user_flag']==3){
+                        redirect('Seller/profile');
+                    }else if($_SESSION['user_flag']==4){
+                        redirect('Supplier/profile');
+                    }else if($_SESSION['user_flag']==5){
+                        redirect('AgriOfficer/profile');
+                    }
+                  }
+                  else{
+                   $data['retype_new_password_err']='something wrong';
+                   $this->view('Users/user/v_changePW',$data);
+                  }   
+               }else{
+                 $this->view('Users/user/v_changePW',$data);
+               } 
+
+             }else{
+             $data = [
+              'current_password'=>'',
+              'new_password'=>'',      
+              'retype_new_password'=>'',      
+            
+              'current_password_err'=>'',
+              'retype_new_password_err'=>'' ,
+              'new_password_err'=>''    
+             ];
+              $this->view('Users/user/v_changePW',$data);     
+           }
+          }else{
+            redirect('Login/login');  
+          }
+        
+        }  
 
         public function forgot_password(){
             $data=[];
             $this->view('users/v_fogotpw', $data);
         }
         
-
-        public function create_user_session($user){
-            $_SESSION['user_id'] = $user->user_id;
-            $_SESSION['username'] = $user->first_name;
-            $_SESSION['lastname'] = $user->last_name;
-            $_SESSION['profile_image'] = $user->profile_picture;
-
-            $flag = $user->user_flag;
-            if($flag==1){
-                $_SESSION['position'] = "Admin";
-            }
-            else if($flag==2){
-                $_SESSION['position'] = "Seller";
-            }
-            else if($flag==3){
-                $_SESSION['position'] = "Buyer";
-            }
-            else if($flag==4){
-                $_SESSION['position'] = "Supplier";
-            }
-            else if($flag==5){
-                $_SESSION['position'] = "Agri-officer";
-            }
-            
-            redirect('blog_post/create_posts');
-        }
-
         public function logout(){
             unset($_SESSION['user_id']);
             unset($_SESSION['username'] );

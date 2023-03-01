@@ -33,25 +33,25 @@
           
           <div class="input-box">
             <span class="details">Address Line 01</span>
-            <input type="text" placeholder="" name="address_line_one">
+            <input type="text" placeholder="Enter your house no: " name="address_line_one">
             <span class="error_msg"><?php echo $data['address_line_one_err'] ?></span>
           </div>
           
           <div class="input-box">
             <span class="details">Address Line 02</span>
-            <input type="text" placeholder="" name="address_line_two">
+            <input type="text" placeholder="Enter your street name: " name="address_line_two">
             <span class="error_msg"><?php echo $data['address_line_two_err'] ?></span>
           </div>
           
           <div class="input-box">
             <span class="details">Address Line 03</span>
-            <input type="text" placeholder="" name="address_line_three">
+            <input type="text" placeholder="Enter your city: " name="address_line_three">
             <span class="error_msg"><?php echo $data['address_line_three_err'] ?></span>
           </div>
           
           <div class="input-box">
             <span class="details">Address Line 04</span>
-            <input type="text" placeholder="" name="address_line_four">
+            <input type="text" placeholder="Enter your district: " name="address_line_four">
           </div>
           
           <div class="input-box">
@@ -84,37 +84,37 @@
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
-            <!-- <span class="error_msg"><?php echo $data['gender_err'] ?></span> -->
+
          </div>
 
           <div class="input-box">
             <span class="details">Choose Profile Picture</span>
-            <input type="file" name="propic" id="propic">
+            <input type="file" name="propic" id="propic"  >
             <span class="error_msg"><?php echo $data['propic_err'] ?></span>
           </div>
 
 
-<div class="input-box">
+        <div class="input-box">
             <span class="details">Bank Account Name</span>
-            <input type="text" placeholder="" name="bank_account_name">
+            <input type="text" placeholder="Enter your bank account name" name="bank_account_name">
             <span class="error_msg"><?php echo $data['bank_account_name_err'] ?></span>
           </div>
           
           <div class="input-box">
             <span class="details">Bank Account Number</span>
-            <input type="text" placeholder="" name="bank_account_no">
+            <input type="text" placeholder="Enter your bank account no" name="bank_account_no">
             <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>
           </div>
           
           <div class="input-box">
             <span class="details">Bank</span>
-            <input type="text" placeholder="" name="bank">
+            <input type="text" placeholder="Enter your bank name" name="bank">
             <span class="error_msg"><?php echo $data['bank_err'] ?></span>
           </div>
           
           <div class="input-box">
             <span class="details">Branch of Bank</span>
-            <input type="text" placeholder="" name="branch">
+            <input type="text" placeholder="Enter your bank branch" name="branch">
             <span class="error_msg"><?php echo $data['branch_err'] ?></span>
           </div>
           
@@ -148,4 +148,3 @@
     </div>
 </div>
 
-<?php require APPROOT.'/views/Users/component/footer.php'?>

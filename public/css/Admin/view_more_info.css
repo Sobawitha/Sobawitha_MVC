@@ -1,335 +1,373 @@
 *{
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+.body{
+    display:grid;
+    grid-template-columns:20% 53% 27%;
+    padding-top:90px;
+    
+}
+
+.section_1{
+    /* background-color:bisque; */
+}
+
+.section_2{
+    /* background-color:rgb(222, 251, 243); */
+    
+}
+
+.last{
+    margin:10px;
+    z-index:1000;
+}
+
+.notification_main_header{
+    font-size:14px;
+    color:rgb(239, 231, 193);
+
+}
+
+#drop_down_arrow{
+    margin-left:10px;
+    font-size:12px;
+}
+
+.individual_notification_1{
+    padding:8px 20px 8px 20px;
+    background-color:white;
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    border-left:7px solid green;
+    width:86%;
+    margin-bottom:15px;
+    border-radius:10px;
+    line-height: 20px;
+    background-color: rgb(244, 255, 244);
+}
+
+.individual_notification_2{
+    padding:8px 20px 8px 20px;
+    background-color:white;
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    border-left:7px solid rgb(218, 126, 51);
+    width:86%;
+    margin-bottom:15px;
+    border-radius:10px;
+    line-height: 20px;
+    background-color: rgb(249, 241, 230);
+}
+
+.individual_notification_4{
+    padding:8px 20px 8px 20px;
+    background-color:white;
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    border-left:7px solid crimson;
+    width:86%;
+    margin-bottom:15px;
+    border-radius:10px;
+    line-height: 20px;
+    background-color: rgb(255, 240, 246);
+}
+
+.individual_notification_3{
+    padding:8px 20px 8px 20px;
+    background-color:white;
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    border-left:7px solid rgb(52, 94, 128);
+    width:86%;
+    margin-bottom:15px;
+    border-radius:10px;
+    line-height: 20px;
+    background-color: rgb(234, 247, 254);
+}
+
+.individual_notification_5{
+    padding:8px 20px 8px 20px;
+    background-color:white;
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    border-left:7px solid rgb(108, 113, 76);
+    width:86%;
+    margin-bottom:15px;
+    border-radius:10px;
+    line-height: 20px;
+    background-color: rgb(251, 252, 238);
+}
+
+.icon{
+    transform:translate(-5px,8px);
+    position:absolute;
+    font-size:20px;
+}
+.notification_header{
+    font-size:13px;
+    font-weight:bold;
+    padding-left: 30px;
+}
+
+.notification_body{
+    font-size:12px;
+    padding-left: 30px;
+    color:rgb(92, 90, 90);
+}
+
+#close{
+    position:absolute;
+    transform: translate(340px, -30px);
+    font-size:11px;
+    z-index:500;
+}
+
+  .container{
+    /* margin-left: 200px; */
+    margin-top: 20px;
+    max-width: 800px;
+    box-sizing: border-box;
     font-family: 'Montserrat', sans-serif; 
+    width: 100%;
+    /* background-color: #e6ede6; */
+    padding: 0px 0px 0px 30px;
+    border-radius: 5px;
+    /* box-shadow: 0 5px 10px rgba(0,0,0,0.15); */
   }
-  .body{
-      display:grid;
-      grid-template-columns:20% 53% 27%;
-      padding-top:90px;
-      
+  .container .title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+    font-weight:bold;
+    margin-bottom:20px;
+
   }
-  
-  .section_1{
-      /* background-color:bisque; */
+  .container .title::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 25px;
+    border-radius: 5px;
   }
-  
-  .section_2{
-      /* background-color:rgb(222, 251, 243); */
-      
+
+  .profile_image{
+    display:flex;
+    gap:30px;
   }
-  
- 
-    
-  .a_add_admin_maincontent{
-      /* margin-top: 3.6%;
-      margin-left: 19%; */
-    }
-    
-    .container{
-      margin-left: 100px;
-      /* margin-top: 40px; */
-      max-width: 800px;
-      box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif; 
-      width: 100%;
-      /* background-color: #e6ede6; */
-      padding: 0px 0px 0px 30px;
-      border-radius: 5px;
-      /* box-shadow: 0 5px 10px rgba(0,0,0,0.15); */
-    }
-    .container .title{
-      font-size: 25px;
-      font-weight: 500;
-      position: relative;
-      font-weight:bold;
-      margin-bottom:20px;
-  
-    }
-    .container .title::before{
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      height: 3px;
-      width: 25px;
-      border-radius: 5px;
-    }
-  
-    .profile_image{
-      display:flex;
-      gap:30px;
-    }
-  
-    #userprofileimage_for_viewprofile{
-      width:100px;
-      height:100px;
-      border-radius:70px;
-      align-self: center;
-      border:7px solid white;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-    }
-  
-    .image_change_button{
-        padding-top:20px;
-        display:flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-  
-    #change_img{
-      border:none;
-      background-color: rgb(9, 75, 70);
-      color:white;
-      padding:10px 10px 10px 10px;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:12px;
-    }
-  
-    #delete_img{
-      border:1px solid rgb(9, 75, 70);
-      background-color: transparent;
-      color:rgb(9, 75, 70);
-      padding:8px 11px 8px 11px;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:12px;
-    }
-  
-    .content form .user-details{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 20px 0px  15px 0;
-    }
-    form .user-details .input-box{
-      margin-bottom: 15px;
-      width: calc(100% / 2 - 10px); /*change**/
-    }
-    form .input-box span.details{
-      display: block;
-      font-weight: 500;
-      margin-bottom: 5px;
-      font-size:14px;
-    }
-    .user-details .input-box input{
-      height: 40px;
-      width: 100%;
-      outline: none;
-      font-size: 13px;
-      border-radius: 5px;
-      padding-left: 15px;
-      border: 1px solid #ccc;
-      border-bottom-width: 2px;
-      transition: all 0.3s ease;
-      font-family: 'Montserrat', sans-serif; 
-    }
-    .user-details .input-box input,
-    .user-details .input-box input:valid{
-      border:1px solid rgb(232, 246, 242);
-    }
-     form .gender-details .gender-title{
-      font-size: 20px;
-      font-weight: 500;
-     }
-    
-     form .avp_category {
-      display: flex;
-      width: 80%;
-      margin: 14px 0;
-      justify-content: space-around;
-    }
-    
-     
-     form .avp_category label{
-       display: flex;
-       align-items: center;
-       cursor: pointer;
-        padding: 4px 16px;
-      
-     }
-     form .avp_category label .dot{
-      height: 18px;
-      width: 18px;
-      border-radius: 50%;
-      margin-right: 10px;
-      background: #d5cdcd;
-      border: 5px solid transparent;
-      transition: all 0.3s ease;
-    }
-     #dot-1:checked ~ .avp_category label .one,
-     #dot-2:checked ~ .avp_category label .two{
-       background: black;
-       border-color: #d9d9d9;
-     }
-     form input[type="radio"]{
-       display: none;
-     }
-  
-     /*setting*/
-  
-     .settings{
-      margin-right:50px;
-     }
-  
-     .settings h4{
-      color:rgb(209, 219, 216);
-     }
-     .three_btns{
+
+  #userprofileimage_for_viewprofile{
+    width:100px;
+    height:100px;
+    border-radius:70px;
+    align-self: center;
+    border:7px solid white;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  }
+
+  .image_change_button{
+      padding-top:20px;
       display:flex;
       flex-direction: column;
-      gap:7px;
-      padding-top:20px;
-     }
-     #update_btn, #change_pwd, #delete{
-      border:1px solid rgb(244, 248, 247);
-      background-color: transparent;
-      color:rgb(105, 132, 129);
-      padding:9px 11px 9px 11px;
-      border-radius:20px;
-      cursor:pointer;
-      width:140px;
-      text-align: center;
-      font-size:12px;
-     }
-     #update_btn:hover{
-      border:1px solid rgb(9, 75, 70);
-      background-color: transparent;
-      color:rgb(9, 75, 70);
-     }
-     
-     #change_pwd:hover{
-      border:1px solid rgb(9, 75, 70);
-      background-color: transparent;
-      color:rgb(9, 75, 70);
-     }
+      gap: 10px;
+  }
+
+  #change_img{
+    border:none;
+    background-color: rgb(9, 75, 70);
+    color:white;
+    padding:10px 10px 10px 10px;
+    border-radius:10px;
+    font-size:12px;
+    opacity: 50%;
+  }
+
+  #delete_img{
+    border:1px solid #094b46;
+    background-color: black;
+    color:azure;
+    padding:8px 11px 8px 11px;
+    border-radius:10px;
+    font-size:12px;
+    opacity: 50%;
+  }
+
+  .qualificationOne{
+    height: 40px;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif; 
+    background-color: #769c99 ;
+    color: #414040;
+  }
+
+  .qualificationTwo{
+    height: 40px;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif; 
+    background-color: #094b46 ;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .qualificationTwo a{
+    text-decoration: none;
+    color: #ccc;
+  }
+
+  .content form .user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0px  15px 0;
+  }
+  form .user-details .input-box{
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 10px); /*change**/
+  }
+  form .input-box span.details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size:14px;
+  }
+  .user-details .input-box input{
+    height: 40px;
+    width: 100%;
+    outline: none;
+    font-size: 13px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif; 
+  }
+  .user-details .input-box input,
+  .user-details .input-box input:valid{
+    border:1px solid rgb(232, 246, 242);
+  }
+   form .gender-details .gender-title{
+    font-size: 20px;
+    font-weight: 500;
+   }
   
-     #delete:hover{
-      border:1px solid rgba(249, 115, 115, 0.787);
-      background-color: transparent;
-      color:rgb(9, 75, 70);
-     }
+   form .avp_category {
+    display: flex;
+    width: 80%;
+    margin: 14px 0;
+    justify-content: space-around;
+  }
   
-     .profile_hr{
-      height:34%;
-      border-left:1px solid lavender;
-     }
-  
-  
-     /* .three_btns{
+   
+   form .avp_category label{
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+      padding: 4px 16px;
+    
+   }
+   form .avp_category label .dot{
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #d5cdcd;
+    border: 5px solid transparent;
+    transition: all 0.3s ease;
+  }
+   #dot-1:checked ~ .avp_category label .one,
+   #dot-2:checked ~ .avp_category label .two{
+     background: black;
+     border-color: #d9d9d9;
+   }
+   form input[type="radio"]{
+     display: none;
+   }
+
+   /*setting*/
+
+   .settings{
+    margin-right:50px;
+   }
+
+   .settings h4{
+    color:rgb(209, 219, 216);
+   }
+   .three_btns{
+    display:flex;
+    flex-direction: column;
+    gap:7px;
+    padding-top:20px;
+   }
+   #update_btn, #change_pwd, #delete{
+    border:1px solid rgb(244, 248, 247);
+    background-color: black;
+    color:rgb(105, 132, 129);
+    padding:9px 11px 9px 11px;
+    border-radius:20px;
+    width:140px;
+    text-align: center;
+    font-size:12px;
+    opacity: 50%;
+   }
+   .profile_hr{
+    height:34%;
+    border-left:1px solid lavender;
+   }
+
+    .section_2{
       display:flex;
-      gap:0px;
-  
-     }
-     form #update_btn{
-       height: 35px;
-       border-radius: 5px;
-       cursor: pointer;
-       font-size: 13px;
-       font-family: 'Montserrat', sans-serif; 
-       font-weight: 500;
-       transition: all 0.3s ease;
-       background-color: transparent;
-       text-align: center;
-       color:rgb(9, 75, 70);
-       padding-inline: 10px;
-       border:1px solid rgb(239, 244, 243);
+    }
     
-     }
+    #avf_delete_btn:Hover,#avf_change_pwd_btn:Hover,#avf_update_btn:hover{
+    /* transform: scale(0.99); */
+    opacity: 75%;
+    }
     
-     form #change_pwd{
-        height: 35px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 13px;
-        font-family: 'Montserrat', sans-serif; 
-        font-weight: 500;
-        transition: all 0.3s ease;
-        background-color: transparent;
-        text-align: center;
-        color:rgb(9, 75, 70);
-        padding-inline: 10px;
-        border:1px solid rgb(239, 244, 243); 
-      }
-    
-      form #delete{
-        height: 35px;
-       border-radius: 5px;
-       cursor: pointer;
-       font-size: 13px;
-       font-family: 'Montserrat', sans-serif; 
-       font-weight: 500;
-       transition: all 0.3s ease;
-       background-color: transparent;
-       text-align: center;
-       color:rgb(161, 112, 112);
-       padding-inline: 10px;
-       border:1px solid rgb(239, 244, 243);
-    
-      }
+   @media(max-width: 584px){
+   .container{
+    max-width: 100%;
+  }
+  form .user-details .input-box{
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    form .category{
+      width: 100%;
+    }
+    .content form .user-details{
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+    .user-details::-webkit-scrollbar{
+      width: 5px;
+    }
+    }
+    @media(max-width: 459px){
+    .container .content .category{
+      flex-direction: column;
+    }
   
-      form #update_btn:hover{
-        color:rgb(9, 75, 70);
-        border:1px solid rgb(9, 75, 70);
-      }
   
-      form #change_pwd:hover{
-        color:rgb(9, 75, 70);
-        border:1px solid rgb(9, 75, 70);
-      }
-  
-      form #delete:hover{
-        color:rgb(161, 112, 112);
-        border:1px solid rgb(252, 168, 168);
-      }
-    
-      .three_btns{
-        display: flex;
-        justify-content: space-around;
-        padding-left:100px;
-      } */
-  
-      .section_2{
-        display:flex;
-      }
+    .three_btns{
       
-      #avf_delete_btn:Hover,#avf_change_pwd_btn:Hover,#avf_update_btn:hover{
-      /* transform: scale(0.99); */
-      opacity: 75%;
-      }
-      
-     @media(max-width: 584px){
-     .container{
-      max-width: 100%;
     }
-    form .user-details .input-box{
-        margin-bottom: 15px;
-        width: 100%;
-      }
-      form .category{
-        width: 100%;
-      }
-      .content form .user-details{
-        max-height: 300px;
-        overflow-y: scroll;
-      }
-      .user-details::-webkit-scrollbar{
-        width: 5px;
-      }
-      }
-      @media(max-width: 459px){
-      .container .content .category{
-        flex-direction: column;
-      }
-    
-    
-      .three_btns{
-        
-      }
-    }
+  }
+
+  .title{
+    font-weight: bold;
+    color:rgb(117, 97, 97);
+    padding-left:10px;
+  }
   
-    .title{
-      font-weight: bold;
-      color:rgb(117, 97, 97);
-      padding-left:10px;
-    }
-    
