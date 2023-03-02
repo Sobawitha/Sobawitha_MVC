@@ -8,7 +8,7 @@
         <i class="fa-solid fa-bars" id="equal"></i>
         <i class="fa-solid fa-play" id="shape"></i>
     </div>
-    <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($_SESSION['profile_image']);?>" id="userprofileimage"/>
+    <?php echo '<img src="../'.$_SESSION['profile_image_path'].'"   alt="Profile Picture"  id="userprofileimage">';?>
      <div class="user_detail">
      <span class="uname"> <?php echo $_SESSION['username'] ," ",$_SESSION['lastname'] ?>  </span><br>
     <span class="position"><?php echo $_SESSION['position'] ?></span>
@@ -19,8 +19,8 @@
         <li><a href="<?php echo URLROOT?>/forum/forum"><i class="fa-brands fa-forumbee"></i>&nbsp;&nbsp;Forum</a></li>
         <li><a href="<?php echo URLROOT?>/seller_ad_management/View_listing"><i class="fa-solid fa-rectangle-ad"></i>&nbsp;&nbsp;Manage Ads</a></li> 
         <li><a href="<?php echo URLROOT?>/seller_order_list/view_orders"><i class="fa-sharp fa-solid fa-store"></i>&nbsp;&nbsp;Orders</a></li> 
-        <li><a href="<?php echo URLROOT?>/"><i class="fa-solid fa-cart-shopping"></i></i>&nbsp;&nbsp;Buy Raw-material</a></li> 
-        <li><a href="<?php echo URLROOT?>/feedback/seller_feedback"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;Feedbacks</a></li> 
+        <li><a href="<?php echo URLROOT?>/"><i class="fa-solid fa-cart-shopping"></i></i>&nbsp;&nbsp;Buy Raw-materials</a></li> 
+        <li><a href="<?php echo URLROOT?>/seller_feedback/view_all_feed"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;Feedbacks</a></li> 
         <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;Complaints</a></li> 
         <li><a href="<?php echo URLROOT?>/seller_payment/view_payment"><i class="fa-solid fa-coins"></i></i>&nbsp;&nbsp;Payments</a></li> 
     </ul>

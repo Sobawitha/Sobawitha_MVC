@@ -19,6 +19,7 @@
 .add_container .title{
   font-size: 30px;
   font-weight:bold;
+  color: rgb(53, 53, 53) ;
 }
 
 form .input-box span.details{

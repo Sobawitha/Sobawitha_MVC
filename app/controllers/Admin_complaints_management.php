@@ -1,16 +1,25 @@
 <?php
     class Admin_complaints_management extends Controller{
+        
+        private $adminComplaintsMgnt;
         public function __construct(){
-            $this->userModel = $this->model('M_Admin_complaints_management');
+            $this->adminComplaintsMgnt = $this->model('M_Admin_complaints_management');
     }
 
-    public function comp_review_pending(){
-        $data=[
-            'title' => 'Sobawitha'
-        ];
-        $this->view('Admin/AdminCompManage/v_admin_comp_pending', $data);
+    public function view_complaints(){
+        if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
+            $complaints = $this->adminComplaintsMgnt->getCompDetails();
+           
+            $data=[
+            'complaints' =>  $complaints
+            ];
+        
+            $this->view('Admin/AdminCompManage/v_admin_comp_pending', $data);
       
-       }
+        }else{
+            redirect('Login/login');  
+        }
+      }
 
        public function comp_solved(){
         $data=[

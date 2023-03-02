@@ -11,26 +11,33 @@
 
         <div class="section_2">
 
-        <h3>Payment Detail</h3>
+        <h3>Payments Details</h3>
         <hr>
 
         <br><br>
+        <div class="button_section">
         <form method="POST">
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="Search by firstname | lastname" require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
         </div>
         </form>
+        <div class="add_new_user_btn">
+            <button class="gen_report" onclick=""  id="genReport"><i class="fa-solid fa-file-invoice"></i> Generate Report</button>
+          </div>
+          </div>
+        
 
                 <div class="filter_section">
                         <label for="all" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing" checked>All types</label>
                         <label for="credit_card" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Visa</label>
                         <label for="debit_card" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Debit</label>
+                        <label for="debit_card" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">COD</label>
                 </div>
 
                 <div class="order_list">
@@ -38,57 +45,31 @@
 
                 <table class="order_list_table">
                         <tr class="table_head">
-                                <td>#</td>
+                                <td>Payment Id</td>
                                 <td>Type</td>
-                                <td>Full Name</td>
-                                <td>Adress</td>
-                                <td>City</td>
-                                <td>Postal Code</td>
-                                <td>Amount</td>
-                                <td>Option</td>
+                                <td>Payer Full Name</td>
+                                <td>Total_Fee</td>
+                                <td>Payee_Fee</td>
+                                <td>Profit</td>
+                                <td>Date & Time</td>
+                                
                         </tr>
-
+                        <?php foreach($data['payments'] as $payments): ?>
                         <tr class="order">
                                 <div class="order_detail">
-                                        <td><span class="p_name">1</span></td>
-                                        <td><span class="p_name">Debit</span></td>
-                                        <td><span class="amount">Dasun Shanaka</span></td>
-                                        <td class="unit">Matara</td>
-                                        <td class="unit">Colombo</td>
-                                        <td><span class="price">81000</span></td>
-                                        <td><span class="payment_status">Rs. 150.00</span></td>
-                                        <td><span class="delete">Delete</span></td>
+                                        <td><?php echo $payments->payment_id ?></td>
+                                        <td><?php echo $payments->type ?></td>
+                                        <td><?php echo $payments->payer_first ?>&nbsp<?php echo $payments->payer_last ?></td>
+                                        <td>Rs. <?php echo $payments->total_fee ?></td>
+                                        <td>Rs. <?php echo $payments->payee_fee ?></td>
+                                        <td><button class="profit_gain">Rs. <?php echo $payments->profit ?></button></td>
+                                        <td><?php echo $payments->date ?></td>
+                                
                                 </div>
 
                         </tr>
-
-                        <tr class="order">
-                                <div class="order_detail">
-                                        <td><span class="p_name">1</span></td>
-                                        <td><span class="p_name">Debit</span></td>
-                                        <td><span class="amount">Dasun Shanaka</span></td>
-                                        <td class="unit">Matara</td>
-                                        <td class="unit">Colombo</td>
-                                        <td><span class="price">81000</span></td>
-                                        <td><span class="payment_status">Rs. 150.00</span></td>
-                                        <td><span class="delete">Delete</span></td>
-                                </div>
-
-                        </tr>
-
-                        <tr class="order">
-                                <div class="order_detail">
-                                        <td><span class="p_name">1</span></td>
-                                        <td><span class="p_name">Debit</span></td>
-                                        <td><span class="amount">Dasun Shanaka</span></td>
-                                        <td class="unit">Matara</td>
-                                        <td class="unit">Colombo</td>
-                                        <td><span class="price">81000</span></td>
-                                        <td><span class="payment_status">Rs. 150.00</span></td>
-                                        <td><span class="delete">Delete</span></td>
-                                </div>
-
-                        </tr>
+                        <?php endforeach;?>          
+         
 
                 </table>
 

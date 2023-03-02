@@ -10,6 +10,8 @@
 
     </div>
     <div class="section_2">
+       <h3>Admin Dashboard</h3>
+        <hr>
         <div class="dashboard">
             <div class='card' id="card1">
                 <div class='content'>

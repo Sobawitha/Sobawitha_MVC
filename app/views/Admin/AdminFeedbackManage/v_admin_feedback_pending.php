@@ -2,6 +2,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
+<script src="../js/Admin/Feed_manage/feed_manage.js"></script>
 
 <div class="body">
         <div class="section_1">
@@ -10,7 +11,7 @@
 
         <div class="section_2">
 
-        <h3>Feedback Management</h3>
+        <h3>Feedbacks Management</h3>
         <hr>
 
         <br><br>
@@ -18,8 +19,8 @@
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search_text" placeholder="Search by feedback category"  id="searchBar" require/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
@@ -27,90 +28,109 @@
         </form>
 
                 <div class="filter_section">
-                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Published</label>
                         <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing" checked>Pending</label>
+                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Published</label>
+                       
                 </div>
 
                 <div class="order_list">
                 <div class="orders">
 
+               
+
                 <table class="order_list_table">
                         <tr class="table_head">
                                 <td>Feedback Receiver</td>
                                 <td>Category</td>
-                                <td>Reviewed</td>
+                                <td>Reviewed By</td>
                                 <td>Review</td>
-                                <td>Option</td>
+                                <td>Options</td>
                         </tr>
 
+                        <?php foreach($data['feed'] as $feed): ?>
+                        <?php if($feed->feed_status ==0 ) { ?>
                         <tr class="order">
                                 <div class="order_detail">
-                                        <td><span class="p_name">Punsara</span></td>
-                                        <td><span class="amount">Seller</span></td>
-                                        <td class="unit">Devin</td>
-                                        <td>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-regular fa-star" id="star"></i>
-                                          <i class="fa-regular fa-star" id="star"></i>
-                                          <br>
+                                        <td><?php echo $feed->receiver_name ?></td>
+                                        <td><?php echo $feed->category ?></td>
+                                        <td><?php echo $feed->admin_first_name ?></td>
+                                        <td class="rate">
+                                       
+                                          <?php if($feed->rating==1) { ?>      
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                                <br>
+                                          <?php } else if($feed->rating==2){?>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                          <?php } else if($feed->rating==3){?> 
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+                                                
+                                         <?php } else if($feed->rating==4){?>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-regular fa-star" id="star"></i>
+
+                                          <?php } else if($feed->rating==5){?>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+                                                <i class="fa-solid fa-star" id="star"></i>
+
+                                        <?php } ?> 
+                                           
                                           <div class="comment_for_review">
-                                            <span class="comment_line_1">Good Product</span><br>
-                                            <span class="comment_line_2">Quality product. Heigly recomended.</span>
-                                          </div>
+
+                                            <!-- <span class="comment_line_1">Good Product</span><br>
+                                            <span class="comment_line_2">Quality product. Heigly recomended.</span> -->
+                                            <?php 
+                                                $description_words = explode(" ", $feed->review_desc);
+                                                $limited_words = implode(" ", array_slice($description_words, 0, 10)); // limit to 10 words
+                                                if (count($description_words) > 10) {
+                                                echo $limited_words . " ...[See More]";
+                                                } else {
+                                                echo $limited_words;
+                                                }
+                                                ?>   
+                                        </div>
                                         </td>
-                                        <td><span class="payment_status">Rs. 1200.00</span></td>
-                                        
+                                        <td>
+                                        <div class="action">
+                                                                        
+                                                                
+                                           <form method="GET">
+                                         <span class="delete"><button type="button" onclick="popUpOpenDelete()" id="review"><i class="fa-solid fa-hand"></i> Review</button></span>
+                                                                
+                                        </form><br>
+                                                                        
+                                        <form  action="">
+                                        <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> More</button></span>
+                                        </form>
+                
+                                         <form  action="">
+                                          <span class="viewmore"><button id="ignore" ><i class="fa-solid fa-delete-left"></i> Ignore</button></span>
+                                         </form>
+                                         </div>
+                                         </td>
+                                         
                                 </div>
 
                         </tr>
-
-                        <tr class="order">
-                                <div class="order_detail">
-                                        <td><span class="p_name">Punsara</span></td>
-                                        <td><span class="amount">Seller</span></td>
-                                        <td class="unit">Devin</td>
-                                        <td>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-regular fa-star" id="star"></i>
-                                          <i class="fa-regular fa-star" id="star"></i>
-                                          <br>
-                                          <div class="comment_for_review">
-                                            <span class="comment_line_1">Good Product</span><br>
-                                            <span class="comment_line_2">Quality product. Heigly recomended.</span>
-                                          </div>
-                                        </td>
-                                        <td><span class="payment_status">Rs. 1200.00</span></td>
-                                        
-                                </div>
-
-                        </tr>
-
-                        <tr class="order">
-                                <div class="order_detail">
-                                        <td><span class="p_name">Punsara</span></td>
-                                        <td><span class="amount">Seller</span></td>
-                                        <td class="unit">Devin</td>
-                                        <td>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-solid fa-star" id="star"></i>
-                                          <i class="fa-regular fa-star" id="star"></i>
-                                          <i class="fa-regular fa-star" id="star"></i>
-                                          <br>
-                                          <div class="comment_for_review">
-                                            <span class="comment_line_1">Good Product</span><br>
-                                            <span class="comment_line_2">Quality product. Heigly recomended.</span>
-                                          </div>
-                                        </td>
-                                        <td><span class="payment_status">Rs. 1200.00</span></td>
-                                        
-                                </div>
-
-                        </tr>
+                <?php } ?>                    
+                <?php endforeach;?>                  
 
                 </table>
 
