@@ -1,8 +1,10 @@
 <?php
     class users extends Controller {
         private $userModel;
+        private $loginModel;
         public function __construct(){
             $this-> userModel =$this->model('M_Users');
+            $this-> loginModel =$this->model('M_Login');
         }
 
         public function register(){
@@ -161,7 +163,86 @@
             $this->view('Raw_material_supplier/Raw_material_supplier/v_supplier_view_profile', $data);
         }
 
+        public function verify_email($mail){
+          
+            if($_SERVER['REQUEST_METHOD']=='POST'){
+                  
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                if(isset($_POST['verify_btn'])) {
+                  
+                       $token = trim($_POST['verify_code']);
+                       if($token != null) { 
+                         $email = $mail;
+                         $userRow=$this->loginModel->findUserId($email);   
+                         $tokenExpire = $this->loginModel->checkToken($email);
+                       }
+                     
+                       //    echo "<script>";
+                       // echo "alert('" . $tokenExpire->verify_token . "')";
+                       // echo "</script>";
+   
+                       $data = [
+                           'email' => trim($_POST['verify_email']),
+                           'verify_code' => trim($_POST['verify_code']),
+                           'user_id'=> $userRow -> user_id,
         
+                          
+                           'token_err' => '',
+                           'token_unmatch_err' =>'',
+                           'email_err' =>'',
+                           'code_err' => ''
+                       ];
+                       
+                       if(empty($data['email'])){
+                        $data['email_err']='Please register with Sobawitha first, to get a verification code';
+                       }  
+
+                        if(empty($data['verify_code'])){
+                             $data['token_err']='Please enter verification code';
+                          } 
+                          
+                       if(!empty($data['verify_code'])){
+                           if($token != $tokenExpire->verify_token){
+                               $data['token_unmatch_err'] = 'We are sorry, but the verification code you entered doesnot match the one we sent you. Please double-check the code and try again. If you continue to have issues, please contact our support team for assistance.';
+                           }
+                       }
+                       
+                       if(empty($data['token_err']) && empty($data['token_unmatch_err']) && empty($data['email_err']) ){
+                           $activate_user=$this->userModel->activateUser($data['user_id']);
+                           $token = md5(rand());
+                           $this->loginModel->setToken($token,$email);
+                   
+                             if($activate_user){
+                                   redirect('Login/login');      
+                              
+                             }else{
+                              $data['code_err']='something went wrong';
+                              $this->view('Users/user/v_verify_email', $data);
+                             }   
+                          }else{
+                            $this->view('Users/user/v_verify_email', $data);
+                          }
+               
+               }
+               }else{
+                   //initial form
+                   $data = [
+                    'email' => $mail,
+                    'verify_code' => '',
+                    'user_id'=> '',
+ 
+                   
+                    'token_err' => '',
+                    'token_unmatch_err' =>'',
+                    'email_err' =>'',
+                    'code_err' => ''
+                   ];
+   
+                   //load view
+                   $this->view('Users/user/v_verify_email', $data);
+               }
+     
+       }
 
 
 }

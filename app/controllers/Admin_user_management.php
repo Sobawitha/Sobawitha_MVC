@@ -35,6 +35,7 @@
             'propic'=>$_FILES['propic'],
             'qualification'=>$_FILES['qualification'],
             'password'=>trim($_POST['password']),
+            'email_pwd'=>trim($_POST['password']),
             'confirm_password'=>trim($_POST['confirm_password']),
             // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
             'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['propic']['name'],
@@ -65,6 +66,10 @@
 
         if($this->adminUserMngtModel->findUserByEmail($data['email'])){
             $data['email_err']='Email is already exists';
+        } 
+        
+        if($this->adminUserMngtModel->findSameNic($data['nic'])){
+            $data['nic_err']='NIC no is already exists';
         } 
 
         if(empty($data['propic'])){
@@ -202,6 +207,8 @@
         $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  
         if($this->adminUserMngtModel->addAgri($data)){
             //   flash('post_msg', 'add new admin successfully');
+                $flag =2;
+                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd']);
                 redirect('Admin_user_management/view_all_users'); 
         }else{
             die('Error creating');
@@ -294,6 +301,7 @@
             'bank'=>trim($_POST['bank']),
             'branch'=>trim($_POST['branch']),
             'password'=>trim($_POST['password']),
+            'email_pwd'=>trim($_POST['password']),
             'confirm_password'=>trim($_POST['confirm_password']),
             // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
             'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['propic']['name'],
@@ -322,6 +330,10 @@
 
         if($this->adminUserMngtModel->findUserByEmail($data['email'])){
             $data['email_err']='Email is already exists';
+        } 
+
+        if($this->adminUserMngtModel->findSameNic($data['nic'])){
+            $data['nic_err']='NIC no is already exists';
         } 
 
         if(empty($data['propic'])){
@@ -429,6 +441,8 @@
         $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  
         if($this->adminUserMngtModel->addAdmin($data)){
             //   flash('post_msg', 'add new admin successfully');
+                $flag =2;
+                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd']);
                 redirect('Admin_user_management/view_all_users'); 
         }else{
             die('Error creating');
@@ -513,7 +527,8 @@
        }    
     
    }
-
+   
+   //remove this
    public function view_more_usert(){
   
         $user= $this->adminUserMngtModel->getUserDetails(43);
@@ -528,47 +543,7 @@
     
    }
 
-   public function view_all_users()
-   {
-    if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
-       
-            $filter = $_GET['filter'] ?? 'AllUsers';
-            
-            switch($filter) {
-                case 'Admins':
-                    $users = $this->adminUserMngtModel->getAdmins();
-                    break;
-                case 'Customers':
-                    $users = $this->adminUserMngtModel->getCustomers();
-                    break;
-                case 'Sellers':
-                    $users = $this->adminUserMngtModel->getSellers();
-                    break;
-                case 'Suppliers':
-                    $users = $this->adminUserMngtModel->getSuppliers();
-                    break;
-                case 'AgriOfficers':
-                    $users = $this->adminUserMngtModel->getAgri();
-                    break;
-                default:
-                    $users = $this->adminUserMngtModel->getUsers();
-            }
-            
-            $count = 0;
-            $data = [
-                'user' => $users,
-                'search' => '',
-                'id' => $count
-            ];
-            
-            $this->view('Admin/AdminUserManagement/v_user_management',$data);
- 
 
-  
-  }else{
-    redirect('Login/login');  
-  }
-  }
 
   public function  adminSearchUser()
   {
@@ -624,6 +599,92 @@
       redirect('Login/login');  
     }
   }
+
+    
+    
+    public function view_all_users()
+    {
+    if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $filter_type = trim($_POST['user_type']);
+            $users = $this->adminUserMngtModel->display_all_users($filter_type); //data object array
+
+            
+            $users = $this->adminUserMngtModel->display_all_users($filter_type); //data object array
+            $count = 0;
+            $data = [
+                'user' => $users,
+                'search' => '',
+                'id' => $count
+            ]; 
+            $this->view('Admin/AdminUserManagement/v_user_management',$data);
+
+        }else{
+            $users = $this->adminUserMngtModel->display_all_users(); //data object array
+            $count = 0;
+            $data = [
+                'user' => $users,
+                'search' => '',
+                'id' => $count
+            ]; 
+             
+            $this->view('Admin/AdminUserManagement/v_user_management',$data);
+
+        }   
+            
+            
+            
+           
+
+
+
+    }else{
+    redirect('Login/login');  
+    }
+    }
+
+    // public function view_all_users()
+    // {
+    // if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
+        
+    //         $filter = $_GET['filter'] ?? 'AllUsers';
+            
+    //         switch($filter) {
+    //             case 'Admins':
+    //                 $users = $this->adminUserMngtModel->getAdmins();
+    //                 break;
+    //             case 'Customers':
+    //                 $users = $this->adminUserMngtModel->getCustomers();
+    //                 break;
+    //             case 'Sellers':
+    //                 $users = $this->adminUserMngtModel->getSellers();
+    //                 break;
+    //             case 'Suppliers':
+    //                 $users = $this->adminUserMngtModel->getSuppliers();
+    //                 break;
+    //             case 'AgriOfficers':
+    //                 $users = $this->adminUserMngtModel->getAgri();
+    //                 break;
+    //             default:
+    //                 $users = $this->adminUserMngtModel->getUsers();
+    //         }
+            
+    //         $count = 0;
+    //         $data = [
+    //             'user' => $users,
+    //             'search' => '',
+    //             'id' => $count
+    //         ];
+            
+    //         $this->view('Admin/AdminUserManagement/v_user_management',$data);
+
+
+
+    // }else{
+    // redirect('Login/login');  
+    // }
+    // }
   
 
 }

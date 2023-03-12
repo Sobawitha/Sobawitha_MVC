@@ -25,7 +25,7 @@
 
     public function  addAdmin($data)
     {
-        $this->db->query('INSERT INTO user(first_name,last_name,email,user_flag,contact_no,nic_no,dob,profile_picture,address_line_one,address_line_two,address_line_three,address_line_four,qualifications,gender,bank_account_no,bank,branch,bank_account_name,password) VALUES (:first_name,:last_name,:email,:user_flag,:contact_no,:nic,:dob,:propic,:address_line_one,:address_line_two,:address_line_three,:address_line_four,:qualifications,:gender,:bank_account_no,:bank,:branch,:bank_account_name,:password)');
+        $this->db->query('INSERT INTO user(first_name,last_name,email,user_flag,contact_no,nic_no,dob,profile_picture,address_line_one,address_line_two,address_line_three,address_line_four,qualifications,gender,bank_account_no,bank,branch,bank_account_name,password,active_status) VALUES (:first_name,:last_name,:email,:user_flag,:contact_no,:nic,:dob,:propic,:address_line_one,:address_line_two,:address_line_three,:address_line_four,:qualifications,:gender,:bank_account_no,:bank,:branch,:bank_account_name,:password,:active_status)');
         $this->db->bind(':first_name',$data['first_name']);
         $this->db->bind(':last_name', $data['last_name']);
         $this->db->bind(':email', $data['email']);
@@ -47,6 +47,7 @@
         $this->db->bind(':password',$data['password']);
         $this->db->bind(':branch', $data['branch']);
         $this->db->bind(':bank_account_name', $data['bank_account_name']);
+        $this->db->bind(':active_status', 1);
         // $this->db->bind(':account_number',$data['account_number']);
        
         if($this->db->execute()){
@@ -60,7 +61,7 @@
 
     public function  addAgri($data)
     {
-        $this->db->query('INSERT INTO user(first_name,last_name,email,user_flag,contact_no,nic_no,dob,profile_picture,qualifications,address_line_one,address_line_two,address_line_three,address_line_four,gender,bank_account_no,bank,branch,bank_account_name,password) VALUES (:first_name,:last_name,:email,:user_flag,:contact_no,:nic,:dob,:propic,:qualifications,:address_line_one,:address_line_two,:address_line_three,:address_line_four,:gender,:bank_account_no,:bank,:branch,:bank_account_name,:password)');
+        $this->db->query('INSERT INTO user(first_name,last_name,email,user_flag,contact_no,nic_no,dob,profile_picture,qualifications,address_line_one,address_line_two,address_line_three,address_line_four,gender,bank_account_no,bank,branch,bank_account_name,password ,active_status) VALUES (:first_name,:last_name,:email,:user_flag,:contact_no,:nic,:dob,:propic,:qualifications,:address_line_one,:address_line_two,:address_line_three,:address_line_four,:gender,:bank_account_no,:bank,:branch,:bank_account_name,:password, :active_status)');
         $this->db->bind(':first_name',$data['first_name']);
         $this->db->bind(':last_name', $data['last_name']);
         $this->db->bind(':email', $data['email']);
@@ -81,6 +82,7 @@
         $this->db->bind(':password',$data['password']);
         $this->db->bind(':branch','');
         $this->db->bind(':bank_account_name','');
+        $this->db->bind(':active_status', 1);
 
        
         if($this->db->execute()){
@@ -175,6 +177,56 @@
             return false;
       }
     } 
+
+    public function findSameNic($nic)
+    {
+      $this->db->query('SELECT * FROM user WHERE nic_no= :nic');
+      $this->db->bind(':nic',$nic);  
+
+      $row= $this->db->single();
+
+      if($this->db->rowCount() >0){
+            return true;
+      }else{
+            return false;
+      }
+    }
+
+    public function display_all_users(){
+      if(isset($_POST['user_type']) && !empty($_POST['user_type'])){
+          if ($_POST['user_type'] == 'all'){            
+              $this->db->query('SELECT * FROM user');
+              return $this->db->resultSet(); 
+          }
+          if ($_POST['user_type'] == 'admins'){
+              $this->db->query('SELECT * FROM user WHERE user_flag=1');
+              return $this->db->resultSet(); 
+          }
+          if ($_POST['user_type'] == 'customers'){
+              $this->db->query('SELECT * FROM user WHERE user_flag=2');
+              return $this->db->resultSet(); 
+          }
+
+          if ($_POST['user_type'] == 'sellers'){
+            $this->db->query('SELECT * FROM user WHERE user_flag=3');
+            return $this->db->resultSet(); 
+        }
+        if ($_POST['user_type'] == 'suppliers'){
+          $this->db->query('SELECT * FROM user WHERE user_flag=4');
+          return $this->db->resultSet(); 
+        }
+        if ($_POST['user_type'] == 'agris'){
+        $this->db->query('SELECT * FROM user WHERE user_flag=5');
+        return $this->db->resultSet(); 
+        }
+      }
+
+      else{
+          $this->db->query('SELECT * FROM user');
+          return $this->db->resultSet(); 
+      }
+                
+  }
     
 
 }

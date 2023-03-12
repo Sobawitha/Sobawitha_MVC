@@ -28,7 +28,7 @@
         </div>
         </form>
         <div class="add_new_user_btn">
-            <button class="gen_report" onclick=""  id="genReport"><i class="fa-solid fa-file-invoice"></i> Generate Report</button>
+         <a href ="<?php echo URLROOT ?> /Admin_payments/generate_report" id="genReport" ><button class="gen_report"><i class="fa-solid fa-file-invoice"></i> Generate Report</button></a>
           </div>
           </div>
         

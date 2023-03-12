@@ -41,16 +41,17 @@
     color:rgb(230, 160, 19);
 }
 
-li a:is(:link, :active, :visited).active{
+/* li a:is(:link, :active, :visited).active{
     background-color: rgb(237, 237, 226);
     font-weight: 700;
     border-radius: 5px;
     color:rgb(230, 160, 19);
-}
+} */
 
 
 #userprofile{
     margin-bottom:18px;
+
 }
 
 .user_detail .uname{
@@ -105,3 +106,10 @@ li a:is(:link, :active, :visited).active{
     color:rgb(246, 246, 206);
     transform: translate(70px, -11px);
 }
+
+.sidebar ul li.active a {
+    background-color: rgb(237, 237, 226);
+    font-weight: 700;
+    border-radius: 5px;
+    color:rgb(230, 160, 19);
+  }

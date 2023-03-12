@@ -51,14 +51,36 @@
             <div class="title">Account Information</div>
             <div class="profile_image">
                 <img  src="./../public/upload/user_profile_pics/<?php echo $_SESSION['profile_image']?>" id="userprofileimage_for_viewprofile"/>
+                
                 <div class="image_change_button">
                 
-                <form method="POST" action="<?php echo URLROOT ?>/Admin/change_profile_pic" enctype="multipart/form-data">
-                    <button type ="submit" id="change_img">change picture<input type="file" name="propic" id="propic"  /></button><br>
-                    <span class="error_msg"><?php echo $data['propic_err'] ?></span>
-                </form> 
+                <form method="POST" action="<?php echo URLROOT?>/Admin/change_profile_pic " enctype="multipart/form-data">
+                
+                <label for="propic" id="labelpic" >Change Picture</label>
+                <input type="file" name="propic" id="propic" onchange="showButton()" />
+                <button type="button" onclick ="popUpOpenChangePic()" id="change_img" style="display:none;"  >Change picture</button>
+                <span class="error_msg"><?php echo $data['propic_err'] ?></span>
+                <dialog id="confirmingChangePicPopup">
+                    <div class="confirmingChangePicPopup">
+                    <div class="dialog__heading">
+                        <h2>Are you sure you want to change your profile pic?</h2>
+                        <button id="closebtnthree" type="button">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="dialog__content">
+                        <button type="submit" name="submitForm" value="true" id="green_yes">Yes</button>
+                        <a href="<?php echo URLROOT?>/Admin/profile " id="no">No</a>
+                    </div>
+                    </div>
+                </dialog>
 
-                    <button id="delete_img">delete picture</button>
+           
+         
+
+            </form>
+
+        
                 </div>
             </div>
             <div class="content">
@@ -179,5 +201,10 @@
 
     </div>
 </div>
+
+
+                </div>
+
+
 
 <?php require APPROOT.'/views/Users/component/footer.php'?>

@@ -118,7 +118,8 @@
   }
 
   .raiting_star{
-    margin-left:25px;
+    /* margin-left:25px; */
+    /* align-self: flex-start; */
   }
 
   #feedback_user{
@@ -144,4 +145,22 @@
     background-color:salmon ;
     border-radius: 15px;
     border: none;
+  }
+
+/* .feedbacks_desc{
+   background-color: #b5e7a0;
+} */
+
+
+  .sender_name{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .three{
+    max-width: 90%;
+  }
+
+  .time_feed{
+    color:#86af49;
   }

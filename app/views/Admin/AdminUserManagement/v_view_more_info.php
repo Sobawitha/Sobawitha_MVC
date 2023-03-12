@@ -1,7 +1,8 @@
-<link rel="stylesheet" href="../css/Admin/view_more_info.css"></link>
+<!-- <link rel="stylesheet" href="../css/Admin/view_more_info.css"></link> -->
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Admin/view_more_info.css"></link>
 
 
 <div class="body">
@@ -28,7 +29,7 @@
         <div class="container">
             <div class="title">Account Information</div>
             <div class="profile_image">
-                <img  src="./../public/upload/user_profile_pics/<?php echo $data['user']->profile_picture?>" id="userprofileimage_for_viewprofile"/>
+                <img  src="<?php echo URLROOT ?>/public/upload/user_profile_pics/<?php echo $data['user']->profile_picture?>" id="userprofileimage_for_viewprofile"/>
                 <div class="image_change_button">
                     <button id="change_img" disabled>change picture</button>
                     <button id="delete_img" disabled>delete picture</button>

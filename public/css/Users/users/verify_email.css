@@ -1,0 +1,271 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loginContent{
+    /* width: 30%;
+    height: 55%; */
+    /* margin-left: 180px; */
+    display: flex;
+    height:100%;
+    overflow: hidden; /*try to skip this*/
+}
+
+.login_header {
+    /* border: 1px solid black; */
+    padding: 0px 70px;
+    /* background-color: blue; */
+}
+
+.login_inputs{
+    padding: 0px 80px;
+    /* background-color: maroon; */
+    
+}
+
+.login_details{
+    /* background-color: #000000; */
+    /* border:1px solid black; */
+    flex-basis: 60%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0px 100px;
+}
+
+.login_content{
+    /* border:1px solid black; */
+    flex-basis: 50%;
+    display: flex;
+    padding: 100px 80px;
+    height: 100%;
+    align-content: center;
+    justify-content: space-between;
+    /* background-color: red; */
+}
+
+.login_form_content{
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    height: 37vh;
+    justify-content: space-between;
+    /* background-color: #00ff04; */
+    align-content: center;
+}
+
+
+.login_intro{
+    padding:50px 50px 50px 50px;
+}
+.login_intro h1, #back_home{
+    color: rgb(191, 236, 191);
+    text-align: left;
+    font-weight:bold;
+    font-size:18px;
+    text-decoration:none;
+}
+
+.login_intro p{
+    color: #c0baba;
+    font-size: 14px;
+    text-align: justify;
+    line-height:20px;
+}
+
+.login_intro h2{
+    color: #ffffff;
+    font-size:50px;
+}
+
+#leaf{
+    transform: translate(505px,15px);
+    color: rgb(255, 255, 255);
+    font-size:22px;
+}
+
+
+
+.login_form_content h1{
+    font-size: 40px;
+    color: #000000;
+    font-weight:bold;
+}
+
+.login_form_content p{
+    font-size: 15px;
+    color: #000000;
+}
+
+.login_form_content a{
+    font-size: 15px;
+    color: blue;
+    text-decoration: none;
+}
+
+#forget_pw{
+    font-size: 15px;
+    color: blue;
+    cursor: pointer;
+    
+}
+
+
+
+.loginContent form{
+    /* margin-top: 20px; */
+    /* width: 100%;
+    height:100%; */
+    /* display: flex; */
+    /* padding: 7% 5%; */
+    /* justify-content: space-around; */
+    font-weight: 500;
+    color:white;
+    /* box-shadow:2px 2px 12px #00000033,-1px -1px 8px #00000033; */
+}
+
+.loginContent form label{
+    /* display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    float: left; */
+    font-size: 18px;
+    color: #000000;
+    font-weight:bold;
+}
+
+.login_header p{
+    font-size:14px;
+    color:gray;
+}
+
+#sign_up, #forget_pw{
+    font-weight:bold;
+    color:#87bb87;
+}
+
+.loginContent form input {
+    font-size: 15px;
+    border: none;
+    padding: 8px 20px;
+    /* width: 100%;
+    height: 30px; */
+    border-radius: 10px;
+    color: black;
+    background: white;
+    font-weight: 600;
+    border: 1px solid black;
+    width: 400px;
+    
+}
+
+.loginContent form input:focus{
+    outline:none;
+}
+
+.loginContent form #login_btn{
+    /*
+    height: 50px;
+    margin-top: 30px; */
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    background-color: #000000;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: 700;
+    transform:translateY(20px);
+    font-size: 20px;
+    width: 400px;
+    border-radius:25px;
+    border:none;
+    font-size: 17px;
+}
+
+.loginContent form #verify_btn
+    :hover{
+    background: #ffffff;
+    color: #000000;
+}
+
+.error_msg{
+    font-size: 15px;
+    color: #FF0000;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+
+
+/*for responsive site*/
+@media only screen and(max-width:600px){
+    
+    body{
+        padding-left:0%;
+        padding-right:0%;
+        transform:translateX(0%);
+    }
+    #back1{
+        position:absolute;
+        top:100px;
+        left:-150px;
+        transform:translateY(-100%)
+    }
+    input{
+        padding-left:80px;
+    }
+    login{
+        width:100%;
+    }
+}
+
+#forgot_email{
+    font-size:15px;
+    color:gray;
+    font-weight:200px;
+}
+
+
+#sign_up{
+    cursor:pointer;
+}
+ 
+  #seller_reg, #buyer_reg, #supplier_reg{
+    font-size:15px;
+    font-weight:bold;
+    text-decoration:none;
+  }
+
+  #icon_reg{
+    font-size:45px;
+    color:rgb(7, 82, 66);
+  }
+
+  #verify_btn{
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    background-color: #000000;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: 700;
+    transform:translateY(20px);
+    font-size: 20px;
+    width: 400px;
+    border-radius:25px;
+    border:none;
+    font-size: 17px; 
+  }
+
+.error_msg h5{
+    color: #000000;
+}

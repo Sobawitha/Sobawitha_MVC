@@ -10,7 +10,9 @@
     public function seller_register(){
             if($_SERVER['REQUEST_METHOD']=='POST'){
                 $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                
+                     
+                $verificationCode = generateVerificationCode();     
+
                     $data=[
                     'first_name'=>trim($_POST['first_name']),
                     'last_name'=>trim($_POST['last_name']),
@@ -32,7 +34,7 @@
                     'confirm_password'=>trim($_POST['confirm_password']),
                     // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
                     'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['propic']['name'],
-       
+                    'verify_token' => $verificationCode,
             
                     'first_name_err'=>'',
                     'last_name_err'=>'',
@@ -57,6 +59,10 @@
             
                 if($this->sellerModel->findUserByEmail($data['email'])){
                     $data['email_err']='Email is already exists';
+                } 
+
+                if($this->sellerModel->findSameNic($data['nic'])){
+                    $data['nic_err']='Nic no is already exists';
                 } 
     
                 if(empty($data['propic'])){
@@ -162,9 +168,13 @@
       
               if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err'])&& empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])&& empty($data['gender_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err']) && empty($data['propic_err']) && empty($data['address_line_four_err'])){
                 $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  
+                
+                
                 if($this->sellerModel->addSeller($data)){
                     //   flash('post_msg', 'add new seller successfully');
-                           redirect('Login/login'); 
+                       $flag=3;
+                       sendMail($data['email'],$data['first_name'], $verificationCode, $flag, '');
+                       redirect('Users/verify_email/'.$data['email']); 
                   }else{
                     die('Error creating');
                   }  
@@ -233,27 +243,6 @@
       
 }    
         
-   
-
-   
-    public function forgot_password(){
-        $data=[];
-        $this->view('Seller/v_forgotpw', $data);
-    }
-
-    public function create_user_session($user){
-        $_SESSION['user_id'] = $user->user_id;
-        $_SESSION['usernames'] = $user->first_name;
-        $_session['Gender'] = $user->gender;
-        redirect();
-    }
-
-    public function logout(){
-        unset($_SESSION['user_id']);
-        unset($_SESSION['username']);
-        session_destroy();
-        redirect();
-    }
 
     public function isLoggedIn(){
         if(isset($_SESSION['user_id'])){

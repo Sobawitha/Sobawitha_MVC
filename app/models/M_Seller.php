@@ -25,7 +25,7 @@
 
     public function  addSeller($data)
     {
-        $this->db->query('INSERT INTO user(first_name,last_name,email,user_flag,contact_no,nic_no,dob,profile_picture,address_line_one,address_line_two,address_line_three,address_line_four,qualifications,gender,bank_account_no,bank,branch,bank_account_name,password) VALUES (:first_name,:last_name,:email,:user_flag,:contact_no,:nic,:dob,:propic,:address_line_one,:address_line_two,:address_line_three,:address_line_four,:qualifications,:gender,:bank_account_no,:bank,:branch,:bank_account_name,:password)');
+        $this->db->query('INSERT INTO user(first_name,last_name,email,user_flag,contact_no,nic_no,dob,profile_picture,address_line_one,address_line_two,address_line_three,address_line_four,qualifications,gender,bank_account_no,bank,branch,bank_account_name,password,verify_token) VALUES (:first_name,:last_name,:email,:user_flag,:contact_no,:nic,:dob,:propic,:address_line_one,:address_line_two,:address_line_three,:address_line_four,:qualifications,:gender,:bank_account_no,:bank,:branch,:bank_account_name,:password, :verify_token)');
         $this->db->bind(':first_name',$data['first_name']);
         $this->db->bind(':last_name', $data['last_name']);
         $this->db->bind(':email', $data['email']);
@@ -47,6 +47,7 @@
         $this->db->bind(':password',$data['password']);
         $this->db->bind(':branch', $data['branch']);
         $this->db->bind(':bank_account_name',$data['bank_account_name']);
+        $this->db->bind(':verify_token',$data['verify_token']);
        
         if($this->db->execute()){
             return true;
@@ -67,6 +68,20 @@
       }else{
             return false;
       }
+     }
+
+     public function findSameNic($nic)
+     {
+       $this->db->query('SELECT * FROM user WHERE nic_no= :nic');
+       $this->db->bind(':nic',$nic);  
+ 
+       $row= $this->db->single();
+ 
+       if($this->db->rowCount() >0){
+             return true;
+       }else{
+             return false;
+       }
      }
     
 

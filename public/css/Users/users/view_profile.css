@@ -222,7 +222,7 @@
   }
 
   #delete_img{
-    border:1px solid rgb(9, 75, 70);
+    border:1px solid #094b46;
     background-color: transparent;
     color:rgb(9, 75, 70);
     padding:8px 11px 8px 11px;
@@ -314,7 +314,7 @@
    #update_btn, #change_pwd, #delete{
     border:1px solid rgb(244, 248, 247);
     background-color: transparent;
-    color:rgb(105, 132, 129);
+    color:#698481;
     padding:9px 11px 9px 11px;
     border-radius:20px;
     cursor:pointer;
@@ -455,17 +455,17 @@
   opacity: 1;
 }
 
-#deactivateUserPopup {
+#deactivateUserPopup , #confirmingChangePicPopup{
   border: none;
   padding: 0;
   border-radius: 10px;
 }
 
-#deactivateUserPopup::backdrop{
+#deactivateUserPopup::backdrop , #confirmingChangePicPopup::backdrop{
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(1px);
 }
-.deactivateUserPopup { 
+.deactivateUserPopup ,.confirmingChangePicPopup { 
   min-height: 200px;
   padding:1rem;
   display: flex;
@@ -473,7 +473,7 @@
   
 }
 
-.deactivateUserPopup h2{
+.deactivateUserPopup h2 , .confirmingChangePicPopup h2{
   font-size:15px;
 }
 
@@ -481,7 +481,7 @@
   opacity: 1;
 }
 
-#yes, #no{
+#yes, #no , #green_yes{
   font-size:13px;
   font-weight:bold;
   text-decoration:none;
@@ -519,11 +519,36 @@ input[type="file"]::before {
   padding: 2px 5px;
   background-color: #fff;
   color: #333;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 3px;
 }
 
 .error_msg{
   font-size: 15px;
   color: #FF0000;
+}
+
+#green_yes{
+  text-align: center;
+  width: 120px;
+  height: 30px;
+  padding: 0.5rem 0.5rem;
+  background-color: #06543c;
+  color: #fff;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  opacity: 0.8;
+  transform: opacity 0.2s ease-in-out;
+}
+
+#labelpic {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #094b46;
+  background-color: transparent;
+  border-radius: 10px;
+  border:0.5px solid grey;
 }

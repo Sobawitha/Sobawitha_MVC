@@ -189,6 +189,7 @@ tr{
   font-size:13px;
   font-weight: bold;
   color:rgb(174, 169, 128);
+
 }
 
 #filter_label{
@@ -201,6 +202,11 @@ tr{
 
 input[type=radio]{
   accent-color: crimson;
+}
+
+#filter_form{
+  display: flex;
+  
 }
 
 .add_image{

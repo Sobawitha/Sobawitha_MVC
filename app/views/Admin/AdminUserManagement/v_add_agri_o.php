@@ -64,16 +64,20 @@
                   </div>
                   
                   <div class="input-box">
+                    <span class="details">Birthday</span>
+                    <input type="date" placeholder="" name="birthday">
+                    <span class="error_msg"><?php echo $data['birthday_err'] ?></span>
+                  </div>
+                  
+                  
+                  
+                  <div class="input-box">
                     <span class="details">NIC No</span>
                     <input type="text" placeholder="Enter nic no" name="nic" >
                     <span class="error_msg"><?php echo $data['nic_err'] ?></span>
                   </div>
                   
-                  <div class="input-box">
-                    <span class="details">Birthday</span>
-                    <input type="date" placeholder="" name="birthday">
-                    <span class="error_msg"><?php echo $data['birthday_err'] ?></span>
-                  </div>
+             
 
                   <div class="input-box">
                     <span class="details">Gender</span>

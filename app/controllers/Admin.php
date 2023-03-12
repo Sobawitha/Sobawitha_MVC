@@ -4,7 +4,7 @@
 
         public function __construct(){
             $this->adminModel = $this->model('M_Admin');
-    }
+        }
 
     public function profile()
     {
@@ -220,7 +220,7 @@
 
   public function change_profile_pic(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==1) {
-      if($_SERVER['REQUEST_METHOD']=='POST'){
+      if(($_SERVER['REQUEST_METHOD'] ==='POST' && $_POST['submitForm'] === 'true')){
         $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
       
       $user= $this->adminModel->findUserByID($_SESSION['user_id']);
@@ -292,8 +292,10 @@
       
       $changeStatus= $this->adminModel->updateProPic($data);
       
-      $this->view('Admin/Admin/v_admin_view_profile',$data);
-      }
+      
+      
+        $this->view('Admin/Admin/v_admin_view_profile',$data);
+    }
    
 
     }else{

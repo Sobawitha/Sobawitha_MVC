@@ -121,6 +121,7 @@
 #forget_pw{
     font-size: 15px;
     color: blue;
+    cursor: pointer;
     
 }
 
@@ -158,7 +159,7 @@
 
 #sign_up, #forget_pw{
     font-weight:bold;
-    color:rgb(135, 187, 135);
+    color:#87bb87;
 }
 
 .loginContent form input {
@@ -252,45 +253,6 @@ input:-webkit-autofill:active{
     cursor:pointer;
 }
 
-/* 
-.popup{
-    width:200px;
-    background-color:white;
-    border-radius:6px;
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) scale(1);
-    text-align:center;
-    color:#333;
-    z-index:5000;
-    font-weight:bold;
-    font-size:12px;
-    padding:0 30px 30px;
-}
-
-#overlap1{
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    background-color:rgba(0, 0, 0, 0.5);
-    transition: opacity 500ms;
-    opacity:1;
-    z-index: 1;
-}
-
-Devin Aiya CS, [2/8/2023 11:16 AM]
-#fail{
-    color:red;
-    font-size: 30px;
-    transform: translateY(-10px);
-    z-index:50000;
-} */
-
-
-
 #addUserPopup {
     border: none;
     padding: 0;
@@ -366,3 +328,88 @@ Devin Aiya CS, [2/8/2023 11:16 AM]
     font-size:45px;
     color:rgb(7, 82, 66);
   }
+
+
+/* forgot password popup */
+  #forgotPasswordDialog {
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:30%;
+    margin-top:15%;
+  }
+
+  #forgotPasswordDialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  .forgotPasswordDialog { 
+    min-height: 250px;
+    padding:2rem;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .forgotPasswordDialog h2{
+    font-size:15px;
+    color:rgb(2, 55, 46);
+  }
+
+  .dialog__content_forgot{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: left;
+  }
+  
+  #forgot_label{
+    font-size:14px;
+    color:rgb(2, 55, 46);
+    padding: 20px;
+  }
+
+  #forgot_btn{
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    background-color: #000000;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: 700;
+    transform:translateY(20px);
+    font-size: 20px;
+    width: 400px;
+    border-radius:25px;
+    border:none;
+    font-size: 17px; 
+  }
+
+  #email_forgot{
+    font-size: 15px;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    color: black;
+    background: white;
+    font-weight: 600;
+    border: 1px solid black;
+    width: 400px;
+  }
+
+
+  /* For the forgot password */
+  /* #alert
+{
+    height: auto;
+    width: 100%;
+    background: #ee05503b;
+    padding: 0 15px;
+    font-size: 19px;
+    line-height: 40px;
+    margin: 10px 0;
+    color: #000;
+    border-radius: 4px;
+} */

@@ -34,14 +34,23 @@
         </div>
               <?php if(empty($data['message'])){ ?>
 
-                <form method="GET" action="<?php echo URLROOT?>/Admin_user_management/view_all_users?filter=${filter}">
+
                 <div class="filter_section">
-                        <label for="all_users" id="filter_label"> <input type="radio" name="filter" id="all_users"  value="AllUsers" checked>All Users</label>
+                    <form method ="POST" action="<?php echo URLROOT?>/Admin_user_management/view_all_users" id="filter_form">
+
+                        <label for="all" id="filter_label"> <input type="radio" id="all" name="user_type"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'all') echo ' checked="checked"';?> checked>All Users</label>
+                        <br><label for="admins" id="filter_label"> <input type="radio" id="admins" name="user_type" value="admins" onclick="javascript:submit()"  value = "admins"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'admins') echo ' checked="checked"';?>>Admins</label>
+                        <br><label for="customers" id="filter_label"><input type="radio" id="customers" name="user_type" value="customers" onclick="javascript:submit()"  value = "customers"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'customers') echo ' checked="checked"';?>>Customers</label>
+                        <br><label for="sellers" id="filter_label"><input type="radio" id="sellers" name="user_type" value="sellers" onclick="javascript:submit()"  value = "sellers"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'sellers') echo ' checked="checked"';?>>Sellers</label>
+                        <br><label for="suppliers" id="filter_label"><input type="radio" id="suppliers" name="user_type" value="suppliers" onclick="javascript:submit()"  value = "suppliers"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'suppliers') echo ' checked="checked"';?>>Suppliers</label>
+                        <br><label for="agris" id="filter_label"><input type="radio" id="agris" name="user_type" value="agris" onclick="javascript:submit()"  value = "agris"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'agris') echo ' checked="checked"';?>>Agri-Officers</label>
+                                     
+                        <!-- <label for="all_users" id="filter_label"> <input type="radio" name="filter" id="all_users"  value="AllUsers" checked>All Users</label>
                         <label for="admins" id="filter_label"> <input type="radio" name="filter" id="admins"  value="Admins" >Admins</label>
                         <label for="customers" id="filter_label"> <input type="radio" name="filter"  id="customers" value="Customers" >Customers</label>
                         <label for="sellers" id="filter_label"> <input type="radio" name="filter"  id="sellers"  value="Sellers" >Sellers</label>
                         <label for="suppliers" id="filter_label"> <input type="radio" name="filter" id="suppliers"  value="Suppliers" >Suppliers</label>
-                        <label for="agri_officers" id="filter_label"> <input type="radio" name="filter"  id="agri_officers" value="AgriOfficers" >Agri-Officers</label>
+                        <label for="agri_officers" id="filter_label"> <input type="radio" name="filter"  id="agri_officers" value="AgriOfficers" >Agri-Officers</label> -->
                 </div>
                
               </form>
@@ -115,7 +124,7 @@
                    
                       </form><br>
                         
-                        <form  action="<?php echo URLROOT;?>/Admin_user_management/view_more_user/<?php echo $users->user_id ?>">
+                        <form  action="<?php echo URLROOT;?>/Admin_user_management/view_more_user/<?php echo $users->user_id ?>" method="GET">
                         <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> View More</button></span>
                         </form>
                         </div>

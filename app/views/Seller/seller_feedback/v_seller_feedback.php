@@ -130,27 +130,55 @@
                 <div class="feedbacks_desc">
                   <?php foreach ($data['feed']['feedbacks'] as $feedback): ?>
                     <div class="feed_desc_one">
-                      <i class="fa-regular fa-user" id="feedback_user"></i>
-                      <?php  $sender_name = $feedback->hide_name_status ? substr($feedback->sender_first_name, 0, 1) . "**** " . substr($feedback->sender_last_name, 0, 1) . "****" : $feedback->sender_first_name.' '.$feedback->sender_last_name;
-                          ?>
+                      <div class ="sender_name">
+                        <div class="one">
+                           <i class="fa-regular fa-user" id="feedback_user"></i>
+                            <?php  $sender_name = $feedback->hide_name_status ? substr($feedback->sender_first_name, 0, 1) . "**** " . substr($feedback->sender_last_name, 0, 1) . "****" : $feedback->sender_first_name.' '.$feedback->sender_last_name;?>
+                            <?php
+                                $feedback_timestamp = strtotime($feedback->date);
+                                $current_timestamp = time();
+                                $time_difference = $current_timestamp - $feedback_timestamp;
 
-                          <span class="user_detail">By <?php echo $sender_name . ' ' . $feedback->date ?></span>
+                                if ($time_difference < 60) {
+                                  $time_period = "less than a minute ago";
+                                } elseif ($time_difference < 3600) {
+                                  $time_period = floor($time_difference / 60) . " minutes ago";
+                                } elseif ($time_difference < 86400) {
+                                  $time_period = floor($time_difference / 3600) . " hours ago";
+                                } elseif ($time_difference < 604800) {
+                                  $time_period = floor($time_difference / 86400) . " days ago";
+                                } else {
+                                  $time_period = "more than a week ago";
+                                }
+                                ?>
+
+                            <span class="user_detail">By <?php echo $sender_name ?><span class="time_feed"> <?php echo $time_period ?></span></span>
                     
-                     
-                          <span class="raiting_star">
-                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                          <?php if ($feedback->rating >= $i): ?>
-                            <span class="fa fa-star checked"></span>
-                          <?php else: ?>
-                            <span class="fa fa-star"></span>
-                          <?php endif; ?>
-                        <?php endfor; ?>
-                      </span>
+                        </div>
 
-                      <p class="user_feedback"><?php echo $feedback->review_desc; ?></p>  
+                        <div class="two">
+                          <span class="raiting_star">
+                              <?php for ($i = 1; $i <= 5; $i++): ?>
+                                <?php if ($feedback->rating >= $i): ?>
+                                  <span class="fa fa-star checked"></span>
+                                <?php else: ?>
+                                  <span class="fa fa-star"></span>
+                                <?php endif; ?>
+                              <?php endfor; ?>
+                           </span>
+                        </div>
+
+                      </div>
+                      
+                      <div class="three">
+                        <p class="user_feedback"><?php echo $feedback->review_desc; ?></p>  
+                      </div>
+
                     </div><br>
+                    
                   <?php endforeach; ?>
-                </div>
+
+                </div><br>
 
 
             </div>

@@ -10,7 +10,9 @@
        
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
+                
+             $verificationCode = generateVerificationCode(); 
+
                 $data=[
                 'first_name'=>trim($_POST['first_name']),
                 'last_name'=>trim($_POST['last_name']),
@@ -32,7 +34,7 @@
                 'confirm_password'=>trim($_POST['confirm_password']),
                 // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
                 'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pro_pic']['name'],
-   
+                'verify_token' => $verificationCode,
         
                 'first_name_err'=>'',
                 'last_name_err'=>'',
@@ -58,6 +60,10 @@
             if($this->supplierModel->findUserByEmail($data['email'])){
                 $data['email_err']='Email is already exists';
             } 
+            
+            if($this->supplierModel->findSameNic($data['nic'])){
+                $data['nic_err']='Nic no is already exists';
+            }
 
             if(empty($data['propic'])){
                 $data['propic_err']='profile picture cannot be empty';
@@ -164,7 +170,9 @@
             $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  
             if($this->supplierModel->addSupplier($data)){
                 //   flash('post_msg', 'add new seller successfully');
-                       redirect('Login/login'); 
+                $flag=3;
+                sendMail($data['email'],$data['first_name'], $verificationCode, $flag, '');
+                redirect('Users/verify_email/'.$data['email']);  
               }else{
                 die('Error creating');
                 
