@@ -227,6 +227,18 @@
       }
                 
   }
+
+  public function activateUser($user_id)
+  {
+      $this->db->query('UPDATE user set active_status=1 WHERE user_id = :id');
+      $this->db->bind(':id',$user_id);
+
+      if($this->db->execute()){
+         return true;
+      }else{
+          return false;
+      }    
+  } 
     
 
 }

@@ -20,7 +20,7 @@
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="Search by firstname | lastname" require/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="Search by firstname | lastname of the Payer" require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
@@ -62,7 +62,8 @@
                                         <td><?php echo $payments->payer_first ?>&nbsp<?php echo $payments->payer_last ?></td>
                                         <td>Rs. <?php echo $payments->total_fee ?></td>
                                         <td>Rs. <?php echo $payments->payee_fee ?></td>
-                                        <td><button class="profit_gain">Rs. <?php echo $payments->profit ?></button></td>
+                                        <?php $profit = $payments->total_fee - $payments->payee_fee ?>
+                                        <td><button class="profit_gain">Rs. <?php echo $profit ?></button></td>
                                         <td><?php echo $payments->date ?></td>
                                 
                                 </div>

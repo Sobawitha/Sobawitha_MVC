@@ -47,7 +47,7 @@ form .input-box span.details{
   font-weight: 500;
   margin-bottom: 5px;
 }
-.user-details .input-box input ,#admin_gender, #agri_reg_button, #a_pro_pic, #a_gender{
+.user-details .input-box input ,#admin_gender, #agri_reg_button, #a_pro_pic, #a_gender ,#address_line_four{
   height: 45px;
   width: 100%;
   outline: none;

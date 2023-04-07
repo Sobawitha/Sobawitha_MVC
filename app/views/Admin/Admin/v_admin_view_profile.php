@@ -2,12 +2,18 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
+<script src="../js/Users/Notifications/push_notifications_profile.js"></script>
 <script src="../js/Admin/Profile/profile.js"></script>
+
 
 <div class="body">
     <div class="section_1">
-
+   
     </div>
+    <div id="notification-container">   </div>
+   
+ 
+
     <div class="section_2">  
         <div class="settings">
         <div class="three_btns">
@@ -47,8 +53,11 @@
         </div>
         <hr class="profile_hr">
         <div class="a_add_admin_maincontent">
+            <!-- For push notifications -->
+
         <div class="container">
             <div class="title">Account Information</div>
+            <div id="success-message"></div>
             <div class="profile_image">
                 <img  src="./../public/upload/user_profile_pics/<?php echo $_SESSION['profile_image']?>" id="userprofileimage_for_viewprofile"/>
                 
@@ -58,7 +67,7 @@
                 
                 <label for="propic" id="labelpic" >Change Picture</label>
                 <input type="file" name="propic" id="propic" onchange="showButton()" />
-                <button type="button" onclick ="popUpOpenChangePic()" id="change_img" style="display:none;"  >Change picture</button>
+                <br> <button type="button" onclick ="popUpOpenChangePic()" id="change_img" style="display:none;"  >Confirm change</button>
                 <span class="error_msg"><?php echo $data['propic_err'] ?></span>
                 <dialog id="confirmingChangePicPopup">
                     <div class="confirmingChangePicPopup">
@@ -70,7 +79,8 @@
                     </div>
                     <div class="dialog__content">
                         <button type="submit" name="submitForm" value="true" id="green_yes">Yes</button>
-                        <a href="<?php echo URLROOT?>/Admin/profile " id="no">No</a>
+                        <button type="button" id="no_btn" onclick="location.href='<?php echo URLROOT?>/Admin/profile'">No</button>
+
                     </div>
                     </div>
                 </dialog>
@@ -163,6 +173,14 @@
     </div>
 
     <div class="last">
+
+                <?php if (isset($_SESSION['success_msg'])): ?>
+                <div class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['success_msg']; ?> <div class="progress-bar"></div>
+               </div>
+                <?php unset($_SESSION['success_msg']); ?>
+                <?php endif; ?>
+      
+
                     <p class="notification_main_header">Notifications<i class="fa-solid fa-chevron-down" id="drop_down_arrow"></i></p>
                     <div class="individual_notification_1">
                         <span class="icon" ><i class="fa-regular fa-circle-check"></i></span>
@@ -200,11 +218,17 @@
                     </div>
 
     </div>
+
+    <!-- <span id="isUpdated"><?php if(1){echo $_SESSION['profile_updateAdmin']; unset($_SESSION['profile_updateAdmin']);}?></span> -->
+
+
+    
+
+
 </div>
 
 
-                </div>
-
+   
 
 
 <?php require APPROOT.'/views/Users/component/footer.php'?>

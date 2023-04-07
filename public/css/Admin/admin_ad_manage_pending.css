@@ -48,8 +48,13 @@
   background-color:transparent;
 }
 
+#searchBar{
+  color:#376462;
+}
+
 #search{
-  color:rgb(55, 100, 98);
+  color:rgb(74, 74, 63);
+  font-size:15px;
 }
 
 .search_bar input:focus{
@@ -63,7 +68,7 @@
 }
 
 
-#cansel{
+#cancel{
   display:none;
 }
 
@@ -211,3 +216,17 @@ input[type=radio]{
    border: none;
    cursor: pointer;
 }
+
+#ad_view_more_btn {
+  background-color:transparent;
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+  color: #376462;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* #ad_view_more_btn:hover {
+  background-color: #376462;
+} */

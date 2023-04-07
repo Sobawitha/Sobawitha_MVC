@@ -109,7 +109,7 @@
         $_SESSION['profile_image'] = $loggeduser->profile_picture;
         $_SESSION['user_gender'] = $loggeduser->gender;
         $_SESSION['profile_image_path'] = "upload/user_profile_pics/" .  $_SESSION['profile_image'];
-        
+        // $_SESSION['profile_updateAdmin']="false";
 
             $flag = $_SESSION['user_flag'];
             if($flag==1){

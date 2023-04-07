@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/Admin/admin_ad_manage_pending.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT;?>/css/Admin/admin_ad_manage_pending.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
@@ -15,23 +15,30 @@
         <hr>
 
         <br><br>
-        <form method="POST">
+        <form class="searchForm" action="<?php echo URLROOT;?>/Admin_ad_management/adminSearchAd" method="GET">
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="Search by title of the advertisement" require/></span>
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()"><i class="fa-solid fa-xmark" id="cancel" ></i></button>
+                    <button type="submit" class="search_btn"  onclick="open_cancel_btn()" ><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
         </div>
         </form>
-
+        <?php if(empty($data['message'])){ ?>
+                <?php if($data['search'] ==='Search by title of the advertisement'): ?>
+               
                 <div class="filter_section">
-                <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="pending_ads" checked>Pending Ads</label>
-                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="reviewed">Reviewed Ads</label>
-                        
+                <div class="radio-buttons"  id="radioButtons">        
+                <form method ="POST" action="<?php echo URLROOT?>/Admin_ad_management/ad_management_view" id="filter_form">
+                <label for="pending_ads" id="filter_label"> <input type="radio" id="pending_ads" name="ad_type" onclick="javascript:submit()" value="pending_ads" <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'pending_ads') echo ' checked="checked"';?> checked>Pending Ads</label>
+                <label for="reviewed_ads" id="filter_label"> <input type="radio" id="reviewed_ads" name="ad_type" value="reviewed_ads" onclick="javascript:submit()" value = "reviewed_ads"<?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'reviewed_ads') echo ' checked="checked"';?>>Reviewed Ads</label>
+                <label for="rejected_ads" id="filter_label"> <input type="radio" id="rejected_ads" name="ad_type" value="rejected_ads" onclick="javascript:submit()" value = "rejected_ads"<?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'rejected_ads') echo ' checked="checked"';?>>Rejected Ads</label>
+                <div class="radio-buttons">
+                </form>        
                 </div>
+                <?php endif?> 
 
                 <div class="order_list">
                 <div class="orders">
@@ -48,24 +55,36 @@
                                 <td>Options</td>
                         </tr>
                         <?php foreach($data['products'] as $products): ?>
-                        <?php if($products->ad_status ==0 ) {?>
+                       
                         <tr class="order">
                                 <div class="order_detail">
-                                <td><img src="./../public/upload/listing_images/<?php echo $products->listing_image?>" class="add_image"></td>
+                                <td><img src="<?php echo URLROOT;?>/public/upload/listing_images/<?php echo $products->listing_image?>" class="add_image"></td>
                                 <td><?php echo $products->product_name ?></td>
                                 <td><?php echo $products->product_description ?></td>
                                 <td><button class="product_category"><?php echo $products->category ?></button></td>
                                 <td><?php echo $products->manufacturer ?></td>
                                 <td>Rs.<?php echo $products->price ?></td>
                                 <td class="unit"><span class="value"><?php echo $products->quantity ?></span></td>
-                                <td><span class="delete"><button type="button" onclick="popUpOpenDelete()" id="review_btn"> Review</button></span></td>
+                                
+                                <?php if($products->review_status ==0 ): ?>
+                                        <td><span class="delete"><button type="button" onclick="popUpOpenDelete()" id="review_btn"> Review</button></span></td>
+                                <?php elseif($products->review_status == 1): ?>
+                                        <td><button type="button" onclick="popUpOpenDelete()" id="ad_view_more_btn"><i class="fa-solid fa-circle-info"></i> View More</button></td>
+                                <?php else: ?>
+                                        <td><button type="button" onclick="popUpOpenDelete()" id="ad_view_more_btn"><i class="fa-solid fa-circle-info"></i> View More</button></td>
+                                <?php endif?> 
+  
+
+                               
                        
                                 </div>
 
                         </tr>
-                        <?php } ?>          
+                                 
                    <?php endforeach;?>
-        
+                   <?php }else{ ?>
+                          <span class="error_msg"><?php echo $data['message'];?></span>
+                   <?php    }  ?> 
 
                 </table>
 

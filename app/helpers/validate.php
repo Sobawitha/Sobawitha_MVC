@@ -13,7 +13,7 @@
     }
     
     // If all checks pass, return true
-    return "true";
+    return true;
   }
 
   function validateLastName($lastName) {
@@ -47,7 +47,7 @@
     }
     
     // If all checks pass, return true
-    return "true";
+    return true;
   }
 
   function validateEmail($email) {
@@ -57,58 +57,31 @@
     }
     
     // If all checks pass, return true
-    return "true";
+    return true;
   }
 
   
   function validatePassword($password) {
     // Check if the password is at least 8 characters long
     if (strlen($password) < 8) {
-      return "Password must be at least 8 characters long";
+        return "Password must be at least 8 characters long";
     }
     
-    // Check if the password contains at least one uppercase letter, one lowercase letter, and one digit
-    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', $password)) {
-      return "Password should contains at least one uppercase letter, one lowercase letter, and one digit";
+    // Check if the password contains at least one uppercase letter, one lowercase letter, one digit, and one special character
+    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).+$/', $password)) {
+        return "Password should contain at least one uppercase letter, one lowercase letter, one digit, and one special character";
     }
     
     // If all checks pass, return true
-    return "true";
-  }
+    return true;
+}
+
 
 
   function validateCity($city) {
     // Check if the city name contains only letters and spaces
     if (!preg_match('/^[A-Za-z\s]+$/', $city)) {
       return "city name should contains only letters and spaces";
-    }
-    
-    // If all checks pass, return true
-    return "true";
-  }
-
-  function validateSlmcRegisterNumber($registerNumber) {
-    // Remove any non-digit characters
-    $registerNumber = preg_replace('/\D/', '', $registerNumber);
-    
-    // Check if the number is exactly 7 digits long
-    if (strlen($registerNumber) != 7) {
-      return "slmc reg number should be 7 digits long";
-    }
-    
-    // Check if the number starts with "1" or "2"
-    if (substr($registerNumber, 0, 1) != "1" && substr($registerNumber, 0, 1) != "2") {
-      return "slmc reg number should start with 1 or 2";
-    }
-    
-    // If all checks pass, return true
-    return "true";
-  }
-
-  function validateSpecialization($specialization) {
-    // Check if the specialization name contains only letters and spaces
-    if (!preg_match('/^[A-Za-z\s]+$/', $specialization)) {
-      return "specialization name should contains only letters and spaces";
     }
     
     // If all checks pass, return true
@@ -123,7 +96,7 @@
     }
     
     // If all checks pass, return true
-    return "true";
+    return true;
   }
 
   function validateAccountHolderName($name) {
@@ -133,7 +106,7 @@
     }
     
     // If all checks pass, return true
-    return "true";
+    return true;
   }
 
   function validateBankBranch($branch) {
@@ -143,24 +116,24 @@
     }
     
     // If all checks pass, return true
-    return "true";
+    return true;
   }
 
   
   function validateAccountNumber($accountNumber) {
-    // Check if the account number is numeric
-    if (!is_numeric($accountNumber)) {
-      return "account number should be numeric";
+    // Check if the account number only contains hyphens and digits
+    if (!preg_match("/^[0-9\-]+$/", $accountNumber)) {
+        return "Account number should only contain hyphens and digits";
     }
     
-    // Check if the account number is 10 digits long
-    if (strlen($accountNumber) != 10) {
-      return "account number should be 10 digits long";
+    // Check if the account number is between 10 and 20 digits long
+    if (strlen($accountNumber) < 10 || strlen($accountNumber) > 20) {
+        return "Account number should be between 10 and 20 digits long";
     }
     
     // If all checks pass, return true
-    return "true";
-  }
+    return true;
+}
 
   function validateAddress($address) {
     // Check if the address contains only letters, numbers, spaces and common special characters
@@ -169,7 +142,7 @@
     }
     
     // If all checks pass, return true
-    return "true";
+    return true;
   }
 
   function validateFee($fee) {
@@ -193,15 +166,6 @@
   }
 
 
-  function validateMaxParticipants($maxParticipants) {
-    // Check if the maxParticipants is numeric and positive
-    if (!is_numeric($maxParticipants) || $maxParticipants <= 0) {
-      return "maximum Participants must be a positive number";
-    }
-    
-    // If all checks pass, return true
-    return "true";
-  }
 
   function validateDescription($description) {
     // Check if the description contains only letters, numbers, spaces and common special characters
@@ -212,6 +176,52 @@
     // If all checks pass, return true
     return "true";
   }
+
+  function validateNIC($nic) {
+    // Check if the length of the NIC number is between 10 and 12 characters
+    $nicLength = strlen($nic);
+    if ($nicLength < 10 || $nicLength > 12) {
+        return "NIC number must have 10 or 12 characters";
+    }
+
+    // If the NIC number is 10 characters long, the last character must be a letter and the others must be digits
+    if ($nicLength === 10) {
+        if (!preg_match('/^[0-9]{9}[a-zA-Z]$/', $nic)) {
+            return "NIC number must have 9 digits followed by a letter";
+        }
+    }
+    
+        // If the NIC number is 11 characters long, it is invalid
+        if ($nicLength === 11) {
+          return 'NIC number must have 10 or 12 characters';
+      }
+  
+    // If the NIC number is 12 characters long, all characters must be digits
+    if ($nicLength === 12) {
+        if (!preg_match('/^[0-9]{12}$/', $nic)) {
+            return "NIC number must have 12 digits";
+        }
+    }
+
+    // If all checks pass, return true
+    return true;
+}
+
+function validateBirthDate($birthDate) {
+  // Convert the birth date to a timestamp
+  $birthTimestamp = strtotime($birthDate);
+  
+  // Get the current timestamp
+  $currentTimestamp = time();
+  
+  // Compare the birth timestamp with the current timestamp
+  if ($birthTimestamp > $currentTimestamp) {
+    return "Birth date cannot be a future date";
+  }
+  
+  // If the birth date is valid, return true
+  return true;
+}
   
 
  ?>

@@ -19,7 +19,9 @@
         $feed = $this->adminFeedMgntModel->getFeedbackDetails();
        
         $data=[
-        'feed' =>  $feed
+        'feed' =>  $feed,
+        'search' =>''
+        
         ];
     
         $this->view('Admin/AdminFeedbackManage/v_admin_feedback_pending', $data);
@@ -27,6 +29,10 @@
     }else{
         redirect('Login/login');  
     } 
+  }
+
+  public function search_feed(){
+
   }
 }
 ?>

@@ -21,7 +21,8 @@
             $data=[                      
                 'current_password_err'=>'',
                 'retype_new_password_err'=>'' ,
-                'new_password_err'=>''
+                'new_password_err'=>'',
+                'pwd_unmatch_err'=>''  
             ];
             $this->view('Users/user/v_changePW',$data);
 
@@ -43,7 +44,8 @@
                
                  'current_password_err'=>'',
                  'retype_new_password_err'=>'' ,
-                 'new_password_err'=>'' 
+                 'new_password_err'=>'' ,
+                 'pwd_unmatch_err'=>''
                 ];      
                 
         
@@ -59,7 +61,7 @@
                }
 
                if($data['new_password']!=$data['retype_new_password']){
-                $data['new_password_err']='New password and retype new password is incorrect';
+                $data['pwd_unmatch_err']='New password and retype new password is incorrect';
                } 
         
                if(empty($data['new_password'])){
@@ -69,12 +71,18 @@
                if(empty($data['retype_new_password'])){
                 $data['retype_new_password_err']='Please retype your new password';
              } 
+
+             
+             $pwdValidationResult = validatePassword($data['retype_new_password']);
+             if($pwdValidationResult !== true){
+                $data['pwd_unmatch_err']=$pwdValidationResult;
+             }
         
-               if(empty($data['current_password_err']) && empty($data['retype_new_password_err']) && empty($data['new_password_err'])){
+               if(empty($data['current_password_err']) && empty($data['retype_new_password_err']) && empty($data['new_password_err']) && empty($data['pwd_unmatch_err']) ){
              
                 $data['password']=password_hash($data['new_password'],PASSWORD_DEFAULT);
                 $changeUserPW=$this->userModel->changePW($data);
-        
+                  $_SESSION['success_msg'] = 'Password updated successfully';
                   if($changeUserPW){
                     $_SESSION['profileUpdatePassword']="true";
                     if($_SESSION['user_flag']==1){
@@ -98,14 +106,16 @@
                } 
 
              }else{
-             $data = [
+            
+                $data = [
               'current_password'=>'',
               'new_password'=>'',      
               'retype_new_password'=>'',      
             
               'current_password_err'=>'',
               'retype_new_password_err'=>'' ,
-              'new_password_err'=>''    
+              'new_password_err'=>'' ,
+              'pwd_unmatch_err'=>''    
              ];
               $this->view('Users/user/v_changePW',$data);     
            }

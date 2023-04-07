@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/Users/users/changePW.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/users/changePW.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
 <?php if($_SESSION['user_flag'] ==1){ ?> 
@@ -31,7 +31,7 @@
             <div class="add_content">
               
             <form action="<?php echo URLROOT ?>/Users/updatePW/<?php echo $_SESSION['user_id'];?>" method="POST">
-                <div class="user_details">
+                <div class="pwd_details">
 
                   <div class="input-box">
                     <span class="details">Current Password</span>
@@ -56,15 +56,11 @@
                 <div class="changepw_button">
                   <input type="submit" value="Change Password" >
                 </div>
-
+                <br><span class="error_msg"><?php echo $data['pwd_unmatch_err'] ?></span>  
               </form>
             </div>
           </div>
         </div>
-    </div>
-
-    <div class="last">
-
     </div>
 </div>
 

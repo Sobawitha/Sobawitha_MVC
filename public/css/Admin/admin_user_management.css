@@ -114,6 +114,13 @@ tr{
   font-weight: bold;
 }
 
+.activate{
+  color:#1ABC9C ;
+  font-size:12px;
+  cursor:pointer;
+  font-weight: bold;
+}
+
 .viewmore{
   color:green;
   font-size:12px;
@@ -321,6 +328,13 @@ input[type=radio]{
    cursor: pointer;
 }
 
+#active_user_button{
+  color: #1ABC9C ;
+  background-color: transparent; 
+  border: none;
+  cursor: pointer;
+}
+
 #view_more{
    color: 06543c ;
    background-color: transparent; 
@@ -377,4 +391,12 @@ input[type=radio]{
   background-color: transparent;
   color: black;
   border: 1px solid black;
+}
+
+td.active-status {
+  color: #06543c;
+}
+
+td.deactivated-status {
+  color: crimson;
 }

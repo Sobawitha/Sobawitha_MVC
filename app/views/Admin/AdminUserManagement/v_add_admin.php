@@ -51,7 +51,33 @@
           
           <div class="input-box">
             <span class="details">Address Line 04</span>
-            <input type="text" placeholder="Enter your district: " name="address_line_four">
+            <select name="address_line_four" id="address_line_four">
+            <option value="Ampara">Ampara</option>
+            <option value="Anuradhapura">Anuradhapura</option>
+            <option value="Badulla">Badulla</option>
+            <option value="Batticaloa">Batticaloa</option>
+            <option value="Colombo">Colombo</option>
+            <option value="Galle">Galle</option>
+            <option value="Gampaha">Gampaha</option>
+            <option value="Hambantota">Hambantota</option>
+            <option value="Jaffna">Jaffna</option>
+            <option value="Kalutara">Kalutara</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Kegalle">Kegalle</option>
+            <option value="Kilinochchi">Kilinochchi</option>
+            <option value="Kurunegala">Kurunegala</option>
+            <option value="Mannar">Mannar</option>
+            <option value="Matale">Matale</option>
+            <option value="Matara">Matara</option>
+            <option value="Moneragala">Moneragala</option>
+            <option value="Mullaitivu">Mullaitivu</option>
+            <option value="Nuwara Eliya">Nuwara Eliya</option>
+            <option value="Polonnaruwa">Polonnaruwa</option>
+            <option value="Puttalam">Puttalam</option>
+            <option value="Ratnapura">Ratnapura</option>
+            <option value="Trincomalee">Trincomalee</option>
+            <option value="Vavuniya">Vavuniya</option>
+            </select>
           </div>
           
           <div class="input-box">
@@ -98,7 +124,7 @@
 
 
         <div class="input-box">
-            <span class="details">Bank Account Name</span>
+            <span class="details">Bank Account Holder Name</span>
             <input type="text" placeholder="Enter your bank account name" name="bank_account_name">
             <span class="error_msg"><?php echo $data['bank_account_name_err'] ?></span>
           </div>

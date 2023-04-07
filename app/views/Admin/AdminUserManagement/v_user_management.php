@@ -84,6 +84,7 @@
                                 <td>User NIC</td>
                                 <td>Contact No</td>
                                 <td>User Role</td>
+                                <td>Active Status</td>
                                 <td>Actions</td>
                  </tr>
                     <?php $value=0; 
@@ -91,7 +92,7 @@
                     ?>
                     
                     <?php foreach($data['user'] as $users): ?>
-                      <?php if($users->active_status ==1 ) {?>
+                      
                       <tr class="order">
                       <div class="order_detail">
                       <td><?php echo ++$value ?></td>
@@ -109,8 +110,14 @@
                         <td ><button class="user_role">Supplier</button></td>
                         <?php else: ?>
                         <td ><button class="user_role">Agri-Officer</button></td>
-                     
-                      <?php endif?> 
+                        <?php endif?> 
+
+                        <?php if($users->active_status ==1): ?>
+                        <td class="active-status">Active</td>
+                        <?php else: ?>
+                        <td class="deactivated-status">Deactivated</td>
+                      
+                        <?php endif?> 
                       
 
 
@@ -118,22 +125,10 @@
                       <td>
                       <div class="action">
                                           
-                                       
+                        <?php if($users->active_status ==1): ?>              
                         <form method="GET">
                         <span class="delete"><button type="button" onclick="popUpOpenDelete()" id="deactive_user_button"><i class="fa-solid fa-hand"></i> Deactivate</button></span>
-                   
-                      </form><br>
-                        
-                        <form  action="<?php echo URLROOT;?>/Admin_user_management/view_more_user/<?php echo $users->user_id ?>" method="GET">
-                        <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> View More</button></span>
-                        </form>
-                        </div>
-                      </td>
-                      
-                      </div>  
-                        
-                    </tr>
-                    <dialog id="deactivateUserPopup">
+                        <dialog id="deactivateUserPopup">
                     <div class="deactivateUserPopup">
                       <div class="dialog__heading">
                         <h2>Are you sure you want to deactivate this user ?</h2>
@@ -148,7 +143,24 @@
                       </div>
                     </div>
                     </dialog>
-                    <?php } ?>          
+                      </form><br>
+                      <?php else: ?>
+                        <form method="GET">
+                        <span class="activate"><button type="button" onclick="location.href='<?php echo URLROOT?>/Admin_user_management/adminactivateUser/<?php echo $users->user_id ?>'" id="active_user_button"><i class="fa-solid fa-handshake-simple"></i> Activate</button></span>
+                      
+                      </form><br>
+                      <?php endif?> 
+                        <form  action="<?php echo URLROOT;?>/Admin_user_management/view_more_user/<?php echo $users->user_id ?>" method="GET">
+                        <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> View More</button></span>
+                        </form>
+                        </div>
+                      </td>
+                      
+                      </div>  
+                        
+                    </tr>
+                   
+                         
                    <?php endforeach;?>
                    <?php }else{ ?>
                           <span class="error_msg"><?php echo $data['message'];?></span>

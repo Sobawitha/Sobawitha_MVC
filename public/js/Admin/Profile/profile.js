@@ -27,3 +27,9 @@ function popUpOpenDelete() {
         file.style.display = "none";
     }
 }
+
+function popUpOpenConfirmUpdate() {
+  const updateUserPopup = document.getElementById('updateUserPopup')
+    document.getElementById('update_profile').addEventListener('click',() => updateUserPopup.showModal());
+    document.getElementById('closebtnfour').addEventListener('click',() => updateUserPopup.close());
+}

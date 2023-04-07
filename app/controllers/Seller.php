@@ -55,6 +55,7 @@
                     'password_err'=>'',
                     'confirm_password_err'=>'',
                     'propic_err'=>'',
+                    
                 ];
             
                 if($this->sellerModel->findUserByEmail($data['email'])){
@@ -89,82 +90,166 @@
                       
                       }
                     }else{
-                      $data[ 'propic_err'] ="qualification file size is empty";
+                      $data[ 'propic_err'] ="Profile picture size is empty";
                     
                     }
           
                 }
     
-    
-                if(empty($data['first_name'])){
-                    $data['first_name_err']='first name cannot be empty';
-                }
+                
+                // if(empty($data['first_name'])){
+                //     $data['first_name_err']='first name cannot be empty';
+                // }
+                $firstNameValidationResult = validateFirstName($data['first_name']);
 
+                if ($firstNameValidationResult !== true || empty($data['first_name'])) {
+                    $data['first_name_err'] = !empty($firstNameValidationResult) ? $firstNameValidationResult : 'first name cannot be empty';
+                }
+                        
 
-                if(empty($data['last_name'])){
-                    $data['last_name_err']='last name cannot be empty';
+                // if(empty($data['last_name'])){
+                //     $data['last_name_err']='last name cannot be empty';
+                // }
+                $lastNameValidationResult = validateLastName($data['last_name']);
+
+                if ($lastNameValidationResult !== true || empty($data['first_name'])) {
+                    $data['last_name_err'] = !empty($lastNameValidationResult) ? $lastNameValidationResult : 'last name cannot be empty';
                 }
-    
-                if(empty($data['address_line_one'])){
-                    $data['address_line_one_err']='address line 01 cannot be empty';
+                     
+                
+                $emailValidationResult = validateEmail($data['email']);
+
+                if ($emailValidationResult !== true || empty($data['email'])) {
+                    $data['email_err'] = !empty($emailValidationResult) ? $emailValidationResult : 'email cannot be empty';
                 }
-            
-                if(empty($data['address_line_two'])){
-                    $data['address_line_two_err']='address line 02 cannot be empty';
-                }
-            
-                if(empty($data['address_line_three'])){
-                    $data['address_line_three_err']='address line 03 cannot be empty';
-                }
-          
-                if(empty($data['nic'])){
-                $data['nic_err']='nic cannot be empty';
-                }
-          
-                if(empty($data['contact_number'])){
-                    $data['contact_number_err']='contact number cannot be empty';
-                }
-            
-                if(empty($data['email'])){
-                    $data['email_err']='email cannot be empty';
-                }
-    
-                if(empty($data['birthday'])){
-                    $data['birthday_err']='birthday cannot be empty';
+                 
+                $contactValidationResult = validateContactNumber($data['contact_number']);
+
+                if ($contactValidationResult !== true || empty($data['contact_number'])) {
+                    $data['contact_number_err'] = !empty($contactValidationResult) ? $contactValidationResult : 'contact number cannot be empty';
                 }
                 
-                if(empty($data['password'])){
-                    $data['password_err']='password cannot be empty';
+                $nicValidationResult = validateNIC($data['nic']);
+
+                if ($nicValidationResult !== true || empty($data['nic'])) {
+                    $data['nic_err'] = !empty($nicValidationResult) ? $nicValidationResult : 'nic number cannot be empty';
                 }
+
+                $addressValidationResult = validateAddress($data['address_line_one']);
+
+                if ($addressValidationResult !== true || empty($data['address_line_one'])) {
+                    $data['address_line_one_err'] = !empty($addressValidationResult) ? $addressValidationResult : 'address line 01 cannot be empty';
+                }
+
+                $addressValidationResult = validateAddress($data['address_line_two']);
+
+                if ($addressValidationResult !== true || empty($data['address_line_two'])) {
+                    $data['address_line_two_err'] = !empty($addressValidationResult) ? $addressValidationResult : 'address line 02 cannot be empty';
+                }
+
+                $addressValidationResult = validateAddress($data['address_line_three']);
+
+                if ($addressValidationResult !== true || empty($data['address_line_three'])) {
+                    $data['address_line_three_err'] = !empty($addressValidationResult) ? $addressValidationResult : 'address line 03 cannot be empty';
+                }
+
+                $birthdayValidationResult = validateBirthDate($data['birthday']);
+
+                if ($birthdayValidationResult !== true || empty($data['birthday'])) {
+                    $data['birthday_err'] = !empty($birthdayValidationResult)  ? $birthdayValidationResult : 'birthday cannot be empty';
+                }
+                
+                $bankaccnoValidationResult = validateAccountNumber($data['bank_account_no']);
+
+                if ($bankaccnoValidationResult !== true || empty($data['bank_account_no'])) {
+                    $data['bank_account_no_err'] = !empty($bankaccnoValidationResult)  ? $bankaccnoValidationResult : 'bank account number cannot be empty';
+                }
+
+                $bankValidationResult = validateBankName($data['bank']);
+
+                if ($bankValidationResult !== true || empty($data['bank'])) {
+                    $data['bank_err'] = !empty($bankValidationResult)  ? $bankValidationResult : 'bank cannot be empty';
+                }
+
+                $branchValidationResult = validateBankBranch($data['branch']);
+
+                if ($branchValidationResult !== true || empty($data['branch'])) {
+                    $data['branch_err'] = !empty($branchValidationResult)  ? $branchValidationResult : 'branch cannot be empty';
+                }
+
+                $accholderValidationResult = validateAccountHolderName($data['bank_account_name']);
+
+                if ($accholderValidationResult !== true || empty($data['bank_account_name'])) {
+                    $data['bank_account_name_err'] = !empty($accholderValidationResult)  ? $accholderValidationResult : 'bank account holder name cannot be empty';
+                }
+
+                $pwdValidationResult = validatePassword($data['password']);
+
+                if ($pwdValidationResult !== true || empty($data['password'])) {
+                    $data['password_err'] = !empty($pwdValidationResult)  ? $pwdValidationResult : 'password cannot be empty';
+                }
+
+                // if(empty($data['address_line_one'])){
+                //     $data['address_line_one_err']='address line 01 cannot be empty';
+                // }
+            
+                // if(empty($data['address_line_two'])){
+                //     $data['address_line_two_err']='address line 02 cannot be empty';
+                // }
+            
+                // if(empty($data['address_line_three'])){
+                //     $data['address_line_three_err']='address line 03 cannot be empty';
+                // }
+          
+                // if(empty($data['nic'])){
+                // $data['nic_err']='nic cannot be empty';
+                // }
+          
+                // if(empty($data['contact_number'])){
+                //     $data['contact_number_err']='contact number cannot be empty';
+                // }
+            
+                // if(empty($data['email'])){
+                //     $data['email_err']='email cannot be empty';
+                // }
+    
+                // if(empty($data['birthday'])){
+                //     $data['birthday_err']='birthday cannot be empty';
+                // }
+                
+                // if(empty($data['password'])){
+                //     $data['password_err']='password cannot be empty';
+                // }
           
                 if(empty($data['confirm_password'])){
                 $data['confirm_password_err']='confirm password cannot be empty';
                 }
           
-                if(empty($data['gender'])){
-                $data['gender_err']='gender cannot be empty';
-                }
+                // if(empty($data['gender'])){
+                // $data['gender_err']='gender cannot be empty';
+                // }
     
-                if(empty($data['bank_account_no'])){
-                    $data['bank_account_no_err']='bank account number cannot be empty';
-                }
+                // if(empty($data['bank_account_no'])){
+                //     $data['bank_account_no_err']='bank account number cannot be empty';
+                // }
     
-                if(empty($data['bank_account_name'])){
-                    $data['bank_account_name_err']='bank account name cannot be empty';
-                }
+                // if(empty($data['bank_account_name'])){
+                //     $data['bank_account_name_err']='bank account name cannot be empty';
+                // }
               
-                if(empty($data['bank'])){
-                    $data['bank_err']='bank name cannot be empty';
-                }
+                // if(empty($data['bank'])){
+                //     $data['bank_err']='bank name cannot be empty';
+                // }
     
-                if(empty($data['branch'])){
-                    $data['branch_err']='bank branch cannot be empty';
-                }
+                // if(empty($data['branch'])){
+                //     $data['branch_err']='bank branch cannot be empty';
+                // }
 
                 if($data['password']!=$data['confirm_password']){
                     $data['password_err']='passwords do not match';
                    }
-    
+                
+             
       
               if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err'])&& empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])&& empty($data['gender_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err']) && empty($data['propic_err']) && empty($data['address_line_four_err'])){
                 $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  

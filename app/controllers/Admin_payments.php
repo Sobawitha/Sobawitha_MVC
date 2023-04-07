@@ -28,7 +28,7 @@
         $payments = $this->adminPaymentModel->getPaymentDetails();
         
         // Generate the PDF report using the FPDF library
-        require_once('../fpdf/fpdf.php');
+        require_once(APPROOT.'/fpdf/fpdf.php');
         $pdf = new FPDF();
         $pdf->AddPage('L','A4');
         

@@ -15,23 +15,55 @@
         <hr>
 
         <br><br>
-        <form method="POST">
+        <!-- <form class="searchForm" action="<?php echo URLROOT;?>/Admin_feedback_management/search_feed" method="GET">
         <div class="search_bar">
             <div class="search_content">
-                
-                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search_text" placeholder="Search by feedback category"  id="searchBar" require/></span>
+                     feedback category = supplier || seller -->
+                    <!-- <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search_text" placeholder="<?php echo $data['search'] ?>"  id="searchBar" require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
         </div>
+        </form> --> 
+
+        <form class="searchForm" action="<?php echo URLROOT;?>/Admin_feedback_management/search_feed" method="GET">
+        <div class="search_bar">
+                <div class="search_content">
+              
+                <span class="search_cont" onclick="open_cancel_btn()">
+                        <select name="category" id=category>
+                        <option value="all" id="all">Click here to Choose Feedback Category</option>
+                        <option value="seller">Seller</option>
+                        <option value="supplier">Supplier</option>
+                        </select> 
+                        <!-- <input type="text" name="search_text" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/> -->
+                </span>
+          
+                <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel"></i></button>
+                <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                </div>
+
+          
+        </div>
         </form>
 
-                <div class="filter_section">
-                        <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing" checked>Pending</label>
-                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Published</label>
-                       
-                </div>
+            <?php if($data['search'] !=='Search by feedback category'): ?>
+               
+               <div class="filter_section">
+               <div class="radio-buttons"  id="radioButtons">        
+               <form method ="POST" action="<?php echo URLROOT?>/Admin_feedback_management/view_feedback" id="filter_form">
+               <label for="pending_feed" id="filter_label"> <input type="radio" id="pending_feed" name="feed_type" onclick="javascript:submit()" value="pending_feed" <?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'pending_feed') echo ' checked="checked"';?> checked>Pending</label>
+               <label for="published_feed" id="filter_label"> <input type="radio" id="published_feed" name="feed_type" value="published_feed" onclick="javascript:submit()" value = "published_feed"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'published_feed') echo ' checked="checked"';?>>Published</label>
+               <label for="rejected_feed" id="filter_label"> <input type="radio" id="rejected_feed" name="feed_type" value="rejected_feed" onclick="javascript:submit()" value = "rejected_feed"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'rejected_feed') echo ' checked="checked"';?>>Rejected</label>
+               <div class="radio-buttons">
+               </form>        
+               </div>
+               <?php endif?> 
+
+
+
+
 
                 <div class="order_list">
                 <div class="orders">

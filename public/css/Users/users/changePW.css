@@ -1,4 +1,4 @@
-.body{
+/* .body{
   display:grid;
   grid-template-columns:20% 60% 20%;
   height:100%;
@@ -28,6 +28,7 @@ form .input-box span.details{
   justify-content: space-between; 
   font-weight: 500;
   margin-bottom: 5px; 
+
 }
 
 .user-details .input-box input:focus{
@@ -52,6 +53,7 @@ form .input-box span.details{
    cursor: pointer;
    transition: all 0.3s ease;
    background:  #000000;
+   padding: 10px 10px;
  }
 
  form .changepw_button input:hover{
@@ -93,6 +95,114 @@ form .user-details .input-box{
   .add_container .add_content .category{
     flex-direction: column;
   }
+} */
+
+.body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.section_2 {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.a_add_admin_maincontent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add_container {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 500px;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pwd_details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  height: 80px;
+  align-content: center;
+
+}
+
+.input-box span.details {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.input-box input[type="password"] {
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  border: none;
+  width:250px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  align-self: center;
+}
+
+.input-box input[type="password"]:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+span.error_msg {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f44336;
+  margin-top: 5px;
+  height: 20px;
+
+}
+
+.changepw_button input[type="submit"] {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #222;
+  cursor: pointer;
+}
+
+.changepw_button input[type="submit"]:hover {
+  background-color: #333;
 }
 
 

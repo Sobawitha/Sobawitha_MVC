@@ -451,10 +451,6 @@
   transform: opacity 0.2s ease-in-out;
 }
 
-.dialog__content a:hover {
-  opacity: 1;
-}
-
 #deactivateUserPopup , #confirmingChangePicPopup{
   border: none;
   padding: 0;
@@ -539,7 +535,32 @@ input[type="file"]::before {
   display: grid;
   place-items: center;
   opacity: 0.8;
+  border:none;
   transform: opacity 0.2s ease-in-out;
+  cursor: pointer;
+  align-items: center;
+}
+
+#green_yes:hover{
+  opacity: 1;
+}
+
+#no_btn{
+  text-align: center;
+  width: 120px;
+  height: 30px;
+  padding: 0.5rem 0.5rem;
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  opacity: 0.8;
+  transform: opacity 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: bold;
+
 }
 
 #labelpic {
@@ -551,4 +572,114 @@ input[type="file"]::before {
   background-color: transparent;
   border-radius: 10px;
   border:0.5px solid grey;
+  padding: 0px 10px;
+}
+
+/* notification style */
+#notification-container{
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  overflow: hidden;
+}
+.notification{
+  width: fit-content;
+  height: fit-content;
+  padding: 15px 20px;
+  background-color: white;
+  color: var(--hue-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px;
+  gap: 10px;
+  position: relative;
+  transform: translateX(100%);
+  animation: notify 0.3s linear forwards;
+  opacity: 0;
+}
+.notification i{
+  font-size: 20px;
+  color: var(--hue-dark-blue);
+}
+.notification::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--hue-dark-blue);
+  animation: reduceWidth 5s linear forwards;
+}
+
+.notification.warning i{
+  color: red;
+}
+
+.notification.warning::after{
+  background-color: red;
+}
+
+.notification.success i{
+  color: green;
+}
+
+.notification.success::after{
+  background-color: green;
+}
+
+@keyframes notify {
+  100% {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+
+@keyframes reduceWidth {
+  100% {
+      width: 0;
+  }
+}
+/* notification style ends */
+
+.success-msg {
+  /* position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #1f1f1f;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  z-index: 9999; */
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  padding:8px 20px 8px 20px;
+  background-color:white;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+  border-left:7px solid green;
+  margin-bottom:15px;
+  border-radius:10px;
+  line-height: 20px;
+  background-color: rgb(244, 255, 244);
+  transform: translateX(-50%);
+  font-size: 16px;
+  z-index: 9999;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background-color: #094b46;
+  z-index: 9998;
 }
