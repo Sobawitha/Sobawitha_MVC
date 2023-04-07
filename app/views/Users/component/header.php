@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title><?php echo SITENAME;?></title>
+        <title><?php echo SITENAME?></title>
 
         <!--select font-->
 
@@ -27,6 +27,6 @@
 
         <link rel="shortcut icon" type="image/png" href="../images/logo.png"> 
 
-        <link rel="stylesheet" href="<?php echo URLROOT;?> /css/style.css">
+        <link rel="stylesheet" href="<?php echo URLROOT?> /css/style.css">
     </head>
     <body>

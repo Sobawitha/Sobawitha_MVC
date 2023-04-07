@@ -56,7 +56,7 @@
 .signup_seller_content{
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 90vh;
     align-items: center;
     
     
@@ -79,7 +79,6 @@
     flex-direction: column;
     height: 80vh;
     padding: 0px 100px;
-    margin-top: 88px;
 }
 
 .s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn{
@@ -102,6 +101,11 @@
     color: #004000;
 }
 
+.sign_up_seller_btn{
+    display: flex;
+    justify-content: center;
+}
+
 #sign_up_sell_btn{
     /* width: 100%; */
     background-color: #000000;
@@ -110,6 +114,7 @@
     font-weight: bold;
     padding:10px;
     border-radius:40px;
+    
 }
 
 #sign_up_sell_btn:hover{
