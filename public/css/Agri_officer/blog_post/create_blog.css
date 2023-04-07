@@ -5,7 +5,7 @@
 .body{
     display:grid;
     grid-template-columns:20% 60% 20%;
-    padding-top:90px;    
+    padding-top:80px;    
 }
 
 .section_1{
@@ -33,38 +33,46 @@
     position:relative;
     top:55%;
     left:25%;
-    border-radius:40px;
 }
 
-.add_new_post{
-    display:none;
-    position:absolute;
-    font-size:11px;
+.add_new_post_section{
+    margin:20px 45px;
+    background-color:white;
+    padding:40px 20px;
+    border-radius:10px;
+    box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
+    border-top:5px solid rgb(160, 196, 160);
+    text-align: center;
+    align-items: center;
+}
+.add_new_post_section_body .header{
+    font-size:15px;
     font-weight:bold;
+}
+
+.add_new_post_section_body .discription{
+    font-size:12px;
+    line-height: 25px;
+    color:rgb(69, 69, 69);
+}
+
+.add_new_post_section_body .add_new_post{
+    padding:8px 8px;
     color:rgb(0, 0, 0);
-    background-color:rgb(234, 236, 236);
-    padding:10px;
-    border-radius:7px;
-    margin-left:60px;
-    white-space: nowrap;
-    transition:opacity 0.5s ease;
-    transform: translate(0px,15px);
+    border-radius:25px;
+    border:none;
+    background-color: rgb(160, 196, 160);
+    cursor:pointer;
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+    width:100%;
+    text-align: center;
+    margin-top:25px;
 }
 
-.add_new_post::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    transform:translate(-50%,-120%);
-    border:15px solid;
-    border-color:transparent rgba(255, 255, 255, 0) rgb(234, 236, 236) transparent;
+.add_new_post_section:hover{
+    box-shadow:0px 4px 16px 0px rgba(0,0,0,0.2);
 }
-
-.createpost_sec:hover +.add_new_post{
-    display:block;
-}
-
-
 
 /*form*/
 #overlap{
@@ -86,13 +94,13 @@
 }
 
 .wrapper{
-    margin:7% 35%;
+    margin:1.2% 35%;
     padding:20px;
     padding-right:0px;
     border-radius:10px;
     box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
     background-color:rgb(247, 255, 255);
-    width:25%;
+    width:28%;
     transition: all 0.5s ease-in-out;
 }
 
@@ -105,7 +113,7 @@
     position:relative;
     font-size:20px;
     font-weight:bold;
-    color:#ff0000;
+    color:#f1f0f0;
     padding-left:90%;
     cursor:pointer;
 }
@@ -124,12 +132,9 @@ form .label{
 
 form .input_field{
     width:90%;
-    height:20px;
-    border-top:none;
-    border-left:none;
-    border-right:none;
-    border-bottom:2px solid green;
-    background-color:transparent;
+    height:30px;
+    border:2px solid rgb(247, 251, 247);
+    background-color: white;
     margin-top:15px;
 }
 
@@ -138,13 +143,14 @@ form .input_field:focus{
 }
 
 form .discription{
+    margin-top:15px;
     width:90%;
-    height:200px;
-    border-top:none;
-    border-left:none;
-    border-right:none;
-    border-bottom:2px solid green;
+    height:150px;
+    border:2px solid rgb(250, 250, 250);
     background-color:transparent;
+    background-color: white; 
+    color:gray;
+    font-size:13px;
 
 }
 
@@ -156,11 +162,10 @@ form .discription:focus{
     border:none;
     background-color:black;
     color:white;
-    padding:8px;
-    font-size:12px;
-    font-weight:500px; 
-    font-family:'Montserrat';
     width:75px;
+    height:40px;
+    font-size:12px;
+    font-weight:bold; 
     cursor:pointer;
 }
 
@@ -172,25 +177,57 @@ form .discription:focus{
 }
 
 input[type=file]::file-selector-button{
+    overflow: hidden;
     border:none;
-    background-color: rgb(245, 253, 215);
-    color:black;
+    background-color: rgb(123, 143, 68);
+    /* color:transparent; */
     padding:8px;
     font-size:12px;
-    font-weight:500px; 
-    font-family:'Montserrat';
+    font-weight:500px;
     width:75px;
     cursor:pointer;
+    position:relative;
+    opacity:0;
+    transform: scale(30);
+    overflow: hidden;
+    transform:translate(-200px,-15px);
 }
 
-input[type=file]::file-selector-button:hover{
-    cursor:pointer;   
+.upload_file{
+    transform: translate(-150px,-20px);
+    overflow: hidden;
+    font-size: 10px;
+    color: transparent;
+}
+
+
+.uploard_img_hidden{
+    width:80px;
+    overflow: hidden;;
 }
 
 .form{
     padding:20px;
 }
 
+.upload_images{
+    width:35px;
+    height:30px;
+    background-color: rgba(0,0,0,0.7);
+    /* background-color:transparent; */
+    color:white;
+    border:none;
+    position:absolute;
+    cursor:pointer;
+    overflow: hidden;
+    border-radius:3px;
+    margin-top:40px;
+    transform:translateX(-30px);
+}
+
+.upload{
+    font-size:13px;
+}
 
 
 /*individual blog*/
@@ -204,7 +241,7 @@ input[type=file]::file-selector-button:hover{
     padding:20px;
     background-color:white;
     box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
-    border-left:4px solid green;
+    border-left:4px solid rgb(160, 196, 160);
     width:95%;
     margin-bottom:15px;
     border-radius:5px;
@@ -221,6 +258,7 @@ input[type=file]::file-selector-button:hover{
     font-weight:bold;
     margin-left:10px;
     transform: translateY(-20px);
+    color:rgb(100,99,99);
 }
 
 .time{
@@ -239,18 +277,18 @@ input[type=file]::file-selector-button:hover{
     color:rgb(45, 45, 45);
 }
 
-#editbtn , #deletebtn{
+#editbutton , #deletebutton{
     font-size: 10px;
     color:rgb(45, 45, 45);
 }
 
-#deletebtn{
+#deletebutton{
     margin-left:25px;
 }
 
 
 .section_divide_hr{
-    margin-top:60px;
+    margin-top:40px;
     margin-bottom:30px;
     margin-left:20px;
     margin-right:20px;
@@ -258,12 +296,11 @@ input[type=file]::file-selector-button:hover{
 .category{
     font-size:12px;
     list-style: none;
-    transform: translateX(-40px);
     font-weight:bold;
     color:rgb(65, 64, 64);
-    margin-left:90px;
+    margin-left:15px;
     line-height: 25px;
-    margin-top:60px;
+    margin-top:40px;
 
 }
 
@@ -325,6 +362,27 @@ input[type=file]::file-selector-button:hover{
     
 }
 
+
+.filter_section{
+    font-size:12px;
+    list-style: none; 
+    font-weight:bold;
+    color:rgb(65, 64, 64);
+    margin-left:50px;
+    line-height: 25px;
+}
+
+#all{
+    accent-color: crimson;
+}
+
+#completed{
+    accent-color: rgb(90, 90, 125);
+}
+#pending{
+    accent-color:  rgb(134, 134, 53);
+}
+
 /*search section*/
 .search_bar{
     margin-top:20px;
@@ -345,9 +403,7 @@ input[type=file]::file-selector-button:hover{
     background-color:transparent;
 }
 
-#search{
-    color:rgb(41, 171, 56);
-}
+
 
 .search_bar input:focus{
     outline:none;
@@ -359,7 +415,7 @@ input[type=file]::file-selector-button:hover{
     cursor:pointer;
 }
 .search_bar .search_content{
-    border:2px solid rgb(41, 171, 56);
+    border:2px solid rgb(160, 196, 160);
     border-radius:20px;
     padding:5px;
     padding-left:15px;
@@ -372,7 +428,7 @@ input[type=file]::file-selector-button:hover{
 }
 
 #search{
-    color:rgb(41, 171, 56);
+    color:rgb(160, 196, 160);
 }
 
 .search_bar input:focus{
@@ -392,7 +448,6 @@ input[type=file]::file-selector-button:hover{
 .f_filter_section{
     font-size:12px;
     list-style: none; 
-    /* font-weight:bold; */
     color:rgb(65, 64, 64);
     line-height: 25px;
     padding-top:15px;
@@ -401,19 +456,122 @@ input[type=file]::file-selector-button:hover{
 
 
 #innovations{
-    accent-color: rgb(210, 250, 210);
+    accent-color:  crimson;
+    
 }
-
 #knowledge{
     margin-left:80px;
     accent-color: rgb(134, 134, 53);
 }
 #new_technique{
-    accent-color:  crimson;
+    accent-color:  rgb(228, 196, 244);
 }
 #production{
     margin-left:60px;
+    accent-color: rgb(210, 250, 210);
+}
+#knowledges{
+    accent-color: rgb(134, 134, 53);
+}
+#new_techniques{
     accent-color:  rgb(228, 196, 244);
+}
+#productions{
+    accent-color: rgb(210, 250, 210);
+}
 
+/*diaplog box for delete*/
+
+#deletePopup {
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:45%;
+    margin-top:15%;
+  }
+  #deletePopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  .deletePopup { 
+    min-height: 150px;
+    padding:2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align:center; 
+  }
+  
+  .deletePopup i{
+    font-size:50px;
+    color:rgb(213, 4, 4);
+  }
+  
+  .deletePopup h2{
+    font-size:15px;
+    color:rgb(2, 55, 46);
+  }
+
+  .deletePopup p{
+    font-size:13px;
+    color:#868282;
+  }
+  
+  .dialog_content{
+    display: flex;
+    align-content:space-around;
+    gap: 30px;
+  }
+  
+  #cancelbtn{
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(132, 129, 129);
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    color:white;
+  }
+  
+  #deletebtn{
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(170, 27, 27);
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    color:white;
+  }
+
+
+  /*update popup*/
+  #updatePopup {
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:35%;
+    margin-top:2%;
+    z-index:8000;
+    width:500px;
+  }
+  #updatePopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  .updatePopup { 
+    min-height: 150px;
+    padding:2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .updatePopup .closebtn{
+    margin-left:5%;
+  }
+
+.edit_post_image{
+    width:75px;
+    height:75px;
+    border-radius:50px;
 }
 

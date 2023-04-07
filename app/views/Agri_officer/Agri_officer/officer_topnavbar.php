@@ -31,7 +31,7 @@
         <hr class="notification_hr">
       </div>
 
-      <div class="see_more"><a href="<?php echo URLROOT?>/Users/view_profile" class="see_more_txt">See More</a> </div>
+      <div class="see_more"><a href="<?php echo URLROOT?>/Users/officer_view_profile" class="see_more_txt">See More</a> </div>
 
     </div>
     </div>

@@ -14,7 +14,7 @@
     padding-inline: 0.78rem;
     margin-top: 0;
     line-height: 2rem;
-    z-index: 2000;
+    z-index: 20000;
     color:white;
     width:14%;
 }
@@ -46,6 +46,24 @@ li a:is(:link, :active, :visited).active{
     font-weight: 700;
     border-radius: 5px;
     color:rgb(230, 160, 19);
+}
+
+.tab .active{
+    background-color: rgb(237, 237, 226);
+    font-weight: 700;
+    border-radius: 5px;
+    color:rgb(230, 160, 19);
+}
+
+.tab{
+    display:block;
+    font-size:14px;
+    text-decoration:none;
+    font-weight:bold;
+    padding: 0.2rem 0.4rem;
+    color: var(--clr-sidetext);
+    text-decoration: none;
+    transition: 0.4s;
 }
 
 
@@ -82,26 +100,30 @@ li a:is(:link, :active, :visited).active{
 .logo{
     font-weight: bold;
     text-align:center;
-    padding-bottom:2.5rem;
+    padding-bottom:2.5rem; 
+    padding-top:20px;
+    font-size:20px;
 }
 
 #shape{
     position:absolute;
-    transform: translate(40px,-16px);
+    transform: translate(33px,-16px);
     font-size: 70px;
     color:black;
+    display:none;
 }
 
 #equal{
     position:absolute;
-    transform: translate(65px,13px);
+    transform: translate(60px,13px);
     font-size: 13px;
     color:white;
     z-index: 100;
+    display:none;
 }
 
 #leaf{
     position:absolute;
     color:rgb(246, 246, 206);
-    transform: translate(70px, -11px);
+    transform: translate(80px, -12px);
 }

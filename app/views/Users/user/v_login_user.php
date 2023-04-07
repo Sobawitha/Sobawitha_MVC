@@ -14,7 +14,8 @@
                 
                 <div class ="login_intro">
                     
-                    <h1> <i class="fa-solid fa-arrow-left"></i> &nbsp; &nbsp;<a href="<?php echo URLROOT?>/Pages/home" id="back_home">Back to Homepage</a></h1>
+                    <h1> <a href="<?php echo URLROOT?>/Pages/home" id="back_home"><span ><i class="fa-solid fa-arrow-left"></i></span> &nbsp; &nbsp;Back to Homepage</a></h1>
+                    <!-- <i class="fa-solid fa-house" id="home"></i> -->
                     <i class="fa-solid fa-leaf" id="leaf"></i>
                     <h2>Welcome to Sobawitha</h2>
                     <p>Welcome to Sobawitha, your one-stop solution for all your fertilizer management needs. Our e-commerce platform makes it easy for you to 
@@ -43,6 +44,7 @@
                                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                             </button>
                             </div>
+                            <br>
                             
                             <div class="dialog__content">
                             <a href="<?php echo URLROOT?>/Seller/seller_register" id="seller_reg"><i class="fa-brands fa-sellsy" id="icon_reg"></i><br>As seller</a>

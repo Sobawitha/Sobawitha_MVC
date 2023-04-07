@@ -81,7 +81,7 @@ nav{
     color:white;
     font-size:30px;
     font-weight:bold;
-    margin:5% 28% 0.1% 28%;
+    margin:5% 28% 0.1% 30%;
     user-select:none;
     text-transform:uppercase;
 
@@ -162,18 +162,41 @@ nav{
 }
 
 .home_icon_name{
-    margin:2% 38%;
+    margin-left:39%;
+    margin-top:2%;
+    align-items:center;
+    display:flex;
     color:white;
     font-size:11px;
 }
 
-.home_icon_name #name{
+.home_icon_name .name{
     display:inline-block;
-    margin-right:30px;
+    /* margin-right:32px;*/
+} 
+
+.home_icon_name #nameB{
+    margin-right:39px;
+}
+.home_icon_name #nameS{
+    display:inline-block;
+    margin-right:32px;
+}
+.home_icon_name #nameF{
+    display:inline-block;
+    margin-right:15px;
+}
+.home_icon_name #nameI{
+    display:inline-block;
+    margin-right:15px;
+}
+.home_icon_name #nameBL{
+    display:inline-block;
+    margin-right:32px;
 }
 
 .down_arrow{
-    margin:5% 50% 0% 47%;
+    margin:5% 50% 0% 50%;
 }
 #arrow_span{
     display:block;
@@ -221,6 +244,81 @@ nav{
     font-weight:bold;
     font-size:23px;
 }
+.service_cards{
+    margin-top:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:center;
+    gap:25px;    
+}
+
+.individual_service_card{
+    width:180px;
+    height:180px;
+    border-radius:90px;
+    background-color:aliceblue;
+    justify-content:center;
+    display:flex;
+    flex-direction:center;
+    flex-direction:row;
+    background-color: rgb(255, 255, 255);
+    box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
+    cursor:pointer;
+
+}
+
+#icon{
+    font-size:45px;
+    padding-top:50px;
+}
+
+.service_name{
+    position:absolute;
+    padding-top:110px;
+    font-size:13px;
+}
+
+.overlay{
+    width:180px;
+    height:180px;
+    border-radius:90px;
+    align-items: center;
+    justify-content:center;
+    flex-direction:row;
+    background-color:rgba(0,0,0,0.75);
+    color:white;
+    cursor:pointer;
+    position:absolute;
+    font-size:11px;
+    text-align: center;
+    overflow:hidden;
+    transition:0.5s ease;
+    display:none;
+}
+
+.individual_service_card:hover .overlay{
+    display:block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .second_part table{
     margin-left:30%;
     margin-top:5%;
@@ -239,12 +337,8 @@ nav{
     background-size: cover;
     -webkit-background-size:cover ;
     background-position:center;
-    /* margin:0px;
-    padding:0px; */
-    width:380px;
-    height:200px;
-    /* background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../images/background2.jpg); */
-    /* background-image:url(../public/images/buying.jpg); */
+    /* width:380px;
+    height:200px; */
 }
 
 .img12{
@@ -279,6 +373,20 @@ nav{
     text-transform: uppercase;
     font-size: 15px;
 }
+/**/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .third_part_header{
@@ -311,7 +419,7 @@ nav{
 .recent_product_card_section{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap:20px;
+    gap:60px;
     padding:50px 350px 50px 350px;
 }
 
@@ -377,7 +485,7 @@ nav{
 .collection_product_card_setion{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap:20px;
+    gap:60px;
     padding:50px 150px 50px 150px;
 }
 
