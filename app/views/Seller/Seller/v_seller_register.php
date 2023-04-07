@@ -6,7 +6,7 @@
     <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a><br>
     <i class="fa-solid fa-leaf" id="leaf"></i>    
     <h2>Sobawitha </h2>
-        <span class="sign_up">Buyer Sign Up<span>
+        <span class="sign_up">Seller Sign Up<span>
         <br><br>
         <p>Join Sobawitha and become a part 
             of our growing community of fertilizer sellers! Our 
@@ -25,11 +25,6 @@
     
 
         <div class="seller_signup_part_one">
-        
-       
-        <div class="s_input_box">
-        <!-- <h1 id="sign_up_word"> Seller Sign Up  </h1> -->
-        </div>
 
         <div class="s_input-box">
             <span class="ssu_details">First Name</span><br>
@@ -90,12 +85,13 @@
 
         <div class="seller_signup_part_two">
 
-        <div class="s_input-box">
+          <div class="s_input-box">
             <span class="ssu_details" >Birthday</span><br>
             <input type="date" name="birthday"><br>
             <span class="error_msg"><?php echo $data['birthday_err'] ?></span>
           </div>
-<div class="s_input-box">
+
+          <div class="s_input-box">
             <span class="ssu_details">Choose Profile Picture</span><br>
             <input type="file" id="propic" name="propic"><br>
             <span class="error_msg"><?php echo $data['propic_err'] ?></span>
@@ -145,12 +141,17 @@
             <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>
           </div>
 
-          <div class="sign_up_seller_btn">
+          <!-- <div class="sign_up_seller_btn">
           <input type="submit" id="sign_up_sell_btn" value="Sign Up">
-          </div>
+          </div> -->
 
         </div>
    
     </div>
+    <div class="sign_up_seller_btn">
+          <input type="submit" id="sign_up_sell_btn" value="Sign Up">
+          </div>
+
+
 </div>
 </form>
