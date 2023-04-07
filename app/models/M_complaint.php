@@ -14,6 +14,13 @@ class M_complaint
 
 
                 $this->db->query('INSERT into complaint (email, type, subject,discription, date, created_by, user_first_name, user_last_name) VALUES ( :email, :type, :subject, :discription, :created, :created_by, :first_name, :last_name)');
+                // echo $data['email'];
+                // echo $data['type'];
+                // echo $data['subject'];
+                // echo $data['discription'];
+                // echo date('Y-m-d');
+                // echo $data['created_by'];
+
                 
                 $this->db->bind(":email", $data['email']);
                 $this->db->bind(":type", $data['type']);
