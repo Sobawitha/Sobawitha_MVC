@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../css/Agri_officer/resources/individual_resource.css"></link>
-<script src="../js/agri_officer/resources/individual_resources.js"></script> 
+<script src="../js/Agri_officer/resources/individual_resource.js"></script> 
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
 
@@ -25,7 +25,43 @@ else if($_SESSION['user_flag'] == 5){
     require APPROOT . '/views/Agri_officer/Agri_officer/Officer_Sidebar.php';
 }?>
 
+            <dialog id="deletePopup">
+                <div class="deletePopup">
+                        <div class="delete_dialog_heading">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                        <h2>Are you sure</h2>
+                        <p>You will not be able to recover that item.</p>
+                        </div>
 
+                        <div class="dialog_content">
+                            <form method="POST" action="<?php echo URLROOT?>/resources/delete_comment">
+                            <button id="delete" type="submit" value="" name="deletecomment">Delete
+                            </button>
+                            <button id="cancelbtn" type="button">Cancel
+                            </button>
+                            </form>
+                        </div>
+                </div>
+                </dialog>
+
+                <dialog id="deletereplyPopup">
+                <div class="deletePopup">
+                        <div class="delete_dialog_heading">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                        <h2>Are you sure</h2>
+                        <p>You will not be able to recover that item.</p>
+                        </div>
+
+                        <div class="dialog_content">
+                            <form method="POST" action="<?php echo URLROOT?>/resources/delete_reply">
+                            <button id="deletereplybtn" type="submit" value="" name="deletereply">Delete
+                            </button>
+                            <button id="canceldeletereplybtn" type="button">Cancel</button>
+                            </form>
+                        </div>
+                </div>
+                </dialog>
+                
 
 <div class="body">
 
@@ -48,7 +84,7 @@ else if($_SESSION['user_flag'] == 5){
         <div class="blog_reading_content">
 
             <div class="header">
-                    <img class='blog_post_image' src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($resource->image);?>"></img>
+                    <?php echo '<img src=".././public/upload/blog_post_images/'.$resource->image.'"   alt="card Picture"  class="blog_post_image">';?>
                     <div class="rhs">
                     <span class="path">Resource Page- <?php echo $resource->tag?></span>  
                     <h3 class="title"><?php echo $resource->title;?></h3>
@@ -62,8 +98,25 @@ else if($_SESSION['user_flag'] == 5){
     ?>
 
     <div class="like_section">
-        <form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
-            <button type="submit" name="like" class="heart_btn"> <span id="heart_icon"><i class="fa-regular fa-heart" onclick="count_like_dislike()"></i></span>  Like <span id="like_count"><?php echo $resource->no_of_likes; ?></span></button>
+        <?php
+            $post_id = trim($_GET['blog_post_id']);
+            $tag = trim($_GET['category']);
+        ?>
+        <form method="post" action="<?php echo URLROOT?>/resources/like_post?blog_post_id=<?php echo $post_id?>&category=<?php echo $tag?>">
+            <button type="submit" name="like" class="heart_btn"> <span id="heart_icon">
+                <?php if($data['previous_like_status']==0){
+                    ?>
+                    <i class="fa-regular fa-heart"></i>
+                    <?php
+                }
+                else{
+                    ?>
+                    <i class="fa-solid fa-heart"></i>
+                    <?php
+                }
+                ?>
+                
+            </span>  Like <span id="like_count"><?php echo $resource->no_of_likes; ?></span></button>
         </form>
     </div>
 
@@ -73,7 +126,12 @@ else if($_SESSION['user_flag'] == 5){
 
                 <p class="comment_section_header"><?php echo $count ->count_comment; ?> comments</p> <?php endforeach ?>  <!--how get individual-->
                 <div class="comment_form">
-                    <form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+                    <?php
+                        $post_id = trim($_GET['blog_post_id']);
+                        $tag = trim($_GET['category']);
+                    ?>
+
+                    <form method="POST" action="<?php echo URLROOT?>/resources/post_comment?blog_post_id=<?php echo $post_id?>&category=<?php echo $tag?>">
                         <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span>
                         <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn()" name="comment"  required/>
                         <div class="btn">
@@ -96,7 +154,7 @@ else if($_SESSION['user_flag'] == 5){
                                     
                                     <?php if($_SESSION['user_id']==$comment->comment_user_id){ ?> 
                                         <i class="fa-solid fa-pen-to-square" id="editbtn"></i><span class="edit">Edit</span>
-                                        <i class="fa-solid fa-trash" id="deletebtn"></i><span class="delete">Delete</span>
+                                        <i class="fa-solid fa-trash" id="deletebtn" onclick="delete_comment(<?php echo $comment->comment_id?>)"></i><span class="delete">Delete</span>
                                     <?php }?>
 
 
@@ -115,7 +173,7 @@ else if($_SESSION['user_flag'] == 5){
 
                             <!--Reply form-->
                             <div id="reply_form-<?php echo $comment->comment_id ?>" class="reply_form">
-                                <form method="POST">
+                                <form method="POST" action="<?php echo URLROOT?>/resources/post_reply?blog_post_id=<?php echo $post_id?>&category=<?php echo $tag?>&comment_id=<?php echo $comment->comment_id ?>">
                                     <span id="user-<?php echo $comment->comment_id?>" class="user-reply"><?php echo ucfirst($_SESSION['username'][0])?></span>
                                     <input type="text" class="reply-body" placeholder="Add a reply" id="reply-body-(<?php echo $comment->comment_id?>)" onclick="open_save_cancel_btns(<?php echo $comment->comment_id?>)" name="reply"  required/>
                                     <div id="btn-<?php echo $comment->comment_id?>" class="btn">
@@ -140,7 +198,7 @@ else if($_SESSION['user_flag'] == 5){
                                                         
                                                         <?php if($_SESSION['user_id']==$comment_new->reply_user_id){ ?>
                                                             <i class="fa-solid fa-pen-to-square" id="editbtn"></i><span class="edit">Edit</span>
-                                                            <i class="fa-solid fa-trash" id="deletebtn"></i><span class="delete">Delete</span>
+                                                            <i class="fa-solid fa-trash" id="deletebtn" onclick="delete_reply(<?php echo $comment_new->reply_id?>)"></i><span class="delete">Delete</span>
                                                         <?php }?>
                                                         
                                                     </div>
@@ -169,12 +227,12 @@ else if($_SESSION['user_flag'] == 5){
                 <p class="related_post_topic">Related posts</p>
                 <?php foreach($data['related_post'] as $related_post):?>
                 <div class="post_discription">
-                    <!-- <i class="fa-solid fa-circle-plus" id="match"></i> -->
                     <i class="fa-regular fa-bookmark" id="match"></i>
+                    <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $related_post->post_id?>&category=<?php echo $related_post->tag?>"><i class="fa-solid fa-arrow-up-right-from-square" id="visit"></i></a>
                     <div class=""><p class="topic"> <?php echo $related_post->title?><span class="feed_category">(<?php echo $related_post->tag?>)</span></p></div>
                     <p class="author">By <?php echo $related_post->first_name?> </p>
                     <p class="feedback"><?php echo $related_post->no_of_likes?>-Likes <?php echo $related_post->count_comment?>-comment </p>
-                    <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $related_post->post_id?>&category=<?php echo $related_post->tag?>"><i class="fa-solid fa-arrow-up-right-from-square" id="visit"></i></a>
+                    
                 </div>
                 <?php endforeach ?>
             </div>

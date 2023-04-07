@@ -64,17 +64,73 @@ function set_filterbtn_Color($tag){
         </div>
         </form>
         <div class="filter_section" >
-            <!-- <form>
-                <span class="filterbtn"><a href="<?php echo URLROOT?>/resources/resource_page?&category=All categories"><span class="<?php echo set_filterbtn_Color($_SESSION['category']);?>" id="filter" onclick="set_default()"> <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="discription"><?php echo $_SESSION['category']?></span></span></a></span>
-                <div id="category_filter">Category filter</div>
-            </form> -->
-            <form>
+            <form method="GET">
                 <select name="category" id="category_type">
-                    <option value="Innovations">Innovations</option>
-                    <option value="Knowledge">Knowledge</option>
-                    <option value="New technology">New technology</option>
-                    <option value="Production">Production</option>
+                    
+
+                    <?php
+                        $category = trim($_GET['category']);
+                    ?>
+
+                    <?php
+                    if($category == "All categories"){
+                        ?>
+                        <option value="All categories" selected="selected">All categories</option>
+                        <option value="Innovations">Innovations</option>
+                        <option value="Knowledge">Knowledge</option>
+                        <option value="New_technology">New technology</option>
+                        <option value="Production">Production</option>
+                        <?php
+                    }
+                    else if($category == "Knowledge"){
+                        ?>
+                        <option value="All categories" >All categories</option>
+                        <option value="Innovations">Innovations</option>
+                        <option value="Knowledge" selected="selected">Knowledge</option>
+                        <option value="New_technology">New technology</option>
+                        <option value="Production">Production</option>
+                    <?php
+                    }
+                    else if($category == "Innovations"){
+                        ?>
+                        <option value="All categories" >All categories</option>
+                        <option value="Innovations" selected="selected">Innovations</option>
+                        <option value="Knowledge" >Knowledge</option>
+                        <option value="New_technology">New technology</option>
+                        <option value="Production">Production</option>
+                    <?php
+                    }
+                    else if($category == "Production"){
+                        ?>
+                        <option value="All categories" >All categories</option>
+                        <option value="Innovations">Innovations</option>
+                        <option value="Knowledge">Knowledge</option>
+                        <option value="New_technology">New technology</option>
+                        <option value="Production" selected="selected">Production</option>
+                    <?php
+                    }
+                    else if($category == "New_technology"){
+                        ?>
+                        <option value="All categories" >All categories</option>
+                        <option value="Innovations">Innovations</option>
+                        <option value="Knowledge">Knowledge</option>
+                        <option value="New_technology" selected="selected">New technology</option>
+                        <option value="Production">Production</option>
+                    <?php
+                    }
+                    else{
+                        ?>
+                        <option value="All categories" >All categories</option>
+                        <option value="Innovations">Innovations</option>
+                        <option value="Knowledge">Knowledge</option>
+                        <option value="New_technology">New technology</option>
+                        <option value="Production">Production</option>
+                    <?php
+                    }
+
+                    ?>
                 </select>
+                <button type="submit" id="filter_submit_btn">Filter</button>
             </form>
         </div>     
 </div>
@@ -86,13 +142,11 @@ function set_filterbtn_Color($tag){
         /* display blogs */
             foreach($data['resources'] as $resources):?>
             <div class='flash_card'>
-                        <img class='card_image' src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($resources->image);?>"/>
+                            <?php echo '<img src=".././public/upload/blog_post_images/'.$resources->image.'"   alt="card Picture"  class="card_image">';?>
                             <div class='ccontent'>
                                     <div class='header'>
-                                        <a href='' class='uname'><?php echo  $resources->first_name?></a> <!--change-->                                  
-                                        <a href="<?php echo URLROOT?>/resources/resource_page?category=<?php echo $resources->tag?>"><span class="<?php echo setColor($resources->tag);?>" id="tag" > <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="tag_discription-<?php echo $resources->post_id?>"><?php echo $resources->tag ?></span></span></a>
-                                        
-                                        <!---->
+                                        <a href='' class='uname'><?php echo  $resources->first_name?></a> 
+                                        <span class="<?php echo setColor($resources->tag);?>" id="tag" > <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="tag_discription-<?php echo $resources->post_id?>"><?php echo $resources->tag ?></span></span></a>                                  
                                     </div>
                                     <div class='card_content'>
                                         <h4><?php echo $resources->title ?></h4>
@@ -115,16 +169,19 @@ function set_filterbtn_Color($tag){
 
     <div class="category_search">
             <!-- popuer_feeds -->
+            
             <div class="feeds">
                 <p class="choice_topic">Populer Feeds</p>
                 <?php foreach($data['best_resources'] as $best_resource):?>
+                <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $best_resource->post_id?>&category=<?php echo $best_resource->tag?>">
                 <div class="feed_discription">
                     <i class="fa-regular fa-bookmark" id="ok"></i>
                     <p class="topic"> <?php echo $best_resource->title?><span class="feed_category"></p>
                     <p class="author">By <?php echo $best_resource->first_name?> </p>
                     <p class="feedback"><?php echo $best_resource->no_of_likes?>-Likes <?php echo $best_resource->count_comment?>-comment </p>
-                    <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $best_resource->post_id?>&category=<?php echo $best_resource->tag?>"><i class="fa-solid fa-arrow-up-right-from-square" id="visit"></i></a>
+                    
                 </div>
+                </a>
                 <?php endforeach ?>
             </div>
             
@@ -139,6 +196,13 @@ function set_filterbtn_Color($tag){
     // $total_row_count = $_SESSION['row_count'];
     $total_row_count = 5;
     $uri = $_SERVER['REQUEST_URI'];
+    if(isset($_GET['category'])){
+        $category = trim($_GET['category']);
+    }
+    else{
+        $category = "All categories";
+    }
+    
 
 
     $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
@@ -151,15 +215,15 @@ function set_filterbtn_Color($tag){
     }
 
     if($page>1){ 
-        echo "<a href='?page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
+        echo "<a href='?category=". $category."&page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
     }
 
     for($i=1; $i<$total_pages;$i++){
-        echo "<a href='?page=".($i)." '><span class='pagination_number'>$i</span></a>";
+        echo "<a href='?category=".$category."&page=".($i)." '><span class='pagination_number'>$i</span></a>";
     }
 
     if($i>$page){
-        echo "<a href='?page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
+        echo "<a href='?category=". $category."&page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
     }
     
     ?>

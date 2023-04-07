@@ -8,6 +8,34 @@
 
 <!--button_section-->
 
+<dialog id="updatePopup">
+                <div class="updatePopup">
+                        <div class="dialog_content">
+                        <form method="POST" action="<?php echo URLROOT?>/blog_post/update_post" enctype="multipart/form-data">
+                        <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a>
+                        <h2 class="update_dialog_headin">Update Blogpost</h2>
+                        <?php echo '<img src=".././public/upload/blog_post_images/background7.jpg"   alt="card Picture"  class="edit_post_image" id="upload_image">';?>
+                        <button type="" class="upload_images"><i class="fa-solid fa-upload "><span class="upload"></span></i></button>
+                        <span class="uploard_img_hidden"><input type="file" class="upload_file" name="image" onchange="loadFile(event)" id="upload_image"></input></span>
+                        <br>
+                        <label for="title" class="label"><b>Title</b></label><br>
+                        <input type="text" id="title" name="title"  class="input_field" placeholder="" value=""  required></input><br><br>
+                        <label for="tags" class="label"><b>Tags/category</b></label><br>
+                        <div class="f_filter_section">
+                            <label for="innovations" id="filter_label"> <input type="radio" id="innovations" name="tag" value="Innovations">Innovations</label>
+                            <label for="knowledge" id="filter_label"> <input type="radio" id="knowledge" name="tag" value="Knowledge">Knowledge</label><br>
+                            <label for="new_technique" id="filter_label"><input type="radio" id="new_technique" name="tag" value="New_technique">New technique</label>
+                            <label for="production" id="filter_label"><input type="radio" id="production" name="tag" value="Production">Production</label><br>
+                        </div>
+                        <label for="discription" class="label"><b>Discription</b></label><br>
+                        <textarea width="250px" height="500px" class="discription"  id="discription" name="discription"  value="" required></textarea>
+                        <div class="foot">
+                            <button type="submit"  class="publish" id="updatebutton" name="updatepost" value="" >Submit</button>
+                        </div>
+                </form>
+                </div>
+                </div>
+</dialog>
 <?php
 function setColor($tag){
     if($tag == 'Production') return 'set-green';
@@ -41,6 +69,26 @@ function setColor($tag){
 
        <div class="my_complaint_list">
 
+            <dialog id="deletePopup">
+                <div class="deletePopup">
+                        <div class="delete_dialog_heading">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                        <h2>Are you sure</h2>
+                        <p>You will not be able to recover that item.</p>
+                        </div>
+
+                        <div class="dialog_content">
+                            <form method="POST" action="<?php echo URLROOT?>/blog_post/delete_post">
+                            <button id="deletebtn" type="submit" value="" name="deletepost">Delete
+                            </button>
+                            <button id="cancelbtn" type="button">Cancel
+                            </button>
+                            </form>
+                        </div>
+                </div>
+            </dialog>
+        
+
             <?php
                 /* Display tabuler form */
                 foreach($data['blogpost'] as $blogpost):?>
@@ -51,21 +99,42 @@ function setColor($tag){
                         <span class="time"><?php echo $blogpost->created?></span>
 
                         <div class="footer">
-                            <i class="fa-solid fa-pen-to-square" id="editbtn"></i><span class="edit">Edit</span>
-                            <i class="fa-solid fa-trash" id="deletebtn"></i><span class="delete">Delete</span>
+                            <span onclick="updatepopUpOpen(<?php echo $blogpost->post_id;?>,`<?php echo $blogpost->title;?>`,`<?php echo $blogpost->tag;?>`,`<?php echo $blogpost->discription;?>`,`<?php echo $blogpost->image;?>`)" >
+                            <i class="fa-solid fa-pen-to-square" id="editbutton"></i>
+                            <span class="edit">Edit</span>
+                            </span>
+
+                            <span  onclick="popUpOpen(<?php echo $blogpost->post_id?>)"><i class="fa-solid fa-trash deleteButton" id="deletebutton"></i><span class="delete">Delete</span></span>
+                            
                         </div>
                     </div>
 
             <?php endforeach;?>
+
             
             </div>
         </div>
 
         <div class="section_3">
 
-            <div class="button_section">
-                <span class="createpost_sec"><a href="#overlap"><button class="createpost" name="createpost" ><i class="fas fa-plus"></i>Add post</button></a></span>
-                <div class="add_new_post">Add New</div>
+            <div class="add_new_post_section">
+            <div class="add_new_post_section_body">
+                <p class="header">Add new post</p>
+                <p class="discription">To share your knowledge with other please put some post in there.</p>
+                <a href="#overlap"><button class="add_new_post">Add new post</button></a>
+            </div>
+            </div>
+
+            <hr class="section_divide_hr">
+
+            <div class="filter_section">
+                    <form method ="POST" action="<?php echo URLROOT?>/blog_post/display_all_blogposts" id="filter_form">
+                        <label for="all" id="filter_label"> <input type="radio" id="all" name="tag"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['tag']) && $_POST['tag'] == 'all') echo ' checked="checked"';?> checked>All type</label><br>
+                        <label for="innovations" id="filter_label"> <input type="radio" id="innovations" name="tag"  onclick="javascript:submit()" value = "Innovations"<?php if (isset($_POST['tag']) && $_POST['tag'] == 'Innovations') echo ' checked="checked"';?>>Innovations</label><br>
+                        <label for="knowledge" id="filter_label"> <input type="radio" id="knowledges" name="tag"  onclick="javascript:submit()" value = "Knowledge"<?php if (isset($_POST['tag']) && $_POST['tag'] == 'Knowledge') echo ' checked="checked"';?>>Knowledge</label><br>
+                        <label for="new_technique" id="filter_label"><input type="radio" id="new_techniques" name="tag" value="New_technique" onclick="javascript:submit()" value = "New_technique"<?php if (isset($_POST['tag']) && $_POST['tag'] == 'New_technique') echo ' checked="checked"';?>>New technique</label><br>
+                        <label for="production" id="filter_label"><input type="radio" id="productions" name="tag"  onclick="javascript:submit()" value = "Production"<?php if (isset($_POST['tag']) && $_POST['tag'] == 'Production') echo ' checked="checked"';?>>Production</label><br>
+                </form>
             </div>
 
             <hr class="section_divide_hr">
@@ -88,31 +157,27 @@ function setColor($tag){
         <div class="wrapper">
             <div class="create_blog_form">
                 <form method="POST" action="<?php echo URLROOT?>/blog_post/create_posts" enctype="multipart/form-data">
-                    <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a><br>
+                    <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a>
+                    <h2 class="add_post_form_heading">Add New Post</h2>
+                    <?php echo '<img src=".././public/images/background7.png"   alt="card Picture"  class="edit_post_image" id="upload_image1">';?>
+                    <button type="" class="upload_images"><i class="fa-solid fa-upload "><span class="upload"></span></i></button>
+                    <span class="uploard_img_hidden"><input type="file" class="upload_file" name="image" onchange="loadFile1(event)" ></input></span>
+                    <br>
                     <label for="title" class="label"><b>Title</b></label><br>
-
                     <input type="text" name="title"  class="input_field" placeholder=""  required></input><br><br>
-                    
-
                     <label for="tags" class="label"><b>Tags/category</b></label><br>
-                    <!-- <input type="text" name="tag" class="input_field" placeholder=""   required></input><br><br> -->
                     <div class="f_filter_section">
                         <label for="innovations" id="filter_label"> <input type="radio" id="innovations" name="tag" value="Innovations">Innovations</label>
                         <label for="knowledge" id="filter_label"> <input type="radio" id="knowledge" name="tag" value="Knowledge">Knowledge</label><br>
                         <label for="new_technique" id="filter_label"><input type="radio" id="new_technique" name="tag" value="New_technique">New technique</label>
                         <label for="production" id="filter_label"><input type="radio" id="production" name="tag" value="Production">Production</label><br>
                     </div>
-
-                    
-
                     <label for="discription" class="label"><b>Discription</b></label><br>
                     <textarea width="250px" height="500px" class="discription" name="discription"  value="<?php echo $data1['discription']?>" required></textarea>
                     
-
+                    <br>
                     <div class="foot">
-                        <input type="file" class="upload_file" name="image"></input>
-                        <input type="submit" class="publish" name="submit" value="submit"/>
-
+                        <button type="submit" class="publish" name="submit" value="">Submit</button>
                     </div>
                 </form>
             </div>

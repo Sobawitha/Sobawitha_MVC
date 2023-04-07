@@ -19,9 +19,6 @@
 }
 
 .loginContent{
-    /* width: 30%;
-    height: 55%; */
-    /* margin-left: 180px; */
     display: flex;
     height:100%;
     overflow: hidden; /*try to skip this*/
@@ -33,8 +30,6 @@
 }
 
 .login_details{
-    /* background-color: #000000; */
-    /* border:1px solid black; */
     flex-basis: 60%;
     display: flex;
     height: 100%;
@@ -46,7 +41,7 @@
     /* border:1px solid black; */
     flex-basis: 50%;
     display: flex;
-    padding: 100px 80px;
+    padding: 100px 20px;
     height: 100%;
     align-content: center;
     justify-content: space-between;
@@ -67,12 +62,23 @@
     padding:50px 50px 50px 50px;
 }
 .login_intro h1, #back_home{
-    color: rgb(191, 236, 191);
+    color: rgb(225, 248, 225);
     text-align: left;
     font-weight:bold;
     font-size:18px;
     text-decoration:none;
+    font-weight:600px;
 }
+
+
+#home{
+    padding:7px 7px 9px 7px; 
+    border-radius: 30px;
+    border:1px solid rgb(225, 248, 225);
+    align-items: center;
+    font-size:12px;
+
+  }
 
 .login_intro p{
     color: #c0baba;
@@ -87,7 +93,8 @@
 }
 
 #leaf{
-    transform: translate(505px,15px);
+    display:none;
+    transform: translate(498px,13px);
     color: rgb(255, 255, 255);
     font-size:22px;
 }
@@ -142,10 +149,6 @@
 }
 
 .loginContent form label{
-    /* display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    float: left; */
     font-size: 18px;
     color: #000000;
     font-weight:bold;
@@ -165,13 +168,11 @@
     font-size: 15px;
     border: none;
     padding: 8px 20px;
-    /* width: 100%;
-    height: 30px; */
-    border-radius: 10px;
+    border-radius: 20px;
     color: black;
     background: white;
-    font-weight: 600;
-    border: 1px solid black;
+    /* font-weight: 600; */
+    border: 1px solid #f1eded;
     width: 400px;
     
 }
@@ -181,11 +182,7 @@
 }
 
 .loginContent form #login_btn{
-    /*
-    height: 50px;
-    margin-top: 30px; */
     padding: 10px 20px;
-    border-radius: 10px;
     color: white;
     background-color: #000000;
     cursor: pointer;
@@ -199,8 +196,7 @@
     font-size: 17px;
 }
 
-.loginContent form #login_btn
-    :hover{
+.loginContent form #login_btn:hover{
     background: #ffffff;
     color: #000000;
 }
@@ -251,45 +247,6 @@ input:-webkit-autofill:active{
 #sign_up{
     cursor:pointer;
 }
-
-/* 
-.popup{
-    width:200px;
-    background-color:white;
-    border-radius:6px;
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) scale(1);
-    text-align:center;
-    color:#333;
-    z-index:5000;
-    font-weight:bold;
-    font-size:12px;
-    padding:0 30px 30px;
-}
-
-#overlap1{
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    background-color:rgba(0, 0, 0, 0.5);
-    transition: opacity 500ms;
-    opacity:1;
-    z-index: 1;
-}
-
-Devin Aiya CS, [2/8/2023 11:16 AM]
-#fail{
-    color:red;
-    font-size: 30px;
-    transform: translateY(-10px);
-    z-index:50000;
-} */
-
-
 
 #addUserPopup {
     border: none;
@@ -357,12 +314,14 @@ Devin Aiya CS, [2/8/2023 11:16 AM]
   }
   
   #seller_reg, #buyer_reg, #supplier_reg{
+    margin-top:25px;
     font-size:15px;
     font-weight:bold;
     text-decoration:none;
   }
 
   #icon_reg{
-    font-size:45px;
+    padding-top:20px;
+    font-size:48px;
     color:rgb(7, 82, 66);
   }

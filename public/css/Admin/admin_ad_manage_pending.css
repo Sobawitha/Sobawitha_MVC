@@ -50,6 +50,10 @@
 
 #search{
   color:rgb(55, 100, 98);
+  padding: 5px;
+  border-radius: 25px;
+  background-color: #f9f9f9;
+  border: none;
 }
 
 .search_bar input:focus{

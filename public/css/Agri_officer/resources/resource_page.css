@@ -25,7 +25,7 @@
 }
 
 .search_bar input{
-    width:94%;
+    width:92%;
     border-radius: 20px;
     border:none;
     font-family:'Montserrat', sans-serif;
@@ -34,6 +34,10 @@
 #search{
     color:rgb(74, 74, 63);
     font-size:15px;
+    padding: 5px;
+    border-radius: 25px;
+    background-color: #f9f9f9;
+    border: none;
 }
 
 .search_bar input:focus{
@@ -340,6 +344,7 @@ hr{
     height:415px;
     font-size:15px;
     justify-content:center;
+    text-decoration:none;
 
 }
 
@@ -350,16 +355,17 @@ hr{
     text-align:center;
     margin:10px;
     padding-bottom:20px;
+    text-decoration:none;
 }
 .choice_topic{
     color:rgb(1, 18, 1);
     font-weight:bold;
     font-size:15px;
+    text-decoration:none;
 }
 
 .feed_discription{
     box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2); 
-    height:80px;
     background-color:rgb(247, 255, 255);
     justify-content:center;
     margin-top:10px;
@@ -372,22 +378,12 @@ hr{
     padding-bottom:10px;
     padding-left:30px;
     padding-right:10px;
+    
 }
 
 .feed_discription:hover{
     background-color: rgb(253, 255, 241);
 }
-
-#visit{
-    padding-left: 85%;
-    transform: translateY(-75px);
-    font-size:15px;
-    cursor:pointer;
-    /* color:rgb(11, 157, 79); */
-    color:rgb(152, 196, 194);
-    /* color:salmon; */    
-}
-
 
 #ok{
     position:absolute;
@@ -449,38 +445,57 @@ hr{
 }
 
 .pages li:hover{
-    background-color:rgb(0, 0, 0);
-    color:white;
+    /* background-color:rgb(0, 0, 0);
+    color:white; */
+    background-color: rgb(152, 196, 194);
+    color: white;
     cursor:pointer;
     box-shadow:0px 8px 16px 0px rgba(0,0,0,0.1);
 
 }
 
 .pagination{
-    margin-left:50%;
+    margin-left:49%;
     margin-top:2%;
     display:inline-block;
 }
 
 .pagination_number{
-    float:left;
-    padding:8px 10px;
+    float: left;
+    padding: 8px 10px;
     text-decoration: none;
-    color:rgb(26, 57, 12);
-    width:20px;
-    height:20px;
-    background-color: rgb(218, 239, 210);
-    margin-left:3px;
-    margin-right:3px;
-    text-align:center;
-    border-radius: 10px;;
+    color: rgb(41, 158, 164);
+    width: 20px;
+    height: 20px;
+    background-color: rgb(241, 249, 238);
+    margin-left: 3px;
+    margin-right: 3px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
 }
 
 .pagination_number:hover{
-    background-color: rgb(132, 162, 120);
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 
 #forward_bracket, #backword_bracket{
     transform: translateY(2px);
 }
 
+#category_type{
+    height:35px;
+    background-color: transparent;
+    color:rgb(162, 162, 89);
+    border:1px solid rgb(162, 162, 89);
+}
+
+#filter_submit_btn{
+    height:35px;
+    background-color: transparent;
+    color:rgb(255, 255, 255);
+    border:1px solid rgb(162, 162, 89);
+    background-color: rgb(162, 162, 89);
+    padding:0px 10px;
+}

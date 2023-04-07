@@ -31,7 +31,7 @@ else if($_SESSION['user_flag'] == 5){
             
     </div>
     <div class="section_2">
-        <p class="topic"> <i class="fa-solid fa-list" id="topic_icon"></i><span class="topic_category"> All help categories </span></p>
+        <span class="topic"> All help categories </span><br>
         <div class="complaint_category">
         
         <div class="category_card">
@@ -66,11 +66,9 @@ else if($_SESSION['user_flag'] == 5){
 
         </div>
 
-        <!-- <hr class="seperate_category"> -->
+        <span class="topic_for_contact_us_type">Contact us</span><br>
 
-        <p class="topic_for_contact_us_type"><i class="fa-solid fa-user-check" id="topic_icon"></i><span class="topic_icon">Contact us</span></p>
-
-        <div class="contact_us_type">
+        <div class="contact_us_type" class="topic_icon">
 
             <div class="contact_us_card">
                 <i class="fa-regular fa-comments" id="icon_contact_type"></i><br>
@@ -106,14 +104,22 @@ else if($_SESSION['user_flag'] == 5){
         <form method="POST" action="<?php echo URLROOT?>/complaint/add_complaint" enctype="multipart/form-data">
 
                     <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a><br>
-                    <i class="fa-solid fa-users" id='users'></i><br>
-                    <p class="contact_form_discription">Please select a topic below related to your inquiry. We'll show blog posts that provide answers to some most common quections. If you dont find what you need, click 
+                    <img src=".././public/images/customcare.png" id="custom_care"/>
+                    <p class="contact_form_discription">Please select a topic below related to your inquiry. We'll show blog posts & forum that provide answers to some most common quections. If you dont find what you need, click 
                         through the prompts to access our contact form. </p>
                     <label for="email" class="label"><b>Your Email Address</b></label><br>
                     <input type="text" name="email"  class="input_field" placeholder="you@gmail.com"  required></input><br><br>
 
                     <label for="type" class="label"><b>Type</b></label><br>
-                    <input type="text" name="type" class="input_field" placeholder=""   required></input><br><br>
+
+                    <div class="f_filter_section">
+                        <label for="order_status_product_availability" id="filter_label"> <input type="radio" id="order_status" name="type" value="order_status_product_availability">Order status,product availability</label>
+                        <label for="account_access" id="filter_label"> <input type="radio" id="account_access" name="type" value="account_access">Account access</label><br>
+                        <label for="technical_issues" id="filter_label"><input type="radio" id="technical_issues" name="type" value="technical_issues">Technical issues</label>
+                        <label for="buisness_partnership" id="filter_label"><input type="radio" id="buisness_partnership" name="type" value="buisness_partnership">Buisness partnership</label><br>
+                        <label for="legal_and_private_question" id="filter_label"><input type="radio" id="legal_and_private_question" name="type" value="legal_and_private_question">Legal & private question</label>
+                        <label for="payments" id="filter_label"><input type="radio" id="payments" name="type" value="payments">Payments</label>
+                    </div>
                     
 
                     <label for="subject" class="label"><b>Subject</b></label><br>

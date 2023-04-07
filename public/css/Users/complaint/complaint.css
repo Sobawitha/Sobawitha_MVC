@@ -5,7 +5,6 @@
 .body{
     display:grid;
     grid-template-columns:20% 60% 20%;
-    height:100%;
     padding-top:80px;
     
 }
@@ -27,6 +26,7 @@
     border-radius:10px;
     box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
     border-top:5px solid rgb(11,164,118);
+    align-items:center;
 }
 .conatct_us_section_body .header{
     font-size:15px;
@@ -37,6 +37,7 @@
     font-size:12px;
     line-height: 25px;
     color:rgb(69, 69, 69);
+    
 }
 
 .conatct_us_section_body .visit_contact_us_form{
@@ -51,6 +52,7 @@
     width:100%;
     text-align: center;
     margin-top:25px;
+    
 }
 
 .conatct_us_section:hover{
@@ -79,7 +81,11 @@
 }
 
 #search{
-    color:rgb(41, 171, 56);
+    color:rgb(11, 164, 118);
+    padding: 5px;
+    border-radius: 25px;
+    background-color: #f9f9f9;
+    border: none
 }
 
 .search_bar input:focus{
@@ -92,21 +98,21 @@
     cursor:pointer;
 }
 .search_bar .search_content{
-    border:2px solid rgb(41, 171, 56);
+    border:2px solid rgb(11, 164, 118);
     border-radius:20px;
     padding:6px;
     padding-left:15px;
 }
 
 .search_bar input{
-    width:94%;
+    width:92%;
     border-radius: 20px;
     border:none;
     font-family:'Montserrat', sans-serif;
 }
 
 #search{
-    color:rgb(41, 171, 56);
+    color:rgb(11, 164, 118);
 }
 
 .search_bar input:focus{
@@ -130,11 +136,11 @@
     margin-top:50px;
 }
 
-.individual_complaint{
+#individual_complaint{
     padding:20px;
     background-color:white;
     box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
-    border-left:4px solid green;
+    border-left:4px solid rgb(11, 164, 118);
     width:95%;
     margin-bottom:15px;
     border-radius:5px;
@@ -151,32 +157,63 @@
     font-weight:bold;
     margin-left:10px;
     transform: translateY(-20px);
+    color:rgb(100, 99, 99);
 }
 
 .time{
-    font-size: 12px;
-    margin-left:40px;
+    font-size: 11px;
+    margin-left:50px;
     color:rgb(89, 88, 88);
+
 }
 
 .footer{
-    margin-top:10px;
+    margin-top:20px;
+    display:flex;
 }
 
 .edit , .delete{
     font-size: 10px;
     margin-left:5px;
-    color:rgb(45, 45, 45);
+    color:rgb(77, 76, 76);
+    /* color:rgb(175, 153, 124); */
 }
 
 #editbtn , #deletebtn{
     font-size: 10px;
-    color:rgb(45, 45, 45);
+    color:rgb(72, 72, 72);
+    /* color:rgb(175, 153, 124); */
 }
 
 #deletebtn{
     margin-left:25px;
 }
+
+.reply_visible_click_button{
+    margin-left: 20px;
+    border: none;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgb(240, 255, 250);
+}
+
+.display_reply_btn_text {
+    color: darkgreen;
+    font-size: 10px;
+    font-family: 'Montserrat';
+  }
+
+  .drop_down_btn {
+    font-size: 10px;
+    margin-right: 7px;
+    color: darkgreen;
+  }
+
+  
 
 
 .section_divide_hr{
@@ -193,6 +230,57 @@
     color:rgb(65, 64, 64);
     margin-left:30px;
     line-height: 25px;
+}
+
+#angle_right{
+    transform: translateY(50px);
+}
+
+.display_admin_reply{
+    display:none;
+}
+.admin_reply{
+    margin-left:25px;
+    padding:20px;
+    background-color:rgb(244, 242, 242);
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    border-left:4px solid rgb(95, 99, 97);
+    width:92%;
+    margin-bottom:15px;
+    margin-top:-15px;
+    border-radius:5px;
+}
+
+.admin_reply .name{
+    font-weight: bold;
+    color:rgb(81, 80, 80);
+    font-size:13px;
+    display:flex;
+    align-items: center;
+    gap:15px;
+    
+}
+
+.admin_reply .reply{
+    margin-top:15px;
+}
+
+.admin_reply .reply, .thank{
+    font-weight: 600px;
+    color:rgb(120, 118, 118);
+    font-size:12px;
+    
+}
+.admin_reply .date{
+    font-weight:100px;
+    color:gray;
+    font-size: 10px;
+}
+
+.admin_image{
+    width:40px;
+    height:40px;
+    border-radius: 25px;;
 }
 
 #circle1{
@@ -238,7 +326,6 @@
     padding:4px;
     border-radius:10px;
     font-size:8px;
-    
 }
 
 .set-blue{
@@ -265,7 +352,7 @@
 }
 
 .set-white{
-    color:rgb(254, 252, 234);
+    color:rgb(190, 184, 135);
     padding:4px;
     border-radius:10px;
     font-size:8px;
@@ -290,4 +377,241 @@
 }
 #pending{
     accent-color:  rgb(134, 134, 53);
+}
+
+/*delete popup*/
+
+/*diaplog box for delete*/
+
+#deletePopup {
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:45%;
+    margin-top:15%;
+  }
+  #deletePopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  .deletePopup { 
+    min-height: 150px;
+    padding:2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align:center; 
+  }
+  
+  .deletePopup i{
+    font-size:50px;
+    color:rgb(213, 4, 4);
+  }
+  
+  .deletePopup h2{
+    font-size:15px;
+    color:rgb(2, 55, 46);
+  }
+
+  .deletePopup p{
+    font-size:13px;
+    color:#868282;
+  }
+  
+  .dialog_content{
+    display: flex;
+    align-content:space-around;
+    gap: 30px;
+  }
+  
+  #cancelbtn{
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(132, 129, 129);
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    color:white;
+  }
+  
+  #delete{
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(170, 27, 27);
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    color:white;
+  }
+
+ /*updte popup form*/
+
+ #updatePopup {
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:35%;
+    margin-top:1%;
+    z-index: 8000;
+  }
+  #updatePopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  .updatePopup { 
+    min-height: 150px;
+    padding:2rem;
+  }
+ 
+.contact_us_form{
+    margin:0.1% 32%;
+    padding:10px 20px;
+    padding-right:0px;
+    border-radius:10px;
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    background-color:rgb(247, 255, 255);
+    width:35%;
+}
+
+.contact_form_discription{
+    font-size:12px;
+    text-align:center;
+    line-height: 20px;
+    padding:20px;
+}
+
+.contact_us_form #users{
+    font-size: 40px;
+    transform: translateX(230px);
+    margin-bottom:10px;
+}
+
+.closebtn{
+    position:relative;
+    font-size:20px;
+    font-weight:bold;
+    /* color:#f9f8f8; */
+    color:#678e5f;
+    cursor:pointer;
+    padding-left:94%;
+}
+
+.closebtn :hover{
+    color:black;
+}
+
+form{
+    width:100%;
+    align-items: center;
+}
+
+form .label{
+    font-size:14px;
+}
+
+form .input_field{
+    width:95%;
+    height:40px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    /* border-bottom:2px solid green;
+    background-color:transparent; */
+    font-family: 'Montserrat', sans-serif; 
+    margin-top:15px;
+    border:2px solid rgb(250, 250, 250);
+    background-color: white;
+}
+
+form .input_field:focus{
+    outline:none;
+}
+
+form .discription{
+    width:95%;
+    height:50px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    /* border-bottom:2px solid green;
+    background-color:transparent; */
+    border:2px solid rgb(250, 250, 250);
+    background-color: white;
+
+}
+
+form .discription:focus{
+    outline:none;
+}
+
+.send{
+    border:none;
+    background-color:black;
+    color:white;
+    padding:8px;
+    font-size:12px;
+    font-weight:500px; 
+    font-family:'Montserrat';
+    width:75px;
+    cursor:pointer;
+}
+
+
+.f_filter_section{
+    font-size:12px;
+    list-style: none; 
+    color:rgb(65, 64, 64);
+    line-height: 25px;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+
+
+#order_status{
+    accent-color:rgb(228, 196, 244);
+}
+
+#account_access{
+    margin-left:80px;
+    accent-color: rgb(200, 241, 241);
+}
+#technical_issues{
+    accent-color:  salmon;
+}
+#buisness_partnership{
+    margin-left:174px;
+    accent-color:  rgb(241, 219, 219);
+
+}
+#legal_and_private_question{
+    accent-color:  rgb(254, 252, 234);
+}
+#payments{
+    margin-left:127px;
+    accent-color:  rgb(248, 241, 184);
+}
+
+#custom_care{
+    width:75px;
+    height:75px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin-left:36%;
+  }
+
+  .update_popup_title{
+    display:flex;
+    text-align: center;
+    align-items:center;
+    justify-content: center;
+}
+
+#closebtn{
+    position:relative;
+    font-size:20px;
+    font-weight:bold;
+    color:#678e5f;
+    cursor:pointer;
+    padding-left:94%;
 }

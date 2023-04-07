@@ -16,7 +16,7 @@
                     <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
                     <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
                     <li><a href="">Sell</a></li>
-                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
+                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Login</a></li>    
                 </ul>
             </nav>
             <hr class="home_hr">
@@ -40,11 +40,11 @@
             </div>
 
             <div class="home_icon_name">
-                <span id="name">Buy</span>
-                <span id="name">Sell</span>
-                <span id="name">Forum</span>
-                <span id="name">Information</span>
-                <span id="name">Blogs</span>
+                <span class="name" id="nameB">Buy</span>
+                <span class="name" id="nameS">Sell</span>
+                <span class="name" id="nameF">Forum</span>
+                <span class="name" id="nameI">Information</span>
+                <span class="name" id="nameBL">Blogs</span>
             </div>
 
             <div class="down_arrow">
@@ -61,7 +61,7 @@
         <br>
         <span class="second_part_discription">is an online platform driven by agriculture nature by involving more people in their people in their in</span>
         
-        <table style="width:40%">
+        <!-- <table style="width:60%">
         <tr>
             <th colspan="2" class="img11" background="../public/images/buying.jpg" ><span class="td_text">buying</span></td>
             <th rowspan="2" class="img12" background="../public/images/selling.jpg"><span class="td_text">selling</span></td>
@@ -70,7 +70,37 @@
             <th  class="img21"  background="../public/images/instructing.jpg"><span class="td_text">Instructing</span></td>
             <th class="img22" background="../public/images/qestioning.jpg"><span class="td_text" >Questioning</span></td>
         </tr>
-        </table>
+        </table> -->
+
+        <div class="service_cards">
+            <div class="individual_service_card">
+                <i class="fa-solid fa-store" id="icon"></i>
+                <br>
+                <span class="service_name">Selling</span>
+                <span class="overlay">
+                      <p><h3>Selling</h3>Fertilizer timing and application Plants require different foods at different times in  their 
+                        life cycletheir 
+                        life cycle.</p>
+                </span>
+            </div>
+
+            <div class="individual_service_card">
+                <i class="fa-brands fa-sellsy" id="icon"></i>
+                <span class="service_name">Buying</span>
+            </div>
+
+            <div class="individual_service_card">
+                <i class="fa-solid fa-person-chalkboard" id="icon"></i>
+                <span class="service_name">Instructing</span>
+            </div>
+
+             <div class="individual_service_card">
+                <i class="fa-brands fa-forumbee" id="icon"></i>
+                <span class="service_name">Q&A</span>
+            </div>
+        </div>
+
+        
    
    
     </div>
@@ -123,7 +153,7 @@
         <div class="collection_product_card_setion">
 
         <?php
-            for($i=1; $i<=12; $i++){
+            for($i=1; $i<=10; $i++){
                 ?>
                 <div class="adv_card">
                 <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;

@@ -54,11 +54,19 @@ class complaint extends Controller
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $search_cont = trim($_POST['search_text']);
-            $search_complaint = $this->complaint_model->search_bar($search_cont);
-            $complaint = $this->complaint_model->display_all_complaint(); //data object array
 
-            if($search_cont == ''){
+            if(isset($_POST['search_text'])){
+                $search_cont = trim($_POST['search_text']);
+            }
+            else{
+                $search_cont='';
+            }
+            $filter_type = trim($_POST['complaint_type']);
+            $search_complaint = $this->complaint_model->search_bar($search_cont);
+            $complaint = $this->complaint_model->display_all_complaint($filter_type); //data object array
+            
+
+            if($search_cont == '' ){
                 $data = [
                     'complaint' => $complaint,
                 ];    
@@ -81,6 +89,29 @@ class complaint extends Controller
             $this->view('Users/complaint/v_complaint', $data);
         }
     
+    }
+
+    public function delete_complaint(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $complaint_id = trim($_POST['deletepost']);
+            $this->complaint_model->delete_complaint($complaint_id);
+        }
+        redirect('complaint/display_all_complaint');
+    }
+
+    public function update_complaint(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'email' => trim($_POST['email']),
+                'type' => trim($_POST['type']),
+                'subject' => trim($_POST['subject']),
+                'discription'  => $_POST['discription'],
+                'complaint_id' =>$_POST['updatecomplaint']
+            ];
+            $this->complaint_model->update_complaint($data);
+        }
+        redirect('complaint/display_all_complaint');
     }
     
     

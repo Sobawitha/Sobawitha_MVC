@@ -125,7 +125,7 @@
 
 .topic, .topic_for_contact_us_type{
     font-weight: bold;
-    font-size:14px;
+    font-size:16px;
     color:rgb(3, 118, 84);
 }
 
@@ -159,27 +159,25 @@
 }
 
 .contact_us_form{
-    margin:2% 28%;
-    padding:20px;
+    margin:0.1% 32%;
+    padding:10px 20px;
     padding-right:0px;
     border-radius:10px;
     box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
     background-color:rgb(247, 255, 255);
-    width:40%;
+    width:35%;
 }
 
 .contact_form_discription{
     font-size:12px;
     text-align:center;
-    margin-bottom:50px;
     line-height: 20px;
     padding:20px;
-    /* transform: translateX(30px); */
 }
 
 .contact_us_form #users{
     font-size: 40px;
-    transform: translateX(270px);
+    transform: translateX(230px);
     margin-bottom:10px;
 }
 
@@ -187,9 +185,14 @@
     position:relative;
     font-size:20px;
     font-weight:bold;
-    color:#ff0000;
+    /* color:#f9f8f8; */
+    color:#678e5f;
     cursor:pointer;
-    padding-left:95%;
+    padding-left:94%;
+}
+
+.closebtn :hover{
+    color:black;
 }
 
 form{
@@ -203,14 +206,16 @@ form .label{
 
 form .input_field{
     width:95%;
-    height:20px;
+    height:40px;
     border-top:none;
     border-left:none;
     border-right:none;
-    border-bottom:2px solid green;
-    background-color:transparent;
+    /* border-bottom:2px solid green;
+    background-color:transparent; */
     font-family: 'Montserrat', sans-serif; 
     margin-top:15px;
+    border:2px solid rgb(250, 250, 250);
+    background-color: white;
 }
 
 form .input_field:focus{
@@ -219,12 +224,14 @@ form .input_field:focus{
 
 form .discription{
     width:95%;
-    height:150px;
+    height:50px;
     border-top:none;
     border-left:none;
     border-right:none;
-    border-bottom:2px solid green;
-    background-color:transparent;
+    /* border-bottom:2px solid green;
+    background-color:transparent; */
+    border:2px solid rgb(250, 250, 250);
+    background-color: white;
 
 }
 
@@ -243,3 +250,48 @@ form .discription:focus{
     width:75px;
     cursor:pointer;
 }
+
+
+.f_filter_section{
+    font-size:12px;
+    list-style: none; 
+    color:rgb(65, 64, 64);
+    line-height: 25px;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+
+
+#order_status{
+    accent-color:rgb(228, 196, 244);
+}
+
+#account_access{
+    margin-left:80px;
+    accent-color: rgb(200, 241, 241);
+}
+#technical_issues{
+    accent-color:  salmon;
+}
+#buisness_partnership{
+    margin-left:174px;
+    accent-color:  rgb(241, 219, 219);
+
+}
+#legal_and_private_question{
+    accent-color:  rgb(254, 252, 234);
+}
+#payments{
+    margin-left:127px;
+    accent-color:  rgb(248, 241, 184);
+}
+
+#custom_care{
+    width:100px;
+    height:100px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin-left:36%;
+  }
+

@@ -23,14 +23,10 @@ function count_like_dislike(){
         var current_like_count=document.getElementById("like_count").innerHTML;
         if(!click){
             click=true;
-            // var new_like_count=parseInt(current_like_count)+1;
-            // document.getElementById("like_count").innerHTML=new_like_count;
             document.getElementById("heart_icon").innerHTML=`<i class="fa fa-heart" aria-hidden="true" id="afterlikehearticon" ></i>`;
         }
         else if(current_like_count>0){
            click=false;
-            // var new_like_count=parseInt(current_like_count)-1;
-            // document.getElementById("like_count").innerHTML=new_like_count;
             document.getElementById("heart_icon").innerHTML=`<i class="fa-regular fa-heart" id="hearticon"></i>`;
         }
     })
@@ -88,6 +84,7 @@ function save_reply(id){
     document.getElementById(`btn-${id}`).style.display='none';
     
 }
+
 function display_reply(id){
     if(document.getElementById(`display_reply_all-${id}`).style.display=='none'){
         document.getElementById(`display_reply_all-${id}`).style.display='block';
@@ -99,3 +96,22 @@ function display_reply(id){
         document.getElementById(`display_reply_btn_icon-${id}`).innerHTML=document.getElementById(`arrow_up-${id}`).innerHTML;
     }
 }
+
+
+//delete reply
+function delete_comment(id) {
+    const deletePopup = document.getElementById('deletePopup')
+    document.getElementById('cancelbtn').addEventListener('click',() => deletePopup.close());
+    deletePopup.showModal();
+    document.getElementById('delete').value=id;
+    
+  }
+  
+  
+  function delete_reply(id) {
+    const deletePopup = document.getElementById('deletereplyPopup')
+    document.getElementById('canceldeletereplybtn').addEventListener('click',() => deletePopup.close());
+    deletePopup.showModal();
+    document.getElementById('deletereplybtn').value=id;
+    
+  }

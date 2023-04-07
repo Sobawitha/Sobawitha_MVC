@@ -13,40 +13,6 @@
     background-color:white;
 }
 
-#backicon{
-    padding-left:60px;
-    transform: translateY(-25px);
-    color:lavender;
-    font-size:30px;
-}
-
-#to_resources{
-    display:none;
-    position:absolute;
-    font-size:10px;
-    font-weight:bold;
-    color:rgb(2, 53, 16);
-    background-color:lavender;
-    padding:6px;
-    border-radius:7px;
-    margin-left:60px;
-    white-space: nowrap;
-    transition:opacity 0.5s ease;
-    transform: translate(-10px,-10px);
-}
-
-#to_resources::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    transform:translate(-50%,-120%);
-    border:15px solid;
-    border-color:transparent rgba(255, 255, 255, 0) rgb(230,230,250) transparent;
-}
-
-.back_resources:hover + #to_resources{
-    display:block;
-}
 
 
 
@@ -91,7 +57,7 @@
 #usercommon{
     background-color: rgb(2, 42, 35);
     color:white;
-    padding:5.5px 9px;
+    padding:5.5px 12px;
     border-radius: 25px;
     font-weight:bold;
     border:2px solid rgb(216, 218, 215);
@@ -253,13 +219,12 @@
 }
 
 .blog_post_image{
-    width:250px;
+    width:300px;
     transform: translateY(-7px);
     height:250px;
     margin-left:18px;
     margin-right:20px;
-    /* border-radius:5px; */
-    /* float:left; */
+
 }
 
 .blog_reading_content{
@@ -326,7 +291,7 @@
     width:180px;
     border-radius:10px;
     background-color:transparent;
-    border:1px solid crimson;
+    border:1px solid rgb(231, 165, 42);
     font-weight:bold;
     transform: translateX(375px);
     cursor:pointer;
@@ -335,14 +300,14 @@
 }
 
 #afterlikehearticon{
-    color:crimson;
+    color:rgb(231, 165, 42);
     font-size:18px;
 }
 
 #heart_icon{
     margin-right:20px;
     font-size:20px;
-    color:crimson;
+    color:rgb(231, 165, 42);
 }
 
 /*Related post*/
@@ -361,7 +326,7 @@
 
 .post_discription{
     box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2); 
-    height:80px;
+    height:100px;
     background-color:rgb(247, 255, 255);
     justify-content:center;
     margin-top:10px;
@@ -370,9 +335,10 @@
     text-align:left;
     border-radius:8px;
     font-size:12px;
-    padding-top:7px;
+    /* padding-top:7px; */
     padding-bottom:10px;
     padding-left:30px;
+    align-items: center;
 }
 
 .feed_discription:hover{
@@ -381,17 +347,17 @@
 
 #visit{
     padding-left: 85%;
-    transform: translateY(-75px);
+    transform: translateY(15px);
     font-size:15px;
     cursor:pointer;
-    color:salmon;
+    color:rgb(231, 165, 42);
     
 }
 
 
 #match{
     position:absolute;
-    color:salmon;
+    color:rgb(231, 165, 42);
     font-size: 22px;
     transform: translate(-40px,30px);
     z-index:500;
@@ -431,7 +397,7 @@
 
 .user{
     background-color: rgb(49, 92, 85);
-    padding:5.5px 9px;
+    padding:5.5px 12px;
     border-radius: 25px;
     font-weight:bold;
     border:2px solid rgb(216, 218, 215);
@@ -440,7 +406,7 @@
 
 .user-reply{
     background-color: rgb(236, 253, 250);
-    padding:6px 8px;
+    padding:6px 10px;
     border-radius: 25px;
     font-weight:bold;
     border:2px solid rgb(216, 218, 215);
@@ -451,7 +417,7 @@
 #usercommon{
     background-color: rgb(2, 42, 35);
     color:white;
-    padding:5.5px 9px;
+    padding:5.5px 12px;
     border-radius: 25px;
     font-weight:bold;
     border:2px solid rgb(216, 218, 215);
@@ -612,4 +578,96 @@
     color:darkgreen;
 }
 
+/*diaplog box for delete*/
 
+#deletePopup {
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:45%;
+    margin-top:15%;
+  }
+  #deletePopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+#deletereplyPopup{
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:45%;
+    margin-top:15%;
+}
+#deletereplyPopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+}
+.deletePopup { 
+    min-height: 150px;
+    padding:2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align:center; 
+  }
+  
+  .deletePopup i{
+    font-size:50px;
+    color:rgb(213, 4, 4);
+  }
+  
+  .deletePopup h2{
+    font-size:15px;
+    color:rgb(2, 55, 46);
+  }
+
+  .deletePopup p{
+    font-size:13px;
+    color:#868282;
+  }
+  
+  .dialog_content{
+    display: flex;
+    align-content:space-around;
+    gap: 30px;
+  }
+  
+  #canceldeletereplybtn{
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(132, 129, 129);
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    color:white;
+  }
+  
+  #deletereplybtn{
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(170, 27, 27);
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    color:white;
+  }
+
+  #cancelbtn{
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(132, 129, 129);
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    color:white;
+  }
+  
+  #delete{
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(170, 27, 27);
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    color:white;
+  }
