@@ -6,7 +6,7 @@
 }
 .body{
   display:grid;
-  grid-template-columns:20% 70% 10%;
+  grid-template-columns:20%  78% 2%;
   height:100%;
   padding-top:80px;
   
@@ -87,12 +87,14 @@
 
 tr{
   height:60px;
+  text-align: center;
 }
 
 .order{
   font-size: 14px;
   border:1px solid lavender;
   border-radius: 20px;
+  text-align: left;
 }
 
 
@@ -130,7 +132,7 @@ tr{
   padding:15px; 
   margin:0px 0px 25px 50px;
   line-height: 15px;
-  color:rgb(90, 90, 125);
+  color:#5a5a7d;
   width:445%;
 }
 #right{
@@ -154,7 +156,7 @@ tr{
 
 .payment_amount{
   padding-left:45px;
-  color:rgb(79, 43, 43);
+  color:#4f2b2b;
   font-size:14px;
   font-weight:bold;
   
@@ -192,3 +194,43 @@ input[type=radio]{
   accent-color: crimson;
 }
 
+.comp_category{
+  background-color: #376462;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  width: 100px;
+}
+
+#ignore{
+   color: crimson;
+   background-color: transparent; 
+   border: none;
+   cursor: pointer;
+
+}
+
+#view_more{
+   color: 06543c ;
+   background-color: transparent; 
+   border: none;
+   cursor: pointer;
+
+}
+
+#take_action{
+  color: #5a5a7d ;
+   background-color: transparent; 
+   border: none;
+   cursor: pointer;
+
+}
+
+.action{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  height: 15vh;
+  align-items: center;
+  padding: 10px;
+}

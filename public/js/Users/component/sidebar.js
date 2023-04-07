@@ -5,20 +5,16 @@
 //     }
 // });
 
+// Get the current URL path
+var path = window.location.pathname;
 
-$(document).ready(function() {
-    // Update the active tab on page load
-    updateActiveTab();
-    
-    // Update the active tab whenever a new tab is clicked
-    $('.tab').click(function() {
-      updateActiveTab();
-    });
-  });
-  
-  function updateActiveTab() {
-    var activeTab = $('.tab.active');
-    $('.tab').removeClass('active');
-    activeTab.addClass('active');
+// Get all links in the sidebar
+var links = document.querySelectorAll('.sidebar ul li a');
+// Loop through the links and add the "active" class to the one that matches the current path
+for (var i = 0; i < links.length; i++) {
+  var link = links[i];
+
+  if (link.getAttribute('href') === path) {
+    link.classList.add('active');
   }
-  
+}

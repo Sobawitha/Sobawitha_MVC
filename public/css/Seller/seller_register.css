@@ -18,6 +18,7 @@
     background-color:black;
     padding: 160px 70px;
     margin:0;
+    height: 135vh;
 }
 
 .signup_seller_container .signup_seller_intro h1{
@@ -56,7 +57,7 @@
 .signup_seller_content{
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 120vh;
     align-items: center;
     
     
@@ -79,10 +80,10 @@
     flex-direction: column;
     height: 80vh;
     padding: 0px 100px;
-    margin-top: 88px;
+    margin-top: 80px;
 }
 
-.s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn{
+.s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn, #address_line_four{
     border-radius: 10px;
     width: 300px;
     padding: 5px;
@@ -109,6 +110,7 @@
     color: white;
     font-weight: bold;
     padding:10px;
+    margin-top:10px;
     border-radius:40px;
 }
 
@@ -125,7 +127,7 @@
 }
 
 .error_msg{
-    font-size: 15px;
+    font-size: 14px;
     color: #FF0000;
 }
 

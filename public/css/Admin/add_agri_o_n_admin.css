@@ -8,14 +8,9 @@
   
 }
 
-.section_1{
-  /* background-color:bisque; */
-}
-
 .a_add_admin_maincontent{
   margin-right: 2rem;
 }
-
 
 .add_container{
   margin-left: 100px;
@@ -34,16 +29,6 @@
   position: relative;
   font-weight:bold;
 }
-.add_container .title::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 30px;
-  border-radius: 5px;
-  /* background: linear-gradient(135deg, #e6ede6, #004100); */
-}
 
 .add_content form .user-details{
   display: flex;
@@ -55,14 +40,14 @@
 }
 form .user-details .input-box{
   margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
+  width: calc(100% / 2 - 10px);
 }
 form .input-box span.details{
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
 }
-.user-details .input-box input ,#propic,#admin_gender, #agri_reg_button, #a_pro_pic, #a_gender{
+.user-details .input-box input ,#admin_gender, #agri_reg_button, #a_pro_pic, #a_gender ,#address_line_four{
   height: 45px;
   width: 100%;
   outline: none;
@@ -73,43 +58,13 @@ form .input-box span.details{
   border:1px solid lavender;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
+
 }
 .user-details .input-box input:focus,
 .user-details .input-box input:valid{
   border-color: #e6ede6;
 }
- form .gender-details .gender-title{
-  font-size: 20px;
-  font-weight: 500;
- }
- form .category{
-   display: flex;
-   width: 80%;
-   margin: 14px 0 ;
-   justify-content: space-between;
- }
- form .category label{
-   display: flex;
-   align-items: center;
-   cursor: pointer;
- }
- form .category label .dot{
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  margin-right: 10px;
-  background: #d5cdcd;
-  border: 5px solid transparent;
-  transition: all 0.3s ease;
-}
- #dot-1:checked ~ .category label .one,
- #dot-2:checked ~ .category label .two{
-   background: black;
-   border-color: #d9d9d9;
- }
- form input[type="radio"]{
-   display: none;
- }
+
  form .reg_button{
    height: 45px;
    margin: 35px 0
@@ -133,7 +88,7 @@ form .input-box span.details{
   /* transform: scale(0.99); */
   background:  #faffff;
   color: #000000;
-  border:none;
+  border:1px solid #000000;
   }
 
 #agri_reg_button {
@@ -154,6 +109,25 @@ form .input-box span.details{
 .error_msg{
   font-size: 15px;
   color: #FF0000;
+}
+
+.file-input {
+  position: relative;
+}
+
+#propic , #qualification{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 8px;
+  padding-left: 15px;
+  /* border: 1px solid #ccc; */
+  border:1px solid lavender;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+
 }
 
   @media(max-width: 584px){

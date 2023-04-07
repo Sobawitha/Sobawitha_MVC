@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="../css/Users/users/login.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
-<script src="../js/Users/login.js"></script>      
+<script src="../js/Login/login.js"></script>
+
+
 <section class="login">
         <div class="loginContent">
             
@@ -63,26 +65,58 @@
 
                             <div class="login_inputs">
                                 <label>Email</label><br>
-                                <input type="text" id="email"  name="email" placeholder = "Enter your email.."><br>
+                                <input type="text"  name="email" id="email"  placeholder = "Enter your email.."><br>
                                 <span class="error_msg"><?php echo $data['email_err'] ?></span>
                 
                                 <br><label>Password</label><br>
-                                <input type="password" id="password"  name="password" placeholder="Enter your password.."><br>
+                                <input type="password" name="password" id="password" placeholder="Enter your password.."><br>
                                 <span class="error_msg"><?php echo $data['password_err'] ?></span><br>
                 
-                                <br><p id="forget_pw">Forgot password?</p> 
-                                <button type="submit" name="submit" id="login_btn">Log In</button>
+                                <br><p id="forget_pw"><span onclick="window.location='<?php echo URLROOT?>/Login/forgot_password'" id="forgot_pwd">Forgot password?</p></span> 
+                                
+                                <button type="submit" name="login_btn" id="login_btn">Log In</button>
                             
                             </div>
                         
                         </div>
-                    </form>
+
+                        
+                  
 
                     
+                   
                     
+                       
+                        
+                        
+                    
+
+              
 
                 </div>
-    
+                    </form>
+
+            
+                       <!-- Forgot Password dialog -->
+                       <!-- <dialog id="forgotPasswordDialog">
+                            <div class="forgotPasswordDialog">
+                            <div class="dialog__heading">
+                            <h2>Forgot Password</h2>
+                            <button id="closebtnforgot" type="button">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </button>
+                            </div>
+                            <form method="POST"> 
+                            <div class="dialog__content_forgot">
+                 
+                            <label for="email" id="forgot_label">Enter your email address:</label> 
+                            <input type="email" name="email_forgot" id="email_forgot" placeholder="Enter your account email.." name="email" required>  
+                            <button type="submit" name="forgot_btn" id="forgot_btn">Submit</button>
+                            
+                            </div>
+                            </form>
+                            </div>
+                        </dialog> -->
         </div>
     </section>
 

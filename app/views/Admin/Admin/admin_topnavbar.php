@@ -1,10 +1,14 @@
     
 <!--top navbar-->
-<link rel="stylesheet" href="../css/Users/component/topnavbar.css"></link>
+<!-- <link rel="stylesheet" href="../css/Users/component/topnavbar.css"></link> -->
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/topnavbar.css"></link>
 <script src="../js/Users/component/topnavbar.js"></script> 
 
 <div class="topnav" id="navbar">
-  
+<?php
+// Get the current URL
+$current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+?>
 
   <div class="drop_down">
     <div class="dropdown-content" >
@@ -38,10 +42,10 @@
 
     <span class="site_name_nav" id="part_a_nav"><i class="fa-solid fa-leaf" id="leaf1"></i></i>SOBA</span><span id="part_b_nav">WITHA</span>
     <div class="nav-link">
-      <a href="<?php echo URLROOT?>/Users/admin_view_profile">Profile</a>
-      <a href="<?php echo URLROOT?>/admin_dashboard/main_view">Dashboard</a>
-      <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a> 
-      <i class="fa fa-solid fa-bell" id="bell" onclick="openNotificationMenu()"></i>
+      <a href="<?php echo URLROOT?>/Admin/profile" class="<?php if ($current_url === URLROOT.'/Admin/updateProfile' || $current_url === URLROOT.'/Admin/profile' || $current_url === URLROOT.'/Users/changePW') echo 'active'; ?>">Profile</a>
+      <a href="<?php echo URLROOT?>/Admin_dashboard/main_view" class="<?php if ($current_url === URLROOT.'/Admin_dashboard/main_view') echo 'active'; ?>">Dashboard</a>
+      <!-- <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a>  -->
+      <a><i class="fa fa-solid fa-bell" id="bell" onclick="openNotificationMenu()"></i></a>
       <a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="dots"></i></a>
     </div>
   </div>

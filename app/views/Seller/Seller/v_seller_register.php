@@ -6,7 +6,7 @@
     <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a><br>
     <i class="fa-solid fa-leaf" id="leaf"></i>    
     <h2>Sobawitha </h2>
-        <span class="sign_up">Buyer Sign Up<span>
+        <span class="sign_up">Seller Sign Up<span>
         <br><br>
         <p>Join Sobawitha and become a part 
             of our growing community of fertilizer sellers! Our 
@@ -34,56 +34,85 @@
         <div class="s_input-box">
             <span class="ssu_details">First Name</span><br>
             <input type="text" placeholder="Enter your fisrt name" name="first_name"><br>
-            <span class="error_msg"><?php echo $data['first_name_err'] ?></span>
+            <span class="error_msg"><?php echo $data['first_name_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Last Name</span><br>
             <input type="text" placeholder="Enter your last name" name="last_name"><br>
-            <span class="error_msg"><?php echo $data['last_name_err'] ?></span>
+            <span class="error_msg"><?php echo $data['last_name_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Email</span><br>
             <input type="email" placeholder="Enter your email" name="email"><br>
-            <span class="error_msg"><?php echo $data['email_err'] ?></span>
+            <span class="error_msg"><?php echo $data['email_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Contact No</span><br>
             <input type="text" placeholder="Enter your mobile number" name="contact_number"><br>
-            <span class="error_msg"><?php echo $data['contact_number_err'] ?></span>
+            <span class="error_msg"><?php echo $data['contact_number_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Nic No</span><br>
             <input type="text" placeholder="Enter your nic no" name="nic"><br>
-            <span class="error_msg"><?php echo $data['nic_err'] ?></span>
+            <span class="error_msg"><?php echo $data['nic_err'] ?></span><br>
           </div>
         
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 01</span><br>
-            <input type="text"  name="address_line_one"><br>
-            <span class="error_msg"><?php echo $data['address_line_one_err'] ?></span>          
+            <input type="text"  placeholder="Enter your house no: " name="address_line_one"><br>
+            <span class="error_msg"><?php echo $data['address_line_one_err'] ?></span><br>          
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 02</span><br>
-            <input type="text"  name="address_line_two"><br>
-            <span class="error_msg"><?php echo $data['address_line_two_err'] ?></span>
+            <input type="text"  placeholder="Enter your street name: " name="address_line_two"><br>
+            <span class="error_msg"><?php echo $data['address_line_two_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 03</span><br>
-            <input type="text"  name="address_line_three"><br>
-            <span class="error_msg"><?php echo $data['address_line_three_err'] ?></span>
+            <input type="text"  placeholder="Enter your city: " name="address_line_three"><br>
+            <span class="error_msg"><?php echo $data['address_line_three_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 04</span><br>
-            <input type="text"  name="address_line_four"><br>
+            <!-- <input type="text"  placeholder="Enter your district: " name="address_line_four"><br> -->
+            <select name="address_line_four" id="address_line_four">
+            <option value="Ampara">Ampara</option>
+            <option value="Anuradhapura">Anuradhapura</option>
+            <option value="Badulla">Badulla</option>
+            <option value="Batticaloa">Batticaloa</option>
+            <option value="Colombo">Colombo</option>
+            <option value="Galle">Galle</option>
+            <option value="Gampaha">Gampaha</option>
+            <option value="Hambantota">Hambantota</option>
+            <option value="Jaffna">Jaffna</option>
+            <option value="Kalutara">Kalutara</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Kegalle">Kegalle</option>
+            <option value="Kilinochchi">Kilinochchi</option>
+            <option value="Kurunegala">Kurunegala</option>
+            <option value="Mannar">Mannar</option>
+            <option value="Matale">Matale</option>
+            <option value="Matara">Matara</option>
+            <option value="Moneragala">Moneragala</option>
+            <option value="Mullaitivu">Mullaitivu</option>
+            <option value="Nuwara Eliya">Nuwara Eliya</option>
+            <option value="Polonnaruwa">Polonnaruwa</option>
+            <option value="Puttalam">Puttalam</option>
+            <option value="Ratnapura">Ratnapura</option>
+            <option value="Trincomalee">Trincomalee</option>
+            <option value="Vavuniya">Vavuniya</option>
+            </select>
           </div>
+
+      
 
         </div>
 
@@ -93,12 +122,13 @@
         <div class="s_input-box">
             <span class="ssu_details" >Birthday</span><br>
             <input type="date" name="birthday"><br>
-            <span class="error_msg"><?php echo $data['birthday_err'] ?></span>
-          </div>
-<div class="s_input-box">
+            <span class="error_msg"><?php echo $data['birthday_err'] ?></span><br>
+        </div>
+
+        <div class="s_input-box">
             <span class="ssu_details">Choose Profile Picture</span><br>
             <input type="file" id="propic" name="propic"><br>
-            <span class="error_msg"><?php echo $data['propic_err'] ?></span>
+            <span class="error_msg"><?php echo $data['propic_err'] ?></span><br>
           </div> 
 
           <div class="s_input-box">
@@ -110,39 +140,39 @@
          </div>
 
             <div class="s_input-box">
-            <span class="ssu_details">Bank Account Number</span><br>
+            <br><span class="ssu_details">Bank Account Number</span><br>
             <input type="text" placeholder="Enter your bank account no" name="bank_account_no"><br>
-            <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>
+            <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span><br>
           </div> 
 
           <div class="s_input-box">
             <span class="ssu_details">Bank</span><br>
             <input type="text" placeholder="Enter your bank name" name="bank"><br>
-            <span class="error_msg"><?php echo $data['bank_err'] ?></span>
+            <span class="error_msg"><?php echo $data['bank_err'] ?></span><br>
           </div> 
 
           <div class="s_input-box">
             <span class="ssu_details">Branch</span><br>
             <input type="text" placeholder="Enter your bank branch" name="branch"><br>
-            <span class="error_msg"><?php echo $data['branch_err'] ?></span>
+            <span class="error_msg"><?php echo $data['branch_err'] ?></span><br>
           </div> 
 
           <div class="s_input-box">
-            <span class="ssu_details">Bank Account Name</span><br>
+            <span class="ssu_details">Bank Account Holder Name</span><br>
             <input type="text" placeholder="Enter your bank account name" name="bank_account_name"><br>
-            <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>
+            <span class="error_msg"><?php echo $data['bank_account_name_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Password</span><br>
             <input type="password" placeholder="Enter your password" name="password"><br>
-            <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>          
+            <span class="error_msg"><?php echo $data['password_err'] ?></span><br>          
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Confirm Your Password</span><br>
-            <input type="text" placeholder="Confirm your Password" name="confirm_password"><br>
-            <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>
+            <input type="password" placeholder="Confirm your Password" name="confirm_password"><br>
+            <span class="error_msg"><?php echo $data['confirm_password_err'] ?></span><br>
           </div>
 
           <div class="sign_up_seller_btn">

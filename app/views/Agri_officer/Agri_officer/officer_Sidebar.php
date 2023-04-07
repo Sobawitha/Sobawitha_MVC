@@ -8,8 +8,9 @@
         <i class="fa-solid fa-bars" id="equal"></i>
         <i class="fa-solid fa-play" id="shape"></i>
     </div>
-    <?php echo '<img src=".././public/upload/profile_images/'.$_SESSION['profile_image'].'"   alt="user profile"  id="userprofileimage">';?>
-     <div class="user_detail">
+    <!-- <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($_SESSION['profile_image']);?>" id="userprofileimage"/> -->
+    <?php echo '<img src="../'.$_SESSION['profile_image_path'].'"   alt="Profile Picture"  id="userprofileimage">';?> 
+    <div class="user_detail">
      <span class="uname"> <?php echo $_SESSION['username'] ," ",$_SESSION['lastname'] ?>  </span><br>
     <span class="position"><?php echo $_SESSION['position'] ?></span>
     </div>

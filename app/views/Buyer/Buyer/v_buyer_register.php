@@ -55,12 +55,12 @@
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 01</span><br>
-            <input type="text"  required>
+            <input type="text" placeholder="Enter your house no: " required>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 02</span><br>
-            <input type="text"  required>
+            <input type="text" placeholder="Enter your street name: " required>
           </div>
 
        
@@ -72,12 +72,12 @@
 
         <div class="s_input-box">
             <span class="ssu_details">Address Line 03</span><br>
-            <input type="text"  required>
+            <input type="text" placeholder="Enter your city: " required>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 04</span><br>
-            <input type="text"  >
+            <input type="text" placeholder="Enter your district: " >
           </div>
 
         <div class="s_input-box">
@@ -110,7 +110,7 @@
 
           <div class="s_input-box">
             <span class="ssu_details">Confirm Your Password</span><br>
-            <input type="text" placeholder="Confirm your Password" required>
+            <input type="password" placeholder="Confirm your Password" required>
           </div>
 
           <div class="sign_up_seller_btn">

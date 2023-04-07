@@ -1,175 +1,49 @@
 <?php
     class Buyer extends Controller {
+        private $buyerModel;
         public function __construct(){
-            $this-> userModel =$this->model('M_Users');
+            $this-> buyerModel =$this->model('M_buyer');
         }
 
        
-    public function buyer_register()
-    {
-          
-        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        public function profile()
         {
-          
-        
-         $_POST =  fitler_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-
-         $data = [
-
-            'name' => trim($_POST['name']),
-            'email' => trim($_POST['email']),
-            'password' => trim($_POST['password']),
-            'confirm_password' => trim($_POST['confirm_password']),
-            'confirm_password_err' => trim($_POST['confirm_password_err'])
-
-            
-         ];
+         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 2) {
                  
-          
-         
-         if(empty($data['name']))
-         {
-                $data['name_err'] = 'This field is required';
-         }
+            $user= $this->buyerModel->findUserByID($_SESSION['user_id']);
+            $data=[                      
+              'user_id'=>$user->user_id,
+              'first_name'=>$user->first_name,
+              'last_name'=>$user->last_name,
+              'nic'=>$user->nic_no,
+              'email'=>$user->email,
+              'dob'=>$user->dob,
+              'profile_picture'=>$user->profile_picture,
+              'address_line_one'=>$user->address_line_one,
+              'address_line_two'=>$user->address_line_two,
+              'address_line_three'=>$user->address_line_three,
+              'address_line_four'=>$user->address_line_four,    
+              'contact_number'=>$user->contact_no,
+              'gender'=>$user->gender,
 
-
-         if(empty($data['email']))
-         {
-                $data['email_err'] =  'This field is required';
-         }
-         else{
-            
-            if(findUserByEmail($data['email']))
-            {
-                 $data['email_err'] = 'Email is already is registered';
-            }
-             
-
-         }
-         
-         if(empty($data['password']))
-         {
-                $data['password_err' ] =  'This field is required';
-         }
-        
-         
-         
-
-
-       else if(empty($data['confirm_password'])){
-
-              $data['confirm_password'] = 'Please confirm your password';
-
-
-        }
-        else
-        {
-   
-            
-                if((empty($data['password']) != empty($data['confirm_password'])))       
-                      $data['confirm_password'] =  'Passwords are not mathching';
-            
-        }
-
-        if(empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['name_err']) && empty($data['email_err']))
-        {
-                 
-            $data['password'] = password_hash($data['password'],PASSWORD_DEFAULT);
-            $this->userModel->register($data);
-
-
-        }
-
-        else
-         $this->view('Buyer/Buyer/v_buyer_register',$data);
-
-
-
-    }
-        else{
-
-
-            $data = [
-                'name' => '',
-                'email' => '',
-                'password' => '',
-                'confirm_password'=>'',
-                'name_err' => '',
-                'email_err' => '',
-                'password_err' => '',
-                 'confirm_password_err' => '',
+              
+      
+              'first_name_err'=>'',
+              'last_name_err'=>'',
+              'nic_err'=>'',
+              'contact_number_err'=>'',
+              'gender_err'=>''
+      
             ];
+            $this->view('Buyer/Buyer/v_buyer_view_profile',$data);
+        
+          }else{
+            redirect('Login/login');  
+          }
+        
+     } 
 
-
-
-            $this->view('Buyer/Buyer/v_buyer_register',$data);
-
-        }
-
-
-
-
-
-}
-
-        public function login(){
-            if($_SERVER['REQUEST_METHOD']=='POST'){
-                //forum is submitted
-
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $data = [
-                    'username' => trim($_POST['username']),
-                    'password' => trim($_POST['password']),
-    
-                    'login_err'=>''
-                    
-                ];
-
-                if($this-> userModel ->findUserByusername($data['username'])){
-                            //user found
-                            //validate pw
-                            redirect('blog_post/create_posts');
-                }
-                else{
-                    $data['login_err'] = 'Invalid username or password.';
-                }
-
-            if (empty($data['login_err'])) {
-                //log the user
-                $loggeduser = $this-> userModel ->login( $data['username'],$data['password']);
-
-                if ($loggeduser) {
-                    //user authenticated
-                    //create SESSION
-                    $this->create_user_session($loggeduser);
-                }
-                else {
-                    $data['login_err'] = 'Invalid username or password.';
-                    //show error
-                    //load view
-                    $this->view('users/v_login', $data);
-                }
-            }
-            else{
-                $this->view('users/v_login', $data); 
-            }
-                
-
-            }
-            else{
-                //initial form
-
-                $data = [
-                    'username' => '',
-                    'password' => '',
-
-                    'login_err'=>''
-                ];
-
-                //load view
-                $this->view('users/v_login', $data);
-            }
-        }
+        
 
         public function forgot_password(){
             $data=[];

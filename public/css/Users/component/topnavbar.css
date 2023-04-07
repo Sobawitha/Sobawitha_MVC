@@ -102,7 +102,7 @@ body {
   color:rgb(174, 169, 158);
 }
 
-#bell:hover{
+#bell:hover , #dots:hover{
   color:rgb(230, 160, 19);
 }
 
@@ -195,17 +195,14 @@ body {
   text-decoration: none;
 }
 
-
-
-
-
-
-
-
-
-
-
 #cart, #cart_icon{
   font-size:15px;
   color:rgb(174, 169, 158);
+}
+
+
+/* Hovered when selected */
+.nav-link a.active{
+  color:rgb(230, 160, 19);
+  font-weight:bold;
 }

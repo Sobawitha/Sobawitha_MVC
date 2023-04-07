@@ -16,27 +16,44 @@
 
         <br><br>
         <div class="button_section">
-          <form method="POST">
+        <form class="searchForm" action="<?php echo URLROOT;?>/Admin_user_management/adminSearchUser" method="GET">
           <div class="search_bar">
               <div class="search_content">
-                  
-                      <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
-                      <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                      <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
-                  
+             
+                      <span class="search_cont" onclick="open_cancel_btn()" ><input type="text" name="search" value="<?php echo $data['search'] ?>" placeholder="Search by firstname | lastname | Address | NIC No | Email" id="searchBar" require/></span>
+                      <button type="submit" class="search_btn"  onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
+                      <button type="submit" class="search_btn"  onclick="open_cancel_btn()" ><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+            
               </div>
           </div>
-          </form>
+         </form>  
 
           <div class="add_new_user_btn">
             <button class="add_user" onclick="popUpOpen()"  id="addNewUser"><i class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add new user</button>
           </div>
         </div>
+              <?php if(empty($data['message'])){ ?>
+
 
                 <div class="filter_section">
-                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Solved</label>
-                        <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing" checked>Pending</label>
+                    <form method ="POST" action="<?php echo URLROOT?>/Admin_user_management/view_all_users" id="filter_form">
+
+                        <label for="all" id="filter_label"> <input type="radio" id="all" name="user_type"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'all') echo ' checked="checked"';?> checked>All Users</label>
+                        <br><label for="admins" id="filter_label"> <input type="radio" id="admins" name="user_type" value="admins" onclick="javascript:submit()"  value = "admins"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'admins') echo ' checked="checked"';?>>Admins</label>
+                        <br><label for="customers" id="filter_label"><input type="radio" id="customers" name="user_type" value="customers" onclick="javascript:submit()"  value = "customers"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'customers') echo ' checked="checked"';?>>Customers</label>
+                        <br><label for="sellers" id="filter_label"><input type="radio" id="sellers" name="user_type" value="sellers" onclick="javascript:submit()"  value = "sellers"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'sellers') echo ' checked="checked"';?>>Sellers</label>
+                        <br><label for="suppliers" id="filter_label"><input type="radio" id="suppliers" name="user_type" value="suppliers" onclick="javascript:submit()"  value = "suppliers"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'suppliers') echo ' checked="checked"';?>>Suppliers</label>
+                        <br><label for="agris" id="filter_label"><input type="radio" id="agris" name="user_type" value="agris" onclick="javascript:submit()"  value = "agris"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'agris') echo ' checked="checked"';?>>Agri-Officers</label>
+                                     
+                        <!-- <label for="all_users" id="filter_label"> <input type="radio" name="filter" id="all_users"  value="AllUsers" checked>All Users</label>
+                        <label for="admins" id="filter_label"> <input type="radio" name="filter" id="admins"  value="Admins" >Admins</label>
+                        <label for="customers" id="filter_label"> <input type="radio" name="filter"  id="customers" value="Customers" >Customers</label>
+                        <label for="sellers" id="filter_label"> <input type="radio" name="filter"  id="sellers"  value="Sellers" >Sellers</label>
+                        <label for="suppliers" id="filter_label"> <input type="radio" name="filter" id="suppliers"  value="Suppliers" >Suppliers</label>
+                        <label for="agri_officers" id="filter_label"> <input type="radio" name="filter"  id="agri_officers" value="AgriOfficers" >Agri-Officers</label> -->
                 </div>
+               
+              </form>
 
                 <dialog id="addUserPopup">
                         <div class="addUserPopup">
@@ -57,55 +74,97 @@
                 <div class="order_list">
                 <div class="orders">
 
-                <table class="order_list_table">
-                        <tr class="table_head">
+                <table class="order_list_table">   
+                  
+                
+                <tr class="table_head">
                                 <td>User ID</td>
                                 <td>User Name</td>
                                 <td>User Email</td>
                                 <td>User NIC</td>
-                                <td>Contact no</td>
+                                <td>Contact No</td>
                                 <td>User Role</td>
-                                <td>User NIC</td>
-                        </tr>
+                                <td>Active Status</td>
+                                <td>Actions</td>
+                 </tr>
+                    <?php $value=0; 
+              
+                    ?>
+                    
+                    <?php foreach($data['user'] as $users): ?>
+                      
+                      <tr class="order">
+                      <div class="order_detail">
+                      <td><?php echo ++$value ?></td>
+                      <td><?php echo $users->first_name ?></td>
+                      <td><?php echo $users->email ?></td>
+                      <td><?php echo $users->nic_no ?></td>
+                      <td><?php echo $users->contact_no ?></td>
+                      <?php if($users->user_flag==1): ?>
+                        <td ><button class="user_role">Admin</button></td>
+                        <?php elseif($users->user_flag==2): ?>
+                        <td ><button class="user_role">Customer</button></td>
+                        <?php elseif($users->user_flag==3): ?>
+                        <td ><button class="user_role">Seller</button></td>
+                        <?php elseif($users->user_flag==4): ?>
+                        <td ><button class="user_role">Supplier</button></td>
+                        <?php else: ?>
+                        <td ><button class="user_role">Agri-Officer</button></td>
+                        <?php endif?> 
 
-                        <tr class="order">
-                                <div class="order_detail">
-                                        <td><span class="p_name">01</span></td>
-                                        <td><span class="p_name">Devin</span></td>
-                                        <td><span class="amount">Devin@gail.com</span></td>
-                                        <td><span class="price">992142200v</span></td>
-                                        <td><span class="solve">071-1234567</span></td>
-                                        <td><span class="solve">Admin</span></td>
-                                        <td><span class="delete">Delete</span></td>
-                                </div>
+                        <?php if($users->active_status ==1): ?>
+                        <td class="active-status">Active</td>
+                        <?php else: ?>
+                        <td class="deactivated-status">Deactivated</td>
+                      
+                        <?php endif?> 
+                      
 
-                        </tr>
 
-                        <tr class="order">
-                                <div class="order_detail">
-                                        <td><span class="p_name">01</span></td>
-                                        <td><span class="p_name">Devin</span></td>
-                                        <td><span class="amount">Devin@gail.com</span></td>
-                                        <td><span class="price">992142200v</span></td>
-                                        <td><span class="solve">071-1234567</span></td>
-                                        <td><span class="solve">Admin</span></td>
-                                        <td><span class="delete">Delete</span></td>
-                                </div>
 
-                        </tr>
-
-                        <tr class="order">
-                                <div class="order_detail">
-                                        <td><span class="p_name">01</span></td>
-                                        <td><span class="p_name">Devin</span></td>
-                                        <td><span class="amount">Devin@gail.com</span></td>
-                                        <td><span class="price">992142200v</span></td>
-                                        <td><span class="solve">071-1234567</span></td>
-                                        <td><span class="solve">Admin</span></td>
-                                        <td><span class="delete">Delete</span></td>
-                                </div>
-
-                        </tr>
+                      <td>
+                      <div class="action">
+                                          
+                        <?php if($users->active_status ==1): ?>              
+                        <form method="GET">
+                        <span class="delete"><button type="button" onclick="popUpOpenDelete()" id="deactive_user_button"><i class="fa-solid fa-hand"></i> Deactivate</button></span>
+                        <dialog id="deactivateUserPopup">
+                    <div class="deactivateUserPopup">
+                      <div class="dialog__heading">
+                        <h2>Are you sure you want to deactivate this user ?</h2>
+                        <button id="closebtntwo" type="button">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                        
+                      <div class="dialog__content">
+                        <a href="<?php echo URLROOT?>/Admin_user_management/adminDeactivateUser/<?php echo $users->user_id ?>" id="yes">Yes</a>
+                        <a href="<?php echo URLROOT?>/Admin_user_management/view_all_users " id="no">No</a>
+                      </div>
+                    </div>
+                    </dialog>
+                      </form><br>
+                      <?php else: ?>
+                        <form method="GET">
+                        <span class="activate"><button type="button" onclick="location.href='<?php echo URLROOT?>/Admin_user_management/adminactivateUser/<?php echo $users->user_id ?>'" id="active_user_button"><i class="fa-solid fa-handshake-simple"></i> Activate</button></span>
+                      
+                      </form><br>
+                      <?php endif?> 
+                        <form  action="<?php echo URLROOT;?>/Admin_user_management/view_more_user/<?php echo $users->user_id ?>" method="GET">
+                        <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> View More</button></span>
+                        </form>
+                        </div>
+                      </td>
+                      
+                      </div>  
+                        
+                    </tr>
+                   
+                         
+                   <?php endforeach;?>
+                   <?php }else{ ?>
+                          <span class="error_msg"><?php echo $data['message'];?></span>
+                    <?php    }  ?>     
 
                 </table>
 
@@ -119,24 +178,12 @@
                 
         </div>
 
-<dialog id="addUserPopup">
-  <div class="addUserPopup">
-    <div class="dialog__heading">
-      <h2>Choose the user for registrations</h2>
-      <button id="closebtn" type="button">
-        <i class="fa fa-times-circle" aria-hidden="true"></i>
-      </button>
-    </div>
-    
-    <div class="dialog__content">
-      <a href="<?php echo URLROOT?>/Admin_user_management/add_new_admin">Add Admin</a>
-      <a href="<?php echo URLROOT?>/Admin_user_management/add_new_agri">Add Agri Officer</a>
-    </div>
-  </div>
-</dialog>
+<!-- Deactivate User Confirm Popup -->
+
+  
 </div>
 
 
 
 
-<?php require APPROOT.'/views/Users/component/footer.php'?>
+

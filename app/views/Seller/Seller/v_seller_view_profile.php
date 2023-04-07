@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="../css/Users/Users/view_profile.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
-<?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
-<?php require APPROOT.'/views/Seller/Seller/seller_sidebar.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
+<?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
+
 
 <div class="body">
     <div class="section_1">
@@ -30,7 +31,7 @@
         <div class="container">
             <div class="title">Account Information</div>
             <div class="profile_image">
-                <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($_SESSION['profile_image']);?>" id="userprofileimage_for_viewprofile"/>
+                <img  src="./../public/upload/user_profile_pics/<?php echo $data['profile_picture']?>" id="userprofileimage_for_viewprofile"/>
                 <div class="image_change_button">
                     <button id="change_img">change picture</button>
                     <button id="delete_img">delete picture</button>
@@ -41,59 +42,59 @@
                 <div class="user-details">
                 <div class="input-box">
                     <span class="details">First Name</span>
-                    <input type="text" placeholder="Enter your fisrt name" value="<?php echo $profile_detail->first_name ?>" readonly>
+                    <input type="text" placeholder="Enter your fisrt name" value="<?php echo $data['first_name']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Last Name</span>
-                    <input type="text" placeholder="Enter your last name" value="<?php echo $profile_detail->last_name ?>" readonly>
+                    <input type="text" placeholder="Enter your last name" value="<?php echo $data['last_name']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Address Line 01</span>
-                    <input type="text" placeholder="" value="<?php echo $profile_detail->address_line_one ?>" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['address_line_one']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Address Line 02</span>
-                    <input type="text" placeholder="" value="<?php echo $profile_detail->address_line_two ?>" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['address_line_two']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Address Line 03</span>
-                    <input type="text" placeholder="" value="<?php echo $profile_detail->address_line_three ?>" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['address_line_three']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Address Line 04</span>
-                    <input type="text" placeholder=""  value="<?php echo $profile_detail->address_line_four ?>">
+                    <input type="text" placeholder=""  value="<?php echo $data['address_line_four']?>">
                 </div>
                 <div class="input-box">
                     <span class="details">Email</span>
-                    <input type="text" placeholder="Enter your email" value="<?php echo $profile_detail->email ?>" readonly>
+                    <input type="text" placeholder="Enter your email" value="<?php echo $data['email']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Phone Number</span>
-                    <input type="text" placeholder="Enter your number" value="<?php echo $profile_detail->contact_no ?>"readonly>
+                    <input type="text" placeholder="Enter your number" value="<?php echo $data['contact_number']?>"readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">NIC No</span>
-                    <input type="text" placeholder="Enter your NIC no" value="<?php echo $profile_detail->nic_no ?>"readonly>
+                    <input type="text" placeholder="Enter your NIC no" value="<?php echo $data['nic']?>"readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Birthday</span>
-                    <input type="text" placeholder="" value="<?php echo $profile_detail->dob ?>" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['dob']?>" readonly>
                 </div>
                 <div class="input-box">
-                    <span class="details">Bank Account Name</span>
-                    <input type="text" placeholder="" value="<?php echo $profile_detail->bank_account_name ?>"readonly>
+                    <span class="details">Bank Account Holder Name</span>
+                    <input type="text" placeholder="" value="<?php echo $data['account_holder_name']?>"readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Bank Account Number</span>
-                    <input type="text" placeholder="" value="<?php echo $profile_detail->bank_account_number?>" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['account_number']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Bank Name</span>
-                    <input type="text" placeholder="" value="<?php echo $profile_detail->branch ?>" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['bank_name']?>" readonly>
                 </div>
                 <div class="input-box">
                     <span class="details">Branch of Bank</span>
-                    <input type="text" placeholder="" value="<?php echo $profile_detail->bank ?>" readonly>
+                    <input type="text" placeholder="" value="<?php echo $data['branch']?>" readonly>
                 </div>
                 </div>
 
