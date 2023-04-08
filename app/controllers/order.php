@@ -20,13 +20,6 @@ class order extends Controller {
         $this->view('Buyer/shopping_cart/v_shopping_cart',$data);
     }
 
-    public function wish_list(){
-        $data = [
-        ];
-
-        $this->view('Buyer/Buyer_wish_list/v_wish_list',$data);
-    }
-
 }
 
 ?>

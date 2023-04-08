@@ -83,7 +83,7 @@
         <div class="recent_product_card_section">
             
         <?php
-            for($i=1; $i<=4; $i++){
+             {foreach($data['products'] as $product)
                 ?>
                 <div class="adv_card">
                 <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
@@ -93,12 +93,12 @@
                                                 margin:0px;
                                                 padding:0px;">
                     <div class="product_detail">
-                        <span class="product_name">Tea fertilizer</span><br>
-                        <span class="owner">By ABC production</span>
+                        <span class="product_name"><?php echo $product->product_name; ?></span><br>
+                        <span class="owner"><?php echo $product->manufacturer; ?></span>
                     </div>
                 </div>
 
-                <i class="fa-regular fa-heart" id="heart"></i>
+                <a href = "<?php echo URLROOT?>/wishlist/addToWishlist/<?php echo $product->Product_id ?>"><i class="fa-regular fa-heart" id="heart"></i></a> 
 
                 <div class="discription">
                     <i class="fa-solid fa-star" id="star"></i>
@@ -106,7 +106,7 @@
                     <i class="fa-solid fa-star" id="star"></i>
                     <i class="fa-regular fa-star" id="star"></i>
                     <i class="fa-regular fa-star" id="star"></i>
-                    <span class="price"> Rs. 500.00</span>
+                    <span class="price"><?php echo $product->price; ?></span>
                     
                 </div>
 
@@ -123,7 +123,7 @@
         <div class="collection_product_card_setion">
 
         <?php
-            for($i=1; $i<=12; $i++){
+              {foreach($data['products'] as $product)
                 ?>
                 <div class="adv_card">
                 <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
@@ -133,12 +133,14 @@
                                                 margin:0px;
                                                 padding:0px;">
                     <div class="product_detail">
-                        <span class="product_name">Tea fertilizer</span><br>
-                        <span class="owner">By ABC production</span>
+                        <span class="product_name"><?php echo $product->product_name; ?></span>><br>
+                        <span class="owner"><?php echo $product->manufacturer; ?></span>
                     </div>
                 </div>
 
-                <i class="fa-regular fa-heart" id="heart"></i>
+               
+                <a href = "<?php echo URLROOT?>/wishlist/addToWishlist/<?php echo $product->Product_id ?>"><i class="fa-regular fa-heart" id="heart"></i></a> 
+
 
                 <div class="discription">
                     <i class="fa-solid fa-star" id="star"></i>
@@ -146,7 +148,7 @@
                     <i class="fa-solid fa-star" id="star"></i>
                     <i class="fa-regular fa-star" id="star"></i>
                     <i class="fa-regular fa-star" id="star"></i>
-                    <span class="price"> Rs. 500.00</span>
+                    <span class="price"> <?php echo $product->price; ?></span>
                     
                 </div>
 

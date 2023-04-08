@@ -1,13 +1,21 @@
 <?php
 
 class Pages extends Controller {
-    public function __construct(){
-        $this-> pagesModel =$this->model('M_Pages');
-    }
 
+    private $pagesModel;
+    private $fertilizerModel;
+
+    public function __construct(){
+        $this->pagesModel = $this->model('M_Pages');
+        $this->fertilizerModel = $this->model('M_ad_management');
+        
+       
+    }
+  
     //redirect home
     public function home(){
-        $data = [];
+         
+        $data['products'] = $this->fertilizerModel->display_pending_advertisement();
         $this->view('Users/component/home', $data);
     }
 

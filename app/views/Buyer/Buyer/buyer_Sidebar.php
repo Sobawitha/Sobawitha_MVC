@@ -19,7 +19,7 @@
         <li><a href="<?php echo URLROOT?>/forum/forum"><i class="fa-brands fa-forumbee"></i>&nbsp;&nbsp;Forum</a></li>
         <li><a href="<?php echo URLROOT?>/dashboard/buyer_dashboard" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Dashboard</a></li>
         <li><a href="<?php echo URLROOT?>/purchase/display_all_purchases" class=""><i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;Purchase</a></li>
-        <li><a href="<?php echo URLROOT?>/order/wish_list" class=""><i class="fa-solid fa-heart-circle-check"></i>&nbsp;&nbsp;Wish List</a></li>
+        <li><a href="<?php echo URLROOT?>/wishlist/display_all_items" class=""><i class="fa-solid fa-heart-circle-check"></i>&nbsp;&nbsp;Wish List</a></li>
         <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Complaint</a></li>
     </ul>
 </div>

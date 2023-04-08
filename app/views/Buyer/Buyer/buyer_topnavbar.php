@@ -41,7 +41,7 @@
     <div class="nav-link">
       <a href="<?php echo URLROOT?>/Users/buyer_view_profile">Profile</a>
       <a href="<?php echo URLROOT?>/dashboard/buyer_dashboard">Dashboard</a>
-      <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a> <!--change-->
+      <a href="<?php echo URLROOT?>/cart/display_all_items"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a> <!--change-->
       <i class="fa fa-solid fa-bell" id="bell" onclick="openNotificationMenu()"></i>
       <a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="dots"></i></a>
     </div>
