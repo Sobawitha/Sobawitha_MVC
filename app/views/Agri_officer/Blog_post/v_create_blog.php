@@ -159,7 +159,7 @@ function setColor($tag){
                 <form method="POST" action="<?php echo URLROOT?>/blog_post/create_posts" enctype="multipart/form-data">
                     <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a>
                     <h2 class="add_post_form_heading">Add New Post</h2>
-                    <?php echo '<img src=".././public/images/background7.png"   alt="card Picture"  class="edit_post_image" id="upload_image1">';?>
+                    <?php echo '<img src=".././public/images/background7.jpg"   alt="card Picture"  class="edit_post_image" id="upload_image1">';?>
                     <button type="" class="upload_images"><i class="fa-solid fa-upload "><span class="upload"></span></i></button>
                     <span class="uploard_img_hidden"><input type="file" class="upload_file" name="image" onchange="loadFile1(event)" ></input></span>
                     <br>
