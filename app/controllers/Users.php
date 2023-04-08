@@ -186,7 +186,8 @@
                 $data=[
                     'profile_detail' => $profile_detail,
                 ];
-                
+                print_r($data['profile_detail']);
+                die();
                 $this->view('Seller/Seller/v_seller_view_profile', $data);
                 }
             else{
