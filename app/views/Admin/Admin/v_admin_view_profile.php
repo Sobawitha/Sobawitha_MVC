@@ -52,7 +52,7 @@
         </div>
 
         <?php 
-            foreach($data['profile_detail'] as $profile_detail):?>
+            // foreach($data['user'] as $user):?>
         <hr class="profile_hr">
         <div class="a_add_admin_maincontent">
             <!-- For push notifications -->
@@ -155,26 +155,13 @@
                     <input type="text" placeholder="" value="<?php echo $data['branch']?>" readonly>
                 </div>
                 </div>
-          
-                
-
-
-
-
-
-
-
-
-
-
-
             </form>
             </div>
 
             
         </div>
         </div>
-        <?php endforeach;?>
+
     </div>
 
     <div class="last">
