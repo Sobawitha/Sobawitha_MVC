@@ -26,6 +26,7 @@
         </div>
 
         <?php 
+            die();
             foreach($data['profile_detail'] as $profile_detail):?>
         <hr class="profile_hr">
         <div class="a_add_admin_maincontent">
