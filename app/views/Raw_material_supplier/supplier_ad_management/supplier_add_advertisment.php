@@ -1,9 +1,9 @@
 
 
 
-<?php require APPROOT.'/views/Users/component/Header.php'?>
-<?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
-<?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
+<?php require APPROOT . '/views/Users/component/Header.php'?>
+<?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
+<?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
 <link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_advertisment.css"></link>
 <div class="body">
     <div class="section_1">
@@ -14,10 +14,18 @@
           &nbsp<div class="add_container">
             <div class="title">Add advertisment</div>
             <div class="add_content">
-              <form action="<?php echo URLROOT?>/supplier_ad_management/add_advertisment" method="POST" enctype="multipart/form-data">
+              <form action="<?php echo URLROOT ?>/supplier_ad_management/add_advertisment" method="POST" enctype="multipart/form-data">
 
                 <div class="advertisment-details">
-                <i class="fa-solid fa-image" id="uploard_image"></i>
+                  <div class="post-image">
+                    <img src="" alt="" id="image_placeholder" style="display: none;">
+                  </div>
+                  <div class="right">
+                      <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn" onclick="toggleBrowse()">
+                      <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn" style="display:none;" onclick="removeImage()">
+                      <input type="file" name="image" id="image" style="display: none;">
+                  </div>
+
                   <!-- <input type="file"></input> -->
                   <br><br>
                   <div class="input-box">
@@ -40,7 +48,7 @@
                               <option value="others">others</option>
                     </select>
                   </div>
-                  
+
                   <!-- <div class="input-box unit">
                     <span class="details">per</span>
                     <select name="category" id="category">
@@ -137,4 +145,9 @@
 
     </div>
 </div>
+
+
+<!-- javascript for posts -->
+<script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/components/posts/posts.js" ></script>
+
 

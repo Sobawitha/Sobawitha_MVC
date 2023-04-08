@@ -31,8 +31,9 @@ class M_supplier_advertisment
 
 
     public function create($data) {
-        $this->db->query('INSERT INTO raw_material(product_name, quantity, price, product_description, user_id) VALUES (:product_name, :quantity, :price, :product_description, :user_id)');
+        $this->db->query('INSERT INTO raw_material(product_name, quantity, price, product_description, raw_material_image, user_id) VALUES (:product_name, :quantity, :price, :product_description, :image, :user_id)');
         $this->db->bind(':user_id', $_SESSION['user_id']);
+        $this->db->bind(':image', $data['image_name']);
         // $this->db->bind(':product_id', $data['Product_id']);
         $this->db->bind(':product_name', $data['product_name']);
         $this->db->bind(':quantity', $data['quantity']);
@@ -52,7 +53,8 @@ class M_supplier_advertisment
     }
 
     public function edit($data) {
-        $this->db->query('UPDATE raw_material SET product_name = :product_name, quantity=:quantity, price=:price, product_description=:product_description WHERE Product_id = :id');
+        $this->db->query('UPDATE raw_material SET raw_material_image = :image, product_name = :product_name, quantity=:quantity, price=:price, product_description=:product_description WHERE Product_id = :id');
+        $this->db->bind(':image', $data['image_name']);
         $this->db->bind(':product_name', $data['product_name']);
         $this->db->bind(':quantity', $data['quantity']);
         $this->db->bind(':price', $data['price']);

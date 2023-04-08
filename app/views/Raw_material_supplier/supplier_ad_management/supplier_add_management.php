@@ -2,6 +2,7 @@
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
 <link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_management.css"></link>
+<!-- <script src="../js/Raw_material_supplier/ad_delete/ad_delete.js"></script>  -->
 
 
 <body >
@@ -59,7 +60,11 @@
                         <?php foreach($data['posts'] as $ad): ?>
                         <tr class="sm_view">
                                 <div class="sm_view_detail">
-                                        <td><img src="../public/images/other_image_2.jpg" alt="Girl in a jacket" id="fertilizer_img" ></td>
+                                        <td>
+                                                <?php if($ad->raw_material_image != null): ?>
+                                                        <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $ad->raw_material_image;?>" alt="Girl in a jacket" id="fertilizer_img" >
+                                                <?php endif; ?>
+                                        </td>
                                         <td><span class="title"><?php echo $ad->product_name ?></span></td>
                                         <td><span class="category"><?php echo $ad->price ?></span></td>
 
@@ -72,7 +77,7 @@
                                                 
                                                 <span class="edit"><a href="<?php echo URLROOT?>/supplier_ad_management/update_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-pen-to-square"></i></a></span>                                                
                                                 
-                                                <span class="delete"><a href="<?php echo URLROOT?>/supplier_ad_management/delete_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-trash-can"></i></a></span>
+                                                <span class="delete" onclick="popUpOpen(<?php echo $ad->Product_id?>)"><a href="<?php echo URLROOT?>/supplier_ad_management/delete_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-trash-can"></i></a></span>
                                                 
                                         </td>
                                 </div>
@@ -131,12 +136,29 @@
         </div>
 </div>
 
+<dialog id="deletePopup">
+        <div class="deletePopup">
+                <div class="delete_dialog_heading">
+                <i class="fa-regular fa-circle-xmark"></i>
+                <h2>Are you sure</h2>
+                <p>You will not be able to recover that item.</p>
+                </div>
+
+                <div class="dialog_content">
+                        <form method="POST" action="<?php #echo URLROOT?>/blog_post/delete_post">
+                        <button id="deletebtn" type="submit" value="" name="deletepost">Delete
+                        </button>
+                        <button id="cancelbtn" type="button">Cancel
+                        </button>
+                        </form>
+                </div>
+        </div>
+</dialog>
+
+
+
 
 <?php require APPROOT.'/views/Users/component/footer.php'?>
-
-
-
-
 
 
 

@@ -3,6 +3,7 @@
 //load helpers
 require_once 'helpers/url_helpers.php';
 require_once 'helpers/session_helper.php';
+require_once 'helpers/ImageUpload_Helper.php';
 
 //load configuration files
 require_once 'config/Config.php';

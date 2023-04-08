@@ -20,11 +20,16 @@
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'image' => $_FILES['image'],
+                'image_name' => time().'_'.$_FILES['image']['name'],
+
                 'product_name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
                 'quantity' => trim($_POST['quantity']),
                 'product_description' => trim($_POST['additional-info']),
                 // 'raw_material_image' => trim($_POST['image']),
+                
+                'image_err' => '',
                 'product_name_err' => '',
                 'price_err' => '',
                 'quantity_err' => '',
@@ -33,6 +38,18 @@
             ];
 
             //validation
+            if($data['image']['size'] > 0) {
+                if(uploadImage($data['image']['tmp_name'], $data['image_name'], '/img/postsImgs/')) {
+                    //done
+                }
+                else {
+                    $data['image_err'] = 'Unsuccessful image uploading';
+                }
+            }
+            else {
+                $data['image_name'] = null;
+            }
+
             if(empty($data['product_name'])) {
                 $data['product_name_err'] = 'Please enter a product_name';
             }
@@ -53,7 +70,7 @@
             //     $data['raw_material_image_err'] = 'Please enter a raw material image';
             // }
 
-            if(empty($data['product_name_err']) && empty($data['price_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
+            if(empty($data['image_err']) && empty($data['product_name_err']) && empty($data['price_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
                 if($this->supplier_ad->create($data)) {
                     // flash('post_msg', 'Post is published');
                     redirect('supplier_ad_management/index');
@@ -69,11 +86,15 @@
         }
         else{
             $data = [
+                'image' => '',
+                'image_name' => '',
                 'product_name' => '',
                 'price' => '',
                 'quantity' => '',
                 'product_description' => '',
-                'raw_material_image' => ''
+                'raw_material_image' => '',
+
+                'image_err' => ''
                 // 'product_name_err' => '',
                 // 'price_err' => '',
                 // 'quantity_err' => '',
@@ -102,12 +123,16 @@
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
+                'image' => $_FILES['image'],
+                'image_name' => time().'_'.$_FILES['image']['name'],
                 'product_id' => $productId,
                 'product_name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
                 'quantity' => trim($_POST['quantity']),
                 'product_description' => trim($_POST['additional-info']),
                 // 'raw_material_image' => trim($_POST['image']),
+                
+                'image_err' => '',
                 'product_name_err' => '',
                 'price_err' => '',
                 'quantity_err' => '',
@@ -116,6 +141,25 @@
             ];
 
             //validation
+            $post = $this->postsModel->getPostById($postId);
+            $oldImage = PUBROOT.'/img/postsImgs/'.$post->image;
+
+            //photo updated
+            //user haven't changed the existing image
+            if($_POST['intentially_removed'] == 'removed') {
+                deleteImage($oldImage);
+
+                $data['image_name'] = '';
+            }
+            else {
+                if($_FILES['image']['name'] == '') {
+                    $data['image_name'] = $post->image;
+                }
+                else {
+                    updateImage($oldImage, $data['image']['tmp_name'], $data['image_name'], '/img/postsImgs/');
+                }
+            }
+
             if(empty($data['product_name'])) {
                 $data['product_name_err'] = 'Please enter a product_name';
             }
@@ -159,11 +203,14 @@
             // }
 
             $data = [
+                'image' => '',
+                'image_name' => '',
                 'product_id' => $productId,
                 'product_name' => $post->product_name,
                 'price' => $post->price,
                 'quantity' => $post->quantity,
-                'product_description' => $post->product_description
+                'product_description' => $post->product_description,
+                'image_err' => '',
                 // 'title_err' => '',
                 // 'body_err' => ''
             ];
@@ -181,6 +228,10 @@
             redirect('supplier_ad_management/index');
         }
         else {
+            $this->postsModel->getPostById($postId);
+            $oldImage = PUBROOT.'/img/postsImgs/'.$post->image;
+            deleteImage($oldImage);
+            
             if($this->supplier_ad->delete($productId)) {
                 // flash('post_msg', 'Post is deleted');
                 redirect('supplier_ad_management/index');
