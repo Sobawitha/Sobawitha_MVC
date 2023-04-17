@@ -46,7 +46,7 @@
                         </tr>
                         
                         <?php foreach($data['complaints'] as $complaints): ?>
-                        <?php if($complaints->comp_status ==0 ) {?>
+                        <?php if($complaints->current_status ==0 ) {?>
 
                         <tr class="order">
                                 <div class="order_detail">

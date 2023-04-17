@@ -2,7 +2,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_Sidebar.php'?>
-
+<script src="../js/Users/feedback/feedback.js"></script>
 
 <div class="body">
         <div class="section_1">
@@ -54,7 +54,7 @@
 
               <div class="middle">
                 <div class="bar-container">
-                <div class="bar-4" style="width: <?php echo ($data['row_count'] > 0) ? ($data['four_star_count']/$data['row_count']*100) : 0; ?>%;"></div>
+                <div id="bar-4" class="bar-4" style="width: <?php echo ($data['row_count'] > 0) ? ($data['four_star_count']/$data['row_count']*100) : 0; ?>%;"></div>
                 </div>
 
               </div>
@@ -127,9 +127,13 @@
            -->
                 </div>
 
+            
+
                 <div class="feedbacks_desc">
-                  <?php foreach ($data['feed']['feedbacks'] as $feedback): ?>
-                    <div class="feed_desc_one">
+                
+        
+                 <?php foreach ($data['feed']['feedbacks'] as $feedback): ?>
+                    <div class="feed_desc_one"> 
                       <div class ="sender_name">
                         <div class="one">
                            <i class="fa-regular fa-user" id="feedback_user"></i>
@@ -175,9 +179,12 @@
                       </div>
 
                     </div><br>
-                    
+                
+
+                   
                   <?php endforeach; ?>
 
+             
                 </div><br>
 
 
@@ -195,6 +202,8 @@
                 
                 
         </div>
+
+
 </div>
 
 
