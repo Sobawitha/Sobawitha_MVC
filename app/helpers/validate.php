@@ -127,7 +127,7 @@
     }
     
     // Check if the account number is between 10 and 20 digits long
-    if (strlen($accountNumber) < 10 || strlen($accountNumber) > 20) {
+    if (strlen($accountNumber) < 8 || strlen($accountNumber) > 20) {
         return "Account number should be between 10 and 20 digits long";
     }
     
