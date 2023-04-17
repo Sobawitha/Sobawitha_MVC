@@ -21,27 +21,6 @@
         }
     }
 
-    //login the user
-    public function login($username, $password)
-    {
-        $this->db->query('SELECT * FROM admin WHERE Admin_email = :username');
-        $this->db->bind(':username', $username);
-
-        $row = $this->db->single();
-
-        $hashed_password = $row->password;
-
-        // if(password_verify($password,$hashed_password)){
-        //     return $row;
-        // }
-        if ($password == $hashed_password) {
-            return $row;
-        } 
-        else {
-            return false;
-        }
-    }
-
     public function findUserByID($id)
     {
       $this->db->query('SELECT * FROM user WHERE user_id= :id');
@@ -72,7 +51,7 @@
 
     public function deleteProPic($user_id,$user_gender)
     {
-        if($user_gender=='m'||'M'){
+        if($user_gender=='m'|| $user_gender=='M'){
             $this->db->query('UPDATE user set profile_picture="Men_Default_Avatar.png" WHERE user_id = :id');
             $this->db->bind(':id',$user_id);
             $_SESSION['profile_image']="Men_Default_Avatar.png";
