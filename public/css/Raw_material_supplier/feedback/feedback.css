@@ -165,3 +165,30 @@
   .time_feed{
     color:#86af49;
   }
+
+  /*filter_section*/
+
+.filter_section{
+  padding-top:30px;
+  font-size:13px;
+  font-weight: bold;
+  color:rgb(174, 169, 128);
+
+}
+
+#filter_label{
+  margin-right:20px;
+}
+
+#filter_label:hover{
+  cursor:pointer;
+}
+
+input[type=radio]{
+  accent-color: crimson;
+}
+
+#filter_form{
+  display: flex;
+  
+}

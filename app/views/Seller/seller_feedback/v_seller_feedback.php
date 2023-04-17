@@ -32,10 +32,17 @@
               <?php $formatted_number = number_format($data['average_rating'], 2, '.', ''); ?>
               <p style=font-size:14px;><span class="rating"><button><?php echo $formatted_number; ?></span></button> average based on <?php echo $data['row_count']; ?> reviews.</p><br>
               <hr style="border:0.1px solid #f1f1f1"><br>
+              
 
+              <form method ="POST" action="<?php echo URLROOT?>/seller_feedback/view_all_feed" id="filter_form">
               <div class="row">
                 <div class="side">
-                <div class="n_star">5 star</div>
+                <div class="n_star"><input type="radio" id="all" name="feed_type"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'all') echo ' checked="checked"';?> checked>All</div>
+              </div>
+              
+              <div class="row">
+                <div class="side">
+                <div class="n_star"><input type="radio" id="fives" name="feed_type" value="fives" onclick="javascript:submit()"  value = "fives"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'fives') echo ' checked="checked"';?>>5 star</div>
               </div>
 
               <div class="middle">
@@ -49,7 +56,7 @@
               </div>
 
               <div class="side">
-                <div class="n_star">4 star</div>
+                <div class="n_star"><input type="radio" id="fours" name="feed_type" value="fours" onclick="javascript:submit()"  value = "fours"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'fours') echo ' checked="checked"';?>>4 star</div>
               </div>
 
               <div class="middle">
@@ -63,7 +70,7 @@
               </div>
 
               <div class="side">
-                <div class="n_star">3 star</div>
+                <div class="n_star"><input type="radio" id="threes" name="feed_type" value="threes" onclick="javascript:submit()"  value = "threes"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'threes') echo ' checked="checked"';?>>3 star</div>
               </div>
               
               <div class="middle">
@@ -77,7 +84,7 @@
               </div>
 
               <div class="side">
-                <div class="n_star">2 star</div>
+                <div class="n_star"><input type="radio" id="twos" name="feed_type" value="twos" onclick="javascript:submit()"  value = "twos"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'twos') echo ' checked="checked"';?>>2 star</div>
               </div>
 
               <div class="middle">
@@ -91,7 +98,7 @@
               </div>
 
               <div class="side">
-                <div class="n_star">1 star</div>
+                <div class="n_star"><input type="radio" id="ones" name="feed_type" value="ones" onclick="javascript:submit()"  value = "ones"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'ones') echo ' checked="checked"';?>>1 star</div>
               </div>
               <div class="middle">
                 <div class="bar-container">
@@ -103,7 +110,8 @@
                 <div class="count_star"><?php echo $data['one_star_count']; ?></div>
               </div>
             </div>
-
+            
+            </form>
 
             <div class="cus_feedbacks">
                 <i class="fa-regular fa-message" id="message"></i><span class="feedback_section_header"> Feedbacks(<?php echo $data['row_count']?>)</span><br><br>
