@@ -8,6 +8,18 @@
 
     public function view_payments(){
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+             $filter_type = trim($_POST['payment_type']);
+             $payments = $this->adminPaymentModel->getPaymentDetails($filter_type);
+           
+            $data=[
+            'payments' =>  $payments
+            ];
+        
+            $this->view('Admin/AdminPayments/v_admin_payment', $data);
+
+         }else{
             $payments = $this->adminPaymentModel->getPaymentDetails();
            
             $data=[
@@ -15,6 +27,7 @@
             ];
         
             $this->view('Admin/AdminPayments/v_admin_payment', $data);
+         }
       
         }else{
             redirect('Login/login');  

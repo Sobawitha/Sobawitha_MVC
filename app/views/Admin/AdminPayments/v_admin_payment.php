@@ -34,10 +34,14 @@
         
 
                 <div class="filter_section">
-                        <label for="all" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing" checked>All types</label>
-                        <label for="credit_card" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Visa</label>
-                        <label for="debit_card" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Debit</label>
-                        <label for="debit_card" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">COD</label>
+                <div class="radio-buttons"  id="radioButtons"> 
+                <form method ="POST" action="<?php echo URLROOT?>/Admin_payments/view_payments" id="filter_form">
+                        <label for="all" id="filter_label"> <input type="radio" id="all" name="payment_type" onclick="javascript:submit()" value="all" <?php if (isset($_POST['payment_type']) && $_POST['payment_type'] == 'all') echo ' checked="checked"';?> checked>All types</label>
+                        <label for="credit_card" id="filter_label"> <input type="radio" id="credit_card" name="payment_type" onclick="javascript:submit()" value="credit_card"<?php if (isset($_POST['payment_type']) && $_POST['payment_type'] == 'credit_card') echo ' checked="checked"';?> >Credit</label>
+                        <label for="debit_card" id="filter_label"> <input type="radio" id="debit_card" name="payment_type" onclick="javascript:submit()" value="debit_card" <?php if (isset($_POST['payment_type']) && $_POST['payment_type'] == 'debit_card') echo ' checked="checked"';?>>Debit</label>
+                        <label for="cod" id="filter_label"> <input type="radio" id="cod" name="payment_type" onclick="javascript:submit()" value="cod" <?php if (isset($_POST['payment_type']) && $_POST['payment_type'] == 'cod') echo ' checked="checked"';?>>COD</label>
+                </form> 
+                </div>
                 </div>
 
                 <div class="order_list">

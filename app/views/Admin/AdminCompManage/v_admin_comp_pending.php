@@ -28,10 +28,13 @@
         </form>
 
                 <div class="filter_section">
-                        <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing" checked>Pending</label>
-                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Solved</label>
-                       
-                </div>
+                <div class="radio-buttons"  id="radioButtons">        
+                <form method ="POST" action="<?php echo URLROOT?>/Admin_complaints_management/view_complaints" id="filter_form">
+                        <label for="pending_comp" id="filter_label"> <input type="radio" id="pending_comp" name="comp_type"  onclick="javascript:submit()" value="pending_comp" <?php if (isset($_POST['comp_type']) && $_POST['comp_type'] == 'pending_comp') echo ' checked="checked"';?> checked>Pending</label>
+                        <label for="solved_comp" id="filter_label"> <input type="radio" id="solved_comp" name="comp_type"  onclick="javascript:submit()" value="solved_comp" <?php if (isset($_POST['comp_type']) && $_POST['comp_type'] == 'solved_comp') echo ' checked="checked"';?>>Solved</label>
+                </form>        
+                </div>      
+                
 
                 <div class="order_list">
                 <div class="orders">
@@ -46,11 +49,10 @@
                         </tr>
                         
                         <?php foreach($data['complaints'] as $complaints): ?>
-                        <?php if($complaints->comp_status ==0 ) {?>
-
+                       
                         <tr class="order">
                                 <div class="order_detail">
-                                        <td><?php echo $complaints->complaint ?></td>
+                                        <td><?php echo $complaints->user_first_name ?></td>
                                         <td><?php echo $complaints->email ?></td>
                                         <td><button class="comp_category"><?php echo $complaints->type ?></button></td>
                                         <td>
@@ -68,26 +70,32 @@
                                         <td>
                                                 <div class="action">
                                                                         
-                                                                
+                                                        <?php if($complaints->current_status == 0) { ?>      
                                                         <form method="GET">
                                                         <span class="delete"><button type="button" onclick="popUpOpenDelete()" id="take_action"><i class="fa-solid fa-hand"></i> Take Action</button></span>
-                                                
-                                                </form><br>
+                                                        
+                                                        </form><br>
+
+                                                         <?php } ?>
                                                         
                                                         <form  action="">
                                                         <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> View More</button></span>
                                                         </form>
-
+                                                        
+                                                        <?php if($complaints->current_status == 0) { ?>   
                                                         <form  action="">
                                                         <span class="viewmore"><button id="ignore" ><i class="fa-solid fa-delete-left"></i> Ignore</button></span>
                                                         </form>
+                                                        <?php } ?>
+
                                                         </div>
                                         </td>
                                 </div>
 
                         </tr>
-                        <?php } ?>          
-                   <?php endforeach;?>               
+                      
+                   <?php endforeach;?>   
+                             
                         <!-- <tr class="order">
                                 <div class="order_detail">
                                         <td><span class="p_name">Punsara</span>
@@ -104,7 +112,7 @@
                         </tr> -->
 
                 </table>
-
+                </div> 
                 </div>
                 </div>
         </div>

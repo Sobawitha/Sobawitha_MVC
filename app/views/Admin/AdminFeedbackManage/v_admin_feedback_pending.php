@@ -80,7 +80,7 @@
                         </tr>
 
                         <?php foreach($data['feed'] as $feed): ?>
-                        <?php if($feed->feed_status ==0 ) { ?>
+                        
                         <tr class="order">
                                 <div class="order_detail">
                                         <td><?php echo $feed->receiver_name ?></td>
@@ -142,26 +142,30 @@
                                         <td>
                                         <div class="action">
                                                                         
-                                                                
+                                        <?php if($feed->feed_status == 0) { ?>                          
                                            <form method="GET">
                                          <span class="delete"><button type="button" onclick="popUpOpenDelete()" id="review"><i class="fa-solid fa-hand"></i> Review</button></span>
                                                                 
                                         </form><br>
-                                                                        
+                                        <?php } ?>
+                                        
+                                      
                                         <form  action="">
                                         <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> More</button></span>
                                         </form>
-                
+                                       
+                                        <?php if($feed->feed_status == 0 ) { ?> 
                                          <form  action="">
                                           <span class="viewmore"><button id="ignore" ><i class="fa-solid fa-delete-left"></i> Ignore</button></span>
                                          </form>
                                          </div>
+                                         <?php } ?>
                                          </td>
                                          
                                 </div>
 
                         </tr>
-                <?php } ?>                    
+                              
                 <?php endforeach;?>                  
 
                 </table>
@@ -178,4 +182,3 @@
 </div>
 
 
-<?php require APPROOT.'/views/Users/component/footer.php'?>

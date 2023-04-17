@@ -35,7 +35,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $filter_type = trim($_POST['ad_type']);
         $products = $this->adminAdMgmtModel->display_all_ads($filter_type); //data object array
-
+     
         
         $data=[
             'products' =>  $products,
