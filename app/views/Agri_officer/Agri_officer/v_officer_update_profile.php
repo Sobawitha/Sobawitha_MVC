@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../css/Users/users/update_profile.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
-<?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
-<?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
+<?php require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php'?>
+<?php require APPROOT.'/views/Agri_officer/Agri_officer/Officer_Sidebar.php'?>
 <script src="../js/Admin/Profile/profile.js"></script>
 <script src="../js/Users/Notifications/push_notifications_profile.js"></script>
 
@@ -24,7 +24,7 @@
         <div class="a_add_admin_maincontent">
         <div class="container">
             <div class="title">Account Information</div>
-            <form method="POST" action="<?php echo URLROOT?>/Admin/updateProfile" enctype="multipart/form-data">
+            <form method="POST" action="<?php echo URLROOT?>/AgriOfficer/updateProfile" enctype="multipart/form-data">
             
              <!-- Confirm Update Popup -->
 
@@ -39,7 +39,7 @@
                         
                       <div class="dialog__content">
                         <button type="submit" name="submitForm" value="true" id="green_yes">Yes</button>
-                        <button type="button" id="no" onclick="location.href='<?php echo URLROOT?>/Admin/profile'">No</button>
+                        <button type="button" id="no" onclick="location.href='<?php echo URLROOT?>/AgriOfficer/profile'">No</button>
                       </div>
                     </div>
                     </dialog>
@@ -67,8 +67,8 @@
                       </div>
                         
                       <div class="dialog__content">
-                        <a href="<?php echo URLROOT?>/Admin/delete_profile_pic?>" id="yes">Yes</a>
-                        <a href="<?php echo URLROOT?>/Admin/updateProfile " id="no">No</a>
+                        <a href="<?php echo URLROOT?>/AgriOfficer/delete_profile_pic?>" id="yes">Yes</a>
+                        <a href="<?php echo URLROOT?>/AgriOfficer/updateProfile " id="no">No</a>
                       </div>
                     </div>
                     </dialog>
@@ -82,7 +82,7 @@
                     <input type="text" placeholder="" name="first_name" value="<?php echo $data['first_name']?>" >
                     <span class="error_msg"><?php echo $data['first_name_err'] ?></span>
                 </div>
-
+           
                 <div class="input-box">
                     <span class="details">Last Name</span>
                     <input type="text" placeholder="" name="last_name" value="<?php echo $data['last_name']?>" >
@@ -161,29 +161,6 @@
                     <span class="error_msg"><?php echo $data['birthday_err'] ?></span>
                 </div>
 
-                <div class="input-box">
-                    <span class="details">Bank Account Holder Name</span>
-                    <input type="text" placeholder="" name="bank_account_name" value="<?php echo $data['bank_account_name']?>">
-                    <span class="error_msg"><?php echo $data['bank_account_name_err'] ?></span>
-                </div>
-
-                <div class="input-box">
-                    <span class="details">Bank Account Number</span>
-                    <input type="text" placeholder=""  name="bank_account_no" value="<?php echo $data['bank_account_no']?>" >
-                    <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span>
-                </div>
-
-                <div class="input-box">
-                    <span class="details">Bank Name</span>
-                    <input type="text" placeholder="" name="bank" value="<?php echo $data['bank']?>" >
-                    <span class="error_msg"><?php echo $data['bank_err'] ?></span>
-                </div>
-
-                <div class="input-box">
-                    <span class="details">Branch of Bank</span>
-                    <input type="text" placeholder="" name="branch" value="<?php echo $data['branch']?>" >
-                    <span class="error_msg"><?php echo $data['branch_err'] ?></span>
-                </div>
                 </div>
 
                 </div>

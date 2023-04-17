@@ -2,41 +2,99 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php'?>
 <?php require APPROOT.'/views/Agri_officer/Agri_officer/Officer_Sidebar.php'?>
+<script src="../js/Users/Notifications/push_notifications_profile.js"></script>
+<script src="../js/Admin/Profile/profile.js"></script>
+
+<!-- New -->
 
 <div class="body">
     <div class="section_1">
-
+   
     </div>
+    <div id="notification-container">   </div>
+   
+ 
+
     <div class="section_2">  
         <div class="settings">
         <div class="three_btns">
                 <h4>Settings</h4>
                 <div class="button" >
-                <input type="submit" id="update_btn" value="Update">
+                <a href="<?php echo URLROOT?>/AgriOfficer/updateProfile"><input type="button" id="update_btn" value="Update Profile"></a>
                 </div>
 
+               
                 <div class="button" >
                 <a href="<?php echo URLROOT?>/Users/changePW"><input type="button" id="change_pwd"  value="Change Password"></a>
                 </div>
+                
 
-                <div class="button" >
-                <input type="submit" id="delete" value="Delete">
-                </div>
+                <form method="GET" >
+                    <div class="button" >
+                    <input type="button" onclick="popUpOpenDelete()" id="delete" value="Delete">
+                    </div>
+                   
+                </form>
+                <dialog id="deactivateUserPopup">
+                    <div class="deactivateUserPopup">
+                      <div class="dialog__heading">
+                        <h2>Are you sure you want to delete your account ?</h2>
+                        <button id="closebtntwo" type="button">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                        
+                      <div class="dialog__content">
+                        <a href="<?php echo URLROOT?>/Admin/deactivateAccount/<?php echo $_SESSION['user_id'] ?>" id="yes">Yes</a>
+                        <a href="<?php echo URLROOT?>/Admin/profile " id="no">No</a>
+                      </div>
+                    </div>
+                    </dialog>
                 </div>
         </div>
 
         <?php 
-            die();
-            foreach($data['profile_detail'] as $profile_detail):?>
+            // foreach($data['user'] as $user):?>
         <hr class="profile_hr">
         <div class="a_add_admin_maincontent">
+            <!-- For push notifications -->
+
         <div class="container">
             <div class="title">Account Information</div>
+            <div id="success-message"></div>
             <div class="profile_image">
-                <img  src="./../public/upload/user_profile_pics/<?php echo $data['profile_picture']?>" id="userprofileimage_for_viewprofile"/>
+                <img  src="./../public/upload/user_profile_pics/<?php echo $_SESSION['profile_image']?>" id="userprofileimage_for_viewprofile"/>
+                
                 <div class="image_change_button">
-                    <button id="change_img">change picture</button>
-                    <button id="delete_img">delete picture</button>
+                
+                <form method="POST" action="<?php echo URLROOT?>/AgriOfficer/change_profile_pic " enctype="multipart/form-data">
+                
+                <label for="propic" id="labelpic" >Change Picture</label>
+                <input type="file" name="propic" id="propic" onchange="showButton()" />
+                <br> <button type="button" onclick ="popUpOpenChangePic()" id="change_img" style="display:none;"  >Confirm change</button>
+                <span class="error_msg"><?php echo $data['propic_err'] ?></span>
+                <dialog id="confirmingChangePicPopup">
+                    <div class="confirmingChangePicPopup">
+                    <div class="dialog__heading">
+                        <h2>Are you sure you want to change your profile pic?</h2>
+                        <button id="closebtnthree" type="button">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="dialog__content">
+                        <button type="submit" name="submitForm" value="true" id="green_yes">Yes</button>
+                        <button type="button" id="no_btn" onclick="location.href='<?php echo URLROOT?>/AgriOfficer/profile'">No</button>
+
+                    </div>
+                    </div>
+                </dialog>
+
+           
+         
+
+            </form>
+
+        
                 </div>
             </div>
             <div class="content">
@@ -79,46 +137,38 @@
                     <input type="text" placeholder="Enter your NIC no" value="<?php echo $data['nic']?>"readonly>
                 </div>
                 <div class="input-box">
-                    <span class="details">Qualifications</span>
-                    <input type="text" placeholder="Enter your qualifications" value="<?php echo $profile_detail->qualifications ?>"readonly>
-                </div>
-                <!-- <div class="input-box">
                     <span class="details">Birthday</span>
                     <input type="text" placeholder="" value="<?php echo $data['dob']?>" readonly>
                 </div>
+
                 <div class="input-box">
                     <span class="details">Qualification File</span>
-                    <button class="qualification"><a download="<?php echo $data['qualifications']?>"  href="<?php echo URLROOT?>/upload/qualification_files/<?php echo  $data['qualifications']?>">Download</a></button>
+                    <?php if(empty($data['qualifications'])){ ?>
+                        <button class="qualificationOne" disabled>No File to Download</button>
+                    <?php } else {?>
+                     <button class="qualificationTwo"><a download="<?php echo $data['qualifications']?>"  href="<?php echo URLROOT?>/upload/qualification_files/<?php echo  $data['qualifications'] ?>">Download</a></button>
+                    <?php } ?>
                 </div>
-             
+          
                 </div>
-                <div class="gender-details">
-                <input type="radio" name="gender" checked="checked" id="dot-1">
-                <input type="radio" name="gender" id="dot-2">
-                </div>
-
-                
-
-
-
-
-
-
-
-
-
-
-
             </form>
             </div>
 
             
         </div>
         </div>
-        <?php endforeach;?>
+
     </div>
 
     <div class="last">
+
+                <?php if (isset($_SESSION['success_msg'])): ?>
+                <div class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['success_msg']; ?> <div class="progress-bar"></div>
+               </div>
+                <?php unset($_SESSION['success_msg']); ?>
+                <?php endif; ?>
+      
+
                     <p class="notification_main_header">Notifications<i class="fa-solid fa-chevron-down" id="drop_down_arrow"></i></p>
                     <div class="individual_notification_1">
                         <span class="icon" ><i class="fa-regular fa-circle-check"></i></span>
@@ -156,6 +206,21 @@
                     </div>
 
     </div>
+
+    <!-- <span id="isUpdated"><?php if(1){echo $_SESSION['profile_updateAdmin']; unset($_SESSION['profile_updateAdmin']);}?></span> -->
+
+
+    
+
+
 </div>
+
+
+
+
+
+
+
+
 
 <?php require APPROOT.'/views/Users/component/footer.php'?>
