@@ -2,7 +2,8 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_sidebar.php'?>
-<script src="../js/Admin/Add_management/add_management.js"></script>
+<script src="../js/Admin/Payments/payments.js"></script>
+
 
 <div class="body">
         <div class="section_1">
@@ -15,18 +16,20 @@
         <hr>
 
         <br><br>
+
         <div class="button_section">
-        <form method="POST">
+        <form class="searchForm" action="<?php echo URLROOT;?>/Admin_payments/adminSearchPayment" method="GET">
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="Search by firstname | lastname of the Payer" require/></span>
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" value="<?php echo isset($_SESSION['search_term']) ? $_SESSION['search_term'] : ''; ?>" placeholder="Search by firstname | lastname of the Payer" require/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
+                    <button type="submit" class="search_btn" onclick="open_cancel_btn()"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
         </div>
         </form>
+        <?php if(empty($data['message'])){ ?>
         <div class="add_new_user_btn">
          <a href ="<?php echo URLROOT ?> /Admin_payments/generate_report" id="genReport" ><button class="gen_report"><i class="fa-solid fa-file-invoice"></i> Generate Report</button></a>
           </div>
@@ -74,7 +77,9 @@
 
                         </tr>
                         <?php endforeach;?>          
-         
+                        <?php }else{ ?>
+                    <span class="error_msg"><?php echo $data['message'];?></span>
+                    <?php    }  ?>  
 
                 </table>
 

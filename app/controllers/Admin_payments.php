@@ -108,4 +108,39 @@
         }
 
     }
+
+    public function  adminSearchPayment()
+      {
+        if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
+      
+        if($_SERVER['REQUEST_METHOD']=='GET'){
+          $_GET=filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+              
+              $_SESSION['search_term'] = trim($_GET['search']);
+            //   $search=trim($_GET['search']);
+               $search = $_SESSION['search_term'] ;
+              $payments= $this->adminPaymentModel->searchPayments($search);
+              $message = '';
+              if (empty($payments)) {
+                $message = 'No payment details found...';
+              }
+              $data=[                      
+                'payments'=>$payments,
+                'search'=>$search,
+                'message' => $message
+              ];
+              $this->view('Admin/AdminPayments/v_admin_payment',$data);
+         }else{
+              $data=[                      
+                'payments'=>'',
+                'search'=>'',
+                'message' => ''
+              ];
+              $this->view('Admin/AdminPayments/v_admin_payment',$data);
+         }
+    
+        }else{
+          redirect('Login/login');  
+        }
+      }
 }

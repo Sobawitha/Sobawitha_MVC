@@ -50,4 +50,14 @@
             }
                 
     }
+
+    public function searchPayments($search)
+    {
+    $this->db->query("SELECT payments.*, user.first_name AS payer_first, user.last_name AS payer_last 
+    FROM payments 
+    JOIN user ON payments.payer_id = user.user_id 
+    WHERE user.first_name LIKE '%$search%' OR user.last_name LIKE '%$search%'");
+    $result=$this->db->resultSet();
+    return $result;    
+    } 
 }

@@ -48,6 +48,10 @@
   background-color:transparent;
 }
 
+#searchBar{
+  color:#376462;
+}
+
 #search{
   color:rgb(55, 100, 98);
   padding: 5px;
@@ -67,7 +71,7 @@
 }
 
 
-#cansel{
+#cancel{
   display:none;
 }
 
@@ -87,6 +91,10 @@
 
 tr{
   height:60px;
+  text-align: center;
+}
+
+td{
   text-align: center;
 }
 
@@ -234,3 +242,116 @@ input[type=radio]{
   align-items: center;
   padding: 10px;
 }
+
+.error_msg{
+  font-size: 25px;
+  font-weight: 500px;
+  text-align: center;
+}
+
+/* Ignore Complaint Popup */
+#deactivateUserPopup {
+  border: none;
+  padding: 0;
+  border-radius: 10px;
+}
+
+#deactivateUserPopup::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+.deactivateUserPopup { 
+  min-height: 200px;
+  padding:1rem;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.deactivateUserPopup h2{
+  font-size:15px;
+}
+
+.dialog__content a:hover {
+  opacity: 1;
+}
+
+#yes, #no{
+  font-size:13px;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+#yes{
+   background-color: crimson;
+   color: #ccc;
+}
+
+#no{
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+}
+
+
+/* View More Comp Popup */
+.complaint-details {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  font-family: Arial, sans-serif;
+}
+
+.complaint-details h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.complaint-details p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.complaint-details label {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.complaint-details .form-group {
+  margin-bottom: 20px;
+}
+
+.complaint-details input[type="text"],
+.complaint-details textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #555;
+}
+
+.complaint-details button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.complaint-details button[type="submit"]:hover {
+  background-color: #555;
+}
+

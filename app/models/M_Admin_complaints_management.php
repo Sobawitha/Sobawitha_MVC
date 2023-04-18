@@ -30,4 +30,26 @@
     
 }
 
+    public function getSearchComplaints($search)
+    {
+    $this->db->query("SELECT * FROM complaint WHERE type LIKE '%$search%' ");
+    $result=$this->db->resultSet();
+    return $result;    
+    } 
+    
+    public function getComplaintDetails($comp_id)
+    {
+      $this->db->query("SELECT c.*, CONCAT(c.user_first_name, ' ', c.user_last_name) as full_name FROM complaint c WHERE c.complaint_id = :id");
+      $this->db->bind(':id',$comp_id);  
+
+
+      $row= $this->db->single();
+
+      if($this->db->rowCount() >0){
+            return $row;
+      }else{
+            return false;
+      }
+    } 
+
 }
