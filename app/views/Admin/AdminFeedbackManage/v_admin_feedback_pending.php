@@ -57,9 +57,9 @@
                         <tr class="table_head">
                                 <td>Feedback Receiver</td>
                                 <td>Category</td>
-                                <td>Reviewed By</td>
                                 <td>Review</td>
-                                <td>Options</td>
+                                <td>Date & Time</td>
+                                 <td>Options</td>
                         </tr>
                      <?php    }  ?>   
                         <?php foreach($data['feed'] as $feed): ?>
@@ -68,7 +68,7 @@
                                 <div class="order_detail">
                                         <td><?php echo $feed->receiver_name ?></td>
                                         <td><?php echo $feed->category ?></td>
-                                        <td><?php echo $feed->admin_first_name ?></td>
+                                        
                                         <td class="rate">
                                        
                                           <?php if($feed->rating==1) { ?>      
@@ -122,21 +122,103 @@
                                                 ?>   
                                         </div>
                                         </td>
+                                        <td><?php echo $feed->date ?></td>
                                         <td>
                                         <div class="action">
                                                                         
                                         <?php if($feed->feed_status == 0) { ?>                          
-                                           <form method="GET">
-                                         <span class="delete"><button type="button" onclick="popUpOpenDelete()" id="review"><i class="fa-solid fa-hand"></i> Review</button></span>
+                                          
+                                         <button type="button" id="review" onclick="popUpOpenFeedReview('<?php echo $feed->receiver_name ?>','<?php echo $feed->category ?>','<?php echo $feed->rating ?>','<?php echo $feed->review_desc ?>','<?php echo $feed->date ?>')"><i class="fa-solid fa-hand"></i> Review</button>
                                                                 
-                                        </form><br>
+                                              <!-- Dialog box -->
+                                              <dialog id="feedback-details">
+                                                        <div class="feedback-details">
+                                                                <h2>Feedback Details</h2>
+                                                                <form method="POST" action="">
+                                                                <div class="form-group">
+                                                                        <label for="receiver-name">Feedback Receiver:</label>
+                                                                        <input type="text" id="receiver-namee" name="receiver-name" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="feed_category">Feedback Category:</label>
+                                                                        <input type="text" id="feed_categoryy" name="feed_category" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="rating">Rating:</label>
+                                                                        <input type="text" id="ratingg" name="rating" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="feedback-description">Feedback Description:</label>
+                                                                        <textarea id="feedback-descriptionn" name="feedback-description"  readonly></textarea>
+                                                                  
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="feedback-date">Feedback Date & Time</label>
+                                                                        <input type="text" id="feedback-datee" rows="8" name="feedback-date" readonly>
+
+                                                                </div>
+                                                             
+                                                                <div class="btn-group">
+                                                                  
+                                                                <!-- <form method="POST" action="<?php echo URLROOT?>/Admin_feedback_management/adminReviewFeedback/<?php echo $feed->id ?>">        
+                                                                <button type="submit" class ="btn" id ="feed-review-btn"   >Review</button>        
+                                                                </form>
+                                                              
+                                                             
+                                                                <button type="button" class ="btn" id ="clc" onclick="document.getElementById('feedback-details').close()">Close</button>
+                                                              
+                                                                
+                                                                <form method="POST" action="<?php echo URLROOT?>/Admin_feedback_management/adminRejectFeedback/<?php echo $feed->id ?>">        
+                                                                <button type="submit" class ="btn" id ="reject-btn" onclick="rejectFeed()">Reject</button> 
+                                                                </form> -->
+                                                                <button type="submit" class="btn" id="feed-review-btn" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminReviewFeedback/<?php echo $feed->id ?>">Review</button>
+                                                                <button type="button" class="btn" id="clc" onclick="document.getElementById('feedback-details').close()">Close</button>
+                                                                <button type="submit" class="btn" id="reject-btn" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminRejectFeedback/<?php echo $feed->id ?>">Reject</button>
+                                                                
+                                                                </div>
+                                                                </form>
+                                                        </div>
+                                                        </dialog>
+                                                        
+                                                       <br>
                                         <?php } ?>
                                         
                                       
-                                        <form  action="">
-                                        <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> More</button></span>
-                                        </form>
-                                       
+                                        <button type="button" id="view_more" onclick="popUpOpenFeedViewMore('<?php echo $feed->receiver_name ?>','<?php echo $feed->category ?>','<?php echo $feed->rating ?>','<?php echo $feed->review_desc ?>','<?php echo $feed->date ?>')">
+                                        <i class="fa-solid fa-circle-info"></i> More </button>
+                                            <!-- Dialog box -->
+                                            <dialog id="feedback-details-action">
+                                                        <div class="feedback-details">
+                                                                <h2>Feedback Details</h2>
+                                                                <form>
+                                                                <div class="form-group">
+                                                                        <label for="receiver-name">Feedback Receiver:</label>
+                                                                        <input type="text" id="receiver-name" name="receiver_name" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="feed_category">Feedback Category:</label>
+                                                                        <input type="text" id="feed_category" name="feed_category" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="rating">Rating:</label>
+                                                                        <input type="text" id="rating" name="rating" readonly>
+                                                                </div>
+                                                            
+                                                                <div class="form-group">
+                                                                        <label for="feedback-description">Feedback Description:</label>
+                                                                        <textarea id="feedback-description" name="feedback_description" rows="8" readonly></textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="feedback-date">Feedback Date & Time:</label>
+                                                                        <input type="text" id="feedback-date" name="feedback_date" readonly>
+                                                                </div>
+                                                                <div class="button-container">
+                                                                <button type="button" id ="clc" onclick="document.getElementById('feedback-details-action').close()">Close</button>
+                                                                </div>
+                                                                 </form>
+                                                        </div>
+                                                        </dialog>
+                                                </div>
                                      
                                          </td>
                                          

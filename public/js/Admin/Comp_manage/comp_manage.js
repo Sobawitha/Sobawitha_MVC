@@ -32,12 +32,7 @@ function solveComplaint() {
   document.getElementById('complaint-details').close();
 } 
 
-function popUpOpen() {
-    const addUserPopup = document.getElementById('addUserPopup')
-      document.getElementById('addNewUser').addEventListener('click',() => addUserPopup.showModal());
-      document.getElementById('closebtn').addEventListener('click',() => addUserPopup.close());
-    }
-    
+ 
     // function popUpOpenCompViewMore() {
     //   const complaintDetails = document.getElementById('complaint-details')
     //     document.getElementById('view_more').addEventListener('click',() => complaintDetails.showModal());

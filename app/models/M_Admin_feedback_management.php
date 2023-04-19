@@ -56,5 +56,31 @@
     $result=$this->db->resultSet();
     return array('rows' => $result, 'row_count' => $row_count);   
     } 
+
+    public function reviewFeed($feed_id)
+    {
+        $this->db->query('UPDATE feedback set feed_status=1, admin_id= :admin WHERE id = :id');
+        $this->db->bind(':id',$feed_id);
+        $this->db->bind(':admin',$_SESSION['user_id']);
+  
+        if($this->db->execute()){
+           return true;
+        }else{
+            return false;
+        }    
+    } 
+
+    public function rejectFeed($feed_id)
+    {
+        $this->db->query('UPDATE feedback set feed_status=2, admin_id= :admin WHERE id = :id');
+        $this->db->bind(':id',$feed_id);
+        $this->db->bind(':admin',$_SESSION['user_id']);
+  
+        if($this->db->execute()){
+           return true;
+        }else{
+            return false;
+        }    
+    } 
     
 }

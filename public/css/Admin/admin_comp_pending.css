@@ -305,10 +305,17 @@ input[type=radio]{
   font-family: Arial, sans-serif;
 }
 
+#complaint-details-action::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+
 #complaint-details::backdrop{
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(1px);
 }
+
+
 
 .complaint-details h2 {
   font-size: 24px;

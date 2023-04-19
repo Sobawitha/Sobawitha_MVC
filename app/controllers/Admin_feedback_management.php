@@ -18,13 +18,19 @@
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            if(isset($_POST['feed_type'])){
             $filter_type = trim($_POST['feed_type']);  
-            
+            }
+
             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
             $offset = ($current_page - 1) * $records_per_page;
-
+            
+            if(!empty($filter_type)){
             $feed = $this->adminFeedMgntModel->getFeedbackDetails($filter_type, $records_per_page, $offset);
-       
+            }else{
+              $feed = $this->adminFeedMgntModel->getFeedbackDetails('', $records_per_page, $offset);
+            }
+
             $total_records = $feed['row_count'];
             // echo "<script>";
             // echo "alert('" . $total_records . "')";
@@ -187,6 +193,32 @@
       $this->view('Admin/AdminFeedbackManage/v_admin_feedback_pending', $data);
     } else {
       redirect('Login/login');
+    }
+  }
+
+  public function  adminReviewFeedback($feed_id)
+  {
+    if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
+        $solveStatus= $this->adminFeedMgntModel->reviewFeed($feed_id);
+
+   
+        redirect('Admin_feedback_management/view_feedback');
+     
+    }else{
+      redirect('Login/login');  
+    }
+  }
+
+  public function  adminRejectFeedback($feed_id)
+  {
+    if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
+        $solveStatus= $this->adminFeedMgntModel->rejectFeed($feed_id);
+
+   
+        redirect('Admin_feedback_management/view_feedback');
+     
+    }else{
+      redirect('Login/login');  
     }
   }
 }
