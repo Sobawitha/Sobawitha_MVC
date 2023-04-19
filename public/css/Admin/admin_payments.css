@@ -216,3 +216,9 @@ input[type=radio]{
   width: 100px;
   border: none;
 }
+
+.error_msg{
+  font-size: 25px;
+  font-weight: 500px;
+  text-align: center;
+}

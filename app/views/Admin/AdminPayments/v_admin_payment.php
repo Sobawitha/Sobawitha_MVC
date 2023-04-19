@@ -22,7 +22,7 @@
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" value="<?php echo isset($_SESSION['search_term']) ? $_SESSION['search_term'] : ''; ?>" placeholder="Search by firstname | lastname of the Payer" require/></span>
+                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>" require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
                     <button type="submit" class="search_btn" onclick="open_cancel_btn()"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
@@ -30,12 +30,13 @@
         </div>
         </form>
         <?php if(empty($data['message'])){ ?>
+       
         <div class="add_new_user_btn">
          <a href ="<?php echo URLROOT ?> /Admin_payments/generate_report" id="genReport" ><button class="gen_report"><i class="fa-solid fa-file-invoice"></i> Generate Report</button></a>
           </div>
           </div>
         
-
+          <?php if($data['search'] ==='Search by payer firstname or lastname'): ?>
                 <div class="filter_section">
                 <div class="radio-buttons"  id="radioButtons"> 
                 <form method ="POST" action="<?php echo URLROOT?>/Admin_payments/view_payments" id="filter_form">
@@ -46,6 +47,7 @@
                 </form> 
                 </div>
                 </div>
+                <?php endif?> 
 
                 <div class="order_list">
                 <div class="orders">

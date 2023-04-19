@@ -35,15 +35,16 @@
                 <div class="radio-buttons"  id="radioButtons">        
                 <form method ="POST" action="<?php echo URLROOT?>/Admin_complaints_management/view_complaints" id="filter_form">
                         <label for="pending_comp" id="filter_label"> <input type="radio" id="pending_comp" name="comp_type"  onclick="javascript:submit()" value="pending_comp" <?php if (isset($_POST['comp_type']) && $_POST['comp_type'] == 'pending_comp') echo ' checked="checked"';?> checked>Pending</label>
-                        <label for="solved_comp" id="filter_label"> <input type="radio" id="solved_comp" name="comp_type"  onclick="javascript:submit()" value="solved_comp" <?php if (isset($_POST['comp_type']) && $_POST['comp_type'] == 'solved_comp') echo ' checked="checked"';?>>Solved</label>
+                        <label for="solved" id="filter_label"> <input type="radio" id="solved" name="comp_type"  onclick="javascript:submit()" value="solved" <?php if (isset($_POST['comp_type']) && $_POST['comp_type'] == 'solved') echo ' checked="checked"';?>>Solved</label>
                 </form>        
                 </div>      
                 <?php endif?> 
-
+                <span class="error_msg"><?php echo $data['emptydata'];?></span> 
                 <div class="order_list">
                 <div class="orders">
 
                 <table class="order_list_table">
+                       <?php if(empty($data['emptydata'])){ ?>
                         <tr class="table_head">
                                 <td>Complaint</td>
                                 <td>Email</td>
@@ -51,7 +52,7 @@
                                 <td>Complaint Content</td>
                                 <td>Options</td>
                         </tr>
-                        
+                        <?php    }  ?> 
                         <?php foreach($data['complaints'] as $complaints): ?>
                  
                         <tr class="order">
@@ -75,15 +76,49 @@
                                                 <div class="action">
                                                                         
                                                         <?php if($complaints->current_status == 0) { ?>      
-                                                        <form method="GET">
-                                                        <span class="delete"><button type="button"  id="take_action" data-complaint='<?php echo json_encode($complaints); ?>'><i class="fa-solid fa-hand"></i> Take Action</button></span>
+                                                        <button type="button"  id="take_action" onclick="popUpOpenCompViewMore('<?php echo $complaints->user_first_name ?>','<?php echo $complaints->user_last_name ?>','<?php echo $complaints->email ?>','<?php echo $complaints->type ?>','<?php echo $complaints->subject ?>','<?php echo $complaints->discription ?>','<?php echo $complaints->date ?>')"><i class="fa-solid fa-hand"></i> Take Action</button>
                                                         
-                                                        <div id="complaint-modal" class="modal">
-                                                        <!-- Modal content here -->
+                                                        <!-- Dialog box -->
+                                                        <dialog id="complaint-details">
+                                                        <div class="complaint-details">
+                                                                <h2>Complaint Details</h2>
+                                                                <form method="POST" action="<?php echo URLROOT?>/Admin_complaints_management/adminSolveComplaint/<?php echo $complaints->complaint_id ?>"">
+                                                                <div class="form-group">
+                                                                        <label for="full-name">Complainant Full Name:</label>
+                                                                        <input type="text" id="full-namee" name="full_name" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="email">Complainant Email:</label>
+                                                                        <input type="text" id="emaill" name="email" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="complaint-type">Complaint Type:</label>
+                                                                        <input type="text" id="complaint-typee" name="complaint_type" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="complaint-subject">Complaint Subject:</label>
+                                                                        <input type="text" id="complaint-subjectt" name="complaint_subject" readonly>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="complaint-description">Complaint Description:</label>
+                                                                        <textarea id="complaint-descriptionn" name="complaint_description" rows="5" readonly></textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <label for="complaint-date">Complaint Date:</label>
+                                                                        <input type="text" id="complaint-datee" name="complaint_date" readonly>
+                                                                </div>
+                                                                <div class="btn-group">
+                                                                <button type="submit" id ="solve-btn" onclick="solveComplaint()">Solve</button>        
+                                                                <button type="button" id ="clc" onclick="document.getElementById('complaint-details').close()">Close</button>
+                                                                
+                                                                </div>
+                                                                </form>
                                                         </div>
-                                                        </form><br>
+                                                        </dialog>
+                                                        
+                                                       <br>
 
-                                                         <?php } ?>
+                                                        <?php } ?>
 
                                                       
 
@@ -91,22 +126,23 @@
 
 
 
-                                                        <form method="GET">
-                                                        <button type="button" onclick="popUpOpenCompViewMore(<?php echo $complaints->complaint_id ?>)" id="view_more">
+                                                 
+                                                        <button type="button"  id="view_more" onclick="popUpOpenCompTakeAction('<?php echo $complaints->user_first_name ?>','<?php echo $complaints->user_last_name ?>','<?php echo $complaints->email ?>','<?php echo $complaints->type ?>','<?php echo $complaints->subject ?>','<?php echo $complaints->discription ?>','<?php echo $complaints->date ?>')">
                                                         <i class="fa-solid fa-circle-info"></i> View More
                                                         </button>
 
+
                                                         <!-- Dialog box -->
-                                                        <dialog id="complaint-details">
+                                                        <dialog id="complaint-details-action">
                                                         <div class="complaint-details">
                                                                 <h2>Complaint Details</h2>
                                                                 <form>
                                                                 <div class="form-group">
-                                                                        <label for="full-name">Full Name:</label>
+                                                                        <label for="full-name">Complainant Full Name:</label>
                                                                         <input type="text" id="full-name" name="full_name" readonly>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                        <label for="email">Email:</label>
+                                                                        <label for="email">Complainant Email:</label>
                                                                         <input type="text" id="email" name="email" readonly>
                                                                 </div>
                                                                 <div class="form-group">
@@ -125,58 +161,11 @@
                                                                         <label for="complaint-date">Complaint Date:</label>
                                                                         <input type="text" id="complaint-date" name="complaint_date" readonly>
                                                                 </div>
-                                                                <button type="button" onclick="document.getElementById('complaint-details').close()">Close</button>
+                                                                <button type="button" id ="clc" onclick="document.getElementById('complaint-details-action').close()">Close</button>
                                                                 </form>
                                                         </div>
                                                         </dialog>
-                                                        </form>   
-                                                        
-                                                
-                                                                                                                
-                                                        
-                                                        
-                                                        
-
-
-
-
-
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        <?php if($complaints->current_status == 0) { ?>   
-                                                        <form  action="">
-                                                        <span class="viewmore"><button id="ignore" onclick="popUpOpenDelete()"><i class="fa-solid fa-delete-left"></i> Ignore</button></span>
-                                                        
-                                                        <dialog id="deactivateUserPopup">
-                                                        <div class="deactivateUserPopup">
-                                                        <div class="dialog__heading">
-                                                                <h2>Are you sure you want to ignore this complaint ?</h2>
-                                                                <button id="closebtntwo" type="button">
-                                                                        <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                                                </button>
-                                                        </div>
-                                                                
-                                                        <div class="dialog__content">
-                                                                <a href="<?php echo URLROOT?>/Admin_complaints_management/adminDeactivateUser/<?php echo $users->user_id ?>" id="yes">Yes</a>
-                                                                <a href="<?php echo URLROOT?>/Admin_complaints_management/view_complaints " id="no">No</a>
-                                                        </div>
-                                                        </div>
-                                                        </dialog>       
-                                                
-                                                
-                                                
-                                                        </form>
-                                                        <?php } ?>
-
+                                                 
                                                         </div>
                                         </td>
                                 </div>
@@ -193,6 +182,44 @@
                 </div>
                 </div>
         </div>
+        
+        <div class="pagination-container text-center">
+                <?php if ($data['pagination']['total_pages'] > 1): ?>
+        <div class="pagination">
+            <?php if ($data['pagination']['current_page'] > 1): ?>
+                <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>">Previous</a>
+            <?php endif; ?>
+            
+            <?php for ($i = 1; $i <= $data['pagination']['total_pages']; $i++): ?>
+                <?php if ($i == $data['pagination']['current_page']): ?>
+                    <span class="current-page"><?php echo $i; ?></span>
+                <?php else: ?>
+                    <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+            
+            <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']): ?>
+                <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>">Next</a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="section_3">
                 <!-- add forum -->

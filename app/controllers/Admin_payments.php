@@ -7,14 +7,28 @@
     }
 
     public function view_payments(){
+      $records_per_page = 4;
+
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
+           if($_SERVER['REQUEST_METHOD'] == 'POST'){
              $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
              $filter_type = trim($_POST['payment_type']);
-             $payments = $this->adminPaymentModel->getPaymentDetails($filter_type);
+             
+             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+             $offset = ($current_page - 1) * $records_per_page;
+             
+             $payments = $this->adminPaymentModel->getPaymentDetails($filter_type, $records_per_page, $offset);
+             
+             $total_records = $payments['row_count'];
+             // echo "<script>";
+             // echo "alert('" . $total_records . "')";
+             // echo "</script>";
+           $total_pages = ceil($total_records / $records_per_page);
            
-            $data=[
-            'payments' =>  $payments
+           $data=[
+            'payments' =>  $payments,
+            'search' => "Search by payer firstname or lastname",
             ];
         
             $this->view('Admin/AdminPayments/v_admin_payment', $data);
@@ -23,7 +37,8 @@
             $payments = $this->adminPaymentModel->getPaymentDetails();
            
             $data=[
-            'payments' =>  $payments
+            'payments' =>  $payments,
+            'search' => "Search by payer firstname or lastname",
             ];
         
             $this->view('Admin/AdminPayments/v_admin_payment', $data);
@@ -112,13 +127,22 @@
     public function  adminSearchPayment()
       {
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
-      
-        if($_SERVER['REQUEST_METHOD']=='GET'){
+          $payments= $this->adminPaymentModel->getPaymentDetails();
+          $data=[                      
+            'payments'=>$payments,
+            'search'=>"Search by payer firstname or lastname",
+            'message' => ''
+          ];
+       
+       
+       
+       
+          if($_SERVER['REQUEST_METHOD']=='GET'){
           $_GET=filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
               
-              $_SESSION['search_term'] = trim($_GET['search']);
-            //   $search=trim($_GET['search']);
-               $search = $_SESSION['search_term'] ;
+             
+              $search=trim($_GET['search']);
+              if (!empty($search)) {
               $payments= $this->adminPaymentModel->searchPayments($search);
               $message = '';
               if (empty($payments)) {
@@ -129,16 +153,10 @@
                 'search'=>$search,
                 'message' => $message
               ];
+             }
+            }
               $this->view('Admin/AdminPayments/v_admin_payment',$data);
-         }else{
-              $data=[                      
-                'payments'=>'',
-                'search'=>'',
-                'message' => ''
-              ];
-              $this->view('Admin/AdminPayments/v_admin_payment',$data);
-         }
-    
+  
         }else{
           redirect('Login/login');  
         }

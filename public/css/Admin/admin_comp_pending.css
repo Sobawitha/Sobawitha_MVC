@@ -296,13 +296,18 @@ input[type=radio]{
 
 /* View More Comp Popup */
 .complaint-details {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 100px;
   background-color: #f8f8f8;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
   font-family: Arial, sans-serif;
+}
+
+#complaint-details::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
 }
 
 .complaint-details h2 {
@@ -316,6 +321,7 @@ input[type=radio]{
   font-size: 16px;
   color: #555;
   margin-bottom: 10px;
+  
 }
 
 .complaint-details label {
@@ -324,10 +330,12 @@ input[type=radio]{
   font-weight: bold;
   display: block;
   margin-bottom: 5px;
+  text-align: left;
 }
 
 .complaint-details .form-group {
   margin-bottom: 20px;
+  width: 600px;
 }
 
 .complaint-details input[type="text"],
@@ -340,18 +348,179 @@ input[type=radio]{
   color: #555;
 }
 
-.complaint-details button[type="submit"] {
-  padding: 10px 20px;
+#clc {
   background-color: #333;
   color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
   border: none;
-  border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.complaint-details button[type="submit"]:hover {
+#solve-btn {
+  background-color: #06543c;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#solve-btn:hover {
+  background-color: #06543c;
+  opacity: 50%;
+}
+
+
+
+#clc:hover {
+  background-color: #555;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-group button {
+  flex: 1;
+  margin-right: 10px;
+}
+
+/* pagination */
+.pages {
+  display:flex;
+  list-style:none;
+  justify-content: center;
+  transform: translateX(-25px);
+}
+
+.pages li{
+  border-color:black;
+  background-color:rgb(238, 255, 228);
+  cursor:pointer;
+  width:30px;
+  height:23px;
+  text-align:center;
+  vertical-align: middle;
+  font-weight: bold;
+  margin-right:2px;
+  font-size:10px;
+  transform: translateX(-10px);
+  padding-top:9px;
+}
+
+#active{
+  background-color:rgb(0, 0, 0);
+  color:white;
+}
+
+.pages li:hover{
+  /* background-color:rgb(0, 0, 0);
+  color:white; */
+  background-color: rgb(152, 196, 194);
+  color: white;
+  cursor:pointer;
+  box-shadow:0px 8px 16px 0px rgba(0,0,0,0.1);
+
+}
+
+.pagination{
+  margin-left:49%;
+  margin-top:2%;
+  display:inline-block;
+}
+
+.pagination_number{
+  float: left;
+  padding: 8px 10px;
+  text-decoration: none;
+  color: rgb(41, 158, 164);
+  width: 20px;
+  height: 20px;
+  background-color: rgb(241, 249, 238);
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.pagination_number:hover{
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+#forward_bracket, #backword_bracket{
+  transform: translateY(2px);
+}
+
+/* Pagination */
+
+/* .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.pagination a,
+.pagination .current-page {
+  display: inline-block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  background-color: #000;
+  border-radius: 5px;
+  margin: 0 5px;
+  transition: background-color 0.2s;
+}
+
+.pagination a:hover {
+  background-color: #333;
+}
+
+.pagination .current-page {
+  background-color: #333;
+  font-weight: bold;
+} */
+
+.pagination-container {
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  margin-right: 0;
+}
+
+.pagination a,
+.pagination .current-page {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #333;
+}
+
+.pagination a:hover {
+  background-color: #555;
+}
+
+.pagination .current-page {
   background-color: #555;
 }
 
