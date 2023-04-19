@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/Users/dashboards/dashboard.css"></link>
+<link rel="stylesheet" href="../css/Admin/admin_dashboard.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_Sidebar.php'?>

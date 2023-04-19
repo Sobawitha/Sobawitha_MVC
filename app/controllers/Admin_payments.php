@@ -25,25 +25,79 @@
              // echo "alert('" . $total_records . "')";
              // echo "</script>";
            $total_pages = ceil($total_records / $records_per_page);
-           
-           $data=[
-            'payments' =>  $payments,
-            'search' => "Search by payer firstname or lastname",
-            ];
-        
-            $this->view('Admin/AdminPayments/v_admin_payment', $data);
+          
+           if(empty($payments['row_count'])){
 
-         }else{
-            $payments = $this->adminPaymentModel->getPaymentDetails();
-           
-            $data=[
-            'payments' =>  $payments,
+           $data=[
+            'payments' =>  $payments['rows'],
             'search' => "Search by payer firstname or lastname",
+            'emptydata' => "No Payments details to Show...",
+              
+            'pagination' => [
+               'total_records' => $total_records,
+               'records_per_page' => $records_per_page,
+               'total_pages' => $total_pages,
+               'current_page' => $current_page,
+              ],
             ];
         
             $this->view('Admin/AdminPayments/v_admin_payment', $data);
+          }else{
+            $data=[
+            'payments' =>  $payments['rows'],
+            'search' => "Search by payer firstname or lastname",
+            'emptydata' => '',
+              
+            'pagination' => [
+               'total_records' => $total_records,
+               'records_per_page' => $records_per_page,
+               'total_pages' => $total_pages,
+               'current_page' => $current_page,
+              ],
+            ];
+          }
+            $this->view('Admin/AdminPayments/v_admin_payment', $data);
+         }else{
+          $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+          $offset = ($current_page - 1) * $records_per_page;
+
+
+            $payments = $this->adminPaymentModel->getPaymentDetails('',$records_per_page, $offset);
+            $total_records = $payments['row_count'];
+            $total_pages = ceil($total_records / $records_per_page);
+            
+            if(empty($payments['row_count'])){
+            $data=[
+            'payments' =>   $payments['rows'],
+            'search' => "Search by payer firstname or lastname",
+            'emptydata' => "No Payments details to Show...",
+              
+            'pagination' => [
+               'total_records' => $total_records,
+               'records_per_page' => $records_per_page,
+               'total_pages' => $total_pages,
+               'current_page' => $current_page,
+              ],
+            ];
+        
+            
+         }else{
+          $data=[
+            'payments' =>   $payments['rows'],
+            'search' => "Search by payer firstname or lastname",
+            'emptydata' => '',
+              
+            'pagination' => [
+               'total_records' => $total_records,
+               'records_per_page' => $records_per_page,
+               'total_pages' => $total_pages,
+               'current_page' => $current_page,
+              ],
+            ];
          }
-      
+         $this->view('Admin/AdminPayments/v_admin_payment', $data);
+         }
+        
         }else{
             redirect('Login/login');  
         }
@@ -53,7 +107,7 @@
     public function generate_report(){
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
             // Get the data for the report from the model
-        $payments = $this->adminPaymentModel->getPaymentDetails();
+        $payments = $this->adminPaymentModel->getPaymentDetailsForDoc();
         
         // Generate the PDF report using the FPDF library
         require_once(APPROOT.'/fpdf/fpdf.php');

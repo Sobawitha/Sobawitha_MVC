@@ -223,9 +223,12 @@
 
         <div class="section_3">
                 <!-- add forum -->
-                
+               
                 
         </div>
+  
 </div>
+</div>
+<?php require APPROOT.'/views/Users/component/footer.php'?>     
 
 

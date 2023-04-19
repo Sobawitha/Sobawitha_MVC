@@ -48,11 +48,13 @@
                 </div>
                 </div>
                 <?php endif?> 
-
+                
+                <span class="error_msg"><?php echo $data['emptydata'];?></span> 
                 <div class="order_list">
                 <div class="orders">
 
                 <table class="order_list_table">
+                <?php if(empty($data['emptydata'])){ ?>
                         <tr class="table_head">
                                 <td>Payment Id</td>
                                 <td>Type</td>
@@ -63,6 +65,7 @@
                                 <td>Date & Time</td>
                                 
                         </tr>
+                        <?php    }  ?>
                         <?php foreach($data['payments'] as $payments): ?>
                         <tr class="order">
                                 <div class="order_detail">
@@ -88,6 +91,30 @@
                 </div>
                 </div>
         </div>
+        
+        <div class="pagination-container text-center">
+                <?php if ($data['pagination']['total_pages'] > 1): ?>
+        <div class="pagination">
+            <?php if ($data['pagination']['current_page'] > 1): ?>
+                <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>">Previous</a>
+            <?php endif; ?>
+            
+            <?php for ($i = 1; $i <= $data['pagination']['total_pages']; $i++): ?>
+                <?php if ($i == $data['pagination']['current_page']): ?>
+                    <span class="current-page"><?php echo $i; ?></span>
+                <?php else: ?>
+                    <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+            
+            <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']): ?>
+                <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>">Next</a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+        </div>
+
+
 
         <div class="section_3">
                 <!-- add forum -->
@@ -95,6 +122,10 @@
                 
         </div>
 </div>
+
+
+
+
 
 
 <?php require APPROOT.'/views/Users/component/footer.php'?>

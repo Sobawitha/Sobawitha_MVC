@@ -174,6 +174,8 @@
             'complaints' =>  $complaints['rows'],
             'search' =>  $search,
             'message' => $message,
+            'emptydata' =>'',
+            
             'pagination' => [
               'total_records' => $total_records,
               'records_per_page' => $records_per_page,

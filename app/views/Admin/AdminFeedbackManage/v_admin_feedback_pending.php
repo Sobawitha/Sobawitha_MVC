@@ -15,40 +15,21 @@
         <hr>
 
         <br><br>
-        <!-- <form class="searchForm" action="<?php echo URLROOT;?>/Admin_feedback_management/search_feed" method="GET">
+   
+        <div class="button_section">
+        <form class="searchForm" action="<?php echo URLROOT;?>/Admin_feedback_management/adminSearchFeedback" method="GET">
         <div class="search_bar">
             <div class="search_content">
-                     feedback category = supplier || seller -->
-                    <!-- <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search_text" placeholder="<?php echo $data['search'] ?>"  id="searchBar" require/></span>
+         
+                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>"  id="searchBar" require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
-                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
-                
+                    <button type="submit" class="search_btn" onclick="open_cancel_btn()"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                    
             </div>
         </div>
-        </form> --> 
-
-        <form class="searchForm" action="<?php echo URLROOT;?>/Admin_feedback_management/search_feed" method="GET">
-        <div class="search_bar">
-                <div class="search_content">
-              
-                <span class="search_cont" onclick="open_cancel_btn()">
-                        <select name="category" id=category>
-                        <option value="all" id="all">Click here to Choose Feedback Category</option>
-                        <option value="seller">Seller</option>
-                        <option value="supplier">Supplier</option>
-                        </select> 
-                        <!-- <input type="text" name="search_text" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/> -->
-                </span>
-          
-                <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel"></i></button>
-                <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
-                </div>
-
-          
-        </div>
         </form>
-
-            <?php if($data['search'] !=='Search by feedback category'): ?>
+        <?php if(empty($data['message'])){ ?>   
+            <?php if($data['search'] ==='Search by feedback category'): ?>
                
                <div class="filter_section">
                <div class="radio-buttons"  id="radioButtons">        
@@ -59,18 +40,20 @@
                <div class="radio-buttons">
                </form>        
                </div>
+                </div>
                <?php endif?> 
 
 
 
-
-
+               <span class="error_msg"><?php echo $data['emptydata'];?></span> 
+ 
                 <div class="order_list">
                 <div class="orders">
 
                
 
                 <table class="order_list_table">
+                    <?php if(empty($data['emptydata'])){ ?> 
                         <tr class="table_head">
                                 <td>Feedback Receiver</td>
                                 <td>Category</td>
@@ -78,7 +61,7 @@
                                 <td>Review</td>
                                 <td>Options</td>
                         </tr>
-
+                     <?php    }  ?>   
                         <?php foreach($data['feed'] as $feed): ?>
                         
                         <tr class="order">
@@ -154,12 +137,7 @@
                                         <span class="viewmore"><button id="view_more" ><i class="fa-solid fa-circle-info"></i> More</button></span>
                                         </form>
                                        
-                                        <?php if($feed->feed_status == 0 ) { ?> 
-                                         <form  action="">
-                                          <span class="viewmore"><button id="ignore" ><i class="fa-solid fa-delete-left"></i> Ignore</button></span>
-                                         </form>
-                                         </div>
-                                         <?php } ?>
+                                     
                                          </td>
                                          
                                 </div>
@@ -167,18 +145,24 @@
                         </tr>
                               
                 <?php endforeach;?>                  
-
+                 
+                <?php }else{ ?>
+                    <span class="error_msg"><?php echo $data['message'];?></span>
+                    <?php    }  ?>   
                 </table>
 
                 </div>
                 </div>
+       
         </div>
-
         <div class="section_3">
                 <!-- add forum -->
                 
                 
         </div>
+
 </div>
+
+
 
 
