@@ -148,12 +148,33 @@ else if($_SESSION['user_flag'] == 5){
                             <span id="user-<?php echo $comment->comment_id?>" class="user"><?php echo ucfirst(($comment->first_name[0]))?></span> 
                             <div class="display_comment">
                                 <P class="name"> <?php echo $comment->first_name, " ",$comment->last_name," "?><span class="publish_date"><?php echo $comment->comment_date?></span></P>
-                                <p class="comment_post"> <?php echo $comment->comment?> </p>
+                                <!-- <p class="comment_post"> <?php echo $comment->comment?> </p> -->
+
+
+
+
+
+
+                                <form id="edit_comment_content" method="POST" action="<?php echo URLROOT?>/resources/edit_comment?comment_id=<?php echo $comment->comment_id?>"> 
+                                    <input type="text" name = "comment_body" class="comment_body" id="comment_body-<?php echo $comment->comment_id?>" value="<?php echo $comment->comment?>" disabled></input>
+                                        <br><br>
+                                        <div id="button_section-<?php echo $comment->comment_id?>" class="button_section" hidden>
+                                        <button type="submit" id="edit_content" name="submit">Post</button>
+                                        <span id="cancel_edit" onclick="cancel_edit_comment(<?php echo $comment->comment_id?>)">Cancel</span>
+                                        </div>
+                                </form>
+
+
+
+
+
+
+                                
                                 <div class="icon">
                                     <i class="fa-sharp fa-solid fa-reply-all" id="replybtn" onclick="open_replyform(<?php echo $comment->comment_id?>)"></i><span class="reply">Reply</span>
                                     
                                     <?php if($_SESSION['user_id']==$comment->comment_user_id){ ?> 
-                                        <i class="fa-solid fa-pen-to-square" id="editbtn"></i><span class="edit">Edit</span>
+                                        <i class="fa-solid fa-pen-to-square" id="editbtn" onclick="edit_comment(<?php echo $comment->comment_id?>)"></i><span class="edit">Edit</span>
                                         <i class="fa-solid fa-trash" id="deletebtn" onclick="delete_comment(<?php echo $comment->comment_id?>)"></i><span class="delete">Delete</span>
                                     <?php }?>
 
@@ -186,19 +207,30 @@ else if($_SESSION['user_flag'] == 5){
                             <!--display_reply-->
                             <div class="display_reply_all" id="display_reply_all-<?php echo $comment->comment_id?>">
                             <?php if($comment->no_of_reply >0){ ?> 
-                                        <?php foreach ($data['comments_for_reply'] as $comment_new):
-                                            if ($comment_new->comment_id == $comment->comment_id) {?>
+                                        <?php foreach ($data['reply_for_comment'] as $reply_for_comment):
+                                            if ($reply_for_comment->comment_id == $comment->comment_id) {?>
 
                                                 <div class="reply_section">
-                                                <span id="user-<?php echo $comment_new->reply_id?>" class="user-reply"><?php echo ucfirst(($comment_new->user_first_name[0]))?></span>
+                                                <span id="user-<?php echo $reply_for_comment->reply_id?>" class="user-reply"><?php echo ucfirst(($reply_for_comment->user_first_name[0]))?></span>
                                                 <div class="display_reply">
-                                                    <P class="name"> <?php echo $comment_new->user_first_name, " ",$comment_new->user_last_name," "?><span class="publish_date"><?php echo $comment_new->reply_date?></span></P>
-                                                    <p class="comment_post"> <?php echo $comment_new->reply ?> </p>
-                                                    <div class="icon">
-                                                        
-                                                        <?php if($_SESSION['user_id']==$comment_new->reply_user_id){ ?>
-                                                            <i class="fa-solid fa-pen-to-square" id="editbtn"></i><span class="edit">Edit</span>
-                                                            <i class="fa-solid fa-trash" id="deletebtn" onclick="delete_reply(<?php echo $comment_new->reply_id?>)"></i><span class="delete">Delete</span>
+                                                    <P class="name"> <?php echo $reply_for_comment->user_first_name, " ",$reply_for_comment->user_last_name," "?><span class="publish_date"><?php echo $reply_for_comment->reply_date?></span></P>
+                                                    
+
+                                                    <form id="edit_reply_content" method="POST" action="<?php echo URLROOT?>/resources/edit_reply?reply_id=<?php echo $reply_for_comment->reply_id?>"> 
+                                                        <input type="text" name = "reply_body" class="reply_body" id="reply_body-<?php echo $reply_for_comment->reply_id?>" value="<?php echo $reply_for_comment->reply?>" disabled></input>
+                                                            <br><br>
+                                                            <div id="reply_button_section-<?php echo $reply_for_comment->reply_id?>" class="button_section" hidden>
+                                                            <button type="submit" id="edit_content" name="submit">Post</button>
+                                                            <span id="cancel_edit" onclick="cancel_edit_reply(<?php echo $reply_for_comment->reply_id?>)">Cancel</span>
+                                                            </div>
+                                                    </form>
+
+
+
+                                                    <div class="icon">                                                        
+                                                        <?php if($_SESSION['user_id']==$reply_for_comment->reply_user_id){ ?>
+                                                            <i class="fa-solid fa-pen-to-square" id="editbtn" onclick="edit_reply(<?php echo $reply_for_comment->reply_id?>)"></i><span class="edit">Edit</span>
+                                                            <i class="fa-solid fa-trash" id="deletebtn" onclick="delete_reply(<?php echo $reply_for_comment->reply_id?>)"></i><span class="delete">Delete</span>
                                                         <?php }?>
                                                         
                                                     </div>

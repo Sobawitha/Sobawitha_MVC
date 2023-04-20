@@ -101,6 +101,12 @@ class M_blog_post
             return false;
         }
     }
+
+    public function select_image_name($postid){
+        $this->db->query('SELECT image as update_post_image from blogpost where post_id=:postid');
+        $this->db->bind(":postid", $postid);
+        return $this->db->single();
+    }
 }
 
 

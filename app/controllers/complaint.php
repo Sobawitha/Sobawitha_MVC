@@ -46,50 +46,55 @@ class complaint extends Controller
         }
     }
 
+
+
     public function display_all_complaint(){
-
-        unset($_SESSION['search_cont']);
-        $_SESSION['search_cont'] = "Search by key-word";
-
-
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
             if(isset($_POST['search_text'])){
                 $search_cont = trim($_POST['search_text']);
+                $complaint = $this->complaint_model->search_bar($search_cont);
+                if(empty($search_cont)){
+                    $search_cont = 'search by key-word';
+                }
+                if(!empty($complaint)){
+                    $data = [
+                        'complaint' => $complaint,
+                        'search_text' => $search_cont,
+                        'search_result_message'=>''
+                    ];
+                    $this->view('Users/complaint/v_complaint', $data);
+                }
+                else{
+                    $data = [
+                        'search_result_message'=>'match not found...',
+                        'search_text' =>$search_cont 
+                    ];
+                    $this->view('Users/complaint/v_complaint', $data);
+                }    
             }
-            else{
-                $search_cont='';
-            }
-            $filter_type = trim($_POST['complaint_type']);
-            $search_complaint = $this->complaint_model->search_bar($search_cont);
-            $complaint = $this->complaint_model->display_all_complaint($filter_type); //data object array
-            
-
-            if($search_cont == '' ){
-                $data = [
+            else{   
+                $complaint = $this->complaint_model->display_all_complaint(); //data object array
+                $data=[
                     'complaint' => $complaint,
-                ];    
-            }
-            else{
-
-                $_SESSION['search_cont'] = $search_cont;
-                $data = [
-                    'complaint' => $search_complaint
+                    'search_text' => 'Search by key-word',
+                    'search_result_message'=>''
                 ];
+                $this->view('Users/complaint/v_complaint', $data);
             }
-
-            $this->view('Users/complaint/v_complaint', $data);
         }
         else{
             $complaint = $this->complaint_model->display_all_complaint(); //data object array
-            $data = [
+            $data=[
                 'complaint' => $complaint,
+                'search_text' => 'Search by key-word',
+                'search_result_message'=>''
             ];
             $this->view('Users/complaint/v_complaint', $data);
         }
-    
+            
     }
+
 
     public function delete_complaint(){
         if($_SERVER['REQUEST_METHOD']=='POST'){

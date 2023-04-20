@@ -56,7 +56,7 @@ function set_filterbtn_Color($tag){
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $data['search_text']?> " require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
@@ -140,6 +140,10 @@ function set_filterbtn_Color($tag){
         <div class="card_section">
         <?php
         /* display blogs */
+            if(!empty($data['resource_page_display_message'])){
+                echo $data['resource_page_display_message'];
+            }
+            else{
             foreach($data['resources'] as $resources):?>
             <div class='flash_card'>
                             <?php echo '<img src=".././public/upload/blog_post_images/'.$resources->image.'"   alt="card Picture"  class="card_image">';?>
@@ -164,7 +168,7 @@ function set_filterbtn_Color($tag){
                                     </div>
                             </div>
             </div>
-            <?php endforeach;?>
+            <?php endforeach;}?>
     </div>
 
     <div class="category_search">

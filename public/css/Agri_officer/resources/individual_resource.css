@@ -671,3 +671,31 @@
     cursor: pointer;
     color:white;
   }
+
+  /*edit post*/
+  .comment_body, .reply_body{
+    width:90%;
+    border:none;
+  }
+  /* .comment_body:focus {
+    border-color: red;
+  } */
+  
+  #edit_content{
+    background-color:rgb(0, 0, 0);
+    color:white;
+    padding:4px 8px;
+    border:none;
+    border-radius:5px;
+    font-size: 12px;
+  }
+
+  #cancel_edit{
+    background-color:rgb(218, 240, 206);
+    color:rgb(49, 48, 48);
+    padding:4px 8px;
+    border:none;
+    border-radius:5px; 
+    font-size: 12px;
+    text-decoration:none;
+}

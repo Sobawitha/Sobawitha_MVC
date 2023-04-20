@@ -18,144 +18,14 @@
     /* background-color:azure; */
 }
 
-
-
 .section_3{
     background-color:white;
 }
 
 .new_discussion_button{
-    /* margin-top:75px;
-    width:100%;
-    height:21rem; */
     width:50%;
     margin-top:50px;
 }
-/* 
-a {
-    text-decoration: none;
-}
-
-.frem {
-    width: 55rem;
-    height: 100%;
-    background: rgb(245, 241, 241);
-    border-radius: 30px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 0px 12px 12px 12px;
-}
-.frem .logo-name {
-    width: 100%;
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    border-radius: 30px;
-}
-
-.frem .logo-name .logo {
-    width: 5rem;
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgb(245, 241, 241);
-    position: relative;
-    top: -26px;
-    left: -313px;
-    border-radius: 35px 35px 0px 0px;
-}
-.frem .logo-name .logo::before {
-    content: "";
-    width: 31px;
-    height: 38px;
-    background: rgb(245, 241, 241);
-    position: absolute;
-    right: -23px;
-    top: 23px;
-}
-
-.frem .logo-name .logo::after {
-    content: "";
-    width: 31px;
-    height: 38px;
-    background: #ffffff;
-    position: absolute;
-    right: -28px;
-    top: 5px;
-    border-bottom-left-radius: 25px;
-}
-
-.frem .logo-name .logo img {
-    width: 70px;
-    height: 70px;
-    border-radius: 35px;
-    object-fit: cover;
-}
-.frem .logo-name p {
-    position: relative;
-    left: -61px;
-    font-weight: 600;
-    color: #464646;
-}
-.frem .text-area {
-    width: 52rem;
-    height: 1005;
-    min-height: 7rem;
-    background: #ffffff;
-    border-radius: 18px;
-    border: none;
-    outline: none;
-    padding: 12px;
-    color: #484848;
-    font-size: 21px;
-    font-family: cursive;
-}
-.text-area:empty::before {
-    content: attr(data-placeholder);
-    color: #7c7c7c;
-    font-family: auto;
-}
-.bottom-cont {
-    width: 25rem;
-    height: 3rem;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
-    margin-top: 10px;
-}
-
-.bottom-cont a {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 17px;
-}
-
-.bottom-cont a img {
-    width: 27px;
-}
-.bottom-cont a:nth-child(1) {
-    background: #1051ff38;
-    color: #1051ff;
-}
-.bottom-cont a:nth-child(2) {
-    background: #15cf3736;
-    color: #15cf37;
-}
-.bottom-cont a:nth-child(3) {
-    background: #ffc02440;
-}
-.bottom-cont a:nth-child(4) {
-    background: #ff344b40;
-} */
-
 
 .new_discussion{
     background-color: rgb(0, 0, 0);
@@ -398,6 +268,10 @@ input[type=file]::file-selector-button{
     cursor:pointer;
 }
 
+#cancel{
+    display:none;
+}
+
 .closebtn{
     position:relative;
     font-size:17px;
@@ -504,7 +378,14 @@ input[type=file]::file-selector-button{
     margin-left:10px;
     color:rgb(49, 47, 47);
     font-weight: 600px;
+    width:100%;
+    border:none;
+    background-color: rgb(241, 252, 237); 
+    height:40px;
+    border-radius:8px;
 }
+
+  
 #author_at{
     margin-right:5px;
 }
@@ -720,13 +601,6 @@ input[type=file]::file-selector-button{
     margin:20px 10px;
 }
 
-.forum_image{
-    width:50px;
-    height:50px;
-    border-radius:25px;
-    margin-left:35px;
-}
-
 
 
 /*diaplog box for delete*/
@@ -832,8 +706,8 @@ input[type=file]::file-selector-button{
     border-radius:10px;
     box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
     background-color:rgb(255, 255, 255);
-    width:86.5%;
-    margin-left:70px;
+    width:86%;
+    margin-left:50px;
     display:none;
 }
 
@@ -844,9 +718,14 @@ input[type=file]::file-selector-button{
     border-radius:10px;
     box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
     background-color:rgb(255, 255, 255);
-    width:77.5%;
-    margin-left:145px;
+    width:75%;
+    margin-left:60px;
     display:none;
+}
+
+.display_reply_form_2{
+    border-left:2px solid rgb(226, 239, 219);
+    transform:translate(70px,-20px);
 }
 
 
@@ -975,6 +854,12 @@ input[type=file]::file-selector-button{
 
 
 /*reply*/
+
+.display_reply_form{
+    border-left:2px solid rgb(226, 239, 219);
+    transform:translate(30px);
+}
+
 .display_all_replies{
     display:none;
     border-left:2px solid rgb(226, 239, 219);
@@ -1048,12 +933,115 @@ input[type=file]::file-selector-button{
     border-radius:30px;
     border:3px solid rgb(244, 240, 240);
 }
+
 .forum_reply_discription{
     margin-left:10px;
-    color:rgb(16, 16, 16);
+    color:rgb(49, 47, 47);
+    font-weight: 600px;
+    width:100%;
+    border:none;
+    resize: vertical;
+    background-color: rgb(241, 252, 237); 
+    height:40px;
+    border-radius:8px;
 }
 #author_at{
     margin-right:5px;
 }
 
 
+input[type=file]::file-selector-button{
+    overflow: hidden;
+    border:none;
+    background-color: rgb(123, 143, 68);
+    padding:8px;
+    font-size:12px;
+    font-weight:500px;
+    width:75px;
+    cursor:pointer;
+    position:relative;
+    opacity:0;
+    transform: scale(30);
+    overflow: hidden;
+    transform:translate(-200px,-25px);
+}
+
+.upload_file{
+    transform: translate(-150px,-20px);
+    overflow: hidden;
+    font-size: 10px;
+    color: transparent;
+}
+
+
+.uploard_img_hidden{
+    width:80px;
+    overflow: hidden;;
+}
+
+.form{
+    padding:20px;
+}
+
+.upload_images{
+    display:none;
+    width:30px;
+    height:25px;
+    background-color: rgba(0,0,0,0.7);
+    color:white;
+    border:none;
+    position:absolute;
+    cursor:pointer;
+    overflow: hidden;
+    border-radius:3px;
+    margin-top:40px;
+    transform:translate(40px,-70px);
+}
+
+.upload_reply_images{
+    display:none;
+    width:30px;
+    height:25px;
+    background-color: rgba(0,0,0,0.7);
+    color:white;
+    border:none;
+    position:absolute;
+    cursor:pointer;
+    overflow: hidden;
+    border-radius:3px;
+    margin-top:40px;
+    transform:translate(40px,-70px);
+}
+.upload{
+    font-size:13px;
+}
+
+.edit_post_image{
+    width:50px;
+    height:50px;
+    border-radius:30px;
+    margin-left:10px;
+}
+
+.button_section{
+    margin-left:10px;
+}
+
+#edit_post{
+    background-color:rgb(0, 0, 0);
+    color:white;
+    padding:4px 8px;
+    border:none;
+    border-radius:5px;
+    font-size: 12px;
+}
+
+#cancel_edit{
+    background-color:rgb(218, 240, 206);
+    color:rgb(49, 48, 48);
+    padding:4px 8px;
+    border:none;
+    border-radius:5px; 
+    font-size: 12px;
+    text-decoration:none;
+}

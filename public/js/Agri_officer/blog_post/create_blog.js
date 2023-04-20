@@ -23,15 +23,17 @@
         // console.log(id);
         // console.log(title);
         // console.log(tag);
-        // console.log(discription);
+        // console.log(image);
    
-
       const deletePopup = document.getElementById('updatePopup');
       document.getElementById('cancelbtn').addEventListener('click',() => updatePopup.close());
       updatePopup.showModal();
       document.getElementById('updatebutton').value=id;
       document.getElementById('title').value=title;
-      document.getElementById('upload_image').value=image;
+      var imageElement = document.getElementById('upload_image');
+      var imgURL = ".././public/upload/blog_post_images/"+image;
+      imageElement.setAttribute('src', imgURL);
+
       
     if(tag == 'Innovations'){
         document.getElementById('innovations').checked = true;

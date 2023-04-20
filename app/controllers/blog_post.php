@@ -86,47 +86,50 @@ class blog_post extends Controller {
 
 
     public function display_all_blogposts(){
-
-        unset($_SESSION['search_cont']);
-        $_SESSION['search_cont'] = "Search by key-word";
-    
-    
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
             if(isset($_POST['search_text'])){
                 $search_cont = trim($_POST['search_text']);
+                $blogpost = $this->blog_post_model->search_bar($search_cont);
+                if(empty($search_cont)){
+                    $search_cont = 'search by key-word';
+                }
+                if(!empty($blogpost)){
+                    $data = [
+                        'blogpost' => $blogpost,
+                        'search_text' => $search_cont,
+                        'search_result_message'=>''
+                    ];
+                    $this->view('Agri_officer/Blog_post/v_create_blog',$data);
+                }
+                else{
+                    $data = [
+                        'search_result_message'=>'match not found...',
+                        'search_text' =>$search_cont 
+                    ];
+                    $this->view('Agri_officer/Blog_post/v_create_blog',$data);
+                }    
             }
-            else{
-                $search_cont='';
-            }
-            $search_post = $this->blog_post_model->search_bar($search_cont);
-            $blogpost = $this->blog_post_model->display_all_posts(); //data object array
-    
-            if($search_cont == ''){
-                $data = [
+            else{   
+                $blogpost = $this->blog_post_model->display_all_posts(); //data object array
+                $data=[
                     'blogpost' => $blogpost,
-                ];    
-            }
-            else{
-    
-                $_SESSION['search_cont'] = $search_cont;
-                $data = [
-                    'blogpost' => $search_post
+                    'search_text' => 'Search by key-word',
+                    'search_result_message'=>''
                 ];
+                $this->view('Agri_officer/Blog_post/v_create_blog',$data);
             }
-    
-            $this->view('Agri_officer/Blog_post/v_create_blog',$data);
         }
         else{
             $blogpost = $this->blog_post_model->display_all_posts(); //data object array
-            $data = [
-                'blogpost' => $blogpost
+            $data=[
+                'blogpost' => $blogpost,
+                'search_text' => 'Search by key-word',
+                'search_result_message'=>''
             ];
-    
             $this->view('Agri_officer/Blog_post/v_create_blog',$data);
         }
-    
+            
     }
     
 
@@ -154,8 +157,11 @@ class blog_post extends Controller {
             ];
 
             /*error handling */
-            if(empty($data['image'])){
-                $data['image_err']='Post image cannot be empty';           
+            if(empty($data['image']['name'])){
+                $data['image_err']='Post image cannot be empty';
+                $image_name=$this->blog_post_model->select_image_name($data['post_id'])->update_post_image;
+                $data['image_name']=$image_name;
+                $this->blog_post_model->update_post($data);        
             }
             else{
                 $fileExt=explode('.',$_FILES['image']['name']);
@@ -177,10 +183,9 @@ class blog_post extends Controller {
                 }else{
                 $data[ 'image_err'] ="Blog post image file size is empty";
                 }
+                $this->blog_post_model->update_post($data);
             }
              /*error handling */
-
-            $this->blog_post_model->update_post($data);
             redirect('blog_post/display_all_blogposts');
 
         }
