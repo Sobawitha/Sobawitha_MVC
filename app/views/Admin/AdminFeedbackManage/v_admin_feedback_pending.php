@@ -160,18 +160,8 @@
                                                              
                                                                 <div class="btn-group">
                                                                   
-                                                                <!-- <form method="POST" action="<?php echo URLROOT?>/Admin_feedback_management/adminReviewFeedback/<?php echo $feed->id ?>">        
-                                                                <button type="submit" class ="btn" id ="feed-review-btn"   >Review</button>        
-                                                                </form>
-                                                              
-                                                             
-                                                                <button type="button" class ="btn" id ="clc" onclick="document.getElementById('feedback-details').close()">Close</button>
-                                                              
-                                                                
-                                                                <form method="POST" action="<?php echo URLROOT?>/Admin_feedback_management/adminRejectFeedback/<?php echo $feed->id ?>">        
-                                                                <button type="submit" class ="btn" id ="reject-btn" onclick="rejectFeed()">Reject</button> 
-                                                                </form> -->
-                                                                <button type="submit" class="btn" id="feed-review-btn" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminReviewFeedback/<?php echo $feed->id ?>">Review</button>
+                                                
+                                                                <button type="submit" class="btn" id="feed-review-btn" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminReviewFeedback/<?php echo $feed->id ?>">Accept</button>
                                                                 <button type="button" class="btn" id="clc" onclick="document.getElementById('feedback-details').close()">Close</button>
                                                                 <button type="submit" class="btn" id="reject-btn" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminRejectFeedback/<?php echo $feed->id ?>">Reject</button>
                                                                 

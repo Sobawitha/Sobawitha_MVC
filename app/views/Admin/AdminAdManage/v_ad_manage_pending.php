@@ -39,25 +39,28 @@
                 </form>        
                 </div>
                 <?php endif?> 
-
+                <span class="error_msg"><?php echo $data['emptydata'];?></span>  
                 <div class="order_list">
                 <div class="orders">
-
+                
                 <table class="order_list_table">
+                <?php if(empty($data['emptydata'])){ ?>
                         <tr class="table_head">
                                 <td>Image</td>
                                 <td>Title</td>
-                                <td>Discription</td>
+                                <td>Description</td>
                                 <td>Category</td>
                                 <td>Manufacturer</td>
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Options</td>
                         </tr>
+                        <?php    }  ?> 
                         <?php foreach($data['products'] as $products): ?>
                        
                         <tr class="order">
                                 <div class="order_detail">
+                              
                                 <td><img src="<?php echo URLROOT;?>/public/upload/listing_images/<?php echo $products->listing_image?>" class="add_image"></td>
                                 <td><?php echo $products->product_name ?></td>
                                 <td><?php echo $products->product_description ?></td>
@@ -65,14 +68,165 @@
                                 <td><?php echo $products->manufacturer ?></td>
                                 <td>Rs.<?php echo $products->price ?></td>
                                 <td class="unit"><span class="value"><?php echo $products->quantity ?></span></td>
-                                
-                                <?php if($products->review_status ==0 ): ?>
-                                        <td><span class="delete"><button type="button" onclick="popUpOpenDelete()" id="review_btn"> Review</button></span></td>
-                                <?php elseif($products->review_status == 1): ?>
-                                        <td><button type="button" onclick="popUpOpenDelete()" id="ad_view_more_btn"><i class="fa-solid fa-circle-info"></i> View More</button></td>
-                                <?php else: ?>
-                                        <td><button type="button" onclick="popUpOpenDelete()" id="ad_view_more_btn"><i class="fa-solid fa-circle-info"></i> View More</button></td>
-                                <?php endif?> 
+                              
+                                <?php if($products->current_status ==0 ): ?>
+                                        <td>
+                                        <button type="button" id="review_btn" onclick="popUpOpenAdReview('<?php echo $products->product_name ?>','<?php echo $products->listing_image ?>','<?php echo $products->quantity ?>','<?php echo $products->manufacturer ?>','<?php echo $products->price ?>','<?php echo $products->product_description ?>','<?php echo $products->category ?>','<?php echo isset($products->registration_no) ? $products->registration_no : 'No need for Raw Materials' ?>','<?php echo $products->date ?>','<?php echo isset($products->location) ? $products->location : 'No need for Raw Materials' ?>')" > Review</button>
+
+
+                                        
+                                        <!-- Dialog box -->
+                                        <dialog id="ad-details">
+                                        <div class="ad-details">
+
+                                        <h2>Advertisement Details</h2>
+                                        <form method="POST">
+                                        <div class="form-group">
+                                                <label for="product-name">Product Title:</label>
+                                                <input type="text" id="product-name" name="product-name" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                        <label>Product Images:</label>
+                                                <div class="product-images">
+                                                <img id="image_one" class="product-image img-container" src="" alt="Product Image"><br><br>
+                                                <img id="image_two" class="product-image img-container" src="<?php echo URLROOT;?>/public/upload/listing_images/default_upload.png" alt="Product Image"><br><br>
+                                                <img id="image_three" class="product-image img-container" src="<?php echo URLROOT;?>/public/upload/listing_images/default_upload.png" alt="Product Image"><br><br>
+                                                <img id="image_four" class="product-image img-container" src="<?php echo URLROOT;?>/public/upload/listing_images/default_upload.png" alt="Product Image"><br><br>
+                                                <img id="image_five" class="product-image img-container" src="<?php echo URLROOT;?>/public/upload/listing_images/default_upload.png" alt="Product Image">
+                                                </div>
+
+
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label for="product-quantity">Product Quantity:</label>
+                                                <input type="text" id="product-quantity" name="product-quantity" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="manufacturer-name">Manufacturer Name:</label>
+                                                <input type="text" id="manufacturer-name" name="manufacturer-name" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-price">Product Price:</label>
+                                                <input type="text" id="product-price" name="product-price" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-description">Product Description:</label>
+                                                <textarea id="product-description" name="product-description" rows="5" readonly></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-category">Product Category:</label>
+                                                <input type="text" id="product-category" name="product-category" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="regsitration-no">Registration No:</label>
+                                                <input type="text" id="regsitration-no" name="regsitration-no" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-date">Product Date:</label>
+                                                <input type="text" id="product-date" name="product-date" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-location">Product Location:</label>
+                                                <input type="text" id="product-location" name="product-location" readonly>
+                                        </div>
+                                        
+                                        <!-- <div class="form-group">
+                                        <label for="rejected-reason">Reason for rejection:</label>
+                                        <input type="text" id="rejected-reason" name="rejected-reason">
+                                        </div> -->
+                                 
+                                        <div class="btn-group">
+                                                                  
+                                                
+                                        <button type="submit" class="btn" id="ad-review-btn" formaction="<?php echo URLROOT?>/Admin_ad_management/adminReviewAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Accept</button>
+                                        <button type="button" class="btn" id="clc" onclick="document.getElementById('ad-details').close()">Close</button>
+                                         <!-- <button type="submit" class="btn" id="reject-btn" formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Reject</button> -->
+                                         <button type="submit" class="btn" id="reject-btn"  formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Reject</button>
+                                                                  
+                                        </div>
+                                        </form>
+                                        
+                                        </div>
+                                        </dialog>
+
+                                        </td>
+                                    <?php elseif($products->current_status == 1 || $products->current_status == 2): ?>
+                                        <td>
+                                        <button type="button" onclick="popUpOpenViewMore('<?php echo $products->product_name ?>','<?php echo $products->listing_image ?>','<?php echo $products->quantity ?>','<?php echo $products->manufacturer ?>','<?php echo $products->price ?>','<?php echo $products->product_description ?>','<?php echo $products->category ?>','<?php echo isset($products->registration_no) ? $products->registration_no : 'No need for Raw Materials' ?>','<?php echo $products->date ?>','<?php echo isset($products->location) ? $products->location : 'No need for Raw Materials' ?>')" id="ad_view_more_btn"><i class="fa-solid fa-circle-info"></i> View More</button>
+                                            <!-- Dialog box -->
+                                        <dialog id="ad-details">
+                                        <div class="ad-details">
+
+                                        <h2>Advertisement Details</h2>
+                                        <form method="POST">
+                                        <div class="form-group">
+                                                <label for="product-name">Product Title:</label>
+                                                <input type="text" id="product-name" name="product-name" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label>Product Images:</label>
+                                                <div class="product-images">
+                                                <img id="image_one" class="product-image" src="" alt="Product Image"><br><br>
+                                                <img id="image_two" class="product-image" src="<?php echo URLROOT;?>/public/upload/listing_images/default_upload.png" alt="Product Image"><br><br>
+                                                <img id="image_three" class="product-image" src="<?php echo URLROOT;?>/public/upload/listing_images/default_upload.png" alt="Product Image"><br><br>
+                                                <img id="image_four" class="product-image" src="<?php echo URLROOT;?>/public/upload/listing_images/default_upload.png" alt="Product Image"><br><br>
+                                                <img id="image_five" class="product-image" src="<?php echo URLROOT;?>/public/upload/listing_images/default_upload.png" alt="Product Image">
+                                                </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label for="product-quantity">Product Quantity:</label>
+                                                <input type="text" id="product-quantity" name="product-quantity" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="manufacturer-name">Manufacturer Name:</label>
+                                                <input type="text" id="manufacturer-name" name="manufacturer-name" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-price">Product Price:</label>
+                                                <input type="text" id="product-price" name="product-price" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-description">Product Description:</label>
+                                                <textarea id="product-description" name="product-description" rows="5" readonly></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-category">Product Category:</label>
+                                                <input type="text" id="product-category" name="product-category" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="regsitration-no">Registration No:</label>
+                                                <input type="text" id="regsitration-no" name="regsitration-no" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-date">Product Date:</label>
+                                                <input type="text" id="product-date" name="product-date" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="product-location">Product Location:</label>
+                                                <input type="text" id="product-location" name="product-location" readonly>
+                                        </div>
+                                 
+                                        <div class="btn-group">
+                                                                  
+                                                
+                                      
+                                        <button type="button" class="btn" id="clc" onclick="document.getElementById('ad-details').close()">Close</button>
+
+                                                                  
+                                        </div>
+                                        </form>
+                                        
+                                        </div>
+                                        </dialog>
+                                        
+                                        </td>
+                                   
+                                    <?php endif?> 
   
 
                                
@@ -97,6 +251,7 @@
                 
                 
         </div>
+
 </div>
 
 <?php require APPROOT.'/views/Users/component/Header.php'?>

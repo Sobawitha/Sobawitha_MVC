@@ -227,6 +227,198 @@ input[type=radio]{
   border-radius: 4px;
 }
 
+/* error message */
+.error_msg{
+  font-size: 25px;
+  font-weight: 500px;
+  text-align: center;
+}
+
 /* #ad_view_more_btn:hover {
   background-color: #376462;
 } */
+
+/* add details popup */
+
+/* Popup container style */
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Popup content style */
+.ad-details {
+  width: 800px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading style */
+.ad-details h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: #333;
+}
+
+/* Form fields style */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #666;
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.form-group input[readonly],
+.form-group textarea[readonly] {
+  background-color: #fff;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  height: 40px;
+}
+
+.form-group textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* Button style */
+.btn-close {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  background-color: #555;
+}
+
+.product-image {
+  max-width: 450px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.product-images img {
+  width: calc(30% - 5px);
+  height: auto;
+  transition: transform .3s ease-in-out;
+}
+
+.product-images img:hover {
+  transform: scale(3.2);
+}
+
+#ad-review-btn {
+  background-color: #06543c;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#ad-review-btn:hover {
+  background-color: #06543c;
+  opacity: 50%;
+}
+
+#reject-btn {
+  background-color: crimson;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#reject-btn:hover {
+  background-color: crimson;
+  opacity: 50%;
+}
+#clc {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+#clc:hover {
+  background-color: #555;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-group button {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.btn {
+  width: 120px;
+  height: 40px;
+}
+
+.img-container {
+  border: 5px solid #ffffff;
+}
+
+.alert {
+  padding: 15px;
+  background-color: #f44336;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
