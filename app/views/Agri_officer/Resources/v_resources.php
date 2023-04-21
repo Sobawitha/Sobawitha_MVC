@@ -177,9 +177,9 @@ function set_filterbtn_Color($tag){
             <div class="feeds">
                 <p class="choice_topic">Populer Feeds</p>
                 <?php foreach($data['best_resources'] as $best_resource):?>
-                <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $best_resource->post_id?>&category=<?php echo $best_resource->tag?>">
+                <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $best_resource->post_id?>&category=<?php echo $best_resource->tag?>" class="feed_card">
                 <div class="feed_discription">
-                    <i class="fa-regular fa-bookmark" id="ok"></i>
+                    <i class="fa-regular fa-bookmark" id="feed_card_icon"></i>
                     <p class="topic"> <?php echo $best_resource->title?><span class="feed_category"></p>
                     <p class="author">By <?php echo $best_resource->first_name?> </p>
                     <p class="feedback"><?php echo $best_resource->no_of_likes?>-Likes <?php echo $best_resource->count_comment?>-comment </p>

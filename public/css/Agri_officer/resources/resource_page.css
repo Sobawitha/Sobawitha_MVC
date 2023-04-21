@@ -377,19 +377,20 @@ hr{
     padding-top:7px;
     padding-bottom:10px;
     padding-left:30px;
-    padding-right:10px;
-    
+    padding-right:10px;   
 }
 
 .feed_discription:hover{
     background-color: rgb(253, 255, 241);
 }
 
-#ok{
+.feed_card{
+    text-decoration: none;
+}
+
+#feed_card_icon{
     position:absolute;
-    /* color:rgb(10, 182, 90); */
     color:rgb(152, 196, 194);
-    /* color:salmon; */
     font-size: 22px;
     transform: translate(-40px,25px);
     z-index:500;

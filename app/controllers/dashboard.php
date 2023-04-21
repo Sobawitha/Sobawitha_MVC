@@ -6,6 +6,25 @@ class dashboard extends Controller{
         $this->dashboard_model = $this->model('M_dashboard');
     }
 
+    public function dashboard(){
+        if($_SESSION['user_flag'] == 1){
+            redirect('dashboard/Admin_dashboard');
+        }
+        else if($_SESSION['user_flag'] == 2){
+            redirect('dashboard/seller_dashboard');
+        }
+        else if($_SESSION['user_flag'] == 3){
+            redirect('dashboard/buyer_dashboard');
+        }
+        else if($_SESSION['user_flag'] == 4){
+            redirect('dashboard/supplier_dashboard');
+        }
+        else if($_SESSION['user_flag'] == 5){
+            redirect('dashboard/officer_dashboard');
+        }
+        
+    }
+
     // officer-dashboard
     public function officer_dashboard(){
         $no_of_blogpost = $this->dashboard_model->get_no_of_blogposts($_SESSION['user_id']);
@@ -25,10 +44,6 @@ class dashboard extends Controller{
         $this->view('Agri_officer/Dashboard/v_officer_dashboard', $data);
     }
 
-    // public function category_donut_chart(){
-    //     $post_category_detail = $this->dashboard_model->get_category_detail($_SESSION['user_id']);
-    //     echo json_encode($post_category_detail);
-    // }
 
     public function category_donut_chart(){
         $post_category_detail = $this->dashboard_model->get_category_detail();

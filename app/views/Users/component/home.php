@@ -15,6 +15,7 @@
                     <li class="home_link"><a href="<?php echo URLROOT?>/Pages/home">Home</a></li>
                     <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
                     <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
+                    <li><a href="<?php echo URLROOT?>/dashboard/dashboard">Dashboard</a></li> 
                     <li><a href="">Sell</a></li>
                     <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Login</a></li>    
                 </ul>
@@ -60,44 +61,28 @@
         <span class="second_part_header">What do you want to do?</span>
         <br>
         <span class="second_part_discription">is an online platform driven by agriculture nature by involving more people in their people in their in</span>
-        
-        <!-- <table style="width:60%">
-        <tr>
-            <th colspan="2" class="img11" background="../public/images/buying.jpg" ><span class="td_text">buying</span></td>
-            <th rowspan="2" class="img12" background="../public/images/selling.jpg"><span class="td_text">selling</span></td>
-        </tr>
-        <tr>
-            <th  class="img21"  background="../public/images/instructing.jpg"><span class="td_text">Instructing</span></td>
-            <th class="img22" background="../public/images/qestioning.jpg"><span class="td_text" >Questioning</span></td>
-        </tr>
-        </table> -->
 
         <div class="service_cards">
-            <div class="individual_service_card">
+            <a href="<?php echo URLROOT?>/Login/login" class="link"><div class="individual_service_card">
                 <i class="fa-solid fa-store" id="icon"></i>
                 <br>
                 <span class="service_name">Selling</span>
-                <span class="overlay">
-                      <p><h3>Selling</h3>Fertilizer timing and application Plants require different foods at different times in  their 
-                        life cycletheir 
-                        life cycle.</p>
-                </span>
-            </div>
+            </div></a>
 
-            <div class="individual_service_card">
+            <a href="#buying_section" class="link"><div class="individual_service_card">
                 <i class="fa-brands fa-sellsy" id="icon"></i>
                 <span class="service_name">Buying</span>
-            </div>
+            </div></a>
 
-            <div class="individual_service_card">
+            <a href="<?php echo URLROOT?>/resources/resource_page" class="link"><div class="individual_service_card">
                 <i class="fa-solid fa-person-chalkboard" id="icon"></i>
                 <span class="service_name">Instructing</span>
-            </div>
+            </div></a>
 
-             <div class="individual_service_card">
+            <a href="<?php echo URLROOT?>/forum/forum"class="link"><div class="individual_service_card">
                 <i class="fa-brands fa-forumbee" id="icon"></i>
                 <span class="service_name">Q&A</span>
-            </div>
+            </div></a>
         </div>
 
         
@@ -105,7 +90,7 @@
    
     </div>
 
-    <div class="third_part">
+    <div class="third_part" id="buying_section">
         <span class="third_part_header">Latest Products</span>
         <br>
         <span class="second_part_discription">is an online platform driven by agriculture nature by involving more people in their people in their in</span>
