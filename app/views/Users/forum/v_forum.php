@@ -30,7 +30,25 @@ else if($_SESSION['user_flag'] == 5){
         if($type == 'Jobs') return 'set-purple';
         if($type == 'Introductions') return 'set-blue';
     }
+
 ?>
+
+<!-- popup alert -->
+<?php
+if(isset($_SESSION['alert_message'])){
+    
+?>
+<!-- HTML code for the popup message -->
+<div id="popup">
+  <p><?php echo $_SESSION['alert_message']?></p>
+</div>
+
+<?php
+unset($_SESSION['alert_message']);
+}
+?>
+
+
 
 <div class="body">
         <div class="section_1">
@@ -40,19 +58,16 @@ else if($_SESSION['user_flag'] == 5){
         <div class="section_2">
         <form method="POST">
         <div class="search_bar">
-            <div class="search_content">
-                
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+            <div class="search_content">     
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $data['search_text']?> " require/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
-                
             </div>
         </div>
         </form>
+
+       
                 <div class="forum">
-
-                
-
                 <div class="new_discussion_button">
                         <button class="new_discussion" onclick="add_new_discussion()"><i class="fa-solid fa-circle-plus" id="add"></i>Start New Discussion </button>
                 </div>
@@ -130,12 +145,12 @@ else if($_SESSION['user_flag'] == 5){
                 <div class="all_forum_topics">
 
                 <?php 
+                        
+                        if($data['display_message']==''){
+                        
                         foreach($data['forum_discussions'] as $forum_discussion):?>
-                        
-                        <!-- <div class="individual_discussion"> -->
-                        
                         <div class="p1">
-                                <span class="name"><?php echo '<img src=".././public/images/dp4.jpg"   alt="author Picture"  class="author_image">'?></span>
+                                <span class="name"><?php echo '<img src=".././public/upload/profile_images/'.$forum_discussion->posted_by_profile_pic.'"   alt="author Picture"  class="author_image">'?></span>
                         </div>
 
                         <div class="p2">
@@ -174,14 +189,27 @@ else if($_SESSION['user_flag'] == 5){
                                                 </span><span class="topic"><?php echo $forum_discussion->subject?></span>
                                                 <span class="<?php echo setColor($forum_discussion->type);?>" id="tag" > <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="tag_discription-<?php echo $forum_discussion->type?>"><?php echo $forum_discussion->type ?></span></span></a>   
                                                 <br>
-                                                <span class="author"><i class="fa-solid fa-at" id="author_at"></i>Posted by <?php echo $forum_discussion->posted_by_first_name?> <?php echo $forum_discussion->posted_by_last_name ?> from <?php echo $time_difference?>.</span>
+                                                <span class="author"><i class="fa-solid fa-at" id="author_at"></i>Posted by <?php echo $forum_discussion->posted_by_full_name?> from <?php echo $time_difference?>.</span>
                                                 <br>
                                                 <hr id="forum_topic_hr">
                                                 <span class="discription">
-                                                        <p class="forum_discription"><?php echo $forum_discussion->message?></p>
-                                                        <?php if($forum_discussion->forum_image != ''){?>
-                                                                <?php echo '<img src=".././public/upload/forum_images/'.$forum_discussion->forum_image.'"   alt="forum_image"  class="forum_image">';?>  
-                                                        <?php } ?>
+                                                        
+                                                        <form id="edit_post_content" method="POST" action="<?php echo URLROOT?>/forum/edit_forum_content?postid=<?php echo $forum_discussion->discussion_id?>&post_image=<?php echo $forum_discussion->forum_image?>" enctype="multipart/form-data"> 
+                                                                <input type="text" name = "forum_discription" class="forum_discription" id="forum_discription-<?php echo $forum_discussion->discussion_id?>" value="<?php echo $forum_discussion->message?>" disabled></input>
+                                                                <br><br>
+                                                                <?php if($forum_discussion->forum_image != ''){?>     
+                                                                        <?php echo '<img src=".././public/upload/forum_images/'.$forum_discussion->forum_image.'"   alt="card Picture"  class="edit_post_image" id="upload_image-'.$forum_discussion->discussion_id.'"> ';?>
+                                                                        <button type="" class="upload_images" id="upload_images-<?php echo $forum_discussion->discussion_id?>"><i class="fa-solid fa-upload "><span class="upload"></span></i></button>
+                                                                        <span class="uploard_img_hidden"><input type="file" class="upload_file" name="image" onchange="loadFile_for_forumpost(event,<?php echo $forum_discussion->discussion_id?>)" id="upload_image_link-<?php echo $forum_discussion->discussion_id?>" disabled></input></span>
+
+                                                                        <br><br>
+                                                                <?php } ?>
+                                                                <div id="button_section-<?php echo $forum_discussion->discussion_id?>" class="button_section" hidden>
+                                                                        <button type="submit" id="edit_post" name="submit">Post</button>
+                                                                        <span id="cancel_edit" onclick="cancel_edit(<?php echo $forum_discussion->discussion_id?>)">Cancel</span>
+                                                                </div>
+                                                        </form>
+
                                                 </span>
                                                 <!-- check reply -->
                                                 <?php if($forum_discussion->no_of_reply > 0){?>
@@ -200,22 +228,16 @@ else if($_SESSION['user_flag'] == 5){
                                                 <i class="fa-solid fa-reply-all" id="reply" onclick="open_replyform(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="reply_discription">Reply</span><br>
                                                 <?php if($_SESSION['user_id']== $forum_discussion->created_by OR $_SESSION['user_flag'] == 'Admin'){
                                                         ?>
-                                                
-                                                <i class="fa-solid fa-pen-to-square" id="edit"></i><span class="button_discription" id="edit_discription">Edit</span><br>
+                                                <i class="fa-solid fa-pen-to-square" id="edit" onclick="edit_forum_post(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="edit_discription">Edit</span><br>
                                                 <i class="fa-solid fa-trash" id="delete" onclick="popUpOpen(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="delete_discription">Delete</span><br>
-
-
                                                 <?php
                                                 }
                                                 ?>
-
-                                                <i class="fa-solid fa-ellipsis" id='report'>
-                                                </i><span id="report_btn" onclick="openReportSection()" hidden><i class="fa-regular fa-flag" id="report_icon" ></i><span id="report_text">Report</span></span>
                                         </div>
                                 </div>
 
                                 <!-- reply -->
-
+                                <div class="display_reply_form">
                                 <div class="add_forum_reply" id = "add_reply-<?php echo $forum_discussion->discussion_id?>">
                                         <span class="closebtn" onclick="close_reply_form(<?php echo $forum_discussion->discussion_id?>)"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
                                         <div class="forum_body">
@@ -234,6 +256,8 @@ else if($_SESSION['user_flag'] == 5){
                                                 </form>
                                         </div>
                                 </div>
+                                </div>
+                                
 
                         <!-- display reply -->
                         <div id="display_all_replies-<?php echo $forum_discussion->discussion_id?>" class="display_all_replies">
@@ -271,20 +295,32 @@ else if($_SESSION['user_flag'] == 5){
 
                                         <div class="individual_reply">
                                         <div class="p1">
-                                                <span class="name"><?php echo '<img src=".././public/images/dp1.jpg"   alt="author Picture"  class="reply_author_image">'?></span>
+                                                <span class="name"><?php echo '<img src=".././public/upload/profile_images/'.$discussion_reply->reply_user_profile_pic.'"   alt="author Picture"  class="reply_author_image">'?></span>
                                          </div>
 
                                         <div class="forum_post_reply">
                                         
                                                 <div class="forum_post_reply_content">
                                                         <br>
-                                                        <span class="reply_author"><i class="fa-solid fa-at" id="author_at"></i>Posted by <?php echo $discussion_reply->reply_user_firstname?> <?php echo $discussion_reply->reply_user_lastname ?> from <?php echo $time_difference?></span>
+                                                        <span class="reply_author"><i class="fa-solid fa-at" id="author_at"></i>Posted by <?php echo $discussion_reply->reply_user_full_name?> from <?php echo $time_difference?></span>
                                                         <br>
                                                         <span class="reply">
-                                                                <p class="forum_reply_discription"><?php echo $discussion_reply->reply?></p>
-                                                                <?php if($discussion_reply->reply_image != ''){?>
-                                                                        <?php echo '<img src=".././public/upload/forum_reply_images/'.$discussion_reply->reply_image.'"   alt="forum_image"  class="forum_image">';?>  
-                                                                <?php } ?>
+
+                                                                <!-- edit reply -->
+                                                                <form id="edit_reply_content" method="POST" action="<?php echo URLROOT?>/forum/edit_reply_content?reply_id=<?php echo $discussion_reply-> reply_id?>&reply_post_image=<?php echo $discussion_reply->reply_image?>" enctype="multipart/form-data"> 
+                                                                        <input type="text" class="forum_reply_discription" id="forum_reply_discription-<?php echo $discussion_reply-> reply_id?>" name="reply_discription" value="<?php echo $discussion_reply->reply?>" disabled></input>
+                                                                        <br><br>
+                                                                        <?php if($discussion_reply->reply_image != ''){?>
+                                                                                <?php echo '<img src=".././public/upload/forum_reply_images/'.$discussion_reply->reply_image.'"   alt="card Picture"  class="edit_post_image" id="upload_reply_image-'.$discussion_reply-> reply_id.'">';?>
+                                                                                <button type="" class="upload_reply_images" id="upload_reply_images-<?php echo $discussion_reply-> reply_id?>"><i class="fa-solid fa-upload "><span class="upload"></span></i></button>
+                                                                                <span class="uploard_img_hidden"><input type="file" class="upload_file" name="image" onchange="loadFile_for_reply(event,<?php echo $discussion_reply-> reply_id?>)" id="upload_reply_image_link-<?php echo $discussion_reply-> reply_id?>" disabled></input></span>
+                                                                                <br><br>
+                                                                        <?php } ?>
+                                                                        <div id="reply_button_section-<?php echo $discussion_reply-> reply_id?>" class="button_section" hidden>
+                                                                                <button type="submit" id="edit_post">Post</button>
+                                                                                <button id="cancel_edit">Cancel</button>
+                                                                        </div>
+                                                                </form>
                                                         </span>
                                                         
                                                                 
@@ -295,7 +331,7 @@ else if($_SESSION['user_flag'] == 5){
                                                         <br>
                                                         <?php if($_SESSION['user_id']== $discussion_reply->reply_user_id OR $_SESSION['user_flag'] == 'Admin'){
                                                                 ?> 
-                                                        <i class="fa-solid fa-pen-to-square" id="edit"></i><span class="button_discription" id="edit_discription">Edit</span><br>
+                                                        <i class="fa-solid fa-pen-to-square" id="edit" onclick="edit_forum_post_reply(<?php echo $discussion_reply-> reply_id?>)"></i><span class="button_discription" id="edit_discription">Edit</span><br>
                                                         <i class="fa-solid fa-trash" id="delete" onclick="reply_delete_popUpOpen(<?php echo $discussion_reply-> reply_id?>)"></i><span class="button_discription" id="delete_discription">Delete</span><br>
                                                 
                                                         <?php
@@ -306,7 +342,7 @@ else if($_SESSION['user_flag'] == 5){
                                         </div>
 
                                         <!-- reply level 2-->
-
+                                <div class="display_reply_form_2">
                                 <div class="add_forum_reply_level_2" id = "add_l2_reply-<?php echo $discussion_reply-> reply_id?>">
                                         <span class="closebtn" onclick="close_l2_reply_form(<?php echo $discussion_reply-> reply_id?>)"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
                                         <div class="forum_body">
@@ -325,15 +361,21 @@ else if($_SESSION['user_flag'] == 5){
                                                 </form>
                                         </div>
                                 </div>
+                                </div>
                                 <?php } ?>
+
                                 <?php endforeach ?>
                         <?php } ?>
                         </div>
                         
-
+                                                
 
                         </div>   <!--new-->    
-                        <?php endforeach;?>
+                        <?php endforeach;}
+                        else{
+                                echo $data['display_message'];
+                        }
+                        ?>
                         
                         </div>
         </div>

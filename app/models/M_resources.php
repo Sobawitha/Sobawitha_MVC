@@ -10,15 +10,54 @@ class M_resources
     }
     
     public function count_num_of_rows(){
-        $this->db->query('SELECT count(post_id) FROM view_post ');
+        $this->db->query('SELECT count(post_id) as no_of_rows FROM view_post ');
         return $this->db->single();
     }
 
     public function display_all_resources($start_from,$num_per_page){
-        $this->db->query('SELECT * FROM view_post limit :start_from, :num_per_page');
-        $this->db->bind(":start_from", $start_from);
-        $this->db->bind(":num_per_page", $num_per_page);
-        return $this->db->resultSet();
+            if((isset($_POST['search_text']) && !empty($_POST['search_text'])) && (isset($_GET['category']) && !empty($_GET['category']))){
+                $search_cont=($_POST['search_text']);
+                $this->db->query('SELECT * from view_post where ((upper(title) like upper(concat("%", :search_content , "%"))) or (upper(tag) like upper(concat("%", :search_content , "%"))) or
+                (upper(discription) like upper(concat("%", :search_content , "%"))) or (upper(first_name) like upper(concat("%", :search_content , "%"))) or (upper(last_name) like upper(concat("%", :search_content , "%")))) AND tag=:tag limit :start_from, :num_per_page');
+            $this->db->bind(":search_content", $search_cont);
+            $this->db->bind(":start_from", $start_from);
+            $this->db->bind(":num_per_page", $num_per_page);
+            $this->db->bind(":tag",$_GET['category']);
+            return $this->db->resultset();
+    }
+    else if((isset($_POST['search_text']) && !empty($_POST['search_text'])) && (!isset($_GET['category']))){
+            // echo "come2";
+            // echo $_POST['search_text'];
+            // die();
+            $this->db->query('SELECT * from view_post where (upper(title) like upper(concat("%", :search_content , "%"))) or (upper(tag) like upper(concat("%", :search_content , "%"))) or
+            (upper(discription) like upper(concat("%", :search_content , "%"))) or (upper(first_name) like upper(concat("%", :search_content , "%"))) or (upper(last_name) like upper(concat("%", :search_content , "%"))) limit :start_from, :num_per_page');
+            $this->db->bind(":search_content", $_POST['search_text']);
+            $this->db->bind(":start_from", $start_from);
+            $this->db->bind(":num_per_page", $num_per_page);
+            return $this->db->resultset();
+    }
+    else if((!isset($_POST['search_text'])) && (isset($_GET['category']) && !empty($_GET['category']))){
+            if(($_GET['category']) == 'All categories'){
+                $this->db->query('SELECT * FROM view_post limit :start_from, :num_per_page');
+                $this->db->bind(":start_from", $start_from);
+                $this->db->bind(":num_per_page", $num_per_page);
+            }
+            else{
+                $this->db->query('SELECT * FROM view_post where tag=:tag limit :start_from, :num_per_page');
+                $this->db->bind(":start_from", $start_from);
+                $this->db->bind(":num_per_page", $num_per_page);
+                $this->db->bind(":tag",$_GET['category']);
+            }
+            
+            return $this->db->resultSet();
+    }
+    else{
+            $this->db->query('SELECT * FROM view_post limit :start_from, :num_per_page');
+            $this->db->bind(":start_from", $start_from);
+            $this->db->bind(":num_per_page", $num_per_page);
+            return $this->db->resultSet();
+    }
+       
     }
 
     public function find_populerfeed(){
@@ -95,22 +134,22 @@ class M_resources
         }
     }
 
-    public function search_bar($search_cont,$num_per_page,$start_from){
-        $this->db->query('SELECT * from view_post where (upper(title) like upper(concat("%", :search_content , "%"))) or (upper(tag) like upper(concat("%", :search_content , "%"))) or
-        (upper(discription) like upper(concat("%", :search_content , "%"))) or (upper(first_name) like upper(concat("%", :search_content , "%"))) or (upper(last_name) like upper(concat("%", :search_content , "%"))) limit :start_from, :num_per_page');
-        $this->db->bind(":search_content", $search_cont);
-        $this->db->bind(":start_from", $start_from);
-        $this->db->bind(":num_per_page", $num_per_page);
-        return $this->db->resultset();
-    }
+    // public function search_bar($search_cont,$num_per_page,$start_from){
+    //     $this->db->query('SELECT * from view_post where (upper(title) like upper(concat("%", :search_content , "%"))) or (upper(tag) like upper(concat("%", :search_content , "%"))) or
+    //     (upper(discription) like upper(concat("%", :search_content , "%"))) or (upper(first_name) like upper(concat("%", :search_content , "%"))) or (upper(last_name) like upper(concat("%", :search_content , "%"))) limit :start_from, :num_per_page');
+    //     $this->db->bind(":search_content", $search_cont);
+    //     $this->db->bind(":start_from", $start_from);
+    //     $this->db->bind(":num_per_page", $num_per_page);
+    //     return $this->db->resultset();
+    // }
 
-    public function filter_post($search_cont,$num_per_page,$start_from){
-        $this->db->query('SELECT * from view_post where (upper(tag) like upper(concat("%", :search_content , "%"))) limit :start_from, :num_per_page');
-        $this->db->bind(":search_content", $search_cont);
-        $this->db->bind(":start_from", $start_from);
-        $this->db->bind(":num_per_page", $num_per_page);
-        return $this->db->resultset();
-    }
+    // public function filter_post($search_cont,$num_per_page,$start_from){
+    //     $this->db->query('SELECT * from view_post where (upper(tag) like upper(concat("%", :search_content , "%"))) limit :start_from, :num_per_page');
+    //     $this->db->bind(":search_content", $search_cont);
+    //     $this->db->bind(":start_from", $start_from);
+    //     $this->db->bind(":num_per_page", $num_per_page);
+    //     return $this->db->resultset();
+    // }
 
 
 
@@ -202,6 +241,30 @@ class M_resources
     public function delete_reply($id){
         $this->db->query('DELETE from comment_reply where reply_id=:reply_id');
         $this->db->bind(":reply_id", $id);
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function edit_comment($data){
+        $this->db->query('UPDATE comment SET comment=:comment WHERE comment_id=:comment_id');
+        $this->db->bind(":comment",$data['comment']);
+        $this->db-> bind(":comment_id", $data['comment_id']);
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function edit_reply($data){
+        $this->db->query('UPDATE comment_reply SET reply=:reply WHERE reply_id=:reply_id');
+        $this->db->bind(":reply",$data['reply']);
+        $this->db-> bind(":reply_id", $data['reply_id']);
         if($this->db->execute()){
             return true;
         }

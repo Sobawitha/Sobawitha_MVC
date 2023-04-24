@@ -7,100 +7,62 @@ class resources extends Controller
         $this->resources_model = $this->model('M_resources');
     }
 
-    public function resource_page()
-    {
+    public function resource_page(){
         if(isset($_GET['page'])){
             $page = $_GET['page'];
         }
         else{
             $page = 1;
         }
-
         $num_per_page = 3;
         $start_from = ($page - 1) * $num_per_page;
-
-        unset($_SESSION['search_cont']);
-        $_SESSION['search_cont'] = "Search by key-word";
-        $_SESSION['category'] = "All categories";
-        $_SESSION['row_count'] = $this->resources_model->count_num_of_rows();
         $_SESSION['num_per_page'] = $num_per_page;
 
+        $resources = $this->resources_model->display_all_resources($start_from,$num_per_page); //data object array
+        $best_resources = $this->resources_model->find_populerfeed();
+        $row_count = $this->resources_model->count_num_of_rows()->no_of_rows;
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $resources = $this->resources_model->display_all_resources($start_from,$num_per_page); //data object array
-            $best_resources = $this->resources_model->find_populerfeed();
-            $search_cont = trim($_POST['search_text']);
-            $search_resources = $this->resources_model->search_bar( $search_cont,$num_per_page,$start_from);
+        // print_r($resources);
+        // die();
 
-            if(isset($_GET['category'])){
-                
-                $category = trim($_GET['category']);
-                $_SESSION['category'] = $category;
-
-                if($category == "All categories"){
-                    $category_related_posts=$this-> resources_model ->display_all_resources($start_from,$num_per_page);
-                }
-                else{
-                    $category_related_posts=$this-> resources_model ->filter_post($category,$num_per_page,$start_from);
-                }
-                
-
-                $data = [
-                    'resources' => $category_related_posts,
-                    'best_resources' => $best_resources
-                ]; 
-            }
-
-            if($search_cont == ''){
-                $data = [
-                    'resources' => $resources,
-                    'best_resources' => $best_resources
-                ];    
+        if(empty($resources)){
+            // echo"EMPTY";
+            // die();
+            if(isset($_POST['search_text']) && !empty($_POST['search_text']))
+            {
+                $data=[
+                    'search_text'=>($_POST['search_text']),
+                    'resource_page_display_message'=> 'match not found...',
+                    'best_resources' => $best_resources,
+                    'row_count' => $row_count
+                ];
             }
             else{
-
-                $_SESSION['search_cont'] = $search_cont;
-                $data = [
-                    'resources' => $search_resources,
-                    'best_resources' => $best_resources
-                ]; 
+                $data=[
+                    'search_text'=>'search by key-word',
+                    'resource_page_display_message'=> 'match not found...',
+                    'best_resources' => $best_resources,
+                    'row_count' => $row_count
+                ];
             }
-
+            
             $this->view('Agri_officer/Resources/v_resources', $data);
         }
         else{
-
-            $resources = $this->resources_model->display_all_resources($start_from,$num_per_page); //data object array
-            $best_resources = $this->resources_model->find_populerfeed();
-
-            if(isset($_GET['category'])){
-                $category = trim($_GET['category']);
-                $_SESSION['category'] = $category;
-
-                if($category == "All categories"){
-                    $category_related_posts=$this-> resources_model ->display_all_resources($start_from,$num_per_page);
-                }
-                else{
-                    $category_related_posts=$this-> resources_model ->filter_post($category,$num_per_page,$start_from);
-                }
-
-                $data = [
-                    'resources' => $category_related_posts,
-                    'best_resources' => $best_resources
-                ]; 
-            } else {
-                $data = [
-                    'resources' => $resources,
-                    'best_resources' => $best_resources
-                ];
-            }
-
+            $data=[
+                'search_text'=>'search by key-word',
+                'resource_page_display_message'=> '',
+                'best_resources' => $best_resources,
+                'resources' => $resources,
+                'row_count' => $row_count
+            ];
             $this->view('Agri_officer/Resources/v_resources', $data);
-
         }
+            
+        }
+    /**code here */
 
-    }
+    
 
     public function view_individual_resource()
     {
@@ -119,14 +81,14 @@ class resources extends Controller
                 $related_post = $this->resources_model->related_post($data);
                 $comments=$this-> resources_model ->display_all_comment($data);
                 $count_comment= $this-> resources_model ->count_all_comment($data);
-                $comments_for_reply = $this->resources_model->display_all_comment_for_reply($data);
+                $reply_for_comment = $this->resources_model->display_all_comment_for_reply($data);
                 $no_of_likes = $this->resources_model->count_previous_like_with_user_id($id, $_SESSION['user_id'])->previous_like;
                 $data1 = [
                     'ind_resource' => $individual_resource,
                     'related_post' => $related_post,
                     'comments' => $comments,
                     'count_comment' => $count_comment,
-                    'comments_for_reply' => $comments_for_reply,
+                    'reply_for_comment' => $reply_for_comment,
                     'previous_like_status' => $no_of_likes
                 ];
                 $this->view('Agri_officer/Resources/individual_resource', $data1);
@@ -223,6 +185,36 @@ class resources extends Controller
             $id=$this->resources_model->find_blogpost_id_from_replyid($replyid)->post_id;
             $tag=$this->resources_model->find_category($id)->category;
             $this->resources_model->delete_reply($replyid);
+        }
+        redirect('resources/view_individual_resource?blog_post_id='.$id.'&category='.$tag);
+    }
+
+    public function edit_comment(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $commentid = $_GET['comment_id'];
+            $comment = $_POST['comment_body'];
+            $data=[
+                'comment_id' => $commentid,
+                'comment' => $comment
+            ];
+            $id=$this->resources_model->find_blogpost_id($commentid)->post_id;
+            $tag=$this->resources_model->find_category($id)->category;
+            $this->resources_model->edit_comment($data);
+        }
+        redirect('resources/view_individual_resource?blog_post_id='.$id.'&category='.$tag);
+    }
+
+    public function edit_reply(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $replyid = $_GET['reply_id'];
+            $reply = $_POST['reply_body'];
+            $data=[
+                'reply_id' => $replyid,
+                'reply' => $reply
+            ];
+            $id=$this->resources_model->find_blogpost_id_from_replyid($replyid)->post_id;
+            $tag=$this->resources_model->find_category($id)->category;
+            $this->resources_model->edit_reply($data);
         }
         redirect('resources/view_individual_resource?blog_post_id='.$id.'&category='.$tag);
     }

@@ -145,13 +145,15 @@
     color: white;
   }
 
-
-
-
-
-  .last{
-    /* background-color:beige; */
-  }
+.card:hover #forum_icon{
+    color:white; 
+}
+.card:hover #complain_icon{
+    color:white; 
+}
+.card:hover #category_icon{
+    color:white; 
+}
 
   .card .content{
     padding:10px 20px;
@@ -167,7 +169,7 @@
     color: rgb(0, 0, 0);
   }
 
- #complain_icon, #total_income_icon, #Ongoin_order_icon, #complete_order_icon,  #item, #deals, #review, #wishlist,#blog_icon,#forum_icon,#usage_icon{
+#blog_icon, #forum_icon, #complain_icon, #category_icon, #complete_icon, #cart, #item, #deals, #review, #wishlist{
     padding:20px 0px;
     font-size:45px;
     color: rgb(0, 0, 0);
@@ -225,14 +227,86 @@
     box-shadow:0px 7px 25px rgba(0,0,0,0.08);
   }
 
-  .chart h2{
+.chartsLevel2{
+    display:grid;
+    grid-template-columns: 3fr 2fr ;
+    grid-gap:10px;
+    width:100%;
+    margin:20px;
+    padding-top:0px;
+}
+
+.chart h2{
     margin-bottom:5px;
     font-size:20px;
     color:#666;
     text-align:center;
   }
 
-  @media(max-width:1115px){
+th,td{
+    padding:10px; 
+    font-size: 12px;
+    border:1px solid lavender;
+    border-radius: 20px;
+}
+
+table{
+    margin-top:40px;
+    align-items: center;
+    border-collapse:collapse; /*make common border between adjecent cell */
+    width:100%;
+    height:200px;
+}
+
+.category_style{
+    background-color: salmon;
+    color:white;
+    font-size:8px;
+    padding:5px;
+    border-radius:50px;
+}
+
+/*set colors for category*/
+.set-green{
+    background-color: #36a736;
+    color:white;
+    font-size:8px;
+    padding:5px;
+    border-radius:50px;    
+}
+
+.set-yellow{
+    background-color: rgb(134, 134, 53);
+    color:white;
+    font-size:8px;
+    padding:5px;
+    border-radius:50px;
+}
+
+.set-orange{
+    background-color: crimson;
+    color:white;
+    font-size:8px;
+    padding:5px;
+    border-radius:50px;
+}
+
+.set-purple{
+    background-color: rgb(228, 196, 244);
+    color:white;
+    font-size:8px;
+    padding:5px;
+    border-radius:50px;
+}
+.set-blue{
+    background-color: rgb(81, 111, 143);
+    color:white;
+    font-size:8px;
+    padding:5px;
+    border-radius:50px;
+}
+
+@media(max-width:1115px){
     .chart{
         max-width: 1fr;
     }

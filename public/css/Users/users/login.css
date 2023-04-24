@@ -411,3 +411,7 @@ input:-webkit-autofill:active{
     color: #000;
     border-radius: 4px;
 } */
+  .error_msg{
+    font-size: 15px;
+    color: #FF0000;
+}

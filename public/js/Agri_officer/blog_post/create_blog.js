@@ -20,18 +20,20 @@
 
     function updatepopUpOpen(id,title, tag, discription,image) {
 
-        // console.log(id);
-        // console.log(title);
-        // console.log(tag);
-        // console.log(discription);
+        console.log(id);
+        console.log(title);
+        console.log(tag);
+        console.log(image);
    
-
       const deletePopup = document.getElementById('updatePopup');
       document.getElementById('cancelbtn').addEventListener('click',() => updatePopup.close());
       updatePopup.showModal();
       document.getElementById('updatebutton').value=id;
       document.getElementById('title').value=title;
-      document.getElementById('upload_image').value=image;
+      var imageElement = document.getElementById('upload_image');
+      var imgURL = ".././public/upload/blog_post_images/"+image;
+      imageElement.setAttribute('src', imgURL);
+
       
     if(tag == 'Innovations'){
         document.getElementById('innovations').checked = true;
@@ -60,3 +62,13 @@ var loadFile1 = function(event) {
 	var image = document.getElementById('upload_image1');
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
+
+/*for alert message */
+window.onload = function() {
+    create_blogpost_popup = document.getElementById("popup");
+    document.getElementById("popup").style.display = "block";
+    //Set timeout to hide popup after 5 seconds
+    setTimeout(function() {
+        create_blogpost_popup.style.display = "none";
+    }, 5000);
+  };

@@ -6,7 +6,23 @@
 <?php require APPROOT.'/views/Agri_officer/Agri_officer/Officer_Sidebar.php'?>
     
 
-<!--button_section-->
+
+
+<!-- popup alert -->
+<?php
+if(isset($_SESSION['alert_message'])){
+    
+?>
+<!-- HTML code for the popup message -->
+<div id="popup">
+  <p><?php echo $_SESSION['alert_message']?></p>
+</div>
+
+<?php
+unset($_SESSION['alert_message']);
+}
+?>
+
 
 <dialog id="updatePopup">
                 <div class="updatePopup">
@@ -59,7 +75,7 @@ function setColor($tag){
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $data['search_text']?> " require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
@@ -90,9 +106,10 @@ function setColor($tag){
         
 
             <?php
+
+            if(empty($data['search_result_message'])){
                 /* Display tabuler form */
                 foreach($data['blogpost'] as $blogpost):?>
-            
                     <div class="individual_complaint">
                         <span class="<?php echo setColor($blogpost->tag);?>" ><i class="fa-solid fa-circle" id="circle" ></i></span>
                         <span class="complaint"><?php echo $blogpost->title?></span><br>
@@ -103,14 +120,15 @@ function setColor($tag){
                             <i class="fa-solid fa-pen-to-square" id="editbutton"></i>
                             <span class="edit">Edit</span>
                             </span>
-
-                            <span  onclick="popUpOpen(<?php echo $blogpost->post_id?>)"><i class="fa-solid fa-trash deleteButton" id="deletebutton"></i><span class="delete">Delete</span></span>
-                            
+                            <span  onclick="popUpOpen(<?php echo $blogpost->post_id?>)"><i class="fa-solid fa-trash deleteButton" id="deletebutton"></i><span class="delete">Delete</span></span>  
                         </div>
                     </div>
 
-            <?php endforeach;?>
-
+            <?php endforeach;}
+            else{
+                echo $data['search_result_message'];
+            }?>
+                
             
             </div>
         </div>

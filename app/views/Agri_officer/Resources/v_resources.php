@@ -56,7 +56,7 @@ function set_filterbtn_Color($tag){
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $data['search_text']?> " require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
@@ -140,6 +140,10 @@ function set_filterbtn_Color($tag){
         <div class="card_section">
         <?php
         /* display blogs */
+            if(!empty($data['resource_page_display_message'])){
+                echo $data['resource_page_display_message'];
+            }
+            else{
             foreach($data['resources'] as $resources):?>
             <div class='flash_card'>
                             <?php echo '<img src=".././public/upload/blog_post_images/'.$resources->image.'"   alt="card Picture"  class="card_image">';?>
@@ -164,7 +168,7 @@ function set_filterbtn_Color($tag){
                                     </div>
                             </div>
             </div>
-            <?php endforeach;?>
+            <?php endforeach;}?>
     </div>
 
     <div class="category_search">
@@ -173,9 +177,9 @@ function set_filterbtn_Color($tag){
             <div class="feeds">
                 <p class="choice_topic">Populer Feeds</p>
                 <?php foreach($data['best_resources'] as $best_resource):?>
-                <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $best_resource->post_id?>&category=<?php echo $best_resource->tag?>">
+                <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $best_resource->post_id?>&category=<?php echo $best_resource->tag?>" class="feed_card">
                 <div class="feed_discription">
-                    <i class="fa-regular fa-bookmark" id="ok"></i>
+                    <i class="fa-regular fa-bookmark" id="feed_card_icon"></i>
                     <p class="topic"> <?php echo $best_resource->title?><span class="feed_category"></p>
                     <p class="author">By <?php echo $best_resource->first_name?> </p>
                     <p class="feedback"><?php echo $best_resource->no_of_likes?>-Likes <?php echo $best_resource->count_comment?>-comment </p>
@@ -192,39 +196,43 @@ function set_filterbtn_Color($tag){
                 
 
     <?php
-
-    // $total_row_count = $_SESSION['row_count'];
-    $total_row_count = 5;
-    $uri = $_SERVER['REQUEST_URI'];
-    if(isset($_GET['category'])){
-        $category = trim($_GET['category']);
+    if(!empty($_GET['category'])){
+        
     }
     else{
-        $category = "All categories";
+        $total_row_count = $data['row_count'];
+        $uri = $_SERVER['REQUEST_URI'];
+        if(isset($_GET['category'])){
+            $category = trim($_GET['category']);
+        }
+        else{
+            $category = "All categories";
+        }
+    
+        $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
+    
+        if(isset($_GET['page'])){
+            $page = $_GET['page'];
+        }
+        else{
+            $page = 1;
+        }
+    
+        if($page>1){ 
+            echo "<a href='?category=". $category."&page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
+        }
+    
+        for($i=1; $i<=$total_pages;$i++){
+            $class = ($page == $i) ? "current_page" : ""; // add this line
+            echo "<a href='?category=".$category."&page=".($i)." '><span class='pagination_number $class'>$i</span></a>";
+        }
+    
+        if($i>$page){
+            echo "<a href='?category=". $category."&page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
+        }
     }
     
 
-
-    $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
-
-    if(isset($_GET['page'])){
-        $page = $_GET['page'];
-    }
-    else{
-        $page = 1;
-    }
-
-    if($page>1){ 
-        echo "<a href='?category=". $category."&page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
-    }
-
-    for($i=1; $i<$total_pages;$i++){
-        echo "<a href='?category=".$category."&page=".($i)." '><span class='pagination_number'>$i</span></a>";
-    }
-
-    if($i>$page){
-        echo "<a href='?category=". $category."&page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
-    }
     
     ?>
 

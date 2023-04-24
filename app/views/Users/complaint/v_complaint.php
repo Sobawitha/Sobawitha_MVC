@@ -24,6 +24,22 @@ else if($_SESSION['user_flag'] == 5){
     require APPROOT . '/views/Agri_officer/Agri_officer/Officer_Sidebar.php';
 }?>
 
+<!-- popup alert -->
+<?php
+if(isset($_SESSION['alert_message'])){
+    
+?>
+<!-- HTML code for the popup message -->
+<div id="popup">
+  <p><?php echo $_SESSION['alert_message']?></p>
+</div>
+
+<?php
+unset($_SESSION['alert_message']);
+}
+?>
+
+
 <?php
 function setColor($type){
     if($type == 'order_status_product_availability') return 'set-purple';
@@ -106,7 +122,7 @@ function setColor($type){
                             <div class="search_bar">
                                 <div class="search_content">
                                     
-                                        <span class="search_cont" onclick="open_cansel_btn()"><input type="text"  name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " value="" require/></span>
+                                        <span class="search_cont" onclick="open_cansel_btn()"><input type="text"  name="search_text" placeholder="<?php  echo $data['search_text']?> " value="" require/></span>
                                         <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                                         <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                                     
@@ -118,6 +134,7 @@ function setColor($type){
         
         <?php
                 /* Display tabuler form */
+                if(empty($data['search_result_message'])){
                 foreach($data['complaint'] as $complaint):?>
             
                     <div class="" id="individual_complaint">
@@ -126,10 +143,9 @@ function setColor($type){
                         <span class="time"><?php echo $complaint->date?></span>
 
                         <div class="footer">
-
                         <?php if($complaint->current_status == 1){?>
-                            <!-- // updatepopUpOpen(17,'thilina@gmail.com','order_status_product_availability','abc','def') -->
-                                <span onclick="updatepopUpOpen(17,'thilina@gmail.com','order_status_product_availability','abc','def')"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span>
+                                <!-- <span onclick="updatepopUpOpen(17,'thilina@gmail.com','order_status_product_availability','abc','def')"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span> -->
+                                <span onclick="updatepopUpOpen(<?php echo $complaint->complaint_id;?>,`<?php echo $complaint->email;?>`,`<?php echo $complaint->type;?>`,`<?php echo $complaint->subject;?>`,`<?php echo $complaint->message;?>`)"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span>
                                 <i class="fa-solid fa-trash" id="deletebtn" onclick="popUpOpen(<?php echo $complaint->complaint_id?>)"></i><span class="delete">Delete</span>
                             <?php
                         }
@@ -167,7 +183,10 @@ function setColor($type){
                     }
                     ?>
 
-            <?php endforeach;?>
+            <?php endforeach;}
+            else{
+                echo $data['search_result_message'];
+            }?>
             
 
         </div>

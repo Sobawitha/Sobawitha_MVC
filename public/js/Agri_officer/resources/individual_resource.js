@@ -115,3 +115,35 @@ function delete_comment(id) {
     document.getElementById('deletereplybtn').value=id;
     
   }
+
+  //edit reply and comment
+  
+
+function edit_comment(id){
+    document.getElementById(`comment_body-${id}`).disabled = false;
+    document.getElementById(`comment_body-${id}`).style.backgroundColor = "rgb(241, 252, 237)";
+    document.getElementById(`comment_body-${id}`).focus();
+    document.getElementById(`button_section-${id}`).style.display = "block";
+}
+
+function cancel_edit_comment(id){
+    document.getElementById(`comment_body-${id}`).disabled = true;
+    document.getElementById(`comment_body-${id}`).style.backgroundColor = "rgb(241, 252, 237)";
+    document.getElementById(`button_section-${id}`).style.display = "none";   
+}
+
+function edit_reply(id){
+    document.getElementById(`reply_body-${id}`).disabled = false;
+    document.getElementById(`reply_body-${id}`).style.backgroundColor = "rgb(241, 252, 237)";
+    document.getElementById(`reply_body-${id}`).focus();
+    document.getElementById(`reply_button_section-${id}`).style.display = "block";
+}
+
+function cancel_edit_reply(id){
+    document.getElementById(`reply_body-${id}`).disabled = true;
+    document.getElementById(`reply_body-${id}`).style.backgroundColor = "rgb(241, 252, 237)";
+    document.getElementById(`reply_button_section-${id}`).style.display = "none";   
+}
+
+
+

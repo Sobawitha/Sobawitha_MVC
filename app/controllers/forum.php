@@ -5,8 +5,7 @@ class forum extends Controller {
         $this-> forum_model =$this->model('M_forum');
     }
 
-  
-
+    /*start new discussion by posting forum post */
     public function add_new_discussion(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -44,8 +43,7 @@ class forum extends Controller {
             }
             else{
                 redirect('forum/forum');
-            }
-        
+            }        
         }
         else{
             $fileExt=explode('.',$_FILES['image']['name']);
@@ -68,8 +66,6 @@ class forum extends Controller {
             $data[ 'image_err'] ="forum image file size is empty";
             
             }
-      
-
         if($this->forum_model->add_new_discussion($data)){
             redirect('forum/forum');
            
@@ -82,7 +78,7 @@ class forum extends Controller {
     
     }
 
-
+/*reply for discussions */
     public function add_reply_for_discussion(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -142,8 +138,6 @@ class forum extends Controller {
             $data[ 'image_err'] ="forum image file size is empty";
             
             }
-      
-
         if($this->forum_model->add_reply_for_discussion($data)){
             redirect('forum/forum'); 
         }
@@ -153,36 +147,40 @@ class forum extends Controller {
     }
     }
 
-
-
+    /**display all forum posts */
     public function forum(){
-        unset($_SESSION['search_cont']);
-        $_SESSION['search_cont'] = "Search by key-word";
-
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $search_cont="";
-            $search_discussions = $this->forum_model->search_bar($search_cont);
+            $search_cont=$_POST['search_text'];
             $forum_discussions = $this->forum_model->display_all_discussion();
             $discussion_reply =  $this->forum_model->display_all_discussion_reply();
-            // if(isset( $_GET['reply_discussion_id'])){
-            //     $reply_discussion_id = $_GET['reply_discussion_id'];
-            //     $discussion_reply = $this->forum_model->display_all_discussion_reply($reply_discussion_id);
-            // }
             
             if($search_cont == '' ){
                 $data = [
                     'forum_discussions' => $forum_discussions,
-                    'discussion_reply' => $discussion_reply
+                    'discussion_reply' => $discussion_reply,
+                    'display_message'=>'',
+                    'search_text'=>"Search by key-word",
                 ];    
             }
             else{
-    
-                $_SESSION['search_cont'] = $search_cont;
-                $data = [
-                    'forum_discussions' => $search_discussions,
-                    'discussion_reply' => $discussion_reply
-                ];
+                $search_discussions = $this->forum_model->search_from_forum($search_cont);
+                if(!empty($search_discussions)){
+                    $data = [
+                        'forum_discussions' => $search_discussions,
+                        'discussion_reply' => $discussion_reply,
+                        'display_message'=> '',
+                        'search_text'=>$search_cont
+                    ];
+                }
+                else{
+                    $data = [
+                        'display_message'=> 'No match found..',
+                        'discussion_reply' => $discussion_reply,
+                        'search_text'=>$search_cont
+                    ];
+                }
+                
             }
             $this->view('Users/forum/v_forum',$data);
         }
@@ -192,14 +190,16 @@ class forum extends Controller {
             $discussion_reply =  $this->forum_model->display_all_discussion_reply();
             $data = [
                 'forum_discussions' => $forum_discussions,
-                'discussion_reply' => $discussion_reply
+                'discussion_reply' => $discussion_reply,
+                'search_text'=>"Search by key-word",
+                'display_message'=> '',
             ]; 
+            $this->view('Users/forum/v_forum',$data);
         }
-        $this->view('Users/forum/v_forum',$data);
         
-
     }
 
+    /*after post discussion ----> forum_post */
     public function delete_forum_post(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $forumpostid = trim($_POST['deletepost']);
@@ -208,6 +208,7 @@ class forum extends Controller {
         redirect('forum/forum');
     }
 
+    /**delete forum posts */
     public function delete_forum_post_reply(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $forumpostreplyid = trim($_POST['deletereply']);
@@ -216,8 +217,148 @@ class forum extends Controller {
         redirect('forum/forum');
     }
 
+    /**edit forum posts */
+    public function edit_forum_content(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $post_image = trim($_GET['post_image']);
+            if(empty($post_image)){
+                $data=[
+                    'post_id' => trim($_GET['postid']),
+                    'edit_content'=> trim($_POST['forum_discription']),
+                    'image_name'=>NULL,           
+                ];
+                $this->forum_model->edit_forum_post($data);
+                redirect('forum/forum');
+            }
+            else{
+                $data = [
+                    'post_id' => trim($_GET['postid']),
+                    'edit_content'=> trim($_POST['forum_discription']),
+                    'image'=>$_FILES['image'],
+                    'image_name'=>$_FILES['image']['name']
+                ];
 
+                if(empty($data['image_name'])){
+                    $data = [
+                        'post_id' => trim($_GET['postid']),
+                        'edit_content'=> trim($_POST['forum_discription']),
+                        'image_name'=>$post_image,
+                    ];
+        
+                    if($this->forum_model->edit_forum_post($data)){
+                        redirect('forum/forum');  
+                    }
+                    else{
+                        redirect('forum/forum');
+                    }
+                }
+                else{
+                    $fileExt=explode('.',$_FILES['image']['name']);
+                    $fileActualExt=strtolower(end($fileExt));
+                    $allowed=array('jpg','jpeg','png');        
+                
+                    if(!in_array($fileActualExt,$allowed)){
+                        $data['image_err']='You cannot upload files of this type';
+                    }
+            
+        
+                    if($data['image']['size']>0){
+                    if(uploadFile($data['image']['tmp_name'],$data['image_name'],'/upload/forum_images/')){
+                                
+                    }else{  
+                    $data['image_err']='Unsuccessful forum image uploading';
+                    
+                    }
+                    }else{
+                    $data[ 'image_err'] ="forum image file size is empty";
+                    
+                    }
+              
+        
+                    if($this->forum_model->edit_forum_post($data)){
+                        redirect('forum/forum');
+                    
+                    }
+                    else{
+                        redirect('forum/forum');
+                    }
+                }
+                }
 
-}
+            }
+    }
+
+    /**edit forum post reply */
+    public function edit_reply_content(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $post_image = trim($_GET['reply_post_image']);
+
+            if(empty($post_image)){
+                $data=[
+                    'reply_id' => trim($_GET['reply_id']),
+                    'edit_content'=> trim($_POST['reply_discription']),
+                    'image_name'=>NULL,           
+                ];
+                $this->forum_model->edit_forum_post_reply($data);
+                redirect('forum/forum');
+            }
+            else{
+                $data = [
+                    'reply_id' => trim($_GET['reply_id']),
+                    'edit_content'=> trim($_POST['reply_discription']),
+                    'image'=>$_FILES['image'],
+                    'image_name'=>$_FILES['image']['name']
+                ];
+
+                if(empty($data['image_name'])){
+                    $data = [
+                        'reply_id' => trim($_GET['reply_id']),
+                        'edit_content'=> trim($_POST['reply_discription']),
+                        'image_name'=>$post_image,
+                    ];
+        
+                    if($this->forum_model->edit_forum_post_reply($data)){
+                        redirect('forum/forum');  
+                    }
+                    else{
+                        redirect('forum/forum');
+                    }
+                }
+                else{
+                    $fileExt=explode('.',$_FILES['image']['name']);
+                    $fileActualExt=strtolower(end($fileExt));
+                    $allowed=array('jpg','jpeg','png');        
+                
+                    if(!in_array($fileActualExt,$allowed)){
+                        $data['image_err']='You cannot upload files of this type';
+                    }
+            
+        
+                    if($data['image']['size']>0){
+                    if(uploadFile($data['image']['tmp_name'],$data['image_name'],'/upload/forum_reply_images/')){
+                                
+                    }else{  
+                    $data['image_err']='Unsuccessful forum image uploading';
+                    
+                    }
+                    }else{
+                    $data[ 'image_err'] ="forum image file size is empty";
+                    
+                    }
+              
+        
+                    if($this->forum_model->edit_forum_post_reply($data)){
+                        redirect('forum/forum');
+                    
+                    }
+                    else{
+                        redirect('forum/forum');
+                    }
+                }
+                }
+    }}        
+    }
 
 ?>
