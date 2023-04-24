@@ -62,7 +62,7 @@
                                 <div class="sm_view_detail">
                                         <td>
                                                 <?php if($ad->raw_material_image != null): ?>
-                                                        <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $ad->raw_material_image;?>" alt="Girl in a jacket" id="fertilizer_img" >
+                                                        <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $ad->raw_material_image;?>" alt="non" id="fertilizer_img" >
                                                 <?php endif; ?>
                                         </td>
                                         <td><span class="title"><?php echo $ad->product_name ?></span></td>

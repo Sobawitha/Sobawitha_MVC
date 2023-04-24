@@ -1,5 +1,5 @@
 <!--sidebar-->
-<link rel="stylesheet" href="../css/Users/component/sidebar.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Users/component/sidebar.css"></link>
 <script src="../js/component/sidebar.js"></script> 
 <div class="sidebar">
     <div class="logo">
@@ -23,6 +23,7 @@
         <li><a href="<?php echo URLROOT?>/complaint/display_all_complaint" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Complaint</a></li>
         <li><a href="<?php echo URLROOT?>/feedback/supplire_feedback" class=""><i class="fa-regular fa-comments"></i>&nbsp;&nbsp;Feedback</a></li>
         <li><a href="<?php echo URLROOT?>/supplier_ad_management/index" class=""><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Manage ads</a></li>
+        <li><a href="<?php echo URLROOT?>/supplier_ad_view/index" class=""><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;View ads</a></li>
     </ul>
 </div>
 

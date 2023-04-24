@@ -4,7 +4,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
-<link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/update_advertisement.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Raw_material_supplier/ad_management/update_advertisement.css"></link>
 <div class="body">
     <div class="section_1">
 
