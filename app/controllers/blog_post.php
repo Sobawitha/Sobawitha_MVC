@@ -7,8 +7,6 @@ class blog_post extends Controller {
 
     public function create_posts(){
 
-        redirect('blog_post/display_all_blogposts');
-
         if($_SERVER['REQUEST_METHOD']=='POST'){
             //form is submitted
 
@@ -22,7 +20,7 @@ class blog_post extends Controller {
                     'officer_id' => ($_SESSION['user_id']),
                     'no_of_likes' => 0,
                     'image_name'=>$_FILES['image']['name'],
-                    'form_submit_message' => '',
+                    'post_submit_message' => '',
                     'image_err' => '',
                 ];
 
@@ -39,8 +37,7 @@ class blog_post extends Controller {
                     $data['image_err']='You cannot upload files of this type';
         
                     }
-            
-        
+
                     if($data['image']['size']>0){
                     if(uploadFile($data['image']['tmp_name'],$data['image_name'],'/upload/blog_post_images/')){
                                 
@@ -55,16 +52,15 @@ class blog_post extends Controller {
               
 
                 if($this->blog_post_model->create_posts($data)){
-                    $data = ['form_submit_message' => 'Your post has been successfully added!'];
-                    
+                    $_SESSION['alert_message'] = 'Your post has been successfully added!';
                     redirect('blog_post/create_posts');
-                    $this->view('inc/blog_post/v_create_blog',$data);
                 }
                 else{
-                    $data = ['form_submit_message' => 'Post submitted fail.'];
-                    $this->view('inc/blog_post/v_create_blog',$data);
+                    $_SESSION['alert_message'] = 'Post submitted fail.';
+                    redirect('blog_post/create_posts');
                 }
             }
+            
 
             
         }
@@ -75,13 +71,13 @@ class blog_post extends Controller {
                 'discription' => '',
                 'officer_id'=>'',
                 'no_of_likes' => '',
-                'form_submit_message' => ''
+                'post_submit_message' => '',
+                'image_err' => ''
 
             ];
+            redirect('blog_post/display_all_blogposts');
             
         }
-    
-        $this->view('Agri_officer/Blog_post/v_create_blog',$data);
     }
 
 
@@ -183,9 +179,13 @@ class blog_post extends Controller {
                 }else{
                 $data[ 'image_err'] ="Blog post image file size is empty";
                 }
-                $this->blog_post_model->update_post($data);
+                if($this->blog_post_model->update_post($data)){
+                    $_SESSION['alert_message'] = 'Your post has been successfully updated!';
+                }
+                else{
+                    $_SESSION['alert_message'] = 'Post update error!';
+                }
             }
-             /*error handling */
             redirect('blog_post/display_all_blogposts');
 
         }

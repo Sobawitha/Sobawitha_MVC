@@ -196,39 +196,43 @@ function set_filterbtn_Color($tag){
                 
 
     <?php
-
-    // $total_row_count = $_SESSION['row_count'];
-    $total_row_count = 5;
-    $uri = $_SERVER['REQUEST_URI'];
-    if(isset($_GET['category'])){
-        $category = trim($_GET['category']);
+    if(!empty($_GET['category'])){
+        
     }
     else{
-        $category = "All categories";
+        $total_row_count = $data['row_count'];
+        $uri = $_SERVER['REQUEST_URI'];
+        if(isset($_GET['category'])){
+            $category = trim($_GET['category']);
+        }
+        else{
+            $category = "All categories";
+        }
+    
+        $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
+    
+        if(isset($_GET['page'])){
+            $page = $_GET['page'];
+        }
+        else{
+            $page = 1;
+        }
+    
+        if($page>1){ 
+            echo "<a href='?category=". $category."&page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
+        }
+    
+        for($i=1; $i<=$total_pages;$i++){
+            $class = ($page == $i) ? "current_page" : ""; // add this line
+            echo "<a href='?category=".$category."&page=".($i)." '><span class='pagination_number $class'>$i</span></a>";
+        }
+    
+        if($i>$page){
+            echo "<a href='?category=". $category."&page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
+        }
     }
     
 
-
-    $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
-
-    if(isset($_GET['page'])){
-        $page = $_GET['page'];
-    }
-    else{
-        $page = 1;
-    }
-
-    if($page>1){ 
-        echo "<a href='?category=". $category."&page=".($page - 1)." '><span class='pagination_number'><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
-    }
-
-    for($i=1; $i<$total_pages;$i++){
-        echo "<a href='?category=".$category."&page=".($i)." '><span class='pagination_number'>$i</span></a>";
-    }
-
-    if($i>$page){
-        echo "<a href='?category=". $category."&page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
-    }
     
     ?>
 

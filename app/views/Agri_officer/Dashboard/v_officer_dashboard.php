@@ -174,6 +174,7 @@ fetch('<?php echo URLROOT ?>/dashboard/category_donut_chart')
             count = result.data.map(item => item.num_category);
 
             // create chart after fetching data
+            console.log(categories);
             var ctx2 = document.getElementById('doughnut').getContext('2d');
             var myChart2 = new Chart(ctx2, {
                 type: 'doughnut',

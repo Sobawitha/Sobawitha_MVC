@@ -33,6 +33,22 @@ else if($_SESSION['user_flag'] == 5){
 
 ?>
 
+<!-- popup alert -->
+<?php
+if(isset($_SESSION['alert_message'])){
+    
+?>
+<!-- HTML code for the popup message -->
+<div id="popup">
+  <p><?php echo $_SESSION['alert_message']?></p>
+</div>
+
+<?php
+unset($_SESSION['alert_message']);
+}
+?>
+
+
 
 <div class="body">
         <div class="section_1">

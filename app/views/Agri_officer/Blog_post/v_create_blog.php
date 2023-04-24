@@ -6,7 +6,23 @@
 <?php require APPROOT.'/views/Agri_officer/Agri_officer/Officer_Sidebar.php'?>
     
 
-<!--button_section-->
+
+
+<!-- popup alert -->
+<?php
+if(isset($_SESSION['alert_message'])){
+    
+?>
+<!-- HTML code for the popup message -->
+<div id="popup">
+  <p><?php echo $_SESSION['alert_message']?></p>
+</div>
+
+<?php
+unset($_SESSION['alert_message']);
+}
+?>
+
 
 <dialog id="updatePopup">
                 <div class="updatePopup">

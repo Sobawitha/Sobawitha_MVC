@@ -20,10 +20,10 @@
 
     function updatepopUpOpen(id,title, tag, discription,image) {
 
-        // console.log(id);
-        // console.log(title);
-        // console.log(tag);
-        // console.log(image);
+        console.log(id);
+        console.log(title);
+        console.log(tag);
+        console.log(image);
    
       const deletePopup = document.getElementById('updatePopup');
       document.getElementById('cancelbtn').addEventListener('click',() => updatePopup.close());
@@ -62,3 +62,13 @@ var loadFile1 = function(event) {
 	var image = document.getElementById('upload_image1');
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
+
+/*for alert message */
+window.onload = function() {
+    create_blogpost_popup = document.getElementById("popup");
+    document.getElementById("popup").style.display = "block";
+    //Set timeout to hide popup after 5 seconds
+    setTimeout(function() {
+        create_blogpost_popup.style.display = "none";
+    }, 5000);
+  };

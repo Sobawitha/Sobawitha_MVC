@@ -24,6 +24,22 @@ else if($_SESSION['user_flag'] == 5){
     require APPROOT . '/views/Agri_officer/Agri_officer/Officer_Sidebar.php';
 }?>
 
+<!-- popup alert -->
+<?php
+if(isset($_SESSION['alert_message'])){
+    
+?>
+<!-- HTML code for the popup message -->
+<div id="popup">
+  <p><?php echo $_SESSION['alert_message']?></p>
+</div>
+
+<?php
+unset($_SESSION['alert_message']);
+}
+?>
+
+
 <?php
 function setColor($type){
     if($type == 'order_status_product_availability') return 'set-purple';
@@ -128,7 +144,8 @@ function setColor($type){
 
                         <div class="footer">
                         <?php if($complaint->current_status == 1){?>
-                                <span onclick="updatepopUpOpen(17,'thilina@gmail.com','order_status_product_availability','abc','def')"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span>
+                                <!-- <span onclick="updatepopUpOpen(17,'thilina@gmail.com','order_status_product_availability','abc','def')"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span> -->
+                                <span onclick="updatepopUpOpen(<?php echo $complaint->complaint_id;?>,`<?php echo $complaint->email;?>`,`<?php echo $complaint->type;?>`,`<?php echo $complaint->subject;?>`,`<?php echo $complaint->message;?>`)"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span>
                                 <i class="fa-solid fa-trash" id="deletebtn" onclick="popUpOpen(<?php echo $complaint->complaint_id?>)"></i><span class="delete">Delete</span>
                             <?php
                         }

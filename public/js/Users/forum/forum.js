@@ -140,3 +140,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 });
 
+/*for alert message */
+window.onload = function() {
+    create_blogpost_popup = document.getElementById("popup");
+    document.getElementById("popup").style.display = "block";
+    //Set timeout to hide popup after 5 seconds
+    setTimeout(function() {
+        create_blogpost_popup.style.display = "none";
+    }, 5000);
+  };
+
+

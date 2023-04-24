@@ -27,14 +27,14 @@ function popUpOpen(id) {
     
 }
 
-function updatepopUpOpen(id,email, type, subject, help) {
+function updatepopUpOpen(id,email, type, subject,help) {
     const updatePopup = document.getElementById('updatePopup');
     document.getElementById('closebtn').addEventListener('click',() => updatePopup.close());
     updatePopup.showModal();
     document.getElementById('updatebutton').value=id;
-    document.getElementById('email').placeholder=title;
-    document.getElementById('type').placeholder=type;
-    document.getElementById('subject').placeholder=subject;
+    document.getElementById('email').value=email;
+    document.getElementById('type').value=type;
+    document.getElementById('subject').value=subject;
     
   if(type == 'order_status_product_availability'){
       document.getElementById('order_status').checked = true;
@@ -58,3 +58,13 @@ function updatepopUpOpen(id,email, type, subject, help) {
   document.getElementById('updatebutton').value=id;
     
 }
+
+/*for alert message */
+window.onload = function() {
+    create_blogpost_popup = document.getElementById("popup");
+    document.getElementById("popup").style.display = "block";
+    //Set timeout to hide popup after 5 seconds
+    setTimeout(function() {
+        create_blogpost_popup.style.display = "none";
+    }, 5000);
+  };

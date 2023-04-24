@@ -35,10 +35,13 @@ class complaint extends Controller
             ];
 
             if ($this->complaint_model->add_complaint($data)) {
+                $_SESSION['alert_message'] = 'Your complaint has been successfully added!';
                 redirect('complaint/display_all_complaint');
             }
-
-            
+            else{
+                $_SESSION['alert_message'] = 'Your complaint fail to add!';
+                redirect('complaint/display_all_complaint');
+            }    
         }
 
         else{
@@ -114,7 +117,12 @@ class complaint extends Controller
                 'discription'  => $_POST['discription'],
                 'complaint_id' =>$_POST['updatecomplaint']
             ];
-            $this->complaint_model->update_complaint($data);
+            if($this->complaint_model->update_complaint($data)){
+                $_SESSION['alert_message'] = 'Your complaint has been successfully updated!';
+            }
+            else{
+                $_SESSION['alert_message'] = 'Your complaint updated has been failed!';
+            }
         }
         redirect('complaint/display_all_complaint');
     }

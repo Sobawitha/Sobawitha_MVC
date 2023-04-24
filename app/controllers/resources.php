@@ -20,6 +20,7 @@ class resources extends Controller
 
         $resources = $this->resources_model->display_all_resources($start_from,$num_per_page); //data object array
         $best_resources = $this->resources_model->find_populerfeed();
+        $row_count = $this->resources_model->count_num_of_rows()->no_of_rows;
 
         // print_r($resources);
         // die();
@@ -33,6 +34,7 @@ class resources extends Controller
                     'search_text'=>($_POST['search_text']),
                     'resource_page_display_message'=> 'match not found...',
                     'best_resources' => $best_resources,
+                    'row_count' => $row_count
                 ];
             }
             else{
@@ -40,6 +42,7 @@ class resources extends Controller
                     'search_text'=>'search by key-word',
                     'resource_page_display_message'=> 'match not found...',
                     'best_resources' => $best_resources,
+                    'row_count' => $row_count
                 ];
             }
             
@@ -51,6 +54,7 @@ class resources extends Controller
                 'resource_page_display_message'=> '',
                 'best_resources' => $best_resources,
                 'resources' => $resources,
+                'row_count' => $row_count
             ];
             $this->view('Agri_officer/Resources/v_resources', $data);
         }

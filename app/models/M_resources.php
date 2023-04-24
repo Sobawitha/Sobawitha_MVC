@@ -10,7 +10,7 @@ class M_resources
     }
     
     public function count_num_of_rows(){
-        $this->db->query('SELECT count(post_id) FROM view_post ');
+        $this->db->query('SELECT count(post_id) as no_of_rows FROM view_post ');
         return $this->db->single();
     }
 
