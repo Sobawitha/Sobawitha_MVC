@@ -281,3 +281,133 @@ input[type=radio]{
  
 }
 
+/* View More Comp Popup */
+.feedback-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  font-family: Arial, sans-serif;
+}
+
+#feedback-details-action::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+
+#feedback-details::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+
+.feedback-details h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.feedback-details p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+  
+}
+
+.feedback-details label {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.feedback-details .form-group {
+  margin-bottom: 20px;
+  width: 600px;
+}
+
+.feedback-details input[type="text"],
+.feedback-details textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #555;
+}
+
+#clc {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6vh; /* set a height for the container to vertically center the button */
+}
+
+#feed-review-btn {
+  background-color: #06543c;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#feed-review-btn:hover {
+  background-color: #06543c;
+  opacity: 50%;
+}
+
+#reject-btn {
+  background-color: crimson;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#reject-btn:hover {
+  background-color: crimson;
+  opacity: 50%;
+}
+
+
+
+#clc:hover {
+  background-color: #555;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-group button {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.btn {
+  width: 120px;
+  height: 40px;
+}
+

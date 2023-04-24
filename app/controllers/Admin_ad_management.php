@@ -30,26 +30,93 @@
 
 public function ad_management_view()
 {
+  $records_per_page = 4;
 if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $filter_type = trim($_POST['ad_type']);
-        $products = $this->adminAdMgmtModel->display_all_ads($filter_type); //data object array
 
-        
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($current_page - 1) * $records_per_page;
+
+        $products = $this->adminAdMgmtModel->display_all_ads($filter_type, $records_per_page, $offset); //data object array
+     
+        $total_records = $products['total_rows'];
+        // echo "<script>";
+        // echo "alert('" . $total_records . "')";
+        // echo "</script>";
+       $total_pages = ceil($total_records / $records_per_page);
+     
+       if(empty($products['total_rows'])){
+              
         $data=[
-            'products' =>  $products,
-            'search' => "Search by title of the advertisement"
-        ];
+          'products' =>  $products['products'],
+          'search' => "Search by title of the advertisement",
+          'emptydata' => "No Advertisements to Show...",
+          
+          'pagination' => [
+             'total_records' => $total_records,
+             'records_per_page' => $records_per_page,
+             'total_pages' => $total_pages,
+             'current_page' => $current_page,
+            ],
+          ];
+
+        }else{
+          $data=[
+            'products' =>  $products['products'],
+            'search' => "Search by title of the advertisement",
+            'emptydata' => '',
+            
+            'pagination' => [
+               'total_records' => $total_records,
+               'records_per_page' => $records_per_page,
+               'total_pages' => $total_pages,
+               'current_page' => $current_page,
+              ],
+            ];
+          }
         $this->view('Admin/AdminAdManage/v_ad_manage_pending', $data);
 
     }else{
+      $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+      $offset = ($current_page - 1) * $records_per_page; 
+       
+      $products = $this->adminAdMgmtModel->display_all_ads('', $records_per_page, $offset); 
+      $total_records = $products['total_rows'];
+      $total_pages = ceil($total_records / $records_per_page); 
         $products = $this->adminAdMgmtModel->display_all_ads(); //data object array
-        $data = [
-            'products' =>  $products,
-            'search' => "Search by title of the advertisement"
-        ]; 
-         
+  
+        if(empty($products['total_rows'])){
+          $data=[
+            'products' =>  $products['products'],
+            'search' => "Search by title of the advertisement",
+            'emptydata' => "No Advertisements to Show...",
+            
+            'pagination' => [
+               'total_records' => $total_records,
+               'records_per_page' => $records_per_page,
+               'total_pages' => $total_pages,
+               'current_page' => $current_page,
+              ],
+            ];
+          
+          }else{
+            $data=[
+              'products' =>  $products['products'],
+              'search' => "Search by title of the advertisement",
+              'emptydata' => '',
+              
+              'pagination' => [
+                 'total_records' => $total_records,
+                 'records_per_page' => $records_per_page,
+                 'total_pages' => $total_pages,
+                 'current_page' => $current_page,
+                ],
+              ]; 
+
+          }
+       
         $this->view('Admin/AdminAdManage/v_ad_manage_pending',$data);
 
     }   
@@ -102,29 +169,80 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
 // }
 public function  adminSearchAd()
 {
+  $records_per_page = 4;
   if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
-    $products = $this->adminAdMgmtModel->display_all_ads();
-    $data=[                      
-      'products'=>$products,
-      'search'=>"Search by title of the advertisement",
-      'message' => ''
-    ];
 
+    $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $offset = ($current_page - 1) * $records_per_page;
+
+    $products = $this->adminAdMgmtModel->display_all_ads('', $records_per_page, $offset);
+    
+    $total_records = $products['total_rows'];
+    $total_pages = ceil($total_records / $records_per_page);
+
+    if(empty($products['total_rows'])) {
+      $data=[
+        'products' =>  $products['products'],
+        'search' => "Search by title of the advertisement",
+        'message' => '',
+        'emptydata' => "No Advertisements to Show...",
+        
+        'pagination' => [
+           'total_records' => $total_records,
+           'records_per_page' => $records_per_page,
+           'total_pages' => $total_pages,
+           'current_page' => $current_page,
+          ],
+        ];
+      }else{
+        $data=[
+          'products' =>  $products['products'],
+          'search' => "Search by title of the advertisement",
+          'message' => '',
+          'emptydata' => '',
+          
+          'pagination' => [
+             'total_records' => $total_records,
+             'records_per_page' => $records_per_page,
+             'total_pages' => $total_pages,
+             'current_page' => $current_page,
+            ],
+          ];
+        }
+        
     if($_SERVER['REQUEST_METHOD']=='GET'){
       $_GET=filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
       $search=trim($_GET['search']);
 
       if (!empty($search)) {
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($current_page - 1) * $records_per_page;
+
         $products= $this->adminAdMgmtModel->getSearchAds($search);
+
+        $total_records = $products['total_rows'];
+        $total_pages = ceil($total_records / $records_per_page);
         $message = '';
-        if (empty($products)) {
+
+        if (empty($products['total_rows'])) {
             $message = "No ads found on title: $search";
         }
-        $data['products'] = $products;
-        $data['search'] = $search;
-        $data['message'] = $message;
-      }
+        $data=[
+          'products' =>  $products['ads'],
+          'search' => $search,
+          'message' => $message,
+          'emptydata' => '',
+          
+          'pagination' => [
+             'total_records' => $total_records,
+             'records_per_page' => $records_per_page,
+             'total_pages' => $total_pages,
+             'current_page' => $current_page,
+            ],
+          ];
+          $this->view('Admin/AdminAdManage/v_ad_manage_pending',$data);
+        }
     }
     $this->view('Admin/AdminAdManage/v_ad_manage_pending',$data);
 
@@ -132,6 +250,48 @@ public function  adminSearchAd()
     redirect('Login/login');  
   }
 }
+ 
+public function  adminReviewAd($product_id,$category = null)
+{
+  if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
+  if (isset($_GET['category'])) {
+    $category = $_GET['category'];
+  }
+  
+      $solveStatus= $this->adminAdMgmtModel->reviewAd($product_id,$category);
+
+ 
+      redirect('Admin_ad_management/ad_management_view');
+   
+  }else{
+    redirect('Login/login');  
+  }
+}
+
+public function adminRejectAd($product_id,$category = null)
+{
+  if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
+     if (isset($_GET['category'])) {
+      $category = $_GET['category'];
+     } 
+
+    //  if (isset($_GET['reason'])) {
+    //   $reason = $_GET['reason'];
+    //  } 
+
+      // // Retrieve the rejected reason using JavaScript
+      // $rejected_reason = $_POST['rejected_reason'];
+
+      // Call the model function with the retrieved reason
+      $solveStatus= $this->adminAdMgmtModel->rejectAd($product_id,$category);
+
+      redirect('Admin_ad_management/ad_management_view');
+   
+  }else{
+    redirect('Login/login');  
+  }
+}
+
 
 
 }
