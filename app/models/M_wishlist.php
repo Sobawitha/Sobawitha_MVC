@@ -53,7 +53,7 @@ class M_wishlist
     public function getAllItems()
     {
 
-        $this->db->query("SELECT wishlist.*,fertilizer.fertlizer_img,fertilizer.manufacturer,fertilizer.product_name,fertilizer.crop_type,fertilizer.price FROM fertilizer INNER JOIN wishlist ON wishlist.Product_id = fertilizer.Product_id WHERE wishlist.User_id = :user_id");
+        $this->db->query("SELECT wishlist.*,fertilizer.fertilizer_img,fertilizer.manufacturer,fertilizer.product_name,fertilizer.price FROM fertilizer INNER JOIN wishlist ON wishlist.Product_id = fertilizer.Product_id WHERE wishlist.User_id = :user_id");
         $this->db->bind(':user_id', $_SESSION['user_id']);
         return $this->db->resultSet();
 

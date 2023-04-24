@@ -28,7 +28,7 @@ class M_shopping_cart
     public function getAllItems(){
 
 
-        $this->db->query("SELECT  cart.*,fertilizer.product_name as product_name,fertilizer.price as product_price,fertilizer.fertlizer_img as product_img from cart INNER JOIN fertilizer ON fertilizer.Product_id = cart.Product_id WHERE cart.user_id = :user_id");
+        $this->db->query("SELECT  cart.*,fertilizer.product_name as product_name,fertilizer.price as product_price,fertilizer.fertilizer_img as product_img from cart INNER JOIN fertilizer ON fertilizer.Product_id = cart.Product_id WHERE cart.user_id = :user_id");
         $this->db->bind(':user_id',$_SESSION['user_id']);
         $cart =  $this->db->resultSet();
         return $cart;

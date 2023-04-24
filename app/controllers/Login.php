@@ -95,12 +95,13 @@
                 redirect('Admin_dashboard/main_view');
             }
             else if($flag==2){
-                $_SESSION['position'] = "Seller";
-                redirect('dashboard/seller_dashboard');
-            }
-            else if($flag==3){
                 $_SESSION['position'] = "Buyer";
                 redirect('dashboard/buyer_dashboard');
+            }
+            else if($flag==3){
+                $_SESSION['position'] = "Seller";
+                
+                redirect('dashboard/seller_dashboard');
             }
             else if($flag==4){
                 $_SESSION['position'] = "Supplier";

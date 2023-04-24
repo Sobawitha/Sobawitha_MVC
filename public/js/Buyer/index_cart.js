@@ -1,10 +1,11 @@
 let val1 =  document.getElementById('increment');
 let val2 =  document.getElementById('decrement');
-
-
-
 let dlt = document.getElementById('cancel_order');
-console.log(dlt);
+let total_price = document.querySelector('.total_value');
+
+
+
+
 
 
 dlt.addEventListener("click",function(e) {
@@ -61,6 +62,7 @@ val1.addEventListener('click', function(e) {
       
            val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
 
+
        }
        
        let xhr =  new XMLHttpRequest();
@@ -105,6 +107,7 @@ val2.addEventListener('click',function(e) {
        price = val*price;
       
        val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
+       
    }
 
     

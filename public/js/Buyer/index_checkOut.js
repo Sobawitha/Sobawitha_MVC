@@ -50,6 +50,10 @@ checkOutBtn.addEventListener("click", async function () {
   console.log(session);
   // Redirect to Stripe Checkout
   stripe = new Stripe('pk_test_51MskWIIz6Y8hxLUJvtpGYLQGyi2MmZsfsPcVc989vHZ3HN6udWndjzWDkqP1QllvJRjzDUNmwapKzmyqzTYhKVc600LYFgrx7h');
-  stripe.redirectToCheckout({sessionId: session.id});
+  stripe.redirectToCheckout({
+    sessionId: session.id,
+    
+  });
+  
 
 });

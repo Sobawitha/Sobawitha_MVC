@@ -3,15 +3,17 @@
 <script src="../js/Buyer/index_cart.js" defer></script>
 <script src="../js/Buyer/index_checkOut.js" defer></script>
 <?php
+$sum = 0;
 if ($_SESSION['user_flag'] == 1) {
     require APPROOT . '/views/Admin/Admin/admin_topnavbar.php';
     require APPROOT . '/views/Admin/Admin/admin_Sidebar.php';
 } else if ($_SESSION['user_flag'] == 2) {
-    require APPROOT . '/views/Seller/Seller/seller_topnavbar.php';
-    require APPROOT . '/views/Seller/Seller/seller_Sidebar.php';
-} else if ($_SESSION['user_flag'] == 3) {
+    
     require APPROOT . '/views/Buyer/Buyer/buyer_topnavbar.php';
     require APPROOT . '/views/Buyer/Buyer/buyer_Sidebar.php';
+} else if ($_SESSION['user_flag'] == 3) {
+    require APPROOT . '/views/Seller/Seller/seller_topnavbar.php';
+    require APPROOT . '/views/Seller/Seller/seller_Sidebar.php';
 } else if ($_SESSION['user_flag'] == 4) {
     require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php';
     require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php';
@@ -56,7 +58,7 @@ foreach($data['cart'] as $cart):{
                                         </td>
                                         <td><span class="price"><?php echo $cart->product_price ?></span></td>
                                         <td class="unit"><div class = "input-group-text"  data-id="<?php echo $cart->Product_id ?>"><button id = "decrement">-</button><input type="text" class = "input-qty "value = "<?php echo $cart->quantity?>" /><button id = "increment">+</button></div></td>
-                                        <td><span class="tot_price"><?php echo $cart->product_price * $cart->quantity ?></span></td>
+                                        <td><span class="tot_price"><?php echo $cart->product_price * $cart->quantity; $sum += $cart->product_price*$cart->quantity ?></span></td>
 
                                 </div>
 
@@ -74,8 +76,8 @@ foreach($data['cart'] as $cart):{
         <div class="section_3">
                 <div class="total_price_section">
                         <hr id="cart_toatal_section_hr">
-                        <span class="cart_total">Cart total <span class="total_value">Rs.<?php echo $cart->product_price * $cart->quantity ?></span></span><br>
-                        <span class="discription">Shipping and taxes calculate at checkout.</span>
+                        <span class="cart_total">Cart total <span class="total_value">Rs.<?php echo $sum ?></span></span><br>
+                        <span class="discription">Shipping and taxes calculate at checkout.</span><br />
                         <input type="checkbox" name = "agree-terms" id  = "checkvalue"><label class="agreement">I agree for <span class="term">terms & conditions</span></label></input><br><br>
                         <button class="checkout">checkout</button><br>
                         <button class="paypal">Paypal</button><br>
