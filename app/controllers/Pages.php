@@ -21,6 +21,10 @@ class Pages extends Controller {
         $this->view('Users/component/v_product_page', $data);
     }
 
+    public function raw_material_product_page(){
+        $data = [];
+        $this->view('Users/component/v_raw_material_product_page', $data);
+    }
     public function select_user_for_login(){
         $data=[];
         $this->view('Users/component/select_user_for_login', $data);

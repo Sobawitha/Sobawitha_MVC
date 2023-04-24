@@ -1,9 +1,9 @@
 
 
 
-<?php require APPROOT.'/views/Users/component/Header.php'?>
-<?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
-<?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
+<?php require APPROOT . '/views/Users/component/Header.php'?>
+<?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
+<?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
 <link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_advertisment.css"></link>
 <div class="body">
     <div class="section_1">
@@ -14,43 +14,81 @@
           &nbsp<div class="add_container">
             <div class="title">Add advertisment</div>
             <div class="add_content">
-              <form action="#">
+              <form action="<?php echo URLROOT ?>/supplier_ad_management/add_advertisment" method="POST" enctype="multipart/form-data">
 
                 <div class="advertisment-details">
-                <i class="fa-solid fa-image" id="uploard_image"></i>
+                  <div class="post-image">
+                    <img src="" alt="" id="image_placeholder" style="display: none;">
+                  </div>
+                  <div class="right">
+                      <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn" onclick="toggleBrowse()">
+                      <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn" style="display:none;" onclick="removeImage()">
+                      <input type="file" name="image" id="image" style="display: none;">
+                  </div>
+
                   <!-- <input type="file"></input> -->
                   <br><br>
                   <div class="input-box">
-                    <span class="details">Name of the product</span>
-                    <input type="text" placeholder="Enter name of the product" required>
+                    <span class="details">Name of the raw material</span>
+                    <input type="text" placeholder="Enter name of the raw material" name="name" required>
                   </div>
-                  
-                  <div class="input-box">
-                    <span class="details">Category</span>
+
+                  <div class="input-box unit-price">
+                    <span class="details">Unit Price (Rs.)</span>
+                    <input type="text" placeholder="Enter unit price" name="price" required>
+                    <span class="details">per</span>
+                    <input type="text" placeholder="Enter amount" required>
                     <select name="category" id="category">
-                              <option value="Paddy">Paddy</option>
-                              <option value="Vegetables">Vegetables</option>
-                              <option value="Tea">Tea</option>
-                              <option value="Coconut">Coconut</option>
-                              <option value="Flowers">Flowers</option>
-                              <option value="Rubber">Rubber</option>
-                              <option value="Othercrops">Other Crops</option>
+                              <option value="mg">mg</option>
+                              <option value="g">g</option>
+                              <option value="kg">kg</option>
+                              <option value="ml">ml</option>
+                              <option value="l">l</option>
+                              <option value="packet">packets</option>
+                              <option value="others">others</option>
                     </select>
-                </div>
+                  </div>
+
+                  <!-- <div class="input-box unit">
+                    <span class="details">per</span>
+                    <select name="category" id="category">
+                              <option value="mg">mg</option>
+                              <option value="g">g</option>
+                              <option value="kg">kg</option>
+                              <option value="ml">ml</option>
+                              <option value="l">l</option>
+                              <option value="packet">packets</option>
+                              <option value="others">others</option>
+                    </select>
+                </div> -->
 
                   <div class="input-box">
-                    <span class="details">Cirtificate Number</span>
-                    <input type="text" placeholder="" required>
+                    <span class="details">Type</span>
+                    <input type="text" placeholder="" name="type" required>
                   </div>
-                  <div class="input-box">
-                    <span class="details">Manufacture</span>
-                    <input type="text" placeholder="" required>
+                  <div class="input-box available-quantity">
+                    <span class="details">Available quantity</span>
+                    <input type="text" placeholder="" name="quantity" required>
+                    <select name="category" id="category">
+                              <option value="mg">mg</option>
+                              <option value="g">g</option>
+                              <option value="kg">kg</option>
+                              <option value="ml">ml</option>
+                              <option value="l">l</option>
+                              <option value="packet">packets</option>
+                              <option value="others">others</option>
+                    </select>
                   </div>
+
                   <div class="input-box">
-                    <span class="details">Discription</span>
-                    <input type="text" placeholder="" required>
+                    <span class="details">Additional information</span>
+                    <textarea
+                      id="additional-info"
+                      name="additional-info"
+                      style="height: 200px"
+                    ></textarea>
                   </div>
-                  <div class="input-box">
+                  <!-- <div class="input-box">
                     <span class="details">Price</span>
                     <input type="text" placeholder="" >
                   </div>
@@ -89,12 +127,12 @@
                               <option value="vavuniya">Vavuniya</option>
 
                           </select>
-                  </div>
+                  </div> -->
                 </div>
 
 
                 <div class="input-box">
-                  <input type="submit" value="Publish" id="publish_btn">
+                  <input type="submit" value="Publish" id="publish_btn" name="add" >
                 </div>
 
               </form>
@@ -107,4 +145,9 @@
 
     </div>
 </div>
+
+
+<!-- javascript for posts -->
+<script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/components/posts/posts.js" ></script>
+
 

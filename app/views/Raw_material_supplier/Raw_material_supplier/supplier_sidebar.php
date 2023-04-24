@@ -1,5 +1,5 @@
 <!--sidebar-->
-<link rel="stylesheet" href="../css/Users/component/sidebar.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Users/component/sidebar.css"></link>
 <script src="../js/component/sidebar.js"></script> 
 
 <?php

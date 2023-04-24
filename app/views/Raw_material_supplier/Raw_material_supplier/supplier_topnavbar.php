@@ -1,6 +1,6 @@
     
 <!--top navbar-->
-<link rel="stylesheet" href="../css/Users/component/topnavbar.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Users/component/topnavbar.css"></link>
 <script src="../js/Users/component/topnavbar.js"></script> 
 
 <?php

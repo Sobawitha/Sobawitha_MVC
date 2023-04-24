@@ -10,6 +10,7 @@ require_once 'helpers/validate.php';
 
 require_once 'helpers/file_upload_helper.php';
 require_once 'helpers/image_upload_helper.php';
+require_once 'helpers/ImageUpload_Helper.php';
 
 //load configuration files
 require_once 'config/Config.php';

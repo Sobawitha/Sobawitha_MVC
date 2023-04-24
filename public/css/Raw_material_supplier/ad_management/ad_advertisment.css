@@ -175,11 +175,64 @@ form .user-details .input-box{
 }
 
 
+/* changed on 23.02.21 */
+
+.unit-price {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.available-quantity {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.input-box textarea {
+  width: 100%;
+}
+
+form .advertisment-details .right img {
+  width: 40px;
+  height: 40px;
+}
 
 
 
 
 
+ /* aded from simpleepic */
+
+ /* .post-container .upper {
+  display: flex;
+  flex-direction: row;
+} */
+
+/* .post-container .upper .left {
+  width: 100%;
+} */
+
+form .advertisment-details .right {
+  width: fit-content;
+  opacity: 0.8;
+}
+
+form .advertisment-details .right:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+form .advertisment-details .right img {
+  width: 40px;
+  height: 40px;
+}
+
+form .advertisment-details .post-image img {
+  width: 100%;
+  height: 300px;
+  border-radius: 5px;
+}
 
 
 
