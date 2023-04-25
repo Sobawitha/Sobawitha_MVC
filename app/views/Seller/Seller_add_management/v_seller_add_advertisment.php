@@ -59,7 +59,7 @@
                     <input type="text" name="quantity" placeholder="" required>
                   </div>
 
-                  <div class="input-box">
+                  <!-- <div class="input-box">
                     <span class="details">District</span>
                     <select name="location" id="location">
                               <option value="Ampara">Ampara</option>
@@ -89,7 +89,7 @@
                               <option value="Vavuniya">Vavuniya</option>
 
                           </select>
-                  </div>
+                  </div> -->
                 </div>
 
 
