@@ -9,11 +9,11 @@ class dashboard extends Controller{
     public function dashboard(){
         if($_SESSION['user_flag'] == 1){
             redirect('dashboard/Admin_dashboard');
-        }
-        else if($_SESSION['user_flag'] == 2){
+        }                                                
+        else if($_SESSION['user_flag'] == 3){
             redirect('dashboard/seller_dashboard');
         }
-        else if($_SESSION['user_flag'] == 3){
+        else if($_SESSION['user_flag'] == 2){
             redirect('dashboard/buyer_dashboard');
         }
         else if($_SESSION['user_flag'] == 4){
