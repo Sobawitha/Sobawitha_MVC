@@ -67,7 +67,7 @@
 
                         <?php
                                 foreach($data['pending_advertisements'] as $pending_fertilizer_advertisement):?>
-
+                                
                                 <tr class="sm_view">
                                 <div class="sm_view_detail">
                                         <td><img src="./../public/upload/fertilizer_images/<?php echo $pending_fertilizer_advertisement->fertilizer_img?>" alt="fertilizer_image"  id="fertilizer_img"></td>

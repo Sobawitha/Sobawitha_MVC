@@ -34,7 +34,7 @@
     }
 
     public function display_pending_advertisement(){
-        $this->db->query('SELECT * FROM fertilizer WHERE created_by =:userid');
+        $this->db->query('SELECT * FROM fertilizer WHERE created_by =:userid AND current_status = 0');
         $this->db->bind(':userid', $_SESSION['user_id']);
 
         return $this->db->resultSet();
