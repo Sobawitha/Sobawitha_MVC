@@ -58,7 +58,7 @@
                                 <td>Category</td>
                                 <td>Certificate No</td>
                                 <td>Manufacture</td>
-                                <td>Location</td>
+                                <!-- <td>Location</td> -->
                                 <td>Quantity</td>
                                 <td>Price</td>
                                 <td>Options</td>
@@ -76,7 +76,7 @@
                                         <td><span class="certificate No<"><?php echo $pending_fertilizer_advertisement->certificate_no ?></span></td>
                                         <td><span class="manufacture"><?php echo $pending_fertilizer_advertisement->manufacturer ?></span></td>
 
-                                        <td><span class="location"><?php echo $pending_fertilizer_advertisement->location ?></span></td>
+                                        <!-- <td><span class="location"><?php echo $pending_fertilizer_advertisement->location ?></span></td> -->
                                         
                                         <td class="quantity"><span class="value"><?php echo $pending_fertilizer_advertisement->quantity ?></span></td>
                                         <td><span class="price">Rs. <?php echo $pending_fertilizer_advertisement->price ?></span></td>
