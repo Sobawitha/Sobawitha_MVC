@@ -88,6 +88,9 @@ tr{
   height:60px;
 }
 
+td{
+  text-align:center;
+}
 .sm_view{
   font-size: 14px;
   border:1px solid lavender;

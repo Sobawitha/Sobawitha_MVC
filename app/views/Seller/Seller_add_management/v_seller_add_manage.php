@@ -55,7 +55,7 @@
                         <tr class="table_head">
                                 <td>Image</td>
                                 <td>Title</td>
-                                <td>Category</td>
+                                <td>Crop Type</td>
                                 <td>Certificate No</td>
                                 <td>Manufacture</td>
                                 <!-- <td>Location</td> -->
@@ -72,12 +72,9 @@
                                 <div class="sm_view_detail">
                                         <td><img src="./../public/upload/fertilizer_images/<?php echo $pending_fertilizer_advertisement->fertilizer_img?>" alt="fertilizer_image"  id="fertilizer_img"></td>
                                         <td><span class="title"><?php echo $pending_fertilizer_advertisement->product_name ?></span></td>
-                                        <td><span class="category"><?php echo $pending_fertilizer_advertisement->category?></span></td>
-                                        <td><span class="certificate No<"><?php echo $pending_fertilizer_advertisement->certificate_no ?></span></td>
-                                        <td><span class="manufacture"><?php echo $pending_fertilizer_advertisement->manufacturer ?></span></td>
-
-                                        <!-- <td><span class="location"><?php echo $pending_fertilizer_advertisement->location ?></span></td> -->
-                                        
+                                        <td><span class="croptype"><?php echo $pending_fertilizer_advertisement->crop_type?></span></td>
+                                        <td><span class="certificate No<"><?php echo $pending_fertilizer_advertisement->registration_no ?></span></td>
+                                        <td><span class="manufacture"><?php echo $pending_fertilizer_advertisement->manufacturer ?></span></td>                                        
                                         <td class="quantity"><span class="value"><?php echo $pending_fertilizer_advertisement->quantity ?></span></td>
                                         <td><span class="price">Rs. <?php echo $pending_fertilizer_advertisement->price ?></span></td>
 
