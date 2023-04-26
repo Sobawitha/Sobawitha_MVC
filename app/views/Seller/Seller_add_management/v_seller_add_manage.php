@@ -2,7 +2,7 @@
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_sidebar.php'?>
 <link rel="stylesheet" href="../css/seller/seller_ad_management.css"></link>
-<script src="../js/Seller/add_advertisment.js"></script>
+<script src="../js/Seller/AdManage/add_advertisment.js"></script>
 
 
 <body >
@@ -19,13 +19,13 @@
 
         
         <div class="button_section">
-          <form method="POST">
+          <form class="searchForm" action="<?php echo URLROOT;?>/seller_ad_management/sellerSearchAd" method="GET">
           <div class="search_bar">
               <div class="search_content">
                   
-                      <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" " require/></span>
+                      <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/></span>
                       <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                      <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                      <button type="submit" class="search_btn" onclick="open_cancel_btn()"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                   
               </div>
           </div>
@@ -36,37 +36,42 @@
           </div>
         </div>
 
-                <div class = "filter_and_add">
-                        <div class="sm_filter_section">
-                                <label for="ongoing_progress__order" id="sm_filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing" checked>Pending</label>
-                                <label for="ongoing_ready_order" id="sm_filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Complete</label>
-                                <label for="cancel_order" id="sm_filter_label"><input type="radio" id="cancel" name="order_type" value="cancel">Cancel</label>
-                        </div>
+        <?php if(empty($data['message'])){ ?>
+                <?php if($data['search'] ==='Search by product title'): ?>
+                <div class = "filter_section">
+                <div class="radio-buttons"  id="radioButtons">
+                <form method ="POST" action="<?php echo URLROOT?>/seller_ad_management/View_listing" id="filter_form">        
+                                <label for="pending_ads" id="filter_label"> <input type="radio" id="pending_ads" name="ad_type" onclick="javascript:submit()" value="pending_ads" <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'pending_ads') echo ' checked="checked"';?> checked>Pending</label>
+                                <label for="published_ads" id="filter_label"> <input type="radio" id="published_ads" name="ad_type" onclick="javascript:submit()" value="published_ads" <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'published_ads') echo ' checked="checked"';?>>Published</label>
+                                <label for="rejected_ads" id="filter_label"> <input type="radio" id="rejected_ads" name="ad_type" onclick="javascript:submit()" value="rejected_ads" <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'rejected_ads') echo ' checked="checked"';?>>Rejected</label>
+                                
+                </div>
+                </div>
 
-
-
+                <?php endif?> 
+                <span class="error_msg"><?php echo $data['emptydata'];?></span>
 
                         
-                </div>
+                
                 <div class="sm_view_list">
                 <div class="views">
 
                 <table class="sm_view_list_table">
+                   <?php if(empty($data['emptydata'])){ ?>   
                         <tr class="table_head">
-                                <td>Image</td>
+                                <td>Main Image</td>
                                 <td>Title</td>
                                 <td>Crop Type</td>
-                                <td>Certificate No</td>
-                                <td>Manufacture</td>
-                                <!-- <td>Location</td> -->
+                                <td>Registration No</td>
+                                <td>Manufacturer</td>
                                 <td>Quantity</td>
-                                <td>Price</td>
+                                <td>Unit Price</td>
                                 <td>Options</td>
                                 <td></td>
                         </tr>
-
+                        <?php    }  ?> 
                         <?php
-                                foreach($data['pending_advertisements'] as $pending_fertilizer_advertisement):?>
+                                foreach($data['ads'] as $pending_fertilizer_advertisement):?>
                                 
                                 <tr class="sm_view">
                                 <div class="sm_view_detail">
@@ -111,6 +116,10 @@
                         </tr>
 
                         <?php endforeach;?>
+
+                        <?php }else{ ?>
+                    <span class="error_msg"><?php echo $data['message'];?></span>
+                    <?php    }  ?>
                                 
                 </table>
 
@@ -126,7 +135,7 @@
 </div>
 
 
-<?php require APPROOT.'/views/Users/component/footer.php'?>
+
 
 
 

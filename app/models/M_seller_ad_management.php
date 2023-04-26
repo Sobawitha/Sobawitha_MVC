@@ -33,11 +33,42 @@
 
     }
 
-    public function display_pending_advertisement(){
-        $this->db->query('SELECT * FROM fertilizer WHERE created_by =:userid AND current_status = 0');
-        $this->db->bind(':userid', $_SESSION['user_id']);
+    public function display_advertisement($filter_type,$user_id){
+        if(isset($filter_type) && !empty($filter_type)){
+            if ($filter_type == 'pending_ads'){
 
-        return $this->db->resultSet();
+                $this->db->query("SELECT * FROM fertilizer WHERE created_by =:userid AND current_status = 0");
+                $this->db->bind(':userid', $_SESSION['user_id']);
+
+                $result=$this->db->resultSet();
+                return $result;
+            }
+            if ($filter_type == 'published_ads'){
+                $this->db->query("SELECT * FROM fertilizer WHERE created_by =:userid AND current_status = 1");
+                $this->db->bind(':userid', $_SESSION['user_id']);
+
+                $result=$this->db->resultSet();
+                return $result;
+            }
+            if ($filter_type == 'rejected_ads'){                
+               
+                $this->db->query("SELECT * FROM fertilizer WHERE created_by =:userid AND current_status = 2");
+                $this->db->bind(':userid', $_SESSION['user_id']);
+
+                $result=$this->db->resultSet();
+                return $result;
+            }
+            
+        } else {            
+            $this->db->query("SELECT * FROM fertilizer WHERE created_by =:userid AND current_status = 0");
+            $this->db->bind(':userid', $_SESSION['user_id']);
+
+            $result=$this->db->resultSet();
+            return $result;
+        }
+
+
+        
     }
 
 
@@ -65,6 +96,20 @@
         $row=$this->db->single();
         return $row->average_rating;
     }
+
+    public function getSearchAds($userid, $search)
+{
+    $searchTerm = "%".str_replace(" ","%",$search)."%"; // Replace spaces with % for wildcard search
+    $this->db->query("SELECT * FROM fertilizer WHERE LOWER(REPLACE(product_name, ' ', '')) LIKE LOWER(REPLACE(:search_term, ' ', '')) AND created_by = :user_id");
+    $this->db->bind(':search_term', $searchTerm);  
+    $this->db->bind(':user_id',$userid);  
+    $result=$this->db->resultSet();
+    return $result;   
+}
+
+    
+    
+
 
 
 }

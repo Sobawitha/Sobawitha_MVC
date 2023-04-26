@@ -212,28 +212,6 @@ td{
  cursor:pointer;
 }
 
-
-/*filter_section*/
-
-.sm_filter_section{
-  padding-top:30px;
-  font-size:13px;
-  font-weight: bold;
-  color:rgb(174, 169, 128);
-}
-
-#sm_filter_label{
-  margin-right:20px;
-}
-
-#sm_filter_label:hover{
-  cursor:pointer;
-}
-
-input[type=radio]{
-  accent-color: crimson;
-}
-
 .button_section{
   display:grid;
   grid-template-columns: 80% 20%;;
@@ -260,3 +238,32 @@ input[type=radio]{
   text-decoration: none;
   padding-top: 50px;
 } */
+
+/* error messages */
+.error_msg{
+  font-size: 25px;
+  font-weight: 500px;
+  text-align: center;
+}
+
+/*filter_section*/
+
+.filter_section{
+  padding-top:30px;
+  font-size:13px;
+  font-weight: bold;
+  color:rgb(174, 169, 128);
+}
+
+#filter_label{
+  margin-right:20px;
+}
+
+#filter_label:hover{
+  cursor:pointer;
+}
+
+input[type=radio]{
+  accent-color: crimson;
+}
+

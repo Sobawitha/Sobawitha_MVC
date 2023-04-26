@@ -2,6 +2,8 @@
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_sidebar.php'?>
 <link rel="stylesheet" href="../css/seller/seller_add_advertisment.css"></link>
+<script src="../js/Seller/AdManage/add_advertisment.js"></script>
+
 <div class="body">
     <div class="section_1">
 

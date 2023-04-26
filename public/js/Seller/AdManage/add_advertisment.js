@@ -1,11 +1,14 @@
-function open_cansel_btn(){
-    document.getElementById("cansel").style.display='block';
-}
-
-function clear_search_bar(){
-    document.querySelector(".search_cont").value='';
-    document.getElementById("cansel").style.display='none';
-}
+alert();
+function open_cancel_btn(){
+    document.getElementById("cancel").style.display='block';
+  
+  }
+  
+  function clear_search_bar(){
+    document.getElementById("searchBar").value = "";
+    document.getElementById("cancel").style.display='none';
+  
+  }
 
 
 function popUpOpen(id) {

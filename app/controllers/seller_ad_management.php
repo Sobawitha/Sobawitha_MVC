@@ -6,21 +6,72 @@
     }
 
     public function View_listing(){
-        $pending_fertilizer_advertisments = $this->seller_ad_management_model->display_pending_advertisement();
-        $data = [
-            'pending_advertisements'=> $pending_fertilizer_advertisments,
-        ];
-        $this->view('Seller/Seller_add_management/v_seller_add_manage', $data);
-    }
+        $userid = $_SESSION['user_id'];
+        if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==3){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+           
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $filter_type = isset($_POST['ad_type']) ? trim($_POST['ad_type']) : '';
+
+           $ads = $this->seller_ad_management_model->display_advertisement($filter_type,$userid);
+       
+           if(empty($ads)){
+              
+            $data=[
+              'ads' =>  $ads,
+              'search' => "Search by product title",
+              'emptydata' => "No listings to Show...",
+              
+              ];
+       
+          
+            }else{
+                $data=[
+                    'ads' =>  $ads,
+                    'search' => "Search by product title",
+                    'emptydata' => '',
+                    
+                    ]; 
+            }
+            $this->view('Seller/Seller_add_management/v_seller_add_manage', $data);
+        }else{
+            $ads = $this->seller_ad_management_model->display_advertisement('',$userid);
+            if(empty($ads)){
+              
+                $data=[
+                  'ads' =>  $ads,
+                  'search' => "Search by product title",
+                  'emptydata' => "No listings to Show...",
+                  
+                  ];
+           
+              
+                }else{
+                    $data=[
+                        'ads' =>  $ads,
+                        'search' => "Search by product title",
+                        'emptydata' => '',
+                        
+                        ]; 
+                }
+                $this->view('Seller/Seller_add_management/v_seller_add_manage', $data);
+        
+        }
+    }else{
+        redirect('Login/login');  
+      }
+    
+}
 
     public function add_listing(){
-        
-
+        $userid = $_SESSION['user_id'];
+        if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==3){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $userid = $_SESSION['user_id'];
             $avg_rating = $this->seller_ad_management_model ->getAverageRating($userid);
+
             
 
             $data = [
@@ -80,7 +131,11 @@
             $this->view('Seller/Seller_add_management/v_seller_add_advertisment');
         }
 
-    }
+    }else{
+        redirect('Login/login');  
+      }
+
+}
 
     public function delete_advertisment(){
         if($_SERVER["REQUEST_METHOD"]== 'POST'){
@@ -99,6 +154,69 @@
         ];
         
         $this->view('Seller/Seller_add_management/v_seller_update_add',$data);
+    }
+
+    public function sellerSearchAd(){
+        
+        if (isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 3 ){
+            $userid = $_SESSION['user_id'];    
+
+        $ads = $this->seller_ad_management_model-> display_advertisement('',$userid);
+        if(empty($ads)){
+              
+            $data=[
+              'ads' =>  $ads,
+              'search' => "Search by product title",
+              'message' =>'',
+              'emptydata' => "No listings to Show...",
+              
+              ];
+       
+          
+            }else{
+                $data=[
+                    'ads' =>  $ads,
+                    'search' => "Search by product title",
+                    'message' =>'',
+                    'emptydata' => '',
+                    
+                    ]; 
+            }
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+        
+                $search = trim($_GET['search']);
+        
+                if (!empty($search)) {
+                  
+                    $ads = $this->seller_ad_management_model-> getSearchAds($userid,$search);
+                    
+                    $message = '';
+                   
+                  if (empty($ads)) {
+                    $message = "No listings found on title: $search";
+
+                  }
+        
+        
+                  $data = [
+                    'ads' =>  $ads,
+                    'search' =>  $search,
+                    'message' => $message,
+                    'emptydata' =>'',
+                    
+                  ];
+                  
+                
+                  $this->view('Seller/Seller_add_management/v_seller_add_manage', $data);
+                }
+              }
+        
+              $this->view('Seller/Seller_add_management/v_seller_add_manage', $data); 
+            }else {
+                redirect('Login/login');
+              }
+        
     }
 
 }
