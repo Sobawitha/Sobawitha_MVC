@@ -2,8 +2,7 @@
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_sidebar.php'?>
 <link rel="stylesheet" href="../css/seller/seller_ad_management.css"></link>
-<script src="../js/Seller/AdManage/add_advertisment.js"></script>
-
+<script src="../js/Seller/Ad_Manage/add_advertisment.js"></script>
 
 <body >
 
