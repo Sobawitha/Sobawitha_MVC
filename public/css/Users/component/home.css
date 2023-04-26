@@ -346,7 +346,7 @@ nav{
     width:95%;
     background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6));
     padding:5px;
-    transform: translateY(133px);
+    transform: translateY(125px);
 }
 
 .product_name{
@@ -378,8 +378,9 @@ nav{
 }
 .price{
     font-size:12px;
-    margin-left:7px;
+    margin-left:0px;
     color:gray;
+    font-weight: 500;
 }
 
 .collection_product_card_setion{
@@ -449,5 +450,16 @@ nav{
     line-height:17px;
     
 }
+
+.checked {
+    color: salmon;
+    font-size:15px;
+  }
+
+  .fa-star {
+    margin-right: 5px;
+  }
+  
+
 
 

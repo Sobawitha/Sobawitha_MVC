@@ -207,7 +207,7 @@ input[type=radio]{
   color: white;
   border: none;
   border-radius: 50px;
-  width: 100px;
+  width: 100%;
 }
 
 #ignore{

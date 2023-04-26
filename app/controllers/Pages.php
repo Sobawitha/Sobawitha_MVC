@@ -1,13 +1,20 @@
 <?php
 
 class Pages extends Controller {
+    private $pagesModel;
     public function __construct(){
         $this-> pagesModel =$this->model('M_Pages');
     }
 
     //redirect home
     public function home(){
-        $data = [];
+        $listings= $this->pagesModel->getLatestListings();
+        $allAds= $this->pagesModel->getAllListings();
+       
+        $data = [
+          'ads' => $listings,
+          'allads' => $allAds
+        ];
         $this->view('Users/component/home', $data);
     }
 

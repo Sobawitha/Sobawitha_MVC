@@ -96,78 +96,84 @@
         <span class="second_part_discription">is an online platform driven by agriculture nature by involving more people in their people in their in</span>
 
         <div class="recent_product_card_section">
-            
-        <?php
-            for($i=1; $i<=4; $i++){
-                ?>
+         
+        <?php foreach($data['ads'] as $ads): ?>
+        
+                
                 <div class="adv_card">
-                <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
-                                                height:75%;
-                                                -webkit-background-size:cover ;
-                                                background-position:center;
-                                                margin:0px;
-                                                padding:0px;">
+                <div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $ads->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover;  background-position:center; margin:0px; padding:0px; ">
+                    
                     <div class="product_detail">
-                        <span class="product_name">Tea fertilizer</span><br>
-                        <span class="owner">By ABC production</span>
+                        <span class="product_name"><?php echo $ads->product_name ?></span><br>
+                        <span class="owner"><?php echo $ads->manufacturer ?></span>
                     </div>
                 </div>
 
                 <i class="fa-regular fa-heart" id="heart"></i>
 
                 <div class="discription">
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-regular fa-star" id="star"></i>
-                    <i class="fa-regular fa-star" id="star"></i>
-                    <span class="price"> Rs. 500.00</span>
-                    
+                <span class="price">Rs. <?php echo $ads->price ?></span>
+                <?php $avg_rating = round($ads->avg_rating); ?>
+               
+                <!-- <span class="fas fa-star<?php echo ($avg_rating >= 1) ? ' checked' : ''; ?>"></span>
+              <span class="fas fa-star <?php echo ($avg_rating >= 2) ? 'checked' : ''; ?>"></span>
+              <span class="fas fa-star <?php echo ($avg_rating >= 3) ? 'checked' : ''; ?>"></span>
+              <span class="fas fa-star <?php echo ($avg_rating >= 4) ? 'checked' : ''; ?>"></span>
+              <span class="fas fa-star<?php echo ($avg_rating == 5) ? 'checked' : ''; ?>"></span> -->
+                <?php 
+                for ($i = 1; $i <= 5; $i++) {
+                $checked = ($i <= $avg_rating) ? 'checked' : '';
+                echo '<span class="fas fa-star ' . $checked . ' "></span>';
+                }
+                ?>
                 </div>
 
             </div>
-                <?php
-            }?>
             
+               
 
+             <?php endforeach;?>
             
-    </div>
+  </div>
+    
+  
 
     <div class="fourth_part">
         <span class="fourth_part_header">Collection</span>
         <div class="collection_product_card_setion">
-
-        <?php
-            for($i=1; $i<=10; $i++){
-                ?>
+         
+       
+        
+         <?php foreach($data['allads'] as $allAds): ?>
                 <div class="adv_card">
-                <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
-                                                height:75%;
-                                                -webkit-background-size:cover ;
-                                                background-position:center;
-                                                margin:0px;
-                                                padding:0px;">
+                <div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $allAds->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover; background-position:center; margin:0px; padding:0px;">
                     <div class="product_detail">
-                        <span class="product_name">Tea fertilizer</span><br>
-                        <span class="owner">By ABC production</span>
+                        <span class="product_name"><?php echo $allAds->product_name ?></span><br>
+                        <span class="owner"><?php echo $allAds->manufacturer ?></span>
                     </div>
                 </div>
 
                 <i class="fa-regular fa-heart" id="heart"></i>
 
                 <div class="discription">
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-regular fa-star" id="star"></i>
-                    <i class="fa-regular fa-star" id="star"></i>
-                    <span class="price"> Rs. 500.00</span>
+                <span class="price"> Rs. <?php echo $allAds->price ?></span>
+                <?php $avg_rating = round($allAds->avg_rating); ?>
+        
+                <?php 
+                for ($i = 1; $i <= 5; $i++) {
+                $checked = ($i <= $avg_rating) ? 'checked' : '';
+                echo '<span class="fas fa-star ' . $checked . ' "></span>';
+                }
+                ?>
+            
                     
                 </div>
 
             </div>
-                <?php
-            }?>
+            <?php endforeach;?>
+            
+               
+            
 
         </div>
         

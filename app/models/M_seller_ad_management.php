@@ -59,6 +59,14 @@
         return $this->db->single();
     }
 
+    public function getAverageRating($id){
+        $this->db->query('SELECT AVG(rating) AS average_rating FROM feedback WHERE receiver_id=:id AND feed_status=1');
+        $this->db->bind(':id',$id);
+              
+        $row=$this->db->single();
+        return $row->average_rating;
+    }
+
 
 }
 ?>
