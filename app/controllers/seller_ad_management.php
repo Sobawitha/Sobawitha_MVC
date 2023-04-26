@@ -32,7 +32,6 @@
                 'description' => trim($_POST['description']),
                 'price' => trim($_POST['price']),
                 'quantity' => trim($_POST['quantity']),
-                'location' => trim($_POST['location']),
                 'current_status' => 1,
                 'created_by' => $userid,
                 'avg_rating' => $avg_rating,

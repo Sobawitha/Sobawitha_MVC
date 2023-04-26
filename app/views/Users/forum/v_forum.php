@@ -6,11 +6,11 @@ if($_SESSION['user_flag'] == 1){
     require APPROOT.'/views/Admin/Admin/admin_topnavbar.php';
     require APPROOT . '/views/Admin/Admin/admin_Sidebar.php';
 }
-else if($_SESSION['user_flag'] == 2){
-    require APPROOT.'/views/Seller/Seller/seller_topnavbar.php';
-    require APPROOT . '/views/Seller/Seller/seller_Sidebar.php';
-}
 else if($_SESSION['user_flag'] == 3){
+    require APPROOT.'/views/Seller/Seller/seller_topnavbar.php';
+    require APPROOT . '/views/Seller/Seller/seller_sidebar.php';
+}
+else if($_SESSION['user_flag'] == 2){
     require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php';
     require APPROOT . '/views/Buyer/Buyer/buyer_Sidebar.php';
 }
