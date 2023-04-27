@@ -17,7 +17,8 @@
             <div class='card' id="card1">
                 <div class='content'>
                     <div class="p1">
-                    <p class="count">Rs.<?php echo $data["tot_profit"]->total_profit ?></p>
+                    <p class="count"><?php echo empty($data["tot_profit"]->total_profit) ? 'Rs.0.00' : 'Rs.' . $data["tot_profit"]->total_profit ?></p>
+
                     <p class="topic">Total income</p>
                     <p class="time_period">For previous month</P>
                     </div>

@@ -10,7 +10,7 @@
     public function add_fertilizer_advertisment($data)
     {
         //  print_r ($data);die();
-        $this->db->query('INSExRT INTO fertilizer (product_name, quantity, manufacturer, price, product_description, category, registration_no, date, current_status,created_by,fertilizer_img,img_two, img_three, img_four, img_five, crop_type, type ,avg_rating) values (:product_name, :quantity, :manufacturer, :price, :product_description, :category, :registration_no, :current_status, NOW(), :created_by, :fertilizer_img, :img_two, :img_three, :img_four, :img_five, :crop_type, :type, :avg_rating)');
+        $this->db->query('INSERT INTO fertilizer (product_name, quantity, manufacturer, price, product_description, category, registration_no, date, current_status,created_by,fertilizer_img,img_two, img_three, img_four, img_five, crop_type, type ,avg_rating) values (:product_name, :quantity, :manufacturer, :price, :product_description, :category, :registration_no, NOW(), :current_status, :created_by, :fertilizer_img, :img_two, :img_three, :img_four, :img_five, :crop_type, :type, :avg_rating)');
 
         $this->db->bind(":product_name", $data['product_name']);
         $this->db->bind(":category", $data['category']);

@@ -18,20 +18,20 @@
 // }
 
 function popUpOpenAdReview(product_name, img_one, img_two, img_three, img_four,img_five, quantity, manufac, price, desc, category, registr, date, crop_type, type, full_name,rating, location) {
-  document.getElementById('product-name').value = product_name;
-  document.getElementById('product-quantity').value = quantity;
-  document.getElementById('manufacturer-name').value = manufac;
-  document.getElementById('product-price').value = price;
-  document.getElementById('product-description').value = desc;
-  document.getElementById('product-category').value = category;
-  document.getElementById('regsitration-no').value = registr;
-  document.getElementById('product-date').value = date;
-  document.getElementById('crop_type').value = crop_type;
-  document.getElementById('seller_name').value = full_name;
-  document.getElementById('rating').value = rating;
-  document.getElementById('product-type').value = type;
-  document.getElementById('product-location').value = location;
-
+  document.getElementById('product-name').value = product_name ? product_name : 'None';
+  document.getElementById('product-quantity').value = quantity ? quantity : 'None';
+  document.getElementById('manufacturer-name').value = manufac ? manufac : 'None';
+  document.getElementById('product-price').value = price ? price : 'None';
+  document.getElementById('product-description').value = desc ? desc : 'None';
+  document.getElementById('product-category').value = category ? category : 'None';
+  document.getElementById('regsitration-no').value = registr ? registr : 'None';
+  document.getElementById('product-date').value = date ? date : 'None';
+  document.getElementById('crop_type').value = crop_type ? crop_type : 'None';
+  document.getElementById('seller_name').value = full_name ? full_name : 'None';
+  document.getElementById('rating').value = rating ? rating : 'None';
+  document.getElementById('product-type').value = type ? type : 'None';
+  document.getElementById('product-location').value = location ? location : 'None';
+  
   // Set the src attribute of the image tag to display the image if the element exists and has a valid src
   const imgOne = document.getElementById('image_one');
   const imgTwo = document.getElementById('image_two');
@@ -62,22 +62,31 @@ function popUpOpenAdReview(product_name, img_one, img_two, img_three, img_four,i
   document.getElementById('ad-details').showModal();
 }
 
-function popUpOpenViewMore(product_name, img_one, img_two, img_three, img_four,img_five ,quantity, manufac, price, desc, category, registr, date, location) {
-  document.getElementById('product-name').value = product_name;
-  document.getElementById('product-quantity').value = quantity;
-  document.getElementById('manufacturer-name').value = manufac;
-  document.getElementById('product-price').value = price;
-  document.getElementById('product-description').value = desc;
-  document.getElementById('product-category').value = category;
-  document.getElementById('regsitration-no').value = registr;
-  document.getElementById('product-date').value = date;
-  document.getElementById('product-location').value = location;
+function popUpOpenViewMore(product_name, img_one, img_two, img_three, img_four,img_five ,quantity, manufac, price, desc, category, registr, date, crop_type, type, name, rating, location) {
+  document.getElementById('product-name').value = product_name ? product_name : "None";
+  document.getElementById('product-quantity').value = quantity ? quantity : "None";
+  document.getElementById('manufacturer-name').value = manufac ? manufac : "None";
+  document.getElementById('product-price').value = price ? price : "None";
+  document.getElementById('product-description').value = desc ? desc : "None";
+  document.getElementById('product-category').value = category ? category : "None";
+  document.getElementById('regsitration-no').value = registr ? registr : "None";
+  document.getElementById('product-date').value = date ? date : "None";
+  document.getElementById('crop_type').value = crop_type ? crop_type : "None";
+  document.getElementById('seller_name').value = name ? name : "None";
+  document.getElementById('rating').value = rating ? rating : "None";
+  document.getElementById('product-type').value = type ? type : "None";
+  document.getElementById('product-location').value = location ? location : "None";
+  
 
   // Set the src attribute of the image tag to display the image if the element exists and has a valid src
   const imgOne = document.getElementById('image_one');
+  const imgTwo = document.getElementById('image_two');
+  const imgThree = document.getElementById('image_three');
+  const imgFour = document.getElementById('image_four');
+  const imgFive = document.getElementById('image_five');
 
   if (imgOne && img_one !== '') {
-    imgOne.src = `${window.location.origin}/Sobawitha_MVC/public/upload/listing_images/${img_one}`;
+    imgOne.src = `${window.location.origin}/Sobawitha_MVC/public/upload/fertilizer_images/${img_one}`;
   }
 
   if (imgTwo && img_two !== '') {

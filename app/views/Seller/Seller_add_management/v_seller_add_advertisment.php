@@ -19,14 +19,14 @@
 
               <div class="image-upload-container">
               <label for="image-upload" class="image-upload-label">
-                <i class="fa fa-cloud-upload"></i> Choose Images (Max. 5)
+                <i class="fa fa-cloud-upload"></i> Choose Images (Max. 5) | First One will be Main Image |
               </label>
               <input type="file" id="image-upload" name="images[]" multiple>
               <div class="image-preview-container"></div>
             </div>
              <script>
              const imageUpload = document.getElementById('image-upload');
-            const previewContainer = document.querySelector('.image-preview-container');
+             const previewContainer = document.querySelector('.image-preview-container');
 
             imageUpload.addEventListener('change', function() {
               previewContainer.innerHTML = '';
@@ -75,6 +75,7 @@
                               <option value="Flowers">Flowers</option>
                               <option value="Rubber">Rubber</option>
                               <option value="Othercrops">Other Crops</option>
+                              <option value="Any">Any</option>
                     </select>
                 </div>
 
@@ -88,7 +89,7 @@
                   </div>
                   <div class="input-box">
                     <span class="details">Product Description</span>
-                    <textarea name="description" placeholder="Enter product description" rows="8" required></textarea>
+                    <textarea name="description" placeholder="Enter product description" rows="15" required></textarea>
                   </div>
                   <div class="input-box">
                     <span class="details">Unit Price</span>

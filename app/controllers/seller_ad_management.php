@@ -72,8 +72,6 @@
             $userid = $_SESSION['user_id'];
             $avg_rating = $this->seller_ad_management_model ->getAverageRating($userid);
 
-            
-
             $data = [
 
                 'product_name' => trim($_POST['product_name']),
@@ -109,14 +107,16 @@
                         continue;
                     }
                     if ($data['images']['size'][$key] > 0) {
-                        $fileName = trim($_POST['product_name']).'_'.$image;
+                        // $fileName = trim($_POST['product_name']).'_'.$image;
+                        $fileName = substr(trim($_POST['product_name']), 0, 5) . '_' . $image;
+
                         if (uploadFile($data['images']['tmp_name'][$key], $fileName, '/upload/fertilizer_images/')) {
                             $imagesUploaded[] = $fileName;
                         } else {
                             $imageUploadErrors[] = "Could not upload image '$fileName'";
                         }
                     } else {
-                        $fileName = trim($_POST['product_name']).'_'.$image;
+                        $fileName = substr(trim($_POST['product_name']), 0, 5) . '_' . $image;
                         $imageUploadErrors[] = "Image file size is empty for '$fileName'";
                     }
                 }
@@ -124,11 +124,11 @@
             
 
                    // Set data to be added to database
-            $data['image_1'] = isset($imagesUploaded[0]) ? $imagesUploaded[0] : null;
-            $data['image_2'] = isset($imagesUploaded[1]) ? $imagesUploaded[1] : null;
-            $data['image_3'] = isset($imagesUploaded[2]) ? $imagesUploaded[2] : null;
-            $data['image_4'] = isset($imagesUploaded[3]) ? $imagesUploaded[3] : null;
-            $data['image_5'] = isset($imagesUploaded[4]) ? $imagesUploaded[4] : null;
+            $data['image_1'] = isset($imagesUploaded[0]) ? $imagesUploaded[0] : 'default_upload.png';
+            $data['image_2'] = isset($imagesUploaded[1]) ? $imagesUploaded[1] : 'default_upload.png';
+            $data['image_3'] = isset($imagesUploaded[2]) ? $imagesUploaded[2] : 'default_upload.png';
+            $data['image_4'] = isset($imagesUploaded[3]) ? $imagesUploaded[3] : 'default_upload.png';
+            $data['image_5'] = isset($imagesUploaded[4]) ? $imagesUploaded[4] : 'default_upload.png';
            
             if(empty($data['fertilizer_image'])){
                 $data['fertilizer_image_err']='fertilizer image cannot be empty';

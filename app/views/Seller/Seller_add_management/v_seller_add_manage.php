@@ -76,7 +76,9 @@
                                 <tr class="sm_view">
                                 <div class="sm_view_detail">
                                         <td><img src="./../public/upload/fertilizer_images/<?php echo $pending_fertilizer_advertisement->fertilizer_img?>" alt="fertilizer_image"  id="fertilizer_img"></td>
-                                        <td><span class="title"><?php echo $pending_fertilizer_advertisement->product_name ?></span></td>
+                                        <!-- <td><span class="title"><?php echo $pending_fertilizer_advertisement->product_name ?></span></td> -->
+                                        <td><span class="title"><?php echo (strlen($pending_fertilizer_advertisement->product_name) > 20) ? substr($pending_fertilizer_advertisement->product_name, 0, 20) . "..." : $pending_fertilizer_advertisement->product_name; ?></span></td>
+
                                         <td><span class="croptype"><?php echo $pending_fertilizer_advertisement->crop_type?></span></td>
                                         <td><span class="certificate No<"><?php echo $pending_fertilizer_advertisement->registration_no ?></span></td>
                                         <td><span class="manufacture"><?php echo $pending_fertilizer_advertisement->manufacturer ?></span></td>                                        

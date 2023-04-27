@@ -224,4 +224,21 @@
     font-size:15px;
   }
 
-  
+   /*chart status here*/
+
+   .charts{
+    display:grid;
+    grid-template-columns: 2fr 1fr ;
+    grid-gap:10px;
+    width:100%;
+    margin:20px;
+    padding-top:0px;
+  }
+
+  .chart{
+    background-color: rgb(250, 252, 252);
+    padding:20px;
+    border-radius:10px;
+    border:1px solid rgb(233, 230, 230);
+    box-shadow:0px 7px 25px rgba(0,0,0,0.08);
+  }

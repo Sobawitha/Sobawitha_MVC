@@ -62,8 +62,10 @@
                                 <div class="order_detail">
                               
                                 <td><img src="<?php echo URLROOT;?>/public/upload/fertilizer_images/<?php echo $products->listing_image?>" class="add_image"></td>
-                                <td><?php echo $products->product_name ?></td>
-                                <td><?php echo $products->product_description ?></td>
+                                
+                                <td><span class="title"><?php echo (strlen($products->product_name) > 20) ? substr($products->product_name, 0, 20) . "..." : $products->product_name; ?></span></td>
+                                <td><span class="title"><?php echo (strlen($products->product_description) > 25) ? substr($products->product_description, 0, 25) . "...[See More]" : $products->product_description; ?></span></td>
+                                
                                 <td><button class="product_category"><?php echo $products->category ?></button></td>
                                 <td><?php echo $products->manufacturer ?></td>
                                 <td>Rs.<?php echo $products->price ?></td>
@@ -222,7 +224,7 @@
                                         </td>
                                     <?php elseif($products->current_status == 1 || $products->current_status == 2): ?>
                                         <td>
-                                        <button type="button" onclick="popUpOpenViewMore('<?php echo $products->product_name ?>','<?php echo $products->listing_image ?>','<?php echo $products->img_two ?>','<?php echo $products->img_three ?>','<?php echo $products->img_four ?>','<?php echo $products->img_five ?>','<?php echo $products->quantity ?>','<?php echo $products->manufacturer ?>','<?php echo $products->price ?>','<?php echo $products->product_description ?>','<?php echo $products->category ?>','<?php echo isset($products->registration_no) ? $products->registration_no : 'No need for Raw Materials' ?>','<?php echo $products->date ?>','<?php echo isset($products->location) ? $products->location : 'No need for Raw Materials' ?>')" id="ad_view_more_btn"><i class="fa-solid fa-circle-info"></i> View More</button>
+                                        <button type="button" onclick="popUpOpenViewMore('<?php echo $products->product_name ?>','<?php echo $products->listing_image ?>','<?php echo $products->img_two ?>','<?php echo $products->img_three ?>','<?php echo $products->img_four ?>','<?php echo $products->img_five ?>','<?php echo $products->quantity ?>','<?php echo $products->manufacturer ?>','<?php echo $products->price ?>','<?php echo $products->product_description ?>','<?php echo $products->category ?>','<?php echo isset($products->registration_no) ? $products->registration_no : 'No need for Raw Materials' ?>','<?php echo $products->date ?>','<?php echo $products->crop_type ?>','<?php echo $products->type ?>','<?php echo $products->seller_name ?>','<?php echo $products->avg_rating ?>','<?php echo isset($products->location) ? $products->location : 'No need for Raw Materials' ?>')" id="ad_view_more_btn"><i class="fa-solid fa-circle-info"></i> View More</button>
                                             <!-- Dialog box -->
                                         <dialog id="ad-details">
                                         <div class="ad-details">
@@ -309,6 +311,27 @@
                                                 <label for="product-date">Product Date:</label>
                                                 <input type="text" id="product-date" name="product-date" readonly>
                                         </div>
+
+                                        <div class="form-group">
+                                                <label for="crop_type">Crop Type:</label>
+                                                <input type="text" id="crop_type" name="crop_type" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label for="product-type">Type:</label>
+                                                <input type="text" id="product-type" name="product-type" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label for="seller_name">Seller Full Name:</label>
+                                                <input type="text" id="seller_name" name="seller_name" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label for="rating">Seller Rating:</label>
+                                                <input type="text" id="rating" name="rating" readonly>
+                                        </div>
+
                                         <div class="form-group">
                                                 <label for="product-location">Product Location:</label>
                                                 <input type="text" id="product-location" name="product-location" readonly>
