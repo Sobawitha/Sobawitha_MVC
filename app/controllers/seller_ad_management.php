@@ -77,21 +77,59 @@
             $data = [
 
                 'product_name' => trim($_POST['product_name']),
-                'category' => trim($_POST['category']),
-                'certificate_no' => trim($_POST['certificate_no']),
+                'category' => "fertilizer",
+                'crop_type' => trim($_POST['crop_type']),
+                'registration_no' => trim($_POST['registration_no']),
                 'manufacturer' => trim($_POST['manufacturer']),
                 'description' => trim($_POST['description']),
                 'price' => trim($_POST['price']),
                 'quantity' => trim($_POST['quantity']),
-                'current_status' => 1,
+                'type' => trim($_POST['type']),
+                'current_status' => 0,
                 'created_by' => $userid,
                 'avg_rating' => $avg_rating,
-                'fertilizer_image' =>$_FILES['fertilizer_img'],
-                'fertilizer_image_name' => trim($_POST['product_name']).'_'.$_FILES['fertilizer_img']['name'],
+                // 'fertilizer_image' =>$_FILES['fertilizer_img'],
+                // 'fertilizer_image_name' => trim($_POST['product_name']).'_'.$_FILES['fertilizer_img']['name'],
                 'fertilizer_image_err' => '',
+                'images' => $_FILES['images'],
 
             ];
+            
+               // Upload and validate images
+               $imageUploadErrors = [];
+               $imagesUploaded = [];
+   
+               foreach ($data['images']['name'] as $key => $image) {
+                if ($image) {
+                    $fileExt = explode('.', $image);
+                    $fileActualExt = strtolower(end($fileExt));
+                    $allowed = ['jpg', 'jpeg', 'png'];
+                    if (!in_array($fileActualExt, $allowed)) {
+                        $imageUploadErrors[] = "You cannot upload files of type '$fileActualExt'";
+                        continue;
+                    }
+                    if ($data['images']['size'][$key] > 0) {
+                        $fileName = trim($_POST['product_name']).'_'.$image;
+                        if (uploadFile($data['images']['tmp_name'][$key], $fileName, '/upload/fertilizer_images/')) {
+                            $imagesUploaded[] = $fileName;
+                        } else {
+                            $imageUploadErrors[] = "Could not upload image '$fileName'";
+                        }
+                    } else {
+                        $fileName = trim($_POST['product_name']).'_'.$image;
+                        $imageUploadErrors[] = "Image file size is empty for '$fileName'";
+                    }
+                }
+            }
+            
 
+                   // Set data to be added to database
+            $data['image_1'] = isset($imagesUploaded[0]) ? $imagesUploaded[0] : null;
+            $data['image_2'] = isset($imagesUploaded[1]) ? $imagesUploaded[1] : null;
+            $data['image_3'] = isset($imagesUploaded[2]) ? $imagesUploaded[2] : null;
+            $data['image_4'] = isset($imagesUploaded[3]) ? $imagesUploaded[3] : null;
+            $data['image_5'] = isset($imagesUploaded[4]) ? $imagesUploaded[4] : null;
+           
             if(empty($data['fertilizer_image'])){
                 $data['fertilizer_image_err']='fertilizer image cannot be empty';
             
