@@ -1,4 +1,4 @@
-alert();
+// alert();
 function open_cancel_btn(){
     document.getElementById("cancel").style.display='block';
   

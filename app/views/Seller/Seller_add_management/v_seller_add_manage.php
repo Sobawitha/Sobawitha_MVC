@@ -2,7 +2,8 @@
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_sidebar.php'?>
 <link rel="stylesheet" href="../css/seller/seller_ad_management.css"></link>
-<script src="../js/Seller/Ad_Manage/add_advertisment.js"></script>
+<script src="../js/Seller/AdManage/add_advertisment.js"></script>
+
 
 <body >
 
@@ -23,7 +24,7 @@
               <div class="search_content">
                   
                       <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/></span>
-                      <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+                      <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
                       <button type="submit" class="search_btn" onclick="open_cancel_btn()"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                   
               </div>
