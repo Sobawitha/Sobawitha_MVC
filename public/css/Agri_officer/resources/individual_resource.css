@@ -291,7 +291,8 @@
     width:180px;
     border-radius:10px;
     background-color:transparent;
-    border:1px solid rgb(231, 165, 42);
+    /* border:1px solid rgb(231, 165, 42); */
+    border:1px solid salmon;
     font-weight:bold;
     transform: translateX(375px);
     cursor:pointer;
@@ -300,14 +301,16 @@
 }
 
 #afterlikehearticon{
-    color:rgb(231, 165, 42);
+    /* color:rgb(231, 165, 42); */
+    color:salmon;
     font-size:18px;
 }
 
 #heart_icon{
     margin-right:20px;
     font-size:20px;
-    color:rgb(231, 165, 42);
+    /* color:rgb(231, 165, 42); */
+    color:salmon;
 }
 
 /*Related post*/
@@ -350,14 +353,16 @@
     transform: translateY(15px);
     font-size:15px;
     cursor:pointer;
-    color:rgb(231, 165, 42);
+    /* color:rgb(231, 165, 42); */
+    color:salmon;
     
 }
 
 
 #match{
     position:absolute;
-    color:rgb(231, 165, 42);
+    /* color:rgb(231, 165, 42); */
+    color:salmon;
     font-size: 22px;
     transform: translate(-40px,30px);
     z-index:500;

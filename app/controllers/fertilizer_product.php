@@ -7,6 +7,27 @@ class fertilizer_product extends Controller
         $this->fertilizer_product_model = $this->model('M_fertilizer_product');
     }
 
+    public function individual_item(){
+        // $product_id = trim($_GET['product_id']);
+        $id=$_SESSION['user_id'];
+        $data =['product_id' => 1];
+        $comment = $this->fertilizer_product_model->display_all_comment($data);
+        $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);
+        $question = $this->fertilizer_product_model->display_all_questions($data);
+        $answers = $this->fertilizer_product_model->display_all_answers($data);
+        $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
+        $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
+        $data = [
+            'comments' => $comment,
+            'reply_for_comment' => $reply_for_comment,
+            'question' => $question,
+            'answers' => $answers,
+            'current_user_gender' => $current_user_gender,
+            'product_owner_id' => $product_owner_id
+        ];
+        $this->view('Users/component/individual_item', $data);
+    }
+
     //save comment
     public function post_comment(){
 
@@ -23,7 +44,7 @@ class fertilizer_product extends Controller
             ];
 
             if($this->fertilizer_product_model->post_comment($data)){
-                redirect('Pages/individual_item?product_id='.$product_id);
+                redirect('fertilizer_product/individual_item?product_id='.$product_id);
             }
         }
     }
@@ -34,21 +55,61 @@ class fertilizer_product extends Controller
             //save the comment
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $post_id = trim($_GET['blog_post_id']);
-            $tag = trim($_GET['category']);
+            $product_id = trim($_GET['product_id']);
             $comment_id = trim($_GET['comment_id']);
 
             $data = [
-                'user_id' => ($_SESSION['user_id']),
-                'post_id'=> $post_id,
+                'replied_by' => ($_SESSION['user_id']),
+                'product_id'=> $product_id,
                 'reply' => trim($_POST['reply']),
                 'comment_id' => $comment_id,
-                'first_name' => ($_SESSION['username']),
-                'last_name' => ($_SESSION['lastname'])
             ];
 
-            if($this->resources_model->post_reply($data)){
-                redirect('resources/view_individual_resource?blog_post_id='.$post_id. '&category='.$tag );
+            if($this->fertilizer_product_model->post_reply($data)){
+                redirect('fertilizer_product/individual_item?product_id='.$product_id );
+            }
+        }
+    }
+
+
+    public function post_question(){
+
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            //save the comment
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $product_id = trim($_GET['product_id']);
+
+            $data = [
+                'asked_by' => ($_SESSION['user_id']),
+                'product_id'=> $product_id,
+                'question' => trim($_POST['question'])
+            ];
+
+            if($this->fertilizer_product_model->post_question($data)){
+                redirect('fertilizer_product/individual_item?product_id='.$product_id);
+            }
+        }
+    }
+
+    public function post_answer(){
+
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            //save the comment
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $product_id = trim($_GET['product_id']);
+            $question_id = trim($_GET['question_id']);
+
+            $data = [
+                'answered_by' => ($_SESSION['user_id']),
+                'product_id'=> $product_id,
+                'answer' => trim($_POST['answer']),
+                'question_id' => $question_id,
+            ];
+
+            if($this->fertilizer_product_model->post_answer($data)){
+                redirect('fertilizer_product/individual_item?product_id='.$product_id );
             }
         }
     }

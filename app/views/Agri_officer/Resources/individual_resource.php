@@ -144,17 +144,10 @@ else if($_SESSION['user_flag'] == 5){
                 <?php
 
                             foreach($data['comments'] as $comment):?>
-
                             <span id="user-<?php echo $comment->comment_id?>" class="user"><?php echo ucfirst(($comment->first_name[0]))?></span> 
                             <div class="display_comment">
                                 <P class="name"> <?php echo $comment->first_name, " ",$comment->last_name," "?><span class="publish_date"><?php echo $comment->comment_date?></span></P>
                                 <!-- <p class="comment_post"> <?php echo $comment->comment?> </p> -->
-
-
-
-
-
-
                                 <form id="edit_comment_content" method="POST" action="<?php echo URLROOT?>/resources/edit_comment?comment_id=<?php echo $comment->comment_id?>"> 
                                     <input type="text" name = "comment_body" class="comment_body" id="comment_body-<?php echo $comment->comment_id?>" value="<?php echo $comment->comment?>" disabled></input>
                                         <br><br>
@@ -163,14 +156,7 @@ else if($_SESSION['user_flag'] == 5){
                                         <span id="cancel_edit" onclick="cancel_edit_comment(<?php echo $comment->comment_id?>)">Cancel</span>
                                         </div>
                                 </form>
-
-
-
-
-
-
-                                
-                                <div class="icon">
+                            <div class="icon">
                                     <i class="fa-sharp fa-solid fa-reply-all" id="replybtn" onclick="open_replyform(<?php echo $comment->comment_id?>)"></i><span class="reply">Reply</span>
                                     
                                     <?php if($_SESSION['user_id']==$comment->comment_user_id){ ?> 

@@ -12,6 +12,7 @@ class M_fertilizer_product
 
  /*comment */
 
+
     public function post_comment($data){
 
         $this->db->query('INSERT INTO fertilizer_product_comment (product_id, comment, commented_by) VALUES (:product_id, :comment, :commented_by) ');
@@ -29,14 +30,11 @@ class M_fertilizer_product
     }
 
     public function post_reply($data){
-
-        $this->db->query('INSERT INTO comment_reply (reply, comment_id, user_id, post_id, user_first_name, user_last_name) VALUES (:reply, :comment_id, :user_id, :post_id, :first_name, :last_name) ');
-        $this->db->bind(":reply", $data['reply']);
+        $this->db->query('INSERT INTO fertilizer_product_comment_reply (comment_id, replied_by, product_id, reply) VALUES (:comment_id, :replied_by, :product_id, :reply) ');
         $this->db->bind(":comment_id", $data['comment_id']);
-        $this->db->bind(":user_id", $data['user_id']);
-        $this->db->bind(":post_id", $data['post_id']);
-        $this->db->bind(":first_name", $data['first_name']);
-        $this->db->bind(":last_name", $data['last_name']);
+        $this->db->bind(":replied_by", $data['replied_by']);
+        $this->db->bind(":product_id", $data['product_id']);
+        $this->db->bind(":reply", $data['reply']);
 
         //execute the query
         if($this->db->execute()){
@@ -48,86 +46,84 @@ class M_fertilizer_product
     }
 
     public function display_all_comment($data){
-        $this->db->query('SELECT  comment_id, comment_user_id, comment, comment_date, first_name, last_name, reply_id, reply, reply_comment_id, reply_user_id, reply_date, user_first_name, user_last_name, count(reply_id) as no_of_reply FROM view_comment_reply WHERE comment_post_id=:postid group by(comment_id)');
-        $this->db->bind(":postid", $data['resource_id']);
+        $this->db->query('SELECT  comment_id,comment, comment_date, commented_by_full_name, count(reply_id) as no_of_reply FROM view_fertilizer_product_comment_reply WHERE product_id=:productid group by(comment_id)');
+        $this->db->bind(":productid", $data['product_id']);
         return $this->db->resultSet();
     }
 
-    public function display_all_comment_for_reply($data){
-        $this->db->query('SELECT  comment_id, comment_user_id, comment, comment_date, first_name, last_name, reply_id, reply, reply_comment_id, reply_user_id, reply_date, user_first_name, user_last_name  FROM view_comment_reply WHERE comment_post_id=:postid');
-        $this->db->bind(":postid", $data['resource_id']);
+    public function display_all_replies($data){
+        $this->db->query('SELECT  comment_id, comment, comment_date, commented_by_full_name, reply, reply_comment_id, reply_date, reply_user_full_name  FROM view_fertilizer_product_comment_reply WHERE product_id=:productid');
+        $this->db->bind(":productid", $data['product_id']);
         return $this->db->resultSet();
     }
 
-    public function count_all_comment($data){
-        $this->db->query('SELECT count(comment_id) as count_comment FROM comment WHERE post_id=:postid');
-        $this->db->bind(":postid", $data['resource_id']);
-        return $this->db->resultset();
+    // public function count_all_comment($data){
+    //     $this->db->query('SELECT count(comment_id) as count_comment FROM fertilizer_product_comment WHERE product_id=:product_id');
+    //     $this->db->bind(":product_id", $data['product_id']);
+    //     return $this->db->resultset();
+    // }
+
+    public function post_question($data){
+
+        $this->db->query('INSERT INTO fertilizer_product_related_question ( product_id, asked_by, question) VALUES (:product_id, :asked_by, :question) ');
+        $this->db->bind(":product_id", $data['product_id']);
+        $this->db->bind(":question", $data['question']);
+        $this->db->bind(":asked_by", $data['asked_by']);
+        
+        //execute the query
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
-    public function find_blogpost_id($comment_id){
-        // var_dump($comment_id);
-        //     die();
-        $this->db->query('SELECT post_id as post_id from comment where comment_id=:comment_id');
-        $this->db->bind(":comment_id", $comment_id);
+    public function post_answer($data){
+        $this->db->query('INSERT INTO fertilizer_product_related_answers ( product_id,question_id, answered_by, answer) VALUES (:product_id, :question_id, :answered_by, :answer) ');
+        $this->db->bind(":question_id", $data['question_id']);
+        $this->db->bind(":answered_by", $data['answered_by']);
+        $this->db->bind(":product_id", $data['product_id']);
+        $this->db->bind(":answer", $data['answer']);
+
+        //execute the query
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function display_all_questions($data){
+        $this->db->query('SELECT  question_id,question, q_date, asked_by_full_name, count(answer_id) as no_of_answers, asked_user_gender FROM view_fertilizer_product_question_answers WHERE product_id=:productid group by(question_id)');
+        $this->db->bind(":productid", $data['product_id']);
+        return $this->db->resultSet();
+    }
+
+    public function display_all_answers($data){
+        $this->db->query('SELECT  answer_id, answer, answer_date, answer_user_full_name,answer_question_id,  answer_date, answer_user_full_name, answer_user_gender  FROM view_fertilizer_product_question_answers WHERE product_id=:productid');
+        $this->db->bind(":productid", $data['product_id']);
+        return $this->db->resultSet();
+    }
+
+    public function find_gender($id){
+        $this->db->query('SELECT gender as gender from user where user_id=:id');
+        $this->db->bind(":id", $id);
         return $this->db->single();
     }
 
-    public function find_blogpost_id_from_replyid($reply_id){
-        $this->db->query('SELECT post_id as post_id from comment_reply where reply_id=:reply_id');
-        $this->db->bind(":reply_id", $reply_id);
+    // public function count_a($data){
+    //     $this->db->query('SELECT count(comment_id) as count_comment FROM fertilizer_product_comment WHERE product_id=:product_id');
+    //     $this->db->bind(":product_id", $data['product_id']);
+    //     return $this->db->resultset();
+    // }
+
+    public function find_owner_id($product_id){
+        $this->db->query('SELECT created_by as owner_id from fertilizer where product_id=:product_id');
+        $this->db->bind(":product_id", $product_id);
         return $this->db->single();
-    }
 
-    public function find_category($id){
-        $this->db->query('SELECT tag as category from blogpost where post_id=:post_id ');
-        $this->db->bind(":post_id",$id);
-        return $this->db->single();
-    }
-    public function delete_comment($id){
-        $this->db->query('DELETE  from comment where comment_id=:comment_id');
-        $this->db->bind(":comment_id", $id);
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function delete_reply($id){
-        $this->db->query('DELETE from comment_reply where reply_id=:reply_id');
-        $this->db->bind(":reply_id", $id);
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function edit_comment($data){
-        $this->db->query('UPDATE comment SET comment=:comment WHERE comment_id=:comment_id');
-        $this->db->bind(":comment",$data['comment']);
-        $this->db-> bind(":comment_id", $data['comment_id']);
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function edit_reply($data){
-        $this->db->query('UPDATE comment_reply SET reply=:reply WHERE reply_id=:reply_id');
-        $this->db->bind(":reply",$data['reply']);
-        $this->db-> bind(":reply_id", $data['reply_id']);
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
 
