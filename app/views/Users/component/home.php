@@ -104,8 +104,9 @@
                 <div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $ads->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover;  background-position:center; margin:0px; padding:0px; ">
                     
                     <div class="product_detail">
-                        <span class="product_name"><?php echo $ads->product_name ?></span><br>
-                        <span class="owner"><?php echo $ads->manufacturer ?></span>
+                        <span class="product_name"><?php echo strlen($ads->product_name) > 20 ? substr($ads->product_name,0,20)."..." : $ads->product_name ?></span><br>
+
+                        <span class="owner"><?php echo strlen($ads->manufacturer) > 20 ? substr($ads ->manufacturer,0,20 )."..." : $ads -> manufacturer ?></span>
                     </div>
                 </div>
 
@@ -148,8 +149,8 @@
                 <div class="adv_card">
                 <div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $allAds->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover; background-position:center; margin:0px; padding:0px;">
                     <div class="product_detail">
-                        <span class="product_name"><?php echo $allAds->product_name ?></span><br>
-                        <span class="owner"><?php echo $allAds->manufacturer ?></span>
+                        <span class="product_name"><?php echo strlen($allAds->product_name) > 20 ? substr($allAds->product_name,0,20)."..." : $allAds->product_name ?></span><br>
+                        <span class="owner"><?php echo strlen($allAds->manufacturer) > 20 ? substr($allAds ->manufacturer,0,20 )."..." : $allAds -> manufacturer ?></span>
                     </div>
                 </div>
 
