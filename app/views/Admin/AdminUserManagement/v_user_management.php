@@ -127,14 +127,17 @@
                                           
                         <?php if($users->active_status ==1): ?>              
                         <form method="GET">
-                        <span class="delete"><button type="button" onclick="popUpOpenDelete()" id="deactive_user_button"><i class="fa-solid fa-hand"></i> Deactivate</button></span>
-                        <dialog id="deactivateUserPopup">
-                    <div class="deactivateUserPopup">
+                        <span class="delete"><button type="button" onclick="popUpOpenDelete('<?php echo $users->user_id ?>')" id="deactive_user_button-<?php echo $users->user_id ?>"><i class="fa-solid fa-hand"></i> Deactivate</button></span>
+                        
+                        <dialog id="deactivateUserPopup-<?php echo $users->user_id ?>">
+                        <div class="deactivateUserPopup">
                       <div class="dialog__heading">
                         <h2>Are you sure you want to deactivate this user ?</h2>
-                        <button id="closebtntwo" type="button">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                        </button>
+                        <button id="closebtntwo-<?php echo $users->user_id ?>" type="button">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                       </button>
+
+
                       </div>
                         
                       <div class="dialog__content">

@@ -249,6 +249,7 @@ input[type=radio]{
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(1px);
 }
+
 .addUserPopup { 
   min-height: 200px;
   padding:1rem;
@@ -321,11 +322,18 @@ input[type=radio]{
 } */
 
 /* Delete Button */
-#deactive_user_button{
+/* #deactive_user_button{
    color: crimson;
    background-color: transparent; 
    border: none;
    cursor: pointer;
+} */
+
+[id^="deactive_user_button-"] {
+  color: crimson;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 #active_user_button{
@@ -350,26 +358,34 @@ input[type=radio]{
 }
 
 /* Deactivate User Popup */
-#deactivateUserPopup {
+[id^="deactivateUserPopup"] dialog {
   border: none;
   padding: 0;
   border-radius: 10px;
 }
 
-#deactivateUserPopup::backdrop{
+
+[id^="deactivateUserPopup"]::backdrop{
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(1px);
 }
+
 .deactivateUserPopup { 
   min-height: 200px;
   padding:1rem;
   display: flex;
   flex-direction: column;
   
+  
 }
 
 .deactivateUserPopup h2{
   font-size:15px;
+}
+
+[id^="closebtntwo-"]{
+  color: crimson;
+  cursor: pointer;
 }
 
 .dialog__content a:hover {
@@ -399,4 +415,10 @@ td.active-status {
 
 td.deactivated-status {
   color: crimson;
+}
+
+
+dialog {
+  border: none;
+  border-radius: 10px;
 }
