@@ -179,7 +179,9 @@ else if($_SESSION['user_flag'] == 5){
 
           <!-- comment_section -->
           <div id="toggle_section_2" class="toggle_section">
-            <form method="POST" action="<?php echo URLROOT?>/resources/post_comment?blog_post_id=<?php echo $post_id?>&category=<?php echo $tag?>" >
+
+            <?php $product_id = 1?> <!--only for testing-->
+            <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_comment?product_id=<?php echo $product_id?>" >
                     <div id="comment_form">
                         <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span>
                         <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn()" name="comment"  required/>

@@ -1,6 +1,6 @@
 <?php
 
-class M_resources
+class M_fertilizer_product
 {
     private $db;
 
@@ -9,17 +9,15 @@ class M_resources
         $this->db = new Database();
     }
     
-   
-
 
  /*comment */
 
     public function post_comment($data){
 
-        $this->db->query('INSERT INTO comment (user_id, post_id, comment) VALUES (:user_id, :post_id, :comment) ');
-        $this->db->bind(":user_id", $data['user_id']);
-        $this->db->bind(":post_id", $data['post_id']);
+        $this->db->query('INSERT INTO fertilizer_product_comment (product_id, comment, commented_by) VALUES (:product_id, :comment, :commented_by) ');
+        $this->db->bind(":product_id", $data['product_id']);
         $this->db->bind(":comment", $data['comment']);
+        $this->db->bind(":commented_by", $data['commented_by']);
         
         //execute the query
         if($this->db->execute()){
