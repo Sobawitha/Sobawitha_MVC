@@ -52,7 +52,7 @@ else if($_SESSION['user_flag'] == 5){
     </div>
 
     <div class="section_3">
-        <span class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to homepage</span><br><br><br>
+        <a href="<?php echo URLROOT?>/Pages/product_page" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
         <span class="title_1">fertilizer</span><br>
         <span class="title_2">For vegitable special</span>
 
@@ -62,9 +62,6 @@ else if($_SESSION['user_flag'] == 5){
         <section class="customerFeed">
 
             <div class="scf_maincontent">
-              <!-- <h4>Customer Feedbacks</h4>
-              <hr> <br> -->
-
               <br><br>
 
               <span class="fa fa-star checked"></span>
@@ -149,47 +146,64 @@ else if($_SESSION['user_flag'] == 5){
             </div>
         </div>
 
-        <div class="filter">
-            <table class="filter_table">
-                <tr>
-                    <td id="filter_type_1" onclick="filter()">What's inside</td>
-                    <td id="filter_type_2">Comments</td>
-                    <td id="filter_type_3">FAQ's</td>
-                </tr>
-            </table>
+        <div class="process_container">
+        <div class="form_button">
+          <span onclick="reset_sections()">What's inside</span>
+          <span onclick="comment_section()">Comment</span>
+          <span onclick="qna_section()">FAQ's</span>
         </div>
+        <hr id="indicator">
+  
+          <div id="toggle_section_1" class ="toggle_section">
+              <div class="custormizable_item">
+                  <div class="related_item_images">
+                      <img src="../images/related_item_image_2.jpg" id="related_item_image"></img>
+                  </div>
+                  <div class="related_item_discription">
+                      <span class="related_item_name">Vegitable fertilizer_1</span><br>
+                      <span class="see_more_related_item">See product details</span>
+                  </div>
+              </div>
 
-        <div class="for_filter_type_1">
-            <div class="custormizable_item">
-                <div class="related_item_images">
-                    <img src="../images/related_item_image_2.jpg" id="related_item_image"></img>
-                </div>
-                <div class="related_item_discription">
-                    <span class="related_item_name">Vegitable fertilizer_1</span><br>
-                    <span class="see_more_related_item">See product details</span>
-                </div>
-            </div>
+              <div class="custormizable_item">
+                  <div class="related_item_images">
+                      <img src="../images/related_item_image_1.jpg" id="related_item_image"></img>
+                  </div>
+                  <div class="related_item_discription">
+                      <span class="related_item_name">Vegitable fertilizer_1</span><br>
+                      <span class="see_more_related_item">See product details</span>
+                  </div>
+              </div>
+          </div>
 
-            <div class="custormizable_item">
-                <div class="related_item_images">
-                    <img src="../images/related_item_image_1.jpg" id="related_item_image"></img>
-                </div>
-                <div class="related_item_discription">
-                    <span class="related_item_name">Vegitable fertilizer_1</span><br>
-                    <span class="see_more_related_item">See product details</span>
-                </div>
-            </div>
-        </div>
 
-        <div class="for_filter_type_2">
-            comment section
-        </div>
+          <!-- comment_section -->
+          <div id="toggle_section_2" class="toggle_section">
+            <form method="POST" action="<?php echo URLROOT?>/resources/post_comment?blog_post_id=<?php echo $post_id?>&category=<?php echo $tag?>" >
+                    <div id="comment_form">
+                        <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span>
+                        <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn()" name="comment"  required/>
+                    </div>
 
-        <div class="for_filter_type_3">
-            Q&A
+                    <div class="btn">
+                            <button type="submit" class="cancelbtn" value="cancel" onclick="clear_comment()">Cancel</button>
+                            <button type="submit" class="commentbtn" name="commentbtn" onclick="save_comment()">Comment</button>
+                    </div>
+            </form>
+          </div>
+
+          <div id="toggle_section_3" class="toggle_section">
+              Q&A
+          </div>
+
+
+
+
         </div>
 
     </div>
 </div>
 
+<div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>
