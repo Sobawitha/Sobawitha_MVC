@@ -394,11 +394,12 @@ else if($_SESSION['user_flag'] == 5){
 
                         <div class="categories">
                                 <ul type="" class="category">
-                                        <li><i class="fa-solid fa-circle" id="circle1"></i>FAQ's</li>
-                                        <li><i class="fa-solid fa-circle" id="circle2"></i>Feedback</li>
-                                        <li><i class="fa-solid fa-circle" id="circle3"></i>Annousments</li>
-                                        <li><i class="fa-solid fa-circle" id="circle4"></i>Jobs</li>
-                                        <li><i class="fa-solid fa-circle" id="circle5"></i>Introductions</li>
+                                        <li><i class="fa-solid fa-question" id="circle1"></i>FAQ's</li>
+                                        
+                                        <li><i class="fa-regular fa-comments" id="circle2"></i>Feedback</li>
+                                        <li><i class="fa-solid fa-bullhorn" id="circle3"></i>Annousments</li>
+                                        <li><i class="fa-solid fa-people-group" id="circle4"></i>Jobs</li>
+                                        <li><i class="fa-solid fa-layer-group" id="circle5"></i>Introductions</li>
                                 </ul>
                         </div>
                 </div>
