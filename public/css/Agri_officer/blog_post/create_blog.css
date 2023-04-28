@@ -41,7 +41,7 @@
     padding:40px 20px;
     border-radius:10px;
     box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
-    border-top:5px solid rgb(160, 196, 160);
+    border-top:5px solid rgb(63, 79, 63);
     text-align: center;
     align-items: center;
 }
@@ -58,10 +58,10 @@
 
 .add_new_post_section_body .add_new_post{
     padding:8px 8px;
-    color:rgb(0, 0, 0);
+    color:white;
     border-radius:25px;
     border:none;
-    background-color: rgb(160, 196, 160);
+    background-color: rgb(63, 79, 63);
     cursor:pointer;
     font-size: 11px;
     font-family: 'Montserrat', sans-serif;
@@ -241,7 +241,7 @@ input[type=file]::file-selector-button{
     padding:20px;
     background-color:white;
     box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
-    border-left:4px solid rgb(160, 196, 160);
+    border-left:4px solid rgb(63, 79, 63);
     width:95%;
     margin-bottom:15px;
     border-radius:5px;
@@ -269,6 +269,7 @@ input[type=file]::file-selector-button{
 
 .footer{
     margin-top:10px;
+    margin-left:75%;
 }
 
 .edit , .delete{
@@ -277,12 +278,17 @@ input[type=file]::file-selector-button{
     color:rgb(45, 45, 45);
 }
 
-#editbutton , #deletebutton{
-    font-size: 10px;
-    color:rgb(45, 45, 45);
+#editbutton , #deletebutton, #viewmoreButton{
+    font-size: 12px;
+    color:rgb(30, 104, 87);
+    cursor:pointer;
 }
 
 #deletebutton{
+    margin-left:25px;
+}
+
+#viewmoreButton{
     margin-left:25px;
 }
 
@@ -389,7 +395,7 @@ input[type=file]::file-selector-button{
     width:130%;
 }
 .search_bar .search_content{
-    border:2px solid rgb(41, 171, 56);
+    border:2px solid rgb(63, 79, 63);
     border-radius:20px;
     padding:10px;
     padding-left:15px;
@@ -415,7 +421,7 @@ input[type=file]::file-selector-button{
     cursor:pointer;
 }
 .search_bar .search_content{
-    border:2px solid rgb(160, 196, 160);
+    border:2px solid rgb(63, 79, 63);
     border-radius:20px;
     padding:5px;
     padding-left:15px;
@@ -428,7 +434,7 @@ input[type=file]::file-selector-button{
 }
 
 #search{
-    color:rgb(160, 196, 160);
+    color:rgb(63, 79, 63);
 }
 
 .search_bar input:focus{
@@ -454,7 +460,7 @@ input[type=file]::file-selector-button{
     padding-bottom:15px;
 }
 
-
+/*update popup*/
 #innovations{
     accent-color:  crimson;
     
@@ -470,15 +476,27 @@ input[type=file]::file-selector-button{
     margin-left:60px;
     accent-color: rgb(210, 250, 210);
 }
-#knowledges{
+
+/*for view resource*/
+#innovations_tag{
+    accent-color:  crimson;
+    
+}
+#knowledge_tag{
+    margin-left:80px;
     accent-color: rgb(134, 134, 53);
 }
-#new_techniques{
+#new_technique_tag{
     accent-color:  rgb(228, 196, 244);
 }
-#productions{
+#production_tag{
+    margin-left:60px;
     accent-color: rgb(210, 250, 210);
 }
+#discription_area{
+    height:250px;
+}
+
 
 /*diaplog box for delete*/
 
@@ -487,7 +505,7 @@ input[type=file]::file-selector-button{
     padding: 0;
     border-radius: 10px;
     margin-left:45%;
-    margin-top:15%;
+    margin-top:22%;
   }
   #deletePopup::backdrop{
     background-color: rgba(0, 0, 0, 0.5);
@@ -545,7 +563,7 @@ input[type=file]::file-selector-button{
 
 
   /*update popup*/
-  #updatePopup {
+  #updatePopup, #viewmorePopup {
     border: none;
     padding: 0;
     border-radius: 10px;
@@ -558,7 +576,11 @@ input[type=file]::file-selector-button{
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(1px);
   }
-  .updatePopup { 
+  #viewmorePopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  .updatePopup, .viewmorePopup { 
     min-height: 150px;
     padding:2rem;
     display: flex;
@@ -566,6 +588,10 @@ input[type=file]::file-selector-button{
   }
 
   .updatePopup .closebtn{
+    margin-left:5%;
+  }
+
+  .viewmorePopup .closebtn{
     margin-left:5%;
   }
 
@@ -588,4 +614,59 @@ input[type=file]::file-selector-button{
     display: none; /* hide the popup initially */
 }
 
+/*alert messages*/
 
+
+.success-msg {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  padding:8px 20px 8px 20px;
+  background-color:white;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+  /* border-left:7px solid green; */
+  margin-bottom:15px;
+  border-radius:10px;
+  line-height: 20px;
+  background-color: rgb(244, 255, 244);
+  transform: translateX(-50%);
+  font-size: 16px;
+  z-index: 9999;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background-color: #094b46;
+  z-index: 9998;
+}
+
+.error-msg {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    padding:8px 20px 8px 20px;
+    background-color:rgb(240, 217, 217);
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    margin-bottom:15px;
+    border-radius:10px;
+    line-height: 20px;
+    background-color: rgb(244, 222, 227);
+    transform: translateX(-50%);
+    font-size: 16px;
+    z-index: 9999;
+    color:rgb(234, 30, 74);
+}
+
+.progress-bar {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background-color: #4b0917;
+    z-index: 9998;
+  }

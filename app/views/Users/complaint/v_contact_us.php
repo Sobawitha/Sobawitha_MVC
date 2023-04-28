@@ -72,7 +72,7 @@ else if($_SESSION['user_flag'] == 5){
 
             <div class="contact_us_card">
                 <i class="fa-regular fa-comments" id="icon_contact_type"></i><br>
-                <a href="<?php echo URLROOT?>/forum/forum"><button class="contact_button">chat now</button></a>
+                <a href="<?php echo URLROOT?>/forum/forum"><button class="contact_button">Forum access</button></a>
                 <p class="date">Monday - Sunday</p>
                 <p class="time">24 Hours / 7 Days-a Week</p>
             </div>
@@ -108,8 +108,8 @@ else if($_SESSION['user_flag'] == 5){
                     <p class="contact_form_discription">Please select a topic below related to your inquiry. We'll show blog posts & forum that provide answers to some most common quections. If you dont find what you need, click 
                         through the prompts to access our contact form. </p>
                     <label for="email" class="label"><b>Your Email Address</b></label><br>
-                    <input type="text" name="email"  class="input_field" placeholder="you@gmail.com"  required></input><br><br>
-
+                    <input type="text" name="email"  class="input_field" value=<?php echo $_SESSION['user_email']?>  disabled></input><br><br>
+                    
                     <label for="type" class="label"><b>Type</b></label><br>
 
                     <div class="f_filter_section">
@@ -126,7 +126,7 @@ else if($_SESSION['user_flag'] == 5){
                     <input type="text" name="subject" class="input_field" placeholder=""   required></input><br><br>
                     
 
-                    <label for="discription" class="label"><b>How can we help</b></label><br>
+                    <label for="discription" class="label"><b>How can we help you</b></label><br>
                     <textarea width="250px" height="500px" class="discription" name="discription" required></textarea>
                     
 
@@ -147,8 +147,9 @@ else if($_SESSION['user_flag'] == 5){
     </div>
 </div>
 
-
+<div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>
 
 
 

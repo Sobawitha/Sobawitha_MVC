@@ -24,9 +24,9 @@ class blog_post extends Controller {
                     'image_err' => '',
                 ];
 
-                if(empty($data['image'])){
-                    $data['image_err']='Post image cannot be empty';
-                
+                if(empty($data['image_name'])){
+                    $_SESSION['image_err']='Post image cannot be empty';
+                    redirect('blog_post/display_all_blogposts');
                 }
                 else{
                     $fileExt=explode('.',$_FILES['image']['name']);
@@ -34,35 +34,36 @@ class blog_post extends Controller {
                     $allowed=array('jpg','jpeg','png');        
                 
                     if(!in_array($fileActualExt,$allowed)){
-                    $data['image_err']='You cannot upload files of this type';
-        
+                        $_SESSION['image_err']='You cannot upload files of this type';
                     }
 
                     if($data['image']['size']>0){
                     if(uploadFile($data['image']['tmp_name'],$data['image_name'],'/upload/blog_post_images/')){
                                 
                     }else{  
-                    $data['image_err']='Unsuccessful post image uploading';
+                        $_SESSION['image_err']='Unsuccessful post image uploading';
                     
                     }
                     }else{
-                    $data[ 'image_err'] ="Blog post image file size is empty";
+                        $_SESSION[ 'image_err'] ="Blog post image file size is empty";
                     
                     }
-              
 
-                if($this->blog_post_model->create_posts($data)){
-                    $_SESSION['alert_message'] = 'Your post has been successfully added!';
-                    redirect('blog_post/create_posts');
-                }
-                else{
-                    $_SESSION['alert_message'] = 'Post submitted fail.';
-                    redirect('blog_post/create_posts');
-                }
-            }
-            
-
-            
+                    if(!isset($_SESSION['image_err'])){
+                        if($this->blog_post_model->create_posts($data)){
+                            $_SESSION['alert_message'] = 'Your post has been successfully added!';
+                            redirect('blog_post/display_all_blogposts');
+                        }
+                        else{
+                            $_SESSION['alert_message'] = 'Post submitted fail.';
+                            redirect('blog_post/display_all_blogposts');
+                        }
+                    }
+                    else{
+                        redirect('blog_post/display_all_blogposts');
+                    }
+                    
+                }    
         }
         else{
             $data = [
@@ -82,6 +83,8 @@ class blog_post extends Controller {
 
 
     public function display_all_blogposts(){
+
+    if($_SESSION['user_id']){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
             if(isset($_POST['search_text'])){
@@ -125,6 +128,10 @@ class blog_post extends Controller {
             ];
             $this->view('Agri_officer/Blog_post/v_create_blog',$data);
         }
+    }
+    else{
+        redirect('Login/login');
+    }
             
     }
     

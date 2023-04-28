@@ -8,6 +8,7 @@
         }
    
         public function login(){
+            if(!isset($_SESSION['user_id'])){
             if($_SERVER['REQUEST_METHOD']=='POST'){
 
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -78,6 +79,10 @@
                 //load view
                 $this->view('Users/user/v_login_user', $data);
             }
+        }
+        else{
+            redirect('Login/login');
+        }
     } 
 
     public function createUserSession($loggeduser) {

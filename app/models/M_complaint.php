@@ -124,6 +124,13 @@ class M_complaint
 
     }
 
+    public function find_email($id){
+        $this->db->query('SELECT email as user_email from complaint where created_by=:user_id');
+        $this->db->bind(":user_id", $_SESSION['user_id']);
+        return $this->db->single();
+
+    }
+
 
 
 }

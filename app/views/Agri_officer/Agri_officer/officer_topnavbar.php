@@ -45,5 +45,4 @@
       <a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="dots"></i></a>
     </div>
   </div>
-
 </div>

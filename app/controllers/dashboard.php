@@ -27,11 +27,26 @@ class dashboard extends Controller{
 
     // officer-dashboard
     public function officer_dashboard(){
+        if(isset($_SESSION['user_id'])){
+        if(isset($_GET['page'])){
+            $page = $_GET['page'];
+        }
+        else{
+            $page=1;
+        }
+        $num_per_page = 9;
+        $start_from  = ($page - 1) * $num_per_page;
+        $_SESSION['num_per_page'] = $num_per_page;
+
         $no_of_blogpost = $this->dashboard_model->get_no_of_blogposts($_SESSION['user_id']);
         $no_of_post_category = $this-> dashboard_model->get_no_of_category();
         $no_of_forumpost = $this->dashboard_model->get_no_of_forumtopics($_SESSION['user_id']);
         $no_of_complaints = $this->dashboard_model->get_no_of_complaints($_SESSION['user_id']);
-        $forum_post_detail= $this->dashboard_model->get_all_forum_posts($_SESSION['user_id']);
+        $forum_post_detail= $this->dashboard_model->get_all_forum_posts($_SESSION['user_id'],$start_from,$num_per_page);
+        // $post_count_details = $this->dashboard_model->get_blogpost_count_details();
+
+        // var_dump($post_count_details);
+        // die();
         
         
         $data = [
@@ -43,12 +58,118 @@ class dashboard extends Controller{
         ];
         $this->view('Agri_officer/Dashboard/v_officer_dashboard', $data);
     }
-
-
-    public function category_donut_chart(){
-        $post_category_detail = $this->dashboard_model->get_category_detail();
-        echo json_encode($post_category_detail);
+    else{
+        redirect('Login/login');
     }
+    }
+
+    public function category_donut_chart() {
+        $post_category_detail = $this->dashboard_model->get_category_detail();
+    
+        if ($post_category_detail) {
+            // Create a response object with a "success" key and a "data" key
+            $response = [
+                "success" => true,
+                "data" => $post_category_detail
+            ];
+    
+            // Send the response as JSON
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } else {
+            // Return an error response
+            $response = [
+                "success" => false,
+                "message" => "Failed to retrieve category detail"
+            ];
+    
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }
+
+
+    public function blog_posts_linechart() {
+        try {
+            $post_count_details = $this->dashboard_model->get_blogpost_count_details();
+        
+            if ($post_count_details) {
+                // Create a response object with a "success" key and a "data" key
+                $response = [
+                    "success" => true,
+                    "data" => $post_count_details
+                ];
+        
+                // Send the response as JSON
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            } else {
+                // Return an error response
+                $response = [
+                    "success" => false,
+                    "message" => "Failed to retrieve category detail"
+                ];
+        
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            }
+        } catch (Exception $e) {
+            // Log the exception
+            error_log($e);
+        
+            // Return an error response
+            $response = [
+                "success" => false,
+                "message" => "An error occurred while fetching data"
+            ];
+        
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+        
+    }
+
+
+    public function complaint_bar_chart() {
+        try {
+            $complaint_count_details = $this->dashboard_model->get_complaint_count_details();
+        
+            if ($complaint_count_details) {
+                // Create a response object with a "success" key and a "data" key
+                $response = [
+                    "success" => true,
+                    "data" => $complaint_count_details
+                ];
+        
+                // Send the response as JSON
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            } else {
+                // Return an error response
+                $response = [
+                    "success" => false,
+                    "message" => "Failed to retrieve category detail"
+                ];
+        
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            }
+        } catch (Exception $e) {
+            // Log the exception
+            error_log($e);
+        
+            // Return an error response
+            $response = [
+                "success" => false,
+                "message" => "An error occurred while fetching data"
+            ];
+        
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+        
+    }
+    
 
     
 

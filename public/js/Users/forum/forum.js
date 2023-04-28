@@ -78,6 +78,9 @@ function display_reply(id){
 
 
 function edit_forum_post(id){
+    if(document.getElementById(`zoom_image-${id}`)){
+      document.getElementById(`zoom_image-${id}`).style.display='none';
+    }
     document.getElementById(`forum_discription-${id}`).disabled = false;
     document.getElementById(`forum_discription-${id}`).style.backgroundColor = "rgb(241, 252, 237)";
     document.getElementById(`forum_discription-${id}`).focus();
@@ -100,6 +103,9 @@ function cancel_edit(id){
 }
 
 function edit_forum_post_reply(id){
+    if(document.getElementById(`zoom_image_for_reply-${id}`)){
+      document.getElementById(`zoom_image_for_reply-${id}`).style.display='none';
+    }
     document.getElementById(`forum_reply_discription-${id}`).disabled = false;
     document.getElementById(`forum_reply_discription-${id}`).style.backgroundColor = "rgb(241, 252, 237)";
     document.getElementById(`forum_reply_discription-${id}`).focus();
@@ -140,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 });
 
+
 /*for alert message */
 window.onload = function() {
     create_blogpost_popup = document.getElementById("popup");
@@ -149,5 +156,111 @@ window.onload = function() {
         create_blogpost_popup.style.display = "none";
     }, 5000);
   };
+
+function zoomimage_popup_open(image){
+    const zoom_image_popup = document.getElementById('image_display_popup');
+    document.getElementById('close_popup').addEventListener('click',() => zoom_image_popup.close());
+    zoom_image_popup.showModal();
+    var imageElement = document.getElementById('zoom_popup_image');
+    var imgURL = ".././public/upload/forum_images/"+image;
+    imageElement.setAttribute('src', imgURL); 
+    
+  // Get the image and the popup element
+var img = document.getElementById("zoom_popup_image");
+var popup = document.getElementById("image_display_popup");
+
+// Set the initial zoom level and the maximum zoom level
+var zoomLevel = 1;
+var maxZoomLevel = 3;
+
+// Set the zoom area to be the width and height of the popup element
+var zoomAreaWidth = popup.offsetWidth;
+var zoomAreaHeight = popup.offsetHeight;
+
+// Add event listeners for zoom in and zoom out buttons
+document.getElementById("zoom_in_btn").addEventListener("click", function() {
+  if (zoomLevel < maxZoomLevel) {
+    zoomLevel += 0.1;
+    updateImageTransform();
+  }
+});
+
+document.getElementById("zoom_out_btn").addEventListener("click", function() {
+  if (zoomLevel > 1) {
+    zoomLevel -= 0.1;
+    updateImageTransform();
+  }
+});
+
+//Add event listener to close the popup when the user clicks outside of the image
+popup.addEventListener("click", function(e) {
+  if (e.target === popup) {
+    popup.style.display = "none";
+  }
+});
+
+// Add event listeners for drag and drop functionality
+var isDragging = false;
+var dragStartX, dragStartY;
+
+img.addEventListener("mousedown", function(e) {
+  isDragging = true;
+  dragStartX = e.clientX;
+  dragStartY = e.clientY;
+});
+
+img.addEventListener("mousemove", function(e) {
+  if (isDragging) {
+    var dragX = e.clientX - dragStartX;
+    var dragY = e.clientY - dragStartY;
+    var imgRect = img.getBoundingClientRect();
+    var popupRect = popup.getBoundingClientRect();
+    var maxX = popupRect.width - imgRect.width;
+    var maxY = popupRect.height - imgRect.height;
+    var newX = Math.max(0, Math.min(imgRect.left + dragX, maxX));
+    var newY = Math.max(0, Math.min(imgRect.top + dragY, maxY));
+    img.style.left = newX + "px";
+    img.style.top = newY + "px";
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+  }
+});
+
+img.addEventListener("mouseup", function(e) {
+  isDragging = false;
+});
+
+// Function to update the transform of the image based on the current zoom level and zoom area
+function updateImageTransform() {
+  var zoomAreaLeft = (zoomAreaWidth - (zoomAreaWidth / zoomLevel)) / 2;
+  var zoomAreaTop = (zoomAreaHeight - (zoomAreaHeight / zoomLevel)) / 2;
+
+  img.style.transform = "scale(" + zoomLevel + ") translate(" + zoomAreaLeft + "px, " + zoomAreaTop + "px)";
+}
+
+}
+
+/*alert message */
+window.addEventListener('load', function() {
+  var msgBox = document.querySelector('.error-msg');
+  if (msgBox) {
+    var progressBar = document.querySelector('.progress-bar');
+    var width = 0;
+    var intervalId = setInterval(function() {
+      if (width >= 100) {
+        clearInterval(intervalId);
+        setTimeout(function() {
+          msgBox.style.display = 'none';
+          progressBar.style.display = 'none';
+        }, 500);
+      } else {
+        width += 1;
+        progressBar.style.width = width + '%';
+      }
+    }, 20);
+  }
+});
+
+
 
 

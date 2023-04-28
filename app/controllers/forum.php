@@ -21,11 +21,10 @@ class forum extends Controller {
             'last_name'=>$_SESSION['lastname'],
             'image_name'=>$_FILES['image']['name'],
             'form_submit_message' => '',
-            'image_err' => '',
 
         ];
 
-        if(empty($data['image'])){
+        if(empty($data['image_name'])){
             $data = [
                 'subject' => trim($_POST['subject']),
                 'type' => trim($_POST['diss_type']),
@@ -33,7 +32,7 @@ class forum extends Controller {
                 'first_name'=>$_SESSION['username'],
                 'last_name'=>$_SESSION['lastname'],
                 'created_by' => $userid,
-                'image_name'=>'NULL',
+                'image_name'=>'',
     
             ];
 
@@ -51,7 +50,7 @@ class forum extends Controller {
             $allowed=array('jpg','jpeg','png');        
         
             if(!in_array($fileActualExt,$allowed)){
-                $data['image_err']='You cannot upload files of this type';
+                $_SESSION['image_err']='You cannot upload files of this type';
             }
     
 
@@ -59,20 +58,25 @@ class forum extends Controller {
             if(uploadFile($data['image']['tmp_name'],$data['image_name'],'/upload/forum_images/')){
                         
             }else{  
-            $data['image_err']='Unsuccessful forum image uploading';
+            $_SESSION['image_err']='Unsuccessful forum image uploading';
             
             }
             }else{
-            $data[ 'image_err'] ="forum image file size is empty";
+            // $_SESSION[ 'image_err'] ="forum image file size is empty";
             
             }
-        if($this->forum_model->add_new_discussion($data)){
-            redirect('forum/forum');
-           
+        if(!isset($_SESSION['image_err'])){
+            if($this->forum_model->add_new_discussion($data)){
+                redirect('forum/forum');  
+            }
+            else{
+                redirect('forum/forum');
+            }
         }
         else{
             redirect('forum/forum');
         }
+        
     }
 
     
@@ -94,18 +98,16 @@ class forum extends Controller {
             'image_name'=>$_FILES['image']['name'],
             'form_submit_message' => '',
             'image_err' => '',
-
         ];
 
-        if(empty($data['image'])){
+        if(empty($data['image_name'])){
             $data = [
                 'reply' => trim($_POST['reply']),
                 'discussion_id' => trim($_GET['discussion_id']),
                 'first_name'=>$_SESSION['username'],
                 'last_name'=>$_SESSION['lastname'],
                 'created_by' => $userid,
-                'image_name'=>"NULL",
-    
+                'image_name'=>"",
             ];
 
             if($this->forum_model->add_reply_for_discussion($data)){
@@ -123,7 +125,7 @@ class forum extends Controller {
             $allowed=array('jpg','jpeg','png');        
         
             if(!in_array($fileActualExt,$allowed)){
-                $data['image_err']='You cannot upload files of this type';
+                $_SESSION['image_err']='You cannot upload files of this type';
             }
     
 
@@ -131,24 +133,32 @@ class forum extends Controller {
             if(uploadFile($data['image']['tmp_name'],$data['image_name'],'/upload/forum_reply_images/')){
                         
             }else{  
-            $data['image_err']='Unsuccessful forum image uploading';
+            $_SESSION['image_err']='Unsuccessful forum image uploading';
             
             }
             }else{
-            $data[ 'image_err'] ="forum image file size is empty";
+           // $_SESSION[ 'image_err'] ="forum image file size is empty";
             
             }
-        if($this->forum_model->add_reply_for_discussion($data)){
-            redirect('forum/forum'); 
-        }
-        else{
-            redirect('forum/forum');
-        }
+            if(!isset($_SESSION['image_err'])){
+                if($this->forum_model->add_new_discussion($data)){
+                    redirect('forum/forum');  
+                }
+                else{
+                    redirect('forum/forum');
+                }
+            }
+            else{
+                // echo "come here";
+                // die();
+                redirect('forum/forum');
+            }
     }
     }
 
     /**display all forum posts */
     public function forum(){
+        if(isset($_SESSION['user_id'])){
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $search_cont=$_POST['search_text'];
@@ -183,6 +193,7 @@ class forum extends Controller {
                 
             }
             $this->view('Users/forum/v_forum',$data);
+            
         }
 
         else{
@@ -196,6 +207,10 @@ class forum extends Controller {
             ]; 
             $this->view('Users/forum/v_forum',$data);
         }
+    }
+    else{
+        redirect('Login/login');
+    }
         
     }
 
@@ -259,7 +274,7 @@ class forum extends Controller {
                     $allowed=array('jpg','jpeg','png');        
                 
                     if(!in_array($fileActualExt,$allowed)){
-                        $data['image_err']='You cannot upload files of this type';
+                        $_SESSION['image_err']='You cannot upload files of this type';
                     }
             
         
@@ -267,18 +282,20 @@ class forum extends Controller {
                     if(uploadFile($data['image']['tmp_name'],$data['image_name'],'/upload/forum_images/')){
                                 
                     }else{  
-                    $data['image_err']='Unsuccessful forum image uploading';
-                    
+                        $_SESSION['image_err']='Unsuccessful forum image uploading';
                     }
                     }else{
-                    $data[ 'image_err'] ="forum image file size is empty";
-                    
+                    //$_SESSION[ 'image_err'] ="forum image file size is empty";
                     }
               
         
-                    if($this->forum_model->edit_forum_post($data)){
-                        redirect('forum/forum');
-                    
+                    if(!isset($_SESSION['image_err'])){
+                        if($this->forum_model->edit_forum_post($data)){
+                            redirect('forum/forum');  
+                        }
+                        else{
+                            redirect('forum/forum');
+                        }
                     }
                     else{
                         redirect('forum/forum');
@@ -332,7 +349,7 @@ class forum extends Controller {
                     $allowed=array('jpg','jpeg','png');        
                 
                     if(!in_array($fileActualExt,$allowed)){
-                        $data['image_err']='You cannot upload files of this type';
+                        $_SESSION['image_err']='You cannot upload files of this type';
                     }
             
         
@@ -340,25 +357,30 @@ class forum extends Controller {
                     if(uploadFile($data['image']['tmp_name'],$data['image_name'],'/upload/forum_reply_images/')){
                                 
                     }else{  
-                    $data['image_err']='Unsuccessful forum image uploading';
+                    $_SESSION['image_err']='Unsuccessful forum image uploading';
                     
                     }
                     }else{
-                    $data[ 'image_err'] ="forum image file size is empty";
+                    //$_SESSION[ 'image_err'] ="forum image file size is empty";
                     
                     }
               
-        
-                    if($this->forum_model->edit_forum_post_reply($data)){
-                        redirect('forum/forum');
-                    
+                    if(!isset($_SESSION['image_err'])){
+                        if($this->forum_model->edit_forum_post_reply($data)){
+                            redirect('forum/forum');  
+                        }
+                        else{
+                            redirect('forum/forum');
+                        }
                     }
                     else{
                         redirect('forum/forum');
                     }
                 }
                 }
-    }}        
+    }}
+    
+    
     }
 
 ?>

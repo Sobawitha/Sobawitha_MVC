@@ -52,7 +52,7 @@ else if($_SESSION['user_flag'] == 5){
     </div>
 
     <div class="section_3">
-        <span class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to homepage</span><br><br><br>
+        <a href="<?php echo URLROOT?>/Pages/product_page" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
         <span class="title_1">fertilizer</span><br>
         <span class="title_2">For vegitable special</span>
 
@@ -149,7 +149,7 @@ else if($_SESSION['user_flag'] == 5){
             </div>
         </div>
 
-        <div class="filter">
+        <!-- <div class="filter">
             <table class="filter_table">
                 <tr>
                     <td id="filter_type_1" onclick="filter()">What's inside</td>
@@ -157,39 +157,48 @@ else if($_SESSION['user_flag'] == 5){
                     <td id="filter_type_3">FAQ's</td>
                 </tr>
             </table>
-        </div>
+        </div> -->
 
-        <div class="for_filter_type_1">
-            <div class="custormizable_item">
-                <div class="related_item_images">
-                    <img src="../images/related_item_image_2.jpg" id="related_item_image"></img>
-                </div>
-                <div class="related_item_discription">
-                    <span class="related_item_name">Vegitable fertilizer_1</span><br>
-                    <span class="see_more_related_item">See product details</span>
-                </div>
-            </div>
+        <div class="process_container">
+          <div class="form_button">
+            <span>What's inside</span>
+            <span>Comment</span>
+            <span>FAQ's</span>
+          </div>
+          <div class="for_filter_type_1">
+              <div class="custormizable_item">
+                  <div class="related_item_images">
+                      <img src="../images/related_item_image_2.jpg" id="related_item_image"></img>
+                  </div>
+                  <div class="related_item_discription">
+                      <span class="related_item_name">Vegitable fertilizer_1</span><br>
+                      <span class="see_more_related_item">See product details</span>
+                  </div>
+              </div>
 
-            <div class="custormizable_item">
-                <div class="related_item_images">
-                    <img src="../images/related_item_image_1.jpg" id="related_item_image"></img>
-                </div>
-                <div class="related_item_discription">
-                    <span class="related_item_name">Vegitable fertilizer_1</span><br>
-                    <span class="see_more_related_item">See product details</span>
-                </div>
-            </div>
-        </div>
+              <div class="custormizable_item">
+                  <div class="related_item_images">
+                      <img src="../images/related_item_image_1.jpg" id="related_item_image"></img>
+                  </div>
+                  <div class="related_item_discription">
+                      <span class="related_item_name">Vegitable fertilizer_1</span><br>
+                      <span class="see_more_related_item">See product details</span>
+                  </div>
+              </div>
+          </div>
 
-        <div class="for_filter_type_2">
-            comment section
-        </div>
+          <div class="for_filter_type_2">
+              comment section
+          </div>
 
-        <div class="for_filter_type_3">
-            Q&A
+          <div class="for_filter_type_3">
+              Q&A
+          </div>
         </div>
 
     </div>
 </div>
 
+<div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>

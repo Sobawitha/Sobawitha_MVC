@@ -25,20 +25,27 @@ else if($_SESSION['user_flag'] == 5){
 }?>
 
 <!-- popup alert -->
-<?php
-if(isset($_SESSION['alert_message'])){
+
+<?php if (isset($_SESSION['alert_message'])){
+    if($_SESSION['alert_message']=='Your complaint has been successfully added!'){
+        ?>
+            <div id="success-added-msg" class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['alert_message']; ?> <div class="progress-bar"></div></div>
+        <?php
+    }
+    else if($_SESSION['alert_message']=='Your complaint has been successfully updated!'){
+        ?>
+            <div id="success-updated-msg" class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['alert_message']; ?> <div class="progress-bar"></div></div>
+        <?php
+    }
+    else{
+        ?>
+            <div id="error-msg" class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['alert_message']; ?> <div class="progress-bar"></div></div>
+        <?php
+    }
+    ?>
     
-?>
-<!-- HTML code for the popup message -->
-<div id="popup">
-  <p><?php echo $_SESSION['alert_message']?></p>
-</div>
-
-<?php
-unset($_SESSION['alert_message']);
-}
-?>
-
+    <?php unset($_SESSION['alert_message']); ?>
+<?php } ?>
 
 <?php
 function setColor($type){
@@ -139,13 +146,13 @@ function setColor($type){
             
                     <div class="" id="individual_complaint">
                         <span class="<?php echo setColor($complaint->type);?>" ><i class="fa-solid fa-circle" id="circle" ></i></span>
-                        <span class="complaint"><?php echo $complaint->subject?></span><br>
+                        <span class="complaint"><?php echo $complaint->subject?></span><br><br>
+                        <span class="discription"><?php echo $complaint->discription?></span><br>
                         <span class="time"><?php echo $complaint->date?></span>
 
                         <div class="footer">
                         <?php if($complaint->current_status == 1){?>
-                                <!-- <span onclick="updatepopUpOpen(17,'thilina@gmail.com','order_status_product_availability','abc','def')"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span> -->
-                                <span onclick="updatepopUpOpen(<?php echo $complaint->complaint_id;?>,`<?php echo $complaint->email;?>`,`<?php echo $complaint->type;?>`,`<?php echo $complaint->subject;?>`,`<?php echo $complaint->message;?>`)"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span>
+                                <span onclick="updatepopUpOpen(<?php echo $complaint->complaint_id;?>,`<?php echo $complaint->email;?>`,`<?php echo $complaint->type;?>`,`<?php echo $complaint->subject;?>`,`<?php echo $complaint->discription;?>`)"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span>
                                 <i class="fa-solid fa-trash" id="deletebtn" onclick="popUpOpen(<?php echo $complaint->complaint_id?>)"></i><span class="delete">Delete</span>
                             <?php
                         }
@@ -172,8 +179,7 @@ function setColor($type){
                                 <div id="display_admin_reply-<?php echo $complaint->complaint_id?>" class="display_admin_reply">
                                 <i class="fa-solid fa-angle-right" id="angle_right"></i>
                                 <div class="admin_reply">
-                                    <span class="name"><?php echo '<img src=".././public/images/dp4.jpg"   alt="admin Picture"  class="admin_image">'; echo $complaint->replyuser_first_name; echo " " ; echo $complaint->replyuser_last_name ?><span class="date"><?php echo $complaint-> reply_date?></span></span>
-                                    
+                                    <span class="name"><?php echo '<img src=".././public/upload/profile_images/'.$complaint->r_user_profile_picture.'"   alt="admin Picture"  class="admin_image">'?><span class="admin_name"><?php echo $complaint->r_user_first_name." ".$complaint->r_user_last_name?></span></span>
                                     <span class="reply">I answered your question via email.Please check your mails.</span>
                                     <br>
                                     <span class="thank">Thank you.</span>
@@ -229,4 +235,6 @@ function setColor($type){
 </div>
 
 
+<div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>

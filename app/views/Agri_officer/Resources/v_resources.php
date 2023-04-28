@@ -57,7 +57,7 @@ function set_filterbtn_Color($tag){
             <div class="search_content">
                 
                     <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $data['search_text']?> " require/></span>
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+                    <span class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></span>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
@@ -196,11 +196,8 @@ function set_filterbtn_Color($tag){
                 
 
     <?php
-    if(!empty($_GET['category'])){
-        
-    }
-    else{
         $total_row_count = $data['row_count'];
+        //echo ($total_row_count);
         $uri = $_SERVER['REQUEST_URI'];
         if(isset($_GET['category'])){
             $category = trim($_GET['category']);
@@ -227,16 +224,13 @@ function set_filterbtn_Color($tag){
             echo "<a href='?category=".$category."&page=".($i)." '><span class='pagination_number $class'>$i</span></a>";
         }
     
-        if($i>$page){
+        if($i-1>$page){
             echo "<a href='?category=". $category."&page=".($page + 1)." '><span class='pagination_number' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
         }
-    }
-    
-
-    
     ?>
 
 </div>
 
-
+<div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>

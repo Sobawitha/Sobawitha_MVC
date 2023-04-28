@@ -311,7 +311,9 @@
 }
 
 /*Related post*/
-
+#card_link{
+    text-decoration: none;
+}
 .category_search{
     background-color: rgb(255, 255, 255);
     padding:20px;

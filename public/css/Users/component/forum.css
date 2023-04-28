@@ -997,6 +997,9 @@ input[type=file]::file-selector-button{
     margin-top:40px;
     transform:translate(40px,-70px);
 }
+/* button{
+    cursor:pointer;
+} */
 
 .upload_reply_images{
     display:none;
@@ -1021,19 +1024,76 @@ input[type=file]::file-selector-button{
     height:50px;
     border-radius:30px;
     margin-left:10px;
+    cursor:pointer;
 }
 
-.button_section{
-    margin-left:10px;
+/*Ziooom image*/
+#image_display_popup{
+    color:rgb(0, 0, 0);
+    border:none;
+    border-radius:5px;
+    font-size: 12px;
+    z-index:5000;
+    margin-left:35%;
+    margin-top:23%;
+    align-items:center;
 }
+
+
+.fa-magnifying-glass{
+    transform: translateX(-15px);
+    font-size:20px;
+    padding-left:5px;
+    border-radius:50px;
+    background-color: #f9f9f9;
+    color:#413b3b;
+    cursor:pointer;
+}
+
+.zoom_img{
+    align-items: center;
+    overflow: hidden;
+    background-color: #fcfdf2;
+}
+
+.zoom_popup_image{
+    max-width:250px;
+    max-height:400px;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+}
+
+#zoom_in_btn{
+    padding:4px 4px 4px 4px;
+    background-color: #e8efca;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+#zoom_out_btn{
+    margin-left:15px;
+    padding:4px 4px 4px 4px;
+    background-color: #f5f7ec;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+#close_popup{
+    position: absolute;
+    margin-left:65%;
+    font-size:15px;
+    cursor:pointer;
+}
+
 
 #edit_post{
-    background-color:rgb(0, 0, 0);
     color:white;
     padding:4px 8px;
     border:none;
     border-radius:5px;
     font-size: 12px;
+    background-color: black;
 }
 
 #cancel_edit{
@@ -1047,14 +1107,29 @@ input[type=file]::file-selector-button{
 }
 
 /*pop up message*/
-#popup {
+.error-msg {
     position: fixed;
-    top: 50%;
+    top: 30px;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
+    padding:8px 20px 8px 20px;
+    background-color:rgb(240, 217, 217);
+    box-shadow:0px 2px 4px 0px rgba(0,0,0,0.2);
+    margin-bottom:15px;
+    border-radius:10px;
+    line-height: 20px;
+    background-color: rgb(244, 222, 227);
+    transform: translateX(-50%);
+    font-size: 16px;
     z-index: 9999;
-    display: none; /* hide the popup initially */
+    color:rgb(234, 30, 74);
 }
+
+.progress-bar {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background-color: #4b0917;
+    z-index: 9998;
+  }

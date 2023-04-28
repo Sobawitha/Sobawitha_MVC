@@ -258,14 +258,16 @@ else if($_SESSION['user_flag'] == 5){
             <div class="related">
                 <p class="related_post_topic">Related posts</p>
                 <?php foreach($data['related_post'] as $related_post):?>
-                <div class="post_discription">
-                    <i class="fa-regular fa-bookmark" id="match"></i>
-                    <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $related_post->post_id?>&category=<?php echo $related_post->tag?>"><i class="fa-solid fa-arrow-up-right-from-square" id="visit"></i></a>
-                    <div class=""><p class="topic"> <?php echo $related_post->title?><span class="feed_category">(<?php echo $related_post->tag?>)</span></p></div>
-                    <p class="author">By <?php echo $related_post->first_name?> </p>
-                    <p class="feedback"><?php echo $related_post->no_of_likes?>-Likes <?php echo $related_post->count_comment?>-comment </p>
-                    
-                </div>
+                <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $related_post->post_id?>&category=<?php echo $related_post->tag?>" id="card_link">
+                    <div class="post_discription">
+                        <i class="fa-regular fa-bookmark" id="match"></i>
+                        <a href="<?php echo URLROOT?>/resources/view_individual_resource?blog_post_id=<?php echo $related_post->post_id?>&category=<?php echo $related_post->tag?>"><i class="fa-solid fa-arrow-up-right-from-square" id="visit"></i></a>
+                        <div class=""><p class="topic"> <?php echo $related_post->title?><span class="feed_category">(<?php echo $related_post->tag?>)</span></p></div>
+                        <p class="author">By <?php echo $related_post->first_name?> </p>
+                        <p class="feedback"><?php echo $related_post->no_of_likes?>-Likes <?php echo $related_post->count_comment?>-comment </p>
+                        
+                    </div>
+                </a>
                 <?php endforeach ?>
             </div>
             

@@ -8,6 +8,7 @@ class resources extends Controller
     }
 
     public function resource_page(){
+        if(isset($_SESSION['user_id'])){
         if(isset($_GET['page'])){
             $page = $_GET['page'];
         }
@@ -22,24 +23,34 @@ class resources extends Controller
         $best_resources = $this->resources_model->find_populerfeed();
         $row_count = $this->resources_model->count_num_of_rows()->no_of_rows;
 
-        // print_r($resources);
-        // die();
-
         if(empty($resources)){
-            // echo"EMPTY";
-            // die();
-            if(isset($_POST['search_text']) && !empty($_POST['search_text']))
+            if(isset($_POST['search_text']) && !empty($_POST['search_text'])) //seacr some text
             {
+                // echo"EMPTY1";
+                // die();
                 $data=[
                     'search_text'=>($_POST['search_text']),
                     'resource_page_display_message'=> 'match not found...',
                     'best_resources' => $best_resources,
-                    'row_count' => $row_count
+                    'row_count' => 0
                 ];
             }
-            else{
+            if(isset($_POST['search_text']) && empty($_POST['search_text'])) //not seacr some text press x mark
+            {
+                // echo"EMPTY1";
+                // die();
                 $data=[
-                    'search_text'=>'search by key-word',
+                    'search_text'=>'search by any key-word',
+                    'resource_page_display_message'=> 'match not found...',
+                    'best_resources' => $best_resources,
+                    'row_count' => 0
+                ];
+            }
+            else if(!isset($_POST['search_text'])){ //no search
+                // echo"EMPTY3";
+                // die();
+                $data=[
+                    'search_text'=>'search by any key-word',
                     'resource_page_display_message'=> 'match not found...',
                     'best_resources' => $best_resources,
                     'row_count' => $row_count
@@ -49,18 +60,38 @@ class resources extends Controller
             $this->view('Agri_officer/Resources/v_resources', $data);
         }
         else{
-            $data=[
-                'search_text'=>'search by key-word',
-                'resource_page_display_message'=> '',
-                'best_resources' => $best_resources,
-                'resources' => $resources,
-                'row_count' => $row_count
-            ];
-            $this->view('Agri_officer/Resources/v_resources', $data);
-        }
+            if(isset($_POST['search_text']) && !empty($_POST['search_text'])) // when there is some seacrh result and then press x mark
+            {
+                // echo"EMPTY3";
+                // die();
+                $data=[
+                        'search_text'=>($_POST['search_text']),
+                        'resource_page_display_message'=> '',
+                        'best_resources' => $best_resources,
+                        'resources' => $resources,
+                        'row_count' => $row_count
+                    ];
+                
+            }
             
-        }
-    /**code here */
+            else{  //no search
+                // echo"EMPTY3";
+                // die();
+                $data=[
+                    'search_text'=>'search by any key-word',
+                    'resource_page_display_message'=> '',
+                    'best_resources' => $best_resources,
+                    'resources' => $resources,
+                    'row_count' => $row_count
+                ];
+            }            
+            $this->view('Agri_officer/Resources/v_resources', $data);
+        } 
+    }
+    else{
+        redirect('Login/login');
+    }  
+    }
 
     
 
@@ -78,7 +109,7 @@ class resources extends Controller
                 ];
 
                 $individual_resource=$this-> resources_model ->view_individual_resource($data);
-                $related_post = $this->resources_model->related_post($data);
+                $related_post = $this->resources_model->related_post($data,$id);
                 $comments=$this-> resources_model ->display_all_comment($data);
                 $count_comment= $this-> resources_model ->count_all_comment($data);
                 $reply_for_comment = $this->resources_model->display_all_comment_for_reply($data);
