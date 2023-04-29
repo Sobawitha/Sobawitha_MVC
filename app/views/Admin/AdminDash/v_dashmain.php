@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/Admin/admin_dashboard.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Admin/admin_dashboard.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_topnavbar.php'?>
 <?php require APPROOT.'/views/Admin/Admin/admin_Sidebar.php'?>
@@ -124,8 +124,10 @@
 
 
           </div>
-              <script src="../js/Admin/Dashboard/fertilizer_ads_chart.js"></script>
-              <script src="../js/Admin/Dashboard/user_type_chart.js"></script>
+
+          <br>
+        
+           
         </div>
 
     </div>
