@@ -152,6 +152,7 @@
   
 .fa {
     font-size: 25px;
+    padding-top: 10px;
   }
   
 .checked {
@@ -269,8 +270,10 @@
     font-size:15px;
     font-weight:bold;
     margin-top:12px;
-    color: #654321 ;
+    margin-bottom: 10px;
+    color: #654321;
   }
+  
 
   .reg_no{
     font-size:15px;
