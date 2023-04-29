@@ -1,7 +1,7 @@
 
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
-<link rel="stylesheet" href="../css/Users/component/footer.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/footer.css"></link>
 <div class="footer_section">
     <div class="footer_content">
         <div class="coloumn-1">

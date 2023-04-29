@@ -101,26 +101,21 @@
         
                 
                 <div class="adv_card">
-                <div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $ads->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover;  background-position:center; margin:0px; padding:0px; ">
+                <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product/<?php echo $ads->Product_id ?>"><div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $ads->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover;  background-position:center; margin:0px; padding:0px; ">
                     
-                    <div class="product_detail">
+                      <div class="product_detail">
                         <span class="product_name"><?php echo strlen($ads->product_name) > 20 ? substr($ads->product_name,0,20)."..." : $ads->product_name ?></span><br>
 
                         <span class="owner"><?php echo strlen($ads->manufacturer) > 20 ? substr($ads ->manufacturer,0,20 )."..." : $ads -> manufacturer ?></span>
-                    </div>
-                </div>
-
+                    </div> 
+                 </div></a>
+                
                 <i class="fa-regular fa-heart" id="heart"></i>
 
                 <div class="discription">
                 <span class="price">Rs. <?php echo $ads->price ?></span>
                 <?php $avg_rating = round($ads->avg_rating); ?>
                
-                <!-- <span class="fas fa-star<?php echo ($avg_rating >= 1) ? ' checked' : ''; ?>"></span>
-              <span class="fas fa-star <?php echo ($avg_rating >= 2) ? 'checked' : ''; ?>"></span>
-              <span class="fas fa-star <?php echo ($avg_rating >= 3) ? 'checked' : ''; ?>"></span>
-              <span class="fas fa-star <?php echo ($avg_rating >= 4) ? 'checked' : ''; ?>"></span>
-              <span class="fas fa-star<?php echo ($avg_rating == 5) ? 'checked' : ''; ?>"></span> -->
                 <?php 
                 for ($i = 1; $i <= 5; $i++) {
                 $checked = ($i <= $avg_rating) ? 'checked' : '';
@@ -128,8 +123,8 @@
                 }
                 ?>
                 </div>
-
-            </div>
+                </div>
+            
             
                
 
@@ -147,12 +142,14 @@
         
          <?php foreach($data['allads'] as $allAds): ?>
                 <div class="adv_card">
-                <div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $allAds->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover; background-position:center; margin:0px; padding:0px;">
+                <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product/<?php echo $allAds->Product_id ?>">
+               
+                    <div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $allAds->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover; background-position:center; margin:0px; padding:0px;">
                     <div class="product_detail">
                         <span class="product_name"><?php echo strlen($allAds->product_name) > 20 ? substr($allAds->product_name,0,20)."..." : $allAds->product_name ?></span><br>
                         <span class="owner"><?php echo strlen($allAds->manufacturer) > 20 ? substr($allAds ->manufacturer,0,20 )."..." : $allAds -> manufacturer ?></span>
                     </div>
-                </div>
+                </div></a>
 
                 <i class="fa-regular fa-heart" id="heart"></i>
 
