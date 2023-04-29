@@ -127,11 +127,28 @@ class fertilizer_product extends Controller
         $crop_type = $content->crop_type;
         $type = $content->type;
         $similar = $this->fertilizer_product_model->show_similar($title,$crop_type,$type,$id);
-        
-        $data=[
+
+        /* */
+        $id=$_SESSION['user_id'];
+        $data =['product_id' => $content->Product_id]; /** */
+        $comment = $this->fertilizer_product_model->display_all_comment($data);
+        $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);
+        $question = $this->fertilizer_product_model->display_all_questions($data);
+        $answers = $this->fertilizer_product_model->display_all_answers($data);
+        $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
+        $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
+        $data = [
+            'comments' => $comment,
+            'reply_for_comment' => $reply_for_comment,
+            'question' => $question,
+            'answers' => $answers,
+            'current_user_gender' => $current_user_gender,
+            'product_owner_id' => $product_owner_id,
             'adcontent' => $content,
-            'similar' => $similar
+            'similar' => $similar,
+            'owner_id'=> $product_owner_id
         ];
+        
         $this->view('Users/component/individual_item',$data);
 
 
