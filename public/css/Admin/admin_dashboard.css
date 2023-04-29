@@ -397,3 +397,177 @@ table{
     color: #fff;
     border-color: #000000;
   } 
+
+/*chart status here*/
+
+.charts{
+  display:grid;
+  grid-template-columns: 2fr 1fr ;
+  grid-gap:10px;
+  width:100%;
+  margin:20px;
+  padding-top:0px;
+}
+
+.chart{
+  background-color: rgb(250, 252, 252);
+  padding:20px;
+  border-radius:10px;
+  border:1px solid rgb(233, 230, 230);
+  box-shadow:0px 7px 25px rgba(0,0,0,0.08);
+}
+
+.chartsLevel2{
+  display:grid;
+  grid-template-columns: 3fr 2fr ;
+  grid-gap:10px;
+  width:100%;
+  margin:20px;
+  padding-top:0px;
+}
+
+.chart h2{
+  margin-bottom:5px;
+  font-size:20px;
+  color:#666;
+  text-align:center;
+}
+
+th,td{
+  padding:10px; 
+  font-size: 12px;
+  border:1px solid lavender;
+  border-radius: 20px;
+}
+
+table{
+  margin-top:40px;
+  align-items: center;
+  border-collapse:collapse; /*make common border between adjecent cell */
+  width:100%;
+  height:200px;
+}
+
+.category_style{
+  background-color: salmon;
+  color:white;
+  font-size:8px;
+  padding:5px;
+  border-radius:50px;
+}
+
+/*set colors for category*/
+.set-green{
+  background-color: #36a736;
+  color:white;
+  font-size:8px;
+  padding:5px;
+  border-radius:50px;    
+}
+
+.set-yellow{
+  background-color: rgb(134, 134, 53);
+  color:white;
+  font-size:8px;
+  padding:5px;
+  border-radius:50px;
+}
+
+.set-orange{
+  background-color: crimson;
+  color:white;
+  font-size:8px;
+  padding:5px;
+  border-radius:50px;
+}
+
+.set-purple{
+  background-color: rgb(228, 196, 244);
+  color:white;
+  font-size:8px;
+  padding:5px;
+  border-radius:50px;
+}
+.set-blue{
+  background-color: rgb(81, 111, 143);
+  color:white;
+  font-size:8px;
+  padding:5px;
+  border-radius:50px;
+}
+
+@media(max-width:1115px){
+  .chart{
+      max-width: 1fr;
+  }
+}
+
+
+/*pagination*/
+.pages {
+  display:flex;
+  list-style:none;
+  justify-content: center;
+  transform: translateX(-25px);
+}
+
+.pages li{
+  border-color:black;
+  background-color:rgb(238, 255, 228);
+  cursor:pointer;
+  /* width:30px;
+  height:23px; */
+  text-align:center;
+  vertical-align: middle;
+  font-weight: bold;
+  margin-right:2px;
+  font-size:8px;
+  transform: translateX(-10px);
+  padding-top:9px;
+}
+
+
+.pages li:hover{
+  background-color: rgb(152, 196, 194);
+  color: white;
+  cursor:pointer;
+  box-shadow:0px 8px 16px 0px rgba(0,0,0,0.1);
+
+}
+
+.pagination{
+  margin-left:49%;
+  margin-top:2%;
+  display:inline-block;
+}
+
+.pagination_number:hover{
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+#forward_bracket, #backword_bracket{
+  transform: translate(0px,0px);
+  padding:5px 5px 5px 5px;
+  color:black;
+
+}
+
+.pagination_number {
+  width: 8px;
+  height: 15px;
+  display: inline-block;
+  padding: 4px 10px 10px 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  color: #333;
+  text-decoration: none;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.current_page {
+  background-color: #000000;
+  color: #fff;
+  border-color: #000000;
+}
