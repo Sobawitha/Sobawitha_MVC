@@ -57,12 +57,6 @@ class M_fertilizer_product
         return $this->db->resultSet();
     }
 
-    // public function count_all_comment($data){
-    //     $this->db->query('SELECT count(comment_id) as count_comment FROM fertilizer_product_comment WHERE product_id=:product_id');
-    //     $this->db->bind(":product_id", $data['product_id']);
-    //     return $this->db->resultset();
-    // }
-
     public function post_question($data){
 
         $this->db->query('INSERT INTO fertilizer_product_related_question ( product_id, asked_by, question) VALUES (:product_id, :asked_by, :question) ');
@@ -113,12 +107,6 @@ class M_fertilizer_product
         return $this->db->single();
     }
 
-    // public function count_a($data){
-    //     $this->db->query('SELECT count(comment_id) as count_comment FROM fertilizer_product_comment WHERE product_id=:product_id');
-    //     $this->db->bind(":product_id", $data['product_id']);
-    //     return $this->db->resultset();
-    // }
-
     public function find_owner_id($product_id){
         $this->db->query('SELECT created_by as owner_id from fertilizer where product_id=:product_id');
         $this->db->bind(":product_id", $product_id);
@@ -158,10 +146,6 @@ class M_fertilizer_product
         $this->db->bind(":id",$id);
         return $this->db->resultset();
     }
-    
-    
-
-
 
 }
 

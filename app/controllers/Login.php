@@ -90,16 +90,6 @@
                 $this->view('Users/user/v_login_user', $data);
             }
         }
-
-      
-
-    
-         
-
-               
- 
-    
-
     public function createUserSession($loggeduser) {
         $_SESSION['user_id']=$loggeduser->user_id;
         $_SESSION['username']=$loggeduser->first_name;
@@ -364,7 +354,7 @@
                     'password' => '',
                     'email' => '',
                     'pwd_token' => '',
- 
+
                     'new_pwd_err' => '',
                     'password_err' => '',
                     'confirm_password_err' => '',

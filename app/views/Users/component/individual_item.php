@@ -105,9 +105,6 @@ $content = $data['adcontent'];
     }
 ?>
 
-
-
-
 </p>
     </div>
 
