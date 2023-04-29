@@ -1,5 +1,5 @@
 <!--sidebar-->
-<link rel="stylesheet" href="../css/Users/component/sidebar.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/sidebar.css"></link>
 <script src="../js/component/sidebar.js"></script> 
 
 <?php
@@ -14,7 +14,7 @@ $current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HO
         <i class="fa-solid fa-bars" id="equal"></i>
         <i class="fa-solid fa-play" id="shape"></i>
     </div>
-    <?php echo '<img src="../'.$_SESSION['profile_image_path'].'"   alt="Profile Picture"  id="userprofileimage">';?>
+    <img src="<?php echo URLROOT ?>/public/upload/user_profile_pics/<?php echo $_SESSION['profile_image']?>"   alt="Profile Picture"  id="userprofileimage" />
      <div class="user_detail">
      <span class="uname"> <?php echo $_SESSION['username'] ," ",$_SESSION['lastname'] ?>  </span><br>
     <span class="position"><?php echo $_SESSION['position'] ?></span>

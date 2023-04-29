@@ -2,6 +2,8 @@
 
 class fertilizer_product extends Controller
 {
+    private $fertilizer_product_model;
+    private $resources_model;
     public function __construct()
     {
         $this->fertilizer_product_model = $this->model('M_fertilizer_product');
@@ -51,6 +53,27 @@ class fertilizer_product extends Controller
                 redirect('resources/view_individual_resource?blog_post_id='.$post_id. '&category='.$tag );
             }
         }
+    }
+
+    public function view_individual_product($id){
+        $content = $this->fertilizer_product_model->view_individual_product($id);
+        // $title = $content->product_name;
+        if (is_object($content)) {
+            $title = $content->product_name;
+        } else {
+            $title = "Unknown Product";
+        }
+        $crop_type = $content->crop_type;
+        $type = $content->type;
+        $similar = $this->fertilizer_product_model->show_similar($title,$crop_type,$type,$id);
+        
+        $data=[
+            'adcontent' => $content,
+            'similar' => $similar
+        ];
+        $this->view('Users/component/individual_item',$data);
+
+
     }
 
    
