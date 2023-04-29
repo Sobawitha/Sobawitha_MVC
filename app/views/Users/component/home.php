@@ -101,7 +101,7 @@
         
                 
                 <div class="adv_card">
-                <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product/<?php echo $ads->Product_id ?>"><div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $ads->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover;  background-position:center; margin:0px; padding:0px; ">
+                <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product?product_id=<?php echo $ads->Product_id ?>"><div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $ads->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover;  background-position:center; margin:0px; padding:0px; ">
                     
                       <div class="product_detail">
                         <span class="product_name"><?php echo strlen($ads->product_name) > 20 ? substr($ads->product_name,0,20)."..." : $ads->product_name ?></span><br>
@@ -142,7 +142,7 @@
         
          <?php foreach($data['allads'] as $allAds): ?>
                 <div class="adv_card">
-                <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product/<?php echo $allAds->Product_id ?>">
+                <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product?product_id=<?php echo $allAds->Product_id ?>">
                
                     <div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $allAds->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover; background-position:center; margin:0px; padding:0px;">
                     <div class="product_detail">

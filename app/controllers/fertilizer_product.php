@@ -9,26 +9,26 @@ class fertilizer_product extends Controller
         $this->fertilizer_product_model = $this->model('M_fertilizer_product');
     }
 
-    public function individual_item(){
-        // $product_id = trim($_GET['product_id']);
-        $id=$_SESSION['user_id'];
-        $data =['product_id' => 1];
-        $comment = $this->fertilizer_product_model->display_all_comment($data);
-        $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);
-        $question = $this->fertilizer_product_model->display_all_questions($data);
-        $answers = $this->fertilizer_product_model->display_all_answers($data);
-        $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
-        $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
-        $data = [
-            'comments' => $comment,
-            'reply_for_comment' => $reply_for_comment,
-            'question' => $question,
-            'answers' => $answers,
-            'current_user_gender' => $current_user_gender,
-            'product_owner_id' => $product_owner_id
-        ];
-        $this->view('Users/component/individual_item', $data);
-    }
+    // public function individual_item(){
+    //     // $product_id = trim($_GET['product_id']);
+    //     $id=$_SESSION['user_id'];
+    //     $data =['product_id' => 1];
+    //     $comment = $this->fertilizer_product_model->display_all_comment($data);
+    //     $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);
+    //     $question = $this->fertilizer_product_model->display_all_questions($data);
+    //     $answers = $this->fertilizer_product_model->display_all_answers($data);
+    //     $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
+    //     $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
+    //     $data = [
+    //         'comments' => $comment,
+    //         'reply_for_comment' => $reply_for_comment,
+    //         'question' => $question,
+    //         'answers' => $answers,
+    //         'current_user_gender' => $current_user_gender,
+    //         'product_owner_id' => $product_owner_id
+    //     ];
+    //     $this->view('Users/component/individual_item', $data);
+    // }
 
     //save comment
     public function post_comment(){
@@ -46,7 +46,7 @@ class fertilizer_product extends Controller
             ];
 
             if($this->fertilizer_product_model->post_comment($data)){
-                redirect('fertilizer_product/individual_item?product_id='.$product_id);
+                redirect('fertilizer_product/view_individual_product?product_id='.$product_id);
             }
         }
     }
@@ -68,7 +68,7 @@ class fertilizer_product extends Controller
             ];
 
             if($this->fertilizer_product_model->post_reply($data)){
-                redirect('fertilizer_product/individual_item?product_id='.$product_id );
+                redirect('fertilizer_product/view_individual_product?product_id='.$product_id );
             }
         }
     }
@@ -89,7 +89,7 @@ class fertilizer_product extends Controller
             ];
 
             if($this->fertilizer_product_model->post_question($data)){
-                redirect('fertilizer_product/individual_item?product_id='.$product_id);
+                redirect('fertilizer_product/view_individual_product?product_id='.$product_id);
             }
         }
     }
@@ -111,14 +111,14 @@ class fertilizer_product extends Controller
             ];
 
             if($this->fertilizer_product_model->post_answer($data)){
-                redirect('fertilizer_product/individual_item?product_id='.$product_id );
+                redirect('fertilizer_product/view_individual_product?product_id='.$product_id );
             }
         }
     }
 
-    public function view_individual_product($id){
+    public function view_individual_product(){
+        $id = $_GET['product_id'];
         $content = $this->fertilizer_product_model->view_individual_product($id);
-        // $title = $content->product_name;
         if (is_object($content)) {
             $title = $content->product_name;
         } else {
@@ -128,9 +128,10 @@ class fertilizer_product extends Controller
         $type = $content->type;
         $similar = $this->fertilizer_product_model->show_similar($title,$crop_type,$type,$id);
 
-        /* */
         $id=$_SESSION['user_id'];
-        $data =['product_id' => $content->Product_id]; /** */
+        $data =['product_id' =>  $_GET['product_id']]; 
+        // echo $data['product_id'];
+        // die();
         $comment = $this->fertilizer_product_model->display_all_comment($data);
         $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);
         $question = $this->fertilizer_product_model->display_all_questions($data);
