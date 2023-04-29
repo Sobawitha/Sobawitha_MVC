@@ -483,3 +483,5 @@ minusButton.addEventListener('click', () => {
 <div id="footer">
   <?php require APPROOT . '/views/Users/component/footer.php' ?>
 </div>
+
+
