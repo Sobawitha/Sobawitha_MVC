@@ -9,9 +9,42 @@ class M_resources
         $this->db = new Database();
     }
     
+    // public function count_num_of_rows(){
+    //     $this->db->query('SELECT count(post_id) as no_of_rows FROM view_post ');
+    //     return $this->db->single();
+    // }
+
     public function count_num_of_rows(){
-        $this->db->query('SELECT count(post_id) as no_of_rows FROM view_post ');
+        if((isset($_POST['search_text']) && !empty($_POST['search_text'])) && (isset($_GET['category']) && !empty($_GET['category']))){
+            $search_cont=($_POST['search_text']);
+            $this->db->query('SELECT count(post_id) as no_of_rows from view_post where ((upper(title) like upper(concat("%", :search_content , "%"))) or (upper(tag) like upper(concat("%", :search_content , "%"))) or
+            (upper(discription) like upper(concat("%", :search_content , "%"))) or (upper(first_name) like upper(concat("%", :search_content , "%"))) or (upper(last_name) like upper(concat("%", :search_content , "%")))) AND tag=:tag ');
+        $this->db->bind(":search_content", $search_cont);
+        $this->db->bind(":tag",$_GET['category']);
         return $this->db->single();
+    }
+    else if((isset($_POST['search_text']) && !empty($_POST['search_text'])) && (!isset($_GET['category']))){
+            $this->db->query('SELECT count(post_id) as no_of_rows from view_post where (upper(title) like upper(concat("%", :search_content , "%"))) or (upper(tag) like upper(concat("%", :search_content , "%"))) or
+            (upper(discription) like upper(concat("%", :search_content , "%"))) or (upper(first_name) like upper(concat("%", :search_content , "%"))) or (upper(last_name) like upper(concat("%", :search_content , "%"))) ');
+            $this->db->bind(":search_content", $_POST['search_text']);
+            return $this->db->single();
+    }
+    else if((!isset($_POST['search_text'])) && (isset($_GET['category']) && !empty($_GET['category']))){
+            if(($_GET['category']) == 'All categories'){
+                $this->db->query('SELECT count(post_id) as no_of_rows FROM view_post');
+            }
+            else{
+                $this->db->query('SELECT count(post_id) as no_of_rows FROM view_post where tag=:tag');
+                $this->db->bind(":tag",$_GET['category']);
+            }
+            
+            return $this->db->single();
+    }
+    else{
+            $this->db->query('SELECT count(post_id) as no_of_rows FROM view_post');
+            return $this->db->single();
+    }
+    
     }
 
     public function display_all_resources($start_from,$num_per_page){
@@ -72,8 +105,9 @@ class M_resources
     }
 
     public function related_post($data){
-        $this->db->query('SELECT * FROM view_post WHERE tag=:category');
+        $this->db->query('SELECT * FROM view_post WHERE tag=:category AND post_id!=:id');
         $this->db->bind(":category", $data['tag']);
+        $this->db->bind(":id", $data['resource_id']);
         return $this->db->resultSet();
     }
 

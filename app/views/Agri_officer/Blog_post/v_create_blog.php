@@ -9,19 +9,17 @@
 
 
 <!-- popup alert -->
-<?php
-if(isset($_SESSION['alert_message'])){
-    
-?>
-<!-- HTML code for the popup message -->
-<div id="popup">
-  <p><?php echo $_SESSION['alert_message']?></p>
-</div>
+<?php if (isset($_SESSION['alert_message'])): ?>
+    <div class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['alert_message']; ?> <div class="progress-bar"></div>
+    </div>
+    <?php unset($_SESSION['alert_message']); ?>
+<?php endif; ?>
 
-<?php
-unset($_SESSION['alert_message']);
-}
-?>
+<?php if (isset($_SESSION['image_err'])): ?>
+    <div class="error-msg"><i class="fa-solid fa-triangle-exclamation"></i> <?php echo $_SESSION['image_err']; ?> <div class="progress-bar"></div>
+    </div>
+    <?php unset($_SESSION['image_err']); ?>
+<?php endif; ?>
 
 
 <dialog id="updatePopup">
@@ -50,6 +48,29 @@ unset($_SESSION['alert_message']);
                         </div>
                 </form>
                 </div>
+                </div>
+</dialog>
+
+<dialog id="viewmorePopup">
+                <div class="viewmorePopup">
+                        <div class="dialog_content">
+                        <form method="POST" action="<?php echo URLROOT?>/blog_post/update_post" enctype="multipart/form-data">
+                        <a href=""><label for="" class="closebtn"><i class="fa fa-times-circle" aria-hidden="true"></i></label></a>
+                        <?php echo '<img src=".././public/upload/blog_post_images/background7.jpg"   alt="card Picture"  class="edit_post_image" id="upload_images">';?>
+                        <br>
+                        <label for="title" class="label"><b>Title</b></label><br>
+                        <input type="text" id="titles" name="title"  class="input_field" placeholder="" value=""  disabled></input><br><br>
+                        <label for="tags" class="label"><b>Tags/category</b></label><br>
+                        <div class="f_filter_section">
+                            <label for="innovations" id="filter_label"> <input type="radio" id="innovations_tag" name="tag" value="Innovations" disabled checked>Innovations</label>
+                            <label for="knowledge" id="filter_label"> <input type="radio" id="knowledge_tag" name="tag" value="Knowledge" disabled checked>Knowledge</label><br>
+                            <label for="new_technique" id="filter_label"><input type="radio" id="new_technique_tag" name="tag" value="New_technique" disabled checked>New technique</label>
+                            <label for="production" id="filter_label"><input type="radio" id="production_tag" name="tag" value="Production" disabled checked>Production</label><br>
+                        </div>
+                        <label for="discription" class="label"><b>Discription</b></label><br>
+                        <textarea width="250px" height="500px" class="discription"  id="discription_area" name="discription"  value="" disabled></textarea>
+                        </form>
+                        </div>
                 </div>
 </dialog>
 <?php
@@ -121,6 +142,7 @@ function setColor($tag){
                             <span class="edit">Edit</span>
                             </span>
                             <span  onclick="popUpOpen(<?php echo $blogpost->post_id?>)"><i class="fa-solid fa-trash deleteButton" id="deletebutton"></i><span class="delete">Delete</span></span>  
+                            <span  onclick="viewmorepopUpOpen(<?php echo $blogpost->post_id;?>,`<?php echo $blogpost->title;?>`,`<?php echo $blogpost->tag;?>`,`<?php echo $blogpost->discription;?>`,`<?php echo $blogpost->image;?>`)"><i class="fa-solid fa-hand" id="viewmoreButton"></i><span class="delete">View more</span></span>
                         </div>
                     </div>
 
@@ -203,7 +225,6 @@ function setColor($tag){
 </div>
 
     
-    
-
-
+<div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>

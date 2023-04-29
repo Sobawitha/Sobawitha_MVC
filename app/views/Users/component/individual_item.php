@@ -611,3 +611,6 @@ function display_answers(id){
     }
 }
 </script>
+<div id="footer">
+<?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>

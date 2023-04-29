@@ -249,6 +249,7 @@
                            'verify_code' => trim($_POST['verify_code']),
                            'user_id'=> $userRow -> user_id,
         
+        
                           
                            'token_err' => '',
                            'token_unmatch_err' =>'',
@@ -307,7 +308,41 @@
      
        }
 
-        
+       public function register_as_new_sletter(){
+        $current_url = $_GET['current_url'];
+        $url_parts = explode('/', $current_url);
+        $redirect_parts = array_slice($url_parts, 2);
+        $redirect_part = implode('/', $redirect_parts);
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data =[
+                'email'=> trim($_POST['email']),
+            ];
+
+            $no_of_users_have_samemail = $this->userModel->email_exists($data)->count_users;
+
+            if($no_of_users_have_samemail >0){
+                $_SESSION['error'] = 'Email is already taken';
+                redirect($redirect_part .'#footer');
+
+            }
+            else{
+                if($this->userModel->reg_as_new_sletter($data)){
+                    $_SESSION['error']='Your registration successfully';
+                    redirect($redirect_part.'#footer');
+                }
+                else{
+                    $_SESSION['error'] = 'Some thing happening wrong';
+                    redirect($redirect_part .'#footer');
+
+                }
+            }
+
+            
+        }
+    }
+
 
 
 }

@@ -34,19 +34,11 @@ else if($_SESSION['user_flag'] == 5){
 ?>
 
 <!-- popup alert -->
-<?php
-if(isset($_SESSION['alert_message'])){
-    
-?>
-<!-- HTML code for the popup message -->
-<div id="popup">
-  <p><?php echo $_SESSION['alert_message']?></p>
-</div>
-
-<?php
-unset($_SESSION['alert_message']);
-}
-?>
+<?php if (isset($_SESSION['image_err'])): ?>
+        <div class="error-msg"><i class="fa-solid fa-triangle-exclamation"></i> <?php echo $_SESSION['image_err']; ?> <div class="progress-bar"></div>
+        </div>
+        <?php unset($_SESSION['image_err']); ?>
+<?php endif; ?>
 
 
 
@@ -66,7 +58,6 @@ unset($_SESSION['alert_message']);
         </div>
         </form>
 
-       
                 <div class="forum">
                 <div class="new_discussion_button">
                         <button class="new_discussion" onclick="add_new_discussion()"><i class="fa-solid fa-circle-plus" id="add"></i>Start New Discussion </button>
@@ -108,6 +99,17 @@ unset($_SESSION['alert_message']);
                         </div>
                 </div>
                 </dialog>
+
+                <dialog id="image_display_popup">
+                        <div class="image_display_popup">
+                                <i class="fa-solid fa-magnifying-glass-plus" id="zoom_in_btn"></i>
+                                <i class="fa-solid fa-magnifying-glass-minus" id="zoom_out_btn"></i>
+                                <i class="fa-solid fa-xmark" id="close_popup"></i><br>
+                                <div class="zoom_img">
+                                        <?php echo '<img src=".././public/upload/blog_post_images/background7.jpg"   alt="card Picture"  class="zoom_popup_image" id="zoom_popup_image">';?>
+                                </div>
+                        </div>
+                </dialog>
                 
                 <!-- /*forum*/ -->
                 <div class="add_forum" >
@@ -124,7 +126,6 @@ unset($_SESSION['alert_message']);
                                                 <label for="jobs" id="filter_label"><input type="radio" id="jobs" name="diss_type" value="jobs">Jobs</label>
                                                 <label for="introductions" id="filter_label"><input type="radio" id="introductions" name="diss_type" value="Introductions">Introductions</label>
                                         </div>
-
                                         <label for="message" class="label"><b>Message</b></label><br>
                                         <input type="text" class="message" name="message" required></textarea>
                                 <div class="attachment">
@@ -199,9 +200,9 @@ unset($_SESSION['alert_message']);
                                                                 <br><br>
                                                                 <?php if($forum_discussion->forum_image != ''){?>     
                                                                         <?php echo '<img src=".././public/upload/forum_images/'.$forum_discussion->forum_image.'"   alt="card Picture"  class="edit_post_image" id="upload_image-'.$forum_discussion->discussion_id.'"> ';?>
-                                                                        <button type="" class="upload_images" id="upload_images-<?php echo $forum_discussion->discussion_id?>"><i class="fa-solid fa-upload "><span class="upload"></span></i></button>
+                                                                        <button type="button" class="upload_images" id="upload_images-<?php echo $forum_discussion->discussion_id?>"><i class="fa-solid fa-upload"><span class="upload"></span></i></button>
+                                                                        <span class="zoom_image" id="zoom_image"><i class="fa-solid fa-magnifying-glass" id="zoom_image-<?php echo $forum_discussion->discussion_id?>" onclick="zoomimage_popup_open(`<?php echo $forum_discussion->forum_image?>`)"></i></span> 
                                                                         <span class="uploard_img_hidden"><input type="file" class="upload_file" name="image" onchange="loadFile_for_forumpost(event,<?php echo $forum_discussion->discussion_id?>)" id="upload_image_link-<?php echo $forum_discussion->discussion_id?>" disabled></input></span>
-
                                                                         <br><br>
                                                                 <?php } ?>
                                                                 <div id="button_section-<?php echo $forum_discussion->discussion_id?>" class="button_section" hidden>
@@ -226,7 +227,7 @@ unset($_SESSION['alert_message']);
                                                 <i class="fa-regular fa-comment" id="comment"></i> <span class="post_details"> <?PHP echo $forum_discussion->no_of_reply?> Reply</span>
                                                 <br>
                                                 <i class="fa-solid fa-reply-all" id="reply" onclick="open_replyform(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="reply_discription">Reply</span><br>
-                                                <?php if($_SESSION['user_id']== $forum_discussion->created_by OR $_SESSION['user_flag'] == 'Admin'){
+                                                <?php if($_SESSION['user_id']== $forum_discussion->created_by OR $_SESSION['user_flag'] == 1){
                                                         ?>
                                                 <i class="fa-solid fa-pen-to-square" id="edit" onclick="edit_forum_post(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="edit_discription">Edit</span><br>
                                                 <i class="fa-solid fa-trash" id="delete" onclick="popUpOpen(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="delete_discription">Delete</span><br>
@@ -313,6 +314,7 @@ unset($_SESSION['alert_message']);
                                                                         <?php if($discussion_reply->reply_image != ''){?>
                                                                                 <?php echo '<img src=".././public/upload/forum_reply_images/'.$discussion_reply->reply_image.'"   alt="card Picture"  class="edit_post_image" id="upload_reply_image-'.$discussion_reply-> reply_id.'">';?>
                                                                                 <button type="" class="upload_reply_images" id="upload_reply_images-<?php echo $discussion_reply-> reply_id?>"><i class="fa-solid fa-upload "><span class="upload"></span></i></button>
+                                                                                <span class="zoom_image" id="zoom_image"><i class="fa-solid fa-magnifying-glass" id="zoom_image_for_reply-<?php echo $discussion_reply->reply_id?>" onclick="zoomimage_popup_open(`<?php echo $discussion_reply->reply_image?>`)"></i></span>
                                                                                 <span class="uploard_img_hidden"><input type="file" class="upload_file" name="image" onchange="loadFile_for_reply(event,<?php echo $discussion_reply-> reply_id?>)" id="upload_reply_image_link-<?php echo $discussion_reply-> reply_id?>" disabled></input></span>
                                                                                 <br><br>
                                                                         <?php } ?>
@@ -392,11 +394,12 @@ unset($_SESSION['alert_message']);
 
                         <div class="categories">
                                 <ul type="" class="category">
-                                        <li><i class="fa-solid fa-circle" id="circle1"></i>FAQ's</li>
-                                        <li><i class="fa-solid fa-circle" id="circle2"></i>Feedback</li>
-                                        <li><i class="fa-solid fa-circle" id="circle3"></i>Annousments</li>
-                                        <li><i class="fa-solid fa-circle" id="circle4"></i>Jobs</li>
-                                        <li><i class="fa-solid fa-circle" id="circle5"></i>Introductions</li>
+                                        <li><i class="fa-solid fa-question" id="circle1"></i>FAQ's</li>
+                                        
+                                        <li><i class="fa-regular fa-comments" id="circle2"></i>Feedback</li>
+                                        <li><i class="fa-solid fa-bullhorn" id="circle3"></i>Annousments</li>
+                                        <li><i class="fa-solid fa-people-group" id="circle4"></i>Jobs</li>
+                                        <li><i class="fa-solid fa-layer-group" id="circle5"></i>Introductions</li>
                                 </ul>
                         </div>
                 </div>
@@ -405,8 +408,10 @@ unset($_SESSION['alert_message']);
         </div>
 </div>
 
-
+<div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>
+
 
 
 
