@@ -29,10 +29,11 @@
         } else{
             redirect('Login/login');  
         }
+    }
 
-       
-    
-    
-   }
+    public function type_donut_chart(){
+        $user_category_detail = $this->adminDashModel->get_user_detail();
+        echo json_encode($user_category_detail);
+    }
 }
 ?>
