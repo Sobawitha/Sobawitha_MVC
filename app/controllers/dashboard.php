@@ -1,8 +1,9 @@
 <?php
 
 class dashboard extends Controller{
-
+    private $dashboard_model;
     public function __construct(){
+        
         $this->dashboard_model = $this->model('M_dashboard');
     }
 
