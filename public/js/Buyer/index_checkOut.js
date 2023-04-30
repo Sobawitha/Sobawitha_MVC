@@ -6,7 +6,7 @@ let checkBoxVal =  document.getElementById("checkvalue").value;
 
 checkOutBtn.addEventListener("click", async function () {
   let itemsToBuy = [];
-
+  
   for (var i = 0; i < orderElements.length; i++) {
     var orderElement = orderElements[i];
     var productId = orderElement.getAttribute("id").split("-")[1];
@@ -14,16 +14,19 @@ checkOutBtn.addEventListener("click", async function () {
     var productPrice = parseFloat(orderElement.getElementsByClassName("price")[0].innerText);
     var quantity = parseInt(orderElement.getElementsByClassName("input-qty")[0].value);
     var total = parseFloat(orderElement.getElementsByClassName("tot_price")[0].innerText);
+    
 
     var item = {
       productId: productId,
       productName: productName,
       productPrice: productPrice,
       quantity: quantity,
-      total: total
+      total: total,
+      
+
     };
 
-    console.log(itemsToBuy);
+  
 
     itemsToBuy.push(item);
   }

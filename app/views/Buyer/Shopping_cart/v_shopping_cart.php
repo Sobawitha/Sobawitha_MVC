@@ -29,6 +29,29 @@ if ($_SESSION['user_flag'] == 1) {
         </div>
 
         <div class="section_2">
+         
+
+
+        <?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
+    <div id="flash-message" >
+        <div class="flash-text">Order was successful .Check your email for information </div>
+        <div class="flash-loading"></div>
+    </div>
+<?php unset($_SESSION['order_status']); ?>
+<?php elseif(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'failure'): ?>
+     
+    <div id="flash-message" class = "flash-error">
+        <div class="flash-text">Order was unsuccessful Try Again</div>
+        <div class="flash-loading"></div>
+    </div>
+<?php unset($_SESSION['order_status']); ?>
+<?php endif; ?>
+
+
+
+
+
+
 
         <div class="order_list">
                 <div class="orders">
@@ -49,7 +72,7 @@ foreach($data['cart'] as $cart):{
                                 <div class="order_detail"  >
                                         <td>
                                             <div class="product_detail">
-                                                <img src="../images/vegitable.jpg" class="cart_image"></img>
+                                                <img src="http://localhost/Sobawitha_MVC/public/images/<?php echo $cart->product_img ?>" class="cart_image"></img>
                                                 <i class="fa-solid fa-xmark" id="cancel_order" data-id="<?php echo $cart->Product_id ?>"></i><br><br>
                                                 <span class="order_p_name"><?php echo $cart->product_name ?></span><br>
                                                 <span class="order_p_id"><?php echo $cart->Product_id ?></span><br>

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../css/Users/component/home.css"></link>
+<link rel="stylesheet" href="../css/Buyer/wish_list/wish_list.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <body>
     <header style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../public/images/background2.jpg);
@@ -112,7 +113,7 @@
 
             </div>
                 <?php
-            }?>
+            } ?>
             
 
             
@@ -207,7 +208,62 @@
         </div>
     </div>
 
+    <dialog id="deletePopup">
+                <div class="deletePopup">
+                
+                        <div class="delete_dialog_heading">
+                 
+                        
+                        <p><?php if(isset($_SESSION['wishlist_error'])){
+                            echo $_SESSION['wishlist_error']; unset($_SESSION['wishlist_error']);}?></p>
+                        
+                        </div>
+                 
+                        <div class="dialog_content">
+                            <!-- <form method="POST" action="<?php echo URLROOT?>/blog_post/delete_post">
+                            <button id="deletebtn" type="submit" value="" name="deletepost">Delete
+                            </button>-->
+                            <button id="cancelbtn" type="button">Cancel
+                            </button>
+                           <!-- </form> -->
 
+                            
+                        </div>
+                </div>
+            </dialog>
+
+
+ <script type="text/javascript">
+let p = document.querySelector('.delete_dialog_heading p');
+var deletePopup = document.getElementById("deletePopup");
+; // Change the height to 300 pixels
+let button  = document.getElementById('cancelbtn');
+ function popUpOpen() {
+    const deletePopup = document.getElementById('deletePopup')
+  //   document.getElementById('delete').addEventListener('click',() => deletePopup.showModal());
+  cancelbtn.style.backgroundColor =  "#AEF359";
+  cancelbtn.style.color = "white";
+  cancelbtn.style.outline = "none";
+  deletePopup.style.overflow = "hidden";
+  deletePopup.style.borderRadius = "10px";
+  p.style.fontSize = "20px";
+  deletePopup.style.width = "300px"; // Change the width to 500 pixels
+  deletePopup.style.height = "150px"
+  document.getElementById('cancelbtn').addEventListener('click',() => deletePopup.close());
+  deletePopup.showModal();
+//   document.getElementById('deletebtn').value=id;
+  
+}
+
+if(p.innerHTML != ""){
+    popUpOpen();
+}
+
+
+
+ 
+
+</script>
 <?php
 
 include 'footer.php';

@@ -46,7 +46,12 @@ public function addToWishlist($pro_id){
  
 
 
-
+if($this->wishlistModel->findByWishlistId($pro_id))
+{   
+    $_SESSION['wishlist_error'] = "Item already in wishlist";
+    redirect('Pages/home');
+    return;
+}
 
   
     $this->wishlistModel->insertItem($pro_id);

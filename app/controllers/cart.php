@@ -7,6 +7,8 @@ class cart extends Controller
     public function __construct()
     {
         $this->cartModel = $this->model('M_shopping_cart');
+        $this->orderModel = $this->model('M_order');
+        $this->paymentModel = $this->model('M_seller_payment');
     }
 
     public function display_all_items()
@@ -84,19 +86,24 @@ class cart extends Controller
             $total = 0;
             $lineItems = [];
             foreach ($items as $item) {
-                $total += $item->productPrice * $item->quantity;
+                $total += $item->productPrice*$item->quantity;
+              
                 $lineItems[] = [
 
-                    'images' => [],
 
                     'quantity' => $item->quantity,
                     'price_data' => [
-                        'currency' => 'usd',
-                        'unit_amount' => $item->productPrice,
+                        'currency' => 'lkr',
+                        'unit_amount' => $item->productPrice*100,
                         'product_data' => [
                             'name' => $item->productName,
+                            'metadata' => [
+                                'product_id' => $item->productId,
+                            ]
+                         
 
-                        ],
+                        ]
+                        
 
                     ],
 
@@ -105,10 +112,12 @@ class cart extends Controller
             }
         
         $stripe = new \Stripe\StripeClient('sk_test_51MskWIIz6Y8hxLUJq8DTBxJ0xInEFNHtBn9H1i30ReXNtkRg6eAIrpz74kd2HYPYXN0v2TnqoT9jBMnJxWdqYXXu00gAVFTXaI');
+        $serialized_line_items = json_encode($lineItems);
+        $success_url = URLROOT . '/cart/createOrder?line_items='.urlencode($serialized_line_items);
         $session = $stripe->checkout->sessions->create([
             'payment_method_types' => ['card'],
-            'success_url' => 'http://localhost/ecommerce/public/cart?status=success',
-            'cancel_url' => 'http://localhost/ecommerce/public/cart?status=cancel',
+            'success_url' => $success_url,
+            'cancel_url' => URLROOT.'/cart'.'/payment_cancelled',
             'mode' => 'payment',
             'line_items' => $lineItems
         ]);
@@ -133,6 +142,53 @@ class cart extends Controller
 
 
   
+
+}
+
+
+
+public function createOrder()
+{     
+      $orderData = $_GET["line_items"];
+      $orderData = urldecode($orderData);
+      $orderData = json_decode($orderData, true);
+      if(isset($_SESSION['user_id']))
+
+      {
+         
+          
+          if($this->orderModel->createOnlineOrder($orderData)){
+                    $_SESSION['order_status'] = "success";
+                    $this->cartModel->clearAll();
+                    
+                    
+                    redirect('Cart/display_all_items');
+                }
+                
+          else {
+        
+            $_SESSION['order_status'] = "failure"; 
+            redirect('Cart/display_all_items');
+        }
+                }
+          
+          
+          
+       
+      
+
+      
+  
+    
+   else{
+
+    
+    print_r($orderData);
+      
+
+
+   }
+
 
 }
 

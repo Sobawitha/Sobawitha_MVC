@@ -10,6 +10,64 @@
     
 }
 
+#flash-message {
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  #flash-message.show {
+    opacity: 1;
+  }
+  
+  .flash-text {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .flash-loading {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    animation: flash-loading 1s ease-in-out infinite;
+  }
+  
+  #flash-message:not(.flash-error) {
+    background-color: #36f47f;
+    color: black;
+  }
+  
+  #flash-message:not(.flash-error) .flash-loading {
+    border-color: #fff;
+  }
+  
+  .flash-error .flash-text {
+    color: white;
+    background-color: red;
+  }
+
+
+  @keyframes flash-loading {
+    0% {
+      transform: scale(0.5);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+  
+
 .section_1{
     /* background-color:bisque; */
 }

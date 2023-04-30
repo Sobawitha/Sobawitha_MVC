@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="../css/Users/component/product_page.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
-<script src="../js/Users/component/product_page.js"></script>
 
 <div class="nav">
             <nav>
@@ -27,11 +26,15 @@
         <div class="filter_type_1">
             <span class="title">Brand</span><br>
             <div class="all_brands">
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">ABC producers</label><br>
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">Sara bhoomi</label><br>
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">Govi mithuru</label><br>
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">ABC producers</label><br>
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">Saru ketha</label><br>
+            <?php foreach($data['products'] as $product): ?>
+               
+           
+           
+           
+                <label for="brand_1" > <input type="checkbox"  name="brands" value="<?php echo $product->manufacturer?>"><?php echo $product->manufacturer?></label><br>
+              
+
+                <?php endforeach; ?>
                 <span class="view_more">view more</span>
             </div>
         </div>
@@ -41,10 +44,13 @@
         <div class="filter_type_2">
             <span class="title">Type</span><br>
             <div class="all_types">
-                <label for="type" id="type"> <input type="checkbox" id="type" name="brands" value="type">Liquid</label><br>
-                <label for="type" id="type"> <input type="checkbox" id="type" name="brands" value="type">Solid</label><br>
-                <label for="type" id="type"> <input type="checkbox" id="type" name="brands" value="type">Packet</label><br>
-                <label for="type" id="type"> <input type="checkbox" id="type" name="brands" value="type">Bottles</label><br>
+          
+
+
+                <label> <input type="checkbox"  name="brands" value="Liquid">Liquid</label><br>
+                <label> <input type="checkbox"  name="brands" value="Solid">Solid</label><br>
+                <label> <input type="checkbox"  name="brands" value="Packet">Packet</label><br>
+                <label> <input type="checkbox"  name="brands" value="Bottles">Bottles</label><br>
             </div>
         </div>
         
@@ -53,11 +59,26 @@
         <div class="filter_type_3">
             <span class="title">Price</span><br>
             <div class="all_prices">
-            <label for="price" id="price"> <input type="radio" id="price" name="diss_type" value="price">Rs.5000.00 or more</label><br>
+            <!-- <label for="price" id="price"> <input type="radio" id="price" name="diss_type" value="price">Rs.5000.00 or more</label><br>
             <label for="price" id="price"> <input type="radio" id="price" name="diss_type" value="price">Rs.5000.00 or less</label><br>
             <label for="price" id="price"> <input type="radio" id="price" name="diss_type" value="price">Rs.2500.00 or less</label><br>
-            <label for="price" id="price"> <input type="radio" id="price" name="diss_type" value="price">Rs.1000.00 or less</label><br>
+            <label for="price" id="price"> <input type="radio" id="price" name="diss_type" value="price">Rs.1000.00 or less</label><br> -->
+            
+            <div class="field">
+              <span>Min</span>
+              <input type="number" class="input-min" value="2500">
             </div>
+            <div class="separator">
+                -
+            </div>
+            <div class="field">
+             <span>Max</span>
+             <input type="number" class="input-max" value="7500">
+            </div>
+        
+        
+        
+        </div>
         </div>
 
         <hr class="filter_hr">
@@ -65,10 +86,10 @@
         <div class="filter_type_4">
             <span class="title">Quantity</span><br>
             <div class="all_quantity">
-            <label for="quantity" id="filter_label"> <input type="radio" id="quantity" name="diss_type" value="quantity">5 kg or more</label><br>
-            <label for="quantity" id="filter_label"> <input type="radio" id="quantity" name="diss_type" value="quantity">less than Rs.5000.00</label><br>
-            <label for="quantity" id="filter_label"> <input type="radio" id="quantity" name="diss_type" value="quantity">Innovations</label><br>
-            <label for="quantity" id="filter_label"> <input type="radio" id="quantity" name="diss_type" value="quantity">Innovations</label><br>
+            <label > <input type="radio"  name="diss_type" value="1">5 kg or more</label><br>
+            <label > <input type="radio"  name="diss_type" value="2">1kg to 5kg</label><br>
+            <label > <input type="radio"  name="diss_type" value="3">Below 5kg</label><br>
+            <label > <input type="radio"  name="diss_type" value="4">Innovations</label><br>
             
             </div>
         </div>
@@ -78,15 +99,17 @@
         <div class="filter_type_5">
             <span class="title">Location</span><br>
             <div class="all_locations">
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
+                
+              <?php foreach($data['provinces'] as $province): ?>
+               
+           
+           
+             <label> <input type="checkbox"  name="location" value="<?php echo $province ?>"><?php echo $province ?></label><br> 
+                
+            
+             
+
+               <?php endforeach; ?> 
             </div>
         </div>
 
@@ -97,17 +120,23 @@
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" " required/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
-                
+
+                    
+                    </div>
+                    <div class="live-search-result">
+                        <ul class="search-result">
+                             
+                        </ul>
             </div>
         </div>
 
         <div class="dropdown-content" hidden>
-            <a href="">Best Match</a>
-            <a href="">Price Low to High</a>
-            <a href="">Price High to Low</a>
+         
+            <a onclick = >Price Low to High</a>
+            <a onclick >Price High to Low</a>
         </div>
 
         <div class="search_bar_filter">
@@ -122,20 +151,22 @@
 
         <div class="recent_product_card_section">
 
-            <?php
-            for($i=0; $i<12; $i++){
-                ?>
-                
-                <div class="adv_card">
-                <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
+       
+
+
+<?php foreach($data['products'] as $product): ?>
+               
+           
+    <div class="adv_card">
+                <div class="card_image" style="background: url(../images/<?php echo $product->fertilizer_img?>.jpg); background-size: cover;
                                                 height:75%;
                                                 -webkit-background-size:cover ;
                                                 background-position:center;
                                                 margin:0px;
                                                 padding:0px;">
                     <div class="product_detail">
-                        <span class="product_name">Tea fertilizer</span><br>
-                        <span class="owner">By ABC production</span>
+                        <span class="product_name"><?php echo $product->product_name; ?></span><br>
+                        <span class="owner"><?php echo $product->manufacturer?></span>
                     </div>
                 </div>
 
@@ -147,15 +178,17 @@
                     <i class="fa-solid fa-star" id="star"></i>
                     <i class="fa-regular fa-star" id="star"></i>
                     <i class="fa-regular fa-star" id="star"></i>
-                    <span class="price"> Rs. 500.00</span>
+                    <span class="price"> <?php echo $product->price?></span>
                     
                 </div>
             </div>
                 
-                <?php
-            }
-            
-            ?>
+             
+                  
+              
+               
+  
+                 <?php endforeach; ?> 
         </div>
 
     </div>
@@ -165,5 +198,5 @@
     </div>
 </div>
 
+<script src="../js/Buyer/product_page.js" ></script>
 
-<?php require APPROOT.'/views/Users/component/footer.php'?>

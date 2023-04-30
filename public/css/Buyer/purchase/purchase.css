@@ -34,7 +34,7 @@
 /*search section*/
 .search_bar{
     /* margin-top:20px; */
-    width:100%;
+    width:85%;
 }
 .search_bar .search_content{
     border:2px solid rgb(55, 100, 98);

@@ -4,8 +4,7 @@
 }
 .body{
     display:grid;
-    grid-template-columns:20% 75% 5%;
-    height:100%;    
+    grid-template-columns:20% 75% 5%;   
 }
 
 .section_1{
@@ -86,12 +85,14 @@ nav{
 .search_bar .search_content{
     border:1px solid lightgreen;
     border-radius:20px;
-    padding:8px;
-    padding-left:15px;
+    
+    padding-left:10px;
 }
 
 .search_bar input{
     width:93%;
+    margin-top: 10px;
+    margin-left:20px;
     border-radius: 20px;
     border:none;
     font-family:'Montserrat', sans-serif;
@@ -100,7 +101,11 @@ nav{
 
 #search{
     color:lightgreen;
+    position: relative;
+    top: -17px; 
+    
 }
+
 
 .search_bar input:focus{
     outline:none;
@@ -111,6 +116,7 @@ nav{
     border:none;
     cursor:pointer;
 }
+
 
 .search_and_filter{
     display:flex;
@@ -151,11 +157,13 @@ nav{
     text-decoration: none;
     display:inline-block;
     margin: 0;
+    cursor: pointer;
     font-size:13px;
   }
   
   .dropdown-content a:hover {
     color: #004100;
+    background-color: #999;
   }
   
   .filter_title{
@@ -207,7 +215,7 @@ nav{
     font-size:14px;
 }
 
-.all_brands,.all_types, .all_prices, .all_quantity, .all_locations{
+.all_brands,.all_types,  .all_quantity, .all_locations{
     display: flex;
     flex-direction: column;
     gap: 0.01rem; 
@@ -220,6 +228,41 @@ nav{
     font-size:12px;
 
 }
+.all_prices{
+    width: 100%;
+    display: flex;
+    margin: 30px 0 35px;
+    font-size:12px;
+}
+.all_prices .field{
+        display: flex;
+        width: 100%;
+        height: 45px;
+        align-items: center;
+   
+}
+.field input{
+    width: 100%;
+    height: 80%;
+    outline: none;
+    font-size: 12px;
+    margin-left: 5px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #999;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  .all_prices .separator{
+    width: 100px;
+    display: flex;
+    font-size: 19px;
+    align-items: center;
+    justify-content: center;
+  }
 
 .filter_hr{
     margin-right:30px;
@@ -331,3 +374,6 @@ nav{
     margin-left:7px;
     color:gray;
 }
+
+
+  
