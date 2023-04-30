@@ -8,24 +8,27 @@ class complaint extends Controller
     }
 
     public function contact_us(){
+        $userid = $_SESSION['user_id'];
+        $user_email = $this->complaint_model-> find_email($userid)->user_email;
+        $_SESSION['user_email']=$user_email;
+
         $data = [];
         $this->view('Users/complaint/v_contact_us', $data);
     }
 
     public function add_complaint(){
-
+        
         
 
         // redirect('complaint/complaint');
         if($_SERVER['REQUEST_METHOD']=='POST'){
             //form is submitted
-
+            $userid = $_SESSION['user_id'];
             //save the post
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $userid = $_SESSION['user_id'];
 
             $data = [
-                'email' => trim($_POST['email']),
+                'email' => trim($_SESSION['user_email']),
                 'type' => trim($_POST['type']),
                 'subject' => trim($_POST['subject']),
                 'discription' => trim($_POST['discription']),
@@ -35,10 +38,12 @@ class complaint extends Controller
             ];
 
             if ($this->complaint_model->add_complaint($data)) {
+                unset($_SESSION['user_email']);
                 $_SESSION['alert_message'] = 'Your complaint has been successfully added!';
                 redirect('complaint/display_all_complaint');
             }
             else{
+                unset($_SESSION['user_email']);
                 $_SESSION['alert_message'] = 'Your complaint fail to add!';
                 redirect('complaint/display_all_complaint');
             }    
@@ -52,6 +57,7 @@ class complaint extends Controller
 
 
     public function display_all_complaint(){
+        if(isset($_SESSION['user_id'])){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
             if(isset($_POST['search_text'])){
@@ -95,6 +101,10 @@ class complaint extends Controller
             ];
             $this->view('Users/complaint/v_complaint', $data);
         }
+    }
+    else{
+        redirect('Login/login');
+    }
             
     }
 

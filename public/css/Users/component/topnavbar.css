@@ -201,8 +201,4 @@ body {
 }
 
 
-/* Hovered when selected */
-.nav-link a.active{
-  color:rgb(230, 160, 19);
-  font-weight:bold;
-}
+

@@ -1,0 +1,134 @@
+<button><i class="fa-solid fa-magnifying-glass-plus" id="zoom_image" onclick="openPopup(<?php echo $forum_discussion->discussion_id?>)></i></button>
+                                                                        
+                                                                        <dialog id="image_display_popup">
+                                                                                <div class="image_display_popup">
+                                                                                        <div class="image">
+                                                                                        hiiii    
+                                                                                        </div>
+                                                                                </div>
+                                                                        </dialog>
+
+
+
+/*pop up*/
+// Get the image and the popup element
+    var img = document.getElementById("zoom_popup_image");
+    var popup = document.getElementById("image_display_popup");
+
+    // Set the initial zoom level and the maximum zoom level
+    var zoomLevel = 1;
+    var maxZoomLevel = 3;
+
+    // Set the zoom area to be the width and height of the popup element
+    var zoomAreaWidth = popup.offsetWidth;
+    var zoomAreaHeight = popup.offsetHeight;
+
+    // Add event listeners for zoom in and zoom out buttons
+    document.getElementById("zoom_in_btn").addEventListener("click", function() {
+    if (zoomLevel < maxZoomLevel) {
+        zoomLevel += 0.1;
+        updateImageTransform();
+    }
+    });
+
+    document.getElementById("zoom_out_btn").addEventListener("click", function() {
+    if (zoomLevel > 1) {
+        zoomLevel -= 0.1;
+        updateImageTransform();
+    }
+    });
+
+    // Add event listener to update the zoom area when the popup is resized
+    window.addEventListener("resize", function() {
+    zoomAreaWidth = popup.offsetWidth;
+    zoomAreaHeight = popup.offsetHeight;
+    updateImageTransform();
+    });
+
+    // Function to update the transform of the image based on the current zoom level and zoom area
+    function updateImageTransform() {
+    var zoomAreaLeft = (zoomAreaWidth - (zoomAreaWidth / zoomLevel)) / 2;
+    var zoomAreaTop = (zoomAreaHeight - (zoomAreaHeight / zoomLevel)) / 2;
+
+    img.style.transform = "scale(" + zoomLevel + ") translate(" + zoomAreaLeft + "px, " + zoomAreaTop + "px)";
+    }
+
+}
+
+
+
+
+
+/**/
+  // Get the image and the popup element
+    var img = document.getElementById("zoom_popup_image");
+    var popup = document.getElementById("image_display_popup");
+
+    // Set the initial zoom level and the maximum zoom level
+    var zoomLevel = 1;
+    var maxZoomLevel = 3;
+
+    // Set the zoom area to be the width and height of the popup element
+    var zoomAreaWidth = popup.offsetWidth;
+    var zoomAreaHeight = popup.offsetHeight;
+
+    // Add event listeners for zoom in and zoom out buttons
+    document.getElementById("zoom_in_btn").addEventListener("click", function() {
+    if (zoomLevel < maxZoomLevel) {
+        zoomLevel += 0.1;
+        updateImageTransform();
+    }
+    });
+
+    document.getElementById("zoom_out_btn").addEventListener("click", function() {
+    if (zoomLevel > 1) {
+        zoomLevel -= 0.1;
+        updateImageTransform();
+    }
+    });
+
+    // Add event listener to close the popup when the user clicks outside of the image
+    // popup.addEventListener("click", function(e) {
+    // if (e.target === popup) {
+    //     popup.style.display = "none";
+    // }
+    // });
+
+    // Add event listeners for drag and drop functionality
+    var isDragging = false;
+    var dragStartX, dragStartY;
+
+    img.addEventListener("mousedown", function(e) {
+    isDragging = true;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    });
+
+    img.addEventListener("mousemove", function(e) {
+    if (isDragging) {
+        var dragX = e.clientX - dragStartX;
+        var dragY = e.clientY - dragStartY;
+        var imgRect = img.getBoundingClientRect();
+        var popupRect = popup.getBoundingClientRect();
+        var maxX = popupRect.width - imgRect.width;
+        var maxY = popupRect.height - imgRect.height;
+        var newX = Math.max(0, Math.min(imgRect.left + dragX, maxX));
+        var newY = Math.max(0, Math.min(imgRect.top + dragY, maxY));
+        img.style.left = newX + "px";
+        img.style.top = newY + "px";
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+    }
+    });
+
+    img.addEventListener("mouseup", function(e) {
+    isDragging = false;
+    });
+
+    // Function to update the transform of the image based on the current zoom level and zoom area
+    function updateImageTransform() {
+    var zoomAreaLeft = (zoomAreaWidth - (zoomAreaWidth / zoomLevel)) / 2;
+    var zoomAreaTop = (zoomAreaHeight - (zoomAreaHeight / zoomLevel)) / 2;
+
+    img.style.transform = "scale(" + zoomLevel + ") translate(" + zoomAreaLeft + "px, " + zoomAreaTop + "px)";
+    }
