@@ -96,6 +96,34 @@
                 </div>
             </div>
 
+            <div class='card' id="card3">
+                <div class='content'>
+                <div class="p1">
+                    <p class="count"><?php echo $data['tot_raw_ads']->total_raw_adds_count?></p>
+                    <p class="topic">Raw Material ads</p>
+                    <p class="time_period">For previous month</P>
+                    </div>
+                    <div class="p2">
+                    <i class="fa-solid fa-rectangle-ad" id="ad_icon"></i>
+                    </div>
+                
+                </div>
+            </div> 
+
+            <div class='card' id="card3">
+                <div class='content'>
+                <div class="p1">
+                    <p class="count"><?php echo $data['tot_forum_posts']->total_discussions ?></p>
+                    <p class="topic">Total forum posts</p>
+                    <p class="time_period">For previous month</P>
+                    </div>
+                    <div class="p2">
+                    <id= class="fa-solid fa-file-pen" id="ad_icon"></i>
+                </div>
+                
+                </div>
+            </div> 
+
             <var>
             <div class='card' id="card3">
                 <div class='content'>
@@ -140,8 +168,9 @@
             <div class="chartsLevel2">
               
                 <div class="chart">
-                    <h2>Forum Topics</h2><br>
+                    <h2>Latest 30 Forum Topics</h2><br>
                     <div>
+                    <?php if(!empty($data['forum_post_detail'])): ?>
                         <table class="forum_post_detail_table">
                             <tr>
                                 <th>#</th>
@@ -149,6 +178,7 @@
                                 <th>Date</th>
                                 <th>Category</th>
                                 <th>No of reply</th>
+                               
                             </tr><?php 
                             foreach($data['forum_post_detail'] as $forum_post_detail):
                                 ?>
@@ -162,10 +192,19 @@
                                 <?php endforeach;
                             ?>    
                         </table>
+                        <?php else: ?>
+                            <div class="no-data-found">
+                            <img src="<?php echo URLROOT ?>/images/No_Data_Found.png" alt="No Data Found">
+                            <p>Sorry, no data found.</p>
+                            </div>
+                        <?php endif; ?>
                         <div class="pagination">
                             <?php
                                 //$total_row_count = $data['no_of_forumposts'];
-                                $total_row_count = 27;
+                                // $total_row_count = $data['forum_total_rows'];
+
+                                $total_row_count = 30;
+                                
                                 $uri = $_SERVER['REQUEST_URI'];
                                 $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
                             
@@ -193,18 +232,55 @@
                         </div>
                     </div>
                 </div>
+            
+                <div class="chart" id="bar-chart">
+                    <h2>Complaints</h2><br>
+                    <div class="chart-container">
+                    <canvas id="barChart" ></canvas>
+                    </div>
+                    <h2>Top Rated Sellers</h2>
+                    <br>
+                    <div>
 
+<div>
+  <?php foreach ($data['top_rated_sellers'] as $top_rated_seller) { ?>
+    <div class="top_sellers">
+        <div>
+      <span style="background-color: #f5f5f5; padding: 5px;"><?php echo $top_rated_seller->full_name; ?></span>
+      </div>
+      <?php $rating = floor($top_rated_seller->avg_rating); ?>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <?php echo ($rating / 5) * 100; ?>%" aria-valuenow="<?php echo $rating; ?>" aria-valuemin="0" aria-valuemax="5">
+          <?php echo $rating; ?>
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+</div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
            
         </div>
-
-    </div>
+     </div>
+     </div>
 
     <div class="last">
 
     </div>
 </div>
-
 <br><br>
+
+
 <div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
 </div>
@@ -220,6 +296,7 @@ fetch('<?php echo URLROOT ?>/Admin_dashboard/fertilizer_ads_linechart')
     var year = [];
     var month = [];
     var count = [];
+    var count2 = [];
 
     if (result.success) {
         result.data.forEach(item => {
@@ -229,6 +306,10 @@ fetch('<?php echo URLROOT ?>/Admin_dashboard/fertilizer_ads_linechart')
             count.push(item.count);
         });
 
+        result.dataTwo.forEach(item => {
+            count2.push(item.count);
+        });
+
         // create chart after fetching data
         var ctx2 = document.getElementById('lineChart').getContext('2d');
         var myChart2 = new Chart(ctx2, {
@@ -236,7 +317,40 @@ fetch('<?php echo URLROOT ?>/Admin_dashboard/fertilizer_ads_linechart')
             data: {
                 labels: month,
                 datasets: [{
-                    label: 'Count',
+                    label: 'Fertilizer Ads Count',
+                    data: count,
+                    backgroundColor: [
+                        '#346357',   
+                    ],
+                    borderColor: [
+                        '#9bf4d5',
+                    ],
+                    borderWidth: 1
+                }, {
+                    label: 'Raw Material Ads Count',
+                    data: count2,
+                    backgroundColor: [
+                        '#864235',   
+                    ],
+                    borderColor: [
+                        '#f4d59b',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // create a second chart
+        var ctx3 = document.getElementById('lineChart2').getContext('2d');
+        var myChart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: month,
+                datasets: [{
+                    label: 'Fertilizer Ads Count',
                     data: count,
                     backgroundColor: [
                         '#346357',   
@@ -252,13 +366,19 @@ fetch('<?php echo URLROOT ?>/Admin_dashboard/fertilizer_ads_linechart')
             }
         });
 
-        // resize chart on window resize
+        // resize charts on window resize
         $(window).resize(function() {
             var width = $('#lineChart').width();
             var height = $('#lineChart').height();
             myChart2.canvas.width = width;
             myChart2.canvas.height = height;
             myChart2.resize();
+
+            var width2 = $('#lineChart2').width();
+            var height2 = $('#lineChart2').height();
+            myChart3.canvas.width = width2;
+            myChart3.canvas.height = height2;
+            myChart3.resize();
         });
     }
     else{
@@ -268,6 +388,97 @@ fetch('<?php echo URLROOT ?>/Admin_dashboard/fertilizer_ads_linechart')
 .catch(error => {
     console.error(error);
 });
+
+// Complaint bar chart
+fetch('<?php echo URLROOT ?>/Admin_dashboard/complaint_bar_chart')
+.then(response => response.json())
+.then(result => {
+    console.log('result'); // Check the data in console
+
+    var month = [];
+    var count = [];
+
+    
+
+    if (result.success) {
+        result.data.forEach(item => {
+            month.push(item.month);
+            count.push(item.count);
+        });
+
+        // create chart after fetching data
+        var ctx2 = document.getElementById('barChart').getContext('2d');
+        var myChart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: month,
+                datasets: [{
+                    label: 'Count',
+                    data: count,
+                    backgroundColor: [
+                        '#4a5568',   
+                        '#4a5568',   
+                        '#4a5568',   
+                        '#4a5568',   
+                        '#4a5568',   
+                        '#4a5568',   
+                        '#4a5568',   
+                    ],
+                    borderColor: [
+                        '#9bf4d5',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#D1D5DB",
+                            min:100
+                        },
+                        gridLines: {
+                            color: "#4B5563"
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#D1D5DB",
+                        },
+                        gridLines: {
+                            color: "#4B5563"
+                        }
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: "#D1D5DB",
+                    }
+                }
+            }
+        });
+
+        // resize chart on window resize
+        $(window).resize(function() {
+            var width = $('#barChart').width();
+            var height = $('#barChart').height();
+            myChart1.canvas.width = width;
+            myChart1.canvas.height = height;
+            myChart1.resize();
+        });
+    }
+    else{
+        console.log("error");
+    }
+})
+.catch(error => {
+    console.error(error);
+});
+
+
+
 
 
 

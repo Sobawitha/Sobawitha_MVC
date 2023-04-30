@@ -169,7 +169,7 @@
                 </div>
 
                 <div class="chart" id="bar-chart">
-                    <h2>Complaints</h2><br>
+                    <h2 class="bar_head">Complaints</h2><br>
                     <div>
                         <canvas id="barChart"></canvas>
                     </div>
