@@ -46,6 +46,7 @@ class M_dashboard
         $this->db->query("SELECT DISTINCT(tag) as category, count(tag) AS num_category FROM blogpost group by(tag)");
         return $this->db->resultSet();
     }
+    
 
     public function get_all_forum_posts($id,$start_from,$num_per_page){
         $this->db->query("SELECT discussion_id, subject, date, type,count(reply_id) as no_of_reply from view_discussion_and_reply where created_by=:id group by(discussion_id) limit :start_from, :num_per_page ");

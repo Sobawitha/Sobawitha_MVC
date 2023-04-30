@@ -4,6 +4,16 @@
 <?php require APPROOT.'/views/Admin/Admin/admin_Sidebar.php'?>
 <script src='https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js'></script>
 
+<?php
+    function setColor($type){
+        if($type == 'faq') return 'set-green';
+        if($type == 'feedback') return 'set-yellow';
+        if($type == 'annousments') return 'set-orange';
+        if($type == 'Jobs') return 'set-purple';
+        if($type == 'Introductions') return 'set-blue';
+    }
+
+?>
 
 <div class="body">
     <div class="section_1">
@@ -109,14 +119,14 @@
             <div class="charts">
               
                 <div class="chart">
-                    <h2>Fertilizer Ads (Last 12 months)</h2><br>
+                    <h2>Fertilizer Ads (Past 12 months)</h2><br>
                     <div>
                         <canvas id="lineChart"></canvas>   
                     </div>
                 </div>
 
                 <div class="chart" id="doughnut-chart">
-                    <h2>Blog post type</h2><br>
+                    <h2>User types</h2><br>
                     <div>
                         <canvas id="doughnut"></canvas>
                     </div>
@@ -126,6 +136,7 @@
             </div>
 
             <br>
+
             <div class="chartsLevel2">
               
                 <div class="chart">
@@ -183,13 +194,7 @@
                     </div>
                 </div>
 
-                <div class="chart" id="bar-chart">
-                    <h2>Complaints</h2><br>
-                    <div>
-                        <canvas id="barChart"></canvas>
-                    </div>
-                </div>
-            </div>
+           
         </div>
 
     </div>
@@ -205,80 +210,22 @@
 </div>
 
 <script>
-/*donut chart */
-fetch('<?php echo URLROOT ?>/dAdmin_ashboard/type_donut_chart')
-.then(response => response.json())
-.then(result => {
-    console.log(result); // Check the data in console
-
-    var categories = [];
-    var count = [];
-
-    if (result.success) {
-        result.data.forEach(item => {
-            categories.push(item.category);
-            count.push(item.num_category);
-        });
-
-        // create chart after fetching data
-        var ctx2 = document.getElementById('doughnut').getContext('2d');
-        var myChart2 = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: categories,
-                datasets: [{
-                    label: 'Count',
-                    data: count,
-                    backgroundColor: [
-                        '#deeaee',
-                        '#9bf4d5',
-                        '#346357',
-                        '#c94c4c'
-                    ],
-                    borderColor: [
-                        '#deeaee',
-                        '#9bf4d5',
-                        '#346357',
-                        '#c94c4c'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-
-        // resize chart on window resize
-        $(window).resize(function() {
-            var width = $('#doughnut').width();
-            var height = $('#doughnut').height();
-            myChart2.canvas.width = width;
-            myChart2.canvas.height = height;
-            myChart2.resize();
-        });
-    }
-    else{
-        console.log("error");
-    }
-})
-.catch(error => {
-    console.error(error);
-});
 
 
 /*line chart */
-fetch('<?php echo URLROOT ?>/dashboard/blog_posts_linechart')
+fetch('<?php echo URLROOT ?>/Admin_dashboard/fertilizer_ads_linechart')
 .then(response => response.json())
 .then(result => {
-    console.log('result'); // Check the data in console
-
+    console.log(result); // Check the data in console
+    var year = [];
     var month = [];
     var count = [];
 
     if (result.success) {
         result.data.forEach(item => {
-            month.push(item.month);
+            // month.push(item.month);
+            var monthName = item.month.substr(0, 3); // Get the first three letters of the month
+            month.push(monthName + ' ' + item.year);
             count.push(item.count);
         });
 
@@ -309,9 +256,9 @@ fetch('<?php echo URLROOT ?>/dashboard/blog_posts_linechart')
         $(window).resize(function() {
             var width = $('#lineChart').width();
             var height = $('#lineChart').height();
-            myChart1.canvas.width = width;
-            myChart1.canvas.height = height;
-            myChart1.resize();
+            myChart2.canvas.width = width;
+            myChart2.canvas.height = height;
+            myChart2.resize();
         });
     }
     else{
@@ -322,60 +269,6 @@ fetch('<?php echo URLROOT ?>/dashboard/blog_posts_linechart')
     console.error(error);
 });
 
-
-fetch('<?php echo URLROOT ?>/dashboard/complaint_bar_chart')
-.then(response => response.json())
-.then(result => {
-    console.log('result'); // Check the data in console
-
-    var month = [];
-    var count = [];
-
-    if (result.success) {
-        result.data.forEach(item => {
-            month.push(item.month);
-            count.push(item.count);
-        });
-
-        // create chart after fetching data
-        var ctx2 = document.getElementById('barChart').getContext('2d');
-        var myChart2 = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: month,
-                datasets: [{
-                    label: 'Count',
-                    data: count,
-                    backgroundColor: [
-                        '#346357',   
-                    ],
-                    borderColor: [
-                        '#9bf4d5',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-
-        // resize chart on window resize
-        $(window).resize(function() {
-            var width = $('#barChart').width();
-            var height = $('#barChart').height();
-            myChart1.canvas.width = width;
-            myChart1.canvas.height = height;
-            myChart1.resize();
-        });
-    }
-    else{
-        console.log("error");
-    }
-})
-.catch(error => {
-    console.error(error);
-});
 
 
 </script>
