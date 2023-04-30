@@ -147,6 +147,50 @@ class M_fertilizer_product
         return $this->db->resultset();
     }
 
+    public function insert_order_table($data){
+        $this->db->query("INSERT INTO fertilizer_order ( product_id, quantity, user_id, current_status) VALUES (:product_id, :quantity, :user_id, 1)");
+        $this->db->bind(":product_id", $data['product_id']);
+        $this->db->bind(":quantity", $data['quantity']);
+        $this->db->bind(":user_id", $data['user_id']);
+        if($this->db->execute()){
+            return true;
+        }else{
+                return false;
+        }
+    }
+
+    public function update_fertilizer_count( $product_id, $count) {
+        $this->db->query("UPDATE fertilizer SET quantity = quantity - :count WHERE product_id = :product_id");
+        $this->db->bind(":count", $count);
+        $this->db->bind(":product_id", $product_id);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+
+    public function find_price_from_id($product_id){
+        $this->db->query("SELECT price as product_price from fertilizer WHERE product_id = :product_id");
+        $this->db->bind(":product_id", $product_id);
+        return $this->db->single();
+
+    }
+
+    public function list_order_deatils($id){
+        $this->db->query("");
+        $this->db->bind(":id", $id);
+        return $this->db->resultSet();
+    }
+
+    public function check_cart($id){
+        $this->db-> query("SELECT count(*) as count_item from cart where user_id = :user_id");
+        $this->db->bind("user_id", $id);
+        return $this->db->single();
+
+    }
+
 }
 
 

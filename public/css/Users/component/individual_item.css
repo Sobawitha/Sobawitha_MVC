@@ -2,10 +2,69 @@
   font-family: 'Montserrat', sans-serif;
   font-family: 'Poppins', sans-serif;
 }
+
+/*nav bar*/
+nav{
+  top:0;
+  transform: translate(-10%,-10%);
+  width:100%;
+  left:0px;
+  right:0px;
+  background-color:transparent; 
+  overflow:hidden;
+  font-size:15px;
+}
+
+.nav ul{
+   width:auto;
+   float:right;
+}
+
+.nav li{
+   display:inline-block;
+   padding:18px 20px;
+}
+
+.nav a{
+   text-align:center;
+   color:rgb(81, 80, 78);
+   text-decoration:none;
+   /* font-weight:bold;     */
+}
+
+.nav a:hover{
+   color:rgb(184, 241, 184);
+   font-weight:bold;
+   transition:0.5s;
+}
+
+#user_home{
+  color:lightgreen;
+  margin-right:5px;
+}
+
+.home_hr{
+  border-top:0.5px solid lavender;
+  transform: translateY(-30px);
+}
+
+#part_a{
+  position:absolute;
+  color:rgb(160, 155, 155);
+  transform: translate(250px,30px);
+  font-weight:bold;
+}
+#part_b{
+  position:absolute;
+  color:rgb(183, 245, 183);
+  transform: translate(294px,30px);
+  font-weight:bold;
+} 
+
+
 .body{
     display:grid;
-    grid-template-columns:20% 45% 35%;
-    padding-top:100px;
+    grid-template-columns:5% 55% 40%;
     
 }
 
@@ -331,12 +390,11 @@
   /*comment and Q&A*/
 
   .process_container{
-    margin-top:20px;
+    padding-top:20px;
     position:relative;
     width:500px;
     height:700px;
     position:relative;
-    /* text-align:center; */
     margin:auto;
   }
 
@@ -358,7 +416,7 @@
 
 .toggle_section{
   max-width:500px;
-  padding:0 20px;
+  padding:10px 20px;
   position:absolute;
   top:50px;
   transition: 1s;
@@ -992,4 +1050,214 @@
   
   
   
-  
+ /*buttons*/
+ 
+.buttons{
+  margin-left: 120px;
+}
+
+#buy_now_btn{
+  width:100px;
+  height:50px;
+  color:white;
+  font-weight: bold;
+  font-size:15px;
+  background-color: salmon;
+  border:none;
+  cursor:pointer;
+}
+
+#add_to_cart_btn{
+  width:100px;
+  height:50px;
+  color:white;
+  font-weight: bold;
+  font-size:15px;
+  background-color: rgb(0, 0, 0);
+  border:none;
+  cursor:pointer;
+}
+
+#buy_now_btn_disable{
+  width:100px;
+  height:50px;
+  color:white;
+  font-weight: bold;
+  font-size:15px;
+  background-color: salmon;
+  border:none;
+  opacity:0.5;
+}
+
+#add_to_cart_btn_disable{
+  width:100px;
+  height:50px;
+  color:white;
+  font-weight: bold;
+  font-size:15px;
+  background-color: rgb(0, 0, 0);
+  border:none;
+  opacity:0.5;
+}
+
+.not_available_msg{
+  font-size:17px;
+  color:rgb(234, 54, 34);
+  font-weight:bold;
+  margin-left:30px;
+}
+
+/*buy now dialog box*/
+
+#buy_now_dialog_box{
+  border: none;
+  padding: 0;
+  border-radius: 10px;
+  margin-left:30%;
+  margin-top:3%;
+  width:500px;
+  text-align: center;
+  transition: 1s;
+}
+
+#buy_now_dialog_box::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+
+#cart_toatal_section_hr{
+  margin:15px 30px 50px 30px;
+  border:2px solid black;
+}
+
+.total_price_section{
+  padding:30px;
+  background-color:rgb(241, 251, 237);
+  text-align: center;
+  line-height: 30px;
+  z-index:50000;
+}
+
+.cart_total{
+  font-size:13px; 
+  text-transform:uppercase;  
+}
+
+.total_value{
+  font-weight: bold;
+  margin-left:20px;
+  font-size:25px;
+}
+
+.total_price_section .discription{
+  font-size: 13px;
+}
+
+.agreement{
+  font-size: 13px;
+}
+
+.term{
+   color:salmon;
+}
+
+.checkout{
+  margin-top:30px;
+  background-color: salmon;
+  color:white;
+  font-weight: bold;
+  border:none;
+  padding:10px 20px 10px 20px ;
+  border-radius: 5px;
+  cursor:pointer;
+}
+
+.paypal{
+  margin-top:10px;
+  background-color: rgb(255, 255, 255);
+  color:rgb(8, 1, 1);
+  font-weight: bold;
+  border:none;
+  padding:10px 30px 10px 30px;
+  border-radius: 5px;
+  cursor:pointer;
+
+}
+
+#bag{
+  font-size: 100px;
+  margin-top:50px;
+  color:rgb(217, 246, 206);
+  margin-bottom:30px;
+}
+
+/*thank_you_dialog_box*/
+#thank_you_dialog_box{
+  border: none;
+  padding: 0;
+  border-radius: 10px;
+  margin-left:30%;
+  margin-top:8%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  width:500px;
+  padding:60px 50px;
+  text-align: center;
+  transition: 1s;
+}
+
+#thank_you_dialog_box::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+
+#gift{
+  font-size:50px;
+  color:rgb(39, 87, 87);
+}
+
+#success_button{
+  background-color: rgb(39, 87, 87);
+  color:white;
+  font-size:15px;
+  text-align:center;
+  width:250px;
+  height:50px;
+  cursor:pointer;
+}
+
+.thank{
+  font-weight:bold;
+  font-size:25px;
+}
+
+.thank_discription{
+  font-size:14px;
+  font-weight:800px;
+  color:gray;
+}
+
+#close{
+  padding:8px 10px 8px 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius:70px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  border:none;
+  transform:translate(300px, -70px);
+  cursor:pointer;
+}
+
+#close_buy_dialog{
+  padding:8px 10px 8px 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius:70px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  border:none;
+  transform:translate(240px, -45px);
+  cursor:pointer;
+}
+
+#add_wishlist_heart{
+  color:salmon;
+  font-size:40px;
+  margin-left:50px;
+}

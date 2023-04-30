@@ -19,7 +19,7 @@
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" " require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
@@ -29,7 +29,6 @@
 
                 <div class="filter_section">
                         <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Ongoing (in-progress)</label>
-                        <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Ongoing (ready)</label>
                         <label for="cancel_order" id="filter_label"><input type="radio" id="cancel" name="order_type" value="cancel">Cancel</label>
                 </div>
 
@@ -39,7 +38,7 @@
                 <table class="order_list_table">
                         <tr class="table_head">
                                 <td>Product</td>
-                                <td>Quantity</td>
+                                <td>product type</td>
                                 <td>Units</td>
                                 <td>Amount</td>
                                 <td>Payment satus</td>
@@ -58,7 +57,7 @@
 
                         </tr>
 
-                        <tr id="order_more_details" hidden>
+                        <tr id="order_more_details" >
                                 <td colspan="6">
                                         <i class="fa-solid fa-angle-right" id="right"></i>
                                         <div class="order_more_detail">
@@ -68,7 +67,7 @@
                                         </div>
                                 </td>        
                         </tr>
-<tr class="order">
+                <tr class="order">
                                 <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
                                 <td><span class="amount">10kg</span></td>
                                 <td class="unit"><span class="value">4</span></td>

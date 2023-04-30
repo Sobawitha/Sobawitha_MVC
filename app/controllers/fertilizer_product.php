@@ -9,27 +9,6 @@ class fertilizer_product extends Controller
         $this->fertilizer_product_model = $this->model('M_fertilizer_product');
     }
 
-    // public function individual_item(){
-    //     // $product_id = trim($_GET['product_id']);
-    //     $id=$_SESSION['user_id'];
-    //     $data =['product_id' => 1];
-    //     $comment = $this->fertilizer_product_model->display_all_comment($data);
-    //     $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);
-    //     $question = $this->fertilizer_product_model->display_all_questions($data);
-    //     $answers = $this->fertilizer_product_model->display_all_answers($data);
-    //     $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
-    //     $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
-    //     $data = [
-    //         'comments' => $comment,
-    //         'reply_for_comment' => $reply_for_comment,
-    //         'question' => $question,
-    //         'answers' => $answers,
-    //         'current_user_gender' => $current_user_gender,
-    //         'product_owner_id' => $product_owner_id
-    //     ];
-    //     $this->view('Users/component/individual_item', $data);
-    // }
-
     //save comment
     public function post_comment(){
 
@@ -138,6 +117,7 @@ class fertilizer_product extends Controller
         $answers = $this->fertilizer_product_model->display_all_answers($data);
         $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
         $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
+        $no_of_cart_item = $this->fertilizer_product_model->check_cart($id)->count_item;
         $data = [
             'comments' => $comment,
             'reply_for_comment' => $reply_for_comment,
@@ -147,7 +127,8 @@ class fertilizer_product extends Controller
             'product_owner_id' => $product_owner_id,
             'adcontent' => $content,
             'similar' => $similar,
-            'owner_id'=> $product_owner_id
+            'owner_id'=> $product_owner_id,
+            'no_of_cart_item' => $no_of_cart_item
         ];
         
         $this->view('Users/component/individual_item',$data);
@@ -155,6 +136,53 @@ class fertilizer_product extends Controller
 
     }
 
+
+    function complete_order(){
+        // $quantity = $_POST['quantity'];
+        $quantity =1; 
+        $product_id = $_GET['product_id'];
+        //$price = $this->fertilizer_product_model->find_price_from_id($product_id)->product_price;
+        // $price =780;
+        $data = [
+          'product_id' => $_GET['product_id'],
+          //'price' => $price,
+          'quantity' => $quantity,
+          'user_id' => $_SESSION['user_id'],
+        ];
+      
+        // Insert data into the database
+        $this->fertilizer_product_model->insert_order_table($data);
+        $this->fertilizer_product_model->update_fertilizer_count($product_id, $quantity);
+
+        $_SESSION['complete_order_msg'] = "complete";
+
+        redirect('fertilizer_product/view_individual_product?product_id='.$product_id);
+      
+        // // Return a success response
+        // echo json_encode(['status' => 'success']);
+      }
+
+      /*fertilizer_order_list */
+      function list_order_deatils($id){
+        $order_list = $this-> fertilizer_product_model -> list_order_deatils($id);
+
+        $data =[
+            'order_list' => $order_list
+        ];
+
+        $this->view('Seller/Seller_order/v_seller_order_list',$data);
+
+      }
+
+    //   function check_cart($id){
+        
+    //     $data=[
+    //         'no_of_cart_item' => $no_of_cart_item
+    //     ];
+    //   }
+      
+
+    
    
 }
 
