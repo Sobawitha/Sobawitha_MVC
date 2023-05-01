@@ -7,7 +7,6 @@
 .body{
   display:grid;
   grid-template-columns:20%  78% 2%;
-  height:100%;
   padding-top:80px;
   
 }
@@ -241,12 +240,23 @@ input[type=radio]{
   height: 15vh;
   align-items: center;
   padding: 10px;
+  gap:5px;
 }
 
 .error_msg{
-  font-size: 25px;
+  /* font-size: 25px;
   font-weight: 500px;
-  text-align: center;
+  text-align: center; */
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    font-size: 16px;
+    text-align: center;
+  
+  
 }
 
 /* Ignore Complaint Popup */
@@ -399,7 +409,7 @@ input[type=radio]{
 }
 
 /* pagination */
-.pages {
+/* .pages {
   display:flex;
   list-style:none;
   justify-content: center;
@@ -424,11 +434,9 @@ input[type=radio]{
 #active{
   background-color:rgb(0, 0, 0);
   color:white;
-}
+} */
 
-.pages li:hover{
-  /* background-color:rgb(0, 0, 0);
-  color:white; */
+/* .pages li:hover{
   background-color: rgb(152, 196, 194);
   color: white;
   cursor:pointer;
@@ -499,6 +507,58 @@ input[type=radio]{
 
 .pagination .current-page {
   background-color: #555;
+} */
+
+.pagination-container {
+  margin-top: 20px;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination a, .pagination .current-page {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.pagination .current-page {
+  background-color: #000000;
+  color: #fff;
+}
+
+.pagination a:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+
+/* error message  */
+
+.error-msg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.error-msg {
+  font-size: 1.5rem;
+  color: #ff0000;
+  padding: 1rem;
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* dialog deafult */
+dialog{
+  border: none;
+}
 

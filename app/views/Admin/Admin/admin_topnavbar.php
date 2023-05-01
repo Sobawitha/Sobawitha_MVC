@@ -50,6 +50,7 @@ $current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HO
       <!-- <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a>  -->
       <a><i class="fa fa-solid fa-bell" id="bell" onclick="openNotificationMenu()"></i></a>
       <a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="dots"></i></a>
+
     </div>
   </div>
 

@@ -40,7 +40,7 @@
 
             
             <form method="POST" action="<?php echo URLROOT?>/Users/register_as_new_sletter?current_url=<?php echo $currentUrl ?>">
-                <h3>New Sletter</h3>
+                <h3>Newsletter</h3>
                 <span class="new_sletter_form">
                     <input type="email" name="email" class="sign_up" placeholder="sign_up for free"></input>
                     <button type="sign_up" class="signup_btn">Sign-up</button>

@@ -199,10 +199,16 @@ span.error_msg {
   padding: 10px;
   background-color: #222;
   cursor: pointer;
+  
 }
 
 .changepw_button input[type="submit"]:hover {
   background-color: #333;
+}
+
+.changepw_button{
+  display: flex;
+  justify-content: center;
 }
 
 
