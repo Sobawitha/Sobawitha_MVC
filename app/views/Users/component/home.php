@@ -1,13 +1,14 @@
 <link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/home.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <body>
-    <header style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../public/images/background2.jpg);
+    <header style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(<?php echo PUBROOT?>/public/images/background2.jpg);
                                 background-size: cover;
                                 height:77vh;
                                 -webkit-background-size:cover ;
                                 background-position:center;
                                 margin:0px;
                                 padding:0px;">
+
         <div class="nav">
             <nav>
                 <span class="site_name" id="part_a">SOBA</span><span id="part_b">WITHA</span>
