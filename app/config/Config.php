@@ -9,7 +9,7 @@
     //App Root
     define('APPROOT',dirname(dirname(__FILE__)));
     //URL Root
-    define('URLROOT','http://localhost/Sobawitha_MVC');
+    define('URLROOT','http://localhost/Sobawitha');
     //WEB site name
     define('SITENAME','Sobawitha');
 

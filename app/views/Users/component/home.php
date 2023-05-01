@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/Users/component/home.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/home.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <body>
     <header style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(../public/images/background2.jpg);
