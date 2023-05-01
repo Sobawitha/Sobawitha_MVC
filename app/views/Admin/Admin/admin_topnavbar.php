@@ -7,8 +7,11 @@
 <div class="topnav" id="navbar">
 <?php
 // Get the current URL
-$current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];                                          
 ?>
+<!-- <?php echo "<script> 
+ alert('$current_url'); 
+ </script>" ?> -->
 
   <div class="drop_down">
     <div class="dropdown-content" >

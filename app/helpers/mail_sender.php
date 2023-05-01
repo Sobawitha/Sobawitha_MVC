@@ -63,7 +63,7 @@
                                         <h2>Hello $name,</h2>
                                         <p>You are receiving this email because we received a password reset request for your account.</p>
                                         <p>To reset your password, please click the button below:</p>
-                                        <p><a href='http://localhost/Sobawitha_MVC/Login/reset_password?token=$token&email=$email' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none;'>Reset Password</a></p>
+                                        <p><a href='http://localhost/Sobawitha/Login/reset_password?token=$token&email=$email' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none;'>Reset Password</a></p>
                                         <p>If you did not request a password reset, please ignore this email.</p>
                                         <p>Thank you,</p>
                                         <p>The Sobawitha Team</p>

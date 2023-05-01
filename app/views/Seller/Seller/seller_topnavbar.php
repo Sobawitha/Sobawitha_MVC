@@ -46,6 +46,7 @@ $current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HO
     <div class="nav-link">
       <a href="<?php echo URLROOT?>/Seller/profile" class="<?php if ($current_url === URLROOT.'/Seller/updateProfile' || $current_url === URLROOT.'/Seller/profile' || $current_url === URLROOT.'/Users/changePW') echo 'active'; ?>">Profile</a>
       <a href="<?php echo URLROOT?>/dashboard/seller_dashboard" class="<?php if ($current_url === URLROOT.'/dashboard/seller_dashboard') echo 'active'; ?>">Dashboard</a>
+      <a href="<?php echo URLROOT?>/resources/resource_page" class="<?php if ($current_url === URLROOT.'/resources/resource_page') echo 'active'; ?>">Resources</a>
       <a href="<?php echo URLROOT?>/order/view_cart"><i class="fa fa-shopping-cart" aria-hidden="true" id="cart"></i></a> <!--change-->
       <i class="fa fa-solid fa-bell" id="bell" onclick="openNotificationMenu()"></i>
       <a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="dots"></i></a>
