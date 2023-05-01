@@ -15,7 +15,7 @@
         else{
             $page=1;
         }
-        $num_per_page = 9;
+        $num_per_page = 10;
         $start_from  = ($page - 1) * $num_per_page;
         $_SESSION['num_per_page'] = $num_per_page;
 
@@ -24,18 +24,26 @@
         $total_suppliers=$this->adminDashModel->getTotalSuppliers();
         $total_agrio = $this->adminDashModel->getTotalAgrio();
         $total_fertilizer_ads =$this->adminDashModel->getTotalFertilizerAds();
+        $total_raw_material_ads =$this->adminDashModel->getTotalRawAds();
         $total_profit=$this->adminDashModel->getTotalProfit();
         $tot_complaints=$this->adminDashModel->getTotalComplaints();
         $forum_post_detail= $this->adminDashModel->get_all_forum_posts($start_from,$num_per_page);
+        $total_row_count_forum_post = $this->adminDashModel->get_total_row_count_forum();
+        $top_rated_sellers = $this->adminDashModel->get_top_sellers();
+        $tot_forum_posts =  $this->adminDashModel->get_tot_forum_posts();
 
         $data=[
             'sellers_active' => $sellers_active,
             'tot_sups' => $total_suppliers,
             'tot_agris' => $total_agrio,
             'tot_fertilizer_ads' => $total_fertilizer_ads,
+            'tot_raw_ads' => $total_raw_material_ads,
             'tot_profit' => $total_profit,
             'tot_complaints' => $tot_complaints,
-            'forum_post_detail' => $forum_post_detail
+            'forum_post_detail' => $forum_post_detail,
+            'forum_total_rows' => $total_row_count_forum_post,
+            'top_rated_sellers' => $top_rated_sellers,
+            'tot_forum_posts' => $tot_forum_posts,
         ];
         
         $this->view('Admin/AdminDash/v_dashmain', $data);
@@ -48,12 +56,14 @@
     public function fertilizer_ads_linechart() {
         try {
             $post_count_details = $this->adminDashModel->get_fertilizer_ads_count_details();
+            $ad_count_details = $this->adminDashModel->get_raw_material_ads_count_details();
             
-            if ($post_count_details) {
+            if ($post_count_details || $ad_count_details ) {
                 // Create a response object with a "success" key and a "data" key
                 $response = [
                     "success" => true,
-                    "data" => $post_count_details
+                    "data" => $post_count_details,
+                    "dataTwo" => $ad_count_details
                 ];
         
                 // Send the response as JSON
@@ -84,5 +94,47 @@
         }
         
     }
+
+    public function complaint_bar_chart() {
+        try {
+            $complaint_count_details = $this->adminDashModel->get_complaint_count_details();
+        
+            if ($complaint_count_details) {
+                // Create a response object with a "success" key and a "data" key
+                $response = [
+                    "success" => true,
+                    "data" => $complaint_count_details
+                ];
+        
+                // Send the response as JSON
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            } else {
+                // Return an error response
+                $response = [
+                    "success" => false,
+                    "message" => "Failed to retrieve category detail"
+                ];
+        
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            }
+        } catch (Exception $e) {
+            // Log the exception
+            error_log($e);
+        
+            // Return an error response
+            $response = [
+                "success" => false,
+                "message" => "An error occurred while fetching data"
+            ];
+        
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+        
+    }
+
+  
 }
 ?>
