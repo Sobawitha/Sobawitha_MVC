@@ -3,6 +3,15 @@
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_Sidebar.php'?>
 
+<?php
+function setColor($tag){
+    if($tag == 'cod') return 'set-green';
+    if($tag == 'online') return 'set-blue';
+}
+?>
+
+
+<?php $tot_income = 0; ?>
 <div class="body">
         <div class="section_1">
             
@@ -10,80 +19,69 @@
 
         <div class="section_2">
 
-
         <h3>Order List</h3>
         <hr>
-
-
-        <form method="POST">
-        <div class="search_bar">
-            <div class="search_content">
-                
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" " require/></span>
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
-                
-            </div>
-        </div>
-        </form>
-
-                <div class="filter_section">
-                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Ongoing (in-progress)</label>
-                        <label for="cancel_order" id="filter_label"><input type="radio" id="cancel" name="order_type" value="cancel">Cancel</label>
+        <!-- search bar -->
+        <div class="filters">
+                <form method="POST">
+                <div class="search_bar">
+                <div class="search_content">
+                        
+                        <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" " require/></span>
+                        <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+                        <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                        
                 </div>
+                </div>
+                </form>
+                <div class="filter_section">
+                        <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/view_orders">
+                                <label for="all" id="filter_label"> <input type="radio" id="all" name="order_type"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'all') echo ' checked="checked"';?> checked>All type</label>
+                                <label for="pending" id="filter_label"><input type="radio" id="pending" name="order_type" value="pending" onclick="javascript:submit()"  value = "pending"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'pending') echo ' checked="checked"';?>>Ongoing (in-progress)</label>
+                                <label for="completed" id="filter_label"> <input type="radio" id="completed" name="order_type" value="completed" onclick="javascript:submit()"  value = "completed"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'completed') echo ' checked="checked"';?>>Completed</label>                               
+                        </form>        
+                </div>
+        </div>
 
                 <div class="order_list">
                 <div class="orders">
 
                 <table class="order_list_table">
                         <tr class="table_head">
-                                <td>Product</td>
-                                <td>product type</td>
-                                <td>Units</td>
-                                <td>Amount</td>
-                                <td>Payment satus</td>
-                                <td></td>
+                                <th>Order_id</th>
+                                <th>Customer</th>
+                                <th>Order</th>
+                                <th>Tot price</th>
+                                <th>Order date</th>
+                                <th>Current status</th>
+                                <th>Payment</th>
                         </tr>
 
+                        <?php foreach($data['order_list'] as $order):?>
                         <tr class="order">
                                 <div class="order_detail">
-                                        <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
-                                        <td><span class="amount">10kg</span></td>
-                                        <td class="unit"><span class="value">4</span></td>
-                                        <td><span class="price">Rs. 1000 x 4</span></td>
-                                        <td><span class="payment_status">completed</span></td>
-                                        <td><span class="delete">Delete</span><i class="fa-solid fa-circle-info" id="more_detail" onclick="display_order_detail()"></i></td>
+                                        <th><span class="order_id"><?php echo $order->order_id;?></span></th>
+                                        <td><span class="customer"><?php echo $order->customer;?></span></td>
+                                        <td class="products"><?php echo $order->product_names;?></td>
+                                        <th><span class="price"><?php echo ($order->total_price); $tot_income = $tot_income + ($order->total_price)*95/100; ?></span></th>
+                                        <th><span class="date"><?php echo $order->date ?></span></th>
+                                        <?php if($order->current_status == 0){
+                                                ?>
+                                                <th><span class="current_status" id="pending">pending</span></th>
+                                                <?php
+                                        }else{
+                                                ?>
+                                                <th><span class="current_status" id="completed">completed</span></th>
+                                        <?php
+                                        }
+                                        ?>
+                                        <th><span class="<?php echo setColor($order->payment_type)?>"><?php echo $order->payment_type;?></span></th>
+                                        
                                 </div>
 
                         </tr>
+                        <?php endforeach;?>
 
-                        <tr id="order_more_details" >
-                                <td colspan="6">
-                                        <i class="fa-solid fa-angle-right" id="right"></i>
-                                        <div class="order_more_detail">
-                                                <span class="id">Product ID :1 </span><br>
-                                                <span class="owner">Recever : M.R Mayunika</span><br>
-                                                <span class="date">Date : 01 Jan 2023</span>
-                                        </div>
-                                </td>        
-                        </tr>
-                <tr class="order">
-                                <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
-                                <td><span class="amount">10kg</span></td>
-                                <td class="unit"><span class="value">4</span></td>
-                                <td><span class="price">Rs. 1000 x 4</span></td>
-                                <td><span class="payment_status">Not completed</span></td>
-                                <td><span class="delete">Delete</span><i class="fa-solid fa-circle-info" id="more_detail"></i></td>
-                        </tr>
-
-                        <tr class="order">
-                                <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
-                                <td><span class="amount">10kg</span></td>
-                                <td class="unit"><span class="value">4</span></td>
-                                <td><span class="price">Rs. 1000 x 4</span></td>
-                                <td><span class="payment_status">Not completed</span></td>
-                                <td><span class="delete">Delete</span><i class="fa-solid fa-circle-info" id="more_detail"></i></td>
-                        </tr>
                 </table>
 
                 </div>
@@ -91,17 +89,14 @@
 
                 <div class="payment_detail">
                         <div class="detail">
-                                <span class="total">Total product</span>  <span class="payment_amount"> Rs 50000.00 </span><br>
-                                <span class="shipping_cost">Astimated shipping cost </span><span class="payment_amount"> Rs 200.00 </span><br>
-                                <span class="total_inc_vat">Total </span><span class="vat">(including VAT)</span> <span class="payment_amount"> Rs 48000.00 </span>
+                                <span class="total">Total income</span>  <span class="payment_amount"> Rs <?php echo $tot_income ?> </span><br>
                         </div>
                 </div>
         </div>
 
-        <div class="section_3">
-                <!-- add forum -->
-                
-                
+
+
+        <div class="section_3">                
         </div>
 </div>
 

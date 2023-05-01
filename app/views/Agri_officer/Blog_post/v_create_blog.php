@@ -186,7 +186,6 @@ function setColor($tag){
                     <li><i class="fa-solid fa-circle" id="circle3"></i>New technique</li>
                     <li><i class="fa-solid fa-circle" id="circle4"></i>Production</li>
                 </ul>
-        
             </div>
 
         </div>

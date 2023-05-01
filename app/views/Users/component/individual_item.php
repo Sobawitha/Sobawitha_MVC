@@ -2,29 +2,60 @@
 </link>
 <script src="<?php echo URLROOT ?>/js/Users/component/individual_item.js"></script>
 
+<script>
+  /*pay popup */
+function pay_popup(price) {
+  const existingQuantity = document.getElementById("existing_quantity_value").textContent;
+  const quantity = parseInt(quantityInput.value);
+
+  if(quantity>existingQuantity){
+    errorMsg.style.display = "block";
+    quantity.style.color="red";
+    $_SESSION['order_count_error'] = "invalid_order";
+  }
+  else{
+    const total_count = quantity * price;
+    console.log(total_count);
+    const total_price = document.querySelector(".total_value");
+    total_price.textContent = `Rs. ${total_count.toFixed(2)}`;
+    const paypopup = document.getElementById('buy_now_dialog_box');
+    document.getElementById('close_buy_dialog').addEventListener('click', () => paypopup.close());
+    paypopup.showModal();
+  }
+}
+
+function checkout() {
+  const userInput = document.getElementById("quantity_input").value;
+  const agreementCheckbox = document.querySelector('#terms-checkbox');
+  
+  if (agreementCheckbox.checked) {
+    // Checkbox is checked, continue with checkout process
+    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+  } else {
+    // Checkbox is not checked, show an error message
+    //alert('Please agree to the terms and conditions before proceeding to checkout.');
+    document.getElementById("terms_and_condition_check").style.display="block";
+  }
+}
+
+
+</script>
+
   <dialog id="buy_now_dialog_box">
     <div class="total_price_section">
-          <i class="fa-solid fa-xmark" id="close_buy_dialog"></i>
-            <hr id="cart_toatal_section_hr">
-            <span class="cart_total">Cart total <span class="total_value">Rs. 5000.00</span></span><br>
-            <span class="discription">Shipping and taxes calculate at checkout.</span><br>
-            <input type="checkbox"><label class="agreement">I agree for <span class="term">terms & conditions</span></label></input><br><br>
-            <a href="<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>"><button class="checkout" onclick="thanku_popup()">checkout</button><br></a>
-            <button class="paypal">Paypal</button><br>
-            <i class="fa-solid fa-bag-shopping" id="bag"></i>  
-          </div>
+      <i class="fa-solid fa-xmark" id="close_buy_dialog"></i>
+      <hr id="cart_toatal_section_hr">
+      <span class="cart_total">Cart total <span class="total_value">Rs. 5000.00</span></span><br>
+      <span class="discription">Shipping and taxes calculate at checkout.</span><br>
+      <input type="checkbox" id="terms-checkbox"><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br>
+      <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
+      <br>
+      <button class="checkout" onclick="checkout()">checkout</button><br>
+      <button class="paypal">Paypal</button><br>
+      <i class="fa-solid fa-bag-shopping" id="bag"></i>  
+    </div>
   </dialog>
 
-
-  <dialog id="thank_you_dialog_box">
-    <i class="fa-solid fa-xmark" id="close" onclick="thanku_popup_close()"></i>
-    <br>
-    <i class="fa-solid fa-gifts" id="gift"></i>
-    <p class="thank">Thank You!</p>
-    <p class="thank_discription">check if the browser supports the dialog element, and use a polyfill 
-      or alternative implementation if necessary.</p>
-    <button id="success_button" onclick="thanku_popup_close()">OK</button>
-  </dialog>
 
 
 
@@ -135,8 +166,8 @@ $content = $data['adcontent'];
 
   <div class="section_3">
     <a href="<?php echo URLROOT ?>/Pages/product_page" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
-    <span class="title_1">fertilizer</span><i class="fa-regular fa-heart" id="add_wishlist_heart" ></i><br>
-    <span class="title_2"><?php echo $content->product_name ?></span><br><br>
+    <span class="title_1">fertilizer</span><br>
+    <span class="title_2"><?php echo $content->product_name ?></span><i class="fa-regular fa-heart" id="add_wishlist_heart" ></i><br><br>
 
     <span class="title_3"><span class="sub_title_3">Company / Manufacturer  </span><?php echo $content->manufacturer ?></span><br><br>
 
@@ -220,56 +251,47 @@ $content = $data['adcontent'];
             <div class="count_star"><?php echo $content->rating_1_count ?></div>
           </div>
         </div>
-
-
-
       </div>
-
     </section>
-
-    <!-- <div class="select_quantity">
-  <span class="header_quantity">Insert Quantity</span>
-  <div class="select_quantity_input">
-    <input type="text" name="quantity" placeholder="" >
-    <span class="existing_quantity"><?php echo $content->quantity; ?> available</span>
-  </div>
-</div> -->
 
 <div class="select_quantity">
   <span class="header_quantity">Quantity</span>
   <div class="select_quantity_input">
     <div class="quantity_control">
       <span class="minus_button">-</span>
-      <!-- <form> -->
-        
-      <!-- </form> -->
       <?php if($content->quantity == 0) { ?>
-        <input type="text" name="quantity" value="0" style="color:red;">
-      <?php
-      }else{?>
-        <input type="text" name="quantity" value="1">
-      <?php
-      }
-      ?>
+        <input type="text" name="quantity" value="0" style="color:red;" readonly>
+      <?php } else { ?>
+        <input type="text" name="quantity" value="1" id="quantity_input">
+      <?php } ?>
       <span class="plus_button">+</span>
     </div>
-    <span class="existing_quantity" id="existing_quantity"><span id="existing_quantity_value"><?php echo $content->quantity; ?></span> available</span>
+    <span class="existing_quantity" id="existing_quantity">
+      <span id="existing_quantity_value"><?php echo $content->quantity; ?></span> available
+    </span>
+    <br>
+    <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
+    <span id="quantity_error" style="color:red;"></span>
   </div>
 </div>
 
 <div class="buttons">
-<?php if($content->quantity > 0) { 
-  if($data['no_of_cart_item'] ==0){
+<?php if($content->quantity > 0 ) { 
+  if($data['no_of_cart_item'] ==0 ){
     ?>
       <button id="buy_now_btn" onclick="pay_popup(<?php echo $content->price ?>)">Buy Now</button>
     <?php
   }else{
     ?>
-      <a href="<?php echo URLROOT?>/order/view_cart"><button id="buy_now_btn">Buy Now</button></a>
+      <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
+      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn" >Add to Cart</button></a>
+
     <?php
   }
   ?>
-  <button id="add_to_cart_btn">Add to Cart</button>
+      <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
+      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn">Add to Cart</button></a>
+
 <?php
 }else{?>
   <span class="not_available_msg">Not awailable now. </span><br><br>
@@ -311,9 +333,7 @@ minusButton.addEventListener('click', () => {
 });
 </script>
 
-
-
-    <div class="process_container">
+<div class="process_container">
       <div class="form_button">
         <span onclick="reset_sections()">What's inside</span>
         <span onclick="comment_section()">Comment</span>
@@ -380,7 +400,6 @@ minusButton.addEventListener('click', () => {
                         <?php if($comment->no_of_reply >0 ){ ?> 
                             <br><button class="reply_visible_click_button" id="reply_visible_click_button-<?php echo $comment->comment_id?>" onclick="display_reply(<?php echo $comment->comment_id?>)">
                             <span id="display_reply_btn_icon-<?php echo $comment->comment_id?>" class="drop_down_btn"> <i class="fa fa-chevron-circle-up" aria-hidden="true" ></i></span><span class="display_reply_btn_text">Reply</span></button>
-                        
                             <div class="replace_dropdown_arrows" hidden>
                                     <span id="arrow_up-<?php echo $comment->comment_id?>"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></span>
                                     <span id="arrow_down-<?php echo $comment->comment_id?>"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
@@ -427,7 +446,7 @@ minusButton.addEventListener('click', () => {
           <?php $product_id = $_GET['product_id']?> <!--only for testing-->
             <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_question?product_id=<?php echo $product_id?>" >
                     <div id="post_question_form">
-                        <?php if(($data['current_user_gender'])=='f'){
+                        <?php if(($data['current_user_gender'])=='f' or ($data['current_user_gender'])=='F'){
                           ?>
                             <img src="<?php echo URLROOT ?>/public/upload/profile_images/female_img.jpg"   alt="Profile Picture"  id="user_img"/>
                           <?php
@@ -676,20 +695,6 @@ function display_answers(id){
     }
 }
 
-/*pay popup */
-function pay_popup(price) {
-  const quantity = parseInt(quantityInput.value);
-  const total_count = quantity * price;
-  console.log(total_count);
-  const total_price = document.querySelector(".total_value");
-  total_price.textContent = `Rs. ${total_count.toFixed(2)}`;
-  const paypopup = document.getElementById('buy_now_dialog_box');
-  document.getElementById('close_buy_dialog').addEventListener('click', () => paypopup.close());
-  paypopup.showModal();
-}
-
-
-
 // function pay_popup(price) {
 //   const quantity = parseInt(quantityI nput.value);
 //   const total_count = quantity * price;
@@ -711,25 +716,44 @@ function pay_popup(price) {
 
 
 
-/*thanku pop up */
-// function thanku_popup() {
-//    document.getElementById('buy_now_dialog_box').close();
-//    const thankpopup = document.getElementById('thank_you_dialog_box');
-//    document.getElementById('close').addEventListener('click',() => thankpopup.close());
-//    thankpopup.showModal();
-// }
-
-window.onload = function() {
-    <?php if (isset($_SESSION['complete_order_msg']) && $_SESSION['complete_order_msg'] === 'complete'): ?>
-      const thankuPopup = document.getElementById('thank_you_dialog_box');
-      thankuPopup.showModal();
-    <?php endif; ?>
-  }
 
 function thanku_popup_close(){
   document.getElementById('thank_you_dialog_box').close();
-  <?php unset($_SESSION['complete_order_msg']); ?>
 }
+
+function checkout() {
+  const userInput = document.getElementById("quantity_input").value;
+  const agreementCheckbox = document.querySelector('#terms-checkbox');
+  
+  if (agreementCheckbox.checked) {
+    // Checkbox is checked, continue with checkout process
+    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+  } else {
+    // Checkbox is not checked, show an error message
+    //alert('Please agree to the terms and conditions before proceeding to checkout.');
+    document.getElementById("terms_and_condition_check").style.display="block";
+  }
+}
+
+function add_to_cart(){
+
+}
+
+
+
+// const existingQuantity = <?php echo $content->quantity; ?>;
+// const quantityInput = document.getElementById('quantity_input');
+// const quantityError = document.getElementById('quantity_error');
+  
+//   quantityInput.addEventListener('input', () => {
+//     const enteredQuantity = parseInt(quantityInput.value);
+//     if (enteredQuantity > existingQuantity) {
+//       quantityError.textContent = 'Entered quantity is greater than the available quantity.';
+//     } else {
+//       quantityError.textContent = '';
+//     }
+//   });
+
 
 </script>
 

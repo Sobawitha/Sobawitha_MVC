@@ -198,9 +198,6 @@ class blog_post extends Controller {
         }
     }
 
-    public function dashboard_chart_for_blogpost(){
-
-    }
 
 }
 
