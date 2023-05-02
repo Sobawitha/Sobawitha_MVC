@@ -110,7 +110,7 @@
     }
 
     public function get_user_detail(){
-      $this->db->query("SELECT DISTINCT(user_flag) as user_type, COUNT(*) AS num_users FROM user GROUP BY user_flag");
+      $this->db->query("SELECT DISTINCT(user_flag) as user_type, COUNT(user_flag) AS num_users FROM user GROUP BY user_flag");
       return $this->db->resultSet();
   }
   

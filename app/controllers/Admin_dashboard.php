@@ -135,6 +135,31 @@
         
     }
 
+    public function type_donut_chart() {
+        $post_category_detail = $this->adminDashModel->get_user_detail();
+    
+        if ($post_category_detail) {
+            // Create a response object with a "success" key and a "data" key
+            $response = [
+                "success" => true,
+                "data" => $post_category_detail
+            ];
+    
+            // Send the response as JSON
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } else {
+            // Return an error response
+            $response = [
+                "success" => false,
+                "message" => "Failed to retrieve category detail"
+            ];
+    
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }
+
   
 }
 ?>
