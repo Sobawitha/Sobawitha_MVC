@@ -208,6 +208,38 @@
         </div>
     </div>
 
+<dialog id="my-dialog">
+  <p>Item Successfully Added to the Wishlist</p>
+  <button id="dialog-close-button">Close</button>
+</dialog>
+
+<?php
+
+
+
+// Check if the session variable is set and equal to true
+if (isset($_SESSION['showDialog']) && $_SESSION['showDialog'] == true) {
+
+  unset($_SESSION['showDialog']);
+?>
+
+  <script>
+    // Open the dialog box
+    const dialog = document.querySelector('#my-dialog');
+    dialog.showModal();
+
+    // Close the dialog box when the close button is clicked
+    const dialogCloseButton = document.querySelector('#dialog-close-button');
+    dialogCloseButton.addEventListener('click', () => {
+      dialog.close();
+    });
+  </script>
+
+<?php
+}
+?>
+
+
     <dialog id="deletePopup">
                 <div class="deletePopup">
                 

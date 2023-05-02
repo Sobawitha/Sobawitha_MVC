@@ -192,4 +192,18 @@ public function createOrder()
 
 }
 
+public function cashOnlyOrder()
+{
+   
+   $orderData =  $this->cartModel->getAllItems();
+
+   print_r($orderData[0]->product_price);
+   if($this->orderModel->createCOD($orderData))
+     { 
+        print_r(count($orderData));
+
+     }
+
+}
+
 }

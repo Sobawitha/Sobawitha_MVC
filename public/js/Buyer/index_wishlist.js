@@ -1,6 +1,5 @@
 let dlt = document.getElementById('remove');
 let  cart_adder = document.getElementById('add');
-console.log(dlt);
 
 cart_adder.addEventListener("click", function(e) {
 

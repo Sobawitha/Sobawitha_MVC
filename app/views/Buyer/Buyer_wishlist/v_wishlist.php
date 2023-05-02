@@ -64,26 +64,8 @@ else{
     </div>
 </div>
 
-<dialog id="deletePopup">
-                <div class="deletePopup">
-                        <div class="delete_dialog_heading">
-                 
-                        
-                        <p>Item successfully  added to the cart !</p>
-                        </div>
 
-                        <div class="dialog_content">
-                            <!-- <form method="POST" action="<?php echo URLROOT?>/blog_post/delete_post">
-                            <button id="deletebtn" type="submit" value="" name="deletepost">Delete
-                            </button>-->
-                            <button id="cancelbtn" type="button">Cancel
-                            </button>
-                           <!-- </form> -->
 
-                            
-                        </div>
-                </div>
-            </dialog>
 
 </div>
 

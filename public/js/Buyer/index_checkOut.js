@@ -1,12 +1,17 @@
 let checkOutBtn = document.querySelector(".checkout");
+let checkbox =  document.getElementById('checkvalue');
 console.log(checkOutBtn);
 
+
 var orderElements = document.getElementsByClassName("order");
-let checkBoxVal =  document.getElementById("checkvalue").value;
+let checkBoxVal =   document.getElementById("checkvalue").value;
 
 checkOutBtn.addEventListener("click", async function () {
-  let itemsToBuy = [];
-  
+    let itemsToBuy = [];
+   console.log("Clicked the button");
+
+
+    if(checkbox.checked){
   for (var i = 0; i < orderElements.length; i++) {
     var orderElement = orderElements[i];
     var productId = orderElement.getAttribute("id").split("-")[1];
@@ -59,4 +64,20 @@ checkOutBtn.addEventListener("click", async function () {
   });
   
 
-});
+}
+
+
+
+
+
+else{
+
+
+    document.getElementById('terms_and_condition_check').style.display = "block";
+  
+  }
+
+
+
+}
+)

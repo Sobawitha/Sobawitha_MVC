@@ -202,6 +202,7 @@ tr{
     color:white;
     font-weight: bold;
     border:none;
+    width: 150px;
     padding:10px 20px 10px 20px ;
     border-radius: 5px;
     cursor: pointer;
@@ -212,9 +213,15 @@ tr{
     background-color: rgb(255, 255, 255);
     color:rgb(8, 1, 1);
     font-weight: bold;
+    width:150px;
     border:none;
-    padding:10px 30px 10px 30px;
+    cursor: pointer;
+    padding:10px 20px 10px 20px;
     border-radius: 5px;
+}
+.paypal a{
+    text-decoration: none;
+    color:rgb(8, 1, 1);
 }
 
 #bag{
@@ -258,3 +265,9 @@ tr{
 .input-group-text button:hover{
     background-color: rgb(235, 246, 229);
 }
+
+#terms_and_condition_check{
+    font-size:12px;
+    color:red;
+    display:none;
+  }

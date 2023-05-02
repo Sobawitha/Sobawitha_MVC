@@ -1,7 +1,8 @@
-<?php require APPROOT . '/views/Users/component/Header.php'?>
+
 <link rel="stylesheet" href="../css/Buyer/shopping_cart/shopping_cart.css"></link>
-<script src="../js/Buyer/index_cart.js" defer></script>
 <script src="../js/Buyer/index_checkOut.js" defer></script>
+<?php require APPROOT . '/views/Users/component/Header.php'?>
+
 <?php
 $sum = 0;
 if ($_SESSION['user_flag'] == 1) {
@@ -101,9 +102,10 @@ foreach($data['cart'] as $cart):{
                         <hr id="cart_toatal_section_hr">
                         <span class="cart_total">Cart total <span class="total_value">Rs.<?php echo $sum ?></span></span><br>
                         <span class="discription">Shipping and taxes calculate at checkout.</span><br />
-                        <input type="checkbox" name = "agree-terms" id  = "checkvalue"><label class="agreement">I agree for <span class="term">terms & conditions</span></label></input><br><br>
-                        <button class="checkout">checkout</button><br>
-                        <button class="paypal">Paypal</button><br>
+                        <input type="checkbox" name = "agree-terms" id  = "checkvalue" /><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br><br>
+                        <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
+                        <button class="checkout">Online</button><br>
+                        <button class="paypal"><a  href = "<?php  echo  URLROOT.'/Pages/orderpage'?>">Place an Order</a></button><br>
                         <i class="fa-solid fa-bag-shopping" id="bag"></i>
                 </div>
         </div>
@@ -121,6 +123,169 @@ foreach($data['cart'] as $cart):{
 
 
 </div>
-<script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/" defer></script>
+<script defer>
+console.log("Hefew");
+let checkOutBtn = document.querySelector(".checkout");
+console.log(checkOutBtn);
+var orderElements = document.getElementsByClassName("order");
+let checkBoxVal =  document.getElementById("checkvalue");
+let val1 =  document.getElementById('increment');
+let val2 =  document.getElementById('decrement');
+let dlt = document.getElementById('cancel_order');
+let total_price = document.querySelector('.total_value');
+// Get the flash message element and its child elements
+var flashMessage = document.getElementById("flash-message");
+// var flashText = flashMessage.querySelector(".flash-text");
+// var flashLoading = flashMessage.querySelector(".flash-loading");
+
+// Set the time for the message to disappear
+var hideTime = 5000; // 5 seconds
+
+// Show the message and loading animation
+// flashMessage.classList.add("show");
+
+
+// // Wait for the specified time and then hide the message
+// setTimeout(function(){
+//   flashMessage.classList.remove("show");
+// }, hideTime);
+
+
+
+
+
+
+dlt.addEventListener("click",function(e) {
+    
+    let id =  e.target.getAttribute("data-id");
+    console.log(id);
+    let  xhr  = new XMLHttpRequest();
+    xhr.open('GET', `http://localhost/Sobawitha_MVC/cart/delete/${id}`);
+    xhr.onload = function() {
+             
+        if (xhr.status === 200)
+        {
+          
+         let  user  =  'user-'+id;
+         const userRow = document.getElementById(user); 
+         userRow.parentNode.removeChild(userRow);
+         console.log(userRow);
+    
+        }
+
+        else{
+
+            console.error(xhr.statusText);
+        }
+
+    }
+    xhr.send();
+    
+})
+
+
+
+
+
+
+
+val1.addEventListener('click', function(e) {
+  console.log("Hello");
+       e.preventDefault();
+       let qty = val1.closest('.input-group-text').querySelector('.input-qty').value;
+       let prod_id =  val2.closest(".input-group-text").getAttribute("data-id");
+       let price =        val2.closest(".unit").previousElementSibling.innerText;
+       price = parseFloat(price);
+       console.log(qty);
+       let val    = parseInt(qty);
+       val = isNaN(val) ? 0 : val;
+
+       if(val  < 10)
+       {
+
+           val++;
+           console.log(val);
+           val1.closest('.input-group-text').querySelector('.input-qty').value = val;
+           price = val*price;
+      
+           val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
+
+
+       }
+       
+       let xhr =  new XMLHttpRequest();
+       xhr.open('GET',`http://localhost/Sobawitha_MVC/cart/updateQuantity/${val}/${prod_id}`);
+       xhr.onload =  function(){
+
+        if(xhr.readyState == 4 && xhr.status == 200)
+        {
+                
+         console.log("Successfully updated ");
+ 
+        }
+ 
+        else{
+    
+          console.error(xhr.statusText);
+        }
+    }
+ 
+ 
+    xhr.send();
+
+   
+})
+val2.addEventListener('click',function(e) {
+  console.log("Hello");
+   e.preventDefault();
+   let qty  = val2.closest('.input-group-text').querySelector('.input-qty').value;
+   let prod_id =  val2.closest(".input-group-text").getAttribute("data-id");
+   let price =        val2.closest(".unit").previousElementSibling.innerText;
+   price = parseFloat(price);
+   console.log(price);
+   console.log(prod_id +"Hello");
+   console.log(qty);
+   let val  = parseInt(qty);
+   val  =  isNaN(val) ? 0 : val;
+   if(val  > 0)
+   {
+       val--;
+       console.log(val);
+       val2.closest('.input-group-text').querySelector('.input-qty').value = val;
+       price = val*price;
+      
+       val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
+       
+   }
+
+    
+
+   let xhr  = new XMLHttpRequest();
+   xhr.open('GET',`http://localhost/Sobawitha_MVC/cart/updateQuantity/${val}/${prod_id}`);
+
+   xhr.onload =  function() {
+
+       if(xhr.readyState == 4 && xhr.status == 200)
+       {
+               
+        console.log("Successfully updated ");
+
+       }
+
+       else{
+   
+         console.error(xhr.statusText);
+       }
+   }
+
+
+   xhr.send();
+   
+})
+
+
+
+
 
 <?php require APPROOT . '/views/Users/component/footer.php'?>

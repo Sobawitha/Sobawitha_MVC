@@ -134,7 +134,7 @@
         </div>
 
         <div class="dropdown-content" hidden>
-         
+        
             <a onclick = >Price Low to High</a>
             <a onclick >Price High to Low</a>
         </div>

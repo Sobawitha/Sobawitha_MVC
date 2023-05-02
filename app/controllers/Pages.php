@@ -4,6 +4,7 @@ class Pages extends Controller {
     public function __construct(){
         $this-> pagesModel =$this->model('M_Pages');
         $this->supplierModel  = $this->model('M_Supplier');
+        $this->cartModel = $this->model('M_shopping_cart');
         $this->fertilizerModel = $this->model('M_ad_management');
         $this->filterModel = $this->model('M_seller_ad_management');
       
@@ -16,11 +17,14 @@ class Pages extends Controller {
         $this->view('Users/component/home', $data);
     }
 
-    public function orderpage(){
-
-        $data = [];
-        $this->view('Users/component/test', $data);
+    public function orderpage(){                                        
+        $data = array(
+            'cart' => $this->cartModel->getAllItems(),
+            'user' => $this->pagesModel->get_user_details()
+        );
+        $this->view('Users/component/cod_order', $data);
     }
+
     public function individual_item(){
         $data = [];
         $this->view('Users/component/individual_item', $data);
