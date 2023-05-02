@@ -116,7 +116,9 @@ class fertilizer_product extends Controller
         $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);
         $question = $this->fertilizer_product_model->display_all_questions($data);
         $answers = $this->fertilizer_product_model->display_all_answers($data);
+     
         $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
+        
         $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
         $no_of_cart_item = $this->fertilizer_product_model->check_cart($id)->count_item;
         $data = [
