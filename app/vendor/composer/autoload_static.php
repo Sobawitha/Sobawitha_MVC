@@ -12,28 +12,13 @@ class ComposerStaticInite2c0eddc15bac1d772abf2c1fb57988d
             'PHPMailer\\PHPMailer\\' => 20,
         ),
     );
-        }
-class ComposerStaticInit7e196f9056ba7d76a31dc558d5cb93c0
-{
-    public static $prefixLengthsPsr4 = array (
-        'S' => 
+
+    public static $prefixDirsPsr4 = array (
+        'PHPMailer\\PHPMailer\\' => 
         array (
-            'Stripe\\' => 7,
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
     );
-
-
-public static $prefixDirsPsr4 = array (
-    'PHPMailer\\PHPMailer\\' => 
-    array (
-        0 => '/path/to/phpmailer/src',
-    ),
-    'Stripe\\' => 
-    array (
-        0 => '/path/to/stripe-php/lib',
-    ),
-);
-
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
