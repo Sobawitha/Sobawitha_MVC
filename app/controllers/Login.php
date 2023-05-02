@@ -113,7 +113,7 @@
             }
             else if($flag==3){
                 $_SESSION['position'] = "Seller";
-                redirect('dashboard/seller_dashboard');
+                redirect('seller_dashboard/seller_dashboard');
             }
             else if($flag==3){
                 $_SESSION['position'] = "Seller";

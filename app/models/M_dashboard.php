@@ -57,10 +57,30 @@ class M_dashboard
     }
 
     public function get_blogpost_count_details(){
-        $this->db->query("SELECT YEAR(created) as year, MONTHNAME(created) as month, COUNT(*) as count
-        FROM blogpost where officer_id=:id
-        GROUP BY YEAR(created), MONTH(created) 
-        ");
+        // $this->db->query("SELECT YEAR(created) as year, MONTHNAME(created) as month, COUNT(*) as count
+        // FROM blogpost where officer_id=:id
+        // GROUP BY YEAR(created), MONTH(created) 
+        // ");
+
+        $this->db->query("SELECT YEAR(date_list.month_year) as year, MONTHNAME(date_list.month_year) as month, COUNT(blogpost.post_id) as count
+        FROM
+        (
+          SELECT DATE_FORMAT(NOW(), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 2 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 4 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 5 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 6 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 7 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 8 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 9 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 10 MONTH), '%Y-%m-01') AS month_year
+          UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 11 MONTH), '%Y-%m-01') AS month_year
+        ) AS date_list
+        LEFT JOIN blogpost ON YEAR(blogpost.created) = YEAR(date_list.month_year) AND MONTH(blogpost.created) = MONTH(date_list.month_year) AND officer_id=17
+        GROUP BY YEAR(date_list.month_year), MONTH(date_list.month_year)
+        ORDER BY YEAR(date_list.month_year), MONTH(date_list.month_year)");
         $this->db->bind(":id", $_SESSION['user_id']);
         return $this->db->resultSet();
     }
