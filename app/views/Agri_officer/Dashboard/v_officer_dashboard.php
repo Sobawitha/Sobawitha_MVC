@@ -138,8 +138,8 @@
                         </table>
                         <div class="pagination">
                             <?php
-                                //$total_row_count = $data['no_of_forumposts'];
-                                $total_row_count = 27;
+                                $total_row_count = $data['no_of_forumposts'];
+                                //$total_row_count = 27;
                                 $uri = $_SERVER['REQUEST_URI'];
                                 $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
                             

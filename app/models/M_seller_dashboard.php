@@ -45,9 +45,51 @@
     }
 
     public function get_order_detail() {
-        $this->db->query("SELECT DISTINCT current_status as status, COUNT(DISTINCT order_id) as num_orders FROM view_seller_orders WHERE created_by = :id GROUP BY current_status"); // corrected query
+        $this->db->query("SELECT 
+        CASE current_status 
+          WHEN 1 THEN 'complete'
+          WHEN 0 THEN 'pending'
+        END as status,
+        COUNT(DISTINCT order_id) as num_orders 
+      FROM 
+        view_seller_orders 
+      WHERE 
+        owner_id = :id
+      GROUP BY 
+        current_status"); // corrected query
         $this->db->bind(":id", $_SESSION['user_id']);
         return $this->db->resultSet();
+    }
+
+    public function get_monthly_income_details(){
+        $this->db->query("SELECT 
+        YEAR(months.month_date) AS year, 
+        MONTHNAME(months.month_date) AS month, 
+        COALESCE(SUM(quantity*price)*95/100, 0) AS count
+      FROM 
+        (SELECT DATE_SUB(NOW(), INTERVAL n MONTH) AS month_date 
+         FROM (SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 
+               UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 
+               UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 
+               UNION ALL SELECT 10 UNION ALL SELECT 11) AS nums) AS months
+        LEFT JOIN view_seller_orders ON MONTH(months.month_date) = MONTH(created_at) 
+                                     AND YEAR(months.month_date) = YEAR(created_at) 
+                                     AND owner_id = :id 
+      WHERE 
+        months.month_date BETWEEN DATE_SUB(NOW(), INTERVAL 12 MONTH) AND NOW()
+      GROUP BY 
+        YEAR(months.month_date), 
+        MONTH(months.month_date);
+      ");
+        $this->db->bind(":id", $_SESSION['user_id']);
+        return $this->db->resultSet();
+    }
+
+    public function get_stock_details(){
+        $this->db->query("SELECT fertilizer.product_id, fertilizer.product_name, fertilizer.quantity, product_starting_stock.quantity as supplied_qyuantity from fertilizer inner join product_starting_stock on fertilizer.product_id = product_starting_stock.product_id where created_bu = :id  )");
+        $this->db->bind(":id", $_SESSION['user_id']);
+        return $this->db->resultSet();
+
     }
 }
 ?>
