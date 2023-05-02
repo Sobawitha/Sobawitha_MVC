@@ -73,9 +73,15 @@
             $result=$this->db->resultSet();
             return $result;
         }
+    }
 
 
         
+    public function display_pending_advertisement(){
+        $this->db->query('SELECT * FROM fertilizer WHERE created_by =:userid');
+        $this->db->bind(':userid', $_SESSION['user_id']);
+
+        return $this->db->resultSet();
     }
 
 
@@ -119,5 +125,46 @@
 
 
 
+    public function get_all_fertilizer_details(){
+
+        $this->db->query('SELECT *  FROM fertilizer');
+        return $this->db->resultSet();
+        
+    }
+
+
+    public function customized_query($data){
+       
+        $this->db->query($data);
+        return $this->db->resultSet();
+
+    }
+//    public   function generateQuery( $columns, $condition) {
+//         $query = "SELECT ";
+//         if ($columns == '*') {
+//             $query .= "*";
+//         } else {
+//             $query .= implode(",", $columns);
+//         }
+//         $query .= " FROM  fertilizer" ;
+//         if (!empty($condition)) {
+//             $query .= " WHERE " . $condition;
+//         }
+//         $this->db->query($query);
+        
+//         return  $query;
+//     }
+ 
+
+     public function  searchResults($keyword){
+    
+         $query = "SELECT * FROM fertilizer WHERE product_name LIKE :key OR product_description LIKE :key";
+        $this->db->query($query);
+        $this->db->bind(":key", $keyword);
+        $fetched_results =  $this->db->resultSet();
+       
+
+        return $fetched_results;
+     }
 }
 ?>

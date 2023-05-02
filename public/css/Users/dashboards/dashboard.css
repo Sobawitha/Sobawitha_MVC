@@ -126,12 +126,16 @@
     color:white;
   }
 
+  #icon_for_total_income,#ongoin_order_icon,#complete_order_icon,#complain_icon{
+    font-size:45px;
+  }
   .card:hover .time_period{
     color:white;
   }
 
-  .card:hover #total_income_icon{
+  .card:hover #icon_for_total_income{
     color:white;
+    font-size:45px;
   }
   .card:hover  #ongoin_order_icon{
     color: white;

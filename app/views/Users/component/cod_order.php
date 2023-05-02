@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="../css/Users/component/orderpage.css"></link>
-<?php require APPROOT.'/views/Users/component/Header.php'?>
+<link rel="stylesheet" href="../css/Buyer/wish_list/wish_list.css"></link>
+<?php require APPROOT.'/views/Users/component/Header.php';$sum = 0;?>
+
 <script>
   function thanku_popup_close(){
     document.getElementById('thank_you_dialog_box').close();

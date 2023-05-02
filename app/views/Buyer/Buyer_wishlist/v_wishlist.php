@@ -1,11 +1,14 @@
 <link rel="stylesheet" href="../css/Buyer/wish_list/wish_list.css"></link>
+<script src="../js/Buyer/index_wishlist.js" defer></script>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php'?>
 <?php require APPROOT.'/views/Buyer/Buyer/buyer_sidebar.php'?>
 
 
 
+
 <div class="body">
+
     <div class="section_1">
 
     </div>
@@ -21,27 +24,39 @@
     <div class="shop-items">
 
     <?php
-        for($i=1; $i<=8; $i++){
+    if (!is_null($data['wishlist'])) {
+       
+        foreach($data['wishlist'] as $wishlist):{
+        
             ?>
-        <div class="wishlist-item">
+           
+        <div class="wishlist-item" id = "user-<?php echo $wishlist->Product_id; ?>">
             <i class="fa-solid fa-xmark" id="xmark"></i>
-            <span id="remove">Remove</span>
+            <span id="remove" data-id="<?php echo $wishlist->Product_id; ?>">Remove</span>
             <div class="pic">
             <img src="../public/images/background2.jpg" class="wisthlist_image">
             </div>
 
             <div class="info">
-            <span class="title">Organic fertilizer</span>
-            <span class="producer">From abc production</span>
+            <span class="title"><?php echo $wishlist->product_name ?></span>
+            <span class="producer"><?php echo  $wishlist->manufacturer ?></span>
             </div>
 
-            <div class="currPrice">Rs. 500.00</div>
+            <div class="currPrice"><?php echo $wishlist->price ?></div>
             <span class="wishlist_button">
-                <button class="add_to_cart">Add to cart</button>    
+              <button class="add_to_cart"  id = "add">Add to Cart</button>
+              
             </span>  
             </div>
         <?php
-        }?>
+        }
+    ?>
+
+<?php endforeach; }
+
+else{
+ echo "There is an error";   
+}?>
 
     </div>
     <div class="last">
@@ -49,5 +64,10 @@
     </div>
 </div>
 
+
+
+
 </div>
+
+
 <?php require APPROOT.'/views/Users/component/footer.php'?>
