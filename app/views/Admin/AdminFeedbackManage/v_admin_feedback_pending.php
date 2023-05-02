@@ -22,11 +22,12 @@
             <div class="search_content">
          
                     <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>"  id="searchBar" require/></span>
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
+                    <button type="button" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
                     <button type="submit" class="search_btn" onclick="open_cancel_btn()"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                     
             </div>
         </div>
+       </div>
         </form>
         <?php if(empty($data['message'])){ ?>   
             <?php if($data['search'] ==='Search by feedback category'): ?>
@@ -227,14 +228,28 @@
                 </div>
        
         </div>
+        </div>
         <div class="section_3">
                 <!-- add forum -->
                 
                 
         </div>
 
+
+
 </div>
 
 
+<div id="footer">
+<?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>
 
 
+<script>
+function clear_search_bar(){
+  document.getElementById("searchBar").value = "";
+  document.getElementById("cancel").style.display='none';
+  window.location.replace("<?php echo URLROOT?>/Admin_feedback_management/view_feedback");
+}
+
+</script>

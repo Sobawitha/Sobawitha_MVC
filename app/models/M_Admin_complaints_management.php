@@ -93,7 +93,7 @@
     $this->db->query("SELECT COUNT(*) as total_rows FROM complaint  WHERE type LIKE '%$search%' ");
     $row_count = $this->db->single()->total_rows;    
     
-    $this->db->query("SELECT * FROM complaint WHERE type LIKE '%$search%' ");
+    $this->db->query("SELECT * FROM complaint WHERE type LIKE '%$search%'");
     $result=$this->db->resultSet();
     return array('rows' => $result, 'row_count' => $row_count);   
     } 

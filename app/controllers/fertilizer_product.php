@@ -106,8 +106,11 @@ class fertilizer_product extends Controller
         $crop_type = $content->crop_type;
         $type = $content->type;
         $similar = $this->fertilizer_product_model->show_similar($title,$crop_type,$type,$id);
-
-        $id=$_SESSION['user_id'];
+         
+        if(isset($_SESSION['user_id'])){
+            $id=$_SESSION['user_id'];
+        }
+        
         $data =['product_id' =>  $_GET['product_id']]; 
         $comment = $this->fertilizer_product_model->display_all_comment($data);
         $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);

@@ -7,7 +7,6 @@
 .body{
   display:grid;
   grid-template-columns:20% 70% 10%;
-  height:100%;
   padding-top:80px;
   
 }
@@ -109,6 +108,10 @@ tr{
   height:80px;
   text-align: left;
   
+}
+
+td{
+  padding-left: 5px;
 }
 
 .order{
@@ -274,6 +277,7 @@ input[type=radio]{
   height: 15vh;
   align-items: center;
   padding: 10px;
+  gap:5px;
 }
 
 .rate{
