@@ -100,6 +100,7 @@
         $_SESSION['user_gender'] = $loggeduser->gender;
         $_SESSION['profile_image_path'] = "upload/user_profile_pics/" .  $_SESSION['profile_image'];
         // $_SESSION['profile_updateAdmin']="false";
+        $_SESSION['radio_admin_comp'] = '';
 
             $flag = $_SESSION['user_flag'];
             if($flag==1){
