@@ -44,10 +44,13 @@
                 </div>
                <?php endif?> 
 
-
-
+               
+               <?php if (!empty($data['emptydata'])) : ?>
+               <div class="error-msg-container">
                <span class="error_msg"><?php echo $data['emptydata'];?></span> 
- 
+               </div> 
+               <?php endif; ?>
+
                 <div class="order_list">
                 <div class="orders">
 
@@ -220,7 +223,10 @@
                 <?php endforeach;?>                  
                  
                 <?php }else{ ?>
+                    <div class="error-msg-container">
                     <span class="error_msg"><?php echo $data['message'];?></span>
+                     </div>
+                    
                     <?php    }  ?>   
                 </table>
 
@@ -228,7 +234,38 @@
                 </div>
        
         </div>
+
+        <?php if ($data['search'] === 'Search by complaint category') : ?>
+       
+       <div class="pagination-container text-center">
+<?php if ($data['pagination']['total_pages'] > 1) : ?>
+<div class="pagination">
+   <?php if ($data['pagination']['current_page'] > 1) : ?>
+       <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>&comp_type=<?php echo isset($_GET['comp_type']) ? $_GET['comp_type'] : $_SESSION['radio_admin_comp']; ?>">Previous</a>
+   <?php endif; ?>
+
+   <?php for ($i = 1; $i <= $data['pagination']['total_pages']; $i++) : ?>
+       <?php if ($i == $data['pagination']['current_page']) : ?>
+           <span class="current-page"><?php echo $i; ?></span>
+       <?php else : ?>
+           <a href="?page=<?php echo $i; ?>&comp_type=<?php echo isset($_GET['comp_type']) ? $_GET['comp_type'] : $_SESSION['radio_admin_comp']; ?>"><?php echo $i; ?></a>
+       <?php endif; ?>
+   <?php endfor; ?>
+
+   <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']) : ?>
+       <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&comp_type=<?php echo isset($_GET['comp_type']) ? $_GET['comp_type'] : $_SESSION['radio_admin_comp']; ?>">Next</a>
+   <?php endif; ?>
+</div>
+<?php endif; ?>
+   </div>
+
+   <?php endif; ?>
+
+       
+
+
         </div>
+
         <div class="section_3">
                 <!-- add forum -->
                 
