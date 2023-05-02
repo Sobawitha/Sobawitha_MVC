@@ -115,6 +115,11 @@
                 $_SESSION['position'] = "Seller";
                 redirect('dashboard/seller_dashboard');
             }
+            else if($flag==3){
+                $_SESSION['position'] = "Seller";
+                
+                redirect('dashboard/seller_dashboard');
+            }
             else if($flag==4){
                 $_SESSION['position'] = "Supplier";
                 redirect('dashboard/supplier_dashboard');

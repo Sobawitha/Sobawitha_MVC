@@ -138,6 +138,64 @@
                                 </html>
                                 ";
                         }
+
+                        else if($bodyFlag == 4)
+                        {
+
+                            $email->Subject =  "Sobawitha Confirmation of the order";
+                            $email->template  =   "
+                                 <html>
+                                <head>
+                                <title>Confirmation of Order.No$token</title>
+                                </head>
+                                <body style='font-family: Arial, sans-serif;'>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <span style='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #4CAF50; margin-right: 0.2em;'>SOBA</span><span style ='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #000;'>WITHA</span>
+                                </div>
+                                <div style='padding: 20px;'>
+                                <h2>Hi $name,</h2>
+                                <p>Thanks for using Sobawitha.</p>
+                                <p>Just to let you know — we've received your order $token, and it is now being processed</h3>
+                              
+                                <p>Thanks for shopping with us.</p>
+                                <p>The Sobawitha Team</p>
+                            </div>
+                        
+                            </body>
+                            </html>
+                            " ;
+
+
+                        }
+
+
+                        else if($bodyFlag == 5)
+                        {
+
+                          $email->Subject =  "Your Sobawitha order is now complete";
+                          $email->template  =   "
+                               <html>
+                              <head>
+                              <title>Completion of Order.No$token</title>
+                              </head>
+                              <body style='font-family: Arial, sans-serif;'>
+                              <div style='background-color: #f2f2f2; padding: 20px;'>
+                                  <span style='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #4CAF50; margin-right: 0.2em;'>SOBA</span><span style ='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #000;'>WITHA</span>
+                              </div>
+                          <div style='padding: 20px;'>
+                              <h2>Hi $name,</h2>
+                             
+                              <p>We have finished processing your order $token</h3>
+                            
+                              <p>Thank you,</p>
+                              <p>The Sobawitha Team</p>
+                          </div>
+                      
+                          </body>
+                          </html>
+                          " ;
+
+                        }
                         $mail->Body  =$email_template;
                         $mail->send();
                         return true;

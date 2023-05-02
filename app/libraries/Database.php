@@ -73,6 +73,27 @@
             public function rowCount(){
                 return $this->statement->rowCount();
             }
+            
+            public function beginTransaction() {
+                return $this->dbh->beginTransaction();
+            }
+
+            
+            public function endTransaction() {
+                return $this->dbh->commit();
+            }
+            public function rollBack() {
+                return $this->dbh->rollBack();
+            }
+            public function lastInsertId(){
+                return $this->dbh->lastInsertId();
+            }
+            public function commit(){
+                return $this->dbh->commit();
+            }
+            
+          
         }
+
 
 ?>
