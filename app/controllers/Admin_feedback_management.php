@@ -15,18 +15,23 @@
 
    public function view_feedback(){
     $records_per_page = 3;
+     
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             if(isset($_POST['feed_type'])){
-            $filter_type = trim($_POST['feed_type']);  
+            $filter_type = trim($_POST['feed_type']); 
+            $_SESSION['radio_admin_feed'] = $filter_type; 
             }
+
+            
 
             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
             $offset = ($current_page - 1) * $records_per_page;
             
             if(!empty($filter_type)){
-            $feed = $this->adminFeedMgntModel->getFeedbackDetails($filter_type, $records_per_page, $offset);
+            $feed = $this->adminFeedMgntModel->getFeedbackDetails($_SESSION['radio_admin_feed'], $records_per_page, $offset);
             }else{
               $feed = $this->adminFeedMgntModel->getFeedbackDetails('', $records_per_page, $offset);
             }
@@ -36,6 +41,7 @@
             // echo "alert('" . $total_records . "')";
             // echo "</script>";
           $total_pages = ceil($total_records / $records_per_page);
+          
           if(empty($feed['row_count'])){
         $data=[
         'feed' =>  $feed['rows'],
@@ -54,6 +60,7 @@
                 'feed' =>  $feed['rows'],
                 'search' =>'Search by feedback category',
                 'emptydata' => '',
+                'feedType' => $_SESSION['radio_admin_feed'],
                  
                 'pagination' => [
                     'total_records' => $total_records,
@@ -68,7 +75,8 @@
     }else{
         $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($current_page - 1) * $records_per_page; 
-        $feed = $this->adminFeedMgntModel->getFeedbackDetails('',$records_per_page, $offset);
+       
+        $feed = $this->adminFeedMgntModel->getFeedbackDetails($_SESSION['radio_admin_feed'],$records_per_page, $offset);
         
         $total_records = $feed['row_count'];
         $total_pages = ceil($total_records / $records_per_page);
@@ -91,6 +99,8 @@
                     'feed' =>  $feed['rows'],
                     'search' => "Search by feedback category",
                     'emptydata'=>'',
+                    'feedType' => $_SESSION['radio_admin_feed'],
+
                     
                     'pagination' => [
                       'total_records' => $total_records,
@@ -184,7 +194,7 @@
             ],
           ];
           
-        
+           $_SESSION['radion_admin_feed'] ='pending_feed';
           $this->view('Admin/AdminFeedbackManage/v_admin_feedback_pending', $data);
         }
 
@@ -213,7 +223,11 @@
   {
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
         $solveStatus= $this->adminFeedMgntModel->rejectFeed($feed_id);
+        $feedDetails =  $this->adminFeedMgntModel->getFeedDetailsForReject($feed_id); 
+        $email = $feedDetails -> email;
+        $name = $feedDetails -> first_name;
 
+        sendMail($email, $name, '',4,'');
    
         redirect('Admin_feedback_management/view_feedback');
      

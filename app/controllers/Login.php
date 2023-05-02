@@ -101,6 +101,7 @@
         $_SESSION['profile_image_path'] = "upload/user_profile_pics/" .  $_SESSION['profile_image'];
         // $_SESSION['profile_updateAdmin']="false";
         $_SESSION['radio_admin_comp'] = '';
+        $_SESSION['radio_admin_feed'] = '';
 
             $flag = $_SESSION['user_flag'];
             if($flag==1){
@@ -139,6 +140,7 @@
              unset($_SESSION['user_flag']);
             unset($_SESSION['lastname']);
             unset($_SESSION['position']);
+            unset($_SESSION['radio_admin_feed']);
             session_destroy();
         
 

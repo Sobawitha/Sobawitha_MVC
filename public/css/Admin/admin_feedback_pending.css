@@ -483,3 +483,78 @@ input[type=radio]{
 dialog{
   border: none;
 }
+
+/* reject reason popup */
+#popup-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#popup-dialog::-webkit-scrollbar {
+  width: 5px;
+}
+
+#popup-dialog::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 10px;
+}
+
+#close-popup-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background-image: url('close-icon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+}
+
+#submit-reject {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#cancel-reject {
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.popup-content label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.popup-content select, .popup-content input[type="text"] {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.popup-content h2 {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
