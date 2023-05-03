@@ -140,7 +140,7 @@
             unset($_SESSION['lastname']);
             unset($_SESSION['position']);
             session_destroy();
-           
+        
 
              // session_destroy();
 
