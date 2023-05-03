@@ -1,6 +1,6 @@
 
 <link rel="stylesheet" href="../css/Buyer/shopping_cart/shopping_cart.css"></link>
-<script src="../js/Buyer/index_checkOut.js" defer></script>
+<!-- <script src="../js/Buyer/index_checkOut.js" defer></script> -->
 <?php require APPROOT . '/views/Users/component/Header.php'?>
 
 <?php
@@ -73,7 +73,7 @@ foreach($data['cart'] as $cart):{
                                 <div class="order_detail"  >
                                         <td>
                                             <div class="product_detail">
-                                                <img src="http://localhost/Sobawitha_MVC/public/images/<?php echo $cart->product_img ?>" class="cart_image"></img>
+                                                <img src="http://localhost/Sobawitha/public/images/<?php echo $cart->product_img ?>" class="cart_image"></img>
                                                 <i class="fa-solid fa-xmark" id="cancel_order" data-id="<?php echo $cart->Product_id ?>"></i><br><br>
                                                 <span class="order_p_name"><?php echo $cart->product_name ?></span><br>
                                                 <span class="order_p_id"><?php echo $cart->Product_id ?></span><br>
@@ -130,9 +130,11 @@ let checkOutBtn = document.querySelector(".checkout");
 console.log(checkOutBtn);
 var orderElements = document.getElementsByClassName("order");
 let checkBoxVal =  document.getElementById("checkvalue");
-let val1 =  document.getElementById('increment');
-let val2 =  document.getElementById('decrement');
-let dlt = document.getElementById('cancel_order');
+let incrementButtons = document.querySelectorAll('#increment');
+let decrementButtons = document.querySelectorAll('#decrement');
+// let  incrementButtons =  document.getElementById('increment');
+// let  decrementButtons = document.getElementById('decrement') ;
+let dlt = document.querySelectorAll('#cancel_order');
 let total_price = document.querySelector('.total_value');
 // Get the flash message element and its child elements
 var flashMessage = document.getElementById("flash-message");
@@ -153,15 +155,128 @@ var hideTime = 5000; // 5 seconds
 
 
 
+for (let i = 0; i < incrementButtons.length; i++) {
+  incrementButtons[i].addEventListener('click', function(e) {
+  console.log("Hello");
+       e.preventDefault();
+       let qty =      incrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value;
+       let prod_id =  incrementButtons[i].closest(".input-group-text").getAttribute("data-id");
+       let price =    incrementButtons[i].closest(".unit").previousElementSibling.innerText;
+       price = parseFloat(price);
+       console.log(qty);
+       let val    = parseInt(qty);
+       val = isNaN(val) ? 0 : val;
+
+       if(val  < 10)
+       {
+
+           val++;
+           console.log(val);
+           incrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
+           price = val*price;
+      
+           incrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
 
 
+       }
+       
+       let xhr =  new XMLHttpRequest();
+       xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
+       xhr.onload =  function(){
 
-dlt.addEventListener("click",function(e) {
+        if(xhr.readyState == 4 && xhr.status == 200)
+        {
+                
+         console.log("Successfully updated ");
+ 
+        }
+ 
+        else{
     
+          console.error(xhr.statusText);
+        }
+    }
+ 
+ 
+    xhr.send();
+
+    })};
+
+
+    for(let i = 0; i < decrementButtons.length; i++){
+  decrementButtons[i].addEventListener('click', function(e) {
+
+   
+   e.preventDefault();
+   let qty  =     decrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value;
+   let prod_id =  decrementButtons[i].closest(".input-group-text").getAttribute("data-id");
+   let price =    decrementButtons[i].closest(".unit").previousElementSibling.innerText;
+   price = parseFloat(price);
+   console.log(price);
+   console.log(prod_id +"Hello");
+   console.log(qty);
+   let val  = parseInt(qty);
+   val  =  isNaN(val) ? 0 : val;
+   if(val  > 0)
+   {
+       val--;
+       console.log(val);
+       decrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
+       price = val*price;
+      
+       decrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
+       
+   }
+
+    
+
+   let xhr  = new XMLHttpRequest();
+   xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
+
+   xhr.onload =  function() {
+
+       if(xhr.readyState == 4 && xhr.status == 200)
+       {
+               
+        console.log("Successfully updated ");
+
+       }
+
+       else{
+   
+         console.error(xhr.statusText);
+       }
+   }
+
+
+   xhr.send();
+
+
+
+
+
+
+
+
+
+
+  })
+
+}
+
+
+  
+
+
+
+for(let i = 0; i < dlt.length; i++){
+  dlt[i].addEventListener('click', function(e) {
+
+   
     let id =  e.target.getAttribute("data-id");
     console.log(id);
     let  xhr  = new XMLHttpRequest();
-    xhr.open('GET', `http://localhost/Sobawitha_MVC/cart/delete/${id}`);
+    xhr.open('GET', `http://localhost/Sobawitha/cart/delete/${id}`);
     xhr.onload = function() {
              
         if (xhr.status === 200)
@@ -184,105 +299,136 @@ dlt.addEventListener("click",function(e) {
     
 })
 
+}
+
+
+// dlt.addEventListener("click",function(e) {
+    
+//     let id =  e.target.getAttribute("data-id");
+//     console.log(id);
+//     let  xhr  = new XMLHttpRequest();
+//     xhr.open('GET', `http://localhost/Sobawitha/cart/delete/${id}`);
+//     xhr.onload = function() {
+             
+//         if (xhr.status === 200)
+//         {
+          
+//          let  user  =  'user-'+id;
+//          const userRow = document.getElementById(user); 
+//          userRow.parentNode.removeChild(userRow);
+//          console.log(userRow);
+    
+//         }
+
+//         else{
+
+//             console.error(xhr.statusText);
+//         }
+
+//     }
+//     xhr.send();
+    
+// })
 
 
 
 
 
 
-val1.addEventListener('click', function(e) {
-  console.log("Hello");
-       e.preventDefault();
-       let qty = val1.closest('.input-group-text').querySelector('.input-qty').value;
-       let prod_id =  val2.closest(".input-group-text").getAttribute("data-id");
-       let price =        val2.closest(".unit").previousElementSibling.innerText;
-       price = parseFloat(price);
-       console.log(qty);
-       let val    = parseInt(qty);
-       val = isNaN(val) ? 0 : val;
 
-       if(val  < 10)
-       {
+// val1.addEventListener('click', function(e) {
+//   console.log("Hello");
+//        e.preventDefault();
+//        let qty = val1.closest('.input-group-text').querySelector('.input-qty').value;
+//        let prod_id =  val2.closest(".input-group-text").getAttribute("data-id");
+//        let price =        val2.closest(".unit").previousElementSibling.innerText;
+//        price = parseFloat(price);
+//        console.log(qty);
+//        let val    = parseInt(qty);
+//        val = isNaN(val) ? 0 : val;
 
-           val++;
-           console.log(val);
-           val1.closest('.input-group-text').querySelector('.input-qty').value = val;
-           price = val*price;
+//        if(val  < 10)
+//        {
+
+//            val++;
+//            console.log(val);
+//            val1.closest('.input-group-text').querySelector('.input-qty').value = val;
+//            price = val*price;
       
-           val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
+//            val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
 
 
-       }
+//        }
        
-       let xhr =  new XMLHttpRequest();
-       xhr.open('GET',`http://localhost/Sobawitha_MVC/cart/updateQuantity/${val}/${prod_id}`);
-       xhr.onload =  function(){
+//        let xhr =  new XMLHttpRequest();
+//        xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
+//        xhr.onload =  function(){
 
-        if(xhr.readyState == 4 && xhr.status == 200)
-        {
+//         if(xhr.readyState == 4 && xhr.status == 200)
+//         {
                 
-         console.log("Successfully updated ");
+//          console.log("Successfully updated ");
  
-        }
+//         }
  
-        else{
+//         else{
     
-          console.error(xhr.statusText);
-        }
-    }
+//           console.error(xhr.statusText);
+//         }
+//     }
  
  
-    xhr.send();
+//     xhr.send();
 
    
-})
-val2.addEventListener('click',function(e) {
-  console.log("Hello");
-   e.preventDefault();
-   let qty  = val2.closest('.input-group-text').querySelector('.input-qty').value;
-   let prod_id =  val2.closest(".input-group-text").getAttribute("data-id");
-   let price =        val2.closest(".unit").previousElementSibling.innerText;
-   price = parseFloat(price);
-   console.log(price);
-   console.log(prod_id +"Hello");
-   console.log(qty);
-   let val  = parseInt(qty);
-   val  =  isNaN(val) ? 0 : val;
-   if(val  > 0)
-   {
-       val--;
-       console.log(val);
-       val2.closest('.input-group-text').querySelector('.input-qty').value = val;
-       price = val*price;
+// })
+// val2.addEventListener('click',function(e) {
+//   console.log("Hello");
+//    e.preventDefault();
+//    let qty  = val2.closest('.input-group-text').querySelector('.input-qty').value;
+//    let prod_id =  val2.closest(".input-group-text").getAttribute("data-id");
+//    let price =        val2.closest(".unit").previousElementSibling.innerText;
+//    price = parseFloat(price);
+//    console.log(price);
+//    console.log(prod_id +"Hello");
+//    console.log(qty);
+//    let val  = parseInt(qty);
+//    val  =  isNaN(val) ? 0 : val;
+//    if(val  > 0)
+//    {
+//        val--;
+//        console.log(val);
+//        val2.closest('.input-group-text').querySelector('.input-qty').value = val;
+//        price = val*price;
       
-       val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
+//        val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
        
-   }
+//    }
 
     
 
-   let xhr  = new XMLHttpRequest();
-   xhr.open('GET',`http://localhost/Sobawitha_MVC/cart/updateQuantity/${val}/${prod_id}`);
+//    let xhr  = new XMLHttpRequest();
+//    xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
 
-   xhr.onload =  function() {
+//    xhr.onload =  function() {
 
-       if(xhr.readyState == 4 && xhr.status == 200)
-       {
+//        if(xhr.readyState == 4 && xhr.status == 200)
+//        {
                
-        console.log("Successfully updated ");
+//         console.log("Successfully updated ");
 
-       }
+//        }
 
-       else{
+//        else{
    
-         console.error(xhr.statusText);
-       }
-   }
+//          console.error(xhr.statusText);
+//        }
+//    }
 
 
-   xhr.send();
+//    xhr.send();
    
-})
+// })
 
 
 
@@ -324,7 +470,7 @@ checkOutBtn.addEventListener("click", async function () {
 
   }
 
-  let sessionRequest = await fetch("http://localhost/Sobawitha_MVC/Cart/checkOut", {
+  let sessionRequest = await fetch("http://localhost/Sobawitha/Cart/checkOut", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
