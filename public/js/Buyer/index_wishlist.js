@@ -1,13 +1,15 @@
-let dlt = document.getElementById('remove');
-let  cart_adder = document.getElementById('add');
-
-cart_adder.addEventListener("click", function(e) {
+let dlt = document.querySelectorAll('#remove');
+let  cart_adder = document.querySelectorAll('#add');
+console.log("Hello");
+for(let i=0; i<cart_adder.length; i++)
+{     
+    cart_adder[i].addEventListener("click", function(e) {
 
 
     let id =  e.target.closest('.wishlist-item').querySelector('#remove').getAttribute("data-id");
     console.log(id);
     let  xhr  = new XMLHttpRequest();
-    xhr.open('GET', "http://localhost/Sobawitha_MVC/wishlist/addToCart/"+encodeURIComponent(id));
+    xhr.open('GET', "http://localhost/Sobawitha/wishlist/addToCart/"+encodeURIComponent(id));
     xhr.onload = function() {
              
         if (xhr.status === 200 && xhr.readyState === 4)
@@ -29,37 +31,78 @@ cart_adder.addEventListener("click", function(e) {
     }
     xhr.send();
     
+})
+
+
 }
 
-
-)
-dlt.addEventListener("click",function(e) {
+for(let i = 0; i <dlt.length;i++){
+  
+    dlt[i].addEventListener("click",function(e){
+   
+        let id =  e.target.getAttribute("data-id");
+        console.log(id);
+        let  xhr  = new XMLHttpRequest();
+        xhr.open('GET', "http://localhost/Sobawitha/wishlist/delete/"+encodeURIComponent(id));
+        xhr.onload = function() {
+                 
+            if (xhr.status === 200)
+            {
+             console.log(xhr.responseText);    
+             let  user  =  'user-'+id;
+             const userRow = document.getElementById(user); 
+             userRow.parentNode.removeChild(userRow);
+             console.log(userRow);
+        
+            }
     
-    let id =  e.target.getAttribute("data-id");
-    console.log(id);
-    let  xhr  = new XMLHttpRequest();
-    xhr.open('GET', "http://localhost/Sobawitha_MVC/wishlist/delete/"+encodeURIComponent(id));
-    xhr.onload = function() {
+            else{
+    
+                console.error(xhr.statusText);
+            }
+    
+        }
+        xhr.send();
+        
+
+
+
+
+
+
+
+    })
+
+
+}
+
+// dlt.addEventListener("click",function(e) {
+    
+//     let id =  e.target.getAttribute("data-id");
+//     console.log(id);
+//     let  xhr  = new XMLHttpRequest();
+//     xhr.open('GET', "http://localhost/Sobawitha/wishlist/delete/"+encodeURIComponent(id));
+//     xhr.onload = function() {
              
-        if (xhr.status === 200)
-        {
-         console.log(xhr.responseText);    
-         let  user  =  'user-'+id;
-         const userRow = document.getElementById(user); 
-         userRow.parentNode.removeChild(userRow);
-         console.log(userRow);
+//         if (xhr.status === 200)
+//         {
+//          console.log(xhr.responseText);    
+//          let  user  =  'user-'+id;
+//          const userRow = document.getElementById(user); 
+//          userRow.parentNode.removeChild(userRow);
+//          console.log(userRow);
     
-        }
+//         }
 
-        else{
+//         else{
 
-            console.error(xhr.statusText);
-        }
+//             console.error(xhr.statusText);
+//         }
 
-    }
-    xhr.send();
+//     }
+//     xhr.send();
     
-})
+// })
 
 function popUpOpen() {
     const deletePopup = document.getElementById('deletePopup')

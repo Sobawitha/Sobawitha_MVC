@@ -149,8 +149,8 @@
                 </div></a>
 
                
-                <!-- <a href = "<?php echo URLROOT?>/wishlist/addToWishlist/<?php echo $product->Product_id ?>"><i class="fa-regular fa-heart" id="heart"></i></a>  -->
-                <i class="fa-regular fa-heart" id="heart"></i>
+                <a href = "<?php echo URLROOT?>/wishlist/addToWishlist/<?php echo $allAds->Product_id ?>"><i class="fa-regular fa-heart" id="heart"></i></a>
+             
 
                 <div class="discription">
                 <span class="price"> Rs. <?php echo $allAds->price ?></span>

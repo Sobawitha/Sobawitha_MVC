@@ -48,6 +48,13 @@ class Pages extends Controller {
 
 
     }
+    public function orderpage(){                                        
+        $data = array(
+            'cart' => $this->cartModel->getAllItems(),
+            'user' => $this->pagesModel->get_user_details()
+        );
+        $this->view('Users/component/COD', $data);
+    }
 }
 
 ?>
