@@ -78,10 +78,10 @@ class cart extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           header('Content-Type: application/json');
         
-            require_once '../vendor/autoload.php';
+             require '../app/vendor/autoload.php';
             $items = json_decode(trim(file_get_contents('php://input')));
-            $checkboxvalue  =  $items->checkboxvalue;
-            $items = $items->items;
+            // $checkboxvalue  =  $items->checkboxvalue;
+            // $items = $items->items;
            
             $total = 0;
             $lineItems = [];

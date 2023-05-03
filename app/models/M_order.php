@@ -194,7 +194,7 @@ class M_order
         // Commit the transaction
         $this->db->commit();
 
-        $this->db-query("SELECT * from user WHERE user_id = :user_id");
+        $this->db->query("SELECT * from user WHERE user_id = :user_id");
         $this->db->bind(":user_id", $_SESSION['user_id']);
         $result = $this->db->single();
         $payer_email = $result->email;

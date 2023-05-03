@@ -1,6 +1,6 @@
 
 <link rel="stylesheet" href="../css/Buyer/shopping_cart/shopping_cart.css"></link>
-<script src="../js/Buyer/index_checkOut.js" defer></script>
+
 <?php require APPROOT . '/views/Users/component/Header.php'?>
 
 <?php
@@ -73,7 +73,7 @@ foreach($data['cart'] as $cart):{
                                 <div class="order_detail"  >
                                         <td>
                                             <div class="product_detail">
-                                                <img src="http://localhost/Sobawitha_MVC/public/images/<?php echo $cart->product_img ?>" class="cart_image"></img>
+                                                <img src="http://localhost/Sobawitha/public/images/<?php echo $cart->product_img ?>" class="cart_image"></img>
                                                 <i class="fa-solid fa-xmark" id="cancel_order" data-id="<?php echo $cart->Product_id ?>"></i><br><br>
                                                 <span class="order_p_name"><?php echo $cart->product_name ?></span><br>
                                                 <span class="order_p_id"><?php echo $cart->Product_id ?></span><br>
@@ -290,10 +290,11 @@ val2.addEventListener('click',function(e) {
 
 checkOutBtn.addEventListener("click", async function () {
     let itemsToBuy = [];
-   console.log("Clicked the button");
+   
 
 
     if(checkBoxVal.checked){
+      console.log("Clicked the button");
   for (var i = 0; i < orderElements.length; i++) {
     var orderElement = orderElements[i];
     var productId = orderElement.getAttribute("id").split("-")[1];
@@ -318,13 +319,10 @@ checkOutBtn.addEventListener("click", async function () {
     itemsToBuy.push(item);
   }
 
-  const data = {
-    items: itemsToBuy,
-    checkboxvalue:checkBoxVal
+  const data = itemsToBuy;
 
-  }
-
-  let sessionRequest = await fetch("http://localhost/Sobawitha_MVC/Cart/checkOut", {
+  console.log(data);
+  let sessionRequest = await fetch("http://localhost/Sobawitha/Cart/checkOut", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

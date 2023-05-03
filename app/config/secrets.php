@@ -9,5 +9,7 @@ require_once 'vendor/autoload.php';
 $stripe_Settings = array
 (
     'currency' => 'usd',
-    'webhook_secret' => 'whsec_
-)
+    'webhook_secret' => 'whsec_'
+);
+
+?>
