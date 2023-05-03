@@ -436,10 +436,11 @@ for(let i = 0; i < dlt.length; i++){
 
 checkOutBtn.addEventListener("click", async function () {
     let itemsToBuy = [];
-   console.log("Clicked the button");
 
 
     if(checkBoxVal.checked){
+      
+   console.log("Clicked the button");
   for (var i = 0; i < orderElements.length; i++) {
     var orderElement = orderElements[i];
     var productId = orderElement.getAttribute("id").split("-")[1];
