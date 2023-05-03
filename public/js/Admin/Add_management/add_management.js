@@ -110,11 +110,6 @@ function popUpOpenViewMore(product_name, img_one, img_two, img_three, img_four,i
 
 
 
-  function clear_search_bar(){
-    document.getElementById("searchBar").value = "";
-    document.getElementById("cancel").style.display='none';
-  }
-
   function open_cancel_btn() {
     if (document.getElementById("searchBar").value !== "") {
         document.getElementById("cancel").style.display = "inline-block";

@@ -31,15 +31,17 @@
 public function ad_management_view()
 {
   $records_per_page = 4;
+
 if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $filter_type = trim($_POST['ad_type']);
+        $_SESSION['radio_admin_ad'] = $filter_type;
 
         $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($current_page - 1) * $records_per_page;
 
-        $products = $this->adminAdMgmtModel->display_all_ads($filter_type, $records_per_page, $offset); //data object array
+        $products = $this->adminAdMgmtModel->display_all_ads($_SESSION['radio_admin_ad'], $records_per_page, $offset); //data object array
      
         $total_records = $products['total_rows'];
         // echo "<script>";
@@ -67,6 +69,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
             'products' =>  $products['products'],
             'search' => "Search by title of the advertisement",
             'emptydata' => '',
+            'adType' => $_SESSION['radio_admin_ad'],
             
             'pagination' => [
                'total_records' => $total_records,
@@ -82,10 +85,12 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
       $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
       $offset = ($current_page - 1) * $records_per_page; 
        
-      $products = $this->adminAdMgmtModel->display_all_ads('', $records_per_page, $offset); 
+      $products = $this->adminAdMgmtModel->display_all_ads($_SESSION['radio_admin_ad'], $records_per_page, $offset); 
+      
       $total_records = $products['total_rows'];
       $total_pages = ceil($total_records / $records_per_page); 
-        $products = $this->adminAdMgmtModel->display_all_ads(); //data object array
+       
+      // $products = $this->adminAdMgmtModel->display_all_ads(); //data object array
   
         if(empty($products['total_rows'])){
           $data=[
@@ -106,6 +111,7 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
               'products' =>  $products['products'],
               'search' => "Search by title of the advertisement",
               'emptydata' => '',
+              'adTypes' => $_SESSION['radio_admin_ad'],
               
               'pagination' => [
                  'total_records' => $total_records,
