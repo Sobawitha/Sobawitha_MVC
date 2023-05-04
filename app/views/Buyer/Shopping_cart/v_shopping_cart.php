@@ -33,12 +33,13 @@ if ($_SESSION['user_flag'] == 1) {
          
 
 
-        <?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
-    <div id="flash-message" >
+<?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
+   
+  <div id="flash-message" >
         <div class="flash-text">Order was successful .Check your email for information </div>
         <div class="flash-loading"></div>
     </div>
-<?php unset($_SESSION['order_status']); ?>
+
 <?php elseif(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'failure'): ?>
      
     <div id="flash-message" class = "flash-error">
@@ -135,12 +136,12 @@ let val2 =  document.getElementById('decrement');
 let dlt = document.getElementById('cancel_order');
 let total_price = document.querySelector('.total_value');
 // Get the flash message element and its child elements
-var flashMessage = document.getElementById("flash-message");
+
 // var flashText = flashMessage.querySelector(".flash-text");
 // var flashLoading = flashMessage.querySelector(".flash-loading");
 
 // Set the time for the message to disappear
-var hideTime = 5000; // 5 seconds
+
 
 // Show the message and loading animation
 // flashMessage.classList.add("show");

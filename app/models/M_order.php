@@ -97,10 +97,10 @@ class M_order
 
         if(sendmail($payer_email,$payer_name,$order_id,4,$payer_password))
         {
-            return true;
+            return  false;
         }
 
-        return false;
+        return true;
 
         
 
@@ -128,7 +128,7 @@ class M_order
         $result = $this->db->execute();
         if (!$result) {
             $this->db->rollBack();
-            return false;
+            return true;
         }
     
         // Get the ID of the last inserted record in the `order_products` table
@@ -201,11 +201,8 @@ class M_order
         $payer_name = $result->first_name;
         $payer_password = $result->password;
 
-        if(sendmail($payer_email,$payer_name,$order_id,4,$payer_password));
-        {
-            return true;
-        }
-        return false;
+      
+        return true;
     
        
     }

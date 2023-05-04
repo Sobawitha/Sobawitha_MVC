@@ -3,21 +3,6 @@ let val2 =  document.getElementById('decrement');
 let dlt = document.getElementById('cancel_order');
 let total_price = document.querySelector('.total_value');
 // Get the flash message element and its child elements
-var flashMessage = document.getElementById("flash-message");
-var flashText = flashMessage.querySelector(".flash-text");
-var flashLoading = flashMessage.querySelector(".flash-loading");
-
-// Set the time for the message to disappear
-var hideTime = 5000; // 5 seconds
-
-// Show the message and loading animation
-flashMessage.classList.add("show");
-
-// Wait for the specified time and then hide the message
-setTimeout(function(){
-  flashMessage.classList.remove("show");
-}, hideTime);
-
 
 
 

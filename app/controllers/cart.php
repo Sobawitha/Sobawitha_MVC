@@ -160,8 +160,6 @@ public function createOrder()
           if($this->orderModel->createOnlineOrder($orderData)){
                     $_SESSION['order_status'] = "success";
                     $this->cartModel->clearAll();
-                    
-                    
                     redirect('Cart/display_all_items');
                 }
                 
@@ -169,6 +167,7 @@ public function createOrder()
         
             $_SESSION['order_status'] = "failure"; 
             redirect('Cart/display_all_items');
+      
         }
                 }
           
