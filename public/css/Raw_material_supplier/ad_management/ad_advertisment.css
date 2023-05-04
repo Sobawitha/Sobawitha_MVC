@@ -15,6 +15,10 @@
   /* background-color:bisque; */
 }
 
+.section_2{
+  width: 1500px;
+}
+
 .a_add_admin_maincontent{
   margin-right: 2rem;
 }
@@ -23,7 +27,7 @@
 .add_container{
   
   margin-left: 100px;
-  max-width: 900px;
+  max-width: 1000px;
   box-sizing: border-box;
   font-family:'Montserrat', sans-serif ;
   width: 100%;
@@ -242,16 +246,18 @@ form .advertisment-details .post-image img {
 
 
 
+/* 2023/5/2 */
 
+#category{
+  width: 100px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.input-box select{
+  margin-left: 5px;
+}
+.input-box span{
+  margin-right: 5px;
+}
+.input-box input{
+  margin-left: 5px;
+}
