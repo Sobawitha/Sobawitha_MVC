@@ -238,7 +238,7 @@ function filterProducts() {
                 var html = '';
 
                if(results.length > 0){
-                console.log(results.length);
+                // console.log(results.length);
                 for (let i = 0; i < results.length; i++) {
 
 
