@@ -466,8 +466,7 @@ checkOutBtn.addEventListener("click", async function () {
   }
 
   const data = {
-    items: itemsToBuy,
-    checkboxvalue:checkBoxVal
+    items: itemsToBuy
 
   }
 

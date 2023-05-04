@@ -68,7 +68,7 @@ document.querySelectorAll('.dropdown-content a')[1].addEventListener('click', ()
 
 search_input.addEventListener("keyup", (e) => {
   let search_input = e.target.value;
-  fetch(`http://localhost/Sobawitha_MVC/Users/search/${search_input}`,
+  fetch(`http://localhost/Sobawitha/Users/search/${search_input}`,
   {
 
       method:'GET',
@@ -85,7 +85,7 @@ search_input.addEventListener("keyup", (e) => {
           for (let i = 0; i < data.length; i++) {
             html += `
             
-            <a href="http://localhost/Sobawitha_MVC/Users/product_page/${data[i].product_id}">
+            <a href="http://localhost/Sobawitha/Users/product_page/${data[i].product_id}">
              <li>${data[i].product_name}</li>
             </a>
             `
@@ -152,7 +152,7 @@ function open_sorttype(){
 }
 
 viewMore.addEventListener("click", () =>{
-    fetch("http://localhost/Sobawitha_MVC/pages/view_more/",
+    fetch("http://localhost/Sobawitha/pages/view_more/",
     {
         method: 'GET',
         headers: {
