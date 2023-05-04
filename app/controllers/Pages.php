@@ -26,7 +26,7 @@ class Pages extends Controller {
     public function product_page(){
         $data = [];
         $data['products'] = $this->filterModel->get_all_fertilizer_details();
-      
+        $data['manufacturers'] = $this->filterModel->get_manufacturer_names();
         $data['provinces'] = SriLanka::getProvinces();
         $this->view('Users/component/v_product_page', $data);
     }

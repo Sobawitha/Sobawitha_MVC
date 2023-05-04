@@ -26,12 +26,12 @@
         <div class="filter_type_1">
             <span class="title">Brand</span><br>
             <div class="all_brands">
-            <?php foreach($data['products'] as $product): ?>
+            <?php foreach($data['manufacturers'] as $manufacturer): ?>
                
            
            
            
-                <label for="brand_1" > <input type="checkbox"  name="brands" value="<?php echo $product->manufacturer?>"><?php echo $product->manufacturer?></label><br>
+                <label for="brand_1" > <input type="checkbox"  name="brands" value="<?php echo $manufacturer->manufacturer?>"><?php echo $manufacturer->manufacturer?></label><br>
               
 
                 <?php endforeach; ?>
