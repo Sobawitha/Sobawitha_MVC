@@ -51,7 +51,7 @@
                 <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'reviewed_ads') {
                 echo ' checked="checked"';
                 $_SESSION['radio_admin_ad'] = 'reviewed_ads';
-                }elseif(!isset($_POST['ad_type'])){
+                }elseif(!isset($_POST['ad_type']) && isset($_GET['ad_type']) && $_GET['ad_type'] == 'reviewed_ads '){
                 echo 'checked';
                 $_SESSION['radio_admin_ad'] = 'reviewed_ads';
                 }?> >Reviewed Ads</label>
@@ -60,7 +60,7 @@
                 <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'rejected_ads'){
                  echo ' checked="checked"';
                  $_SESSION['radio_admin_ad'] = 'rejected_ads';
-                }elseif(!isset($_POST['ad_type'])){
+                }elseif(!isset($_POST['ad_type']) && isset($_GET['ad_type']) && $_GET['ad_type'] == 'rejected_ads '){
                 echo 'checked';
                 $_SESSION['radio_admin_ad'] = 'rejected_ads';
                 } ?>>Rejected Ads</label>
@@ -414,7 +414,7 @@
         </div>
        </div>
 
-       <?php if ($data['search'] === 'Search by title of the advertisement') : ?>
+       <!-- <?php if ($data['search'] === 'Search by title of the advertisement') : ?>
        
        <div class="pagination-container text-center">
 <?php if ($data['pagination']['total_pages'] > 1) : ?>
@@ -438,7 +438,7 @@
 <?php endif; ?>
    </div>
 
-   <?php endif; ?>
+   <?php endif; ?> -->
 
          </div>
         <div class="section_3">

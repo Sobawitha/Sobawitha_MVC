@@ -2,7 +2,7 @@
 .body{
   display:grid;
   grid-template-columns:20% 70% 5%;
-  height:100%;
+  min-height:600px;
   padding-top:80px;
   
 }
