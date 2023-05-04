@@ -107,7 +107,7 @@
     place-items: center;
   }
   
-  .edit{
+  .edit a i{
     color:rgb(89, 218, 104);
     font-size:15px;
     cursor:pointer;
@@ -192,3 +192,183 @@
     text-decoration: none;
     padding-top: 50px;
   }
+
+
+
+
+
+
+
+
+
+
+/* 
+  .delete{
+    color:rgb(191, 29, 29);
+    font-size:12px;
+    cursor:pointer;
+    font-weight: bold;
+  }
+   */
+  
+  
+  .dialog__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .dialog__heading button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.2rem;
+  }
+  
+  .dialog__content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .dialog__content a {
+    text-align: center;
+    width: 120px;
+    height: 30px;
+    padding: 0.5rem 0.5rem;
+    background-color: #06543c;
+    color: #fff;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    opacity: 0.8;
+    transform: opacity 0.2s ease-in-out;
+  }
+  
+  .dialog__content a:hover {
+    opacity: 1;
+  }
+  
+  #deactive_user_button{
+    color: crimson;
+    background-color: transparent; 
+    border: none;
+    cursor: pointer;
+  }
+  
+  
+  /* Deactivate User Popup */
+  #deactivateUserPopup {
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+  }
+  
+  #deactivateUserPopup::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  .deactivateUserPopup { 
+    min-height: 200px;
+    padding:1rem;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .deactivateUserPopup h2{
+    font-size:15px;
+  }
+  
+  .dialog__content a:hover {
+    opacity: 1;
+  }
+  
+  #yes, #no{
+    font-size:13px;
+    font-weight:bold;
+    text-decoration:none;
+  }
+  
+  #yes{
+     background-color: crimson;
+     color: #ccc;
+  }
+  
+  #no{
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+  }
+  
+
+
+
+
+  /*filter_section*/
+
+.filter_section{
+  padding-top:30px;
+  font-size:13px;
+  font-weight: bold;
+  color:rgb(174, 169, 128);
+
+}
+
+#filter_label{
+  margin-right:20px;
+}
+
+#filter_label:hover{
+  cursor:pointer;
+}
+
+input[type=radio]{
+  accent-color: crimson;
+}
+
+#filter_form{
+  display: flex;
+  
+}
+
+
+
+/* .expired{
+  display: none;
+} */
+
+
+
+
+
+
+/* changed */
+
+[id^="closebtntwo-"]{
+  color: crimson;
+  cursor: pointer;
+}
+
+
+[id^="deactivateUserPopup"] dialog {
+  border: none;
+  padding: 0;
+  border-radius: 10px;
+}
+
+
+[id^="deactivateUserPopup"]::backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+
+[id^="deactive_user_button-"] {
+  color: crimson;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
