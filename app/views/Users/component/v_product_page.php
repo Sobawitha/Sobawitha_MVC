@@ -121,16 +121,19 @@
             <div class="search_content">
                 
                     <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" " required/></span>
+                    
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
 
                     
                     </div>
+
                     <div class="live-search-result">
                         <ul class="search-result">
                              
                         </ul>
-            </div>
+                    </div>
+                    
         </div>
 
         <div class="dropdown-content" hidden>
