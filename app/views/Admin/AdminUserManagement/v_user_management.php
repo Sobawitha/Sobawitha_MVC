@@ -20,8 +20,8 @@
           <div class="search_bar">
               <div class="search_content">
              
-                      <span class="search_cont" onclick="open_cancel_btn()" ><input type="text" name="search" value="<?php echo $data['search'] ?>" placeholder="Search by firstname | lastname | Address | NIC No | Email" id="searchBar" require/></span>
-                      <button type="submit" class="search_btn"  onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
+                      <span class="search_cont" onclick="open_cancel_btn()" ><input type="text" name="search" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/></span>
+                      <button type="button" class="search_btn"  onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
                       <button type="submit" class="search_btn"  onclick="open_cancel_btn()" ><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
             
               </div>
@@ -34,7 +34,7 @@
         </div>
               <?php if(empty($data['message'])){ ?>
 
-
+                <?php if($data['search'] === 'Search by firstname | lastname | Address | NIC No | Email' ): ?>
                 <div class="filter_section">
                     <form method ="POST" action="<?php echo URLROOT?>/Admin_user_management/view_all_users" id="filter_form">
 
@@ -45,12 +45,7 @@
                         <br><label for="suppliers" id="filter_label"><input type="radio" id="suppliers" name="user_type" value="suppliers" onclick="javascript:submit()"  value = "suppliers"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'suppliers') echo ' checked="checked"';?>>Suppliers</label>
                         <br><label for="agris" id="filter_label"><input type="radio" id="agris" name="user_type" value="agris" onclick="javascript:submit()"  value = "agris"<?php if (isset($_POST['user_type']) && $_POST['user_type'] == 'agris') echo ' checked="checked"';?>>Agri-Officers</label>
                                      
-                        <!-- <label for="all_users" id="filter_label"> <input type="radio" name="filter" id="all_users"  value="AllUsers" checked>All Users</label>
-                        <label for="admins" id="filter_label"> <input type="radio" name="filter" id="admins"  value="Admins" >Admins</label>
-                        <label for="customers" id="filter_label"> <input type="radio" name="filter"  id="customers" value="Customers" >Customers</label>
-                        <label for="sellers" id="filter_label"> <input type="radio" name="filter"  id="sellers"  value="Sellers" >Sellers</label>
-                        <label for="suppliers" id="filter_label"> <input type="radio" name="filter" id="suppliers"  value="Suppliers" >Suppliers</label>
-                        <label for="agri_officers" id="filter_label"> <input type="radio" name="filter"  id="agri_officers" value="AgriOfficers" >Agri-Officers</label> -->
+            
                 </div>
                
               </form>
@@ -70,6 +65,14 @@
                         </div>
                         </div>
                 </dialog>
+
+                <?php endif ?> 
+                
+                <?php if (!empty($data['emptydata'])) : ?>
+               <div class="error-msg-container">
+               <span class="error_msg"><?php echo $data['emptydata'];?></span> 
+               </div> 
+               <?php endif; ?>
 
                 <div class="order_list">
                 <div class="orders">
@@ -166,7 +169,9 @@
                          
                    <?php endforeach;?>
                    <?php }else{ ?>
-                          <span class="error_msg"><?php echo $data['message'];?></span>
+                    <div class="error-msg-container">
+                    <span class="error_msg"><?php echo $data['message'];?></span>
+                     </div>
                     <?php    }  ?>     
 
                 </table>
@@ -187,6 +192,18 @@
 </div>
 
 
+<div id="footer">
+<?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>
+
+<script>
+function clear_search_bar(){
+  document.getElementById("searchBar").value = "";
+  document.getElementById("cancel").style.display='none';
+  window.location.replace("<?php echo URLROOT?>/Admin_user_management/view_all_users");
+}
+
+</script>
 
 
 
