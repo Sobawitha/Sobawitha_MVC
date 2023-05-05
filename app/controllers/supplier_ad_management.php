@@ -28,7 +28,7 @@
             $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
 
         }else{
-            $posts = $this->supplier_ad->getPosts();
+            $posts = $this->supplier_ad->getPostsfilter();
         
             $data = [
                 'posts' => $posts
@@ -36,7 +36,6 @@
         
             $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
         }
-
     }
 
 
@@ -102,7 +101,7 @@
             if(empty($data['image_err']) && empty($data['product_name_err']) && empty($data['price_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
                 if($this->supplier_ad->create($data)) {
                     // flash('post_msg', 'Post is published');
-                    redirect('supplier_ad_management/index');
+                    redirect('supplier_ad_management/indexfilter');
                 }
                 else {
                     die('Something went wrong');
@@ -212,7 +211,7 @@
             if(empty($data['product_name_err']) && empty($data['price_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
                 if($this->supplier_ad->edit($data)) {
                     // flash('post_msg', 'Post is published');
-                    redirect('supplier_ad_management/index');
+                    redirect('supplier_ad_management/indexfilter');
                 }
                 else {
                     die('Something went wrong');
@@ -254,7 +253,7 @@
 
         // Check owner
         if($post->user_id != $_SESSION['user_id']) {
-            redirect('supplier_ad_management/index');
+            redirect('supplier_ad_management/indexfilter');
         }
         else {
             // $post = $this->postsModel->getPostById($productId);
@@ -263,7 +262,7 @@
             
             if($this->supplier_ad->delete($productId)) {
                 // flash('post_msg', 'Post is deleted');
-                redirect('supplier_ad_management/index');
+                redirect('supplier_ad_management/indexfilter');
             }
             else {
                 die('Something went wrong');
