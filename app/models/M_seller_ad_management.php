@@ -89,6 +89,16 @@
         
 //         return  $query;
 //     }
+
+
+     public function  get_manufacturer_names()
+     {
+
+
+
+        $this->db->query('SELECT DISTINCT manufacturer FROM fertilizer');
+        return $this->db->resultSet();
+     }
  
 
      public function  searchResults($keyword){
