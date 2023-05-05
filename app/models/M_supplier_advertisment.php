@@ -17,28 +17,40 @@ class M_supplier_advertisment
         return $results;
     }
     public function getPostsfilter() {
-
-        if ($_POST['current_status'] == 'all'){            
-            $this->db->query('SELECT * FROM raw_material ');
+        $user_id = $_SESSION['user_id'];
+        if(isset($_POST['current_status']) && !empty($_POST['current_status'])){
+            if ($_POST['current_status'] == 'all'){
+                $this->db->query('SELECT * FROM raw_material WHERE user_id = :uid');
+                $this->db->bind(':uid', $user_id);
+                return $this->db->resultSet(); 
+            }
+            if ($_POST['current_status'] == 'Pending'){
+                $this->db->query('SELECT * FROM raw_material WHERE ((ad_status != 1 AND current_status=0) AND user_id = :uid)');
+                $this->db->bind(':uid', $user_id);
+                return $this->db->resultSet(); 
+            }
+            if ($_POST['current_status'] == 'Accepted'){
+                $this->db->query('SELECT * FROM raw_material WHERE ((ad_status != 1 AND current_status=1) AND user_id = :uid)');
+                $this->db->bind(':uid', $user_id);
+                return $this->db->resultSet(); 
+            }
+    
+            if ($_POST['current_status'] == 'Rejected'){
+              $this->db->query('SELECT * FROM raw_material WHERE ((ad_status != 1 AND current_status=2) AND user_id = :uid)');
+              $this->db->bind(':uid', $user_id);
+              return $this->db->resultSet(); 
+            }
+            if ($_POST['current_status'] == 'Expired'){
+                $this->db->query('SELECT * FROM raw_material WHERE ((ad_status != 1 AND current_status=3) AND user_id = :uid)');
+                $this->db->bind(':uid', $user_id);
+                return $this->db->resultSet(); 
+            }
+        }else{
+            $this->db->query('SELECT * FROM raw_material WHERE user_id = :uid');
+            $this->db->bind(':uid', $user_id);
             return $this->db->resultSet(); 
         }
-        if ($_POST['current_status'] == 'Pending'){
-            $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND current_status=0)');
-            return $this->db->resultSet(); 
-        }
-        if ($_POST['current_status'] == 'Accepted'){
-            $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND current_status=1)');
-            return $this->db->resultSet(); 
-        }
-
-        if ($_POST['current_status'] == 'Rejected'){
-          $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND current_status=2)');
-          return $this->db->resultSet(); 
-        }
-        if ($_POST['current_status'] == 'Expired'){
-            $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND current_status=3)');
-            return $this->db->resultSet(); 
-        }
+        
 
 
 
