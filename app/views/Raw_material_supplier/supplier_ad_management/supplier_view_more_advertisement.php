@@ -1,35 +1,64 @@
-<?php require APPROOT.'/views/Users/component/Header.php'?>
-<?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
-<?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
+<?php require APPROOT . '/views/Users/component/Header.php'?>
+<?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
+<?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
 <!-- <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Raw_material_supplier/ad_management/ad_view.css"></link> -->
 <!-- <script src="../js/Raw_material_supplier/ad_delete/ad_delete.js"></script>  -->
 
 
 <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Raw_material_supplier/ad_management/ad_view_more.css"></link>
-<script src="../js/Users/component/individual_item.js"></script> 
+<!-- <script src="../js/Users/component/individual_item.js"></script> -->
+<script src="<?php echo URLROOT ?>/public/js/Raw_material_supplier/ad_view/ad_view_more.js"></script>
 
 <div class="body">
     <div class="section_1">
 
     </div>
     <div class="section_2">
-        <div class="individual_image">
-        
-            <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $data['image_name']; ?>" class="i_image">
-            
-            <p class="product_discription">
-                    <span class="first_character">T</span><?php echo $data['product_description']; ?>
-            </p>
-            <p class="product_discription">
-                    <span class="first_characters">H</span>he rapid development of livestock and poultry farming produces a lot of excrement and sewage.
-                    The harmful elements of these fouling are too high to be processed by traditional returning way.
-                    For this situation, our company has developed the organic fertilizer production line which use high 
-                    efficient solid-liquid rotten aseptic deodorization technology as the core, and the whole production 
-                    equipment process includes: high efficient excrement, raw material mixing, granule processing, drying 
-                    and packin.
-            </p>
+      <div class="individual_image">
+
+      <div class="image-container">
+        <div class="main_image">
+          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>" onclick="switchImages()" id="main-image">
         </div>
-        
+
+        <div class="thumbnail-images">
+          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>')">
+          <img src="<?php echo URLROOT; ?>/public/upload/fertilizer_images/<?php echo $content->img_two ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/public/upload/fertilizer_images/<?php echo $content->img_two ?>')">
+          <img src="<?php echo URLROOT; ?>/public/upload/fertilizer_images/<?php echo $content->img_three ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/public/upload/fertilizer_images/<?php echo $content->img_three ?>')">
+        </div>
+
+        <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modal-image">
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>" class="i_image">
+
+        <p class="product_discription">
+                <span class="first_character">T</span><?php echo $data['product_description']; ?>
+        </p>
+        <p class="product_discription">
+                <span class="first_characters">H</span>he rapid development of livestock and poultry farming produces a lot of excrement and sewage.
+                The harmful elements of these fouling are too high to be processed by traditional returning way.
+                For this situation, our company has developed the organic fertilizer production line which use high
+                efficient solid-liquid rotten aseptic deodorization technology as the core, and the whole production
+                equipment process includes: high efficient excrement, raw material mixing, granule processing, drying
+                and packin.
+        </p>
+      </div>
+
 
     </div>
 
@@ -116,11 +145,11 @@
             </div>
 
 
-            
+
             </div>
         </section>
 
-        
+
 
         <div class="select_quantity">
             <span class="header_quantity">Quantity</span>
