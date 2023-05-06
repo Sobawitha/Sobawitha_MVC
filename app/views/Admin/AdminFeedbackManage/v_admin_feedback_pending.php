@@ -171,7 +171,7 @@
                                                                         
                                         <?php if($feed->feed_status == 0) { ?>                          
                                           
-                                         <button type="button" id="review" onclick="popUpOpenFeedReview('<?php echo $feed->receiver_name ?>','<?php echo $feed->category ?>','<?php echo $feed->rating ?>','<?php echo $feed->review_desc ?>','<?php echo $feed->date ?>')"><i class="fa-solid fa-hand"></i> Review</button>
+                                         <button type="button" id="review" onclick="popUpOpenFeedReview('<?php echo $feed->receiver_name ?>','<?php echo $feed->category ?>','<?php echo $feed->rating ?>','<?php echo $feed->review_desc ?>','<?php echo $feed->date ?>')"><i class="fa-solid fa-check-double"></i>  Review</button>
                                                                 
                                               <!-- Dialog box -->
                                               <dialog id="feedback-details">
@@ -223,9 +223,56 @@
                                                                 </form>
                                                         </div>
                                                         </dialog>
+                                                <br>
+                                                  <!-- Reject Button -->
+                                        <button id="reject_btn" onclick="openRejectDialog()" ><i class="fa-solid fa-registered"></i> Reject</button>
 
-                                                                              
-                                                       <br>
+                                                <dialog id="reject-dialog">
+                                                <form method="POST">
+                                                <label class="reject_popup_labels" for="reason-select">Reason for rejection:</label>
+                                                <select id="reason-select" name="reason">
+                                                <option value="Inappropriate language">Inappropriate language</option>
+                                                <option value="Irrelevant content">Irrelevant content</option>
+                                                <option value="Offensive language">Offensive language</option>
+                                                <option value="False information">False information</option>
+                                                <option value="Incomplete feedback">Incomplete feedback</option>
+                                                <option value="Duplicate feedback">Duplicate feedback</option>
+                                                <option value="Other">Other</option>
+                                                </select>
+                                                <br>
+                                                <label for="reason-details" class="reject_popup_labels">More details:</label>
+                                                <textarea id="reason-details" name="more_detail" rows="10"></textarea>
+                                                <input type="hidden" id="reason-details" value="<?php echo $feed->sender_email?>" name="sender_email">
+                                                <!-- <input type="hidden" id="reason-details" value="<?php echo $feed->category?>" name="seller_category"> -->
+                                                <input type="hidden" id="reason-details" value="<?php echo $feed->firstname ?>" name="sender_name">
+                                                <input type="hidden" id="reason-details" value="<?php echo $feed->id?>" name="feedback_id">
+
+
+                                                <br>
+                                                <div class=reject_btn>
+                                                <button type="submit" id="reject_btn_popup" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminRejectFeedback/">Reject</button>
+                                                </div> 
+                                                </form>
+                                                <button id="reject-dialog-close" type="button" ><i class="fa-regular fa-circle-xmark"></i></button>
+                                                </dialog>
+
+                                                <script>
+                                                const rejectDialog = document.querySelector("#reject-dialog");
+                                                const rejectDialogCloseBtn = document.querySelector("#reject-dialog-close");
+
+                                                function openRejectDialog() {
+
+                                                rejectDialog.showModal();
+                                                }
+
+                                                function closeRejectDialog() {
+                                                rejectDialog.close();
+                                                }
+
+                                                rejectDialogCloseBtn.addEventListener("click", closeRejectDialog);
+
+                                                </script>
+
                                         <?php } ?>
                                         
                                       
@@ -263,15 +310,17 @@
                                                                  </form>
                                                         </div>
                                                         </dialog>
-                                                </div>
-                                     
+                                               
+
+                                               
+                                        </div>
                                          </td>
                                          
                                 </div>
 
                         </tr>
 
-                        <dialog id="popup-dialog">
+                        <!-- <dialog id="popup-dialog">
   <div class="popup-content">
     <h2>Reject Feedback</h2>
     <form>
@@ -291,8 +340,9 @@
     </form>
   </div>
   <button id="close-popup-btn" aria-label="Close popup"></button>
-</dialog>
+</dialog> -->
 
+              
                               
                 <?php endforeach;?>                  
                  
