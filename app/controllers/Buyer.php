@@ -4,6 +4,7 @@
             $this-> userModel =$this->model('M_Users');
         }
 
+        
        
     public function buyer_register()
     {

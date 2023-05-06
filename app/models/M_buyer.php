@@ -20,6 +20,29 @@
             return false;
       }
     }
+    public function get_fertilizer_type_details(){
+
+        $this->db->query("SELECT f.type, COUNT(*) AS count
+        FROM orders o
+        JOIN order_items oi ON o.order_id = oi.order_id
+        JOIN fertilizer f ON oi.product_id = f.Product_id
+        WHERE o.cust_id = :user_id
+        AND o.status = '0'
+        GROUP BY f.type;");
+        $this->db->bind(":user_id",$_SESSION['user_id']);
+        $result = $this->db->resultSet();
+        if($this->db->rowCount() > 0){
+            return $result;
+        }
+        else{      
+
+
+            return false;
+        }
+
+
+
+}
 
     // Add Admin
 

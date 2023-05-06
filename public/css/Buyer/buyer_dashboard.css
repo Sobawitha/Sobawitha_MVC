@@ -13,19 +13,51 @@
     /* background-color:bisque; */
 }
 
+
+.section_2{
+    grid-template-rows: repeat(auto-fit,minmax(250px,1fr));
+}
+
+
+
+/*dasboard*/
+.charts{
+    display:grid;
+    grid-template-columns: 2fr 1fr ;
+    grid-gap:10px;
+    width:100%;
+    margin:20px;
+    padding-top:0px;
+  }
+
+  .chart{
+    background-color: rgb(250, 252, 252);
+    padding:20px;
+    border-radius:10px;
+    border:1px solid rgb(233, 230, 230);
+    box-shadow:0px 7px 25px rgba(0,0,0,0.08);
+  }
+
+.chartsLevel2{
+    display:grid;
+    grid-template-columns: 3fr 2fr ;
+    grid-gap:10px;
+    width:100%;
+    margin:20px;
+    padding-top:0px;
+}
+
+.demo{
+    padding:20px;
+}
+
+
 .dashboard{
     background-color:rgb(255, 255, 255);
     display:grid;
     grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
     padding:20px; 
     gap:20px;   
-}
-.section_2{
-    grid-template-rows: repeat(auto-fit,minmax(250px,1fr));
-}
-
-.demo{
-    padding:20px;
 }
 
 .card{

@@ -5,6 +5,16 @@
 <script src='https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js'></script>
 
 
+<?php
+    function setColor($type){
+        if($type == 'faq') return 'set-green';
+        if($type == 'feedback') return 'set-yellow';
+        if($type == 'annousments') return 'set-orange';
+        if($type == 'Jobs') return 'set-purple';
+        if($type == 'Introductions') return 'set-blue';
+    }
+
+?>
 
 <div class="body">
     <div class="section_1">
@@ -70,10 +80,24 @@
         <div class="demo">
             
         
-         
-        <!-- Demostration here -->
+        <div class="charts">
+              
+              <div class="chart">
+                  <h2>Fertilizer Type Distribution in Completed Orders</h2><br>
+                  <div>
+                      <canvas id="doughnut"></canvas>   
+                  </div>
+              </div>
+
+              <div class="chart" id="doughnut-chart">
+                  <h2>User types</h2><br>
+                  <div>
+                      <canvas id="doughnut"></canvas>
+                  </div>
+              </div>
 
 
+          </div>
 
         </div>
 
@@ -92,13 +116,14 @@
 <script>
 
 
- fetch("<?php echo URLROOT?>/Buyer/buyer_dashboard/fertilizer_type_donut_chart").then(response => response.json).then(data =>() => {
-        console.log(data);
-        var lables = ["Liquid", "Solid", "Packet","Bottles"];
+ fetch("http://localhost/Sobawitha/buyer_dashboard/fertilizer_type_donut_chart").then(response => response.json).then(results => {
+        console.log(results);
+        var labels = ["Liquid", "Solid", "Packet","Bottles"];
         var count = []
-        count = result.data.map(value => value.no_of_items);
+       
+        console.log(labels, count);
         const fertilizer_type_donut_chart = new Chart(
-            document.getElementById('fertilizer_type_donut_chart'),
+            document.getElementById('doughnut'),
             {
                 type: 'doughnut',
                 data: {
@@ -110,11 +135,15 @@
                             backgroundColor: [
                         '#deeaee',
                         '#9bf4d5',
+                        '#346357',
+                        '#c94c4c',
                       
                     ],
                     borderColor: [
                         '#deeaee',
                         '#9bf4d5',
+                        '#346357',
+                        '#c94c4c',
                       
                     ],
                     borderWidth: 1
