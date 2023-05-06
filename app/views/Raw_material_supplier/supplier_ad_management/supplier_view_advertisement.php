@@ -1,21 +1,8 @@
-<link rel="stylesheet" href="../css/Users/component/product_page.css"></link>
-<?php require APPROOT.'/views/Users/component/header.php'?>
+<link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_view.css"></link>
+
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <script src="../js/Users/component/product_page.js"></script>
 
-<div class="nav">
-            <nav>
-                <span class="site_name" id="part_a">SOBA</span><span id="part_b">WITHA</span>
-                <ul>
-                    <li class="home_link"><a href="<?php echo URLROOT?>/Pages/home">Home</a></li>
-                    <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
-                    <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
-                    <li><a href="">Sell</a></li>
-                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
-                </ul>
-            </nav>
-            <hr class="home_hr">
-</div>
 
 
 <div class="body">
@@ -25,7 +12,7 @@
 
         <p class="filter_section_title">shop by category</p>
 
-        <div class="filter_type_1">
+        <!-- <div class="filter_type_1">
             <span class="title">Brand</span><br>
             <div class="all_brands">
                 <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">ABC producers</label><br>
@@ -35,7 +22,7 @@
                 <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">Saru ketha</label><br>
                 <span class="view_more">view more</span>
             </div>
-        </div>
+        </div> -->
 
         <hr class="filter_hr">
 
@@ -76,7 +63,7 @@
 
         <hr class="filter_hr">
 
-        <div class="filter_type_5">
+        <!-- <div class="filter_type_5">
             <span class="title">Location</span><br>
             <div class="all_locations">
                 <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
@@ -89,7 +76,7 @@
                 <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
                 <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
             </div>
-        </div>
+        </div> -->
 
     </div>
 
@@ -98,7 +85,7 @@
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $_SESSION['search_cont']?> " require/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="" require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
@@ -122,20 +109,18 @@
 
 
         <div class="recent_product_card_section">
-
-            <?php
-            for($i=0; $i<12; $i++){
-                ?>
-                
+            
+            <?php foreach($data['posts'] as $ad): ?>
+                <a href="<?php echo URLROOT?>/supplier_ad_view/indexmore/<?php echo $ad->Product_id ?>" id = "product_card_link">
                 <div class="adv_card">
-                <div class="card_image" style="background: url(../images/background3.jpg); background-size: cover;
+                <div class="card_image" style="background: url(<?php echo URLROOT;?>/img/postsImgs/<?php echo $ad->raw_material_image;?>); background-size: cover;
                                                 height:75%;
                                                 -webkit-background-size:cover ;
                                                 background-position:center;
                                                 margin:0px;
                                                 padding:0px;">
                     <div class="product_detail">
-                        <span class="product_name">Tea fertilizer</span><br>
+                        <span class="product_name"><?php echo $ad->product_name ?></span><br>
                         <span class="owner">By ABC production</span>
                     </div>
                 </div>
@@ -148,15 +133,16 @@
                     <i class="fa-solid fa-star" id="star"></i>
                     <i class="fa-regular fa-star" id="star"></i>
                     <i class="fa-regular fa-star" id="star"></i>
-                    <span class="price"> Rs. 500.00</span>
+                    <span class="price"><?php echo $ad->price ?></span>
                     
                 </div>
             </div>
-                
-                <?php
-            }
+            </a>
+            <?php endforeach; ?>
             
-            ?>
+
+        
+              
         </div>
 
     </div>

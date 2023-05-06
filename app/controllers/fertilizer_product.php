@@ -7,6 +7,7 @@ class fertilizer_product extends Controller
     public function __construct()
     {
         $this->fertilizer_product_model = $this->model('M_fertilizer_product');
+        $this->wishList_model = $this->model('M_wishList');
     }
 
     //save comment
@@ -116,7 +117,9 @@ class fertilizer_product extends Controller
         $reply_for_comment = $this->fertilizer_product_model->display_all_replies($data);
         $question = $this->fertilizer_product_model->display_all_questions($data);
         $answers = $this->fertilizer_product_model->display_all_answers($data);
+        $wishlist_items = $this->wishList_model->getAllItems();
         $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
+        
         $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
         $no_of_cart_item = $this->fertilizer_product_model->check_cart($id)->count_item;
         $data = [
@@ -129,7 +132,8 @@ class fertilizer_product extends Controller
             'adcontent' => $content,
             'similar' => $similar,
             'owner_id'=> $product_owner_id,
-            'no_of_cart_item' => $no_of_cart_item
+            'no_of_cart_item' => $no_of_cart_item,
+            'wishlist_items' => $wishlist_items
         ];
         
         $this->view('Users/component/individual_item',$data);

@@ -1,6 +1,5 @@
 <?php
     class supplier_ad_management extends Controller{
-        
         public function __construct(){
             $this->supplier_ad = $this->model('M_supplier_advertisment');
     }
@@ -15,6 +14,34 @@
     
         $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
     }
+    
+    public function indexfilter() {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $filter_type = trim($_POST['current_status']);
+            $posts = $this->supplier_ad->getPostsfilter($filter_type);
+        
+            $data = [
+                'posts' => $posts
+            ];
+        
+            $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
+
+        }else{
+            $posts = $this->supplier_ad->getPosts();
+        
+            $data = [
+                'posts' => $posts
+            ];
+        
+            $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
+        }
+
+    }
+
+
+
+
 
     public function add_advertisment(){
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -28,6 +55,7 @@
                 'price' => trim($_POST['price']),
                 'quantity' => trim($_POST['quantity']),
                 'product_description' => trim($_POST['additional-info']),
+                'current_status' => 0,
                 // 'raw_material_image' => trim($_POST['image']),
                 
                 'image_err' => '',
@@ -142,7 +170,7 @@
             ];
 
             //validation
-            $post = $this->postsModel->getPostById($postId);
+            $post = $this->supplier_ad->getPostById($productId);
             $oldImage = PUBROOT.'/img/postsImgs/'.$post->image;
 
             //photo updated
@@ -205,7 +233,7 @@
 
             $data = [
                 'image' => '',
-                'image_name' => '',
+                'image_name' => $post->raw_material_image,
                 'product_id' => $productId,
                 'product_name' => $post->product_name,
                 'price' => $post->price,
@@ -229,9 +257,9 @@
             redirect('supplier_ad_management/index');
         }
         else {
-            $this->postsModel->getPostById($postId);
-            $oldImage = PUBROOT.'/img/postsImgs/'.$post->image;
-            deleteImage($oldImage);
+            // $post = $this->postsModel->getPostById($productId);
+            // $oldImage = PUBROOT.'/img/postsImgs/'.$post->image;
+            // deleteImage($oldImage);
             
             if($this->supplier_ad->delete($productId)) {
                 // flash('post_msg', 'Post is deleted');

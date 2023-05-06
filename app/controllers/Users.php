@@ -5,6 +5,8 @@
         public function __construct(){
             $this-> userModel =$this->model('M_Users');
             $this-> loginModel =$this->model('M_Login');
+            $this->sellerAdModel = $this->model('M_seller_ad_management');
+            $this->buyerAdModel = $this->model('M_ad_management');
         }
 
         public function register(){
@@ -225,6 +227,95 @@
             }
             
         }
+        
+        public function filter_data()
+        {
+         $output = '';
+        
+           if($_SERVER['REQUEST_METHOD'] == 'POST')
+            {
+                 $data = json_decode(file_get_contents("php://input"), true);
+                
+                 $query =  "SELECT * FROM  fertilizer where 1 = 1";
+                  
+                 if(isset($data['minPrice']) && isset($data['maxPrice']) &&  !empty($data['minPrice']) && !empty($data['maxPrice']))
+                 {
+                     $min = intval($data['minPrice']);
+                     $max  = intval($data['maxPrice']);
+                     $query .= " AND price BETWEEN '".$min."' AND '".$max."'";
+                 }   
+                 if (isset($data['brands']) && !empty($data['brands'])) {
+                     $brands = array_map('trim', $data['brands']); // removes leading and trailing whitespace from each brand
+                      
+                     $brand_filter = implode("','", $brands); // joins the brands with single quotes
+                     $query .= " AND manufacturer IN ('".$brand_filter."')";
+                   }
+                   
+        
+                 if(isset($data['type']) && !empty($data['type']))
+        
+                 {
+                    $type_filter = implode("','",$data['type']);      
+                    $query .= " AND type in  ('".$type_filter."')";
+        
+        
+        
+                 }
+                 
+               
+                 if(isset($data['quantity']) && !empty($data['quantity']) )
+        
+                 {
+                 //    $quantity_filter = implode("','", $data['quantity']);
+                 //    $query .= "AND quantity in  ('".$quantity_filter."')";
+                   $quantity = intval($data['quantity']);
+                   if($quantity == 1){
+ 
+ 
+                   }
+                   else if($quantity == 2) {
+ 
+ 
+                   }
+ 
+                   else if($quantity == 3) {
+        
+        
+                 }
+ 
+ 
+                else{
+ 
+ 
+                }
+     
+ 
+             }
+                 if(isset($data['location'])  && !empty($data['location']))
+        
+                 {
+                    $location_filter = implode("','", $data['location']);      
+                    $query .= " AND location in  ('".$location_filter."')";
+        
+        
+        
+                 }
+        
+                    
+                        $result =  $this->sellerAdModel->customized_query($query);
+                     
+                 
+        
+                        $output = $result;
+                    
+                  
+        
+        
+                        echo json_encode($result); 
+             }
+ 
+ 
+ }
 
         public function verify_email($mail){
           
@@ -248,6 +339,10 @@
                            'email' => trim($_POST['verify_email']),
                            'verify_code' => trim($_POST['verify_code']),
                            'user_id'=> $userRow -> user_id,
+
+
+ 
+      
         
         
                           
@@ -344,6 +439,15 @@
             
         }
     }
+
+    public function search($keyword)
+    {
+       
+      
+       $param = "%".$keyword."%";
+       
+       echo  json_encode($this->sellerAdModel->searchResults($param));
+     }
 
 
     /*for notification */

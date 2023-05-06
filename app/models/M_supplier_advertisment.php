@@ -10,15 +10,50 @@ class M_supplier_advertisment
     }
 
     public function getPosts() {
-        $this->db->query('SELECT * FROM raw_material');
+        $this->db->query('SELECT * FROM raw_material WHERE ad_status != 1');
 
         $results = $this->db->resultSet();
 
         return $results;
     }
+    public function getPostsfilter() {
+
+        if ($_POST['current_status'] == 'all'){            
+            $this->db->query('SELECT * FROM raw_material ');
+            return $this->db->resultSet(); 
+        }
+        if ($_POST['current_status'] == 'Pending'){
+            $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND current_status=0)');
+            return $this->db->resultSet(); 
+        }
+        if ($_POST['current_status'] == 'Accepted'){
+            $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND current_status=1)');
+            return $this->db->resultSet(); 
+        }
+
+        if ($_POST['current_status'] == 'Rejected'){
+          $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND current_status=2)');
+          return $this->db->resultSet(); 
+        }
+        if ($_POST['current_status'] == 'Expired'){
+            $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND current_status=3)');
+            return $this->db->resultSet(); 
+        }
+
+
+
+
+
+
+        // $this->db->query('SELECT * FROM raw_material WHERE ad_status != 1');
+
+        // $results = $this->db->resultSet();
+
+        // return $results;
+    }
 
     public function getPostById($productId) {
-        $this->db->query('SELECT * FROM raw_material WHERE Product_id = :id');
+        $this->db->query('SELECT * FROM raw_material WHERE (Product_id = :id AND ad_status != 1)');
         $this->db->bind(':id', $productId);
 
         $row = $this->db->single();
@@ -31,8 +66,8 @@ class M_supplier_advertisment
 
 
     public function create($data) {
-        $this->db->query('INSERT INTO raw_material(product_name, quantity, price, product_description, raw_material_image/*, user_id*/) VALUES (:product_name, :quantity, :price, :product_description, :image/*, :user_id*/)');
-        // $this->db->bind(':user_id', $_SESSION['user_id']);
+        $this->db->query('INSERT INTO raw_material(product_name, quantity, price, product_description, raw_material_image, user_id, current_status) VALUES (:product_name, :quantity, :price, :product_description, :image, :user_id, :current_status)');
+        $this->db->bind(':user_id', $_SESSION['user_id']);
         $this->db->bind(':image', $data['image_name']);
         // $this->db->bind(':product_id', $data['Product_id']);
         $this->db->bind(':product_name', $data['product_name']);
@@ -40,6 +75,9 @@ class M_supplier_advertisment
         // $this->db->bind(':manufacturer', $data['manufacturer']);
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':product_description', $data['product_description']);
+        
+        $this->db->bind(':current_status', $data['current_status']);
+
         // $this->db->bind(':admin_id', $data['Admin_Id']);
         // $this->db->bind(':raw_material_image', $data['raw_material_image']);
         
@@ -71,7 +109,8 @@ class M_supplier_advertisment
     }
 
     public function delete($productId) {
-        $this->db->query('DELETE FROM raw_material WHERE Product_id = :id');
+        $this->db->query('UPDATE raw_material SET ad_status = 1 WHERE Product_id = :id');
+        // $this->db->query('DELETE FROM raw_material WHERE Product_id = :id');
         $this->db->bind(':id', $productId);
         
         // Execute

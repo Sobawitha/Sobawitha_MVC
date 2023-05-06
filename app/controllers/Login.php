@@ -101,6 +101,7 @@
         $_SESSION['profile_image_path'] = "upload/user_profile_pics/" .  $_SESSION['profile_image'];
         // $_SESSION['profile_updateAdmin']="false";
         $_SESSION['radio_admin_comp'] = '';
+        $_SESSION['radio_admin_feed'] = '';
 
             $flag = $_SESSION['user_flag'];
             if($flag==1){
@@ -114,6 +115,11 @@
             else if($flag==3){
                 $_SESSION['position'] = "Seller";
                 redirect('seller_dashboard/seller_dashboard');
+            }
+            else if($flag==3){
+                $_SESSION['position'] = "Seller";
+                
+                redirect('dashboard/seller_dashboard');
             }
             else if($flag==4){
                 $_SESSION['position'] = "Supplier";
@@ -134,8 +140,9 @@
              unset($_SESSION['user_flag']);
             unset($_SESSION['lastname']);
             unset($_SESSION['position']);
+            unset($_SESSION['radio_admin_feed']);
             session_destroy();
-            redirect('Users/login');
+        
 
              // session_destroy();
 

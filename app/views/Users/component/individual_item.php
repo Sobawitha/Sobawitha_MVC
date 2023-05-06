@@ -324,10 +324,35 @@ $content = $data['adcontent'];
 
   </div>
 
+  <?php
+
+$is_wishlist_item = false;
+
+foreach($data['wishlist_items'] as $wishlist_item)
+{
+
+
+  if($wishlist_item->Product_id == $content->Product_id)
+  {
+    $is_wishlist_item = true;
+    break;
+  }
+}
+
+
+
+
+?>
+
   <div class="section_3">
+
+
     <a href="<?php echo URLROOT ?>/Pages/product_page" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
     <span class="title_1">fertilizer</span><br>
-    <span class="title_2"><?php echo $content->product_name ?></span><i class="fa-regular fa-heart" id="add_wishlist_heart" ></i><br><br>
+    <span class="title_2"><?php echo $content->product_name ?></span>
+    <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="add_wishlist_heart" data-product-id="<?php echo $content->Product_id ?>" onclick = "editWishlist()"></i>
+    
+    <br><br>
 
     <span class="title_3"><span class="sub_title_3">Company / Manufacturer  </span><?php echo $content->manufacturer ?></span><br><br>
 
@@ -450,7 +475,7 @@ $content = $data['adcontent'];
   }
   ?>
       <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
-      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn">Add to Cart</button></a>
+      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn" data-product-id = "<?php echo $content->Product_id ?>">Add to Cart</button></a>
 
 <?php
 }else{?>
@@ -727,3 +752,8 @@ minusButton.addEventListener('click', () => {
   <?php require APPROOT . '/views/Users/component/footer.php' ?>
 </div>
 
+
+<dialog id="my-dialog">
+  <p>Item Successfully Added to the Wishlist</p>
+  <button id="dialog-close-button">Close</button>
+</dialog>

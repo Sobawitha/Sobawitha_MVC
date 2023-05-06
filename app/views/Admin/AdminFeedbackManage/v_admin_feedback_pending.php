@@ -27,27 +27,69 @@
                     
             </div>
         </div>
-       </div>
+       
         </form>
+        </div>
         <?php if(empty($data['message'])){ ?>   
             <?php if($data['search'] ==='Search by feedback category'): ?>
                
                <div class="filter_section">
                <div class="radio-buttons"  id="radioButtons">        
                <form method ="POST" action="<?php echo URLROOT?>/Admin_feedback_management/view_feedback" id="filter_form">
-               <label for="pending_feed" id="filter_label"> <input type="radio" id="pending_feed" name="feed_type" onclick="javascript:submit()" value="pending_feed" <?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'pending_feed') echo ' checked="checked"';?> checked>Pending</label>
-               <label for="published_feed" id="filter_label"> <input type="radio" id="published_feed" name="feed_type" value="published_feed" onclick="javascript:submit()" value = "published_feed"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'published_feed') echo ' checked="checked"';?>>Published</label>
-               <label for="rejected_feed" id="filter_label"> <input type="radio" id="rejected_feed" name="feed_type" value="rejected_feed" onclick="javascript:submit()" value = "rejected_feed"<?php if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'rejected_feed') echo ' checked="checked"';?>>Rejected</label>
-               <div class="radio-buttons">
+               
+               <label for="pending_feed" id="filter_label"> <input type="radio" id="pending_feed" name="feed_type" onclick="javascript:submit()" value="pending_feed" <?php 
+               if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'pending_feed') {
+                echo ' checked="checked"';
+                $_SESSION['radio_admin_feed'] = 'pending_feed';
+               }elseif(!isset($_POST['feed_type'])){
+                echo 'checked';
+                $_SESSION['radio_admin_feed'] = 'pending_feed';
+                } ?> checked>Pending</label>
+               
+               <label for="published_feed" id="filter_label"> 
+               <input type="radio" id="published_feed" name="feed_type" value="published_feed" onclick="javascript:submit()" value = "published_feed"<?php 
+               if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'published_feed') {
+                echo ' checked="checked"';
+                $_SESSION['radio_admin_feed'] = 'published_feed';
+               } elseif (!isset($_POST['feed_type']) && isset($_GET['feed_type']) && $_GET['feed_type'] == 'published_feed') {
+                echo ' checked="checked"';
+                $_SESSION['radio_admin_feed'] = 'published_feed';
+               }
+                ?>
+                >Published</label>
+               
+               
+               
+               
+               
+               <label for="rejected_feed" id="filter_label"> <input type="radio" id="rejected_feed" name="feed_type" value="rejected_feed" onclick="javascript:submit()" 
+               <?php 
+               if (isset($_POST['feed_type']) && $_POST['feed_type'] == 'rejected_feed') {
+                echo ' checked="checked"';
+                $_SESSION['radio_admin_feed'] = 'rejected_feed'; 
+               }elseif  (!isset($_POST['feed_type']) && isset($_GET['feed_type']) && $_GET['feed_type'] == 'rejected_feed') {
+                echo ' checked="checked"';
+                $_SESSION['radio_admin_feed'] = 'rejected_feed';
+               }
+                ?>
+                >Rejected</label>
+               
+               
+               
+               
+               
                </form>        
                </div>
                 </div>
-               <?php endif?> 
+               <?php endif ?> 
 
-
-
+               
+               <?php if (!empty($data['emptydata'])) : ?>
+               <div class="error-msg-container">
                <span class="error_msg"><?php echo $data['emptydata'];?></span> 
- 
+               </div> 
+               <?php endif; ?>
+
                 <div class="order_list">
                 <div class="orders">
 
@@ -64,7 +106,7 @@
                         </tr>
                      <?php    }  ?>   
                         <?php foreach($data['feed'] as $feed): ?>
-                        
+   
                         <tr class="order">
                                 <div class="order_detail">
                                         <td><?php echo $feed->receiver_name ?></td>
@@ -164,13 +206,25 @@
                                                 
                                                                 <button type="submit" class="btn" id="feed-review-btn" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminReviewFeedback/<?php echo $feed->id ?>">Accept</button>
                                                                 <button type="button" class="btn" id="clc" onclick="document.getElementById('feedback-details').close()">Close</button>
-                                                                <button type="submit" class="btn" id="reject-btn" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminRejectFeedback/<?php echo $feed->id ?>">Reject</button>
-                                                                
+                                                                <button type="submit" class="btn" id="reject-btn" onclick="closeFeedbackDetailsAndOpenAnotherPopup()">Reject</button>
+                                                                <script>
+                                                                                                                                function closeFeedbackDetailsAndOpenAnotherPopup() {
+                                                                // Close the feedback-details popup
+                                                                document.getElementById('feedback-details').close();
+
+                                                                // Open another popup after 1 second
+                                                                window.setTimeout(function() {
+                                                                const popupDialog = document.querySelector('#popup-dialog');
+                                                                popupDialog.showModal();
+                                                                }, 500);
+                                                                }
+                                                                </script>
                                                                 </div>
                                                                 </form>
                                                         </div>
                                                         </dialog>
-                                                        
+
+                                                                              
                                                        <br>
                                         <?php } ?>
                                         
@@ -216,24 +270,82 @@
                                 </div>
 
                         </tr>
+
+                        <dialog id="popup-dialog">
+  <div class="popup-content">
+    <h2>Reject Feedback</h2>
+    <form>
+      <label for="reason-dropdown">Reason for rejecting:</label>
+      <select id="reason-dropdown" name="reason-dropdown">
+        <option value="not-relevant">Not relevant to our service</option>
+        <option value="inappropriate">Inappropriate content</option>
+        <option value="spam">Looks like spam</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="reason-textbox">Other reason (if applicable):</label>
+      <input type="text" id="reason-textbox" name="reason-textbox">
+
+      <button id="submit-reject">Reject</button>
+      <button id="cancel-reject">Cancel</button>
+    </form>
+  </div>
+  <button id="close-popup-btn" aria-label="Close popup"></button>
+</dialog>
+
                               
                 <?php endforeach;?>                  
                  
                 <?php }else{ ?>
+                    <div class="error-msg-container">
                     <span class="error_msg"><?php echo $data['message'];?></span>
+                     </div>
+                    
                     <?php    }  ?>   
                 </table>
 
                 </div>
                 </div>
        
+      
+
+        <?php if ($data['search'] === 'Search by feedback category') : ?>
+       
+       <div class="pagination-container text-center">
+<?php if ($data['pagination']['total_pages'] > 1) : ?>
+<div class="pagination">
+   <?php if ($data['pagination']['current_page'] > 1) : ?>
+       <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>&feed_type=<?php echo isset($_GET['feed_type']) ? $_GET['feed_type'] : $_SESSION['radio_admin_feed']; ?>">Previous</a>
+   <?php endif; ?>
+
+   <?php for ($i = 1; $i <= $data['pagination']['total_pages']; $i++) : ?>
+       <?php if ($i == $data['pagination']['current_page']) : ?>
+           <span class="current-page"><?php echo $i; ?></span>
+       <?php else : ?>
+           <a href="?page=<?php echo $i; ?>&feed_type=<?php echo isset($_GET['feed_type']) ? $_GET['feed_type'] : $_SESSION['radio_admin_feed']; ?>"><?php echo $i; ?></a>
+       <?php endif; ?>
+   <?php endfor; ?>
+
+   <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']) : ?>
+       <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&feed_type=<?php echo isset($_GET['feed_type']) ? $_GET['feed_type'] : $_SESSION['radio_admin_feed']; ?>">Next</a>
+   <?php endif; ?>
+</div>
+<?php endif; ?>
+   </div>
+
+   <?php endif; ?>
+
+       
+
+
         </div>
-        </div>
+
         <div class="section_3">
                 <!-- add forum -->
                 
                 
         </div>
+
 
 
 

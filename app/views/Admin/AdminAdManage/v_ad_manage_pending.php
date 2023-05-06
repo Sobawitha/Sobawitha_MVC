@@ -15,31 +15,69 @@
         <hr>
 
         <br><br>
+
+        <div class="button_section">
         <form class="searchForm" action="<?php echo URLROOT;?>/Admin_ad_management/adminSearchAd" method="GET">
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/></span>
-                    <button type="submit" class="search_btn" onclick="clear_search_bar()"><i class="fa-solid fa-xmark" id="cancel" ></i></button>
+                    <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" id="searchBar" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/></span>
+                    <button type="button" class="search_btn" onclick="clear_search_bar()"><i class="fa-solid fa-xmark" id="cancel" ></i></button>
                     <button type="submit" class="search_btn"  onclick="open_cancel_btn()" ><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
         </div>
+     
         </form>
+        </div>
         <?php if(empty($data['message'])){ ?>
                 <?php if($data['search'] ==='Search by title of the advertisement'): ?>
                
                 <div class="filter_section">
                 <div class="radio-buttons"  id="radioButtons">        
+                
                 <form method ="POST" action="<?php echo URLROOT?>/Admin_ad_management/ad_management_view" id="filter_form">
-                <label for="pending_ads" id="filter_label"> <input type="radio" id="pending_ads" name="ad_type" onclick="javascript:submit()" value="pending_ads" <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'pending_ads') echo ' checked="checked"';?> checked>Pending Ads</label>
-                <label for="reviewed_ads" id="filter_label"> <input type="radio" id="reviewed_ads" name="ad_type" value="reviewed_ads" onclick="javascript:submit()" value = "reviewed_ads"<?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'reviewed_ads') echo ' checked="checked"';?>>Reviewed Ads</label>
-                <label for="rejected_ads" id="filter_label"> <input type="radio" id="rejected_ads" name="ad_type" value="rejected_ads" onclick="javascript:submit()" value = "rejected_ads"<?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'rejected_ads') echo ' checked="checked"';?>>Rejected Ads</label>
-                <div class="radio-buttons">
+                
+                <label for="pending_ads" id="filter_label"> <input type="radio" id="pending_ads" name="ad_type" onclick="javascript:submit()" value="pending_ads" <?php 
+                if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'pending_ads') {
+                echo ' checked="checked"';
+                $_SESSION['radio_admin_ad'] = 'pending_ads';
+                }elseif (!isset($_POST['ad_type'])){
+                echo 'checked'; 
+                $_SESSION['radio_admin_ad'] = 'pending_ads';       
+                }?> checked>Pending Ads</label>
+
+                <label for="reviewed_ads" id="filter_label"> <input type="radio" id="reviewed_ads" name="ad_type" value="reviewed_ads" onclick="javascript:submit()" value = "reviewed_ads"
+                <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'reviewed_ads') {
+                echo ' checked="checked"';
+                $_SESSION['radio_admin_ad'] = 'reviewed_ads';
+                }elseif(!isset($_POST['ad_type']) && isset($_GET['ad_type']) && $_GET['ad_type'] == 'reviewed_ads '){
+                echo 'checked';
+                $_SESSION['radio_admin_ad'] = 'reviewed_ads';
+                }?> >Reviewed Ads</label>
+
+                <label for="rejected_ads" id="filter_label"> <input type="radio" id="rejected_ads" name="ad_type" value="rejected_ads" onclick="javascript:submit()" value = "rejected_ads"
+                <?php if (isset($_POST['ad_type']) && $_POST['ad_type'] == 'rejected_ads'){
+                 echo ' checked="checked"';
+                 $_SESSION['radio_admin_ad'] = 'rejected_ads';
+                }elseif(!isset($_POST['ad_type']) && isset($_GET['ad_type']) && $_GET['ad_type'] == 'rejected_ads '){
+                echo 'checked';
+                $_SESSION['radio_admin_ad'] = 'rejected_ads';
+                } ?>>Rejected Ads</label>
+
+                
+                
                 </form>        
                 </div>
+                
                 <?php endif?> 
-                <span class="error_msg"><?php echo $data['emptydata'];?></span>  
+                <?php if (!empty($data['emptydata'])) : ?>
+                        <div class="error-msg-container">
+                                <span class="error_msg"><?php echo $data['emptydata']; ?></span>
+                        </div>
+                <?php endif; ?>
+                
+                
                 <div class="order_list">
                 <div class="orders">
                 
@@ -245,7 +283,7 @@
                                                 <img id="image_four" class="product-image img-container" src="" alt="Product Image">
                                                 <img id="image_five" class="product-image img-container" src="" alt="Product Image">
                                                 </div>
-                                                <script>
+                                                <scr>
                                                         // Get the popup elements
                                                         var popupContainer = document.querySelector(".popup-container");
                                                         var popupImage = document.querySelector("#popup-image");
@@ -363,21 +401,65 @@
                                  
                    <?php endforeach;?>
                    <?php }else{ ?>
-                          <span class="error_msg"><?php echo $data['message'];?></span>
+                        <div class="error-msg-container">
+                           <span class="error-msg"><?php echo $data['message']; ?></span>
+                        </div>
                    <?php    }  ?> 
 
                 </table>
 
-                </div>
+        
                 </div>
         </div>
+        </div>
+       </div>
 
+       <!-- <?php if ($data['search'] === 'Search by title of the advertisement') : ?>
+       
+       <div class="pagination-container text-center">
+<?php if ($data['pagination']['total_pages'] > 1) : ?>
+<div class="pagination">
+   <?php if ($data['pagination']['current_page'] > 1) : ?>
+       <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>&ad_type=<?php echo isset($_GET['ad_type']) ? $_GET['ad_type'] : $_SESSION['radio_admin_ad']; ?>">Previous</a>
+   <?php endif; ?>
+
+   <?php for ($i = 1; $i <= $data['pagination']['total_pages']; $i++) : ?>
+       <?php if ($i == $data['pagination']['current_page']) : ?>
+           <span class="current-page"><?php echo $i; ?></span>
+       <?php else : ?>
+           <a href="?page=<?php echo $i; ?>&ad_type=<?php echo isset($_GET['ad_type']) ? $_GET['ad_type'] : $_SESSION['radio_admin_ad']; ?>"><?php echo $i; ?></a>
+       <?php endif; ?>
+   <?php endfor; ?>
+
+   <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']) : ?>
+       <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&ad_type=<?php echo isset($_GET['ad_type']) ? $_GET['ad_type'] : $_SESSION['radio_admin_ad']; ?>">Next</a>
+   <?php endif; ?>
+</div>
+<?php endif; ?>
+   </div>
+
+   <?php endif; ?> -->
+
+         </div>
         <div class="section_3">
                 <!-- add forum -->
                 
                 
         </div>
 
+
 </div>
 
-<?php require APPROOT.'/views/Users/component/Header.php'?>
+
+<div id="footer">
+<?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>
+
+
+<script>
+    function clear_search_bar(){
+    document.getElementById("searchBar").value = "";
+    document.getElementById("cancel").style.display='none';
+    window.location.replace("<?php echo URLROOT?>/Admin_ad_management/ad_management_view");
+  }
+</script>

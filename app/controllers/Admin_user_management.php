@@ -635,6 +635,7 @@
     
     public function view_all_users()
     {
+    $records_per_page = 3;    
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -645,7 +646,7 @@
             $count = 0;
             $data = [
                 'user' => $users,
-                'search' => '',
+                'search' => 'Search by firstname | lastname | Address | NIC No | Email',
                 'id' => $count
             ]; 
             $this->view('Admin/AdminUserManagement/v_user_management',$data);
@@ -655,7 +656,7 @@
             $count = 0;
             $data = [
                 'user' => $users,
-                'search' => '',
+                'search' => 'Search by firstname | lastname | Address | NIC No | Email',
                 'id' => $count
             ]; 
              

@@ -1,5 +1,6 @@
 <?php
     class seller_dashboard extends Controller{
+        private $seller_dashboard_model;
         public function __construct(){
             $this->seller_dashboard_model = $this->model('M_seller_dashboard');
     }

@@ -28,7 +28,7 @@
 
             $data = [
                 'image' => '',
-                'image_name' => '',
+                'image_name' => $post->raw_material_image,
                 'product_id' => $productId,
                 'product_name' => $post->product_name,
                 'price' => $post->price,

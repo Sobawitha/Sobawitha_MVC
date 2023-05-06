@@ -99,39 +99,40 @@
     // }
     
 
-    public function display_all_ads() {
-        if (isset($_POST['ad_type']) && !empty($_POST['ad_type'])) {
-            if ($_POST['ad_type'] == 'pending_ads') {
-                $this->db->query('SELECT fertilizer.*, fertilizer.fertilizer_img as listing_image, CONCAT(user.first_name, " ", user.last_name) as seller_name , user.address_line_four as location FROM fertilizer INNER JOIN user ON fertilizer.created_by = user.user_id WHERE fertilizer.current_status = 0 ORDER BY fertilizer.Product_id DESC');
+    public function display_all_ads($ad_type, $limit , $offset) {
+        // $newLimit =$limit/2;
+        if (isset($ad_type) && !empty($ad_type)) {
+            if ($ad_type== 'pending_ads') {
+                $this->db->query("SELECT fertilizer.*, fertilizer.fertilizer_img as listing_image, CONCAT(user.first_name, ' ', user.last_name) as seller_name , user.address_line_four as location FROM fertilizer INNER JOIN user ON fertilizer.created_by = user.user_id WHERE fertilizer.current_status = 0 ORDER BY fertilizer.Product_id DESC");
                 $fertilizer = $this->db->resultSet();
-                $this->db->query('SELECT raw_material.*, raw_material.raw_material_image as listing_image, CONCAT(user.first_name, " ", user.last_name) as seller_name, user.address_line_four as location FROM raw_material INNER JOIN user ON raw_material.created_by = user.user_id WHERE raw_material.current_status = 0 ORDER BY raw_material.Product_id DESC');
+                $this->db->query("SELECT raw_material.*, raw_material.raw_material_image as listing_image, CONCAT(user.first_name, ' ', user.last_name) as seller_name, user.address_line_four as location FROM raw_material INNER JOIN user ON raw_material.created_by = user.user_id WHERE raw_material.current_status = 0 ORDER BY raw_material.Product_id DESC");
                 $raw_materials = $this->db->resultSet();
                 $allProducts = array_merge($fertilizer, $raw_materials);
                 $total_rows = count($fertilizer) + count($raw_materials);
                 return array('products' => $allProducts, 'total_rows' => $total_rows);
             }
-            if ($_POST['ad_type'] == 'reviewed_ads') {
-                $this->db->query('SELECT fertilizer.*, fertilizer.fertilizer_img as listing_image, CONCAT(user.first_name, " ", user.last_name) as seller_name, user.address_line_four as location FROM fertilizer INNER JOIN user ON fertilizer.created_by = user.user_id WHERE fertilizer.current_status = 1 ORDER BY fertilizer.Product_id DESC');
+            if ($ad_type == 'reviewed_ads') {
+                $this->db->query("SELECT fertilizer.*, fertilizer.fertilizer_img as listing_image, CONCAT(user.first_name, ' ', user.last_name) as seller_name, user.address_line_four as location FROM fertilizer INNER JOIN user ON fertilizer.created_by = user.user_id WHERE fertilizer.current_status = 1 ORDER BY fertilizer.Product_id DESC");
                 $fertilizer = $this->db->resultSet();
-                $this->db->query('SELECT raw_material.*, raw_material.raw_material_image as listing_image, CONCAT(user.first_name, " ", user.last_name) as seller_name, user.address_line_four as location FROM raw_material INNER JOIN user ON raw_material.created_by = user.user_id WHERE raw_material.current_status = 1 ORDER BY raw_material.Product_id DESC');
+                $this->db->query("SELECT raw_material.*, raw_material.raw_material_image as listing_image, CONCAT(user.first_name, ' ', user.last_name) as seller_name, user.address_line_four as location FROM raw_material INNER JOIN user ON raw_material.created_by = user.user_id WHERE raw_material.current_status = 1 ORDER BY raw_material.Product_id DESC ");
                 $raw_materials = $this->db->resultSet();
                 $allProducts = array_merge($fertilizer, $raw_materials);
                 $total_rows = count($fertilizer) + count($raw_materials);
                 return array('products' => $allProducts, 'total_rows' => $total_rows);
             }
-            if ($_POST['ad_type'] == 'rejected_ads') {
-                $this->db->query('SELECT fertilizer.*, fertilizer.fertilizer_img as listing_image, CONCAT(user.first_name, " ", user.last_name) as seller_name, user.address_line_four as location FROM fertilizer INNER JOIN user ON fertilizer.created_by = user.user_id WHERE fertilizer.current_status = 2 ORDER BY fertilizer.Product_id DESC');
+            if ($ad_type == 'rejected_ads') {
+                $this->db->query("SELECT fertilizer.*, fertilizer.fertilizer_img as listing_image, CONCAT(user.first_name, ' ', user.last_name) as seller_name, user.address_line_four as location FROM fertilizer INNER JOIN user ON fertilizer.created_by = user.user_id WHERE fertilizer.current_status = 2 ORDER BY fertilizer.Product_id DESC ");
                 $fertilizer = $this->db->resultSet();
-                $this->db->query('SELECT raw_material.*, raw_material.raw_material_image as listing_image, CONCAT(user.first_name, " ", user.last_name) as seller_name, user.address_line_four as location FROM raw_material INNER JOIN user ON raw_material.created_by = user.user_id WHERE raw_material.current_status = 2 ORDER BY raw_material.Product_id DESC');
+                $this->db->query("SELECT raw_material.*, raw_material.raw_material_image as listing_image, CONCAT(user.first_name, ' ', user.last_name) as seller_name, user.address_line_four as location FROM raw_material INNER JOIN user ON raw_material.created_by = user.user_id WHERE raw_material.current_status = 2 ORDER BY raw_material.Product_id DESC ");
                 $raw_materials = $this->db->resultSet();
                 $allProducts = array_merge($fertilizer, $raw_materials);
                 $total_rows = count($fertilizer) + count($raw_materials);
                 return array('products' => $allProducts, 'total_rows' => $total_rows);
             }
         } else {
-            $this->db->query('SELECT fertilizer.*, fertilizer.fertilizer_img as listing_image, CONCAT(user.first_name, " ", user.last_name) as seller_name, user.address_line_four as location FROM fertilizer INNER JOIN user ON fertilizer.created_by = user.user_id WHERE fertilizer.current_status = 0 ORDER BY fertilizer.Product_id DESC');
+            $this->db->query("SELECT fertilizer.*, fertilizer.fertilizer_img as listing_image, CONCAT(user.first_name, ' ', user.last_name) as seller_name, user.address_line_four as location FROM fertilizer INNER JOIN user ON fertilizer.created_by = user.user_id WHERE fertilizer.current_status = 0 ORDER BY fertilizer.Product_id DESC ");
             $fertilizer = $this->db->resultSet();
-            $this->db->query('SELECT raw_material.*, raw_material.raw_material_image as listing_image, CONCAT(user.first_name, " ", user.last_name) as seller_name, user.address_line_four as location FROM raw_material INNER JOIN user ON raw_material.created_by = user.user_id WHERE raw_material.current_status = 0 ORDER BY raw_material.Product_id DESC');
+            $this->db->query("SELECT raw_material.*, raw_material.raw_material_image as listing_image, CONCAT(user.first_name, ' ', user.last_name) as seller_name, user.address_line_four as location FROM raw_material INNER JOIN user ON raw_material.created_by = user.user_id WHERE raw_material.current_status = 0 ORDER BY raw_material.Product_id DESC ");
             $raw_materials = $this->db->resultSet();
             $allProducts = array_merge($fertilizer, $raw_materials);
             $total_rows = count($fertilizer) + count($raw_materials);

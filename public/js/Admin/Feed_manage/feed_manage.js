@@ -1,4 +1,12 @@
 // alert();
+
+
+
+
+
+
+
+
 function popUpOpenFeedReview(receiver_nam,categoryy,rate,descc,datee) {
 
   document.getElementById('receiver-namee').value = receiver_nam;

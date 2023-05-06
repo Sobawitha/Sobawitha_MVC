@@ -2,6 +2,7 @@
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
 <link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_management.css"></link>
+<script src="../js/Raw_material_supplier/ad_management/ad_manage.js"></script>
 <!-- <script src="../js/Raw_material_supplier/ad_delete/ad_delete.js"></script>  -->
 
 
@@ -43,6 +44,29 @@
                                 <label for="cancel_order" id="sm_filter_label"><input type="radio" id="cancel" name="order_type" value="cancel">Cancel</label>
                         </div>
                 </div> -->
+
+
+                <div class="filter_section">
+                <form method ="POST" action="<?php echo URLROOT?>/supplier_ad_management/indexfilter" id="filter_form">
+
+                        <label for="all" id="filter_label"> <input type="radio" id="all" name="current_status"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'all') echo ' checked="checked"';?>>All</label>
+                        <br><label for="admins" id="filter_label"> <input type="radio" id="admins" name="current_status" value="Pending" onclick="javascript:submit()"  value = "Pending"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'Pending') echo ' checked="checked"';?>>Pending</label>
+                        <br><label for="customers" id="filter_label"><input type="radio" id="customers" name="current_status" value="Accepted" onclick="javascript:submit()"  value = "Accepted"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'Accepted') echo ' checked="checked"';?>>Accepted</label>
+                        <br><label for="sellers" id="filter_label"><input type="radio" id="sellers" name="current_status" value="Rejected" onclick="javascript:submit()"  value = "Rejected"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'Rejected') echo ' checked="checked"';?>>Rejected</label>
+                        <br><label for="suppliers" id="filter_label"><input type="radio" id="suppliers" name="current_status" value="Expired" onclick="javascript:submit()"  value = "Expired"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'Expired') echo ' checked="checked"';?>>Expired</label>
+                        <br>
+                </form>
+                </div>
+
+
+
+
+
+
+
+
+
+
                 <div class="sm_view_list">
                 <div class="views">
 
@@ -77,7 +101,25 @@
                                                 
                                                 <span class="edit"><a href="<?php echo URLROOT?>/supplier_ad_management/update_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-pen-to-square"></i></a></span>                                                
                                                 
-                                                <span class="delete" onclick="popUpOpen(<?php echo $ad->Product_id?>)"><a href="<?php echo URLROOT?>/supplier_ad_management/delete_advertisement/<?php echo $ad->Product_id ?>"><i class="fa-solid fa-trash-can"></i></a></span>
+
+                                                <form method="GET">
+                                                <span class="delete"><button type="button" onclick="popUpOpenDelete('<?php echo $ad->Product_id ?>')" id="deactive_user_button-<?php echo $ad->Product_id ?>"><i class="fa-solid fa-trash-can"></i></button></span>
+                                                <dialog id="deactivateUserPopup-<?php echo $ad->Product_id ?>">
+                                                        <div class="deactivateUserPopup">
+                                                                <div class="dialog__heading">
+                                                                        <h2>Are you sure you want to delete this ?</h2>
+                                                                        <button id="closebtntwo-<?php echo $ad->Product_id ?>" type="button">
+                                                                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                                                        </button>
+                                                                </div>
+                                                                
+                                                                <div class="dialog__content">
+                                                                        <a href="<?php echo URLROOT?>/supplier_ad_management/delete_advertisement/<?php echo $ad->Product_id ?>" id="yes">Yes</a>
+                                                                        <a href="<?php echo URLROOT?>/supplier_ad_management/index " id="no">No</a>
+                                                                </div>
+                                                        </div>
+                                                </dialog>
+                                                </form>
                                                 
                                         </td>
                                 </div>
@@ -136,24 +178,6 @@
         </div>
 </div>
 
-<dialog id="deletePopup">
-        <div class="deletePopup">
-                <div class="delete_dialog_heading">
-                <i class="fa-regular fa-circle-xmark"></i>
-                <h2>Are you sure</h2>
-                <p>You will not be able to recover that item.</p>
-                </div>
-
-                <div class="dialog_content">
-                        <form method="POST" action="<?php #echo URLROOT?>/blog_post/delete_post">
-                        <button id="deletebtn" type="submit" value="" name="deletepost">Delete
-                        </button>
-                        <button id="cancelbtn" type="button">Cancel
-                        </button>
-                        </form>
-                </div>
-        </div>
-</dialog>
 
 
 

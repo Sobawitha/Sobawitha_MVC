@@ -14,10 +14,28 @@
           &nbsp<div class="add_container">
             <div class="title">Update advertisment</div>
             <div class="add_content">
-              <form action="<?php echo URLROOT;?>/supplier_ad_management/update_advertisement/<?php echo $data['product_id']; ?>" method="POST">
+              <form action="<?php echo URLROOT;?>/supplier_ad_management/update_advertisement/<?php echo $data['product_id']; ?>" method="POST" enctype="multipart/form-data">
 
                 <div class="advertisment-details">
-                <i class="fa-solid fa-image" id="uploard_image"></i>
+                  <div class="post-image">
+                    <?php if($data['image_name'] != null): ?>
+                      <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $data['image_name']; ?>" alt="" id="image_placeholder">
+                    <?php else: ?>
+                      <img src="" alt="" id="image_placeholder" style="display: none;">
+                    <?php endif; ?>
+                  </div>
+                  <div class="right">
+                      <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn" onclick="toggleBrowse()">
+                      <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn" style="display:none;" onclick="removeImage()">
+                      <input type="text" name="intentially_removed" id="intentially_removed" style="display: none;" readonly>
+                      <input type="file" name="image" id="image" style="display: none;">
+                  </div>
+
+
+
+
+
+                <!-- <i class="fa-solid fa-image" id="uploard_image"></i> -->
                   <!-- <input type="file"></input> -->
                   <br><br>
                   <div class="input-box">
@@ -138,3 +156,6 @@
     </div>
 </div>
 
+
+<!-- javascript for posts -->
+<script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/components/posts/posts.js" ></script>

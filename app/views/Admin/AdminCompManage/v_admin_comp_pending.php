@@ -234,7 +234,7 @@
             <?php endfor; ?>
 
             <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']) : ?>
-                <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&comp_type=<?php echo isset($_GET['comp_type']) ? $_GET['comp_type'] : $_SESSION['radio_admin_comp']; ?>">Next</a>
+                <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&feed_type=<?php echo isset($_GET['comp_type']) ? $_GET['comp_type'] : $_SESSION['radio_admin_comp']; ?>">Next</a>
             <?php endif; ?>
         </div>
         <?php endif; ?>

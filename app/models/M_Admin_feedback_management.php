@@ -6,31 +6,31 @@
         $this->db = new Database();
     }
 
-    public function getFeedbackDetails(){
-        if(isset($_POST['feed_type']) && !empty($_POST['feed_type'])){
-            if ($_POST['feed_type'] == 'pending_feed'){  
+    public function getFeedbackDetails($feed_type, $limit, $offset){
+        if(isset($feed_type) && !empty($feed_type)){
+            if ($feed_type == 'pending_feed'){  
                 
                 $this->db->query("SELECT COUNT(*) as total_rows FROM feedback  WHERE feed_status = 0");
                 $row_count = $this->db->single()->total_rows;
-                $this->db->query('SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id WHERE feedback.feed_status = 0');
+                $this->db->query("SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id WHERE feedback.feed_status = 0 LIMIT $limit OFFSET $offset");
      
                 $result=$this->db->resultSet();
                 return array('rows' => $result, 'row_count' => $row_count);
             }
             
-            if ($_POST['feed_type'] == 'published_feed'){     
+            if ($feed_type == 'published_feed'){     
                 $this->db->query("SELECT COUNT(*) as total_rows FROM feedback  WHERE feed_status = 1");
                 $row_count = $this->db->single()->total_rows;
-                $this->db->query('SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id WHERE feedback.feed_status = 1');
+                $this->db->query("SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id WHERE feedback.feed_status = 1 LIMIT $limit OFFSET $offset");
      
                 $result=$this->db->resultSet();
                 return array('rows' => $result, 'row_count' => $row_count);
             }
 
-            if ($_POST['feed_type'] == 'rejected_feed'){     
+            if ($feed_type == 'rejected_feed'){     
                 $this->db->query("SELECT COUNT(*) as total_rows FROM feedback  WHERE feed_status = 2");
                 $row_count = $this->db->single()->total_rows;
-                $this->db->query('SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id WHERE feedback.feed_status = 2');
+                $this->db->query("SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id WHERE feedback.feed_status = 2 LIMIT $limit OFFSET $offset");
      
                 $result=$this->db->resultSet();
                 return array('rows' => $result, 'row_count' => $row_count);
@@ -39,7 +39,7 @@
         }else{
             $this->db->query("SELECT COUNT(*) as total_rows FROM feedback  WHERE feed_status = 0");
                 $row_count = $this->db->single()->total_rows;
-                $this->db->query('SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id WHERE feedback.feed_status = 0');
+                $this->db->query("SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id WHERE feedback.feed_status = 0 LIMIT $limit OFFSET $offset");
      
                 $result=$this->db->resultSet();
                 return array('rows' => $result, 'row_count' => $row_count);
@@ -82,5 +82,16 @@
             return false;
         }    
     } 
+
+    public function getFeedDetailsForReject($id){
+        $this->db->query("SELECT f.*, u.email, u.first_name 
+                          FROM feedback f 
+                          JOIN user u ON f.sender_id = u.user_id 
+                          WHERE f.id = :id");
+        $this->db->bind(':id', $id); 
+        $row = $this->db->single();
+        return $row;
+   }
+   
     
 }

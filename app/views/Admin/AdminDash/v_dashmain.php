@@ -477,6 +477,67 @@ fetch('<?php echo URLROOT ?>/Admin_dashboard/complaint_bar_chart')
     console.error(error);
 });
 
+/*donut chart */
+fetch('<?php echo URLROOT ?>/Admin_dashboard/type_donut_chart')
+.then(response => response.json())
+.then(result => {
+    console.log(result); // Check the data in console
+
+    var categories = [];
+    var count = [];
+     
+    if (result.success) {
+        labels= ['Admins','Buyers','Sellers','Suppliers','Agri-Officers'];
+        counts = result.data.map(value => value.num_users)
+        console.log(labels, counts);
+
+        // create chart after fetching data
+        var ctx2 = document.getElementById('doughnut').getContext('2d');
+        var myChart2 = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Count',
+                    data: counts,
+                    backgroundColor: [
+                        '#deeaee',
+                        '#9bf4d5',
+                        '#346357',
+                        '#c94c4c',
+                        '#acddde',
+                    ],
+                    borderColor: [
+                        '#deeaee',
+                        '#9bf4d5',
+                        '#346357',
+                        '#c94c4c',
+                        '#acddde',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // resize chart on window resize
+        $(window).resize(function() {
+            var width = $('#doughnut').width();
+            var height = $('#doughnut').height();
+            myChart2.canvas.width = width;
+            myChart2.canvas.height = height;
+            myChart2.resize();
+        });
+    } else {
+        console.log("error");
+    }
+})
+.catch(error => {
+    console.error(error);
+});
+
 
 
 
