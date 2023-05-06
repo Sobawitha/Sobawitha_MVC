@@ -219,18 +219,24 @@
     }
   }
 
-  public function  adminRejectFeedback($feed_id)
+  public function  adminRejectFeedback()
   {
-    if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
-        $solveStatus= $this->adminFeedMgntModel->rejectFeed($feed_id);
-        $feedDetails =  $this->adminFeedMgntModel->getFeedDetailsForReject($feed_id); 
-        $email = $feedDetails -> email;
-        $name = $feedDetails -> first_name;
+    if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+        $name = trim($_POST['sender_name']);
+        $email = trim($_POST['sender_email']);
+        $id = trim($_POST['feedback_id']);
+        $reason = trim($_POST['reason']);
+        $more_detail = trim($_POST['more_detail']);
 
-        sendMail($email, $name, '',4,'');
+        $solveStatus= $this->adminFeedMgntModel->rejectFeed($id);
+
+        if($solveStatus){
+          sendMail($email,$name,'',7,'',$reason,$more_detail); 
+        }
    
         redirect('Admin_feedback_management/view_feedback');
-     
+      }
     }else{
       redirect('Login/login');  
     }

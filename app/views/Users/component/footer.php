@@ -25,10 +25,10 @@
         <div class="coloumn-3">
             <h3>Links</h3>
             <ul type="" class="lists">
-                <li><a href="">Home</a></li>
-                <li><a href="">Products</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="">Forum</a></li>
+                <li><a href="<?php echo URLROOT?>/Pages/home">Home</a></li>
+                <li><a href="<?php echo URLROOT?>/Pages/#buying_section">Products</a></li>
+                <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li>
+                <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li>
             </ul>
         </div>
 

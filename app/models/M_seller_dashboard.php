@@ -85,11 +85,18 @@
         return $this->db->resultSet();
     }
 
-    public function get_stock_details(){
-        $this->db->query("SELECT fertilizer.product_id, fertilizer.product_name, fertilizer.quantity, product_starting_stock.quantity as supplied_qyuantity from fertilizer inner join product_starting_stock on fertilizer.product_id = product_starting_stock.product_id where created_bu = :id  )");
+    public function get_stock_details($start_from,$num_per_page){
+        $this->db->query("SELECT fertilizer.product_id, fertilizer.product_name, fertilizer.quantity, product_starting_stock.quantity as supplied_quantity from fertilizer left join product_starting_stock on fertilizer.product_id = product_starting_stock.product_id where created_by = :id limit :start_from, :num_per_page");
+        $this->db->bind(":start_from", $start_from);
+        $this->db->bind(":num_per_page", $num_per_page);
         $this->db->bind(":id", $_SESSION['user_id']);
         return $this->db->resultSet();
+    }
 
+    public function get_no_of_products(){
+        $this->db->query("SELECT count(*) as no_of_products from fertilizer where created_by = :id  ");
+        $this->db->bind(":id", $_SESSION['user_id']);
+        return $this->db->single();
     }
 }
 ?>

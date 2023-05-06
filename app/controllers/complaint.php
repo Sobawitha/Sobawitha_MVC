@@ -8,18 +8,24 @@ class complaint extends Controller
     }
 
     public function contact_us(){
-        $userid = $_SESSION['user_id'];
-        $user_email = $this->complaint_model-> find_email($userid)->user_email;
-        $_SESSION['user_email']=$user_email;
-
-        $data = [];
-        $this->view('Users/complaint/v_contact_us', $data);
+        if(isset($_SESSION['user_id'])){
+            $userid = $_SESSION['user_id'];
+            $user_email = $this->complaint_model-> find_email($userid)->user_email;
+            $_SESSION['user_email']=$user_email;
+            $data = [];
+            $this->view('Users/complaint/v_contact_us', $data);
+    
+        }
+        else{
+            redirect("Login/login");
+        }
+        
     }
 
     public function add_complaint(){
         
         
-
+        if(isset($_SESSION['user_id'])){
         // redirect('complaint/complaint');
         if($_SERVER['REQUEST_METHOD']=='POST'){
             //form is submitted
@@ -53,6 +59,10 @@ class complaint extends Controller
             redirect('complaint/contact_us');
         }
     }
+    else{
+        redirect('Login/login');
+    }
+}
 
 
 

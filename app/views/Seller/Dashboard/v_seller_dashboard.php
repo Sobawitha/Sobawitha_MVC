@@ -97,80 +97,7 @@
                     </div>
                 </div>
 
-
-            </div>
-
-            <div class="chartsLevel3">
-              
-                <div class="chart">
-                    <h2>Forum Topics</h2><br>
-                    <div>
-                        <table class="forum_post_detail_table">
-                            <tr>
-                                <th>#</th>
-                                <th>Product name</th>
-                                <th>Quantity</th>
-                                <th>Soled</th>
-                                <th>Available</th>
-                            </tr><?php 
-                            foreach($data['forum_post_detail'] as $forum_post_detail):
-                                ?>
-                            <tr>
-                                <td><?php echo $forum_post_detail->discussion_id?></td>
-                                <td><?php echo $forum_post_detail->subject?></td>
-                                <td><?php echo $forum_post_detail->date?></td>
-                                <th><span class="<?php echo Setcolor($forum_post_detail->type)?>"><?php echo $forum_post_detail->type ?></span></th>
-                                <td><?php echo $forum_post_detail->no_of_reply?></td>
-                            </tr>
-                                <?php endforeach;
-                            ?>    
-                        </table>
-                        <div class="pagination">
-                            <?php
-                                $total_row_count = $data['no_of_forumposts'];
-                                //$total_row_count = 27;
-                                $uri = $_SERVER['REQUEST_URI'];
-                                $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
-                            
-                                if(isset($_GET['page'])){
-                                    $page = $_GET['page'];
-                                }
-                                else{
-                                    $page = 1;
-                                }
-                            
-                                if($page>1){ 
-                                    echo "<a href='?page=".($page - 1)." '><span class=''><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
-                                }
-                            
-                                for($i=1; $i<=$total_pages;$i++){
-                                    $class = ($page == $i) ? "current_page" : ""; // add this line
-                                    echo "<a href='?page=".($i)." '><span class='pagination_number $class'>$i</span></a>";
-                                }
-                            
-                                if($i-1>$page){
-                                    echo "<a href='?page=".($page + 1)." '><span class='' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
-                                }
-                            ?>
-
-                        </div>
-                    </div>
-                </div>
-        </div>
-
-    </div>
-    </div>
-
-    <div class="last">
-</div>
-</div>
-
-<br><br>
-<?php require APPROOT.'/views/Users/component/footer.php'?>
-
-
-
-
+                
 <script>
                 /* donut chart */
                 fetch('<?php echo URLROOT ?>/seller_dashboard/order_status_donut_chart')
@@ -291,3 +218,93 @@
 
 
                 </script>
+
+
+
+
+            </div>
+
+            <div class="chartsLevel3">
+              
+                <div class="chart">
+                    <h2>Forum Topics</h2><br>
+                    <div>
+                        <table class="forum_post_detail_table">
+                            <tr>
+                                <th>#</th>
+                                <th>Product name</th>
+                                <th>Quantity</th>
+                                <th>Soled</th>
+                                <th>Available</th>
+                            </tr><?php 
+
+                            if(!empty($data['stock_details'])){
+                            foreach($data['stock_details'] as $stock_details):
+                                ?>
+                            <tr>
+                                <td><?php echo $stock_details->product_id?></td>
+                                <td><?php echo $stock_details->product_name?></td>
+                                <td><?php echo $stock_details->supplied_quantity?></td>
+                                <th><span class=""><?php echo ($stock_details->supplied_quantity - $stock_details->quantity)?></th>
+                                <?php if(($stock_details->quantity) ==0){?>
+                                    <td><span id="out_stock"><?php echo $stock_details->quantity ?></span></td>
+                                <?php
+                                }else{
+                                ?>
+                                    <td><span><?php echo $stock_details->quantity ?></span></td>
+                                <?php
+                                }?>
+                                
+                            </tr>
+                                <?php endforeach;
+                            ?>    
+                        </table>
+                        <div class="pagination">
+                            <?php
+                                $total_row_count = $data['no_of_products'];
+                                $uri = $_SERVER['REQUEST_URI'];
+                                $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
+                            
+                                if(isset($_GET['page'])){
+                                    $page = $_GET['page'];
+                                }
+                                else{
+                                    $page = 1;
+                                }
+                            
+                                if($page>1){ 
+                                    echo "<a href='?page=".($page - 1)." '><span class=''><i class='fa fa-angle-double-left' aria-hidden='true' id='backword_bracket'></i></span></a>" ;
+                                }
+                            
+                                for($i=1; $i<=$total_pages;$i++){
+                                    $class = ($page == $i) ? "current_page" : ""; // add this line
+                                    echo "<a href='?page=".($i)." '><span class='pagination_number $class'>$i</span></a>";
+                                }
+                            
+                                if($i-1>$page){
+                                    echo "<a href='?page=".($page + 1)." '><span class='' onclick='setcolor()'><i class='fa fa-angle-double-right' aria-hidden='true' id='forward_bracket'></i></span></a>";
+                                }
+                            }else{
+                                ?>
+                                No found
+                                <?php
+                            }
+                            ?>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+    </div>
+
+    <div class="last">
+</div>
+</div>
+
+<br><br>
+<?php require APPROOT.'/views/Users/component/footer.php'?>
+
+
+

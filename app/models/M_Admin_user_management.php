@@ -192,38 +192,66 @@
       }
     }
 
-    public function display_all_users(){
-      if(isset($_POST['user_type']) && !empty($_POST['user_type'])){
-          if ($_POST['user_type'] == 'all'){            
-              $this->db->query('SELECT * FROM user');
-              return $this->db->resultSet(); 
+    public function display_all_users($user_type, $limit, $offset){
+      if(isset($user_type) && !empty($user_type)){
+          if ($user_type == 'all'){  
+            $this->db->query("SELECT COUNT(*) as total_rows FROM user");
+            $row_count = $this->db->single()->total_rows;
+            // var_dump($row_count); die();
+            $this->db->query("SELECT * FROM user LIMIT $limit OFFSET $offset");
+            $result=$this->db->resultSet();
+            return array('rows' => $result, 'row_count' => $row_count); 
           }
-          if ($_POST['user_type'] == 'admins'){
-              $this->db->query('SELECT * FROM user WHERE user_flag=1');
-              return $this->db->resultSet(); 
+          if ($user_type == 'admins'){
+            $this->db->query("SELECT COUNT(*) as total_rows FROM user WHERE user_flag=1");
+            $row_count = $this->db->single()->total_rows;
+            
+            $this->db->query("SELECT * FROM user WHERE user_flag=1 LIMIT $limit OFFSET $offset");
+            $result=$this->db->resultSet();
+            return array('rows' => $result, 'row_count' => $row_count);  
           }
-          if ($_POST['user_type'] == 'customers'){
-              $this->db->query('SELECT * FROM user WHERE user_flag=2');
-              return $this->db->resultSet(); 
+          if ($user_type == 'customers'){
+            $this->db->query("SELECT COUNT(*) as total_rows FROM user WHERE user_flag=2");
+            $row_count = $this->db->single()->total_rows;
+            
+            $this->db->query("SELECT * FROM user WHERE user_flag=2 LIMIT $limit OFFSET $offset");
+            $result=$this->db->resultSet();
+            return array('rows' => $result, 'row_count' => $row_count);  
           }
 
-          if ($_POST['user_type'] == 'sellers'){
-            $this->db->query('SELECT * FROM user WHERE user_flag=3');
-            return $this->db->resultSet(); 
+          if ($user_type == 'sellers'){
+            $this->db->query("SELECT COUNT(*) as total_rows FROM user WHERE user_flag=3");
+            $row_count = $this->db->single()->total_rows;
+            
+            $this->db->query("SELECT * FROM user WHERE user_flag=3 LIMIT $limit OFFSET $offset");
+            $result=$this->db->resultSet();
+            return array('rows' => $result, 'row_count' => $row_count);  
         }
-        if ($_POST['user_type'] == 'suppliers'){
-          $this->db->query('SELECT * FROM user WHERE user_flag=4');
-          return $this->db->resultSet(); 
+        if ($user_type == 'suppliers'){
+          $this->db->query("SELECT COUNT(*) as total_rows FROM user WHERE user_flag=4");
+          $row_count = $this->db->single()->total_rows;
+          
+          $this->db->query("SELECT * FROM user WHERE user_flag=4 LIMIT $limit OFFSET $offset");
+          $result=$this->db->resultSet();
+          return array('rows' => $result, 'row_count' => $row_count); 
         }
-        if ($_POST['user_type'] == 'agris'){
-        $this->db->query('SELECT * FROM user WHERE user_flag=5');
-        return $this->db->resultSet(); 
+        if ($user_type == 'agris'){
+          $this->db->query("SELECT COUNT(*) as total_rows FROM user WHERE user_flag=5");
+          $row_count = $this->db->single()->total_rows;
+          
+          $this->db->query("SELECT * FROM user WHERE user_flag=5 LIMIT $limit OFFSET $offset");
+          $result=$this->db->resultSet();
+          return array('rows' => $result, 'row_count' => $row_count);  
         }
       }
 
       else{
-          $this->db->query('SELECT * FROM user');
-          return $this->db->resultSet(); 
+        $this->db->query("SELECT COUNT(*) as total_rows FROM user");
+        $row_count = $this->db->single()->total_rows;
+        
+        $this->db->query("SELECT * FROM user LIMIT $limit OFFSET $offset");
+        $result=$this->db->resultSet();
+        return array('rows' => $result, 'row_count' => $row_count);  
       }
                 
   }

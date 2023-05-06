@@ -2,8 +2,33 @@
 <link rel="stylesheet" href="../css/Users/component/home.css"></link>
 <link rel="stylesheet" href="../css/Buyer/wish_list/wish_list.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
+
+<script>
+    function search() {
+    const searchTerm = document.getElementById('search_text').value;
+    if (searchTerm) {
+      const regex = new RegExp(searchTerm, 'gi');
+      const elements = document.querySelectorAll('body *');
+      for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) {
+          const text = element.childNodes[0].textContent;
+          if (text.match(regex)) {
+            const highlightedText = text.replace(regex, '<span class="highlight">$&</span>');
+            element.innerHTML = highlightedText;
+          }
+        }
+      }
+    }
+  }
+</script>
+
+
 <body>
-    <header style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(<?php echo URLROOT?>/public/images/background2.jpg); background-size: cover;  height:77vh;  -webkit-background-size:cover ;  background-position:center; margin:0px;    padding:0px;">
+    <!-- <header style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)),url(<?php echo URLROOT?>/public/images/background2.jpg); background-size: cover;  height:77vh;  -webkit-background-size:cover ;  background-position:center; margin:0px;    padding:0px;"> -->
+
+    
+    <header id="home_header">
 
         <div class="nav">
             <nav>
@@ -14,7 +39,15 @@
                     <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
                     <li><a href="<?php echo URLROOT?>/dashboard/dashboard">Dashboard</a></li> 
                     <li><a href="">Sell</a></li>
-                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Login</a></li>    
+                    <?php if(!isset($_SESSION['user_id'])) {
+                      ?>
+                      <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>
+                      <?php
+                    }else{
+                      ?>
+                      <li><a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="user_home"></i></i>Log out</a></li>
+                    <?php
+                    }?> 
                 </ul>
             </nav>
             <hr class="home_hr">
@@ -23,12 +56,24 @@
         <div class="discription">
             <p class="main">Find the best places to your trade</p>
             <p class=sub_main>Sobawitha is an online platform driven by agriculture nature by involving more people in their people in their in</p>
+            <!-- <form method="POST">
             <div class="search_bar">
                 <div class="search_content">
-                    <input type="text" name="search_text" placeholder="Search the forum" require/>
-                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i> <span class="search">SEARCH</span></button>
+                    <input type="text" name="search_text" id="search_text" placeholder="Search from home" require/>
+                    <button type="submit" class="search_btn" ><i class="fa fa-search" aria-hidden="true" id="search"></i> <span class="search">SEARCH</span></button>
                 </div>
             </div>
+            </form> -->
+
+            <form id="search_form" method="POST">
+            <div class="search_bar">
+                <div class="search_content">
+                <input type="text" name="search_text" id="search_text" placeholder="Search from home" required />
+                <span class="search_btn" onclick="search()"><i class="fa fa-search" aria-hidden="true" id="search" ></i> <span class="search">SEARCH</span></span>
+                </div>
+            </div>
+            </form>
+
             <div class="click_home_icon">
                 <i class="fa-solid fa-cart-shopping" id="home_icon"></i>
                 <i class="fa-solid fa-coins" id="home_icon"></i>
@@ -318,3 +363,17 @@ include 'footer.php';
 
 ?>
 </div>
+
+<script>
+    const header = document.querySelector('#home_header');
+    const images = ['<?php echo URLROOT?>/public/images/background2.jpg', '<?php echo URLROOT?>/public/images/background7.jpg', '<?php echo URLROOT?>/public/images/background4.jpg', '<?php echo URLROOT?>/public/images/background3.jpg']; // array of image file names
+    let currentIndex = 0;
+
+    function changeBackground() {
+    header.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6)), url(${images[currentIndex]})`;
+    currentIndex = (currentIndex + 1) % images.length; // cycle through the array of images
+    }
+
+    setInterval(changeBackground, 5000); // call the function every 5 seconds
+
+</script>

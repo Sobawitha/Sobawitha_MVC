@@ -262,5 +262,3 @@ window.addEventListener('load', function() {
 });
 
 
-
-

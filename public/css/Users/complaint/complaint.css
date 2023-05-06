@@ -702,3 +702,14 @@ form .discription:focus{
   }
 
 
+
+  /*search result*/
+  #search_result_image{
+    width:300px;
+    height:300px;
+    margin-left:300px;
+}
+
+#topic_not_found{
+    transform: translateX(300px);
+}

@@ -50,15 +50,50 @@ function set_filterbtn_Color($tag){
 
 ?>
 
+<script>
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   const submitBtn = document.querySelector('button[type="submit"]');
+//   submitBtn.addEventListener('click', highlightSearchText);
+// });
+
+
+
+// function highlightSearchText() {
+
+//   // Retrieve search text input value
+//   const searchText = document.querySelector('search_btn').value;
+
+//   // Create RegExp object with search text and "gi" flags
+//   const searchRegex = new RegExp(searchText, 'gi');
+
+//   // Get element containing text to be highlighted
+//   const searchText = document.querySelector('input[name="search_text"]').value;
+
+//   if (!contentDiv) {
+//     console.error('Error: Could not find element with class "search_content".');
+//     return;
+//   }
+
+//   // Highlight search text
+//   const highlightedText = contentDiv.innerHTML.replace(searchRegex, '<span class="highlight">$&</span>');
+//   contentDiv.innerHTML = highlightedText;
+
+  // Log the highlighted text for debugging
+//    console.log('Highlighted text:', highlightedText);
+// }
+
+</script>
+
 <div class="button_section">
         <div class=""></div>
         <form method="POST">
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $data['search_text']?> " require/></span>
-                    <span class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></span>
-                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $data['search_text']?> " required/></span>
+                    <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
+                    <button type="submit" class="search_btn" id="search_btn" ><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
         </div>
@@ -141,7 +176,12 @@ function set_filterbtn_Color($tag){
         <?php
         /* display blogs */
             if(!empty($data['resource_page_display_message'])){
-                echo $data['resource_page_display_message'];
+                // echo $data['resource_page_display_message'];
+                 echo '<img src=".././public/images/search.png"   alt="no_result_found_Picture" id="search_result_image"/>';
+                 ?>
+                 
+                 <h1 id="topic_not_found">Result Not Found</h1>
+                 <?php
             }
             else{
             foreach($data['resources'] as $resources):?>

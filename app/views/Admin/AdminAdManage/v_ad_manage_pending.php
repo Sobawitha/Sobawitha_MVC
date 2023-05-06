@@ -111,10 +111,54 @@
                               
                                 <?php if($products->current_status ==0 ): ?>
                                         <td>
-                                        <button type="button" id="review_btn" onclick="popUpOpenAdReview('<?php echo $products->product_name ?>','<?php echo $products->listing_image ?>','<?php echo $products->img_two ?>','<?php echo $products->img_three ?>','<?php echo $products->img_four ?>','<?php echo $products->img_five ?>','<?php echo $products->quantity ?>','<?php echo $products->manufacturer ?>','<?php echo $products->price ?>','<?php echo $products->product_description ?>','<?php echo $products->category ?>','<?php echo isset($products->registration_no) ? $products->registration_no : 'No need for Raw Materials' ?>','<?php echo $products->date ?>','<?php echo $products->crop_type ?>','<?php echo $products->type ?>','<?php echo $products->seller_name ?>','<?php echo $products->avg_rating ?>','<?php echo isset($products->location) ? $products->location : 'No need for Raw Materials' ?>')" > Review</button>
-
-
+                                        <?php $def_image ='default_upload.png' ?>
+                                        <button type="button" id="review_btn" onclick="popUpOpenAdReview('<?php echo $products->product_name ?>','<?php echo $products->listing_image ?>','<?php echo isset($products->img_two) ? $products->img_two : $products->rm_image_two ?>','<?php echo isset($products->img_three) ? $products->img_three : $def_image ?>','<?php echo isset($products->img_four) ? $products->img_four : $def_image ?>','<?php echo isset($products->img_five) ? $products->img_five : $def_image ?>','<?php echo $products->quantity ?>','<?php echo $products->manufacturer ?>','<?php echo $products->price ?>','<?php echo $products->product_description ?>','<?php echo $products->category ?>','<?php echo isset($products->registration_no) ? $products->registration_no : 'No need for Raw Materials' ?>','<?php echo $products->date ?>','<?php echo isset($products->crop_type) ? $products->crop_type : 'No need for Raw Materials' ?>','<?php echo $products->type ?>','<?php echo $products->seller_name ?>','<?php echo $products->avg_rating ?>','<?php echo isset($products->location) ? $products->location : 'No need for Raw Materials' ?>')" ><i class="fa-solid fa-check-double"></i> Review</button><br>
                                         
+                                        <button id="reject_btn" onclick="openRejectDialog()" ><i class="fa-solid fa-registered"></i> Reject Ad</button>
+
+                                        <dialog id="reject-dialog">
+                                        <form method="POST">
+                                        <label class="reject_popup_labels" for="reason-select">Reason for rejection:</label>
+                                        <select id="reason-select" name="reason">
+                                        <option value="Inappropriate content">Inappropriate content</option>
+                                        <option value="False information">False information</option>
+                                        <option value="Poor quality images">Poor quality images</option>
+                                        <option value="Pricing not competitive">Pricing not competitive</option>
+                                        <option value="Misleading product description">Misleading product description</option>
+                                        <option value="Incomplete product details">Incomplete product details</option>
+                                        <option value="Other">Other</option>
+                                        </select>
+                                        <br>
+                                        <label for="reason-details" class="reject_popup_labels">More details:</label>
+                                        <textarea id="reason-details" name="more_detail" rows="10"></textarea>
+                                        <input type="hidden" id="reason-details" value="<?php echo $products->seller_email?>" name="seller_email">
+                                        <input type="hidden" id="reason-details" value="<?php echo $products->category?>" name="seller_category">
+                                        <input type="hidden" id="reason-details" value="<?php echo $products->seller_name ?>" name="seller_name">
+                                        <input type="hidden" id="reason-details" value="<?php echo $products->Product_id?>" name="seller_productId">
+
+
+                                        <br>
+                                        <button type="submit" id="reject_btn_popup" formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/">Reject</button>
+                                        </form>
+                                        <button id="reject-dialog-close" type="button" ><i class="fa-regular fa-circle-xmark"></i></button>
+                                        </dialog>
+
+                                        <script>
+                                                const rejectDialog = document.querySelector("#reject-dialog");
+                                                        const rejectDialogCloseBtn = document.querySelector("#reject-dialog-close");
+
+                                                        function openRejectDialog() {
+
+                                                        rejectDialog.showModal();
+                                                        }
+
+                                                        function closeRejectDialog() {
+                                                        rejectDialog.close();
+                                                        }
+
+                                                        rejectDialogCloseBtn.addEventListener("click", closeRejectDialog);
+
+                                        </script>
                                         <!-- Dialog box -->
                                         <dialog id="ad-details">
                                         <div class="ad-details">
@@ -127,16 +171,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                        <!-- <label>Product Images:</label>
-                                                <div class="product-images">
-                                                <img id="image_one" class="product-image img-container" src="" alt="Product Image"><br><br>
-                                                <img id="image_two" class="product-image img-container" src="" alt="Product Image"><br><br>
-                                                <img id="image_three" class="product-image img-container" src="" alt="Product Image"><br><br>
-                                                <img id="image_four" class="product-image img-container" src="" alt="Product Image"><br><br>
-                                                <img id="image_five" class="product-image img-container" src="" alt="Product Image">
-                                                </div> -->
-                                        
-
+        
                                                 <label>Product Images:</label>
                                                 <div class="product-images">
                                                 <img id="image_one" class="product-image img-container" src="" alt="Product Image">
@@ -155,7 +190,7 @@
                                                         var productImages = document.querySelectorAll(".product-image");
 
                                                         // Add event listener for each product image
-                                                        for (var i = 0; i < productImages.length; i++) {
+                                                        for (var i = 0; i <productImages.length; i++) {
                                                         productImages[i].addEventListener("click", function() {
                                                         // Get the source of the clicked image and set it as the source of the popup image
                                                         var src = this.src;
@@ -200,7 +235,7 @@
                                         </div>
                                         <div class="form-group">
                                                 <label for="product-description">Product Description:</label>
-                                                <textarea id="product-description" name="product-description" rows="5" readonly></textarea>
+                                                <textarea id="product-description" name="product-description" rows="20000" readonly></textarea>
                                         </div>
                                         <div class="form-group">
                                                 <label for="product-category">Product Category:</label>
@@ -258,9 +293,10 @@
                                         
                                         </div>
                                         </dialog>
+                                        
 
                                         </td>
-                                    <?php elseif($products->current_status == 1 || $products->current_status == 2): ?>
+                                        <?php elseif($products->current_status == 1 || $products->current_status == 2): ?>
                                         <td>
                                         <button type="button" onclick="popUpOpenViewMore('<?php echo $products->product_name ?>','<?php echo $products->listing_image ?>','<?php echo $products->img_two ?>','<?php echo $products->img_three ?>','<?php echo $products->img_four ?>','<?php echo $products->img_five ?>','<?php echo $products->quantity ?>','<?php echo $products->manufacturer ?>','<?php echo $products->price ?>','<?php echo $products->product_description ?>','<?php echo $products->category ?>','<?php echo isset($products->registration_no) ? $products->registration_no : 'No need for Raw Materials' ?>','<?php echo $products->date ?>','<?php echo $products->crop_type ?>','<?php echo $products->type ?>','<?php echo $products->seller_name ?>','<?php echo $products->avg_rating ?>','<?php echo isset($products->location) ? $products->location : 'No need for Raw Materials' ?>')" id="ad_view_more_btn"><i class="fa-solid fa-circle-info"></i> View More</button>
                                             <!-- Dialog box -->
@@ -283,7 +319,7 @@
                                                 <img id="image_four" class="product-image img-container" src="" alt="Product Image">
                                                 <img id="image_five" class="product-image img-container" src="" alt="Product Image">
                                                 </div>
-                                                <scr>
+                                                <script>
                                                         // Get the popup elements
                                                         var popupContainer = document.querySelector(".popup-container");
                                                         var popupImage = document.querySelector("#popup-image");

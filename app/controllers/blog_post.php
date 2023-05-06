@@ -84,7 +84,7 @@ class blog_post extends Controller {
 
     public function display_all_blogposts(){
 
-    if($_SESSION['user_id']){
+    if(isset($_SESSION['user_id'])){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
             if(isset($_POST['search_text'])){

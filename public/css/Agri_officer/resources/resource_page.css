@@ -487,3 +487,24 @@ hr{
     padding:0px 10px;
 }
   
+
+/*search result*/
+#search_result_image{
+    width:300px;
+    height:300px;
+    margin-left:300px;
+}
+
+#topic_not_found{
+    transform: translateY(280px);
+}
+
+/* .highlight {
+    background-color: yellow;
+} */
+
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+  }
+  
