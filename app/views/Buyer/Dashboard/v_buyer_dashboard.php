@@ -91,86 +91,44 @@
 
 <script>
 
-fetch('<?php echo  URLROOT ?>/Buyer_dashboard/fertilizer_type_donut_chart')
- .then(res =>  res.json())
- .then(results =>{
 
-
-
-    console.log(data);
-    var type = [];
-    var count = [];
-    var colors = [];
-    if(results.success) {
-
-
-        result.data.forEach(element => {
-            type.push(element.type);
-            count.push(element.count);
+ fetch("<?php echo URLROOT?>/Buyer/buyer_dashboard/fertilizer_type_donut_chart").then(response => response.json).then(data =>() => {
+        console.log(data);
+        var lables = ["Liquid", "Solid", "Packet","Bottles"];
+        var count = []
+        count = result.data.map(value => value.no_of_items);
+        const fertilizer_type_donut_chart = new Chart(
+            document.getElementById('fertilizer_type_donut_chart'),
+            {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Count',
+                            data:count,
+                            backgroundColor: [
+                        '#deeaee',
+                        '#9bf4d5',
+                      
+                    ],
+                    borderColor: [
+                        '#deeaee',
+                        '#9bf4d5',
+                      
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
         });
 
-
-
-
-    }   
-   
-   
-    for(let i = 0; i < count.length; i++){
-       
-        colors.push(getRandomColor());
     }
-
-
-    var ctx2 =  document.getElementById('dougnut').getContext('2d');
-    var myChart2 =  new Chart(ctx2, {
-       type:'doughnut',
-       data:{
-            
-        labels: type,
-         datasets:[{
-
-            data:
-         }]
-
- 
-
-
-
-       }
-
-
-
-
-    })
-
- })
-
-
-
-
-
-
-
-
- function getRandomColor()
- {
-
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for(var i = 0; i < 6; i++)
-    {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
- }
-
-
-
-
-
-
-
-
+    ).catch(function(error){
+        console.log(error);
+    });
 
 
 
