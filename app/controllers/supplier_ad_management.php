@@ -170,7 +170,7 @@
 
             //validation
             $post = $this->supplier_ad->getPostById($productId);
-            $oldImage = PUBROOT.'/img/postsImgs/'.$post->image;
+            $oldImage = PUBROOT.'/img/postsImgs/'.$post->raw_material_image;
 
             //photo updated
             //user haven't changed the existing image
@@ -181,7 +181,8 @@
             }
             else {
                 if($_FILES['image']['name'] == '') {
-                    $data['image_name'] = $post->image;
+
+                    $data['image_name'] = $post->raw_material_image;
                 }
                 else {
                     updateImage($oldImage, $data['image']['tmp_name'], $data['image_name'], '/img/postsImgs/');
