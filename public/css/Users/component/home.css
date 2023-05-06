@@ -28,6 +28,16 @@ header{
     margin:0px;
     padding:0px; */
 }
+
+#home_header{
+    height: 77vh;
+    background-position: center;
+    background-size: cover;
+    animation: change 10s infinite ease-in-out;
+    /* transition: background-image 1s ease-in-out; */
+}
+
+
 nav{
     top:0;
     transform: translate(-10%,-10%);
@@ -466,4 +476,6 @@ a{
 }
 
 
-
+.highlight {
+    background-color: rgb(212, 212, 172);
+  }

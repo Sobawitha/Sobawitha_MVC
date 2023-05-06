@@ -71,7 +71,21 @@ class M_users
           }else{
               return false;
           }    
-      } 
+      }
+      
+
+      /*for notification */
+    public function get_all_notification(){
+        $this->db->query("SELECT * FROM notifications ORDER BY time DESC LIMIT 5");
+        return $this->db->resultset();
+    }
+    
+    public function get_unseen_notifications(){
+        $this->db->query("SELECT * FROM notifications WHERE status=1 ORDER BY time DESC LIMIT 5");
+        return $this->db->resultset();
+    }
+    
+    
       
 }
 

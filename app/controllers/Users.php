@@ -302,7 +302,7 @@
                  }
         
                     
-                     $result =  $this->sellerAdModel->customized_query($query);
+                        $result =  $this->sellerAdModel->customized_query($query);
                      
                  
         
@@ -404,6 +404,8 @@
        }
 
        public function register_as_new_sletter(){
+        echo "comee";
+        die();
         $current_url = $_GET['current_url'];
         $url_parts = explode('/', $current_url);
         $redirect_parts = array_slice($url_parts, 2);
@@ -448,7 +450,36 @@
      }
 
 
+    /*for notification */
+    public function noti(){
+        $notification = $this->userModel->get_all_notification();
+        $no_of_rows = count($notification);
+        $unseen_noti = $this->userModel->get_unseen_notifications();
+        $no_of_unseen_noti = count($unseen_noti);
+        $data=[
+            'notifications' => $notification,
+            'num_rows' => $no_of_rows,
+            'unseen_noti' => $no_of_unseen_noti
+        ];
+        // $this->view('Users/user/v_notification', $data);
+
+        // echo json_encode($data);
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
+    
+    public function add_notification(){
+        if(isset($_POST['not_message'])){
+            $message = $_POST['not_message'];
+            $this->userModel->insert_notification($message);
+            echo "success";
+        }
+    }
+    
+
+
 
 }
 
 ?>
+

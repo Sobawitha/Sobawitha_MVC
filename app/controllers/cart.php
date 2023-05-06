@@ -27,7 +27,9 @@ class cart extends Controller
         if ($this->cartModel->findByCartId($pro_id)) {
 
             //alert message if it is already in the cart
-
+             
+            
+            
             $this->display_all_items();
 
         }
