@@ -21,6 +21,7 @@ class M_supplier_advertisment
         if(isset($_POST['current_status']) && !empty($_POST['current_status'])){
             if ($_POST['current_status'] == 'all'){
                 $this->db->query('SELECT * FROM raw_material WHERE (user_id = :uid AND ad_status != 1)');
+
                 $this->db->bind(':uid', $user_id);
                 return $this->db->resultSet(); 
             }
