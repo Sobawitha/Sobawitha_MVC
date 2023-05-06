@@ -65,7 +65,7 @@ class dashboard extends Controller{
     }
 
     public function category_donut_chart() {
-        $post_category_detail = $this->dashboard_model->get_user_detail();
+        $post_category_detail = $this->dashboard_model->get_category_detail();
     
         if ($post_category_detail) {
             // Create a response object with a "success" key and a "data" key

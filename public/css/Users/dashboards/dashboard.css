@@ -386,3 +386,15 @@ table{
     border-color: #000000;
   }
   
+/*for out stock*/
+#out_stock{
+  padding:5px 8px;
+  background-color: rgb(255, 214, 214);
+  border:2px solid red;
+  color:red;
+  border-radius:25px;
+}
+
+.highlight {
+  background-color: rgb(212, 212, 172);
+}

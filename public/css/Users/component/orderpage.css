@@ -213,7 +213,7 @@ label >  span{
 
 
 
-button {  
+#place_order {  
   width: 100%;  
   margin-top: 10px;  
   padding: 10px;  
@@ -225,7 +225,7 @@ button {
   font-family:inherit;
   font-weight: bold;  
 }  
-button:hover {  
+#place_order:hover {  
   cursor: pointer;  
   background: #428a7d;  
 }  
@@ -265,7 +265,7 @@ input[type=checkbox], input[type=radio] {
 
 
 
-input[type = "tel"],input[type = "email"]
+input[type = "tel"],#mail_input
 {
 
 width:70%;

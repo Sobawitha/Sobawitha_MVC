@@ -98,7 +98,7 @@ function setColor($tag){
                 
                     <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="<?php  echo $data['search_text']?> " require/></span>
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                    <button type="submit" class="search_btn" onclick=search()><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                 
             </div>
         </div>
@@ -148,7 +148,11 @@ function setColor($tag){
 
             <?php endforeach;}
             else{
-                echo $data['search_result_message'];
+                // echo $data['search_result_message'];
+                 echo '<img src=".././public/images/search.png"   alt="no_result_found_Picture" id="search_result_image"/>';
+                 ?>               
+                 <h1 id="topic_not_found">Result Not Found</h1>
+                 <?php
             }?>
                 
             

@@ -18,3 +18,22 @@ function setcolor(){
     document.querySelector(".search_cont").style.color='salmon';
 
 }
+
+function search(){
+    let searchTerm = document.querySelector(".search_cont").placeholder;
+    if (searchTerm) {
+    const regex = new RegExp(searchTerm, 'gi');
+    const elements = document.querySelectorAll('body *');
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) {
+        const text = element.childNodes[0].textContent;
+        if (text.match(regex)) {
+            const highlightedText = text.replace(regex, '<span class="highlight">$&</span>');
+            element.innerHTML = highlightedText;
+        }
+        }
+    }
+    }
+
+}

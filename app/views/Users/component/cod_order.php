@@ -40,7 +40,7 @@
                     <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
                     <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
                     <li><a href="">Sell</a></li>
-                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
+                    <li><a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="user_home"></i></i>Log out</a></li>    
                 </ul>
             </nav>
             <hr class="home_hr">
@@ -64,7 +64,7 @@
         </label>   
         <label>  
           <span> Address <span class="required"> * </span></span>  
-          <input type="text" name="houseadd" placeholder="House number and street name" value = '<?php echo $data['user_detail']->address ?>'required readonly>  
+          <input type="text" name="houseadd" placeholder="House number and street name" value = '<?php echo $data['user_detail']->address ?>'required >  
         </label>    
         <label>  
           <span> Phone<span class="required">*</span></span>  
@@ -72,7 +72,7 @@
         </label>  
         <label>  
           <span> Email-Address<span class="required">*</span></span>  
-          <input type="email" name="email" value = '<?php echo $data['user_detail']->email ?>' readonly>   
+          <input type="email" name="email" id="mail_input" value = '<?php echo $data['user_detail']->email ?>' readonly>   
         </label>  
 
         <hr>
@@ -108,7 +108,7 @@
             <td>Rs. <?php echo $data['tot_bill'];?></td>  
           </tr>
         </table>
-        <a href="<?php echo URLROOT ?>/fertilizer_product/confirm_payment?product_id=<?php echo $_GET['product_id']?>"><button type="button"> Place Order </button> </a>
+        <a href="<?php echo URLROOT ?>/fertilizer_product/confirm_payment?product_id=<?php echo $_GET['product_id']?>"><button type="button" id="place_order"> Place Order </button> </a>
        </div>
       </div>
     </div>

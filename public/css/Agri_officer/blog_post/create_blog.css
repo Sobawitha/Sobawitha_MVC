@@ -670,3 +670,15 @@ input[type=file]::file-selector-button{
     background-color: #4b0917;
     z-index: 9998;
   }
+
+
+  /*search result*/
+#search_result_image{
+    width:300px;
+    height:300px;
+    margin-left:300px;
+}
+
+#topic_not_found{
+    transform: translateX(300px);
+}

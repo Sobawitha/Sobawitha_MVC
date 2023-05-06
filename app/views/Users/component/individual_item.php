@@ -71,7 +71,7 @@ function qna_section(){
     var qna = document.getElementById("toggle_section_3");
     var indicator = document.getElementById("indicator");
     qna.style.transform = "translateX(-1150px)";
-    comment.style.transform = "translateX(-1150px)";
+    comment.style.transform = "translateX(-1170px)";
     related_item.style.transform = "translateX(-1150px)";
     indicator.style.transform = "translateX(130px)";
 }
@@ -126,7 +126,7 @@ function display_reply(id){
 
 /*QnA section */
 //for questions
-function open_save_cancel_btn(){
+function open_save_cancel_btn_for_question(){
     document.querySelector(".btn_sec").style.display='block';
 }
 
@@ -218,7 +218,16 @@ function checkout() {
                     <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
                     <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
                     <li><a href="">Sell</a></li>
-                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
+                    <?php if(!isset($_SESSION['user_id'])) {
+                      ?>
+                      <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>
+                      <?php
+                    }else{
+                      ?>
+                      <li><a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="user_home"></i></i>Log out</a></li>
+                    <?php
+                    }?>
+                        
                 </ul>
             </nav>
             <hr class="home_hr">
@@ -531,7 +540,7 @@ minusButton.addEventListener('click', () => {
                         <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span>
                         <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn()" name="comment"  required/>
                     </div>
-                    <div class="btn">
+                    <div  class="btn">
                         <button type="submit" class="cancelbtn" value="cancel" onclick="clear_comment()">Cancel</button>
                         <button type="submit" class="commentbtn" name="commentbtn" onclick="save_comment()">Comment</button>
                     </div>
@@ -560,7 +569,7 @@ minusButton.addEventListener('click', () => {
               </div>
 
                 <!--Reply form-->
-              <div id="reply_form-<?php echo $comment->comment_id ?>" class="reply_form">
+                <div id="reply_form-<?php echo $comment->comment_id ?>" class="reply_form">
                     <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_reply?product_id=<?php echo $product_id?>&comment_id=<?php echo $comment->comment_id?>">
                         <span id="user-<?php echo $comment->comment_id?>" class="user-reply"><?php echo ucfirst($_SESSION['username'][0])?></span>
                         <input type="text" class="reply-body" placeholder="Add a reply" id="reply-body-(<?php echo $comment->comment_id?>)" onclick="open_save_cancel_btns(<?php echo $comment->comment_id?>)" name="reply"  required/>
@@ -570,6 +579,7 @@ minusButton.addEventListener('click', () => {
                         </div>
                     </form>
                 </div>
+              
 
                 <!--display_reply-->
                 <div class="display_reply_all" id="display_reply_all-<?php echo $comment->comment_id?>">
@@ -610,7 +620,7 @@ minusButton.addEventListener('click', () => {
                         }
                         ?>
                         
-                        <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btns_in_answer()" name="question"  required/>
+                        <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn_for_question()" name="question"  required/>
                     </div>
                     <div class="btn_sec">
                         <button type="submit" class="cancelbtn" value="cancel" onclick="clear_question()">Cancel</button>
@@ -669,7 +679,7 @@ minusButton.addEventListener('click', () => {
                           <?php
                         }
                     ?>
-                        <input type="text" class="answer-body" placeholder="Add a answer" id="reply-body-(<?php echo $question->question_id?>)" onclick="open_save_cancel_btns(<?php echo $question->question_id?>)" name="answer"  required/>
+                        <input type="text" class="answer-body" placeholder="Add a answer" id="reply-body-(<?php echo $question->question_id?>)" onclick="open_save_cancel_btns_in_answer(<?php echo $question->question_id?>)" name="answer"  required/>
                         <div id="ans_btn_sec-<?php echo $question->question_id?>" class="ans_btn_sec">
                             <button type="submit"  class="cancel" id="cancelbtn-<?php echo $question->question_id?>" value="cancel" onclick="clear_reply()">Cancel</button>
                             <button class="" type="submit" class="commentbtn" id="commentbtn-<?php echo $question->question_id?>" name="replybtn" onclick="save_reply() " value="<?php echo $question->question_id?>">Reply</button> 
@@ -716,5 +726,4 @@ minusButton.addEventListener('click', () => {
 <div id="footer">
   <?php require APPROOT . '/views/Users/component/footer.php' ?>
 </div>
-
 

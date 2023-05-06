@@ -191,7 +191,12 @@ function setColor($type){
 
             <?php endforeach;}
             else{
-                echo $data['search_result_message'];
+                // echo $data['search_result_message'];
+                echo '<img src=".././public/images/search.png"   alt="no_result_found_Picture" id="search_result_image"/>';
+                 ?>
+                 
+                 <h1 id="topic_not_found">Result Not Found</h1>
+                 <?php
             }?>
             
 

@@ -331,12 +331,16 @@ else if($_SESSION['user_flag'] == 5){
                                                 <div class="other_detail">
                                                         <i class="fa-solid fa-reply-all" id="reply" onclick="open_l2_replyform(<?php echo $discussion_reply-> reply_id?>)"></i><span class="button_discription" id="reply_discription">Reply</span>
                                                         <br>
-                                                        <?php if($_SESSION['user_id']== $discussion_reply->reply_user_id OR $_SESSION['user_flag'] == 'Admin'){
+                                                        <?php if($_SESSION['user_id']== $discussion_reply->reply_user_id){
                                                                 ?> 
                                                         <i class="fa-solid fa-pen-to-square" id="edit" onclick="edit_forum_post_reply(<?php echo $discussion_reply-> reply_id?>)"></i><span class="button_discription" id="edit_discription">Edit</span><br>
                                                         <i class="fa-solid fa-trash" id="delete" onclick="reply_delete_popUpOpen(<?php echo $discussion_reply-> reply_id?>)"></i><span class="button_discription" id="delete_discription">Delete</span><br>
                                                 
                                                         <?php
+                                                        }else if($_SESSION['user_flag'] == 1){
+                                                                ?>
+                                                                <i class="fa-solid fa-trash" id="delete" onclick="reply_delete_popUpOpen(<?php echo $discussion_reply-> reply_id?>)"></i><span class="button_discription" id="delete_discription">Delete</span><br>
+                                                                <?php
                                                         }
                                                         ?>
                                                 </div>
@@ -375,7 +379,12 @@ else if($_SESSION['user_flag'] == 5){
                         </div>   <!--new-->    
                         <?php endforeach;}
                         else{
-                                echo $data['display_message'];
+                                // echo $data['display_message'];
+                                echo '<img src=".././public/images/search.png"   alt="no_result_found_Picture" id="search_result_image"/>';
+                                ?>
+                                
+                                <h1 id="topic_not_found">Result Not Found</h1>
+                                <?php
                         }
                         ?>
                         

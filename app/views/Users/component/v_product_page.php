@@ -10,7 +10,15 @@
                     <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
                     <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
                     <li><a href="">Sell</a></li>
-                    <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>    
+                    <?php if(!isset($_SESSION['user_id'])) {
+                      ?>
+                      <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>
+                      <?php
+                    }else{
+                      ?>
+                      <li><a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="user_home"></i></i>Log out</a></li>
+                    <?php
+                    }?>  
                 </ul>
             </nav>
             <hr class="home_hr">
