@@ -222,3 +222,29 @@ function  popUpOpen(stmt){
     
 });
 }
+
+
+
+(document.querySelector("#add_to_cart_btn")).addEventListener('click',(e)=>{
+
+    let product_id = e.target.dataset.productId;
+    let quantity = document.querySelector("#existing_quantity_value").innerText;
+    quantity == 0 ? (quantity = 1 ): (quantity = int(quantity));
+    let xhr =  new XMLHttpRequest();
+    xhr.open('UPDATE',`http://localhost/Sobawitha/cart/update/${product_id}/${quantity}`);
+    xhr.onload = function(){
+        if(xhr.status == 200){
+            let stmt = "Product added to the cart Successfully";
+            popUpOpen(stmt);
+        }
+        else{
+            console.log((xhr.status).toString());
+        }
+    }
+
+
+
+    xhr.send();
+
+}
+)

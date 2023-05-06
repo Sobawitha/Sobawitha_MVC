@@ -1278,9 +1278,10 @@ dialog button:hover {
   top: 30%;
   left: 40%;
   transform: translate(-50%, -50%);
-  background-color: #e0d9d9;
+  background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border:none;
+  box-shadow: 0 2px 8px rgba(179, 175, 175, 0.3);
   padding: 20px;
   z-index: 999;
 }

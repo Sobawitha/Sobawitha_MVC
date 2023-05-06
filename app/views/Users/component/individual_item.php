@@ -466,7 +466,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
   }
   ?>
       <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
-      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn">Add to Cart</button></a>
+      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn" data-product-id = "<?php echo $content->Product_id ?>">Add to Cart</button></a>
 
 <?php
 }else{?>
