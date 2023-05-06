@@ -11,47 +11,60 @@
 }
 
 #flash-message {
-    padding: 10px;
+    padding: 20px 40px;
     position: fixed;
-    top: 0;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, 0);
+  
     z-index: 1000;
+
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+ 
   }
   
   #flash-message.show {
     opacity: 1;
   }
   
+
+    #flash-message .flash-loading {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: 8px solid #fff;
+        border-radius: 50%;
+        margin-right: 10px;
+        animation: flash-loading 1s ease-in-out infinite;
+    }
   .flash-text {
     display: inline-block;
     margin-right: 10px;
     font-weight: bold;
+    
   }
   
-  .flash-loading {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 3px solid rgba(0, 0, 0, 0.3);
-    animation: flash-loading 1s ease-in-out infinite;
-  }
-  
+ 
   #flash-message:not(.flash-error) {
-    background-color: #36f47f;
-    color: black;
+    background-color: #32CD32;
+    color: white;
   }
   
   #flash-message:not(.flash-error) .flash-loading {
-    border-color: #fff;
+    border-color: white;
   }
   
+
+
+  .flash-error {
+    background-color: #ff0000;
+   
+  }
   .flash-error .flash-text {
     color: white;
-    background-color: red;
+    
+  
   }
 
 

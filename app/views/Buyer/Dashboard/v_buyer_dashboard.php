@@ -125,7 +125,7 @@ fetch('<?php echo  URLROOT ?>/Buyer_dashboard/fertilizer_type_donut_chart')
     var myChart2 =  new Chart(ctx2, {
        type:'doughnut',
        data:{
-         
+            
         labels: type,
          datasets:[{
 

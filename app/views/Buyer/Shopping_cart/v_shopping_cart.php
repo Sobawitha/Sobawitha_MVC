@@ -33,23 +33,18 @@ if ($_SESSION['user_flag'] == 1) {
          
 
 
-<?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
-   
-  <div id="flash-message" >
-        <div class="flash-text">Order was successful .Check your email for information </div>
-        <div class="flash-loading"></div>
-    </div>
-
+  <?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
+   <div id="flash-message" class="flash-success">
+      <div class="flash-text">Your order was successful. Check your email for information.</div>
+      <div class="flash-loading"></div>
+   </div>
 <?php elseif(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'failure'): ?>
-     
-    <div id="flash-message" class = "flash-error">
-        <div class="flash-text">Order was unsuccessful Try Again</div>
-        <div class="flash-loading"></div>
-    </div>
+   <div id="flash-message" class="flash-error">
+      <div class="flash-text">Sorry, your order was unsuccessful. Please try again.</div>
+      <div class="flash-loading"></div>
+   </div>
 <?php unset($_SESSION['order_status']); ?>
 <?php endif; ?>
-
-
 
 
 
@@ -135,25 +130,21 @@ let val1 =  document.getElementById('increment');
 let val2 =  document.getElementById('decrement');
 let dlt = document.getElementById('cancel_order');
 let total_price = document.querySelector('.total_value');
-// Get the flash message element and its child elements
+let flashMessage =  document.getElementById('flash-message');
 
-// var flashText = flashMessage.querySelector(".flash-text");
-// var flashLoading = flashMessage.querySelector(".flash-loading");
+if (flashMessage) {
+  // Select the elements within the flash message element
+  var flashText = flashMessage.querySelector('.flash-text');
+  var flashLoading = flashMessage.querySelector('.flash-loading');
 
-// Set the time for the message to disappear
+  // Show the flash message by adding the "show" class
+  flashMessage.classList.add('show');
 
-
-// Show the message and loading animation
-// flashMessage.classList.add("show");
-
-
-// // Wait for the specified time and then hide the message
-// setTimeout(function(){
-//   flashMessage.classList.remove("show");
-// }, hideTime);
-
-
-
+  // Wait for the specified time and then hide the message
+  setTimeout(function(){
+    flashMessage.classList.remove('show');
+  }, 5000);
+}
 
 
 
@@ -162,7 +153,7 @@ dlt.addEventListener("click",function(e) {
     let id =  e.target.getAttribute("data-id");
     console.log(id);
     let  xhr  = new XMLHttpRequest();
-    xhr.open('GET', `http://localhost/Sobawitha_MVC/cart/delete/${id}`);
+    xhr.open('GET', `http://localhost/Sobawitha/cart/delete/${id}`);
     xhr.onload = function() {
              
         if (xhr.status === 200)
@@ -216,7 +207,7 @@ val1.addEventListener('click', function(e) {
        }
        
        let xhr =  new XMLHttpRequest();
-       xhr.open('GET',`http://localhost/Sobawitha_MVC/cart/updateQuantity/${val}/${prod_id}`);
+       xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
        xhr.onload =  function(){
 
         if(xhr.readyState == 4 && xhr.status == 200)
@@ -263,7 +254,7 @@ val2.addEventListener('click',function(e) {
     
 
    let xhr  = new XMLHttpRequest();
-   xhr.open('GET',`http://localhost/Sobawitha_MVC/cart/updateQuantity/${val}/${prod_id}`);
+   xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
 
    xhr.onload =  function() {
 

@@ -7,7 +7,7 @@ cart_adder.addEventListener("click", function(e) {
     let id =  e.target.closest('.wishlist-item').querySelector('#remove').getAttribute("data-id");
     console.log(id);
     let  xhr  = new XMLHttpRequest();
-    xhr.open('GET', "http://localhost/Sobawitha_MVC/wishlist/addToCart/"+encodeURIComponent(id));
+    xhr.open('GET', "http://localhost/Sobawitha/wishlist/addToCart/"+encodeURIComponent(id));
     xhr.onload = function() {
              
         if (xhr.status === 200 && xhr.readyState === 4)

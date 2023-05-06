@@ -149,7 +149,7 @@ class cart extends Controller
 
 public function createOrder()
 {     
-      $orderData = $_GET["line_items"];
+      $orderData = $_GET['line_items'];
       $orderData = urldecode($orderData);
       $orderData = json_decode($orderData, true);
       if(isset($_SESSION['user_id']))
