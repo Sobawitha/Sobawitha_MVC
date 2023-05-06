@@ -1268,3 +1268,59 @@ nav{
   color:red;
   display:none;
 }
+
+dialog button:hover {
+  background-color: #3e8e41;
+}
+
+#my-dialog {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  background-color: #e0d9d9;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 999;
+}
+
+#my-dialog p {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#dialog-close-button {
+  display: block;
+  margin: 0 auto;
+  background-color: #0077ff;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease-in-out;
+  width: 100px;
+}
+
+#dialog-close-button:hover {
+  background-color: #005ce6;
+}
+
+#open-dialog-button {
+  background-color: #0077ff;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#open-dialog-button:hover {
+  background-color: #005ce6;
+}
+

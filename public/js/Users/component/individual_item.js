@@ -3,6 +3,9 @@
 
 
 
+
+
+
 function reset_sections(){
     var related_item = document.getElementById("toggle_section_1");
     var comment = document.getElementById("toggle_section_2");
@@ -129,4 +132,93 @@ function display_answers(id){
         document.getElementById(`display_all_answers-${id}`).style.display='none';
         document.getElementById(`display_answer_btn_icon-${id}`).innerHTML=document.getElementById(`arrow_up-${id}`).innerHTML;
     }
+}
+
+
+
+
+
+function editWishlist(){
+
+  let heart_icon = document.getElementById('add_wishlist_heart');
+  let productID =  heart_icon.dataset.productId;
+  if(heart_icon.classList.contains('fa-solid')){
+    heart_icon.classList.remove('fa-solid');
+    heart_icon.classList.add('fa-regular');
+ // Get the product ID from the data attribute of the heart icon
+
+
+// Send an AJAX request to delete the product from the wishlist
+var xhr = new XMLHttpRequest();
+xhr.open('DELETE', `http://localhost/Sobawitha/wishlist/delete/${productID}`);
+xhr.onload = function() {
+  if (xhr.status === 200) {
+    // Reload the page or update the UI to reflect the removed product
+    let stmt = "Product removed from the wishlist"
+    popUpOpen(stmt);
+
+    // Close the dialog box when the close button is clicked
+   
+}else {
+    // Handle errors
+    console.log((xhr.status).toString())
+
+  }
+};
+xhr.send();
+
+}
+
+else{
+    heart_icon.classList.remove('fa-regular');
+    heart_icon.classList.add('fa-solid');
+    // Send an AJAX request to add the product to the wishlist
+var xhr = new XMLHttpRequest();
+xhr.open('POST', `http://localhost/Sobawitha/wishlist/addToWishlist/${productID}`);
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        // Reload the page or update the UI to reflect the added product
+        let stmt = "Product added to the wishlist"
+        popUpOpen(stmt);
+        
+        // Close the dialog box when the close button is <clicked>  </clicked>
+
+
+
+}
+else{
+    // Handle errors
+    console.log((xhr.status).toString());
+
+}
+
+}
+
+xhr.send();
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+function  popUpOpen(stmt){
+    
+    const dialog = document.querySelector('#my-dialog');
+
+    dialog.showModal();
+
+    document.querySelector('#my-dialog p').innerHTML = stmt;
+     const dialogCloseButton = document.querySelector('#dialog-close-button');
+     dialogCloseButton.addEventListener('click', () => {
+     dialog.close();
+        
+    
+});
 }

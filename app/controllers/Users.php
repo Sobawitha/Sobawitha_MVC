@@ -302,7 +302,7 @@
                  }
         
                     
-                     $result =  $this->sellerAdModel->customized_query($query);
+                        $result =  $this->sellerAdModel->customized_query($query);
                      
                  
         

@@ -78,7 +78,7 @@ search_input.addEventListener("keyup", (e) => {
       }
 
   }).then(response => response.json()).then(data =>
-    {
+    {  console.log(data);
        let html = '<li>Search Results</li>';
        let html2 ='';
         if(data.length > 0){
@@ -86,7 +86,8 @@ search_input.addEventListener("keyup", (e) => {
             html += `
             
             <a href="http://localhost/Sobawitha/Users/product_page/${data[i].product_id}">
-             <li>${data[i].product_name}</li>
+             <li>${data[i].product_name}&nbsp(${data[i].manufacturer})${data[i].price}</li>
+
             </a>
             `
 
@@ -185,7 +186,6 @@ viewMore.addEventListener("click", () =>{
 function getFilter(testingCriteria){
 let tests= [];
 const checkboxes = document.querySelectorAll(testingCriteria);
-console.log(checkboxes);
 
 
 for (let i = 0; i < checkboxes.length; i++) {
@@ -232,13 +232,13 @@ function filterProducts() {
 
      if(this.readyState == 4 && this.status == 200){
         {
-              console.log(this.responseText);
+              
               var results =  JSON.parse(this.responseText);
 
                 var html = '';
 
                if(results.length > 0){
-                console.log(results.length);
+                 console.log(results)
                 for (let i = 0; i < results.length; i++) {
 
 
