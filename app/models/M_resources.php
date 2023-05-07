@@ -207,13 +207,11 @@ class M_resources
 
     public function post_reply($data){
 
-        $this->db->query('INSERT INTO comment_reply (reply, comment_id, user_id, post_id, user_first_name, user_last_name) VALUES (:reply, :comment_id, :user_id, :post_id, :first_name, :last_name) ');
+        $this->db->query('INSERT INTO comment_reply (reply, comment_id, user_id, post_id) VALUES (:reply, :comment_id, :user_id, :post_id) ');
         $this->db->bind(":reply", $data['reply']);
         $this->db->bind(":comment_id", $data['comment_id']);
         $this->db->bind(":user_id", $data['user_id']);
         $this->db->bind(":post_id", $data['post_id']);
-        $this->db->bind(":first_name", $data['first_name']);
-        $this->db->bind(":last_name", $data['last_name']);
 
         //execute the query
         if($this->db->execute()){
@@ -225,13 +223,13 @@ class M_resources
     }
 
     public function display_all_comment($data){
-        $this->db->query('SELECT  comment_id, comment_user_id, comment, comment_date, first_name, last_name, reply_id, reply, reply_comment_id, reply_user_id, reply_date, user_first_name, user_last_name, count(reply_id) as no_of_reply FROM view_comment_reply WHERE comment_post_id=:postid group by(comment_id)');
+        $this->db->query('SELECT  comment_id, comment_user_id, comment, comment_date, first_name, last_name, reply_id, reply, reply_comment_id, reply_user_id, reply_date, reply_user_first_name, reply_user_last_name, count(reply_id) as no_of_reply FROM view_comment_reply WHERE comment_post_id=:postid group by(comment_id)');
         $this->db->bind(":postid", $data['resource_id']);
         return $this->db->resultSet();
     }
 
     public function display_all_comment_for_reply($data){
-        $this->db->query('SELECT  comment_id, comment_user_id, comment, comment_date, first_name, last_name, reply_id, reply, reply_comment_id, reply_user_id, reply_date, user_first_name, user_last_name  FROM view_comment_reply WHERE comment_post_id=:postid');
+        $this->db->query('SELECT  comment_id, comment_user_id, comment, comment_date, first_name, last_name, reply_id, reply, reply_comment_id, reply_user_id, reply_date, reply_user_first_name, reply_user_last_name  FROM view_comment_reply WHERE comment_post_id=:postid');
         $this->db->bind(":postid", $data['resource_id']);
         return $this->db->resultSet();
     }
@@ -305,6 +303,18 @@ class M_resources
         else{
             return false;
         }
+    }
+
+    public function get_profile_detail($id){
+        $this->db->query('SELECT * FROM user WHERE user_id = :id');
+        $this->db->bind (":id", $id);
+        return $this->db->resultset();
+    }
+
+    public function find_user_id($post_id){
+        $this->db->query('select officer_id as user_id from blogpost where post_id = :post_id');
+        $this->db->bind(":post_id",$post_id);
+        return $this->db->single();
     }
 
 

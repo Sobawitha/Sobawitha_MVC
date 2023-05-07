@@ -197,9 +197,9 @@ else if($_SESSION['user_flag'] == 5){
                                             if ($reply_for_comment->comment_id == $comment->comment_id) {?>
 
                                                 <div class="reply_section">
-                                                <span id="user-<?php echo $reply_for_comment->reply_id?>" class="user-reply"><?php echo ucfirst(($reply_for_comment->user_first_name[0]))?></span>
+                                                <span id="user-<?php echo $reply_for_comment->reply_id?>" class="user-reply"><?php echo ucfirst(($reply_for_comment->reply_user_first_name[0]))?></span>
                                                 <div class="display_reply">
-                                                    <P class="name"> <?php echo $reply_for_comment->user_first_name, " ",$reply_for_comment->user_last_name," "?><span class="publish_date"><?php echo $reply_for_comment->reply_date?></span></P>
+                                                    <P class="name"> <?php echo $reply_for_comment->reply_user_first_name, " ",$reply_for_comment->reply_user_last_name," "?><span class="publish_date"><?php echo $reply_for_comment->reply_date?></span></P>
                                                     
 
                                                     <form id="edit_reply_content" method="POST" action="<?php echo URLROOT?>/resources/edit_reply?reply_id=<?php echo $reply_for_comment->reply_id?>"> 

@@ -39,7 +39,7 @@
     }
 
     public function calculate_total($id){
-        $this->db->query("SELECT sum(quantity*price) as total_income from view_seller_orders WHERE owner_id = :user_id GROUP BY order_id");
+        $this->db->query("SELECT round(sum(quantity*price)*95/100,2) as total_income from view_seller_orders WHERE owner_id = :user_id GROUP BY order_id");
         $this->db->bind(":user_id", $id);
         return $this->db->single();
     }
@@ -86,7 +86,7 @@
     }
 
     public function get_stock_details($start_from,$num_per_page){
-        $this->db->query("SELECT fertilizer.product_id, fertilizer.product_name, fertilizer.quantity, product_starting_stock.quantity as supplied_quantity from fertilizer left join product_starting_stock on fertilizer.product_id = product_starting_stock.product_id where created_by = :id limit :start_from, :num_per_page");
+        $this->db->query("SELECT fertilizer.product_id, fertilizer.product_name, fertilizer.quantity, fertilizer_product_starting_stock.quantity as supplied_quantity from fertilizer left join fertilizer_product_starting_stock on fertilizer.product_id = fertilizer_product_starting_stock.product_id where created_by = :id limit :start_from, :num_per_page");
         $this->db->bind(":start_from", $start_from);
         $this->db->bind(":num_per_page", $num_per_page);
         $this->db->bind(":id", $_SESSION['user_id']);

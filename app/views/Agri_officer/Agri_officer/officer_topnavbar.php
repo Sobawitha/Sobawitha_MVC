@@ -41,7 +41,7 @@ $current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HO
     </div>
     </div>
 
-    <span class="site_name_nav" id="part_a_nav"><i class="fa-solid fa-leaf" id="leaf1"></i></i>SOBA</span><span id="part_b_nav">WITHA</span>
+    <span class="site_name_nav" id="part_a_nav">SOBA</span><span id="part_b_nav">WITHA</span>
     <div class="nav-link">
       <a href="<?php echo URLROOT?>/AgriOfficer/profile" class="<?php if ($current_url === URLROOT.'/AgriOfficer/updateProfile' || $current_url === URLROOT.'/AgriOfficer/profile' || $current_url === URLROOT.'/Users/changePW') echo 'active'; ?>">Profile</a>
       <a href="<?php echo URLROOT?>/dashboard/officer_dashboard" class="<?php if ($current_url === URLROOT.'/dashboard/officer_dashboard') echo 'active'; ?>">Dashboard</a>

@@ -86,21 +86,21 @@
                 <div class="chart">
                     <h2>Income change (Past 12 month)</h2><br>
                     <div>
-                    <canvas id="lineChart"></canvas>   
+                    <canvas id="barchart"></canvas>   
                     </div>
                 </div>
 
-                <div class="chart" id="doughnut-chart">
+                <div class="chart" id="pie-chart">
                     <h2>Order status</h2><br>
                     <div>
-                        <canvas id="doughnut"></canvas>
+                        <canvas id="piechart"></canvas>
                     </div>
                 </div>
 
                 
 <script>
                 /* donut chart */
-                fetch('<?php echo URLROOT ?>/seller_dashboard/order_status_donut_chart')
+                fetch('<?php echo URLROOT ?>/supplier_dashboard/order_status_donut_chart')
                     .then(response => response.json())
                     .then(result => {
                         console.log(result); // Check the data in console
@@ -115,9 +115,9 @@
                             });
 
                             // create chart after fetching data
-                            var ctx2 = document.getElementById('doughnut').getContext('2d');
+                            var ctx2 = document.getElementById('piechart').getContext('2d');
                             var myChart2 = new Chart(ctx2, {
-                                type: 'doughnut',
+                                type: 'pie',
                                 data: {
                                     labels: status, // Corrected from categories to status
                                     datasets: [{
@@ -126,14 +126,12 @@
                                         backgroundColor: [
                                             '#deeaee',
                                             '#9bf4d5',
-                                            '#346357',
-                                            '#c94c4c'
+                                           
                                         ],
                                         borderColor: [
                                             '#deeaee',
                                             '#9bf4d5',
-                                            '#346357',
-                                            '#c94c4c'
+                                            
                                         ],
                                         borderWidth: 1
                                     }]
@@ -145,8 +143,8 @@
 
                             // resize chart on window resize
                             $(window).resize(function() {
-                                var width = $('#doughnut').width();
-                                var height = $('#doughnut').height();
+                                var width = $('#piechart').width();
+                                var height = $('#piechart').height();
                                 myChart2.canvas.width = width;
                                 myChart2.canvas.height = height;
                                 myChart2.resize();
@@ -162,7 +160,7 @@
 
                 
                     /*line chart */
-                    fetch('<?php echo URLROOT ?>/seller_dashboard/income_linechart')
+                    fetch('<?php echo URLROOT ?>/supplier_dashboard/income_linechart')
                     .then(response => response.json())
                     .then(result => {
                         console.log('result'); // Check the data in console
@@ -177,9 +175,9 @@
                             });
 
                             // create chart after fetching data
-                            var ctx2 = document.getElementById('lineChart').getContext('2d');
+                            var ctx2 = document.getElementById('barchart').getContext('2d');
                             var myChart2 = new Chart(ctx2, {
-                                type: 'line',
+                                type: 'bar',
                                 data: {
                                     labels: month,
                                     datasets: [{
@@ -201,8 +199,8 @@
 
                             // resize chart on window resize
                             $(window).resize(function() {
-                                var width = $('#lineChart').width();
-                                var height = $('#lineChart').height();
+                                var width = $('#barchart').width();
+                                var height = $('#barchart').height();
                                 myChart1.canvas.width = width;
                                 myChart1.canvas.height = height;
                                 myChart1.resize();
@@ -227,8 +225,9 @@
             <div class="chartsLevel3">
               
                 <div class="chart">
-                    <h2>Forum Topics</h2><br>
+                    <h2>Stock details</h2><br>
                     <div>
+                        <?php if(!empty($data['stock_details'])){?>
                         <table class="forum_post_detail_table">
                             <tr>
                                 <th>#</th>
@@ -237,8 +236,6 @@
                                 <th>Soled</th>
                                 <th>Available</th>
                             </tr><?php 
-
-                            if(!empty($data['stock_details'])){
                             foreach($data['stock_details'] as $stock_details):
                                 ?>
                             <tr>
