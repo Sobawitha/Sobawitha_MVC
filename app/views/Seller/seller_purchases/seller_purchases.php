@@ -3,6 +3,29 @@
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_Sidebar.php'?>
 
+
+<dialog  id="rating_popup">
+<i class="fa-solid fa-xmark" id="close" ></i>
+<span class="user_icon"><i class="fa-solid fa-user-pen"></i></span>
+<i class="fa-solid x-mark" id="close"></i>
+<h4>Rate your experince</h4>
+<form method="POST" action="<?php echo URLROOT ?>/seller_purchses/review_product">
+<div class="stars">
+  <i class="fa-regular fa-star" data-value="1" id="star"></i>
+  <i class="fa-regular fa-star" data-value="2" id="star"></i>
+  <i class="fa-regular fa-star" data-value="3" id="star"></i>
+  <i class="fa-regular fa-star" data-value="4" id="star"></i>
+  <i class="fa-regular fa-star" data-value="5" id="star"></i>
+</div>
+
+<br><br>
+<textarea placeholder="Add a comment to your rating..." id="rating_comment"></textarea>
+<br><br>
+<button type="submit" id="rating_submit">Send Rating</button>
+</form>
+</dialog>
+
+
 <body >
 
 <div class="body">
@@ -28,11 +51,11 @@
             </div>
             </form>
 
-            <!-- <select name="time_period" id="time_period">
-            <option value="last_7_days">Last 7 Days</option>
-            <option value="last_month">Last Month</option>
-            <option value="last_year" >Last Year</option>
-            </select> -->
+            <select name="time_period" id="time_period">
+                <option value="last_7_days">Last 7 Days</option>
+                <option value="last_month">Last Month</option>
+                <option value="last_year" >Last Year</option>
+            </select>
         </span>
 
 
@@ -42,27 +65,27 @@
 
         <table class="sp_view_list_table">
                 <tr class="table_head">
-                        <td>#</td>
-                        <td>Image</td>
-                        <td>Item</td>
-                        <td>Quantity</td>
-                        <td>Date</td>
-                        <td>Price(Per item)</td>
-                        <td></td>
-                        <td></td>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Date</th>
+                        <th>Price(Per item)</th>
+                        <th></th>
                 </tr>
 
                 <?php foreach($data['purchase_list'] as $purchase):?>
 
                 <tr class="sp_view">
                         <div class="sp_view_detail">
-                                <td><span class="no"><?php echo  $purchase-> purchase_id?></span></td>
-                                <td><span class="image"><td><img src="./../public/upload/raw_material_images/<?php echo $purchase-> raw_material_image?>" alt="raw_material_image"  id="raw_material_image"></td></span></td>
-                                <td><span class="item"><?php echo  $purchase-> product_name?></span></td>
-                                <td><span class="quantity"><?php echo  $purchase-> quantity?></span></td>
-                                <td><span class="price"><?php echo  $purchase-> price?></span></td>
-                                <td id="review">
-                                <i class="fa-solid fa-handshake"></i>&nbsp;&nbsp;Review
+                                <th><span class="no" id="row_data"><?php echo  $purchase-> purchase_id?></span></th>
+                                <th><span class="image" id="row_data"><img src="./../public/upload/raw_material_images/<?php echo $purchase-> raw_material_image ?>" alt="raw_material_image"  id="raw_material_image"></span></th>
+                                <th><span class="item" id="row_data"><?php echo  $purchase-> product_name?></span></th>
+                                <th><span class="quantity" id="row_data"><?php echo  $purchase-> quantity?></span></th>
+                                <th><span class="date" id="row_data"><?php $timestamp = strtotime($purchase->date);$date = date('Y-m-d', $timestamp); echo $date ?></span></th>
+                                <th><span class="price" id="row_data"><?php echo  $purchase-> price?></span></th>
+                                <th id="review">
+                                <i class="fa-solid fa-handshake" onclick="rating_popup_open(<?php echo $purchase-> purchase_id ?>)"></i>&nbsp;&nbsp;Review
                                 </td>
                         </div>
                 </tr>
@@ -80,12 +103,37 @@
                 
                 
         </div>
+
+
 </div>
+
+
 
 
 <?php require APPROOT.'/views/Users/component/footer.php'?>
 
+<script>
+        function rating_popup_open(id){
+                const rating_popup = document.getElementById('rating_popup')
+                document.getElementById('close').addEventListener('click',() => rating_popup.close());
+                rating_popup.showModal();
+        }
 
+        const stars = document.querySelectorAll(".stars i");
+
+        stars.forEach(star => {
+        star.addEventListener("click", () => {
+        star.classList.toggle("checked");
+        if (star.classList.contains("checked")) {
+        star.classList.replace("fa-regular", "fa-solid");
+        } else {
+        star.classList.replace("fa-solid", "fa-regular");
+        }
+        });
+        });
+
+
+</script>
 
 
 

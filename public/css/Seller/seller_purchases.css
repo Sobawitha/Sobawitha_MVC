@@ -57,14 +57,26 @@
   
   .filter_section{
     display:grid;
-    grid-template-columns: 100% 0%;
+    grid-template-columns: 75% 25%;
     
   }
 
-  /* #time_period{
-    width:150px;
+  #time_period{
+    width:180px;
     height:40px;
-  } */
+    transform: translate(80px, 30px);
+    font-weight:bold;
+    color:white;
+    background-color: black;
+    padding:10px;
+    border-radius:5px;
+  }
+
+  .quantity{
+    border-radius:40px;
+    padding:4px 10px;
+    border:1px solid salmon;
+  }
   /*sm_view_list*/
   
   .sp_view_list{
@@ -86,6 +98,11 @@
   tr{
     height:60px;
   }
+
+  #row_data{
+    font-weight:normal;
+    text-decoration: none;
+  }
   
   .sp_view{
     font-size: 14px;
@@ -101,46 +118,71 @@
   }
   
  #raw_material_image{
-    width:75px;
+    width:80px;
     height:75px;
+    padding:5px 5px 5px 5px;
  }
   
-  
-  .value{
-    border:1px solid rgb(225, 200, 200);
-    border-radius:40px;
-    padding:4px 6px;
-    margin-left:10px;
-    font-weight:bold;
-  }
-  
-  #more_detail{
-   transform: translate(260%, 80%);
-   color:rgb(145, 126, 126);
-   cursor:pointer;
-  }
-  
-  /*filter_section*/
-  
-  .sp_filter_section{
-    padding-top:30px;
-    font-size:13px;
-    font-weight: bold;
-    color:rgb(174, 169, 128);
-  }
-  
-  #sp_filter_label{
-    margin-right:20px;
-  }
-  
-  #sp_filter_label:hover{
+  #review{
+    color:rgb(8, 66, 48);
     cursor:pointer;
   }
   
-  input[type=radio]{
-    accent-color: crimson;
+  
+  /*review popup*/
+  
+  #rating_popup{
+     width:300px;
+    height:380px;
+    margin-top:150px;
+    text-align: center;
+    padding:20px;
+    border: none;
+  }
+
+  #rating_comment{
+    font-size:12px;
+    height:100px;
+  }
+
+  #rating_submit{
+    background-color: black;
+    color:white;
+    font-weight:bold;
+    width:120px;
+    height:40px;
+  }
+
+  .user_icon{
+    padding:10px 10px 10px 15px;
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.15), 
+    0px 4px 8px rgba(0,0,0,0.15), 
+    0px 8px 16px rgba(0,0,0,0.15), 
+    0px 16px 32px rgba(0,0,0,0.15);
+    color:salmon;
+    font-size:20px;
+  }
+
+  .stars{
+    color:salmon;
+    cursor:pointer;
+  }
+
+  #rating_submit{
+    cursor:pointer;
+  }
+
+  #close{
+    margin-left:100%;
+    transform: translate(-10px,0px);
+    cursor:pointer;
+  }
+
+  .fa-star.checked {
+    color: salmon;
   }
   
-  .delete{
-    font-size:12px;
-  }

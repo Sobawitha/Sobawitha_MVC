@@ -123,7 +123,7 @@
             }
             else if($flag==4){
                 $_SESSION['position'] = "Supplier";
-                redirect('dashboard/supplier_dashboard');
+                redirect('supplier_dashboard/supplier_dashboard');
             }
             else if($flag==5){
                 $_SESSION['position'] = "Agri-officer";
