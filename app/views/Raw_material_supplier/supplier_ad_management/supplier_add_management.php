@@ -93,7 +93,21 @@
 
                                         <td><span class="certificate No<"><?php echo $ad->quantity ?></span></td>
 
-                                        <td><span class="manufacture"><?php echo $ad->product_description ?></span></td>
+                                        <td>
+                                                <span class="manufacture">
+                                                        <?php
+                                                        $words = explode(" ", $ad->product_description);
+                                                        if(count($words) < 50){
+                                                                echo $ad->product_description;
+                                                        }else{
+                                                                for($count=0; $count<50; $count++ ){
+                                                                        echo $words[$count]." ";
+                                                                }
+                                                                echo "...";
+                                                        }
+                                                        ?>
+                                                </span>
+                                        </td>
 
 
                                         <td id="option">

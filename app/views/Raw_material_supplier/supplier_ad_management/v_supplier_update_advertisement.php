@@ -74,7 +74,7 @@
 
                   <div class="input-box">
                     <span class="details">Type</span>
-                    <input type="text" placeholder="" required>
+                    <input type="text" name="type" placeholder="" value="<?php echo $data['type']; ?>" required>
                   </div>
                   <div class="input-box available-quantity">
                     <span class="details">Available quantity</span>
