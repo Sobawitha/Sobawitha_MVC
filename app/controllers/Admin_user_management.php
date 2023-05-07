@@ -228,7 +228,7 @@
         if($this->adminUserMngtModel->addAgri($data)){
             //   flash('post_msg', 'add new admin successfully');
                 $flag =2;
-                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd']);
+                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd'],'','');
                 redirect('Admin_user_management/view_all_users'); 
         }else{
             die('Error creating');
@@ -490,7 +490,7 @@
         if($this->adminUserMngtModel->addAdmin($data)){
             //   flash('post_msg', 'add new admin successfully');
                 $flag =2;
-                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd']);
+                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd'],'','');
                 redirect('Admin_user_management/view_all_users'); 
         }else{
             die('Error creating');
@@ -639,14 +639,27 @@
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $filter_type = trim($_POST['user_type']);
-            $_SESSION['radio_admin_user'] = $filter_type; // set session variable for filter type
+            
+            if(isset($_POST['user_type'])){
+                $filter_type = trim($_POST['user_type']); 
+                $_SESSION['radio_admin_role'] = $filter_type; 
+                }
+    
+            // $filter_type = trim($_POST['user_type']);
+            // $_SESSION['radio_admin_user'] = $filter_type; // set session variable for filter type
              
             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
             $offset = ($current_page - 1) * $records_per_page;
 
-            $users = $this->adminUserMngtModel->display_all_users($_SESSION['radio_admin_user'],$records_per_page, $offset); //data object array
-             
+            // $users = $this->adminUserMngtModel->display_all_users($_SESSION['radio_admin_user'],$records_per_page, $offset); //data object array
+            
+            
+            if(!empty($filter_type)){
+                $users = $this->adminUserMngtModel->display_all_users($_SESSION['radio_admin_role'], $records_per_page, $offset);
+                }else{
+                  $users = $this->adminUserMngtModel->display_all_users('', $records_per_page, $offset);
+                }
+
             $total_records = $users['row_count'];
             $total_pages = ceil($total_records / $records_per_page);
             
@@ -692,7 +705,7 @@
             $offset = ($current_page - 1) * $records_per_page; 
 
             $_SESSION['radio_admin_user']='all';
-            $users = $this->adminUserMngtModel->display_all_users($_SESSION['radio_admin_user'],$records_per_page, $offset  ); //data object array
+            $users = $this->adminUserMngtModel->display_all_users($_SESSION['radio_admin_role'],$records_per_page, $offset  ); //data object array
             
             $total_records = $users['row_count'];
             $total_pages = ceil($total_records / $records_per_page);

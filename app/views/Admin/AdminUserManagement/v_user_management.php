@@ -41,30 +41,30 @@
                         <label for="all" id="filter_label"> <input type="radio" id="all" name="user_type"  onclick="javascript:submit()" value = "all" <?php
                          if (isset($_POST['user_type']) && $_POST['user_type'] == 'all') {
                             echo ' checked="checked"';
-                            $_SESSION['radio_admin_user'] = 'all';
+                            $_SESSION['radio_admin_role'] = 'all';
                          }elseif(!isset($_POST['user_type'])){
                           echo 'checked';
-                          $_SESSION['radio_admin_comp'] = 'all';
+                          $_SESSION['radio_admin_role'] = 'all';
                          } ?> checked>All Users</label>
 
 
                         <br><label for="admins" id="filter_label"> <input type="radio" id="admins" name="user_type" value="admins" onclick="javascript:submit()"  value = "admins"<?php 
                         if (isset($_POST['user_type']) && $_POST['user_type'] == 'admins') {
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'admins';
+                          $_SESSION['radio_admin_role'] = 'admins';
                         }elseif(!isset($_POST['user_type']) && isset($_GET['user_type']) && $_GET['user_type'] == 'admins'){
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'admins';
+                          $_SESSION['radio_admin_role'] = 'admins';
                         }
                           ?>>Admins</label>
                         
                         <br><label for="customers" id="filter_label"> <input type="radio" id="customers" name="user_type" value="customers" onclick="javascript:submit()"  value = "customers"<?php 
                         if (isset($_POST['user_type']) && $_POST['user_type'] == 'customers') {
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'customers';
+                          $_SESSION['radio_admin_role'] = 'customers';
                         }elseif(!isset($_POST['user_type']) && isset($_GET['user_type']) && $_GET['user_type'] == 'customers'){
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'customers';
+                          $_SESSION['radio_admin_role'] = 'customers';
                         }
                           ?>>Customers</label>
                         
@@ -72,10 +72,10 @@
                         <br><label for="sellers" id="filter_label"> <input type="radio" id="sellers" name="user_type" value="sellers" onclick="javascript:submit()"  value = "sellers"<?php 
                         if (isset($_POST['user_type']) && $_POST['user_type'] == 'sellers') {
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'sellers';
+                          $_SESSION['radio_admin_role'] = 'sellers';
                         }elseif(!isset($_POST['user_type']) && isset($_GET['user_type']) && $_GET['user_type'] == 'sellers'){
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'sellers';
+                          $_SESSION['radio_admin_role'] = 'sellers';
                         }
                           ?>>Sellers</label>
 
@@ -83,20 +83,20 @@
                         <br><label for="suppliers" id="filter_label"> <input type="radio" id="suppliers" name="user_type" value="suppliers" onclick="javascript:submit()"  value = "suppliers"<?php 
                         if (isset($_POST['user_type']) && $_POST['user_type'] == 'suppliers') {
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'suppliers';
+                          $_SESSION['radio_admin_role'] = 'suppliers';
                         }elseif(!isset($_POST['user_type']) && isset($_GET['user_type']) && $_GET['user_type'] == 'suppliers'){
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'suppliers';
+                          $_SESSION['radio_admin_role'] = 'suppliers';
                         }
                           ?>>Suppliers</label>
                         
                         <br><label for="agris" id="filter_label"> <input type="radio" id="agris" name="user_type" value="agris" onclick="javascript:submit()"  value = "agris"<?php 
                         if (isset($_POST['user_type']) && $_POST['user_type'] == 'agris') {
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'agris';
+                          $_SESSION['radio_admin_role'] = 'agris';
                         }elseif(!isset($_POST['user_type']) && isset($_GET['user_type']) && $_GET['user_type'] == 'agris'){
                           echo ' checked="checked"';
-                          $_SESSION['radio_admin_user'] = 'agris';
+                          $_SESSION['radio_admin_role'] = 'agris';
                         }
                           ?>>Agri-Officers</label>
                                      
@@ -239,19 +239,19 @@
 <?php if ($data['pagination']['total_pages'] > 1) : ?>
 <div class="pagination">
    <?php if ($data['pagination']['current_page'] > 1) : ?>
-       <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_user']; ?>">Previous</a>
+       <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>">Previous</a>
    <?php endif; ?>
 
    <?php for ($i = 1; $i <= $data['pagination']['total_pages']; $i++) : ?>
        <?php if ($i == $data['pagination']['current_page']) : ?>
            <span class="current-page"><?php echo $i; ?></span>
        <?php else : ?>
-           <a href="?page=<?php echo $i; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_user']; ?>"><?php echo $i; ?></a>
+           <a href="?page=<?php echo $i; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>"><?php echo $i; ?></a>
        <?php endif; ?>
    <?php endfor; ?>
 
    <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']) : ?>
-       <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&feed_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_user']; ?>">Next</a>
+       <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>">Next</a>
    <?php endif; ?>
 </div>
 <?php endif; ?>

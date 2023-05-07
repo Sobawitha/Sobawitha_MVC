@@ -1,11 +1,30 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_sidebar.php'?>
-<link rel="stylesheet" href="../css/seller/seller_ad_management.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/seller/seller_ad_management.css"></link>
 <script src="../js/Seller/AdManage/add_advertisment.js"></script>
 
 
 <body >
+        <dialog id="deletePopup">
+                <div class="deletePopup">
+                        <div class="delete_dialog_heading">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                        <h2>Are you sure</h2>
+                        <p>You will not be able to recover that item.</p>
+                        </div>
+
+                        <div class="dialog_content">
+
+                            <form method="POST" action="<?php echo URLROOT?>/seller_ad_management/delete_advertisment">
+                            <input id="fer_current_status" type="hidden" name="current_status"></input>
+                            <button id="deletebtn" type="submit" name="deleteadvertisment">Delete</button>
+                            <button id="cancelbtn" onclick="closepopup()" type="button">Cancel</button>
+                            </form>
+                            
+                        </div>
+                </div>
+        </dialog>
 
 <div class="body">
         <div class="section_1">
@@ -87,31 +106,14 @@
 
 
                                         <td id="option">
+                                        
 
-                                        <a href="<?php echo URLROOT?>/seller_ad_management/Update_advertisment?fertilizer_id=<?php echo $pending_fertilizer_advertisement->Product_id ?>" class="edit"><i class="fa-solid fa-pen-to-square" ></i></a>
-                                                
-                                                
-                                                <span id="delete"><i class="fa-solid fa-trash-can" onclick="popUpOpen(<?php echo $pending_fertilizer_advertisement->Product_id ?>)"></i></span>
 
-                                                <dialog id="deletePopup">
-                                                        <div class="deletePopup">
-                                                                <div class="delete_dialog_heading">
-                                                                <i class="fa-regular fa-circle-xmark"></i>
-                                                                <h2>Are you sure</h2>
-                                                                <p>You will not be able to recover this image</p>
-                                                                </div>
-
-                                                                <div class="dialog_content">
-                                                                <form method="POST" action="<?php echo URLROOT?>/seller_ad_management/delete_advertisment">
-                                                                <button id="deletebtn" type="submit" value="" name="deleteadvertisment">Delete
-                                                                </button>
-                                                                <button id="cancelbtn" type="button">Cancel
-                                                                </button>
-                                                                </form>
-                                                                </div>
-                                                        </div>
-                                                </dialog>
+                                        <a href="<?php echo URLROOT?>/seller_ad_management/Update_advertisment_page?fertilizer_id=<?php echo $pending_fertilizer_advertisement->Product_id ?>" class="edit"><i class="fa-solid fa-pen-to-square" ></i></a>
                                                 
+                                        <span id="delete"><i class="fa-solid fa-trash-can" onclick="popUpOpen(<?php echo $pending_fertilizer_advertisement->Product_id?>,<?php echo $pending_fertilizer_advertisement->current_status?>)"></i></span>
+
+                
                                         </td>
                                 </div>
 

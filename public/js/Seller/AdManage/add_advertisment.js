@@ -17,12 +17,17 @@ function open_cancel_btn(){
   }
 
 
-function popUpOpen(id) {
+function popUpOpen(id,current_status) {
     const deletePopup = document.getElementById('deletePopup')
-  //   document.getElementById('delete').addEventListener('click',() => deletePopup.showModal());
 
-  document.getElementById('cancelbtn').addEventListener('click',() => deletePopup.close());
   deletePopup.showModal();
   document.getElementById('deletebtn').value=id;
+  document.getElementById('fer_current_status').value=current_status;
+
   
+}
+
+function closepopup() {
+  const deletePopup = document.getElementById('deletePopup')
+  deletePopup.close();
 }

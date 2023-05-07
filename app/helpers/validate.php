@@ -223,8 +223,6 @@ function validateBirthDate($birthDate) {
   return true;
 }
 
-
-
 /*for agri officer */
 function validate_title_for_blogpost($title) {
   // Check if the last name only contains letters
