@@ -27,8 +27,13 @@
             // }
 
             $data = [
-                'image' => '',
-                'image_name' => $post->raw_material_image,
+                'image1' => '',
+                'image_name1' => $post->raw_material_image,
+                'image2' => '',
+                'image_name2' => $post->rm_image_two,
+                'image3' => '',
+                'image_name3' => $post->rm_image_three,
+                
                 'product_id' => $productId,
                 'product_name' => $post->product_name,
                 'price' => $post->price,

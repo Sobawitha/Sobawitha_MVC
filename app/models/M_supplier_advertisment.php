@@ -79,9 +79,11 @@ class M_supplier_advertisment
 
 
     public function create($data) {
-        $this->db->query('INSERT INTO raw_material(product_name, quantity, price, product_description, type, raw_material_image, user_id, current_status) VALUES (:product_name, :quantity, :price, :product_description, :type, :image, :user_id, :current_status)');
+        $this->db->query('INSERT INTO raw_material(product_name, quantity, price, product_description, type, raw_material_image, rm_image_two, rm_image_three, user_id, current_status) VALUES (:product_name, :quantity, :price, :product_description, :type, :image1, :image2, :image3, :user_id, :current_status)');
         $this->db->bind(':user_id', $_SESSION['user_id']);
-        $this->db->bind(':image', $data['image_name']);
+        $this->db->bind(':image1', $data['image_name1']);
+        $this->db->bind(':image2', $data['image_name2']);
+        $this->db->bind(':image3', $data['image_name3']);
         // $this->db->bind(':product_id', $data['Product_id']);
         $this->db->bind(':product_name', $data['product_name']);
         $this->db->bind(':quantity', $data['quantity']);
@@ -105,8 +107,10 @@ class M_supplier_advertisment
     }
 
     public function edit($data) {
-        $this->db->query('UPDATE raw_material SET raw_material_image = :image, product_name = :product_name, quantity=:quantity, price=:price, product_description=:product_description, type=:type WHERE Product_id = :id');
-        $this->db->bind(':image', $data['image_name']);
+        $this->db->query('UPDATE raw_material SET raw_material_image = :image1, rm_image_two = :image2, rm_image_three = :image3, product_name = :product_name, quantity=:quantity, price=:price, product_description=:product_description, type=:type WHERE Product_id = :id');
+        $this->db->bind(':image1', $data['image_name1']);
+        $this->db->bind(':image2', $data['image_name2']);
+        $this->db->bind(':image3', $data['image_name3']);
         $this->db->bind(':product_name', $data['product_name']);
         $this->db->bind(':quantity', $data['quantity']);
         $this->db->bind(':price', $data['price']);

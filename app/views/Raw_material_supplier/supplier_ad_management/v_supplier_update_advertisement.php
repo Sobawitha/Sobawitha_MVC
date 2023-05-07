@@ -17,19 +17,52 @@
               <form action="<?php echo URLROOT;?>/supplier_ad_management/update_advertisement/<?php echo $data['product_id']; ?>" method="POST" enctype="multipart/form-data">
 
                 <div class="advertisment-details">
-                  <div class="post-image">
-                    <?php if($data['image_name'] != null): ?>
-                      <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $data['image_name']; ?>" alt="" id="image_placeholder">
-                    <?php else: ?>
-                      <img src="" alt="" id="image_placeholder" style="display: none;">
-                    <?php endif; ?>
+                  <div class="image_container">
+                    
+                    <div class="post-image1">
+                      <?php if($data['image_name1'] != null): ?>
+                        <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $data['image_name1']; ?>" alt="" id="image_placeholder1">
+                      <?php else: ?>
+                        <img src="" alt="" id="image_placeholder1" style="display: none;">
+                      <?php endif; ?>
+                    </div>
+                    <div class="right1">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn1" onclick="toggleBrowse1()">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn1" style="display:none;" onclick="removeImage1()">
+                        <input type="text" name="intentially_removed1" id="intentially_removed1" style="display: none;" readonly>
+                        <input type="file" name="image1" id="image1" style="display: none;">
+                    </div>
+
+                    <div class="post-image2">
+                      <?php if($data['image_name2'] != null): ?>
+                        <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $data['image_name2']; ?>" alt="" id="image_placeholder2">
+                      <?php else: ?>
+                        <img src="" alt="" id="image_placeholder2" style="display: none;">
+                      <?php endif; ?>
+                    </div>
+                    <div class="right2">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn2" onclick="toggleBrowse2()">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn2" style="display:none;" onclick="removeImage2()">
+                        <input type="text" name="intentially_removed2" id="intentially_removed2" style="display: none;" readonly>
+                        <input type="file" name="image2" id="image2" style="display: none;">
+                    </div>
+
+                    <div class="post-image3">
+                      <?php if($data['image_name3'] != null): ?>
+                        <img src="<?php echo URLROOT;?>/img/postsImgs/<?php echo $data['image_name3']; ?>" alt="" id="image_placeholder3">
+                      <?php else: ?>
+                        <img src="" alt="" id="image_placeholder3" style="display: none;">
+                      <?php endif; ?>
+                    </div>
+                    <div class="right3">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn3" onclick="toggleBrowse3()">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn3" style="display:none;" onclick="removeImage3()">
+                        <input type="text" name="intentially_removed3" id="intentially_removed3" style="display: none;" readonly>
+                        <input type="file" name="image3" id="image3" style="display: none;">
+                    </div>
+
                   </div>
-                  <div class="right">
-                      <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn" onclick="toggleBrowse()">
-                      <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn" style="display:none;" onclick="removeImage()">
-                      <input type="text" name="intentially_removed" id="intentially_removed" style="display: none;" readonly>
-                      <input type="file" name="image" id="image" style="display: none;">
-                  </div>
+                  
 
 
 
@@ -158,4 +191,4 @@
 
 
 <!-- javascript for posts -->
-<script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/components/posts/posts.js" ></script>
+<script type="text/JavaScript" src="<?php echo URLROOT;?>/public/js/Raw_material_supplier/ad_management/ad_update.js" ></script>

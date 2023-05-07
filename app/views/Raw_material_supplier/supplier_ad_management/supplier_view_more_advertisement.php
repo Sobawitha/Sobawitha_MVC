@@ -43,13 +43,13 @@ $content = $data['adcontent'];
 
       <div class="image-container">
         <div class="main_image">
-          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>" onclick="switchImages()" id="main-image">
+          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name1']; ?>" onclick="switchImages()" id="main-image">
         </div>
 
         <div class="thumbnail-images">
-          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>')">
-          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>')">
-          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>')">
+          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name1']; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name1']; ?>')">
+          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name2']; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name2']; ?>')">
+          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name3']; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name3']; ?>')">
         </div>
 
         <div id="myModal" class="modal">

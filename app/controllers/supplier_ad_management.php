@@ -47,8 +47,12 @@
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'image' => $_FILES['image'],
-                'image_name' => time().'_'.$_FILES['image']['name'],
+                'image1' => $_FILES['image1'],
+                'image_name1' => time().'_'.$_FILES['image1']['name'],
+                'image2' => $_FILES['image2'],
+                'image_name2' => time().'_'.$_FILES['image2']['name'],
+                'image3' => $_FILES['image3'],
+                'image_name3' => time().'_'.$_FILES['image3']['name'],
 
                 'product_name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
@@ -58,7 +62,9 @@
                 'current_status' => 0,
                 // 'raw_material_image' => trim($_POST['image']),
                 
-                'image_err' => '',
+                'image_err1' => '',
+                'image_err2' => '',
+                'image_err3' => '',
                 'product_name_err' => '',
                 'price_err' => '',
                 'quantity_err' => '',
@@ -67,17 +73,45 @@
             ];
 
             //validation
-            if($data['image']['size'] > 0) {
-                if(uploadImage($data['image']['tmp_name'], $data['image_name'], '/img/postsImgs/')) {
+            if($data['image1']['size'] > 0) {
+                if(uploadImage($data['image1']['tmp_name'], $data['image_name1'], '/img/postsImgs/')) {
                     //done
                 }
                 else {
-                    $data['image_err'] = 'Unsuccessful image uploading';
+                    $data['image_err1'] = 'Unsuccessful image uploading';
                 }
             }
             else {
-                $data['image_name'] = null;
+                $data['image_name1'] = null;
             }
+
+            //validation
+            if($data['image2']['size'] > 0) {
+                if(uploadImage($data['image2']['tmp_name'], $data['image_name2'], '/img/postsImgs/')) {
+                    //done
+                }
+                else {
+                    $data['image_err2'] = 'Unsuccessful image uploading';
+                }
+            }
+            else {
+                $data['image_name2'] = null;
+            }
+
+            //validation
+            if($data['image3']['size'] > 0) {
+                if(uploadImage($data['image3']['tmp_name'], $data['image_name3'], '/img/postsImgs/')) {
+                    //done
+                }
+                else {
+                    $data['image_err3'] = 'Unsuccessful image uploading';
+                }
+            }
+            else {
+                $data['image_name3'] = null;
+            }
+
+
 
             if(empty($data['product_name'])) {
                 $data['product_name_err'] = 'Please enter a product_name';
@@ -115,8 +149,12 @@
         }
         else{
             $data = [
-                'image' => '',
-                'image_name' => '',
+                'image1' => '',
+                'image_name1' => '',
+                'image2' => '',
+                'image_name2' => '',
+                'image3' => '',
+                'image_name3' => '',
                 'product_name' => '',
                 'price' => '',
                 'quantity' => '',
@@ -124,7 +162,9 @@
                 'type' => '',
                 'raw_material_image' => '',
 
-                'image_err' => ''
+                'image_err1' => '',
+                'image_err2' => '',
+                'image_err3' => '',
                 // 'product_name_err' => '',
                 // 'price_err' => '',
                 // 'quantity_err' => '',
@@ -153,8 +193,13 @@
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'image' => $_FILES['image'],
-                'image_name' => time().'_'.$_FILES['image']['name'],
+                'image1' => $_FILES['image1'],
+                'image_name1' => time().'_'.$_FILES['image1']['name'],
+                'image2' => $_FILES['image2'],
+                'image_name2' => time().'_'.$_FILES['image2']['name'],
+                'image3' => $_FILES['image3'],
+                'image_name3' => time().'_'.$_FILES['image3']['name'],
+
                 'product_id' => $productId,
                 'product_name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
@@ -163,7 +208,9 @@
                 'type' => trim($_POST['type']),
                 // 'raw_material_image' => trim($_POST['image']),
                 
-                'image_err' => '',
+                'image_err1' => '',
+                'image_err2' => '',
+                'image_err3' => '',
                 'product_name_err' => '',
                 'price_err' => '',
                 'quantity_err' => '',
@@ -173,22 +220,58 @@
 
             //validation
             $post = $this->supplier_ad->getPostById($productId);
-            $oldImage = PUBROOT.'/img/postsImgs/'.$post->raw_material_image;
+            $oldImage1 = PUBROOT.'/img/postsImgs/'.$post->raw_material_image;
+            $oldImage2 = PUBROOT.'/img/postsImgs/'.$post->rm_image_two;
+            $oldImage3 = PUBROOT.'/img/postsImgs/'.$post->rm_image_three;
 
             //photo updated
             //user haven't changed the existing image
-            if($_POST['intentially_removed'] == 'removed') {
-                deleteImage($oldImage);
 
-                $data['image_name'] = '';
+            // For image one
+            if($_POST['intentially_removed1'] == 'removed') {
+                deleteImage($oldImage1);
+
+                $data['image_name1'] = '';
             }
             else {
-                if($_FILES['image']['name'] == '') {
+                if($_FILES['image1']['name'] == '') {
 
-                    $data['image_name'] = $post->raw_material_image;
+                    $data['image_name1'] = $post->raw_material_image;
                 }
                 else {
-                    updateImage($oldImage, $data['image']['tmp_name'], $data['image_name'], '/img/postsImgs/');
+                    updateImage($oldImage1, $data['image1']['tmp_name'], $data['image_name1'], '/img/postsImgs/');
+                }
+            }
+
+            // For image two
+            if($_POST['intentially_removed2'] == 'removed') {
+                deleteImage($oldImage2);
+
+                $data['image_name2'] = '';
+            }
+            else {
+                if($_FILES['image2']['name'] == '') {
+
+                    $data['image_name2'] = $post->rm_image_two;
+                }
+                else {
+                    updateImage($oldImage2, $data['image2']['tmp_name'], $data['image_name2'], '/img/postsImgs/');
+                }
+            }
+
+            // For image three
+            if($_POST['intentially_removed3'] == 'removed') {
+                deleteImage($oldImage3);
+
+                $data['image_name3'] = '';
+            }
+            else {
+                if($_FILES['image3']['name'] == '') {
+
+                    $data['image_name3'] = $post->rm_image_three;
+                }
+                else {
+                    updateImage($oldImage3, $data['image3']['tmp_name'], $data['image_name3'], '/img/postsImgs/');
                 }
             }
 
@@ -235,8 +318,13 @@
             // }
 
             $data = [
-                'image' => '',
-                'image_name' => $post->raw_material_image,
+                'image1' => '',
+                'image_name1' => $post->raw_material_image,
+                'image2' => '',
+                'image_name2' => $post->rm_image_two,
+                'image3' => '',
+                'image_name3' => $post->rm_image_three,
+                
                 'product_id' => $productId,
                 'product_name' => $post->product_name,
                 'price' => $post->price,

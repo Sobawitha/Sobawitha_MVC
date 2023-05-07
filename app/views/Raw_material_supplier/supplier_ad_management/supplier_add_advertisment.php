@@ -5,6 +5,11 @@
 <?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
 <link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_advertisment.css"></link>
+
+<!-- <script src="../js/Raw_material_supplier/ad_management/ad_add.js"></script> -->
+
+
+
 <div class="body">
     <div class="section_1">
 
@@ -17,14 +22,42 @@
               <form action="<?php echo URLROOT ?>/supplier_ad_management/add_advertisment" method="POST" enctype="multipart/form-data">
 
                 <div class="advertisment-details">
-                  <div class="post-image">
-                    <img src="" alt="" id="image_placeholder" style="display: none;">
+                  <div class="image_container">
+
+                    <div class="post-image1">
+                      <img src="" alt="" id="image_placeholder1" style="display: none;">
+                    </div>
+                    <div class="right1">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn1" onclick="toggleBrowse1()">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn1" style="display:none;" onclick="removeImage1()">
+                        <input type="file" name="image1" id="image1" style="display: none;">
+                    </div>
+                    
+                    <div class="post-image2">
+                      <img src="" alt="" id="image_placeholder2" style="display: none;">
+                    </div>
+                    <div class="right2">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn2" onclick="toggleBrowse2()">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn2" style="display:none;" onclick="removeImage2()">
+                        <input type="file" name="image2" id="image2" style="display: none;">
+                    </div>
+                    
+                    <div class="post-image3">
+                      <img src="" alt="" id="image_placeholder3" style="display: none;">
+                    </div>
+                    <div class="right3">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn3" onclick="toggleBrowse3()">
+                        <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn3" style="display:none;" onclick="removeImage3()">
+                        <input type="file" name="image3" id="image3" style="display: none;">
+                    </div>
+
                   </div>
-                  <div class="right">
-                      <img src="<?php echo URLROOT; ?>/img/components/posts/browse-image.png" alt="" id="addImagebtn" onclick="toggleBrowse()">
-                      <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn" style="display:none;" onclick="removeImage()">
-                      <input type="file" name="image" id="image" style="display: none;">
-                  </div>
+                  
+
+
+
+
+
 
                   <!-- <input type="file"></input> -->
                   <br><br>
@@ -146,6 +179,6 @@
 
 
 <!-- javascript for posts -->
-<script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/components/posts/posts.js" ></script>
+<script type="text/JavaScript" src="<?php echo URLROOT; ?>/js/Raw_material_supplier/ad_management/ad_add.js" ></script>
 
 
