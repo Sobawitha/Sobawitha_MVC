@@ -29,7 +29,6 @@ $current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HO
         <li class="<?php if (strpos($current_url, URLROOT.'/seller_buy') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/"><i class="fa-solid fa-cart-shopping"></i></i>&nbsp;&nbsp;Buy Raw-materials</a></li> 
         <li class="<?php if (strpos($current_url, URLROOT.'/seller_feedback') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/seller_feedback/view_all_feed"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;Feedbacks</a></li> 
         <li class="<?php if (strpos($current_url, URLROOT.'/complaint') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/complaint/display_all_complaint"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;Complaints</a></li> 
-        <li class="<?php if (strpos($current_url, URLROOT.'/seller_payment') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/seller_payment/view_payment"><i class="fa-solid fa-coins"></i></i>&nbsp;&nbsp;Payments</a></li> 
     </ul>
 </div>
 
