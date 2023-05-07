@@ -90,7 +90,11 @@ ongoing_orders.addEventListener('click',() =>
 }).then((response) => response.json()).then((data) => {
     
     let rows = '';
+   
     data.forEach((order) => {
+
+      let URL  =  `http://localhost/Sobawitha/purchase/generatePDF.php?order_id=${order.order_id}`
+      ;
       rows += `
         <tr class="order">
           <td><span class="p_name">${order.product_name}</span></td>
@@ -99,7 +103,7 @@ ongoing_orders.addEventListener('click',() =>
           <td><span class="price">${order.date}</span></td>
          
           <td>
-            <a href="/pdf/view-order?id=${order.order_id}&type=buyer" class="link">View Order</a>
+            <a href="${URL}" class="link">View Order</a>
           </td>
         </tr>
       `;
