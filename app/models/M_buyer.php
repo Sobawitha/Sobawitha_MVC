@@ -199,5 +199,31 @@ return false;
       
     
 
+      public function getOrderDetails($no){
+      
+       $this->db->query("SELECT fertilizer.*,order_items.quantity,orders.created_at,orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS seller_name
+FROM fertilizer
+INNER JOIN order_items
+ON fertilizer.Product_id = order_items.product_id
+INNER JOIN orders
+ON order_items.order_id = orders.order_id
+
+INNER JOIN user
+ON fertilizer.created_by =  user.user_id
+
+WHERE orders.status = :no AND orders.cust_id = :user_id");
+         $this->db->bind(":no",$no);
+         $this->db->bind(":user_id",41);
+         $result = $this->db->resultSet();
+         if($this->db->rowCount() > 0){
+              return $result;
+         }
+         else{
+              return false;
+         }
+    }
+
+
+
  } 
 ?>

@@ -16,8 +16,48 @@ public function   __construct()
 
 }
 
+public function getTotalReviews(){
+
+  $this->db->query("SELECT COUNT()");
 
 
+}
+
+
+public function getTotalPurchases(){
+
+
+  $this->db->query('SELECT COUNT(Product_id) as total_completed_orders FROM orders WHERE status = 1 AND created_at BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()');
+     
+  $row= $this->db->single();
+
+  if($this->db->rowCount() >0){
+        return $row;
+  }
+  else
+  {
+        return false;
+  }
+
+
+}
+
+
+
+
+
+public function getTotalPurchasesTotal(){
+
+
+
+
+
+
+
+
+
+  
+}
 public function  fertilizer_type_donut_chart()
 {
 

@@ -41,7 +41,7 @@
                     <i class="fa-sharp fa-solid fa-circle-info" id="demo"  onclick=()></i>
                 </div>
             </div>
-
+<!-- 
             <div class='card' id="card3">
                 <div class='content'>
                     <p class="count">10</p>
@@ -61,7 +61,7 @@
 
                     <i class="fa-sharp fa-solid fa-circle-info" id="demo" onclick=()></i>
                 </div>
-            </div>
+            </div> -->
 
             <div class='card' id="card1">
                 <div class='content'>
