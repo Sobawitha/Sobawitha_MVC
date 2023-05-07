@@ -163,28 +163,40 @@ else if($_SESSION['user_flag'] == 5){
                                                 <?php
                                                 $post_time = $forum_discussion->date;
                                                 $dateTime = DateTime::createFromFormat('Y-m-d H:i:s', $post_time);
-
+                                                
                                                 // Current timestamp
-                                                $current_time = time();
-
+                                                $current_time =  date('Y-m-d H:i:s', time());
+                                                $current_time = '2023-05-07 05:29:21';
+                                                
                                                 // Calculate the difference between the two timestamps
-                                                $time_diff = date_diff($dateTime, date_create("@$current_time"));
-
+                                                $time_diff = date_diff($dateTime, new DateTime($current_time));
+                                                
                                                 // Output the time difference
                                                 if ($time_diff->y > 0) {
-                                                        $time_difference = $time_diff->y . " year(s) ago";
+                                                    $time_difference = $time_diff->y . " year(s) ago";
                                                 } elseif ($time_diff->m > 0) {
-                                                        $time_difference = $time_diff->m . " month(s) ago";
+                                                    $time_difference = $time_diff->m . " month(s) ago";
                                                 } elseif ($time_diff->d > 0) {
-                                                        $time_difference = $time_diff->d . " day(s) ago";
+                                                    $time_difference = $time_diff->d . " day(s) ago";
                                                 } elseif ($time_diff->h > 0) {
-                                                        $time_difference = $time_diff->h . " hour(s) ago";
+                                                    $time_difference = $time_diff->h . " hour(s) ago";
                                                 } elseif ($time_diff->i > 0) {
-                                                        $time_difference = $time_diff->i . " minute(s) ago";
+                                                    $time_difference = $time_diff->i . " minute(s) ago";
                                                 } else {
-                                                        $time_difference = "just now";
+                                                    $time_difference = "just now";
                                                 }
+                                                
+                                                // Output the result
+                                                echo print_r($dateTime);
+                                                echo print_r($current_time);
+                                                echo print_r($time_diff);
+                                                echo $time_difference;
+                                                echo "\n";
+                                                $current_time = time(); // Returns the current time in the format of "hours:minutes:seconds"
+                                                echo date('Y-m-d H:i:s',$current_time); // Prints the current time
 
+                                                die();
+                                                
                                                 ?>
 
                                                 </span><span class="topic"><?php echo $forum_discussion->subject?></span>
@@ -276,6 +288,7 @@ else if($_SESSION['user_flag'] == 5){
 
                                                 // Calculate the difference between the two timestamps
                                                 $time_diff = date_diff($dateTime, date_create("@$current_time"));
+                                              
 
                                                 // Output the time difference
                                                 if ($time_diff->y > 0) {
