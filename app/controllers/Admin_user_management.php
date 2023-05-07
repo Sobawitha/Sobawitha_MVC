@@ -228,7 +228,7 @@
         if($this->adminUserMngtModel->addAgri($data)){
             //   flash('post_msg', 'add new admin successfully');
                 $flag =2;
-                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd']);
+                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd'],'','');
                 redirect('Admin_user_management/view_all_users'); 
         }else{
             die('Error creating');
@@ -490,7 +490,7 @@
         if($this->adminUserMngtModel->addAdmin($data)){
             //   flash('post_msg', 'add new admin successfully');
                 $flag =2;
-                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd']);
+                sendMail($data['email'],$data['first_name'],'', $flag, $data['email_pwd'],'','');
                 redirect('Admin_user_management/view_all_users'); 
         }else{
             die('Error creating');

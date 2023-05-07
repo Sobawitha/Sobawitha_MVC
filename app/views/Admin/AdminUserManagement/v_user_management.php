@@ -44,7 +44,7 @@
                             $_SESSION['radio_admin_user'] = 'all';
                          }elseif(!isset($_POST['user_type'])){
                           echo 'checked';
-                          $_SESSION['radio_admin_comp'] = 'all';
+                          $_SESSION['radio_admin_user'] = 'all';
                          } ?> checked>All Users</label>
 
 
@@ -251,7 +251,7 @@
    <?php endfor; ?>
 
    <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']) : ?>
-       <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&feed_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_user']; ?>">Next</a>
+       <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_user']; ?>">Next</a>
    <?php endif; ?>
 </div>
 <?php endif; ?>

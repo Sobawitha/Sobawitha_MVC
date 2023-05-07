@@ -111,7 +111,7 @@
   // }
 
   public function view_complaints()
-{
+  {
     $records_per_page = 3;
     
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
