@@ -9,11 +9,8 @@ require_once 'helpers/image_upload_helper.php';
 require_once 'helpers/mail_sender.php';
 require_once 'helpers/validate.php';
 
-
-
 //load configuration files
 require_once 'config/Config.php';
-
 
 //load libraries
 require_once 'libraries/Controller.php';
