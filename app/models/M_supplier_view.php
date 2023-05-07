@@ -1,6 +1,6 @@
 <?php
 
-class M_supplier_advertisment
+class M_supplier_view
 {
     private $db;
 
@@ -9,12 +9,12 @@ class M_supplier_advertisment
         $this->db = new Database();
     }
 
-    public function getPosts() {
+    public function getPostsView() {
         // Check Expired ones
         $this->db->query('UPDATE raw_material SET current_status = 3 WHERE date <= DATE_SUB(NOW(), INTERVAL 2 WEEK)');
         $this->db->execute();
 
-        $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND (date > DATE_SUB(NOW(), INTERVAL 2 WEEK)))');
+        $this->db->query('SELECT * FROM raw_material WHERE (ad_status != 1 AND (date > DATE_SUB(NOW(), INTERVAL 2 WEEK))) AND current_status = 1');
 
         $results = $this->db->resultSet();
 

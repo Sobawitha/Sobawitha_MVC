@@ -1,12 +1,12 @@
 <?php
     class supplier_ad_view extends Controller{
         public function __construct(){
-            $this->supplier_ad = $this->model('M_supplier_advertisment');
+            $this->supplier_ad = $this->model('M_supplier_view');
     }
 
 
     public function index() {
-        $posts = $this->supplier_ad->getPosts();
+        $posts = $this->supplier_ad->getPostsView();
     
         $data = [
             'posts' => $posts
