@@ -705,11 +705,12 @@ form .discription:focus{
 
   /*search result*/
   #search_result_image{
-    width:300px;
-    height:300px;
-    margin-left:300px;
+    width:600px;
+    height:600px;
+    /* margin-left:300px; */
+    transform: translateY(-50px);
 }
 
 #topic_not_found{
-    transform: translateX(300px);
+    /* transform: translateX(300px); */
 }
