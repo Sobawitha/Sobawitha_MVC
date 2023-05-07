@@ -2,6 +2,9 @@
     class users extends Controller {
         private $userModel;
         private $loginModel;
+        private $sellerAdModel;
+        private $buyerAdModel;
+
         public function __construct(){
             $this-> userModel =$this->model('M_Users');
             $this-> loginModel =$this->model('M_Login');
@@ -476,6 +479,25 @@
         }
     }
     
+
+    public function help_center(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $email = "sobawitha@gmail.com";
+            $name = trim($_POST['victim_mail']);
+            $bodyFlag = 8;
+            $more_detail = trim($_POST['content']);
+            $_SESSION['success_msg']='You will get notified by an email shortly';
+
+        sendMail($email, $name,'',$bodyFlag, '','',$more_detail );
+
+            redirect('Pages/home');
+        }else{
+            redirect('Pages/home');
+        }
+
+        
+    }
 
 
 

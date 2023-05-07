@@ -149,3 +149,98 @@ hr{
     color:rgb(230, 160, 19);
     margin-left: 5px;
 }
+
+
+/* Help button */
+
+#openDialog{
+    cursor: pointer;
+    background-color: transparent;
+    color: aliceblue;
+    border-radius: 5px;
+}
+
+
+
+/* help css */
+
+.dialog-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    z-index: 9999;
+  }
+  
+  .dialog-box form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dialog-box label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .dialog-box input[type="email"],
+  .dialog-box textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .dialog-box input[type="email"]:focus,
+  .dialog-box textarea:focus {
+    border-color: #1B1212;
+  }
+  
+  .dialog-box button[type="submit"] {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    background-color: #1B1212;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .dialog-box button[type="submit"]:hover {
+    color: #1B1212;
+    background-color: #fff;
+    border: 1px solid #1B1212;
+  }
+  
+  .dialog-box button.dialog-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    background-color: transparent;
+  }
+  
+  .dialog-box h2.dialog-title {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .dialog-box .dialog-content {
+    height: 200px;
+  }
+    
+  

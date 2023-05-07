@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/home.css"></link>
 <link rel="stylesheet" href="../css/Users/component/home.css"></link>
 <link rel="stylesheet" href="../css/Buyer/wish_list/wish_list.css"></link>
+<script src="../js/Users/Notifications/push_notifications_profile.js"></script>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
 <script>
@@ -54,6 +55,11 @@
         </div>
         
         <div class="discription">
+          <?php if (isset($_SESSION['success_msg'])): ?>
+                <div class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['success_msg']; ?> <div class="progress-bar"></div>
+               </div>
+                <?php unset($_SESSION['success_msg']); ?>
+                <?php endif; ?>
             <p class="main">Find the best places to your trade</p>
             <p class=sub_main>Sobawitha is an online platform driven by agriculture nature by involving more people in their people in their in</p>
             <!-- <form method="POST">
