@@ -27,7 +27,6 @@ $current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HO
         <li class="<?php if (strpos($current_url, URLROOT.'/supplier_ad_management') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/supplier_ad_management/view_advertisment" class=""><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Manage ads</a></li>
         <li class="<?php if (strpos($current_url, URLROOT.'/supplier_ad_view') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/supplier_ad_view/index" class=""><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;View ads</a></li>
         <li class="<?php if (strpos($current_url, URLROOT.'/order') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/order/supplier_order_list" class=""><i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;View orderlist</a></li>
-        <li class="<?php if (strpos($current_url, URLROOT.'/sales') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/sales/sales_list" class=""><i class="fa-solid fa-list"></i>&nbsp;&nbsp;View sales</a></li>
         <li class="<?php if (strpos($current_url, URLROOT.'/complaint') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/complaint/display_all_complaint" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Complaint</a></li>
         <li class="<?php if (strpos($current_url, URLROOT.'/supplier_feedback') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/supplier_feedback/view_all_feed" class=""><i class="fa-regular fa-comments"></i>&nbsp;&nbsp;Feedback</a></li>
         

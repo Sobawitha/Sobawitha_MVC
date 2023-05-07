@@ -7,7 +7,7 @@
                       require '../app/vendor/autoload.php';
                         
 
-               function sendMail($email,$name,$token,$bodyFlag,$password){   
+               function sendMail($email,$name,$token,$bodyFlag,$password,$reason,$more_detail){   
                 
                         // $flag =1 for forgot_password
                         // $flag =2 for send_password_via_email
@@ -137,6 +137,69 @@
                                 </body>
                                 </html>
                                 ";
+                        }else if($bodyFlag == 6){
+                          $mail->Subject = "Ad Rejection Notice from Sobawitha";
+                          
+                          $email_template = "
+                                <html>
+                                <head>
+                                <title></title>
+                                </head>
+                                <body style='font-family: Arial, sans-serif;'>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <span style='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #4CAF50; margin-right: 0.2em;'>SOBA</span><span style ='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #000;'>WITHA</span>
+                                </div>
+                                <div style='padding: 20px;'>
+                                    <h2>Hello $name,</h2>
+                                    <p>We regret to inform you that your ad has been rejected due to the following reason:</p>
+                                    <h3 style='color: #4CAF50;'>$reason</h3>
+                                    <p>More details about the rejection: $more_detail</p>
+                                    <p>Please consider the above feedback and make necessary changes before re-uploading your ad. If you have any questions or concerns, please contact us at <a href='mailto:support@sobawitha.com' style='color: #4CAF50;'>support@sobawitha.com</a>.
+                                    </p>
+                                    <p>Thank you for choosing Sobawitha.</p>
+                                    <p>The Sobawitha Team</p>
+                                </div>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <p>Follow us on <a href='https://twitter.com/Sobawitha' style='color: #4CAF50;'>Twitter</a> | Like us on <a href='https://www.facebook.com/Sobawitha' style='color: #4CAF50;'>Facebook</a></p>
+                                    <p>You are receiving this email because you have submitted an ad to Sobawitha. If you did not submit an ad, please ignore this email.</p>
+                                </div>
+                                </body>
+                                </html>
+                            ";
+
+                          
+
+                        }else if($bodyFlag == 7){
+                          $mail->Subject = "Feedback Rejection Notice from Sobawitha";
+                          
+                          $email_template = "
+                                <html>
+                                <head>
+                                <title></title>
+                                </head>
+                                <body style='font-family: Arial, sans-serif;'>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <span style='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #4CAF50; margin-right: 0.2em;'>SOBA</span><span style ='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #000;'>WITHA</span>
+                                </div>
+                                <div style='padding: 20px;'>
+                                    <h2>Hello $name,</h2>
+                                    <p>We regret to inform you that your feedback has been rejected due to the following reason:</p>
+                                    <h3 style='color: #4CAF50;'>$reason</h3>
+                                    <p>More details about the rejection: $more_detail</p>
+                                    <p>Please consider the above feedback and make necessary changes before resubmitting your feedback. If you have any questions or concerns, please contact us at <a href='mailto:support@sobawitha.com' style='color: #4CAF50;'>support@sobawitha.com</a>.
+                                    </p>
+                                    <p>Thank you for choosing Sobawitha.</p>
+                                    <p>The Sobawitha Team</p>
+                                </div>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <p>Follow us on <a href='https://twitter.com/Sobawitha' style='color: #4CAF50;'>Twitter</a> | Like us on <a href='https://www.facebook.com/Sobawitha' style='color: #4CAF50;'>Facebook</a></p>
+                                    <p>You are receiving this email because you have submitted an ad to Sobawitha. If you did not submit an ad, please ignore this email.</p>
+                                </div>
+                                </body>
+                                </html>
+                            ";
+
+
                         }
                         $mail->Body  =$email_template;
                         $mail->send();
