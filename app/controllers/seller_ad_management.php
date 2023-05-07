@@ -51,7 +51,6 @@
                         'ads' =>  $ads,
                         'search' => "Search by product title",
                         'emptydata' => '',
-                        
                         ]; 
                 }
                 $this->view('Seller/Seller_add_management/v_seller_add_manage', $data);
@@ -177,21 +176,129 @@
 
     public function delete_advertisment(){
         if($_SERVER["REQUEST_METHOD"]== 'POST'){
+            $current_status = trim($_POST["current_status"]);
             $advertisementid = trim($_POST['deleteadvertisment']);
-            $this->seller_ad_management_model->delete_advertisment($advertisementid);
+            $this->seller_ad_management_model->delete_advertisment($advertisementid,$current_status);
         }
 
         redirect('seller_ad_management/View_listing');
     }
 
+    public function Update_advertisment_page(){
+        $id = $_GET['fertilizer_id'];
+
+        if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3){
+            
+            $fertilizer_details = $this->seller_ad_management_model->get_fertilizer_details($id);
+            $data = [
+                'fertilizer_details'=>$fertilizer_details,
+            ];
+            
+            $this->view('Seller/Seller_add_management/v_seller_update_add',$data);
+        }
+    }
+
     public function Update_advertisment(){
-        $fertilizer_id = $_GET['fertilizer_id'];
-        $fertilizer_details = $this->seller_ad_management_model->get_fertilizer_details($fertilizer_id);
-        $data = [
-            'fertilizer_details'=>$fertilizer_details,
-        ];
-        
-        $this->view('Seller/Seller_add_management/v_seller_update_add',$data);
+        $id= $_GET['fertilizer_id'];
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data=[
+                'product_name'=>trim($_POST['product_name']),
+                'crop_type'=>trim($_POST['crop_type']),
+                'registration_no'=>trim($_POST['registration_no']),
+                'manufacturer'=>trim($_POST['manufacturer']),
+                'description'=>trim($_POST['description']),
+                'price'=>trim($_POST['price']),
+                'quantity'=>trim($_POST['quantity']),
+                'type'=>trim($_POST['type']),
+                'current_status'=>0,
+                'images' => $_FILES['images'],
+
+                'fertilizer_image_err' => ''
+            ];
+             
+             // Upload and validate images
+             $imageUploadErrors = [];
+             $imagesUploaded = [];
+ 
+             foreach ($data['images']['name'] as $key => $image) {
+              if ($image) {
+                  $fileExt = explode('.', $image);
+                  $fileActualExt = strtolower(end($fileExt));
+                  $allowed = ['jpg', 'jpeg', 'png'];
+                  if (!in_array($fileActualExt, $allowed)) {
+                      $imageUploadErrors[] = "You cannot upload files of type '$fileActualExt'";
+                      continue;
+                  }
+                  if ($data['images']['size'][$key] > 0) {
+                      // $fileName = trim($_POST['product_name']).'_'.$image;
+                      $fileName = substr(trim($_POST['product_name']), 0, 5) . '_' . $image;
+
+                      if (uploadFile($data['images']['tmp_name'][$key], $fileName, '/upload/fertilizer_images/')) {
+                          $imagesUploaded[] = $fileName;
+                      } else {
+                          $imageUploadErrors[] = "Could not upload image '$fileName'";
+                      }
+                  } else {
+                      $fileName = substr(trim($_POST['product_name']), 0, 5) . '_' . $image;
+                      $imageUploadErrors[] = "Image file size is empty for '$fileName'";
+                  }
+              }
+          }
+          
+          $existingImages = $this->seller_ad_management_model->get_fertilizer_details($id);
+         if(!empty($imagesUploaded)){
+                    // Set data to be added to database
+          $data['image_1'] = isset($imagesUploaded[0]) ? $imagesUploaded[0] : 'default_upload.png';
+          $data['image_2'] = isset($imagesUploaded[1]) ? $imagesUploaded[1] : 'default_upload.png';
+          $data['image_3'] = isset($imagesUploaded[2]) ? $imagesUploaded[2] : 'default_upload.png';
+          $data['image_4'] = isset($imagesUploaded[3]) ? $imagesUploaded[3] : 'default_upload.png';
+          $data['image_5'] = isset($imagesUploaded[4]) ? $imagesUploaded[4] : 'default_upload.png';
+         
+
+         }else{
+          $data['image_1'] = $existingImages -> fertilizer_img;
+          $data['image_2'] = $existingImages -> img_two;
+          $data['image_3'] = $existingImages -> img_three;
+          $data['image_4'] = $existingImages -> img_four;
+          $data['image_5'] = $existingImages -> img_five;; 
+         }
+
+         
+          if(empty($data['fertilizer_image'])){
+              $data['fertilizer_image_err']='fertilizer image cannot be empty';
+          
+          }
+          else{
+              $fileExt=explode('.',$_FILES['fertilizer_img']['name']);
+              $fileActualExt=strtolower(end($fileExt));
+              $allowed=array('jpg','jpeg','png');
+  
+          
+              if(!in_array($fileActualExt,$allowed)){
+              $data['fertilizer_image_err']='You cannot upload files of this type';
+  
+              }
+      
+  
+              if($data['fertilizer_image']['size']>0){
+              if(uploadFile($data['fertilizer_image']['tmp_name'],$data['fertilizer_image_name'],'/upload/fertilizer_images/')){
+                          
+              }else{  
+              $data['fertilizer_image_err']='Unsuccessful image uploading';
+              
+              }
+              }else{
+              $data[ 'fertilizer_image_err'] ="Image file size is empty";
+              
+              }
+  
+          }
+
+            $this->seller_ad_management_model->update_advertisment($data,$id);
+            redirect('seller_ad_management/View_listing');
+        }
     }
 
     public function sellerSearchAd(){
@@ -209,8 +316,6 @@
               'emptydata' => "No listings to Show...",
               
               ];
-       
-          
             }else{
                 $data=[
                     'ads' =>  $ads,

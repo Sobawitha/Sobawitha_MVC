@@ -1,5 +1,5 @@
 <!--sidebar-->
-<link rel="stylesheet" href="../css/Users/component/sidebar.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/sidebar.css"></link>
 <script src="../js/component/sidebar.js"></script> 
 
 <?php
@@ -25,6 +25,7 @@ $current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HO
         <li class="<?php if (strpos($current_url, URLROOT.'/dashboard') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/dashboard/seller_dashboard" class=""><i class="fas fa-table"></i>&nbsp;&nbsp;Dashboard</a></li>
         <li class="<?php if (strpos($current_url, URLROOT.'/forum') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/forum/forum"><i class="fa-brands fa-forumbee"></i>&nbsp;&nbsp;Forum</a></li>
         <li class="<?php if (strpos($current_url, URLROOT.'/seller_ad_management') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/seller_ad_management/View_listing"><i class="fa-solid fa-rectangle-ad"></i>&nbsp;&nbsp;Manage Ads</a></li> 
+        <li class="<?php if (strpos($current_url, URLROOT.'/seller_wishlist') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/seller_wishlist/view_wishlist"><i class="fa-solid fa-heart-circle-check"></i>&nbsp;&nbsp;Wish List</a></li>
         <li class="<?php if (strpos($current_url, URLROOT.'/seller_order_list') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/seller_order_list/view_orders"><i class="fa-sharp fa-solid fa-store"></i>&nbsp;&nbsp;Orders</a></li> 
         <li class="<?php if (strpos($current_url, URLROOT.'/seller_buy') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/"><i class="fa-solid fa-cart-shopping"></i></i>&nbsp;&nbsp;Buy Raw-materials</a></li> 
         <li class="<?php if (strpos($current_url, URLROOT.'/seller_feedback') !== false) echo 'active'; ?>"><a href="<?php echo URLROOT?>/seller_feedback/view_all_feed"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;Feedbacks</a></li> 

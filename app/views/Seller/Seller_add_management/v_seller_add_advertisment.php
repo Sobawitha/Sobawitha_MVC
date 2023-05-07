@@ -61,7 +61,7 @@
 
                   <br><br>
                   <div class="input-box">
-                    <span class="details">Product </span>
+                    <span class="details">Product Name</span>
                     <input type="text" name="product_name" placeholder="Enter name of the product" required>
                   </div>
                   

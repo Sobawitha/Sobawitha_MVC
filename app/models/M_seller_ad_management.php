@@ -6,7 +6,6 @@
         $this->db = new Database();
     }
 
-
     public function add_fertilizer_advertisment($data)
     {
         //  print_r ($data);die();
@@ -73,21 +72,31 @@
             $result=$this->db->resultSet();
             return $result;
         }
-
-
-        
     }
 
+    public function delete_advertisment($advertisementid,$current_status){
 
-    public function delete_advertisment($advertisementid){
-        $this->db->query('DELETE FROM fertilizer WHERE product_id =:advertisementid');
-        $this->db->bind(':advertisementid', $advertisementid);
-        if($this->db->execute()){
-            return true;
+        if($current_status !=1){
+            $this->db->query("DELETE FROM fertilizer WHERE Product_id =:advertisementid");
+            $this->db->bind(':advertisementid', $advertisementid);
+            if($this->db->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         else{
-            return false;
+            $this->db->query("UPDATE fertilizer SET current_status =3 WHERE Product_id =:advertisementid");
+            $this->db->bind(':advertisementid', $advertisementid);
+            if($this->db->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
+        
     }
 
     public function get_fertilizer_details($fertilizer_id){
@@ -114,10 +123,35 @@
     return $result;   
 }
 
-    
-    
+    public function update_advertisment($data,$id)
+    {
+        
+        $this->db->query('UPDATE fertilizer SET product_name = :product_name, quantity = :quantity, manufacturer = :manufacturer, price = :price, product_description = :product_description, registration_no = :registration_no, fertilizer_img = :fertilizer_img,img_two = :img_two, img_three =:img_three, img_four = :img_four, img_five = :img_five, crop_type = :crop_type, current_status= :current_status, type = :type where product_id = :fertilizer_id ');
+
+        $this->db->bind(":fertilizer_id", $id);
+        $this->db->bind(":product_name", $data['product_name']);
+        
+        $this->db->bind(":registration_no", $data['registration_no']);
+        $this->db->bind(":manufacturer", $data['manufacturer']);
+        $this->db->bind(":product_description", $data['description']);
+        $this->db->bind(":price", $data['price']);
+        $this->db->bind(":quantity", $data['quantity']);
+        $this->db->bind(":fertilizer_img", $data['image_1']);
+        $this->db->bind(":img_two", $data['image_2']);
+        $this->db->bind(":img_three", $data['image_3']);
+        $this->db->bind(":img_four", $data['image_4']);
+        $this->db->bind(":img_five", $data['image_5']);
+        $this->db->bind(":crop_type", $data ['crop_type'] );
+        $this->db->bind(":type", $data ['type'] );
+        $this->db->bind(":current_status", $data ['current_status'] );
 
 
-
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
 ?>
