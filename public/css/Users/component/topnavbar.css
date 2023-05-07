@@ -78,6 +78,13 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px 5px #00000031;
   z-index: 4000;
+
+  animation-name: banner-in;
+  animation-direction: forwards;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 
 .dropdown-content a {
@@ -216,4 +223,24 @@ body {
   color:white;
   transform:translate(-25px, -5px);
   position:absolute;
+}
+
+
+/*special style for officer view profile page for others*/
+
+#part_a_nav{
+  position:absolute;
+  color:rgb(72, 69, 69);
+  transform: translate(30px,0px);
+  font-weight:bold;
+}
+#part_b_nav{
+  position:absolute;
+  color:rgb(229, 169, 66);
+  transform: translate(75px,0px);
+  font-weight:bold;
+} 
+
+#leaf1{
+  display:none;
 }

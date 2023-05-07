@@ -167,8 +167,6 @@ class resources extends Controller
                 'post_id'=> $post_id,
                 'reply' => trim($_POST['reply']),
                 'comment_id' => $comment_id,
-                'first_name' => ($_SESSION['username']),
-                'last_name' => ($_SESSION['lastname'])
             ];
 
             if($this->resources_model->post_reply($data)){
@@ -248,6 +246,16 @@ class resources extends Controller
             $this->resources_model->edit_reply($data);
         }
         redirect('resources/view_individual_resource?blog_post_id='.$id.'&category='.$tag);
+    }
+
+    public function officer_view_profile(){
+        $post_id=$_GET['blog_post_id'];
+        $user_id = $this->resources_model->find_user_id($post_id)->user_id;
+        $profile_detail = $this-> resources_model-> get_profile_detail($user_id);
+        $data=[
+            'profile_detail' => $profile_detail,
+        ];
+        $this->view('Agri_officer/Agri_officer/v_officer_view_profile_for_other', $data);
     }
 }
 

@@ -189,7 +189,7 @@ function set_filterbtn_Color($tag){
                             <?php echo '<img src=".././public/upload/blog_post_images/'.$resources->image.'"   alt="card Picture"  class="card_image">';?>
                             <div class='ccontent'>
                                     <div class='header'>
-                                        <a href='' class='uname'><?php echo  $resources->first_name?></a> 
+                                        <a href='<?php echo URLROOT?>/resources/officer_view_profile?blog_post_id=<?php echo  $resources->post_id?>' class='uname'><?php echo  $resources->first_name?></a> 
                                         <span class="<?php echo setColor($resources->tag);?>" id="tag" > <i class='fa fa-tags' aria-hidden='true'></i>&nbsp;&nbsp;<span id="tag_discription-<?php echo $resources->post_id?>"><?php echo $resources->tag ?></span></span></a>                                  
                                     </div>
                                     <div class='card_content'>
@@ -221,7 +221,7 @@ function set_filterbtn_Color($tag){
                 <div class="feed_discription">
                     <i class="fa-regular fa-bookmark" id="feed_card_icon"></i>
                     <p class="topic"> <?php echo $best_resource->title?><span class="feed_category"></p>
-                    <p class="author">By <?php echo $best_resource->first_name?> </p>
+                    <p class="author">By<?php echo $best_resource->first_name?> </p>
                     <p class="feedback"><?php echo $best_resource->no_of_likes?>-Likes <?php echo $best_resource->count_comment?>-comment </p>
                     
                 </div>

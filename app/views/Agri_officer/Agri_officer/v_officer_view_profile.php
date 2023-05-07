@@ -170,7 +170,7 @@
       
 
                     <p class="notification_main_header">Notifications<i class="fa-solid fa-chevron-down" id="drop_down_arrow"></i></p>
-                    <div class="individual_notification_1">
+                    <div class="individual_notification_1" >
                         <span class="icon" ><i class="fa-regular fa-circle-check"></i></span>
                         <span class="notification_header">Success</span><br>
                         <span class="notification_body">Success message</span><br>

@@ -222,6 +222,35 @@ function validateBirthDate($birthDate) {
   // If the birth date is valid, return true
   return true;
 }
+
+
+
+/*for agri officer */
+function validate_title_for_blogpost($title) {
+  // Check if the last name only contains letters
+  if (!preg_match("/^[a-zA-Z]+$/", $title)) {
+    return 'last name should only contain letters';
+  }
+  
+  // Check if the length of the last name is between 2 and 50 characters
+  if (strlen($title) < 2 || strlen($title) > 50) {
+    return 'last name must be between 2 and 50 characters';
+  }
+  
+  // If all checks pass, return true
+  return true;
+}
+
+
+function validate_discription_for_blogpost($discription) {
+  // Check if the last name only contains letters
+  if (!preg_match("/^[A-Za-z0-9\s.,#\-\/\(\)]+$/", $discription)) {
+    return 'Description contains invalid characters.';
+  }
+  
+  // If all checks pass, return true
+  return true;
+}
   
 
  ?>
