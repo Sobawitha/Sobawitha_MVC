@@ -34,6 +34,9 @@
                 'price' => $post->price,
                 'quantity' => $post->quantity,
                 'product_description' => $post->product_description,
+                'type' => $post->type,
+                'date' => $post->date,
+                
                 'image_err' => '',
                 // 'title_err' => '',
                 // 'body_err' => ''

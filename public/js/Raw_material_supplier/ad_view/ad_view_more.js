@@ -209,3 +209,33 @@ function closeModal() {
     var modal = document.getElementById("myModal");
     modal.style.display = "none";
 }
+
+// fourth script
+
+const plusButton = document.querySelector('.plus_button');
+const minusButton = document.querySelector('.minus_button');
+const quantityInput = document.querySelector('input[name="quantity"]');
+const available_quantity = document.getElementById('existing_quantity');
+
+plusButton.addEventListener('click', () => {
+  let quantity = parseInt(quantityInput.value);
+  let available_quantity = parseInt(document.getElementById("existing_quantity_value").textContent);
+  console.log(quantity);
+  console.log(available_quantity);
+  quantity++;
+  if(quantity>available_quantity){
+    quantityInput.style.color="red";
+  }
+  else{
+    quantityInput.value = quantity;
+  }
+});
+
+minusButton.addEventListener('click', () => {
+  let quantity = parseInt(quantityInput.value);
+  quantity--;
+  if (quantity < 1) {
+    quantity = 1;
+  }
+  quantityInput.value = quantity;
+});
