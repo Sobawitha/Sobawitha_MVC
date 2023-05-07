@@ -222,6 +222,8 @@ function validateBirthDate($birthDate) {
   // If the birth date is valid, return true
   return true;
 }
+
+
   
 
  ?>
