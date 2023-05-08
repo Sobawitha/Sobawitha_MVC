@@ -87,6 +87,10 @@
   tr{
     height:60px;
   }
+
+  td{
+    max-width: 150px;
+  }
   
   .sm_view{
     font-size: 14px;

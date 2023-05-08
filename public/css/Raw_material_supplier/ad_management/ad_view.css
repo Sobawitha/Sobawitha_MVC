@@ -234,17 +234,24 @@
 /*products*/
 .recent_product_card_section{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap:40px;
   padding:70px 50px 50px 0px;
 }
 
 
 .adv_card{
-  width:200px;
-  height:230px;
+  width:250px;
+  height:280px;
   background-color: rgb(255, 255, 255);
-  box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2); 
+  box-shadow:0px 4px 8px 0px rgba(0,0,0,0.2);
+  margin-left: 5px; 
+  margin-right: 5px; 
+  border-radius: 10px;
+}
+
+.adv_card:hover{
+  box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 .card_image{
@@ -255,16 +262,17 @@
   background-position:center;
   margin:0px;
   padding:0px;
+  border-radius: 10px;
 
 }
 
 .product_detail{
   position:relative;
   margin-top:0%;
-  width:95%;
+  width:96%;
   background: linear-gradient(rgba(0,0,0,0.6),rgba(40, 40, 40, 0.6));
   padding:5px;
-  transform: translateY(133px);
+  transform: translateY(170px);
 }
 
 .product_name{
