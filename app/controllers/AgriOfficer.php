@@ -11,6 +11,7 @@ public function profile()
      if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==5) {
              
         $user= $this->agriModel->findUserByID($_SESSION['user_id']);
+        $notifications = $this->agriModel->notifications();
         $data=[                      
           'user_id'=>$user->user_id,
           'first_name'=>$user->first_name,
@@ -41,7 +42,11 @@ public function profile()
           'branch_err'=>'',
           'account_number_err'=>'',
           'gender_err'=>'',
-          'propic_err'=>''
+          'propic_err'=>'',
+          'notifications' => $notifications
+
+
+          
   
         ];
         $this->view('Agri_officer/Agri_officer/v_officer_view_profile',$data);

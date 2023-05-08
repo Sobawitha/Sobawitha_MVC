@@ -197,6 +197,11 @@ form .message:focus{
     accent-color: rgb(81, 111, 143);
 }
 
+input[type="radio"]:disabled {
+    color: gray;
+  }
+  
+
 .forum_body .attachment{
     /* padding-top: 55px; */
 }

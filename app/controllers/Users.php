@@ -154,8 +154,10 @@
             if(isset($_SESSION['user_id'])){
                 $user_id = $_SESSION['user_id'];
                 $profile_detail = $this-> userModel-> get_profile_detail($user_id);
+                $notifications = $this->userModel->notifications();
                 $data=[
                     'profile_detail' => $profile_detail,
+                    'notifications' => $notifications
                 ];
                 $this->view('Admin/Admin/v_admin_view_profile', $data);
             }
@@ -170,8 +172,10 @@
             if(isset($_SESSION['user_id'])){
                 $user_id = $_SESSION['user_id'];
                 $profile_detail = $this-> userModel-> get_profile_detail($user_id);
+                $notifications = $this->userModel->notifications();
                 $data=[
                     'profile_detail' => $profile_detail,
+                    'notifications' => $notifications
                 ];
                 $this->view('Agri_officer/Agri_officer/v_officer_view_profile', $data);
             }
@@ -185,8 +189,10 @@
             if(isset($_SESSION['user_id'])){
                 $user_id = $_SESSION['user_id'];
                 $profile_detail = $this-> userModel-> get_profile_detail($user_id);
+                $notifications = $this->userModel->notifications();
                 $data=[
                     'profile_detail' => $profile_detail,
+                    'notifications' => $notifications
                 ];
                 print_r($data['profile_detail']);
                 die();
@@ -202,8 +208,10 @@
             if(isset($_SESSION['user_id'])){
                 $user_id = $_SESSION['user_id'];
                 $profile_detail = $this-> userModel-> get_profile_detail($user_id);
+                $notifications = $this->userModel->notifications();
                 $data=[
                     'profile_detail' => $profile_detail,
+                    'notifications' => $notifications
                 ];
                 $this->view('Buyer/Buyer/v_buyer_view_profile', $data);
                 }
@@ -217,8 +225,10 @@
             if(isset($_SESSION['user_id'])){
                 $user_id = $_SESSION['user_id'];
                 $profile_detail = $this-> userModel-> get_profile_detail($user_id);
+                $notifications = $this->userModel->notifications();
                 $data=[
                     'profile_detail' => $profile_detail,
+                    'notifications' => $notifications
                 ];
                 $this->view('Raw_material_supplier/Raw_material_supplier/v_supplier_view_profile', $data);
             }
@@ -450,31 +460,9 @@
      }
 
 
-    /*for notification */
-    public function noti(){
-        $notification = $this->userModel->get_all_notification();
-        $no_of_rows = count($notification);
-        $unseen_noti = $this->userModel->get_unseen_notifications();
-        $no_of_unseen_noti = count($unseen_noti);
-        $data=[
-            'notifications' => $notification,
-            'num_rows' => $no_of_rows,
-            'unseen_noti' => $no_of_unseen_noti
-        ];
-        // $this->view('Users/user/v_notification', $data);
-
-        // echo json_encode($data);
-        header('Content-Type: application/json');
-        echo json_encode($data);
-    }
     
-    public function add_notification(){
-        if(isset($_POST['not_message'])){
-            $message = $_POST['not_message'];
-            $this->userModel->insert_notification($message);
-            echo "success";
-        }
-    }
+
+    
     
 
 

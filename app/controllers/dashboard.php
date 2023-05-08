@@ -2,9 +2,12 @@
 
 class dashboard extends Controller{
     private $dashboard_model;
+    private $notification_model;
+
     public function __construct(){
         
         $this->dashboard_model = $this->model('M_dashboard');
+        $this->notification_model = $this->model('M_notifications');
     }
 
     public function dashboard(){
@@ -44,7 +47,9 @@ class dashboard extends Controller{
         $no_of_forumpost = $this->dashboard_model->get_no_of_forumtopics($_SESSION['user_id']);
         $no_of_complaints = $this->dashboard_model->get_no_of_complaints($_SESSION['user_id']);
         $forum_post_detail= $this->dashboard_model->get_all_forum_posts($_SESSION['user_id'],$start_from,$num_per_page);
-        // $post_count_details = $this->dashboard_model->get_blogpost_count_details();
+        $post_count_details = $this->dashboard_model->get_blogpost_count_details();
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
 
         // var_dump($post_count_details);
         // die();
@@ -55,7 +60,9 @@ class dashboard extends Controller{
             'no_of_forumposts' => $no_of_forumpost->num_forum_topics,
             'no_of_complaints' => $no_of_complaints->num_complaint,
             'no_of_category' => $no_of_post_category-> num_category,
-            'forum_post_detail' => $forum_post_detail
+            'forum_post_detail' => $forum_post_detail,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
         ];
         $this->view('Agri_officer/Dashboard/v_officer_dashboard', $data);
     }

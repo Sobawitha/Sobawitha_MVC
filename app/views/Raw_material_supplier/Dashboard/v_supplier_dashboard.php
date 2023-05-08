@@ -216,10 +216,6 @@
 
 
                 </script>
-
-
-
-
             </div>
 
             <div class="chartsLevel3">

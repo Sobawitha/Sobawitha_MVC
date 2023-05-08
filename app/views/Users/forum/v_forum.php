@@ -122,7 +122,16 @@ else if($_SESSION['user_flag'] == 5){
                                         <div class="f_filter_section">
                                                 <label for="faq" id="filter_label"> <input type="radio" id="faq" name="diss_type" value="faq">FAQ's</label>
                                                 <label for="feedback" id="filter_label"> <input type="radio" id="feedback" name="diss_type" value="feedback">Feedback</label>
-                                                <label for="annousments" id="filter_label"><input type="radio" id="annousments" name="diss_type" value="annousments">Annousments</label>
+                                                <?php  if( $_SESSION['user_flag']==5 || $_SESSION['user_flag']==1){
+                                                        ?>
+                                                        <label for="annousments" id="filter_label"><input type="radio" id="annousments" name="diss_type" value="annousments">Announcement</label>
+                                                <?php
+                                                }else{
+                                                        ?>
+                                                        <label for="annousments" id="filter_label"><input type="radio" id="annousments_for_other" name="diss_type" value="annousments" disabled>Announcement</label>
+                                                        <?php
+                                                }?>
+                                                
                                                 <label for="jobs" id="filter_label"><input type="radio" id="jobs" name="diss_type" value="jobs">Jobs</label>
                                                 <label for="introductions" id="filter_label"><input type="radio" id="introductions" name="diss_type" value="Introductions">Introductions</label>
                                         </div>
