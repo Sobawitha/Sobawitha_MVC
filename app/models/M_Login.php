@@ -97,7 +97,8 @@
 
         return $result ? $result : false; 
     }
-
+     
+    // ----------------------------------------------------------------
     public function checkOldPwd($email,$pwd) {
         
         $this->db->query("SELECT * FROM user WHERE email = :email");
