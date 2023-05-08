@@ -1,9 +1,4 @@
 <?php
-   
-    use SendGrid\Mail\Mail;
-   
-  
-//    require '/vendor/autoload.php';
     
     class Login extends Controller{
       
@@ -39,11 +34,17 @@
                 }
                 else {
                     //check for existing emails
-                    if($this->loginModel->findUserByEmail($data['email']) && $this->loginModel->checkUserFlag($data['email']) ) {
+                    if($this->loginModel->findUserByEmail($data['email'])){
                         // User found
                     } else {
                         // User not found
                         $data['password_err'] = 'Invalid email or password';
+                    }
+
+                    if($this->loginModel->checkUserStatus($data['email'])){
+
+                    }else{
+                        $data['password_err'] = 'Your account is deactivated.Please contact our support team';
                     }
                 }
 
@@ -90,11 +91,13 @@
                 $this->view('Users/user/v_login_user', $data);
             }
         }
-    public function createUserSession($loggeduser) {
-        $_SESSION['user_id']=$loggeduser->user_id;
-        $_SESSION['username']=$loggeduser->first_name;
-        $_SESSION['user_email']=$loggeduser->email; 
-        $_SESSION['user_flag']=$loggeduser->user_flag;
+
+    public function createUserSession($loggeduser)
+    {
+        $_SESSION['user_id'] = $loggeduser->user_id;
+        $_SESSION['username'] = $loggeduser->first_name;
+        $_SESSION['user_email'] = $loggeduser->email;
+        $_SESSION['user_flag'] = $loggeduser->user_flag;
         $_SESSION['lastname'] = $loggeduser->last_name;
         $_SESSION['profile_image'] = $loggeduser->profile_picture;
         $_SESSION['user_gender'] = $loggeduser->gender;
@@ -103,48 +106,41 @@
         $_SESSION['radio_admin_comp'] = '';
         $_SESSION['radio_admin_feed'] = '';
 
-            $flag = $_SESSION['user_flag'];
-            if($flag==1){
-                $_SESSION['position'] = "Admin";
-                redirect('Admin_dashboard/main_view');
-            }
-            else if($flag==2){
-                $_SESSION['position'] = "Customer";
-                redirect('dashboard/buyer_dashboard');
-            }
-            else if($flag==3){
-                $_SESSION['position'] = "Seller";
-                redirect('seller_dashboard/seller_dashboard');
-            }
-            else if($flag==3){
-                $_SESSION['position'] = "Seller";
-                
-                redirect('dashboard/seller_dashboard');
-            }
-            else if($flag==4){
-                $_SESSION['position'] = "Supplier";
-                redirect('supplier_dashboard/supplier_dashboard');
-            }
-            else if($flag==5){
-                $_SESSION['position'] = "Agri-officer";
-                redirect('dashboard/officer_dashboard');
-            }
+        $flag = $_SESSION['user_flag'];
+        if ($flag == 1) {
+            $_SESSION['position'] = "Admin";
+            redirect('Admin_dashboard/main_view');
+        } else if ($flag == 2) {
+            $_SESSION['position'] = "Customer";
+            redirect('dashboard/buyer_dashboard');
+        } else if ($flag == 3) {
+            $_SESSION['position'] = "Seller";
+            redirect('seller_dashboard/seller_dashboard');
+        } else if ($flag == 3) {
+            $_SESSION['position'] = "Seller";
+            redirect('dashboard/seller_dashboard');
+        } else if ($flag == 4) {
+            $_SESSION['position'] = "Supplier";
+            redirect('supplier_dashboard/supplier_dashboard');
+        } else if ($flag == 5) {
+            $_SESSION['position'] = "Agri-officer";
+            redirect('dashboard/officer_dashboard');
+        }
     }
 
     public function logout() {
         if(isset($_SESSION['user_id'])){  
-             unset($_SESSION['user_id']);
-             unset($_SESSION['user_email']);
-             unset($_SESSION['username']);
-             unset($_SESSION['user_gender']);
-             unset($_SESSION['user_flag']);
+            unset($_SESSION['user_id']);
+            unset($_SESSION['user_email']);
+            unset($_SESSION['username']);
+            unset($_SESSION['user_gender']);
+            unset($_SESSION['user_flag']);
             unset($_SESSION['lastname']);
-            unset($_SESSION['position']);
-            unset($_SESSION['radio_admin_feed']);
+            unset($_SESSION['profile_image']);
+            unset($_SESSION['profile_image_path']);
             session_destroy();
         
-
-             // session_destroy();
+            // session_destroy();
 
              $_SESSION['logout'] = true;
              redirect('Login/login');
@@ -157,41 +153,31 @@
 
     public function forgot_password(){
         
-        
         if($_SERVER['REQUEST_METHOD']=='POST'){
            
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
              if(isset($_POST['forgot_btn'])) {
-               
                     // echo "<script>";
                     // echo "alert('" . $emailCheckResult . "')";
                     // echo "</script>";
-            $errors = [];
-            $email = $_POST['forgot_email'];
-            $token = md5(rand());
+                
+                $email = $_POST['forgot_email'];
+                $token = md5(rand());
             
-            // session_start();
-            $_SESSION['email'] = $email;
+                // session_start();
+                $_SESSION['email'] = $email;
     
-            $row = $this->loginModel->checkEmail($email);
-           
-         
-            // if(!$row){
-            //     $name="Nandasena";
-            // }else{
-            //     
-            // }
-            
-            $name = $row->first_name; 
+                $row = $this->loginModel->checkEmail($email);
+                 
 
         
-            // if query run
-            if ($row) {
-             
-                   $updateResult= $this->loginModel->setToken($token,$email);
+                 // if query run
+                 if ($row) {
+                    $name = $row->first_name;
+                    $updateResult= $this->loginModel->setToken($token,$email);
                     $flag=1;
                     if($updateResult) {
-                    $val = sendMail($email,$name, $token, $flag, '');
+                    $val = sendMail($email,$name, $token, $flag, '','','');
      
                   if($val){
                         $data = [
@@ -225,10 +211,7 @@
                           
                 
                 }else{
-           
-                  
-              
-                   $data = [
+                    $data = [
                     'login_err' =>'',
                     'email_err' => 'No Email Found',
                     'password_err' => ''
@@ -255,12 +238,11 @@
             }
   
     }
+
     public function reset_password()
      {
-     
         if($_SERVER['REQUEST_METHOD']=='POST'){
-           
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
              if(isset($_POST['change_pw_btn'])) {
                
                     $token = trim($_POST['pwd_token']);
@@ -271,7 +253,7 @@
                     
                     $tokenExpire = $this->loginModel->checkToken($email);
                     }
-                    //    echo "<script>";
+                    // echo "<script>";
                     // echo "alert('" . $tokenExpire->verify_token . "')";
                     // echo "</script>";
 
@@ -299,19 +281,41 @@
                        } 
                 
                        if(empty($data['new_pwd'])){
-                          $data['new_pwd_err']='Please enter a new password';
-                       } 
+                        $data['new_pwd_err'] = 'Please enter a new password';
+                      } else {
+                        $pwdValidationResult = validatePassword($data['new_pwd']);
+                        if($pwdValidationResult !== true){ // fix 1: check the validation result correctly
+                          $data['new_pwd_err'] = $pwdValidationResult; // fix 2: store the error message
+                        } else {
+                          $data['new_pwd_err'] = ''; // fix 3: reset the error message if there is no error
+                        }
+                      }
+                      
+                       
+
+                       
                        
                        if(empty($data['password'])){
-                        $data['confirm_password_err']='Please retype your new password';
-                     } 
+                        $data['confirm_password_err'] = 'Please retype your new password';
+                      } else {
+                        $pwdValidationResult = validatePassword($data['password']);
+                        if($pwdValidationResult !== true){
+                          $data['confirm_password_err'] = $pwdValidationResult;
+                        }else{
+                            $data['confirm_password_err'] = ''; 
+                        }
+                      }
+                      
+                     }
+
+                     
 
                      if(empty($data['pwd_token'])){
                         $data['empty_token_err']='Error: Authentication token missing. Please retrieve a token using the forgot password option.';
                      
                       
                     }
-             
+                 
 
                     if(!empty($data['pwd_token'])){
                         if($token != $tokenExpire->verify_token){
@@ -319,22 +323,11 @@
                         }
                     }
 
-
-
-
-
-
-
-
-
                     // if($oldPwd){
                     //     $data['old_password_err'] = 'Your cannot enter an old password.';
                     // }
 
-                  
-               
-
-                    
+    
                     if(empty($data['new_pwd_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['token_expire_err']) && empty($data['retype_new_password_err']) && empty($data['empty_token_err']) ){
              
                         $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
@@ -354,7 +347,7 @@
                          $this->view('Users/user/v_reset_password', $data);
                        }
             
-            }
+            
             }else{
                 //initial form
                 $data = [
@@ -380,7 +373,3 @@
     }
 
 }
-
-    
-
-?>

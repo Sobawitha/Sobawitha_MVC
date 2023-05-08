@@ -227,7 +227,7 @@
             <div class="chartsLevel3">
               
                 <div class="chart">
-                    <h2>Forum Topics</h2><br>
+                    <h2>Stock details</h2><br>
                     <div>
                         <table class="forum_post_detail_table">
                             <tr>

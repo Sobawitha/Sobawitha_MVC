@@ -2,7 +2,7 @@
 
 class core{
     //write thing related routings
-    //URL format --> contoller/method/para_list
+    //URL format --> controller/method/para_list
 
     protected $currentController = 'Pages';
     protected $currentMethod = 'home';
@@ -12,9 +12,9 @@ class core{
          
         $url=$this->getURL();
         if(isset($url)){
-            // var_dump($url[1]);die();
+            // var_dump($url[0]);die();
             if(file_exists('../app/controllers/'.ucwords($url[0]).'.php')){
-                //if controller exist then loard it
+                //if controller exist then load it
                 $this->currentController = ucwords($url[0]); // get controller part from array     
                 //unset the controller in url
                 unset($url[0]);           
@@ -42,7 +42,7 @@ class core{
         if(isset($_GET['url'])){
             $url=rtrim($_GET['url'],'/');
             $url=filter_var($url,FILTER_SANITIZE_URL);//filter unnessery thing
-            $url=explode('/',$url);
+            $url=explode('/',$url); //splits the URL into an array using the '/' character as the delimiter
 
             return $url;
         }

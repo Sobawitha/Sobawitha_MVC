@@ -268,12 +268,12 @@ input[type=file]::file-selector-button{
 }
 
 .footer{
-    margin-top:10px;
-    margin-left:75%;
+    margin-top:12px;
+    margin-left:70%;
 }
 
 .edit , .delete{
-    font-size: 10px;
+    font-size: 12px;
     margin-left:5px;
     color:rgb(45, 45, 45);
 }
@@ -680,4 +680,18 @@ input[type=file]::file-selector-button{
 
 #topic_not_found{
     transform: translateX(300px);
+}
+
+/*validation*/
+
+.error_msg{
+    color:red;
+    font-size:14px;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+#img_error{
+    transform: translate(-180px,40px);
+    position:absolute;
 }
