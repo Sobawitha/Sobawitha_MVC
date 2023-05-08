@@ -148,7 +148,7 @@ class M_fertilizer_product
     }
 
     public function insert_order_product_table($data){
-        $this->db->query("INSERT INTO order_products (cust_id, payment_type) VALUES (:user_id,'cod')");
+        $this->db->query("INSERT INTO buyer_orders (cust_id, payment_type) VALUES (:user_id,'cod')");
         $this->db->bind(":user_id", $data['user_id']);
         if($this->db->execute()){
             return true;
@@ -169,7 +169,7 @@ class M_fertilizer_product
     }
 
     public function update_order_state($order_id){
-        $this->db->query("UPDATE order_items set current_status=1 WHERE order_id = :order_id");
+        $this->db->query("UPDATE buyer_orders set status=1 WHERE order_id = :order_id");
         $this->db->bind(":order_id", $order_id);
         if ($this->db->execute()) {
             return true;
@@ -179,7 +179,7 @@ class M_fertilizer_product
     }
 
     public function insert_order_table($data, $order_id){
-        $this->db->query("INSERT INTO order_items (order_id,product_id,price,quantity,user_id) VALUES (:order_id, :product_id, :price, :quantity, :user_id)");
+        $this->db->query("INSERT INTO buyer_order_items (order_id,product_id,price,quantity,user_id) VALUES (:order_id, :product_id, :price, :quantity, :user_id)");
         $this->db->bind(":order_id", $order_id);
         $this->db->bind(":product_id", $data['product_id']);
         $this->db->bind(":price", $data['price']);
@@ -206,7 +206,7 @@ class M_fertilizer_product
     }
 
     public function check_similer_item($product_id, $user_id){
-        $this->db->query("SELECT COUNT(*) as count_row from cart where user_id=:user_id AND product_id=:product_id");
+        $this->db->query("SELECT COUNT(*) as count_row from cart where User_id=:user_id AND Product_id=:product_id");
         $this->db->bind(":user_id", $user_id);
         $this->db->bind(":product_id", $product_id);
         $row_count = $this->db->single();
@@ -215,7 +215,7 @@ class M_fertilizer_product
     
 
     public function update_cart($data){
-        $this->db->query("UPDATE cart SET quantity=:quantity where product_id=:product_id AND user_id=:user_id");
+        $this->db->query("UPDATE cart SET quantity=:quantity where Product_id=:product_id AND User_id=:user_id");
         $this->db->bind(":user_id", $data['user_id']);
         $this->db->bind(":product_id", $data['product_id']);
         $this->db->bind(":quantity", $data['quantity']);
@@ -234,7 +234,7 @@ class M_fertilizer_product
     }
 
     public function check_cart($id){
-        $this->db-> query("SELECT count(*) as count_item from cart where user_id = :user_id");
+        $this->db-> query("SELECT count(*) as count_item from cart where User_id = :user_id");
         $this->db->bind("user_id", $id);
         return $this->db->single();
     }
@@ -251,7 +251,7 @@ class M_fertilizer_product
     }
 
     public function find_order_id(){
-        $this->db->query('SELECT order_id as order_id FROM order_items WHERE user_id = :user_id ORDER BY order_id DESC LIMIT 1 ');
+        $this->db->query('SELECT order_id as order_id FROM buyer_order_items WHERE user_id = :user_id ORDER BY order_id DESC LIMIT 1 ');
         $this->db->bind(":user_id", $_SESSION['user_id']);  
         return $this->db->single();
     }
