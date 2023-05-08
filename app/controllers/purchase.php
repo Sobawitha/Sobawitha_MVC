@@ -15,12 +15,13 @@ class purchase extends Controller {
 
 
     public function generatePDF(){
-        if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 2){ 
+       
             // Get the data for the report from the model
             $orderID = $_GET['order_id'];
+            echo $orderID;
         $order = $this->buyerModel->getOrderDetailsById($orderID);
         $order_items = $this->buyerModel->getOrderItemDetails($orderID);
-        
+        echo $order;
         // Generate the PDF report using the FPDF library
         require_once(APPROOT.'/fpdf/fpdf.php');
         $pdf = new FPDF();
@@ -53,8 +54,8 @@ class purchase extends Controller {
         
         $pdf->SetFont('Arial', '', 12);
         
-       
-            
+     
+     
             $pdf->Cell(30, 10, $order->order_id, 1 , 0, 'C');
             $pdf->Cell(60, 10, $order->customer_name, 1 , 0, 'C');
             $pdf->Cell(30, 10, $order->email, 1 , 0, 'C');
@@ -102,10 +103,7 @@ $pdf->Cell(40, 10, 'Rs. '.$order->total_amount, 1);
         // $pdf->Output();
          $pdf->Output($orderID.'Order Details.pdf', 'I');
            
-        }else{
-            redirect('Login/login');
-
-        }
+     
     }
 
     public function getOrderDetails($no){

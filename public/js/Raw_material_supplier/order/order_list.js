@@ -78,7 +78,7 @@ else{
 
 ongoing_orders.addEventListener('click',() =>
 {
-
+        console.log("clicked");
     
     fetch("http://localhost/Sobawitha/purchase/getOrderDetails/0", {
         "method" : "GET",
@@ -93,8 +93,9 @@ ongoing_orders.addEventListener('click',() =>
    
     data.forEach((order) => {
 
-      let URL  =  `http://localhost/Sobawitha/purchase/generatePDF.php?order_id=${order.order_id}`
-      ;
+      let URL  =  'http://localhost/Sobawitha/purchase/generatePDF?order_id='+order.order_id;
+
+      
       rows += `
         <tr class="order">
           <td><span class="p_name">${order.product_name}</span></td>

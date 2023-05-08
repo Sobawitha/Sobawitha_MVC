@@ -233,7 +233,7 @@ WHERE orders.status = :no AND orders.cust_id = :user_id");
         INNER JOIN user
         ON orders.cust_id =  user.user_id
         
-        WHERE orders.order_id = :OrderId  AND user.user_id = :user_id");
+        WHERE orders.order_id = :OrderId  AND orders.cust_id= :user_id");
               $this->db->bind(":OrderId",$orderId);
               $this->db->bind(":user_id",$_SESSION['user_id']);
               $result = $this->db->resultSet();
@@ -241,7 +241,7 @@ WHERE orders.status = :no AND orders.cust_id = :user_id");
                    return $result;
               }
               else{
-                   return false;
+                return $result;
               }
 
 
@@ -270,8 +270,9 @@ WHERE orders.status = :no AND orders.cust_id = :user_id");
         INNER JOIN user
         ON fertilizer.created_by =  user.user_id
         
-        WHERE orders.order_id = :orderID");
+        WHERE orders.order_id = :orderID AND user.user_id = :userID");
               $this->db->bind(":orderID",$orderID);
+              $this->db->bind(":userID",$_SESSION["user_id"]);
               $result = $this->db->resultSet();
               if($this->db->rowCount() > 0){
                    return $result;
