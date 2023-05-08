@@ -47,8 +47,6 @@ class M_users
     }
     
     public function changePW($data){
-
-       
         $this->db->query('UPDATE user set password = :password WHERE user_id = :id');
         $this->db->bind(':password', $data['password']);
         $this->db->bind(':id', $data['user_id']);
