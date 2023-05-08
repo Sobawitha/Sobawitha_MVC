@@ -21,7 +21,7 @@
         $this->db->query("SELECT COUNT(DISTINCT(seller_order_raw_material.order_id)) AS ongoing_orders
         FROM seller_order_raw_material inner join raw_material on seller_order_raw_material.product_id = raw_material.product_id inner join seller_orders on 
         seller_orders.order_id = seller_order_raw_material.order_id  
-        WHERE raw_material.created_by =  :id AND seller_orders.current_status = 0
+        WHERE raw_material.user_id =  :id AND seller_orders.current_status = 0
         AND seller_orders.created_at >= DATE_SUB(NOW(), INTERVAL 1 YEAR)");
         $this->db->bind(":id", $id);
         return $this->db->single();
@@ -31,18 +31,18 @@
         $this->db->query("SELECT COUNT(DISTINCT(seller_order_raw_material.order_id)) AS complete_orders
         FROM seller_order_raw_material inner join raw_material on seller_order_raw_material.product_id = raw_material.product_id inner join seller_orders on 
         seller_orders.order_id = seller_order_raw_material.order_id  
-        WHERE raw_material.created_by =  :id AND seller_orders.current_status = 1
+        WHERE raw_material.user_id =  :id AND seller_orders.current_status = 1
         AND seller_orders.created_at >= DATE_SUB(NOW(), INTERVAL 1 YEAR)");
         $this->db->bind(":id", $id);
         return $this->db->single();
     }
 
     public function calculate_total($id){
-        $this->db->query("SELECT r.created_by as user_id, round(sum(s.quantity*r.price)*95/100,2) as total_income 
+        $this->db->query("SELECT r.user_id as user_id, round(sum(s.quantity*r.price)*95/100,2) as total_income 
         FROM seller_order_raw_material s 
         INNER JOIN raw_material r ON s.product_id = r.product_id inner join seller_orders o on o.order_id = s.order_id
-        WHERE r.created_by = :user_id AND o.created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH);
-        GROUP BY r.created_by");
+        WHERE r.user_id = :user_id AND o.created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH);
+        GROUP BY r.user_id");
         $this->db->bind(":user_id", $id);
         return $this->db->single();
     }
@@ -59,7 +59,7 @@
         INNER JOIN raw_material ON seller_order_raw_material.product_id = raw_material.product_id 
         INNER JOIN seller_orders ON seller_orders.order_id = seller_order_raw_material.order_id  
       WHERE 
-        raw_material.created_by = :id
+        raw_material.user_id = :id
       GROUP BY 
         seller_orders.current_status;
       "); // corrected query
@@ -85,7 +85,7 @@
         ) s ON MONTH(months.month_date) = MONTH(s.created_at) AND YEAR(months.month_date) = YEAR(s.created_at)
         INNER JOIN raw_material r ON s.product_id = r.product_id 
         INNER JOIN seller_orders o ON s.order_id = o.order_id
-        WHERE r.created_by = :id AND o.created_at >= DATE_SUB(NOW(), INTERVAL 12 MONTH)
+        WHERE r.user_id = :id AND o.created_at >= DATE_SUB(NOW(), INTERVAL 12 MONTH)
         GROUP BY YEAR(months.month_date), MONTH(months.month_date)
       ORDER BY YEAR(months.month_date), MONTH(months.month_date) ");
         $this->db->bind(":id", $_SESSION['user_id']);
@@ -93,7 +93,7 @@
     }
 
     public function get_stock_details($start_from,$num_per_page){
-        $this->db->query("SELECT raw_material.product_id, raw_material.product_name, raw_material.quantity, raw_material_product_starting_stock.quantity as supplied_quantity from raw_material left join raw_material_product_starting_stock on raw_material.product_id = raw_material_product_starting_stock.product_id where created_by = :id limit :start_from, :num_per_page");
+        $this->db->query("SELECT raw_material.product_id, raw_material.product_name, raw_material.quantity, raw_material_product_starting_stock.quantity as supplied_quantity from raw_material left join raw_material_product_starting_stock on raw_material.product_id = raw_material_product_starting_stock.product_id where user_id = :id limit :start_from, :num_per_page");
         $this->db->bind(":start_from", $start_from);
         $this->db->bind(":num_per_page", $num_per_page);
         $this->db->bind(":id", $_SESSION['user_id']);
@@ -101,7 +101,7 @@
     }
 
     public function get_no_of_products(){
-        $this->db->query("SELECT count(*) as no_of_products from fertilizer where created_by = :id  ");
+        $this->db->query("SELECT count(*) as no_of_products from raw_material where user_id = :id  ");
         $this->db->bind(":id", $_SESSION['user_id']);
         return $this->db->single();
     }
