@@ -1,9 +1,20 @@
-<link rel="stylesheet" href="../css/Users/dashboards/dashboard.css"></link>
+<link rel="stylesheet" href= "../css/buyer/buyer_dashboard.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php'?>
 <?php require APPROOT.'/views/Buyer/Buyer/buyer_Sidebar.php'?>
+<script src='https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js'></script>
 
 
+<?php
+    function setColor($type){
+        if($type == 'faq') return 'set-green';
+        if($type == 'feedback') return 'set-yellow';
+        if($type == 'annousments') return 'set-orange';
+        if($type == 'Jobs') return 'set-purple';
+        if($type == 'Introductions') return 'set-blue';
+    }
+
+?>
 
 <div class="body">
     <div class="section_1">
@@ -30,7 +41,7 @@
                     <i class="fa-sharp fa-solid fa-circle-info" id="demo"  onclick=()></i>
                 </div>
             </div>
-
+<!-- 
             <div class='card' id="card3">
                 <div class='content'>
                     <p class="count">10</p>
@@ -50,7 +61,7 @@
 
                     <i class="fa-sharp fa-solid fa-circle-info" id="demo" onclick=()></i>
                 </div>
-            </div>
+            </div> -->
 
             <div class='card' id="card1">
                 <div class='content'>
@@ -67,7 +78,27 @@
         </div>
 
         <div class="demo">
-            <!-- Demostration here -->
+            
+        
+        <div class="charts">
+              
+              <div class="chart">
+                  <h2>Crop types of Completed Orders</h2><br>
+                  <div>
+                      <canvas id="doughnut"></canvas>   
+                  </div>
+              </div>
+
+              <div class="chart" id="doughnut-chart">
+                  <h2>Fertilizer Type Distribution in Completed Orders</h2><br>
+                  <div>
+                      <canvas id="doughnut2"></canvas>
+                  </div>
+              </div>
+
+
+          </div>
+
         </div>
 
     </div>
@@ -77,4 +108,125 @@
     </div>
 </div>
 
+<br><br>
+<div id="footer">
 <?php require APPROOT.'/views/Users/component/footer.php'?>
+</div>
+
+<script>
+
+
+ fetch("http://localhost/Sobawitha/buyer_dashboard/fertilizer_type_donut_chart").then(response => response.json()).then(results => {
+        console.log(results.fertilizer_type_details);
+        console.log(results.crop_type_details);
+        var labels1 = ["Liquid", "Solid", "Packets","Bottles"];
+        var labels2 = [];
+        var count1 = [0, 0, 0, 0];
+        var count2 = [];
+
+
+        results.fertilizer_type_details.forEach(val => {
+          if (val !== null && val.type !== null && val.count !== null) {
+                    var index = labels1.indexOf(val.type);
+         if (index !== -1) {
+                    count1[index] = val.count;
+    }
+  }
+});       
+       results.crop_type_details.forEach(val => {
+          if (val !== null && val.type !== null && val.count !== null) {
+                    labels2.push(val.crop_type);
+          }
+        }
+       );
+       results.crop_type_details.forEach(val => {
+          if (val !== null && val.crop_type !== null && val.count !== null) {
+                   var index1 = labels2.indexOf(val.crop_type);
+            if (index1 !== -1) {
+                        count2[index1] = val.count;
+
+          }
+         
+ }})
+
+
+        console.log(count1);
+        const fertilizer_type_donut_chart = new Chart(
+            document.getElementById('doughnut2'),
+            {
+                type: 'doughnut',
+                data: {
+                    labels: labels1,
+                    datasets: [
+                        {
+                            label: 'Count',
+                            data:count1,
+                            backgroundColor: [
+                        '#deeaee',
+                        '#9bf4d5',
+                        '#346357',
+                        '#c94c4c',
+                      
+                    ],
+                    borderColor: [
+                        '#deeaee',
+                        '#9bf4d5',
+                        '#346357',
+                        '#c94c4c',
+                      
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        var backgroundColors = [];
+        for (var i = 0; i < labels2.length; i++) {
+        
+            backgroundColors.push(randomColor());
+        }
+
+        const crop_type_donut_chart = new Chart(
+            document.getElementById('doughnut'),
+            {
+                type: 'doughnut',
+                data: {
+                    labels: labels2,
+                    datasets: [
+                        {
+                            label: 'Count',
+                            data:count2,
+                            backgroundColor:backgroundColors,
+                    borderColor: backgroundColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+    }
+    ).catch(function(error){
+        console.log(error);
+    });
+
+
+
+
+
+
+    function randomColor(){
+        var color = "#";
+        var letters = ['abcdef0123456789'];
+        for (var i = 0; i < 6; i++){
+        color += letters[Math.floor(Math.random() * letters.length)];
+        }
+        return color;
+    }
+
+
+</script>

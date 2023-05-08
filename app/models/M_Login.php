@@ -1,10 +1,12 @@
 <?php
+
     class M_Login{
     private $db;
 
     public function __construct(){
         $this->db = new Database();
     }
+
 
     public function findUserByEmail($email){
         $this->db->query('SELECT * FROM user WHERE email= :email');
@@ -19,11 +21,12 @@
         }
     }
 
-    public function checkUserFlag($email){
+    public function checkUserStatus($email){
         $this->db->query('SELECT * FROM user WHERE email= :email');
         $this->db->bind(':email',$email);
 
         $row = $this->db->single();
+
         if($row->active_status == 1){
             return true;
         }else{

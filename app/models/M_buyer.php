@@ -56,6 +56,57 @@
         }    
     } 
     
+    public function get_fertilizer_type_details(){
+
+        $this->db->query("SELECT f.type, COUNT(*) AS count
+        FROM orders o
+        JOIN order_items oi ON o.order_id = oi.order_id
+        JOIN fertilizer f ON oi.product_id = f.Product_id
+        WHERE o.cust_id = :user_id
+        AND o.status = '0'
+        GROUP BY f.type;");
+        $this->db->bind(":user_id",$_SESSION['user_id']);
+        $result = $this->db->resultSet();
+        if($this->db->rowCount() > 0){
+            return $result;
+        }
+        else{      
+
+
+            return false;
+        }
+
+
+
+}
+    public  function get_fertilizer_crop_type_details()
+{
+    $this->db->query("SELECT f.crop_type, COUNT(*) AS count
+    FROM orders o
+    JOIN order_items oi ON o.order_id = oi.order_id
+    JOIN fertilizer f ON oi.product_id = f.Product_id
+    WHERE o.cust_id = :user_id
+    AND o.status = '0'
+    GROUP BY f.crop_type;");
+    $this->db->bind(":user_id",$_SESSION['user_id']);
+    $result = $this->db->resultSet();
+    if($this->db->rowCount() > 0){
+        return $result;
+    }
+    else{
+ 
+
+return false;
+
+
+
+
+}
+
+
+}
+
+
 
     public function findUserByID($id)
     {
@@ -147,6 +198,96 @@
       }
       
     
+
+      public function getOrderDetails($no){
+      
+       $this->db->query("SELECT fertilizer.*,order_items.quantity,orders.created_at,orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS seller_name
+FROM fertilizer
+INNER JOIN order_items
+ON fertilizer.Product_id = order_items.product_id
+INNER JOIN orders
+ON order_items.order_id = orders.order_id
+
+INNER JOIN user
+ON fertilizer.created_by =  user.user_id
+
+WHERE orders.status = :no AND orders.cust_id = :user_id");
+         $this->db->bind(":no",$no);
+         $this->db->bind(":user_id",41);
+         $result = $this->db->resultSet();
+         if($this->db->rowCount() > 0){
+              return $result;
+         }
+         else{
+              return false;
+         }
+    }
+
+
+    public function getOrderDetailsById($orderId){
+
+     
+
+        $this->db->query("SELECT orders.created_at,orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS customer_name,CONCAT(user.address_line_one,' ',user.address_line_two,' ',user.address_line_three,' ',user.address_line_four) AS address, user.contact_no AS phone, user.email AS email
+        FROM orders 
+        INNER JOIN user
+        ON orders.cust_id =  user.user_id
+        
+        WHERE orders.order_id = :OrderId  AND orders.cust_id= :user_id");
+              $this->db->bind(":OrderId",$orderId);
+              $this->db->bind(":user_id",$_SESSION['user_id']);
+              $result = $this->db->resultSet();
+              if($this->db->rowCount() > 0){
+                   return $result;
+              }
+              else{
+                return $result;
+              }
+
+
+
+
+
+
+
+
+
+
+
+    }
+          
+    
+    public function getOrderItemDetails($orderID){
+
+
+        $this->db->query("SELECT fertilizer.*,order_items.quantity,orders.created_at,orders.order_id,order_items.price,SUM(order_items.price) AS total_amount
+        FROM fertilizer
+        INNER JOIN order_items
+        ON fertilizer.Product_id = order_items.product_id
+        INNER JOIN orders
+        ON order_items.order_id = orders.order_id
+        
+        INNER JOIN user
+        ON fertilizer.created_by =  user.user_id
+        
+        WHERE orders.order_id = :orderID AND user.user_id = :userID");
+              $this->db->bind(":orderID",$orderID);
+              $this->db->bind(":userID",$_SESSION["user_id"]);
+              $result = $this->db->resultSet();
+              if($this->db->rowCount() > 0){
+                   return $result;
+              }
+              else{
+                   return false;
+              }
+
+
+
+
+    }
+
+
+
 
  } 
 ?>

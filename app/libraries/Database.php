@@ -82,12 +82,15 @@
             public function endTransaction() {
                 return $this->dbh->commit();
             }
+
             public function rollBack() {
                 return $this->dbh->rollBack();
             }
+
             public function lastInsertId(){
                 return $this->dbh->lastInsertId();
             }
+            
             public function commit(){
                 return $this->dbh->commit();
             }

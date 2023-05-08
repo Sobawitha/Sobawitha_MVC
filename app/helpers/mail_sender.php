@@ -200,6 +200,37 @@
                             ";
 
 
+                        }else if($bodyFlag == 8){
+                            $mail->Subject = "Asking Help from Sobawitha Team";
+
+                            $email_template = "
+                                <html>
+                                <head>
+                                <title></title>
+                                </head>
+                                <body style='font-family: Arial, sans-serif;'>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <span style='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #4CAF50; margin-right: 0.2em;'>SOBA</span><span style ='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #000;'>WITHA</span>
+                                </div>
+                                <div style='padding: 20px;'>
+                                    <h2>Hello Admin,</h2>
+                                    <p>You have received a request for help from the following email:</p>
+                                    <h3 style='color: #4CAF50;'>$name</h3>
+                                    <p>Here's the help content:</p>
+                                    <p><strong>$more_detail</strong></p>
+                                    <p>Please assist the user as soon as possible. If you have any questions or concerns, please contact the user directly.</p>
+                                    <p>Thank you for your attention.</p>
+                                    <p>The Sobawitha Team</p>
+                                </div>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <p>Follow us on <a href='https://twitter.com/Sobawitha' style='color: #4CAF50;'>Twitter</a> | Like us on <a href='https://www.facebook.com/Sobawitha' style='color: #4CAF50;'>Facebook</a></p>
+                                    <p>You are receiving this email because a user has requested help from Sobawitha.</p>
+                                </div>
+                                </body>
+                                </html>
+                            ";
+
+
                         }
                         $mail->Body  =$email_template;
                         $mail->send();

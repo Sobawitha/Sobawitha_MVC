@@ -17,61 +17,110 @@ function display_order_detail(){
     }
 }
 
-
-function dataloader(data){
-
-
-
-     if(data != "")
-     {
-
-        var formdata = new FormData();
-        formdata.append('data',data);
-        let request = new XMLHttpRequest();
-        request.open('POST','');
-        request.onreadystatechange = function(){
-                let html = ""
-               if(request.readyState == 4 && request.status == 200)
-               {
-                   let response = JSON.parse(request.responseText);
-                    
-                   if(response.length > 0){
-                   for(var i = 0; i < response.length; i++)
-                   {
-                    html += '<tr class="order">';
-                    html += '<td><span class="p_name">'+response[i].ProductName+'</span></td>'
-                    html +=  '<td><span class="amount">'+response[i].OrderID +'</span></td>'
-                    html += '<td class="unit">'+'<span class="value">'+response[i].SellerName+'</span></td>'
-                    html +=   '<td><span class="amount">'+response[i].Date +'</span></td>'
-                    // <td><span class="price">Rs. 1000 x 4</span></td>
-                   
-                    html +=  '<td><span class="delete">'+'View'+'</span><i class="fa-solid fa-circle-info" id="more_detail"></i></td>'
-                    html += '</tr>';
-                   }
+let ongoing_orders =  document.getElementById('ongoing_progress');
+let completed_orders = document.getElementById('ongoing_ready');
 
 
-               }
-               else{
-                  html += '<tr class="order">';
-                  html += '<td colspan = "5">'+ "No Data Found" +'</td>'
-                  html += '</tr>';
+completed_orders.addEventListener('click',() =>
+{
+  console.log("completed");
+// Step 1: Parse the JSON response data
+fetch(`http://localhost/Sobawitha/purchase/getOrderDetails/1`, {
+  "method" : "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  }
+}).then((response) => response.json()).then((data) => {
+  // Step 2: Generate HTML table rows dynamically
+  let rows = '';
+  if(data.lenth > 0){
+  Array.from(data).forEach((order) => {
+    rows += `
+      <tr class="order">
+        <td><span class="p_name">${order.product_name}</span></td>
+        <td><span class="amount">${order.seller_name}</span></td>
+        <td class="unit"><span class="value">${order.order_id}</span></td>
+        <td><span class="price">${order.date}</span></td>
+        <td>
+         
+        <span class="disabled"><a href="/pdf/view-order?id=?>&type=buyer" class="link">Review</a></span>          
+        </td>
+        <td>
+          <a href="/pdf/view-order?id=${order.order_id}&type=buyer" class="link">View Order</a>
+        </td>
+      </tr>
+    `;
+  });
 
+  // Step 3: Replace the existing table rows with the new ones
+  let orderListTable = document.querySelector('.order_list_table');
+  let tableHead = orderListTable.querySelector('.table_head');
+  orderListTable.innerHTML = '';
+  orderListTable.appendChild(tableHead);
+  orderListTable.innerHTML += rows;
+}
 
-               }
-               document.querySelector(".order_list_table").innerHTML += html;
-            //    document.getElementById("counter").innerHTML = response.length;
-            }
+else{
+    
+      let orderListTable = document.querySelector('.order_list_table');
+      let tableHead = orderListTable.querySelector('.table_head');
+      orderListTable.innerHTML = '';
+      orderListTable.appendChild(tableHead);
+      orderListTable.innerHTML += '<tr class="order" align = "center"><td colspan = "5" rowspan = "5">'+ "No Data Found" +'</td></tr>';
+}
+}).catch((err) => console.log(err));
 
-            else{
-
-                document.querySelector(".order_list_table").innerHTML += '<tr class="order"><td colspan = "5">'+ "No Data Found" +'</td></tr>';
-            }
-
-        }
-
-     }
 
 
 }
 
+);
 
+ongoing_orders.addEventListener('click',() =>
+{
+        console.log("clicked");
+    
+    fetch("http://localhost/Sobawitha/purchase/getOrderDetails/0", {
+        "method" : "GET",
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+
+
+}).then((response) => response.json()).then((data) => {
+    
+    let rows = '';
+   
+    data.forEach((order) => {
+
+      let URL  =  'http://localhost/Sobawitha/purchase/generatePDF?order_id='+order.order_id;
+
+      
+      rows += `
+        <tr class="order">
+          <td><span class="p_name">${order.product_name}</span></td>
+          <td><span class="amount">${order.seller_name}</span></td>
+          <td class="unit"><span class="value">${order.order_id}</span></td>
+          <td><span class="price">${order.date}</span></td>
+         
+          <td>
+            <a href="${URL}" class="link">View Order</a>
+          </td>
+        </tr>
+      `;
+    });
+  
+    // Step 3: Replace the existing table rows with the new ones
+    let orderListTable = document.querySelector('.order_list_table');
+    let tableHead = orderListTable.querySelector('.table_head');
+    orderListTable.innerHTML = '';
+    orderListTable.appendChild(tableHead);
+    orderListTable.innerHTML += rows;
+  }
+
+
+
+
+    ).catch((err) => console.log(err))
+}
+)

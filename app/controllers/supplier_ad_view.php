@@ -1,12 +1,12 @@
 <?php
     class supplier_ad_view extends Controller{
         public function __construct(){
-            $this->supplier_ad = $this->model('M_supplier_advertisment');
+            $this->supplier_ad = $this->model('M_supplier_view');
     }
 
 
     public function index() {
-        $posts = $this->supplier_ad->getPosts();
+        $posts = $this->supplier_ad->getPostsView();
     
         $data = [
             'posts' => $posts
@@ -27,13 +27,22 @@
             // }
 
             $data = [
-                'image' => '',
-                'image_name' => $post->raw_material_image,
+                'image1' => '',
+                'image_name1' => $post->raw_material_image,
+                'image2' => '',
+                'image_name2' => $post->rm_image_two,
+                'image3' => '',
+                'image_name3' => $post->rm_image_three,
+                
                 'product_id' => $productId,
                 'product_name' => $post->product_name,
                 'price' => $post->price,
                 'quantity' => $post->quantity,
                 'product_description' => $post->product_description,
+                'type' => $post->type,
+                'manufacturer' =>$post->manufacturer,
+                'date' => $post->date,
+                
                 'image_err' => '',
                 // 'title_err' => '',
                 // 'body_err' => ''

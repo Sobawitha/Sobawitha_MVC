@@ -121,7 +121,7 @@
                                                 padding:0px;">
                     <div class="product_detail">
                         <span class="product_name"><?php echo $ad->product_name ?></span><br>
-                        <span class="owner">By ABC production</span>
+                        <span class="owner">By <?php echo $ad->manufacturer ?></span>
                     </div>
                 </div>
 

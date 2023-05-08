@@ -2,7 +2,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php'?>
 <?php require APPROOT.'/views/Buyer/Buyer/buyer_Sidebar.php'?>
-<script src="../js/Raw_material_supplier/order/order_list.js"></script> 
+<script src="../js/Raw_material_supplier/order/order_list.js" defer></script> 
 
 
 <div class="body">
@@ -30,9 +30,9 @@
         </div>
 
                 <div class="filter_section">
-                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing">Onging</label>
-                        <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing">Completed</label>
-                        <label for="cancel_order" id="filter_label"><input type="radio" id="cancel" name="order_type" value="cancel">Cancel</label>
+                        <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing"> Onging</label>
+                        <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing" checked>Completed</label>
+                        
                 </div>
 
                 <div class="order_list">
@@ -45,7 +45,7 @@
                                 <td>Order ID</td>
                                 <td>Date</td>
                                 
-                                <td></td>
+                                <td>Actions</td>
                         </tr>
 
                         <!-- <tr class="order">
@@ -70,34 +70,16 @@
                                 </td>        
                         </tr> -->
 
-                        <tr class="order">
-                                <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
-                                <td><span class="amount">10kg</span></td>
-                                <td class="unit"><span class="value">4</span></td>
-                                <td><span class="price">Rs. 1000 x 4</span></td>
-                               
-                                <td><span class="delete">Delete</span><i class="fa-solid fa-circle-info" id="more_detail"></i></td>
-                        </tr>
+                 
+                      
+                        <tr class="order" align = "center"><td colspan = "5" rowspan = "5"> No Data Found</td></tr>
 
-                        <tr class="order">
-                                <td><span class="p_name">Paddy fertilizer - ABC producers</span></td>
-                                <td><span class="amount">10kg</span></td>
-                                <td class="unit"><span class="value">4</span></td>
-                                <td><span class="price">Rs. 1000 x 4</span></td>
-                             
-                                <td><span class="delete">Delete</span><i class="fa-solid fa-circle-info" id="more_detail"></i></td>
-                        </tr> 
+
 
                 </div>
                 </div>
 
-                <div class="payment_detail">
-                        <div class="detail">
-                                <span class="total">Total product</span>  <span class="payment_amount"> Rs 50000.00 </span><br>
-                                <span class="shipping_cost">Astimated shipping cost </span><span class="payment_amount"> Rs 200.00 </span><br>
-                                <span class="total_inc_vat">Total </span><span class="vat">(including VAT)</span> <span class="payment_amount"> Rs 48000.00 </span>
-                        </div>
-                </div>
+          
         </div>
 
         <div class="section_3">
@@ -106,4 +88,3 @@
                 
         </div>
 </div>
-
