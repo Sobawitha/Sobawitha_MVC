@@ -14,7 +14,7 @@ class M_order
         
         $this->db->beginTransaction();
 
-        $this->db->query("INSERT INTO order_products(cust_id) VALUES(:cust_id)");
+        $this->db->query("INSERT INTO buyer_orders(cust_id) VALUES(:cust_id)");
 
         $this->db->bind(':cust_id', $_SESSION['user_id']);
         $result = $this->db->execute();
@@ -27,7 +27,7 @@ class M_order
 
          // Insert records into the `order_items` table
          for ($i = 0; $i < count($orderdata); $i++) {
-            $this->db->query("INSERT INTO order_items(order_id, product_id, price, quantity, user_id) VALUES(:order_id, :product_id, :price, :quantity, :user_id)");
+            $this->db->query("INSERT INTO buyer_order_items(order_id, product_id, price, quantity, user_id) VALUES(:order_id, :product_id, :price, :quantity, :user_id)");
             
             $this->db->bind(':order_id', $order_id);
             $this->db->bind(':product_id', $orderdata[$i]->Product_id);
@@ -122,7 +122,7 @@ class M_order
          
         
         // Insert a record into the `order_products` table
-        $this->db->query("INSERT INTO order_products(cust_id) VALUES(:cust_id)");
+        $this->db->query("INSERT INTO buyer_orders(cust_id) VALUES(:cust_id)");
 
         $this->db->bind(':cust_id', $_SESSION['user_id']);
         $result = $this->db->execute();
@@ -136,7 +136,7 @@ class M_order
     
         // Insert records into the `order_items` table
         for ($i = 0; $i < count($data); $i++) {
-            $this->db->query("INSERT INTO order_items(order_id, product_id, price, quantity, user_id) VALUES(:order_id, :product_id, :price, :quantity, :user_id)");
+            $this->db->query("INSERT INTO buyer_order_items(order_id, product_id, price, quantity, user_id) VALUES(:order_id, :product_id, :price, :quantity, :user_id)");
             
             $this->db->bind(':order_id', $order_id);
             $this->db->bind(':product_id', $data[$i]['price_data']['product_data']['metadata']['product_id']);
