@@ -59,6 +59,7 @@
                 'quantity' => trim($_POST['quantity']),
                 'product_description' => trim($_POST['additional-info']),
                 'type' => trim($_POST['type']),
+                'manufacturer' =>trim($_POST['manufacturer']),
                 'current_status' => 0,
                 // 'raw_material_image' => trim($_POST['image']),
                 
@@ -160,6 +161,7 @@
                 'quantity' => '',
                 'product_description' => '',
                 'type' => '',
+                'manufacturer' =>'',
                 'raw_material_image' => '',
 
                 'image_err1' => '',
@@ -206,6 +208,7 @@
                 'quantity' => trim($_POST['quantity']),
                 'product_description' => trim($_POST['additional-info']),
                 'type' => trim($_POST['type']),
+                'manufacturer' =>trim($_POST['manufacturer']),
                 // 'raw_material_image' => trim($_POST['image']),
                 
                 'image_err1' => '',
@@ -331,6 +334,7 @@
                 'quantity' => $post->quantity,
                 'product_description' => $post->product_description,
                 'type' => $post->type,
+                'manufacturer' => $post->manufacturer,
                 'image_err' => '',
                 // 'title_err' => '',
                 // 'body_err' => ''

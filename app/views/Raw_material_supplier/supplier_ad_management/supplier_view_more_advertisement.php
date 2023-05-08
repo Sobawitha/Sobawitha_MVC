@@ -118,7 +118,7 @@ $content = $data['adcontent'];
     
     <br><br>
 
-    <span class="title_3"><span class="sub_title_3">Company / Manufacturer  </span>ABC Producers</span><br><br>
+    <span class="title_3"><span class="sub_title_3">Company / Manufacturer  </span><?php echo $data['manufacturer']; ?></span><br><br>
 
     <!-- <span class="reg_no"><span class="sub_reg_no">Product Registration No  </span></span><br><br> -->
     <span class="product_type"><span class="sub_reg_no">Product Type </span><?php echo $data['type']; ?></span><br><br>

@@ -40,6 +40,7 @@
                 'quantity' => $post->quantity,
                 'product_description' => $post->product_description,
                 'type' => $post->type,
+                'manufacturer' =>$post->manufacturer,
                 'date' => $post->date,
                 
                 'image_err' => '',

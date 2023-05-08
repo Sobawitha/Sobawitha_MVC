@@ -99,6 +99,10 @@
                     <span class="details">Type</span>
                     <input type="text" placeholder="" name="type" required>
                   </div>
+                  <div class="input-box">
+                    <span class="details">Manufacturer</span>
+                    <input type="text" placeholder="" name="manufacturer" required>
+                  </div>
                   <div class="input-box available-quantity">
                     <span class="details">Available quantity</span>
                     <input type="text" placeholder="" name="quantity" required>
