@@ -85,7 +85,7 @@
                                 <th><span class="date" id="row_data"><?php $timestamp = strtotime($purchase->date);$date = date('Y-m-d', $timestamp); echo $date ?></span></th>
                                 <th><span class="price" id="row_data"><?php echo  $purchase-> price?></span></th>
                                 <th id="review">
-                                <i class="fa-solid fa-handshake" onclick="rating_popup_open(<?php echo $purchase-> purchase_id ?>)"></i>&nbsp;&nbsp;Review
+                                <span onclick="rating_popup_open(<?php echo $purchase-> purchase_id ?>)"><i class="fa-solid fa-handshake"></i>&nbsp;&nbsp;Review</span>
                                 </td>
                         </div>
                 </tr>

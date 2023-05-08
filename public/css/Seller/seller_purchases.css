@@ -138,11 +138,13 @@
     text-align: center;
     padding:20px;
     border: none;
+    border-radius: 10px;
   }
 
   #rating_comment{
     font-size:12px;
     height:100px;
+    width:75%;
   }
 
   #rating_submit{
