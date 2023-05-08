@@ -20,8 +20,6 @@
     <div class="shop-items">
 
     <?php
-        // print_r($data);
-        // die();
         foreach($data['seller_wishlist'] as $Seller_wishlist_item):
         
             ?>
