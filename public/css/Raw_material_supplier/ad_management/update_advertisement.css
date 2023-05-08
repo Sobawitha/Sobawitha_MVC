@@ -15,6 +15,10 @@
   /* background-color:bisque; */
 }
 
+.section_2{
+  width: 1500px;
+}
+
 .a_add_admin_maincontent{
   margin-right: 2rem;
 }
@@ -23,7 +27,7 @@
 .add_container{
   
   margin-left: 100px;
-  max-width: 900px;
+  max-width: 1000px;
   box-sizing: border-box;
   font-family:'Montserrat', sans-serif ;
   width: 100%;
@@ -193,6 +197,58 @@ form .user-details .input-box{
   width: 100%;
 }
 
+form .advertisment-details .image_container .right1 img, form .advertisment-details .image_container .right2 img, form .advertisment-details .image_container .right3 img {
+  width: 40px;
+  height: 40px;
+}
+
+
+
+
+
+ /* aded from simpleepic */
+
+ /* .post-container .upper {
+  display: flex;
+  flex-direction: row;
+} */
+
+/* .post-container .upper .left {
+  width: 100%;
+} */
+
+form .advertisment-details .image_container .right1, form .advertisment-details .image_container .right2, form .advertisment-details .image_container .right3{
+  width: fit-content;
+  opacity: 0.8;
+}
+
+form .advertisment-details .image_container .right1:hover, form .advertisment-details .image_container .right2:hover, form .advertisment-details .image_container .right3:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+form .advertisment-details .image_container .right1 img, form .advertisment-details .image_container .right2 img, form .advertisment-details .image_container .right3 img {
+  width: 40px;
+  height: 40px;
+}
+
+form .advertisment-details .image_container .post-image1 img {
+  width: 50%;
+  height: 100px;
+  border-radius: 5px;
+}
+
+form .advertisment-details .image_container .post-image2 img {
+  width: 50%;
+  height: 100px;
+  border-radius: 5px;
+}
+
+form .advertisment-details .image_container .post-image3 img {
+  width: 50%;
+  height: 100px;
+  border-radius: 5px;
+}
 
 
 
@@ -201,21 +257,18 @@ form .user-details .input-box{
 
 
 
+/* 2023/5/2 */
 
+#category{
+  width: 100px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.input-box select{
+  margin-left: 5px;
+}
+.input-box span{
+  margin-right: 5px;
+}
+.input-box input{
+  margin-left: 5px;
+}
