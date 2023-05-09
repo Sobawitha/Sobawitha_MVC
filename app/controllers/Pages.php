@@ -8,6 +8,7 @@ class Pages extends Controller {
         $this->cartModel = $this->model('M_shopping_cart');
         $this->fertilizerModel = $this->model('M_ad_management');
         $this->filterModel = $this->model('M_seller_ad_management');
+        $this->wishlistModel = $this->model('M_wishlist');
       
     }
 
@@ -15,10 +16,11 @@ class Pages extends Controller {
     public function home(){
         $listings= $this->pagesModel->getLatestListings();
         $allAds= $this->pagesModel->getAllListings();
-       
+        $wishlist_items = $this->wishlistModel->getAllItems();
         $data = [
           'ads' => $listings,
-          'allads' => $allAds
+          'allads' => $allAds,
+            'wishlist_items' => $wishlist_items
         ];
         $this->view('Users/component/home', $data);
     }

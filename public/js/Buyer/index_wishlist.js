@@ -18,7 +18,7 @@ for(let i=0; i<cart_adder.length; i++)
          let  user  =  'user-'+id;
          const userRow = document.getElementById(user); 
          userRow.parentNode.removeChild(userRow);
-         popUpOpen();
+        
          console.log(userRow); 
          
         }
@@ -104,12 +104,12 @@ for(let i = 0; i <dlt.length;i++){
     
 // })
 
-function popUpOpen() {
-    const deletePopup = document.getElementById('deletePopup')
-  //   document.getElementById('delete').addEventListener('click',() => deletePopup.showModal());
+// function popUpOpen() {
+//     const deletePopup = document.getElementById('deletePopup')
+//   //   document.getElementById('delete').addEventListener('click',() => deletePopup.showModal());
 
-  document.getElementById('cancelbtn').addEventListener('click',() => deletePopup.close());
-  deletePopup.showModal();
-//   document.getElementById('deletebtn').value=id;
+//   document.getElementById('cancelbtn').addEventListener('click',() => deletePopup.close());
+//   deletePopup.showModal();
+// //   document.getElementById('deletebtn').value=id;
   
-}
+// }

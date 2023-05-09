@@ -199,12 +199,55 @@ public function cashOnlyOrder()
    
    $orderData =  $this->cartModel->getAllItems();
 
-   print_r($orderData[0]->product_price);
    if($this->orderModel->createCOD($orderData))
      { 
-        print_r(count($orderData));
+                    $_SESSION['order_status'] = "success";
+                    $this->cartModel->clearAll();
+                    
+                    
+                    redirect('Cart/display_all_items');
 
-     }
+     }        
+        $_SESSION['order_status'] = "failure"; 
+        redirect('Cart/display_all_items');
+
+
+}
+
+
+public function add_to_cart_from_individual_page()
+{   
+
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+    $pro_id = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
+    $url = "http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=$pro_id";
+    if ($this->cartModel->findByCartId($pro_id)) {
+
+         $this->cartModel->updateItem($pro_id,$quantity);
+         
+        $_SESSION['cart_status'] = "added";
+
+        header("Location: $url");
+
+    }
+
+    
+else{
+        $this->cartModel->insertItem($pro_id,$quantity);
+        $_SESSION['cart_status'] = "added";
+         header("Location: $url");
+
+}
+}
+
+
+else{
+
+    echo "error";
+}
 
 }
 

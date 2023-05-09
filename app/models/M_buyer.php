@@ -201,17 +201,17 @@ return false;
 
       public function getOrderDetails($no){
       
-       $this->db->query("SELECT fertilizer.*,order_items.quantity,orders.created_at,orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS seller_name
+       $this->db->query("SELECT fertilizer.*,buyer_order_items.quantity,buyer_orders.created_at,buyer_orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS seller_name
 FROM fertilizer
-INNER JOIN order_items
-ON fertilizer.Product_id = order_items.product_id
-INNER JOIN orders
-ON order_items.order_id = orders.order_id
+INNER JOIN buyer_order_items
+ON fertilizer.Product_id = buyer_order_items.product_id
+INNER JOIN buyer_orders
+ON buyer_order_items.order_id = buyer_orders.order_id
 
 INNER JOIN user
 ON fertilizer.created_by =  user.user_id
 
-WHERE orders.status = :no AND orders.cust_id = :user_id");
+WHERE buyer_orders.status = :no AND buyer_orders.cust_id = :user_id");
          $this->db->bind(":no",$no);
          $this->db->bind(":user_id",41);
          $result = $this->db->resultSet();
@@ -228,15 +228,15 @@ WHERE orders.status = :no AND orders.cust_id = :user_id");
 
      
 
-        $this->db->query("SELECT orders.created_at,orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS customer_name,CONCAT(user.address_line_one,' ',user.address_line_two,' ',user.address_line_three,' ',user.address_line_four) AS address, user.contact_no AS phone, user.email AS email
-        FROM orders 
+        $this->db->query("SELECT buyer_orders.created_at,buyer_orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS customer_name,CONCAT(user.address_line_one,' ',user.address_line_two,' ',user.address_line_three,' ',user.address_line_four) AS address, user.contact_no AS phone, user.email AS email
+        FROM buyer_orders 
         INNER JOIN user
-        ON orders.cust_id =  user.user_id
+        ON buyer_orders.cust_id =  user.user_id
         
-        WHERE orders.order_id = :OrderId  AND orders.cust_id= :user_id");
+        WHERE buyer_orders.order_id = :OrderId  AND buyer_orders.cust_id= :user_id");
               $this->db->bind(":OrderId",$orderId);
               $this->db->bind(":user_id",$_SESSION['user_id']);
-              $result = $this->db->resultSet();
+              $result = $this->db->single();
               if($this->db->rowCount() > 0){
                    return $result;
               }
@@ -260,19 +260,25 @@ WHERE orders.status = :no AND orders.cust_id = :user_id");
     public function getOrderItemDetails($orderID){
 
 
-        $this->db->query("SELECT fertilizer.*,order_items.quantity,orders.created_at,orders.order_id,order_items.price,SUM(order_items.price) AS total_amount
-        FROM fertilizer
-        INNER JOIN order_items
-        ON fertilizer.Product_id = order_items.product_id
-        INNER JOIN orders
-        ON order_items.order_id = orders.order_id
+        $this->db->query("SELECT 
+      
+    
+        buyer_order_items.quantity, 
+    
+        fertilizer.product_name, 
         
-        INNER JOIN user
-        ON fertilizer.created_by =  user.user_id
-        
-        WHERE orders.order_id = :orderID AND user.user_id = :userID");
+        buyer_order_items.price
+      FROM 
+        buyer_order_items 
+        INNER JOIN fertilizer ON buyer_order_items.product_id = fertilizer.Product_id 
+        INNER JOIN buyer_orders ON buyer_order_items.order_id = :orderID
+        INNER JOIN user ON buyer_orders.cust_id = :userID
+      GROUP BY 
+        :userID, 
+        fertilizer.Product_id
+      ");
               $this->db->bind(":orderID",$orderID);
-              $this->db->bind(":userID",$_SESSION["user_id"]);
+              $this->db->bind(":userID",$_SESSION['user_id']);
               $result = $this->db->resultSet();
               if($this->db->rowCount() > 0){
                    return $result;

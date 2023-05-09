@@ -1215,6 +1215,10 @@ nav{
   color:rgb(39, 87, 87);
 }
 
+.hidden{
+  display:none;
+}
+
 #success_button{
   background-color: rgb(39, 87, 87);
   color:white;
