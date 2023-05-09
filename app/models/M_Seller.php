@@ -1,4 +1,6 @@
+
 <?php
+
     class M_Seller{
     private $db;
 
@@ -56,6 +58,7 @@
         }    
     } 
 
+    //
     public function findUserByID($id)
     {
       $this->db->query('SELECT * FROM user WHERE user_id= :id');
@@ -69,7 +72,8 @@
             return false;
       }
      }
-
+     
+     //
      public function findSameNic($nic)
      {
        $this->db->query('SELECT * FROM user WHERE nic_no= :nic');
@@ -152,4 +156,5 @@
       } 
 
  } 
+
 ?>

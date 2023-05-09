@@ -141,7 +141,7 @@
          </div>
 
             <div class="s_input-box">
-            <br><span class="ssu_details">Bank Account Holder Number</span><br>
+            <br><span class="ssu_details">Bank Account Number</span><br>
             <input type="text" placeholder="Enter your bank account no" name="bank_account_no" ><br>
             <span class="error_msg"><?php echo $data['bank_account_no_err'] ?></span><br>
           </div> 
@@ -159,7 +159,7 @@
           </div> 
 
           <div class="s_input-box">
-            <span class="ssu_details">Bank Account Name</span><br>
+            <span class="ssu_details">Bank Account Holder Name</span><br>
             <input type="text" placeholder="Enter your bank account name" name="bank_account_name" ><br>
             <span class="error_msg"><?php echo $data['bank_account_name_err'] ?></span><br>
           </div>

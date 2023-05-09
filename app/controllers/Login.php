@@ -105,6 +105,7 @@
         // $_SESSION['profile_updateAdmin']="false";
         $_SESSION['radio_admin_comp'] = '';
         $_SESSION['radio_admin_feed'] = '';
+        $_SESSION['radio_admin_role'] = '';
 
         $flag = $_SESSION['user_flag'];
         if ($flag == 1) {
@@ -138,6 +139,7 @@
             unset($_SESSION['lastname']);
             unset($_SESSION['profile_image']);
             unset($_SESSION['profile_image_path']);
+            unset($_SESSION['radio_admin_role']);
             session_destroy();
         
             // session_destroy();

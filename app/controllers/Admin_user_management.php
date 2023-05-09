@@ -635,7 +635,9 @@
     
     public function view_all_users()
     {
+    
     $records_per_page = 3;    
+
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -685,7 +687,7 @@
                     'user' => $users['rows'],
                     'search' => 'Search by firstname | lastname | Address | NIC No | Email',
                     'emptydata' => '',
-                    'userType' => $_SESSION['radio_admin_user'],
+                    'userType' => $_SESSION['radio_admin_role'],
                     'id' => $count,
     
                     'pagination' => [
@@ -696,7 +698,8 @@
                     ],
                 ]; 
             }
-
+            
+            
             $this->view('Admin/AdminUserManagement/v_user_management',$data);
 
         }else{
@@ -704,7 +707,7 @@
             $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
             $offset = ($current_page - 1) * $records_per_page; 
 
-            $_SESSION['radio_admin_user']='all';
+            // $_SESSION['radio_admin_role']='all';
             $users = $this->adminUserMngtModel->display_all_users($_SESSION['radio_admin_role'],$records_per_page, $offset  ); //data object array
             
             $total_records = $users['row_count'];
@@ -732,7 +735,7 @@
                     'user' => $users['rows'],
                     'search' => 'Search by firstname | lastname | Address | NIC No | Email',
                     'emptydata' => '',
-                    'userType' => $_SESSION['radio_admin_user'],
+                    'userType' => $_SESSION['radio_admin_role'],
                     'id' => $count,
     
                     'pagination' => [

@@ -1,12 +1,14 @@
 
 <?php
+
     class Seller extends Controller{
         private $sellerModel;
 
         public function __construct(){
             $this->sellerModel = $this->model('M_Seller');
     }
-
+    
+    //
     public function seller_register(){
             if($_SERVER['REQUEST_METHOD']=='POST'){
                 $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -72,16 +74,14 @@
                 }
                 else{
                     $fileExt=explode('.',$_FILES['propic']['name']);
-                    $fileActualExt=strtolower(end($fileExt));
+                    $fileActualExt=strtolower(end($fileExt)); //Convert the file extension to lowercase
                     $allowed=array('jpg','jpeg','png');
       
                   
                     if(!in_array($fileActualExt,$allowed)){
                       $data['propic_err']='You cannot upload files of this type';
-      
                     }
               
-      
                     if($data['propic']['size']>0){
                       if(uploadFile($data['propic']['tmp_name'],$data['propic_name'],'/upload/user_profile_pics/')){
                                 
@@ -96,8 +96,7 @@
           
                 }
     
-                
-                // if(empty($data['first_name'])){
+                 // if(empty($data['first_name'])){
                 //     $data['first_name_err']='first name cannot be empty';
                 // }
                 $firstNameValidationResult = validateFirstName($data['first_name']);
@@ -106,10 +105,6 @@
                     $data['first_name_err'] = empty($data['first_name']) ? 'first name cannot be empty' : $firstNameValidationResult;
                 }
                         
-
-                // if(empty($data['last_name'])){
-                //     $data['last_name_err']='last name cannot be empty';
-                // }
                 $lastNameValidationResult = validateLastName($data['last_name']);
 
                 if ($lastNameValidationResult !== true || empty($data['first_name'])) {
@@ -195,73 +190,15 @@
                   $data['confirm_password_err'] = empty($data['confirm_password']) ? 'password cannot be empty' : $cpwdValidateResult ;
                 }
 
-                // if(empty($data['confirm_password'])){
-                //   $data['confirm_password_err']='confirm password cannot be empty';
-                //   }
-
-                // if(empty($data['address_line_one'])){
-                //     $data['address_line_one_err']='address line 01 cannot be empty';
-                // }
-            
-                // if(empty($data['address_line_two'])){
-                //     $data['address_line_two_err']='address line 02 cannot be empty';
-                // }
-            
-                // if(empty($data['address_line_three'])){
-                //     $data['address_line_three_err']='address line 03 cannot be empty';
-                // }
-          
-                // if(empty($data['nic'])){
-                // $data['nic_err']='nic cannot be empty';
-                // }
-          
-                // if(empty($data['contact_number'])){
-                //     $data['contact_number_err']='contact number cannot be empty';
-                // }
-            
-                // if(empty($data['email'])){
-                //     $data['email_err']='email cannot be empty';
-                // }
-    
-                // if(empty($data['birthday'])){
-                //     $data['birthday_err']='birthday cannot be empty';
-                // }
-                
-                // if(empty($data['password'])){
-                //     $data['password_err']='password cannot be empty';
-                // }
-          
-                
-          
-                // if(empty($data['gender'])){
-                // $data['gender_err']='gender cannot be empty';
-                // }
-    
-                // if(empty($data['bank_account_no'])){
-                //     $data['bank_account_no_err']='bank account number cannot be empty';
-                // }
-    
-                // if(empty($data['bank_account_name'])){
-                //     $data['bank_account_name_err']='bank account name cannot be empty';
-                // }
-              
-                // if(empty($data['bank'])){
-                //     $data['bank_err']='bank name cannot be empty';
-                // }
-    
-                // if(empty($data['branch'])){
-                //     $data['branch_err']='bank branch cannot be empty';
-                // }
-
                 if($data['password']!=$data['confirm_password']){
                     $data['password_err']='passwords do not match';
-                   }
+                }
                 
              
       
-              if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err'])&& empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])&& empty($data['gender_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err']) && empty($data['propic_err']) && empty($data['address_line_four_err'])){
-                $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  
+              if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err'])&& empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])&& empty($data['gender_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err']) && empty($data['propic_err'])){
                 
+                $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  
                 
                 if($this->sellerModel->addSeller($data)){
                     //   flash('post_msg', 'add new seller successfully');
@@ -304,7 +241,6 @@
                 'confirm_password'=>'',
                 'propic'=>'',
             
-            
                 'first_name_err'=>'',
                 'last_name_err'=>'',
                 'address_line_one_err'=>'',
@@ -333,7 +269,6 @@
       
         }
     
-      
 }    
         
 
