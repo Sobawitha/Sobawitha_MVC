@@ -14,9 +14,11 @@ class M_order
         
         $this->db->beginTransaction();
 
-        $this->db->query("INSERT INTO buyer_orders(cust_id) VALUES(:cust_id)");
-
+        $this->db->query("INSERT INTO buyer_orders(cust_id,payment_type) VALUES(:cust_id,:payment_type)");
+        $this->db->bind(":payment_type","COD");
+      
         $this->db->bind(':cust_id', $_SESSION['user_id']);
+
         $result = $this->db->execute();
         if (!$result) {
             $this->db->rollBack();
@@ -45,12 +47,13 @@ class M_order
             $this->db->bind(":product_id", $orderdata[$i]->Product_id);
             $result = $this->db->single();
             $current_quantity = $result->quantity;
-            if ($current_quantity < $orderdata[$i]->quantity) {
-                // Return an error or throw an exception to indicate that the order cannot be fulfilled due to insufficient stock
-                $this->db->rollBack();
-                return false;
-            }
-         
+          
+            // if ($current_quantity < $orderdata[$i]->quantity) {
+            //     // Return an error or throw an exception to indicate that the order cannot be fulfilled due to insufficient stock
+            //     $this->db->rollBack();
+            //     return false;
+            // }
+         //check this logic later with group members
             $this->db->query("UPDATE  fertilizer SET quantity = quantity -:order_quantity WHERE Product_id = :product_id");
             $this->db->bind(":product_id",$orderdata[$i]->Product_id);
             $this->db->bind(":order_quantity",$orderdata[$i]->quantity);
@@ -65,9 +68,9 @@ class M_order
             $result = $this->db->single();
             $created_by = $result->created_by;
 
-            $this->db->query("INSERT INTO payments (payer_id,type,total_fee,payee_fee,payee_id,profit) VALUES (:payer_id,:type,:total_fee,:payee_fee,:payee_id,:profit)");
+            $this->db->query("INSERT INTO payments (payer_id,order_id,total_fee,payee_fee,payee_id,profit) VALUES (:payer_id,:order_id,:total_fee,:payee_fee,:payee_id,:profit)");
             $this->db->bind(":payer_id", $_SESSION['user_id']);
-            $this->db->bind(":type", "COD");
+            $this->db->bind(":order_id", $order_id);
             $this->db->bind(":total_fee", $orderdata[$i]->product_price*$orderdata[$i]->quantity);
             $this->db->bind(":payee_fee", $orderdata[$i]->product_price*$orderdata[$i]->quantity*0.9);
             $this->db->bind(":payee_id", $created_by);
@@ -82,8 +85,8 @@ class M_order
           
         // }
     
-
-         }
+        }
+         
          
         // // Commit the transaction
         $this->db->commit();
@@ -95,12 +98,8 @@ class M_order
         $payer_name = $result->first_name;
         $payer_password = $result->password;
 
-        if(sendmail($payer_email,$payer_name,$order_id,4,$payer_password))
-        {
-            return true;
-        }
-
-        return false;
+     
+        return true;
 
         
 
@@ -122,9 +121,10 @@ class M_order
          
         
         // Insert a record into the `order_products` table
-        $this->db->query("INSERT INTO buyer_orders(cust_id) VALUES(:cust_id)");
+        $this->db->query("INSERT INTO buyer_orders(cust_id,payment_type) VALUES(:cust_id,:payment_type)");
 
         $this->db->bind(':cust_id', $_SESSION['user_id']);
+        $this->db->bind(':payment_type',"Online");
         $result = $this->db->execute();
         if (!$result) {
             $this->db->rollBack();
@@ -154,11 +154,11 @@ class M_order
             $this->db->bind(":product_id", $data[$i]['price_data']['product_data']['metadata']['product_id']);
             $result = $this->db->single();
             $current_quantity = $result->quantity;
-            if ($current_quantity < $data[$i]['quantity']) {
-                // Return an error or throw an exception to indicate that the order cannot be fulfilled due to insufficient stock
-                $this->db->rollBack();
-                return false;
-            }
+            // if ($current_quantity < $data[$i]['quantity']) {
+            //     // Return an error or throw an exception to indicate that the order cannot be fulfilled due to insufficient stock
+            //     $this->db->rollBack();
+            //     return false;
+            // }
          
             $this->db->query("UPDATE  fertilizer SET quantity = quantity -:order_quantity WHERE Product_id = :product_id");
             $this->db->bind(":product_id",$data[$i]['price_data']['product_data']['metadata']['product_id']);
@@ -174,9 +174,9 @@ class M_order
             $result = $this->db->single();
             $created_by = $result->created_by;
 
-            $this->db->query("INSERT INTO payments (payer_id,type,total_fee,payee_fee,payee_id,profit) VALUES (:payer_id,:type,:total_fee,:payee_fee,:payee_id,:profit)");
+            $this->db->query("INSERT INTO payments (payer_id,order_id,total_fee,payee_fee,payee_id,profit) VALUES (:payer_id,:order_id,:total_fee,:payee_fee,:payee_id,:profit)");
             $this->db->bind(":payer_id", $_SESSION['user_id']);
-            $this->db->bind(":type", "online");
+            $this->db->bind(":order_id", $order_id);
             $this->db->bind(":total_fee", $data[$i]['price_data']['unit_amount']*0.01);
             $this->db->bind(":payee_fee", $data[$i]['price_data']['unit_amount']*0.01*0.9);
             $this->db->bind(":payee_id", $created_by);
@@ -186,26 +186,26 @@ class M_order
                  return false;
             }
  
-          
+            
         
           
         }
     
         // Commit the transaction
+      
         $this->db->commit();
-
-        $this->db-query("SELECT * from user WHERE user_id = :user_id");
+        $this->db->query("SELECT * from user WHERE user_id = :user_id");
         $this->db->bind(":user_id", $_SESSION['user_id']);
         $result = $this->db->single();
         $payer_email = $result->email;
         $payer_name = $result->first_name;
         $payer_password = $result->password;
 
-        if(sendmail($payer_email,$payer_name,$order_id,4,$payer_password));
-        {
-            return true;
-        }
-        return false;
+        // if(sendmail($payer_email,$payer_name,$order_id,4,$payer_password));
+        // {
+        //     return true;
+        // }
+        return true;
     
        
     }

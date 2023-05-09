@@ -36,9 +36,8 @@
             <div class="pic">
             <img src="../public/images/background2.jpg" class="wisthlist_image">
             </div>
-
             <div class="info">
-            <span class="title"><?php echo $wishlist->product_name ?></span>
+            <span class="title"><?php echo strlen($wishlist->product_name) > 20 ? substr($wishlist->product_name, 0, 20) . '...' : $wishlist->product_name ?></span>
             <span class="producer"><?php echo  $wishlist->manufacturer ?></span>
             </div>
 

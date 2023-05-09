@@ -192,7 +192,7 @@
         const crop_type_donut_chart = new Chart(
             document.getElementById('doughnut'),
             {
-                type: 'doughnut',
+                type: 'bar',
                 data: {
                     labels: labels2,
                     datasets: [
@@ -221,10 +221,9 @@
 
     function randomColor(){
         var color = "#";
-        var letters = ['abcdef0123456789'];
-        for (var i = 0; i < 6; i++){
-        color += letters[Math.floor(Math.random() * letters.length)];
-        }
+ 
+        
+       color = '#000000';
         return color;
     }
 

@@ -18,10 +18,11 @@ class purchase extends Controller {
        
             // Get the data for the report from the model
             $orderID = $_GET['order_id'];
-            echo $orderID;
+           
         $order = $this->buyerModel->getOrderDetailsById($orderID);
         $order_items = $this->buyerModel->getOrderItemDetails($orderID);
-        echo $order;
+       
+ 
         // Generate the PDF report using the FPDF library
         require_once(APPROOT.'/fpdf/fpdf.php');
         $pdf = new FPDF();
@@ -43,11 +44,11 @@ class purchase extends Controller {
 
         $pdf->Cell(30, 10, 'Order Id', 1 , 0, 'C',1);
         $pdf->Cell(60, 10, 'Customer Name', 1 , 0, 'C',1);
-        $pdf->Cell(30, 10, 'Email', 1 , 0, 'C',1);
-        $pdf->Cell(50, 10, 'Phone', 1 , 0, 'C',1);
-        $pdf->Cell(30, 10, 'Address', 1 , 0, 'C',1);
-        $pdf->Cell(30, 10, 'Total', 1 , 0, 'C',1);
-        $pdf->Cell(52, 10, 'Date & Time', 1 , 0, 'C',1);
+        $pdf->Cell(50, 10, 'Email', 1 , 0, 'C',1);
+        $pdf->Cell(30, 10, 'Phone', 1 , 0, 'C',1);
+        $pdf->Cell(70, 10, 'Address', 1 , 0, 'C',1);
+       
+        $pdf->Cell(42, 10, 'Date & Time', 1 , 0, 'C',1);
         $pdf->Ln();
         
         $pdf->SetTextColor(0, 0, 0);
@@ -56,36 +57,42 @@ class purchase extends Controller {
         
      
      
-            $pdf->Cell(30, 10, $order->order_id, 1 , 0, 'C');
-            $pdf->Cell(60, 10, $order->customer_name, 1 , 0, 'C');
-            $pdf->Cell(30, 10, $order->email, 1 , 0, 'C');
-            $pdf->Cell(50, 10, $order->phone, 1 , 0, 'C');
-            $pdf->Cell(30, 10, $order->address, 1 , 0, 'C');
-            $pdf->Cell(30, 10, 'Rs. '.$order->total, 1 , 0, 'C');
-            $pdf->Cell(52, 10, $order->created_at, 1 , 0, 'C');
+            $pdf->Cell(30, 20, $order->order_id, 1 , 0, 'C');
+            $pdf->Cell(60, 20, $order->customer_name, 1 , 0, 'C');
+            $pdf->Cell(50, 20, $order->email, 1 , 0, 'C');
+            $pdf->Cell(30, 20, $order->phone, 1 , 0, 'C');
+            $pdf->Cell(70, 20, $order->address, 1 , 0, 'C');
+          
+            $pdf->Cell(42, 20, $order->created_at, 1 , 0, 'C');
             $pdf->Ln();
+            $pdf->Ln();
+
 
       
 
          $pdf->SetFont('Arial','B',12);
-         $pdf->Cell(40,10,'Product Name',1);
+         $pdf->Cell(180,10,'Product Name',1);
          $pdf->Cell(30,10,'Quantity',1);
          $pdf->Cell(30,10,'Unit Price',1);
          $pdf->Cell(30,10,'SubTotal',1);     
          $pdf->Ln();
          $pdf->SetFont('Arial', '', 12);
-foreach ($order_items as $item) {
-    $pdf->Cell(40, 10, $item->product_name, 1);
-    $pdf->Cell(30, 10, $item->quantity, 1);
-    $pdf->Cell(30, 10, 'Rs. '.$item->price, 1);
-
+         if($order_items)
+foreach ($order_items as $row) {
+    $pdf->Cell(180, 10, $row->product_name, 1);
+    $pdf->Cell(30, 10, $row->quantity, 1);
+    $pdf->Cell(30, 10, 'Rs. '.$row->price, 1);
+    $pdf->Cell(30, 10, 'Rs. '.($row->price*$row->quantity), 1);
     $pdf->Ln();
 }
 
+
+$pdf->Ln();
+$pdf->Ln();
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(100, 10, '', 0);
+
 $pdf->Cell(40, 10, 'Total Amount:', 1);
-$pdf->Cell(40, 10, 'Rs. '.$order->total_amount, 1);
+$pdf->Cell(40, 10, 'Rs. ', 1);
          
          
 
@@ -95,9 +102,7 @@ $pdf->Cell(40, 10, 'Rs. '.$order->total_amount, 1);
            
        
         
-        $pdf->AliasNbPages();
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(0, 10, 'Page ' . $pdf->PageNo() . ' of {nb}', 0, 0, 'C');
+       
         
   
         // $pdf->Output();
