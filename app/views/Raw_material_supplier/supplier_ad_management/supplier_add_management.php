@@ -5,7 +5,6 @@
 <script src="../js/Raw_material_supplier/ad_management/ad_manage.js"></script>
 <!-- <script src="../js/Raw_material_supplier/ad_delete/ad_delete.js"></script>  -->
 
-
 <body >
 
 <div class="body">
@@ -49,7 +48,7 @@
                 <div class="filter_section">
                 <form method ="POST" action="<?php echo URLROOT?>/supplier_ad_management/indexfilter" id="filter_form">
 
-                        <label for="all" id="filter_label"> <input type="radio" id="all" name="current_status"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'all') echo ' checked="checked"';?>>All</label>
+                        <label for="all" id="filter_label"> <input type="radio" id="all" name="current_status"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'all') echo ' checked="checked"';?> checked>All</label>
                         <br><label for="admins" id="filter_label"> <input type="radio" id="admins" name="current_status" value="Pending" onclick="javascript:submit()"  value = "Pending"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'Pending') echo ' checked="checked"';?>>Pending</label>
                         <br><label for="customers" id="filter_label"><input type="radio" id="customers" name="current_status" value="Accepted" onclick="javascript:submit()"  value = "Accepted"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'Accepted') echo ' checked="checked"';?>>Accepted</label>
                         <br><label for="sellers" id="filter_label"><input type="radio" id="sellers" name="current_status" value="Rejected" onclick="javascript:submit()"  value = "Rejected"<?php if (isset($_POST['current_status']) && $_POST['current_status'] == 'Rejected') echo ' checked="checked"';?>>Rejected</label>
@@ -94,7 +93,21 @@
 
                                         <td><span class="certificate No<"><?php echo $ad->quantity ?></span></td>
 
-                                        <td><span class="manufacture"><?php echo $ad->product_description ?></span></td>
+                                        <td>
+                                                <span class="manufacture">
+                                                        <?php
+                                                        $words = explode(" ", $ad->product_description);
+                                                        if(count($words) < 50){
+                                                                echo $ad->product_description;
+                                                        }else{
+                                                                for($count=0; $count<50; $count++ ){
+                                                                        echo $words[$count]." ";
+                                                                }
+                                                                echo "...";
+                                                        }
+                                                        ?>
+                                                </span>
+                                        </td>
 
 
                                         <td id="option">
@@ -115,7 +128,7 @@
                                                                 
                                                                 <div class="dialog__content">
                                                                         <a href="<?php echo URLROOT?>/supplier_ad_management/delete_advertisement/<?php echo $ad->Product_id ?>" id="yes">Yes</a>
-                                                                        <a href="<?php echo URLROOT?>/supplier_ad_management/index " id="no">No</a>
+                                                                        <a href="<?php echo URLROOT?>/supplier_ad_management/indexfilter " id="no">No</a>
                                                                 </div>
                                                         </div>
                                                 </dialog>

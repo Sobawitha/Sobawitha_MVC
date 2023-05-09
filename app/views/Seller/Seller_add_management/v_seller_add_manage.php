@@ -13,16 +13,12 @@
                         <h2>Are you sure</h2>
                         <p>You will not be able to recover that item.</p>
                         </div>
-
-                        <div class="dialog_content">
-
-                            <form method="POST" action="<?php echo URLROOT?>/seller_ad_management/delete_advertisment">
+                        
+                            <form class= "dialog_content" method="POST" action="<?php echo URLROOT?>/seller_ad_management/delete_advertisment">
                             <input id="fer_current_status" type="hidden" name="current_status"></input>
                             <button id="deletebtn" type="submit" name="deleteadvertisment">Delete</button>
                             <button id="cancelbtn" onclick="closepopup()" type="button">Cancel</button>
                             </form>
-                            
-                        </div>
                 </div>
         </dialog>
 

@@ -262,3 +262,8 @@ window.addEventListener('load', function() {
 });
 
 
+/*for forum post */
+document.getElementById("annousments_for_other").setAttribute("disabled", true);
+
+
+

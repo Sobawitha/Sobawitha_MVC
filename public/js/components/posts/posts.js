@@ -32,6 +32,9 @@ inputPath.addEventListener("change", function() {
     imagePlaceholder.style.display = "block";
 
     showImage();
+
+    intRemArea.value = '';
+    
 });
 
 function showImage() {

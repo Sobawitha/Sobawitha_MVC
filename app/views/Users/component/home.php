@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/home.css"></link>
-<link rel="stylesheet" href="../css/Users/component/home.css"></link>
 <link rel="stylesheet" href="../css/Buyer/wish_list/wish_list.css"></link>
 <script src="../js/Users/Notifications/push_notifications_profile.js"></script>
 <?php require APPROOT.'/views/Users/component/Header.php'?>

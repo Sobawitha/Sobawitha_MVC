@@ -47,8 +47,6 @@ class M_users
     }
     
     public function changePW($data){
-
-       
         $this->db->query('UPDATE user set password = :password WHERE user_id = :id');
         $this->db->bind(':password', $data['password']);
         $this->db->bind(':id', $data['user_id']);
@@ -84,9 +82,6 @@ class M_users
         $this->db->query("SELECT * FROM notifications WHERE status=1 ORDER BY time DESC LIMIT 5");
         return $this->db->resultset();
     }
-    
-    
-      
 }
 
 

@@ -317,6 +317,14 @@ class M_resources
         return $this->db->single();
     }
 
+    public function get_no_of_forumtopics($id){
+        // $this->db->query("SELECT COUNT(*) AS num_forum_topics FROM forum_posts WHERE (date) >= DATE_SUB(NOW(), INTERVAL 1 YEAR) AND created_by = :id");
+        $this->db->query("SELECT COUNT(*) AS num_forum_topics FROM forum_posts WHERE created_by = :id AND date >= DATE_SUB(NOW(), INTERVAL 1 YEAR);");
+        $this->db->bind(":id", $id);
+        return $this->db->single();
+        
+    }
+
 
 
 }

@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_view.css"></link>
-
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <script src="../js/Users/component/product_page.js"></script>
 
@@ -120,12 +119,13 @@
                                                 margin:0px;
                                                 padding:0px;">
                     <div class="product_detail">
+                        <i class="fa-regular fa-heart" id="heart"></i><br>
                         <span class="product_name"><?php echo $ad->product_name ?></span><br>
-                        <span class="owner">By ABC production</span>
+                        <span class="owner">By <?php echo $ad->manufacturer ?></span>
                     </div>
                 </div>
 
-                <i class="fa-regular fa-heart" id="heart"></i>
+                
 
                 <div class="discription">
                     <i class="fa-solid fa-star" id="star"></i>

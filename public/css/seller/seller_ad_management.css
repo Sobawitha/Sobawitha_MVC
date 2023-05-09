@@ -134,7 +134,7 @@ td{
 #deletePopup {
   border: none;
   padding: 0;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-left:45%;
   margin-top:15%;
 }
@@ -163,16 +163,21 @@ td{
 }
 
 .dialog_content{
+  width:100%;
   display: flex;
-  align-content:space-around;
-  gap: 30px;
+  justify-content:space-evenly;
+  /* gap: 60px; */
+}
+
+#closeiconadmanage{
+  text-decoration: none;
 }
 
 #cancelbtn{
   border: none;
   border-radius: 3px;
   background-color:rgb(132, 129, 129);
-  width: 80px;
+  width: 100px;
   height: 40px;
   cursor: pointer;
   color:white;
@@ -181,8 +186,8 @@ td{
 #deletebtn{
   border: none;
   border-radius: 3px;
-  background-color:rgb(170, 27, 27);
-  width: 80px;
+  background-color:rgb(197, 16, 16);
+  width: 100px;
   height: 40px;
   cursor: pointer;
   color:white;

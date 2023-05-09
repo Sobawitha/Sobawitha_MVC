@@ -284,18 +284,14 @@
                         $data['new_pwd_err'] = 'Please enter a new password';
                       } else {
                         $pwdValidationResult = validatePassword($data['new_pwd']);
-                        if($pwdValidationResult !== true){ // fix 1: check the validation result correctly
-                          $data['new_pwd_err'] = $pwdValidationResult; // fix 2: store the error message
+                        if($pwdValidationResult !== true){ 
+                          $data['new_pwd_err'] = $pwdValidationResult; 
                         } else {
-                          $data['new_pwd_err'] = ''; // fix 3: reset the error message if there is no error
+                          $data['new_pwd_err'] = ''; 
                         }
                       }
                       
-                       
-
-                       
-                       
-                       if(empty($data['password'])){
+                    if(empty($data['password'])){
                         $data['confirm_password_err'] = 'Please retype your new password';
                       } else {
                         $pwdValidationResult = validatePassword($data['password']);
@@ -308,12 +304,8 @@
                       
                      }
 
-                     
-
-                     if(empty($data['pwd_token'])){
+                    if(empty($data['pwd_token'])){
                         $data['empty_token_err']='Error: Authentication token missing. Please retrieve a token using the forgot password option.';
-                     
-                      
                     }
                  
 
@@ -323,11 +315,6 @@
                         }
                     }
 
-                    // if($oldPwd){
-                    //     $data['old_password_err'] = 'Your cannot enter an old password.';
-                    // }
-
-    
                     if(empty($data['new_pwd_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['token_expire_err']) && empty($data['retype_new_password_err']) && empty($data['empty_token_err']) ){
              
                         $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
@@ -346,30 +333,29 @@
                        }else{
                          $this->view('Users/user/v_reset_password', $data);
                        }
-            
-            
-            }else{
-                //initial form
-                $data = [
-                    'new_pwd' => '',       
-                    'password' => '',
-                    'email' => '',
-                    'pwd_token' => '',
+        } else {
+            //initial form
+            $data = [
+                'new_pwd' => '',
+                'password' => '',
+                'email' => '',
+                'pwd_token' => '',
 
-                    'new_pwd_err' => '',
-                    'password_err' => '',
-                    'confirm_password_err' => '',
-                    'old_password_err' => '',
-                    'retype_new_password_err' => '',
-                    'token_expire_err' => '',
-                    'old_password_err' => '',
-                    'empty_token_err' => ''
-                ];
+                'new_pwd_err' => '',
+                'password_err' => '',
+                'confirm_password_err' => '',
+                'old_password_err' => '',
+                'retype_new_password_err' => '',
+                'token_expire_err' => '',
+                'old_password_err' => '',
+                'empty_token_err' => ''
+            ];
 
-                //load view
-                $this->view('Users/user/v_reset_password', $data);
-            }
-  
+            //load view
+            $this->view('Users/user/v_reset_password', $data);
+        }
     }
 
 }
+
+?>
