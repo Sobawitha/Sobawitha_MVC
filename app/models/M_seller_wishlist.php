@@ -8,17 +8,42 @@
         }
 
         public function getItems(){
-            $this->db->query("SELECT seller_wishlist.*,raw_material.raw_material_image,raw_material.Product_id, raw_material.product_name, raw_material.manufacturer, raw_material.price FROM raw_material INNER JOIN seller_wishlist on seller_wishlist.product_Id = raw_material.product_id WHERE seller_wishlist.user_Id = :user_id");
+            $this->db->query("SELECT wishlist.*,raw_material.raw_material_image,raw_material.product_id, raw_material.product_name, raw_material.manufacturer, raw_material.price FROM raw_material INNER JOIN wishlist on wishlist.product_id = raw_material.product_id WHERE wishlist.User_id = :user_id");
             $this->db->bind(':user_id', $_SESSION['user_id']);
             return $this->db->resultSet();
         }
 
         public function removeItem(){
 
-            $this->db->query("DELETE FROM seller_wishlist WHERE User_id = :user_id AND product_id = :product_id");
+            $this->db->query("DELETE FROM wishlist WHERE User_id = :user_id AND Product_id = :product_id");
             $this->db->bind(':user_id', $_SESSION['user_id']);
             $this->db->bind(':product_id', $_GET['product_id']);
             $this->db->execute();
         }
+
+        /*related raw material products */
+
+    public function add_to_wishlist($product_id){
+        $this->db->query("INSERT INTO wishlist (User_id, Product_id) VALUES(:user_id, :product_id)");
+        $this->db->bind("user_id", $_SESSION['user_id']);
+        $this->db->bind("product_id", $product_id);
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
+
+    public function get_all_wishlist_items(){
+        $this->db->query("SELECT Product_id from wishlist where user_id = :user_id");
+        $this->db->bind("user_id", $_SESSION['user_id']);
+        return $this->db->resultSet();
+    }
+
+    
+
+}
+
+
 ?>

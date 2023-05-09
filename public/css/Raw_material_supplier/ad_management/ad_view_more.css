@@ -4,36 +4,12 @@
 }
 
 
-
-#user_home{
-  color:lightgreen;
-  margin-right:5px;
-}
-
-.home_hr{
-  border-top:0.5px solid lavender;
-  transform: translateY(-30px);
-}
-
-#part_a{
-  position:absolute;
-  color:rgb(160, 155, 155);
-  transform: translate(250px,30px);
-  font-weight:bold;
-}
-#part_b{
-  position:absolute;
-  color:rgb(183, 245, 183);
-  transform: translate(294px,30px);
-  font-weight:bold;
-} 
-
-
 .body{
     display:grid;
-    grid-template-columns:50% 50%;
-    margin-left: 250px;
-    
+    grid-template-columns:40% 50%;
+    padding-top: 80px;
+    gap:100px;
+    padding-left:150px;   
 }
 
 .section_1{
@@ -180,7 +156,7 @@
   }
   
 .checked {
-    color: salmon;
+    color: crimson;
     font-size:15px;
   }
 
@@ -465,7 +441,7 @@
   #indicator{
     width:120px;
     border:none;
-    background-color: salmon;
+    background-color: #dfa470;
     height:3px;
     margin-top:8px;
     transform:translateX(-164px);
@@ -1023,7 +999,7 @@
  /*buttons*/
  
 .buttons{
-  margin-left: 120px;
+  margin-left: 160px;
 }
 
 #buy_now_btn{
@@ -1032,7 +1008,7 @@
   color:white;
   font-weight: bold;
   font-size:15px;
-  background-color: salmon;
+  background-color: #dfa470;
   border:none;
   cursor:pointer;
 }
@@ -1054,7 +1030,7 @@
   color:white;
   font-weight: bold;
   font-size:15px;
-  background-color: salmon;
+  background-color: #dfa470;
   border:none;
   opacity:0.5;
 }
@@ -1128,12 +1104,12 @@
 }
 
 .term{
-   color:salmon;
+   color:#dfa470;
 }
 
 .checkout{
   margin-top:30px;
-  background-color: salmon;
+  background-color: #dfa470;
   color:white;
   font-weight: bold;
   border:none;
@@ -1227,7 +1203,7 @@
 }
 
 #add_wishlist_heart{
-  color:salmon;
+  color:crimson;
   font-size:30px;
   margin-left:70px;
   cursor:pointer;

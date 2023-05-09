@@ -11,18 +11,6 @@
 
         <p class="filter_section_title">shop by category</p>
 
-        <!-- <div class="filter_type_1">
-            <span class="title">Brand</span><br>
-            <div class="all_brands">
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">ABC producers</label><br>
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">Sara bhoomi</label><br>
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">Govi mithuru</label><br>
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">ABC producers</label><br>
-                <label for="brand_1" id="brand_1"> <input type="checkbox" id="brand_1" name="brands" value="brand_1">Saru ketha</label><br>
-                <span class="view_more">view more</span>
-            </div>
-        </div> -->
-
         <hr class="filter_hr">
 
         <div class="filter_type_2">
@@ -62,21 +50,6 @@
 
         <hr class="filter_hr">
 
-        <!-- <div class="filter_type_5">
-            <span class="title">Location</span><br>
-            <div class="all_locations">
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-                <label for="location_1" id="location_1"> <input type="checkbox" id="location_1" name="location" value="location_1">province_1</label><br>
-            </div>
-        </div> -->
-
     </div>
 
     <div class="section_2">
@@ -109,35 +82,55 @@
 
         <div class="recent_product_card_section">
             
-            <?php foreach($data['posts'] as $ad): ?>
-                <a href="<?php echo URLROOT?>/supplier_ad_view/indexmore/<?php echo $ad->Product_id ?>" id = "product_card_link">
+            <?php foreach($data['ads'] as $ad): ?>
+                
                 <div class="adv_card">
-                <div class="card_image" style="background: url(<?php echo URLROOT;?>/img/postsImgs/<?php echo $ad->raw_material_image;?>); background-size: cover;
-                                                height:75%;
-                                                -webkit-background-size:cover ;
-                                                background-position:center;
-                                                margin:0px;
-                                                padding:0px;">
+                <a href="<?php echo URLROOT; ?>/supplier_ad_view/indexmore?product_id=<?php echo $ad->Product_id; ?>" id="product_card_link">
+                <div class="card_image" style="background: url(<?php echo URLROOT;?>/img/postsImgs/<?php echo $ad->raw_material_image;?>); background-size: cover; height:75%; -webkit-background-size:cover ; background-position:center; margin:0px; padding:0px;">
                     <div class="product_detail">
-                        <i class="fa-regular fa-heart" id="heart"></i><br>
-                        <span class="product_name"><?php echo $ad->product_name ?></span><br>
-                        <span class="owner">By <?php echo $ad->manufacturer ?></span>
-                    </div>
-                </div>
+                        <?php if($_SESSION['user_flag']==3){
+                            
+                            if(in_array($ad->Product_id , array_column($data['seller_wishlist'], 'Product_id'))){
+                                ?>
+                                <a href="<?php echo URLROOT; ?>/supplier_ad_view/remove_wishlist?product_id=<?php echo $ad->Product_id; ?>"><i class="fa-regular fa-heart"  id="heart_in_wishlist"></i></a><br>
+                                <?php
+                            }else{
+                                ?>
+                                <a href="<?php echo URLROOT; ?>/supplier_ad_view/add_to_wishlist?product_id=<?php echo $ad->Product_id; ?>"><i class="fa-regular fa-heart"  id="heart"></i></a><br>
+                                <?php
+                            }
+                            ?>
+                
+                <?php
+            }else{
+                ?>
+                <i class="fa-regular fa-heart" id="heart"></i><br>
+                <?php
+            }
+            ?>
+            
+            <span class="product_name"><?php echo $ad->product_name; ?></span><br>
+            <span class="owner">By <?php echo $ad->manufacturer; ?></span>
+        </div>
+    </div>
+</a>
+
 
                 
 
                 <div class="discription">
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-solid fa-star" id="star"></i>
-                    <i class="fa-regular fa-star" id="star"></i>
-                    <i class="fa-regular fa-star" id="star"></i>
+                <?php $avg_rating = round($ad->avg_rating); ?>
+                <?php 
+                    for ($i = 1; $i <= 5; $i++) {
+                        $checked = ($i <= $avg_rating) ? 'checked' : '';
+                        echo '<span class="fas fa-star ' . $checked . ' "></span>';
+                        }
+                        ?>
                     <span class="price"><?php echo $ad->price ?></span>
                     
                 </div>
             </div>
-            </a>
+            
             <?php endforeach; ?>
             
 

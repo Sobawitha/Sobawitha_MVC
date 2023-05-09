@@ -210,28 +210,7 @@ function checkout() {
 
 
 
-<div class="nav">
-            <nav>
-                <span class="site_name" id="part_a">SOBA</span><span id="part_b">WITHA</span>
-                <ul>
-                    <li class="home_link"><a href="<?php echo URLROOT?>/Pages/home">Home</a></li>
-                    <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li> 
-                    <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li> 
-                    <li><a href="">Sell</a></li>
-                    <?php if(!isset($_SESSION['user_id'])) {
-                      ?>
-                      <li><a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-user" id="user_home"></i> Join Us</a></li>
-                      <?php
-                    }else{
-                      ?>
-                      <li><a href="<?php echo URLROOT?>/Login/logout"><i class="fa-solid fa-right-from-bracket" id="user_home"></i></i>Log out</a></li>
-                    <?php
-                    }?>
-                        
-                </ul>
-            </nav>
-            <hr class="home_hr">
-</div>
+
 
 <?php
 $content = $data['adcontent'];
@@ -324,24 +303,18 @@ $content = $data['adcontent'];
 
   </div>
 
-  <?php
+<?php
 
 $is_wishlist_item = false;
 
 foreach($data['wishlist_items'] as $wishlist_item)
 {
-
-
   if($wishlist_item->Product_id == $content->Product_id)
   {
     $is_wishlist_item = true;
     break;
   }
 }
-
-
-
-
 ?>
 
   <div class="section_3">
@@ -468,13 +441,11 @@ foreach($data['wishlist_items'] as $wishlist_item)
     <?php
   }else{
     ?>
-      <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
       <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a>
 
     <?php
   }
   ?>
-      <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
       <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn" data-product-id = "<?php echo $content->Product_id ?>">Add to Cart</button></a>
 
 <?php
@@ -487,6 +458,20 @@ foreach($data['wishlist_items'] as $wishlist_item)
 ?>
   
 </div>
+
+</div>
+</div>
+
+  <?php require APPROOT . '/views/Users/component/footer.php' ?>
+
+
+
+<dialog id="my-dialog">
+  <p>Item Successfully Added to the Wishlist</p>
+  <button id="dialog-close-button">Close</button>
+</dialog>
+
+
 
 <script>
  const plusButton = document.querySelector('.plus_button');

@@ -110,7 +110,7 @@
             <td>Rs. <?php echo $data['tot_bill'];?></td>  
           </tr>
         </table>
-        <a href="<?php echo URLROOT ?>/fertilizer_product/confirm_payment?product_id=<?php echo $_GET['product_id']?>"><button type="button" id="place_order"> Place Order </button> </a>
+        <a href="<?php echo URLROOT ?>/supplier_ad_view/confirm_payment?product_id=<?php echo $_GET['product_id']?>"><button type="button" id="place_order"> Place Order </button> </a>
        </div>
       </div>
     </div>

@@ -64,7 +64,7 @@ nav{
 
 .body{
     display:grid;
-    grid-template-columns:5% 55% 40%;
+    grid-template-columns:10% 50% 40%;
     
 }
 

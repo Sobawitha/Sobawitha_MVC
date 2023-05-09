@@ -15,7 +15,7 @@
 }
 
 .section_2{
-  width: 1500px;
+  /* width: 1500px; */
 }
 
 .a_add_admin_maincontent{
@@ -200,22 +200,6 @@ form .advertisment-details .image_container .right1 img, form .advertisment-deta
   width: 40px;
   height: 40px;
 }
-
-
-
-
-
- /* aded from simpleepic */
-
- /* .post-container .upper {
-  display: flex;
-  flex-direction: row;
-} */
-
-/* .post-container .upper .left {
-  width: 100%;
-} */
-
 form .advertisment-details .image_container .right1, form .advertisment-details .image_container .right2, form .advertisment-details .image_container .right3{
   width: fit-content;
   opacity: 0.8;
@@ -232,27 +216,69 @@ form .advertisment-details .image_container .right1 img, form .advertisment-deta
 }
 
 form .advertisment-details .image_container .post-image1 img {
-  width: 50%;
-  height: 100px;
-  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  transform:translate(20px ,25px);
+  /* border-radius: 5px; */
 }
 
 form .advertisment-details .image_container .post-image2 img {
-  width: 50%;
-  height: 100px;
-  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  transform:translate(20px ,25px);
+  /* border-radius: 5px; */
 }
 
 form .advertisment-details .image_container .post-image3 img {
-  width: 50%;
-  height: 100px;
-  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  transform:translate(20px ,25px);
+  /* border-radius: 5px; */
+}
+
+#removeImagebtn1, #removeImagebtn2, #removeImagebtn3{
+  padding:10px;
+  border-radius:50px;
+  background-color: rgb(234, 234, 200);
+}
+
+#addImagebtn1, #addImagebtn2, #addImagebtn3{
+  padding:15px;
+  border-radius:20px;
+  background-color: rgb(236, 230, 181);
 }
 
 
+.flex_view{
+  display:grid;
+  grid-template-columns: 85% 15%;
+  gap:30px;
+}
 
+.text_filed{
+  display:grid;
+  grid-template-columns: 50% 50%;
+  gap:30px;
+}
 
+.input_flex{
+  display:grid;
+  grid-template-columns: 50% 50%;
+  gap:30px;
+}
 
+.enter_amount{
+  display:grid;
+  grid-template-columns: 60% 40%;
+  gap:30px;
+}
+
+.image_container{
+  display:flex;
+  grid-template-columns: 30% 30% 30%;
+  gap:100px;
+
+}
 
 
 
