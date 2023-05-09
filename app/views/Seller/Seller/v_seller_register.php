@@ -1,9 +1,12 @@
-<link rel="stylesheet" href="../css/Seller/seller_register.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Seller/seller_register.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
 <div class="signup_seller_container">
+
     <div class="signup_seller_intro">
+
     <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a><br>
+
     <i class="fa-solid fa-leaf" id="leaf"></i>    
     <h2>Sobawitha </h2>
         <span class="sign_up">Seller Sign Up<span>
@@ -20,6 +23,7 @@
     </div>
     
     <form method="POST" action="<?php echo URLROOT?>/Seller/seller_register" enctype="multipart/form-data">
+    
     <div class="signup_seller_content">
 
     
@@ -176,11 +180,14 @@
 
         </div>
    
-    </div>
+    
     <div class="sign_up_seller_btn">
           <input type="submit" id="sign_up_sell_btn" value="Sign Up">
           </div>
+       
+        </div>
 
+
+</form>
 
 </div>
-</form>

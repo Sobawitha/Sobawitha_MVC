@@ -1,10 +1,13 @@
-<link rel="stylesheet" href="../css/Raw_material_supplier/supplier_register.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Raw_material_supplier/supplier_register.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
 
 <div class="signup_supplier_container">
+
 <div class="signup_supplier_intro">
+
     <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a><br>
+
     <i class="fa-solid fa-leaf" id="leaf"></i>    
     <h2>Sobawitha </h2>
         <span class="sign_up">Supplier Sign Up<span>
@@ -21,6 +24,7 @@
     </div>
 
     <form method="POST" action="<?php echo URLROOT?>/Supplier/supplier_register" enctype="multipart/form-data">
+    
     <div class="signup_supplier_content">
         <div class="supplier_signup_part_one">
         
@@ -179,5 +183,7 @@
         </div>
         
     </div>
-</div>
+
 </form>
+
+</div>
