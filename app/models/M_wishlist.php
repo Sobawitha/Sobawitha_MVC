@@ -54,7 +54,12 @@ class M_wishlist
     {
 
         $this->db->query("SELECT wishlist.*,fertilizer.fertilizer_img,fertilizer.manufacturer,fertilizer.product_name,fertilizer.price FROM fertilizer INNER JOIN wishlist ON wishlist.Product_id = fertilizer.Product_id WHERE wishlist.User_id = :user_id");
-        $this->db->bind(':user_id', $_SESSION['user_id']);
+        if(isset($_SESSION['user_id'])){
+            $this->db->bind(':user_id', $_SESSION['user_id']);
+        }else{
+            $this->db->bind(':user_id', 0);
+        }
+        
         return $this->db->resultSet();
 
     }

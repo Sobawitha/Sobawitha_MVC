@@ -43,7 +43,7 @@
         $this->db->bind(':first_name',$data['first_name']);
         $this->db->bind(':last_name', $data['last_name']);
         $this->db->bind(':email', $data['email']);
-        $this->db->bind(':user_flag', 3);
+        $this->db->bind(':user_flag', 2);
         $this->db->bind(':contact_no',$data['contact_number']);
         $this->db->bind(':nic', $data['nic']);
         $this->db->bind(':dob',$data['birthday']);
