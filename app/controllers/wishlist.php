@@ -33,10 +33,11 @@ public function addToCart($pro_id){
 }
 
 public  function  display_all_items(){
-   $wish_list = $this->wishlistModel->getAllItems();
-
-   $data = ['wishlist' => $wish_list] ;
+  if(isset($_SESSION['user_id'])){
+    $wish_list = $this->wishlistModel->getAllItems();
+    $data = ['wishlist' => $wish_list] ;
    $this->view('Buyer/Buyer_wishlist/v_wishlist',$data);
+  }
 }
 
 
