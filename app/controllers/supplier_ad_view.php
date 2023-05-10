@@ -2,6 +2,7 @@
     class supplier_ad_view extends Controller{
         public function __construct(){
             $this->supplier_ad = $this->model('M_supplier_view');
+            $this->seller_wishlist_model =$this->model('M_seller_wishlist');
     }
 
 
@@ -19,7 +20,7 @@
     public function indexmore() {
 
         $productId = $_GET['product_id'];
-        $this->seller_wishlist_model->search_wishlist()->wishlist_count;
+        $count = $this->seller_wishlist_model->search_wishlist()->wishlist_count;
 
 
         $post = $this->supplier_ad->getPostById($productId);
