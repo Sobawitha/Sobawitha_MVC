@@ -3,6 +3,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.fa-heart.wishlist-active {
+  color: red;
+}
+
 
 
 #user_home{

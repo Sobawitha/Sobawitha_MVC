@@ -1,5 +1,5 @@
 <?php
-    class seller_wishlist extends controller{
+    class seller_wishlist extends Controller{
 
         public function __construct(){
             $this->seller_wishlist_model = $this->model('M_seller_wishlist');
@@ -14,9 +14,7 @@
         }
 
         public function remove_wishlist_item(){
-            // echo "come";
-            // die();
-
+            
             $this->seller_wishlist_model->removeItem();
 
             redirect("seller_wishlist/view_wishlist");

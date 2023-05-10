@@ -111,7 +111,7 @@
         <div class="recent_product_card_section">
             
             <?php foreach($data['posts'] as $ad): ?>
-                <a href="<?php echo URLROOT?>/supplier_ad_view/indexmore/<?php echo $ad->Product_id ?>" id = "product_card_link">
+                <a href="<?php echo URLROOT?>/supplier_ad_view/indexmore?product_id=<?php echo $ad->Product_id ?>" id = "product_card_link">
                 <div class="adv_card">
                 <div class="card_image" style="background: url(<?php echo URLROOT;?>/img/postsImgs/<?php echo $ad->raw_material_image;?>); background-size: cover;
                                                 height:75%;

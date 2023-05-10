@@ -16,7 +16,10 @@
     }
     
     
-    public function indexmore($productId) {
+    public function indexmore() {
+
+        $productId = $_GET['product_id'];
+        $this->seller_wishlist_model->search_wishlist()->wishlist_count;
 
 
         $post = $this->supplier_ad->getPostById($productId);

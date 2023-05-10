@@ -1,6 +1,20 @@
 <?php require APPROOT . '/views/Users/component/Header.php'?>
-<?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
-<?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
+
+<?php
+if($_SESSION['user_flag'] == 1){
+    require APPROOT.'/views/Admin/Admin/admin_topnavbar.php';
+    require APPROOT . '/views/Admin/Admin/admin_Sidebar.php';
+}
+else if($_SESSION['user_flag'] == 3){
+    require APPROOT.'/views/Seller/Seller/seller_topnavbar.php';
+    require APPROOT . '/views/Seller/Seller/seller_sidebar.php';
+}
+
+else if($_SESSION['user_flag'] == 4){
+    require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php';
+    require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php';
+}
+?>
 <!-- <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Raw_material_supplier/ad_management/ad_view.css"></link> -->
 <!-- <script src="../js/Raw_material_supplier/ad_delete/ad_delete.js"></script>  -->
 
@@ -114,7 +128,8 @@ $content = $data['adcontent'];
   <a href="<?php echo URLROOT ?>/Pages/product_page" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
     <span class="title_1">Raw Material</span><br>
     <span class="title_2"><?php echo $data['product_name']; ?></span>
-    <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="add_wishlist_heart" data-product-id="<?php /*echo $content->Product_id*/ ?>" onclick = "editWishlist()"></i>
+    
+    <a href="<?php echo URLROOT ?>/raw_material_product/add_to_wishlist?product_id=<?php echo $data['product_id'] ?>"> <i class="fa-solid fa-heart" id="add_wishlist_heart"></i></a>
     
     <br><br>
 
