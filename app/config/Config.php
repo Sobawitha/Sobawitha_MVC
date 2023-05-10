@@ -18,6 +18,9 @@
 
      // PUBLIC ROOT
      define('PUBROOT', dirname(dirname(dirname(__FILE__))).'\public');
+     
+     
+     date_default_timezone_set('Asia/Kolkata');
         
 ?>
 

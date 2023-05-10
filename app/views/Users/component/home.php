@@ -145,7 +145,25 @@
         <div class="recent_product_card_section">
          
         <?php foreach($data['ads'] as $ads): ?>
-        
+            <?php
+
+$is_wishlist_item = false;
+
+foreach($data['wishlist_items'] as $wishlist_item)
+{
+
+
+  if($wishlist_item->Product_id == $ads->Product_id)
+  {
+    $is_wishlist_item = true;
+    break;
+  }
+}
+
+
+
+
+?>
                 
                 <div class="adv_card">
                 <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product?product_id=<?php echo $ads->Product_id ?>"><div class="card_image" style="background: url(<?php echo URLROOT ?>/public/upload/fertilizer_images/<?php echo $ads->fertilizer_img ?>); background-size: cover; height:75%; -webkit-background-size:cover;  background-position:center; margin:0px; padding:0px; ">
@@ -157,7 +175,7 @@
                     </div> 
                  </div></a>
                 
-                <i class="fa-regular fa-heart" id="heart"></i>
+               <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="heart" data-product-id = "<?php echo $ads->Product_id?>"  ></i>
 
                 <div class="discription">
                 <span class="price">Rs. <?php echo $ads->price ?></span>
@@ -188,6 +206,25 @@
        
         
          <?php foreach($data['allads'] as $allAds): ?>
+            <?php
+
+$is_wishlist_item = false;
+
+foreach($data['wishlist_items'] as $wishlist_item)
+{
+
+
+  if($wishlist_item->Product_id == $allAds->Product_id)
+  {
+    $is_wishlist_item = true;
+    break;
+  }
+}
+
+
+
+
+?>
                 <div class="adv_card">
                 <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product?product_id=<?php echo $allAds->Product_id ?>">
                
@@ -199,8 +236,8 @@
                 </div></a>
 
                
-                <a href = "<?php echo URLROOT?>/wishlist/addToWishlist/<?php echo $allAds->Product_id ?>"><i class="fa-regular fa-heart" id="heart"></i></a>
-             
+                <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id = "heart" data-product-id = "<?php echo $allAds->Product_id?>"  ></i>
+
 
                 <div class="discription">
                 <span class="price"> Rs. <?php echo $allAds->price ?></span>
@@ -331,7 +368,7 @@ if (isset($_SESSION['showDialog']) && $_SESSION['showDialog'] == true) {
             </dialog>
 
 
- <script type="text/javascript">
+ <script type="text/javascript" defer>
 let p = document.querySelector('.delete_dialog_heading p');
 var deletePopup = document.getElementById("deletePopup");
 ; // Change the height to 300 pixels
@@ -356,6 +393,52 @@ let button  = document.getElementById('cancelbtn');
 if(p.innerHTML != ""){
     popUpOpen();
 }
+
+const elements = document.querySelectorAll('[class*=fa-heart]');
+console.log(elements.length)
+elements.forEach(element => {
+    element.addEventListener('click', () => {
+        console.log(element.classList);
+       if(element.classList.contains('fa-solid')){
+        element.classList.remove('fa-solid');
+        element.classList.add('fa-regular');
+
+        let productID =  element.dataset.productId;
+        console.log(productID);
+        // Send an AJAX request to delete the product from the wishlist
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', `http://localhost/Sobawitha/wishlist/delete/${productID}`);
+        xhr.onload = function() {
+        if (xhr.status === 200) {
+          console.log("successfully deleted");
+        }
+        else {
+            alert('Request failed.  Returned status of ' + xhr.status);
+        }
+        };
+        xhr.send();
+    }
+    else if(element.classList.contains('fa-regular')){
+        element.classList.remove('fa-regular');
+        element.classList.add('fa-solid');
+        let productID =  element.dataset.productId;
+        // Send an AJAX request to delete the product from the wishlist
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', `http://localhost/Sobawitha/wishlist/addToWishlist/${productID}`);
+        xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Reload the page or update the UI to reflect the removed product
+            console.log("successfully added");
+        }
+        else {
+            alert('Request failed.  Returned status of ' + xhr.status);
+        }
+        };
+        xhr.send();
+    }
+})
+
+});
 
 
 

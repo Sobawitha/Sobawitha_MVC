@@ -329,6 +329,228 @@
     
       } 
 
+      public function buyer_register(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                 
+               $verificationCode = generateVerificationCode();     
+
+                $data=[
+                'first_name'=>trim($_POST['first_name']),
+                'last_name'=>trim($_POST['last_name']),
+                'address_line_one'=>trim($_POST['address_line_one']),
+                'address_line_two'=>trim($_POST['address_line_two']),
+                'address_line_three'=>trim($_POST['address_line_three']),
+                'address_line_four'=>trim($_POST['address_line_four']),
+                'email'=>trim($_POST['email']),
+                'contact_number'=>trim($_POST['contact_number']),
+                'nic'=>trim($_POST['nic']),
+                'birthday'=>trim($_POST['birthday']),
+                'gender'=>trim($_POST['ssu_gender']),
+                'propic'=>$_FILES['propic'],
+                'password'=>trim($_POST['password']),
+                'confirm_password'=>trim($_POST['confirm_password']),
+                // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
+                'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['propic']['name'],
+                'verify_token' => $verificationCode,
+        
+                'first_name_err'=>'',
+                'last_name_err'=>'',
+                'address_line_one_err'=>'',
+                'address_line_two_err'=>'',
+                'address_line_three_err'=>'',
+                'address_line_four_err'=>'',
+                'email_err'=>'',
+                'contact_number_err'=>'',
+                'nic_err'=>'',
+                'birthday_err'=>'',
+                'gender_err'=>'',
+                // //'profile_pic_err'=>'',
+                'password_err'=>'',
+                'confirm_password_err'=>'',
+                'propic_err'=>'',
+                
+            ];
+        
+            if($this->buyerModel->findUserByEmail($data['email'])){
+                $data['email_err']='Email is already exists';
+            } 
+
+            if($this->buyerModel->findSameNic($data['nic'])){
+                $data['nic_err']='Nic no is already exists';
+            } 
+
+            if(empty($data['propic'])){
+                $data['propic_err']='profile picture cannot be empty';
+            
+            }
+            else{
+                $fileExt=explode('.',$_FILES['propic']['name']);
+                $fileActualExt=strtolower(end($fileExt)); //Convert the file extension to lowercase
+                $allowed=array('jpg','jpeg','png');
+  
+              
+                if(!in_array($fileActualExt,$allowed)){
+                  $data['propic_err']='You cannot upload files of this type';
+                }
+          
+                if($data['propic']['size']>0){
+                  if(uploadFile($data['propic']['tmp_name'],$data['propic_name'],'/upload/user_profile_pics/')){
+                            
+                  }else{  
+                  $data['propic_err']='Unsuccessful propic uploading';
+                  
+                  }
+                }else{
+                  $data[ 'propic_err'] ="Profile picture size is empty";
+                
+                }
+      
+            }
+
+             // if(empty($data['first_name'])){
+            //     $data['first_name_err']='first name cannot be empty';
+            // }
+            $firstNameValidationResult = validateFirstName($data['first_name']);
+
+            if (empty($data['first_name']) || $firstNameValidationResult !== true) {
+                $data['first_name_err'] = empty($data['first_name']) ? 'first name cannot be empty' : $firstNameValidationResult;
+            }
+                    
+            $lastNameValidationResult = validateLastName($data['last_name']);
+
+            if ($lastNameValidationResult !== true || empty($data['first_name'])) {
+                $data['last_name_err'] = empty($data['last_name_err']) ? 'last name cannot be empty' : $lastNameValidationResult;
+            }
+                 
+            
+            $emailValidationResult = validateEmail($data['email']);
+
+            if ($emailValidationResult !== true || empty($data['email'])) {
+                $data['email_err'] = empty($data['email_err']) ? 'email cannot be empty' : $emailValidationResult;
+            }
+             
+            $contactValidationResult = validateContactNumber($data['contact_number']);
+
+            if ($contactValidationResult !== true || empty($data['contact_number'])) {
+                $data['contact_number_err'] = empty($data['contact_number_err']) ? 'contact number cannot be empty' : $contactValidationResult ;
+            }
+            
+            $nicValidationResult = validateNIC($data['nic']);
+
+            if ($nicValidationResult !== true || empty($data['nic'])) {
+                $data['nic_err'] = empty($data['nic_err']) ? 'nic number cannot be empty' : $nicValidationResult;
+            }
+
+            $addressValidationResult = validateAddress($data['address_line_one']);
+
+            if ($addressValidationResult !== true || empty($data['address_line_one'])) {
+                $data['address_line_one_err'] = empty($data['address_line_one_err']) ? 'address line 01 cannot be empty' : $addressValidationResult ;
+            }
+
+            $addressValidationResult = validateAddress($data['address_line_two']);
+
+            if ($addressValidationResult !== true || empty($data['address_line_two'])) {
+                $data['address_line_two_err'] = empty($data['address_line_two_err']) ? 'address line 02 cannot be empty' : $addressValidationResult ;
+            }
+
+            $addressValidationResult = validateAddress($data['address_line_three']);
+
+            if ($addressValidationResult !== true || empty($data['address_line_three'])) {
+                $data['address_line_three_err'] = empty($data['address_line_three_err']) ? 'address line 03 cannot be empty' : $addressValidationResult ;
+            }
+
+            $birthdayValidationResult = validateBirthDate($data['birthday']);
+
+            if ($birthdayValidationResult !== true || empty($data['birthday'])) {
+                $data['birthday_err'] = empty($data['birthday_err'])  ? 'birthday cannot be empty' : $birthdayValidationResult ;
+            }
+            
+            $pwdValidationResult = validatePassword($data['password']);
+
+            if ($pwdValidationResult !== true || empty($data['password'])) {
+                $data['password_err'] = empty($data['password_err'])  ? 'password cannot be empty' : $pwdValidationResult ;
+            }
+
+            $cpwdValidateResult = validatePassword($data['confirm_password']);
+
+            if($cpwdValidateResult !== true || empty($data['confirm_password'])){
+              $data['confirm_password_err'] = empty($data['confirm_password']) ? 'password cannot be empty' : $cpwdValidateResult ;
+            }
+
+            if($data['password']!=$data['confirm_password']){
+                $data['password_err']='passwords do not match';
+            }
+            
+         
+  
+          if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err'])&& empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])&& empty($data['gender_err']) && empty($data['birthday_err']) && empty($data['propic_err'])){
+            
+            $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);  
+            
+            if($this->buyerModel->addBuyer($data)){
+                //   flash('post_msg', 'add new seller successfully');
+                   $flag=3;
+                   sendMail($data['email'],$data['first_name'], $verificationCode, $flag, '','','');
+                   redirect('Users/verify_email/'.$data['email']); 
+              }else{
+                die('Error creating');
+              }  
+         
+            }else{
+              $this->view('Buyer/Buyer/v_buyer_register',$data);
+  
+            }
+        
+             
+        }else{
+                
+               
+   
+          $data=[
+   
+            'first_name'=>'',
+            'last_name'=>'',
+            'address_line_one'=>'',
+            'address_line_two'=>'',
+            'address_line_three'=>'',
+            'address_line_four'=>'',
+            'email'=>'',
+            'contact_number'=>'',
+            'nic'=>'',
+            'birthday'=>'',
+            'ssu_gender'=>'',
+            'pp'=>'',
+            'password'=>'',
+            'confirm_password'=>'',
+            'propic'=>'',
+        
+            'first_name_err'=>'',
+            'last_name_err'=>'',
+            'address_line_one_err'=>'',
+            'address_line_two_err'=>'',
+            'address_line_three_err'=>'',
+            'address_line_four_err'=>'',
+            'email_err'=>'',
+            'contact_number_err'=>'',
+            'nic_err'=>'',
+            'birthday_err'=>'',
+            'gender_err'=>'',
+            //'profile_pic_err'=>'',
+            'password_err'=>'',
+            'confirm_password_err'=>'',
+            'propic_err'=>'',
+   
+  
+         
+        ];
+   
+        $this->view('Buyer/Buyer/v_buyer_register',$data);
+  
+    }
+
+}   
+
 
 }
 

@@ -2,6 +2,18 @@
 <link rel="stylesheet" href="../css/Buyer/shopping_cart/shopping_cart.css"></link>
 <!-- <script src="../js/Buyer/index_checkOut.js" defer></script> -->
 <?php require APPROOT . '/views/Users/component/Header.php'?>
+<?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
+    <div id="flash-message" class="flash-success">
+        <div class="flash-text">Order was successful. Check your email for information.</div>
+        <div class="flash-loading-bar"></div>
+    </div>
+<?php unset($_SESSION['order_status']); ?>
+<?php elseif(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'failure'): ?>
+    <div id="flash-message" class="flash-error">
+        <div class="flash-text">Order was unsuccessful. Please try again.</div>
+    </div>
+<?php unset($_SESSION['order_status']); ?>
+<?php endif; ?>
 
 <?php
 $sum = 0;
@@ -24,6 +36,8 @@ if ($_SESSION['user_flag'] == 1) {
 }?>
 
 
+
+
 <div class="body">
         <div class="section_1">
 
@@ -32,21 +46,6 @@ if ($_SESSION['user_flag'] == 1) {
         <div class="section_2">
          
 
-
-        <?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
-    <div id="flash-message" >
-        <div class="flash-text">Order was successful .Check your email for information </div>
-        <div class="flash-loading"></div>
-    </div>
-<?php unset($_SESSION['order_status']); ?>
-<?php elseif(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'failure'): ?>
-     
-    <div id="flash-message" class = "flash-error">
-        <div class="flash-text">Order was unsuccessful Try Again</div>
-        <div class="flash-loading"></div>
-    </div>
-<?php unset($_SESSION['order_status']); ?>
-<?php endif; ?>
 
 
 
@@ -105,7 +104,7 @@ foreach($data['cart'] as $cart):{
                         <input type="checkbox" name = "agree-terms" id  = "checkvalue" /><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br><br>
                         <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
                         <button class="checkout">Online</button><br>
-                        <button class="paypal"><a  href = "<?php  echo  URLROOT.'/Pages/orderpage'?>">Place an Order</a></button><br>
+                        <button class="paypal">Place an Order</button><br>
                         <i class="fa-solid fa-bag-shopping" id="bag"></i>
                 </div>
         </div>
@@ -127,6 +126,7 @@ foreach($data['cart'] as $cart):{
 <script defer>
 console.log("Hefew");
 let checkOutBtn = document.querySelector(".checkout");
+let placeOrderBtn = document.querySelector(".paypal");
 console.log(checkOutBtn);
 var orderElements = document.getElementsByClassName("order");
 let checkBoxVal =  document.getElementById("checkvalue");
@@ -154,7 +154,29 @@ var hideTime = 5000; // 5 seconds
 // }, hideTime);
 
 
+placeOrderBtn.addEventListener("click", function(){
 
+  if(checkBoxVal.checked){
+
+    
+    console.log("Hell o");
+    
+    window.location.href = "http://localhost/Sobawitha/Pages/orderpage"
+  }
+
+  else{
+
+
+document.getElementById('terms_and_condition_check').style.display = "block";
+
+}
+
+
+
+
+
+
+})
 for (let i = 0; i < incrementButtons.length; i++) {
   incrementButtons[i].addEventListener('click', function(e) {
   console.log("Hello");

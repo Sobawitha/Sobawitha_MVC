@@ -1,3 +1,5 @@
+/* Sobawitha */
+
 *{
     padding: 0;
     margin: 0;
@@ -9,8 +11,7 @@
 
 .signup_seller_container{
     display: flex;
-    /* height: 100%; */
-
+    height: 100%;
 }
 
 .signup_seller_container .signup_seller_intro{
@@ -41,9 +42,11 @@
     text-align: justify;
     line-height:25px;
 }
+
 .signup_seller_container .signup_seller_content{
-    flex-basis: 70%;
+    flex-basis: 60%;
 }
+
 .signup_seller_container .signup_seller_content h1{
     color: white;
 }
@@ -52,6 +55,7 @@
     font-size:25px;
     color:rgb(207, 237, 224);
 }
+
 /* Sign Up Part */
 
 .signup_seller_content{
@@ -59,9 +63,7 @@
     justify-content: center;
     height: 90vh;
     align-items: center;
-
-
-
+    margin-top: 100px;
 }
 
 .seller_signup_part_one{
@@ -69,17 +71,21 @@
     justify-content: space-evenly;
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: 100vh;
     padding: 0px 100px;
 }
 
 .seller_signup_part_two{
-    /* border: 1px solid rgb(0, 0, 0); */
-    justify-content: space-evenly;
     display: flex;
     flex-direction: column;
-    height: 80vh;
+    height: 100vh;
     padding: 0px 100px;
+    margin-top: 20px;
+ 
+}
+
+#birthday_box{
+    padding-bottom:20px;
 }
 
 .s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn, #address_line_four{
@@ -87,7 +93,6 @@
     width: 300px;
     padding: 5px;
     border: 1px solid lavender;
-
 }
 
 .ssu_details{
@@ -98,17 +103,7 @@
     color: black;
 }
 
-#sign_up_word{
-    color: #004000;
-}
-
-.sign_up_seller_btn{
-    display: flex;
-    justify-content: center;
-}
-
 #sign_up_sell_btn{
-    /* width: 100%; */
     background-color: #000000;
     opacity: 80%;
     color: white;
@@ -116,7 +111,6 @@
     padding:10px;
     margin-top:10px;
     border-radius:40px;
-
 }
 
 #sign_up_sell_btn:hover{
@@ -124,7 +118,6 @@
     opacity: 100%;
     color: black;
     cursor: pointer;
-
 }
 
 .s_input-box #pro_pic{

@@ -82,12 +82,6 @@ class M_users
         $this->db->query("SELECT * FROM notifications WHERE status=1 ORDER BY time DESC LIMIT 5");
         return $this->db->resultset();
     }
-
-
-    
-    
-    
-      
 }
 
 

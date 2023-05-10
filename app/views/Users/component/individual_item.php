@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/individual_item.css">
 </link>
-<script src="<?php echo URLROOT ?>/js/Users/component/individual_item.js"></script>
+<script src="<?php echo URLROOT ?>/js/Users/component/individual_item.js" defer></script>
 
 <script>
   /*pay popup */
@@ -202,7 +202,7 @@ function checkout() {
       <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
       <br>
       <button class="checkout" onclick="checkout()">checkout</button><br>
-      <button class="paypal">Paypal</button><br>
+      <button class="paypal" >Place an Order</button><br>
       <i class="fa-solid fa-bag-shopping" id="bag"></i>  
     </div>
   </dialog>
@@ -306,7 +306,7 @@ $content = $data['adcontent'];
 <?php
 
 $is_wishlist_item = false;
-
+// $is_cart_item = false;
 foreach($data['wishlist_items'] as $wishlist_item)
 {
   if($wishlist_item->Product_id == $content->Product_id)
@@ -318,6 +318,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
 ?>
 
   <div class="section_3">
+  <span class  = "hidden"><?php if(isset($_SESSION['cart_status'])){echo true;}unset($_SESSION['cart_status']);?></span> 
 
 
     <a href="<?php echo URLROOT ?>/Pages/product_page" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
@@ -412,6 +413,8 @@ foreach($data['wishlist_items'] as $wishlist_item)
       </div>
     </section>
 
+<form action="<?php echo URLROOT ?>/cart/add_to_cart_from_individual_page" method="POST">
+<input type="hidden" name="product_id" value="<?php echo $_GET['product_id']; ?>">
 <div class="select_quantity">
   <span class="header_quantity">Quantity</span>
   <div class="select_quantity_input">
@@ -437,17 +440,23 @@ foreach($data['wishlist_items'] as $wishlist_item)
 <?php if($content->quantity > 0 ) { 
   if($data['no_of_cart_item'] ==0 ){
     ?>
-      <button id="buy_now_btn" onclick="pay_popup(<?php echo $content->price ?>)">Buy Now</button>
+    
+      <button id="buy_now_btn" onclick="event.preventDefault()pay_popup(<?php echo $content->price ?>)">Buy Now</button>
     <?php
   }else{
     ?>
-      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a>
+      <!-- <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a> -->
+      <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
+      <button id="buy_now_btn" onclick = "event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button></a>
 
     <?php
   }
   ?>
       <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn" data-product-id = "<?php echo $content->Product_id ?>">Add to Cart</button></a>
 
+      <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
+      <!-- <button type="submit" id="add_to_cart_btn" data-product-id="<?php echo $content->Product_id ?>">Add to Cart</button> -->
+</form>
 <?php
 }else{?>
   <span class="not_available_msg">Not awailable now. </span><br><br>

@@ -7,13 +7,6 @@
     src: url(fonts/Poppins-Regular.ttf);
 }
 
-/* body{
-    margin: 0;
-    font-family: Poppins-Regular ;
-    font-size: small;
-    text-align: left;
-} */
-
 /* removing autofill colors */
 /* Change the white to any color */
 input:-webkit-autofill,

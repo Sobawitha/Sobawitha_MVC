@@ -105,6 +105,7 @@
         // $_SESSION['profile_updateAdmin']="false";
         $_SESSION['radio_admin_comp'] = '';
         $_SESSION['radio_admin_feed'] = '';
+        $_SESSION['radio_admin_role'] = '';
 
         $flag = $_SESSION['user_flag'];
         if ($flag == 1) {
@@ -138,6 +139,7 @@
             unset($_SESSION['lastname']);
             unset($_SESSION['profile_image']);
             unset($_SESSION['profile_image_path']);
+            unset($_SESSION['radio_admin_role']);
             session_destroy();
         
             // session_destroy();
@@ -306,8 +308,6 @@
 
                     if(empty($data['pwd_token'])){
                         $data['empty_token_err']='Error: Authentication token missing. Please retrieve a token using the forgot password option.';
-                     
-                      
                     }
                  
 
@@ -317,11 +317,6 @@
                         }
                     }
 
-                    // if($oldPwd){
-                    //     $data['old_password_err'] = 'Your cannot enter an old password.';
-                    // }
-
-    
                     if(empty($data['new_pwd_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['token_expire_err']) && empty($data['retype_new_password_err']) && empty($data['empty_token_err']) ){
              
                         $data['password']=password_hash($data['password'],PASSWORD_DEFAULT);
@@ -340,30 +335,29 @@
                        }else{
                          $this->view('Users/user/v_reset_password', $data);
                        }
-            
-            
-            }else{
-                //initial form
-                $data = [
-                    'new_pwd' => '',       
-                    'password' => '',
-                    'email' => '',
-                    'pwd_token' => '',
+        } else {
+            //initial form
+            $data = [
+                'new_pwd' => '',
+                'password' => '',
+                'email' => '',
+                'pwd_token' => '',
 
-                    'new_pwd_err' => '',
-                    'password_err' => '',
-                    'confirm_password_err' => '',
-                    'old_password_err' => '',
-                    'retype_new_password_err' => '',
-                    'token_expire_err' => '',
-                    'old_password_err' => '',
-                    'empty_token_err' => ''
-                ];
+                'new_pwd_err' => '',
+                'password_err' => '',
+                'confirm_password_err' => '',
+                'old_password_err' => '',
+                'retype_new_password_err' => '',
+                'token_expire_err' => '',
+                'old_password_err' => '',
+                'empty_token_err' => ''
+            ];
 
-                //load view
-                $this->view('Users/user/v_reset_password', $data);
-            }
-  
+            //load view
+            $this->view('Users/user/v_reset_password', $data);
+        }
     }
 
 }
+
+?>

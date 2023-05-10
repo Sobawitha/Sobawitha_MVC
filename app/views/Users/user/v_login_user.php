@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="../css/Users/users/login.css"></link>
+<!-- Sobawitha -->
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/users/login.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <script src="../js/Login/login.js"></script>
 
@@ -79,44 +80,8 @@
                             </div>
                         
                         </div>
-
-                        
-                  
-
-                    
-                   
-                    
-                       
-                        
-                        
-                    
-
-              
-
-                </div>
+                     </div>
                     </form>
-
-            
-                       <!-- Forgot Password dialog -->
-                       <!-- <dialog id="forgotPasswordDialog">
-                            <div class="forgotPasswordDialog">
-                            <div class="dialog__heading">
-                            <h2>Forgot Password</h2>
-                            <button id="closebtnforgot" type="button">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </button>
-                            </div>
-                            <form method="POST"> 
-                            <div class="dialog__content_forgot">
-                 
-                            <label for="email" id="forgot_label">Enter your email address:</label> 
-                            <input type="email" name="email_forgot" id="email_forgot" placeholder="Enter your account email.." name="email" required>  
-                            <button type="submit" name="forgot_btn" id="forgot_btn">Submit</button>
-                            
-                            </div>
-                            </form>
-                            </div>
-                        </dialog> -->
         </div>
     </section>
 
