@@ -51,8 +51,6 @@ function checkout() {
 </script>
 
 
-
-
 <div class="body">
         <div class="section_1">
             
@@ -125,7 +123,9 @@ function checkout() {
                 <span class="cart_total">Cart total <span class="total_value">Rs. <?php echo $tot_price ?></span></span><br>
                 <span class="discription">Shipping and taxes calculate at checkout.</span>
                 <input type="checkbox" id="terms-checkbox"><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br>
-                <button class="checkout" onclick="checkout()">checkout</button><br>                
+                <button class="checkout" onclick="checkout()">checkout</button><br>   
+                <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
+                <br>             
                 <button class="paypal">Paypal</button><br>
                 <i class="fa-solid fa-bag-shopping" id="bag"></i>
                 </div>
