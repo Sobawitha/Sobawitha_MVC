@@ -12,7 +12,7 @@
 
         <div class="section_2">
 
-        <h3>Buyer purchases</h3>
+        <h3>Completed Buyer purchases</h3>
         <hr>
 
         <br><br>
