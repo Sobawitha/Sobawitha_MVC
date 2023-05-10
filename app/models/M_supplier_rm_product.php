@@ -271,23 +271,40 @@ class M_supplier_rm_product
     public function list_order_details($id){
         if(isset($_POST['order_type'])){
             if ($_POST['order_type'] == 'all'){
-                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
+                // $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
+                // $this->db->bind(":user_id", $id);
+                // return $this->db->resultSet();
+
+                $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :user_id GROUP BY order_id;");
                 $this->db->bind(":user_id", $id);
                 return $this->db->resultSet();
             }
             if ($_POST['order_type'] == 'pending'){
-                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=0 GROUP BY order_id;");
+                // $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=0 GROUP BY order_id;");
+                // $this->db->bind(":user_id", $id);
+                // return $this->db->resultSet();
+
+                $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :user_id AND `fpr`.`current_status`=0 GROUP BY order_id;");
                 $this->db->bind(":user_id", $id);
                 return $this->db->resultSet();
             }
             if ($_POST['order_type'] == 'completed'){
-                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=1 GROUP BY order_id;");
+                // $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=1 GROUP BY order_id;");
+                // $this->db->bind(":user_id", $id);
+                // return $this->db->resultSet();
+
+                $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :user_id AND `fpr`.`current_status`=1 GROUP BY order_id;");
                 $this->db->bind(":user_id", $id);
                 return $this->db->resultSet();
             }
         }
         else{
-            $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
+            // $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
+            // $this->db->bind(":user_id", $id);
+            // return $this->db->resultSet();
+
+
+            $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :user_id GROUP BY order_id;");
             $this->db->bind(":user_id", $id);
             return $this->db->resultSet();
         }
@@ -307,3 +324,6 @@ class M_supplier_rm_product
 
 
 ?>
+
+<!-- 
+SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `created_at`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, `fpr1`.`product_name` AS `product_name`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity` AS `quantity`)*(`fp`.`price` AS `price`)) FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`user_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) ; -->

@@ -68,6 +68,7 @@
                     </div>
                   </div>
                   </div>
+                  <p>Cover Image</p>
                   
 
 
