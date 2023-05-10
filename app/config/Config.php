@@ -12,7 +12,6 @@
 
     //URL Root
     define('URLROOT','http://localhost/Sobawitha');
-
     //WEB site name
     define('SITENAME','Sobawitha');
 

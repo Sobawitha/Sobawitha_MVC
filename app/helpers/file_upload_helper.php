@@ -1,4 +1,3 @@
-
 <?php 
   
   function uploadFile($file,$file_name, $location){
