@@ -142,15 +142,15 @@ class M_supplier_view
     }
 
     /* ok*/
-    public function insert_order_product_table($data){
-        $this->db->query("INSERT INTO seller_orders (payment_type, seller_id) VALUES ('cod', :user_id)");
-        $this->db->bind(":user_id", $data['user_id']);
-        if($this->db->execute()){
-            return true;
-        }else{
-                return false;
-        }
-    }
+    // public function insert_order_product_table($data){
+    //     $this->db->query("INSERT INTO seller_orders (payment_type, seller_id) VALUES ('cod', :user_id)");
+    //     $this->db->bind(":user_id", $data['user_id']);
+    //     if($this->db->execute()){
+    //         return true;
+    //     }else{
+    //             return false;
+    //     }
+    // }
 
     /*ok */
     public function update_raw_material_count( $product_id, $count) {
@@ -181,17 +181,17 @@ class M_supplier_view
    
 
     /*related only for buy single item */
-    public function insert_order_table($data, $order_id){
-        $this->db->query("INSERT INTO seller_order_raw_material (order_id,product_id,quantity) VALUES (:order_id, :product_id, :quantity)");
-        $this->db->bind(":order_id", $order_id);
-        $this->db->bind(":product_id", $data['product_id']);
-        $this->db->bind(":quantity", $data['quantity']);
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // public function insert_order_table($data, $order_id){
+    //     $this->db->query("INSERT INTO seller_order_raw_material (order_id,product_id,quantity) VALUES (:order_id, :product_id, :quantity)");
+    //     $this->db->bind(":order_id", $order_id);
+    //     $this->db->bind(":product_id", $data['product_id']);
+    //     $this->db->bind(":quantity", $data['quantity']);
+    //     if ($this->db->execute()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     /*ok */
     public function add_to_cart($data){
@@ -265,11 +265,11 @@ class M_supplier_view
     }
 
     /*ok */
-    public function get_user_detail(){
-        $this->db->query('SELECT first_name , last_name, concat(address_line_one,", ",address_line_two,", ",address_line_three,", ",address_line_four,".") as address, contact_no, email from user where user_id=:user_id');
-        $this->db->bind(":user_id", $_SESSION['user_id']);
-        return $this->db->single();
-    }
+    // public function get_user_detail(){
+    //     $this->db->query('SELECT first_name , last_name, concat(address_line_one,", ",address_line_two,", ",address_line_three,", ",address_line_four,".") as address, contact_no, email from user where user_id=:user_id');
+    //     $this->db->bind(":user_id", $_SESSION['user_id']);
+    //     return $this->db->single();
+    // }
 
     /*ok */
     public function find_order_id(){
@@ -279,28 +279,28 @@ class M_supplier_view
     }
 
     /*ok */
-    public function update_cache_on_delivery_table($order_id){
-        $this->db->query("INSERT into cache_on_delivery_orders (order_id) VALUES (:order_id)");
-        $this->db->bind(":order_id", $order_id);
-        if ($this->db->execute()) {
-            $_SESSION['order_complete_msg']="complete_order_successfully";
-            return true;
-        } else {
-            return false;
-        }
+    // public function update_cache_on_delivery_table($order_id){
+    //     $this->db->query("INSERT into cache_on_delivery_orders (order_id) VALUES (:order_id)");
+    //     $this->db->bind(":order_id", $order_id);
+    //     if ($this->db->execute()) {
+    //         $_SESSION['order_complete_msg']="complete_order_successfully";
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
 
-    }
+    // }
 
     /** */
-    public function update_order_state($order_id){
-        $this->db->query("UPDATE seller_orders set current_status=1 WHERE order_id = :order_id");
-        $this->db->bind(":order_id", $order_id);
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // public function update_order_state($order_id){
+    //     $this->db->query("UPDATE seller_orders set current_status=1 WHERE order_id = :order_id");
+    //     $this->db->bind(":order_id", $order_id);
+    //     if ($this->db->execute()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
 
     /*for order list Naveendra */

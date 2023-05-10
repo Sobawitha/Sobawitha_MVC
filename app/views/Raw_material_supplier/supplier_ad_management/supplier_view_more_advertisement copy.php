@@ -1,8 +1,7 @@
 <?php require APPROOT . '/views/Users/component/Header.php'?>
 <?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
-<!-- <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Raw_material_supplier/ad_management/ad_view.css"></link> -->
-<!-- <script src="../js/Raw_material_supplier/ad_delete/ad_delete.js"></script>  -->
+
 
 
 <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Raw_material_supplier/ad_management/ad_view_more.css"></link>
@@ -31,18 +30,6 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modal-image">
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
         <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $data['image_name']; ?>" class="i_image">
 
@@ -73,8 +60,7 @@
         <section class="customerFeed">
 
             <div class="scf_maincontent">
-              <!-- <h4>Customer Feedbacks</h4>
-              <hr> <br> -->
+
 
               <br><br>
 
