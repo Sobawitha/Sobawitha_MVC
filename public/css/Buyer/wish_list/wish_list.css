@@ -57,7 +57,7 @@
     text-align: right;
     padding-right: 10px;
     padding-top: 5px;
-    font-size:13px;
+    font-size:10px;
     cursor:pointer;
 }
 
@@ -65,7 +65,7 @@
 #remove{
     display:none;
     position:absolute;
-    font-size:11px;
+    font-size:8px;
     font-weight:bold;
     color:rgb(10, 104, 101);
     background-color:rgb(250, 255, 247);
