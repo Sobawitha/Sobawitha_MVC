@@ -251,6 +251,14 @@ class M_supplier_view
         return $this->db->single();
     }
 
+    public function find_name_from_id($product_id){
+        $this->db->query("SELECT product_name as product_name from raw_material WHERE product_id = :product_id");
+        $this->db->bind(":product_id", $product_id);
+        return $this->db->single();
+    }
+
+    
+
     /*ok */
     public function check_cart($id){
         $this->db-> query("SELECT count(*) as count_item from cart where User_id = :user_id");
