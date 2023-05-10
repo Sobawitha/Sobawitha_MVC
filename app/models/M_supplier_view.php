@@ -164,6 +164,20 @@ class M_supplier_view
         }
     }
 
+
+    public function re_update_raw_material_count($product_id, $count){
+        $this->db->query("UPDATE raw_material SET quantity = quantity + :count WHERE product_id = :product_id");
+        $this->db->bind(":count", $count);
+        $this->db->bind(":product_id", $product_id);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
    
 
     /*related only for buy single item */
@@ -190,6 +204,20 @@ class M_supplier_view
         } else {
             return false;
         }
+
+    }
+
+    public function remove_from_cart($data){
+        $this->db->query("DELETE from cart where Product_id = :product_id AND user_id=:user_id");
+        $this->db->bind(":user_id", $data['user_id']);
+        $this->db->bind(":product_id", $data['product_id']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
 
     }
 

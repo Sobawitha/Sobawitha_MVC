@@ -72,11 +72,11 @@
 
         if($current_status>0){
             $this->supplier_ad->update_cart($data);
-            redirect('cart/view_cart?product_id='.$product_id);
+            redirect('raw_material_orders/view_cart?product_id='.$product_id);
         }
         else{
             $this->supplier_ad->add_to_cart($data);
-            redirect('cart/view_cart?product_id='.$product_id);
+            redirect('raw_material_orders/view_cart?product_id='.$product_id);
         }
      }
 
@@ -111,15 +111,29 @@
      function add_to_cart(){
         $quantity =1; /*change */
         $product_id = $_GET['product_id'];
+        $this->supplier_ad->update_raw_material_count($product_id, $quantity);
         $data = [
           'product_id' => $_GET['product_id'],
           'quantity' => $quantity,
           'user_id' => $_SESSION['user_id'],
         ];
         if($this->supplier_ad->add_to_cart($data)){
-            redirect('fertilizer_product/view_individual_product?product_id='.$product_id);
+            redirect('supplier_ad_view/indexmore?product_id='.$product_id);
         }
 
+     }
+
+     function remove_from_cart(){
+        $product_id = $_GET['product_id'];
+        $quantity = $_GET['quantity'] ; /*change */
+        $this->supplier_ad->re_update_raw_material_count($product_id, $quantity);
+        $data = [
+            'product_id' => $_GET['product_id'],
+            'user_id' => $_SESSION['user_id'],
+          ];
+        if($this->supplier_ad->remove_from_cart($data)){
+            redirect('raw_material_orders/view_cart');
+        }
      }
 
 

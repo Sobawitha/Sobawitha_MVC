@@ -1,11 +1,61 @@
-<link rel="stylesheet" href="../css/Buyer/shopping_cart/shopping_cart.css"></link>
-<?php require APPROOT . '/views/Users/component/Header.php'?>\
+<link rel="stylesheet" href="../css/Seller/shopping_cart.css"></link>
+<?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_Sidebar.php'?>
 
+
+<script>
+const plusButton = document.querySelector('.plus_button');
+const minusButton = document.querySelector('.minus_button');
+const quantityInput = document.querySelector('input[name="quantity"]');
+const available_quantity = document.getElementById('existing_quantity');
+
+plusButton.addEventListener('click', () => {
+  let quantity = parseInt(quantityInput.value);
+  let available_quantity = parseInt(document.getElementById("existing_quantity_value").textContent);
+  console.log(quantity);
+  console.log(available_quantity);
+  quantity++;
+  if(quantity>available_quantity){
+    quantityInput.style.color="red";
+  }
+  else{
+    quantityInput.value = quantity;
+  }
+});
+
+minusButton.addEventListener('click', () => {
+  let quantity = parseInt(quantityInput.value);
+  quantity--;
+  if (quantity < 1) {
+    quantity = 1;
+  }
+  quantityInput.value = quantity;
+});
+
+function checkout() {
+        const userInput = document.getElementById("quantity_input").value;
+        const agreementCheckbox = document.querySelector('#terms-checkbox');
+
+        if (agreementCheckbox.checked) {
+                // Checkbox is checked, continue with checkout process
+                window.location.href = '<?php echo URLROOT ?>/supplier_ad_view/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+        } else {
+                // Checkbox is not checked, show an error message
+                //alert('Please agree to the terms and conditions before proceeding to checkout.');
+                document.getElementById("terms_and_condition_check").style.display="block";
+        }
+}
+
+
+</script>
+
+
+
+
 <div class="body">
         <div class="section_1">
-
+            
         </div>
 
         <div class="section_2">
@@ -14,461 +64,74 @@
                 <div class="orders">
 
                 <table class="order_list_table">
-                  <tr class="table_head">
-                          <td>Product</td>
-                          <td>Price</td>
-                          <td>Qty</td>
-                          <td>Total</td>
-                          <td></td>
-                  </tr>
-                    <?php
+                        <tr class="table_head">
+                                <td>Product</td>
+                                <td>Price</td>
+                                <td>Qty</td>
+                                <td>Total</td>
+                                <td></td>
+                        </tr>
+                    <?php $tot_price=0;foreach($data['cart_items'] as $cart_item ):?>
+                        <tr class="order">
+                                <div class="order_detail">
+                                        <td>
+                                            <div class="product_detail">
+                                                <img src="<?php echo URLROOT ?>/public/upload/raw_material_images/<?php echo $cart_item->raw_material_image ?>" class="cart_image"></img>
+                                                <a href="<?php echo URLROOT?>/supplier_ad_view/remove_from_cart?product_id=<?php echo $cart_item->Product_id?>&quantity=<?php echo $cart_item->quantity?>"><i class="fa-solid fa-xmark" id="cancel_order"></i></a><br><br>
+                                                <span class="order_p_name"><?php echo $cart_item-> product_name?></span><br>
+                                                <span class="order_p_id">Product ID: <?php echo $cart_item->Product_id ?></span><br>
+                                                <span class="size">500 g </span>  <!--check-->
+                                            </div>
+                                        </td>
+                                        <td><span class="price">Rs. <?php echo ($cart_item->price) ?></span></td>
 
-                  foreach($data['cart_items'] as $cart_items):{
-                    ?>
-                    <tr class="order" id = "user-<?php echo $cart_items->Product_id?>">
-                      <div class="order_detail"  >
-                        <td>
-                          <div class="product_detail">
-                              <img src="<?php echo URLROOT?>/public/upload/raw_material_images/<?php echo $cart_items->product_img ?>" class="cart_image"></img>
-                              <i class="fa-solid fa-xmark" id="cancel_order" data-id="<?php echo $cart_items->Product_id ?>"></i><br><br>
-                              <span class="order_p_name"><?php echo $cart_items->product_name ?></span><br>
-                              <span class="order_p_id"><?php echo $cart_items->Product_id ?></span><br>
-                              <span class="size">500 g </span>
-                          </div>
-                        </td>
-                        <td><span class="price"><?php echo $cart_items->product_price ?></span></td>
-                        <td class="unit"><div class = "input-group-text"  data-id="<?php echo $cart_items->Product_id ?>"><button id = "decrement">-</button><input type="text" class = "input-qty "value = "<?php echo $cart->quantity?>" /><button id = "increment">+</button></div></td>
-                        <td><span class="tot_price"><?php echo $cart_items->product_price * $cacart_itemsrt->quantity; $sum += $cart_items->product_price*$cart_items->quantity ?></span></td>
+                                        <td class="unit"><div class="select_quantity">
+                                                <br>
+                                                <div class="select_quantity_input">
+                                                <div class="quantity_control">
+                                                        <span class="minus_button">-</span>
+                                                        <?php if($cart_item->stock_quantity == 0) { ?>
+                                                        <input type="text" name="quantity" value="0" style="color:red;" readonly>
+                                                        <?php } else { ?>
+                                                        <input type="text" name="quantity" value="<?php echo $cart_item->quantity ?>" id="quantity_input">
+                                                        <?php } ?>
+                                                        <span class="plus_button">+</span>
+                                                </div>
+                                                <br>
+                                                <span class="existing_quantity" id="existing_quantity" hidden>
+                                                        <span id="existing_quantity_value"><?php echo $cart_item->stock_quantity; ?></span> available
+                                                </span>
+                                                <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
+                                                <span id="quantity_error" style="color:red;"></span>
+                                                </div>
+                                                </div>
+                                        </td>
+                                        <td><span class="tot_price">Rs. <?php $tot_price= ($tot_price + ($cart_item->quantity * $cart_item->price));  echo  ($cart_item->quantity * $cart_item->price)?></span></td>
+                                        
+                                </div>
 
-                      </div>
-
-                    </tr>
-                    <?php }?> 
-                  <?php endforeach;?>
-                       
+                        </tr>
+                        <?php endforeach; ?>
                 </table>
 
-
+        
         </div>
     </div>
 </div>
 
         <div class="section_3">
-                <div class="total_price_section">
-                        <hr id="cart_toatal_section_hr">
-                        <span class="cart_total">Cart total <span class="total_value">Rs.<?php echo $sum ?></span></span><br>
-                        <span class="discription">Shipping and taxes calculate at checkout.</span><br />
-                        <input type="checkbox" name = "agree-terms" id  = "checkvalue" /><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br><br>
-                        <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
-                        <button class="checkout">Online</button><br>
-                        <button class="paypal"><a  href = "<?php  echo  URLROOT.'/Pages/orderpage'?>">Place an Order</a></button><br>
-                        <i class="fa-solid fa-bag-shopping" id="bag"></i>
+        <div class="total_price_section">
+                <hr id="cart_toatal_section_hr">
+                <span class="cart_total">Cart total <span class="total_value">Rs. <?php echo $tot_price ?></span></span><br>
+                <span class="discription">Shipping and taxes calculate at checkout.</span>
+                <input type="checkbox" id="terms-checkbox"><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br>
+                <button class="checkout" onclick="checkout()">checkout</button><br>                
+                <button class="paypal">Paypal</button><br>
+                <i class="fa-solid fa-bag-shopping" id="bag"></i>
                 </div>
+  
         </div>
-
-
-
-
-
-
-
-
-
-   
-
-
-
 </div>
-<script src="https://js.stripe.com/v3/" defer></script>
-<script defer>
-console.log("Hefew");
-let checkOutBtn = document.querySelector(".checkout");
-console.log(checkOutBtn);
-var orderElements = document.getElementsByClassName("order");
-let checkBoxVal =  document.getElementById("checkvalue");
-let incrementButtons = document.querySelectorAll('#increment');
-let decrementButtons = document.querySelectorAll('#decrement');
-// let  incrementButtons =  document.getElementById('increment');
-// let  decrementButtons = document.getElementById('decrement') ;
-let dlt = document.querySelectorAll('#cancel_order');
-let total_price = document.querySelector('.total_value');
-// Get the flash message element and its child elements
-var flashMessage = document.getElementById("flash-message");
-// var flashText = flashMessage.querySelector(".flash-text");
-// var flashLoading = flashMessage.querySelector(".flash-loading");
 
-// Set the time for the message to disappear
-var hideTime = 5000; // 5 seconds
 
-// Show the message and loading animation
-// flashMessage.classList.add("show");
-
-
-// // Wait for the specified time and then hide the message
-// setTimeout(function(){
-//   flashMessage.classList.remove("show");
-// }, hideTime);
-
-
-
-for (let i = 0; i < incrementButtons.length; i++) {
-  incrementButtons[i].addEventListener('click', function(e) {
-  console.log("Hello");
-       e.preventDefault();
-       let qty =      incrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value;
-       let prod_id =  incrementButtons[i].closest(".input-group-text").getAttribute("data-id");
-       let price =    incrementButtons[i].closest(".unit").previousElementSibling.innerText;
-       price = parseFloat(price);
-       console.log(qty);
-       let val    = parseInt(qty);
-       val = isNaN(val) ? 0 : val;
-
-       if(val  < 10)
-       {
-
-           val++;
-           console.log(val);
-           incrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
-           price = val*price;
-      
-           incrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
-
-
-       }
-       
-       let xhr =  new XMLHttpRequest();
-       xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
-       xhr.onload =  function(){
-
-        if(xhr.readyState == 4 && xhr.status == 200)
-        {
-                
-         console.log("Successfully updated ");
- 
-        }
- 
-        else{
-    
-          console.error(xhr.statusText);
-        }
-    }
- 
- 
-    xhr.send();
-
-    })};
-
-
-    for(let i = 0; i < decrementButtons.length; i++){
-  decrementButtons[i].addEventListener('click', function(e) {
-
-   
-   e.preventDefault();
-   let qty  =     decrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value;
-   let prod_id =  decrementButtons[i].closest(".input-group-text").getAttribute("data-id");
-   let price =    decrementButtons[i].closest(".unit").previousElementSibling.innerText;
-   price = parseFloat(price);
-   console.log(price);
-   console.log(prod_id +"Hello");
-   console.log(qty);
-   let val  = parseInt(qty);
-   val  =  isNaN(val) ? 0 : val;
-   if(val  > 0)
-   {
-       val--;
-       console.log(val);
-       decrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
-       price = val*price;
-      
-       decrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
-       
-   }
-
-    
-
-   let xhr  = new XMLHttpRequest();
-   xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
-
-   xhr.onload =  function() {
-
-       if(xhr.readyState == 4 && xhr.status == 200)
-       {
-               
-        console.log("Successfully updated ");
-
-       }
-
-       else{
-   
-         console.error(xhr.statusText);
-       }
-   }
-
-
-   xhr.send();
-
-
-
-
-
-
-
-
-
-
-  })
-
-}
-
-
-  
-
-
-
-for(let i = 0; i < dlt.length; i++){
-  dlt[i].addEventListener('click', function(e) {
-
-   
-    let id =  e.target.getAttribute("data-id");
-    console.log(id);
-    let  xhr  = new XMLHttpRequest();
-    xhr.open('GET', `http://localhost/Sobawitha/cart/delete/${id}`);
-    xhr.onload = function() {
-             
-        if (xhr.status === 200)
-        {
-          
-         let  user  =  'user-'+id;
-         const userRow = document.getElementById(user); 
-         userRow.parentNode.removeChild(userRow);
-         console.log(userRow);
-    
-        }
-
-        else{
-
-            console.error(xhr.statusText);
-        }
-
-    }
-    xhr.send();
-    
-})
-
-}
-
-
-// dlt.addEventListener("click",function(e) {
-    
-//     let id =  e.target.getAttribute("data-id");
-//     console.log(id);
-//     let  xhr  = new XMLHttpRequest();
-//     xhr.open('GET', `http://localhost/Sobawitha/cart/delete/${id}`);
-//     xhr.onload = function() {
-             
-//         if (xhr.status === 200)
-//         {
-          
-//          let  user  =  'user-'+id;
-//          const userRow = document.getElementById(user); 
-//          userRow.parentNode.removeChild(userRow);
-//          console.log(userRow);
-    
-//         }
-
-//         else{
-
-//             console.error(xhr.statusText);
-//         }
-
-//     }
-//     xhr.send();
-    
-// })
-
-
-
-
-
-
-
-// val1.addEventListener('click', function(e) {
-//   console.log("Hello");
-//        e.preventDefault();
-//        let qty = val1.closest('.input-group-text').querySelector('.input-qty').value;
-//        let prod_id =  val2.closest(".input-group-text").getAttribute("data-id");
-//        let price =        val2.closest(".unit").previousElementSibling.innerText;
-//        price = parseFloat(price);
-//        console.log(qty);
-//        let val    = parseInt(qty);
-//        val = isNaN(val) ? 0 : val;
-
-//        if(val  < 10)
-//        {
-
-//            val++;
-//            console.log(val);
-//            val1.closest('.input-group-text').querySelector('.input-qty').value = val;
-//            price = val*price;
-      
-//            val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
-
-
-//        }
-       
-//        let xhr =  new XMLHttpRequest();
-//        xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
-//        xhr.onload =  function(){
-
-//         if(xhr.readyState == 4 && xhr.status == 200)
-//         {
-                
-//          console.log("Successfully updated ");
- 
-//         }
- 
-//         else{
-    
-//           console.error(xhr.statusText);
-//         }
-//     }
- 
- 
-//     xhr.send();
-
-   
-// })
-// val2.addEventListener('click',function(e) {
-//   console.log("Hello");
-//    e.preventDefault();
-//    let qty  = val2.closest('.input-group-text').querySelector('.input-qty').value;
-//    let prod_id =  val2.closest(".input-group-text").getAttribute("data-id");
-//    let price =        val2.closest(".unit").previousElementSibling.innerText;
-//    price = parseFloat(price);
-//    console.log(price);
-//    console.log(prod_id +"Hello");
-//    console.log(qty);
-//    let val  = parseInt(qty);
-//    val  =  isNaN(val) ? 0 : val;
-//    if(val  > 0)
-//    {
-//        val--;
-//        console.log(val);
-//        val2.closest('.input-group-text').querySelector('.input-qty').value = val;
-//        price = val*price;
-      
-//        val2.closest(".unit").nextElementSibling.querySelector('span').innerText = price;
-       
-//    }
-
-    
-
-//    let xhr  = new XMLHttpRequest();
-//    xhr.open('GET',`http://localhost/Sobawitha/cart/updateQuantity/${val}/${prod_id}`);
-
-//    xhr.onload =  function() {
-
-//        if(xhr.readyState == 4 && xhr.status == 200)
-//        {
-               
-//         console.log("Successfully updated ");
-
-//        }
-
-//        else{
-   
-//          console.error(xhr.statusText);
-//        }
-//    }
-
-
-//    xhr.send();
-   
-// })
-
-
-
-
-
-checkOutBtn.addEventListener("click", async function () {
-    let itemsToBuy = [];
-
-
-    if(checkBoxVal.checked){
-      
-   console.log("Clicked the button");
-  for (var i = 0; i < orderElements.length; i++) {
-    var orderElement = orderElements[i];
-    var productId = orderElement.getAttribute("id").split("-")[1];
-    var productName = orderElement.getElementsByClassName("order_p_name")[0].innerText;
-    var productPrice = parseFloat(orderElement.getElementsByClassName("price")[0].innerText);
-    var quantity = parseInt(orderElement.getElementsByClassName("input-qty")[0].value);
-    var total = parseFloat(orderElement.getElementsByClassName("tot_price")[0].innerText);
-    
-
-    var item = {
-      productId: productId,
-      productName: productName,
-      productPrice: productPrice,
-      quantity: quantity,
-      total: total,
-      
-
-    };
-
-  
-
-    itemsToBuy.push(item);
-  }
-
-  const data = {
-    items: itemsToBuy
-
-  }
-
-  let sessionRequest = await fetch("http://localhost/Sobawitha/Cart/checkOut", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(
-      data
-     )
-  });
-
-  // Get the session data
-  let session = await sessionRequest.json();
-  console.log(session);
-  // Redirect to Stripe Checkout
-  stripe = new Stripe('pk_test_51MskWIIz6Y8hxLUJvtpGYLQGyi2MmZsfsPcVc989vHZ3HN6udWndjzWDkqP1QllvJRjzDUNmwapKzmyqzTYhKVc600LYFgrx7h');
-  stripe.redirectToCheckout({
-    sessionId: session.id,
-    
-  });
-  
-
-}
-
-
-
-
-
-else{
-
-
-    document.getElementById('terms_and_condition_check').style.display = "block";
-  
-  }
-
-
-
-}
-)
-
-
-</script>
-
-
-
-<?php require APPROOT . '/views/Users/component/footer.php'?>
+<?php require APPROOT.'/views/Users/component/footer.php'?>
