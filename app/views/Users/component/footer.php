@@ -10,6 +10,7 @@
         <span class="logo_footer">SOBAWITHA</span>
             <p class="about_us">We are a young company always looking for new and creative ideas to help you with our product ain your
                 everyday work.</p>
+            <button id="openDialog">Help</button>
         </div>
 
         <div class="coloumn-2">
@@ -29,7 +30,7 @@
                 <li><a href="<?php echo URLROOT?>/Pages/#buying_section">Products</a></li>
                 <li><a href="<?php echo URLROOT?>/resources/resource_page">Resources</a></li>
                 <li><a href="<?php echo URLROOT?>/forum/forum">Forum</a></li>
-                <li><button id="openDialog">Help</button></li>
+                
 
                 <?php 
                 if(isset($_SESSION['user_email']))  {

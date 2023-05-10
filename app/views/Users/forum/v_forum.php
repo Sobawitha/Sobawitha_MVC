@@ -40,8 +40,6 @@ else if($_SESSION['user_flag'] == 5){
         <?php unset($_SESSION['image_err']); ?>
 <?php endif; ?>
 
-
-
 <div class="body">
         <div class="section_1">
             
@@ -196,15 +194,15 @@ else if($_SESSION['user_flag'] == 5){
                                                 }
                                                 
                                                 // Output the result
-                                                echo print_r($dateTime);
-                                                echo print_r($current_time);
-                                                echo print_r($time_diff);
-                                                echo $time_difference;
-                                                echo "\n";
-                                                $current_time = time(); // Returns the current time in the format of "hours:minutes:seconds"
-                                                echo date('Y-m-d H:i:s',$current_time); // Prints the current time
+                                                // echo print_r($dateTime);
+                                                // echo print_r($current_time);
+                                                // echo print_r($time_diff);
+                                                // echo $time_difference;
+                                                // echo "\n";
+                                                // $current_time = time(); // Returns the current time in the format of "hours:minutes:seconds"
+                                                // echo date('Y-m-d H:i:s',$current_time); // Prints the current time
 
-                                                die();
+                                                // die();
                                                 
                                                 ?>
 

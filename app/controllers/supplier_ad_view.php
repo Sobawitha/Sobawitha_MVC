@@ -1,51 +1,38 @@
 <?php
     class supplier_ad_view extends Controller{
+
+        private $supplier_ad;
+        private $raw_material_product;
         public function __construct(){
             $this->supplier_ad = $this->model('M_supplier_view');
+            $this->raw_material_product = $this->model('M_seller_wishlist');
     }
 
 
     public function index() {
-        $posts = $this->supplier_ad->getPostsView();
+        $ads = $this->supplier_ad->getPostsView();
+        $user_realated_wishlist_items= $this->raw_material_product->get_all_wishlist_items();
     
         $data = [
-            'posts' => $posts
+            'ads' => $ads,
+            'seller_wishlist' => $user_realated_wishlist_items,
         ];
     
         $this->view('Raw_material_supplier/supplier_ad_management/supplier_view_advertisement', $data);
     }
     
     
-    public function indexmore($productId) {
-
-
-        $post = $this->supplier_ad->getPostById($productId);
-
-            // Check the owner
-            // if($post->user_id != $_SESSION['user_id']) {
-            //     redirect('Posts/v_index');
-            // }
+    public function indexmore() {
+        $productId = $_GET['product_id'];
+        $ad = $this->supplier_ad->getPostById($productId);
+        $type = $ad->type;
+        $id=$_SESSION['user_id'];
+        $no_of_cart_item = $this->supplier_ad->check_cart($id)->count_item;
 
             $data = [
-                'image1' => '',
-                'image_name1' => $post->raw_material_image,
-                'image2' => '',
-                'image_name2' => $post->rm_image_two,
-                'image3' => '',
-                'image_name3' => $post->rm_image_three,
-                
-                'product_id' => $productId,
-                'product_name' => $post->product_name,
-                'price' => $post->price,
-                'quantity' => $post->quantity,
-                'product_description' => $post->product_description,
-                'type' => $post->type,
-                'manufacturer' =>$post->manufacturer,
-                'date' => $post->date,
-                
-                'image_err' => '',
-                // 'title_err' => '',
-                // 'body_err' => ''
+                'adcontent' => $ad,
+                'no_of_cart_item' => $no_of_cart_item,
+
             ];
 
             $this->view('Raw_material_supplier/supplier_ad_management/supplier_view_more_advertisement', $data);
@@ -55,231 +42,160 @@
 
 
 
-    // public function add_advertisment(){
-    //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-    //         $data = [
-    //             'image' => $_FILES['image'],
-    //             'image_name' => time().'_'.$_FILES['image']['name'],
+    /*add and remove from wish list*/
+    public function add_to_wishlist(){
+        $rm_product_id = $_GET['product_id'];
+        $this->raw_material_product-> add_to_wishlist($rm_product_id);
+        redirect('supplier_ad_view/index');
+    }
 
-    //             'product_name' => trim($_POST['name']),
-    //             'price' => trim($_POST['price']),
-    //             'quantity' => trim($_POST['quantity']),
-    //             'product_description' => trim($_POST['additional-info']),
-    //             // 'raw_material_image' => trim($_POST['image']),
-                
-    //             'image_err' => '',
-    //             'product_name_err' => '',
-    //             'price_err' => '',
-    //             'quantity_err' => '',
-    //             'product_description_err' => '',
-    //             // 'raw_material_image_err' => ''
-    //         ];
+    public function remove_wishlist(){
+        $this->raw_material_product-> removeItem();
+        redirect('supplier_ad_view/index');
+    }
 
-    //         //validation
-    //         if($data['image']['size'] > 0) {
-    //             if(uploadImage($data['image']['tmp_name'], $data['image_name'], '/img/postsImgs/')) {
-    //                 //done
-    //             }
-    //             else {
-    //                 $data['image_err'] = 'Unsuccessful image uploading';
-    //             }
-    //         }
-    //         else {
-    //             $data['image_name'] = null;
-    //         }
+    
+    /*ok */
+    function add_to_cart_from_individual_page(){
+        $quantity =2; /*change */
+        $product_id = $_GET['product_id'];
+        $user_id = $_SESSION['user_id'];
 
-    //         if(empty($data['product_name'])) {
-    //             $data['product_name_err'] = 'Please enter a product_name';
-    //         }
+        /*add to cart */
+        $current_status = $this->supplier_ad->check_similer_item($product_id,$user_id)->count_row;
+        $data = [
+          'product_id' => $_GET['product_id'],
+          'quantity' => $quantity,
+          'user_id' => $_SESSION['user_id'],
+        ];
 
-    //         if(empty($data['price'])) {
-    //             $data['price_err'] = 'Please enter a price';
-    //         }
+        if($current_status>0){
+            $this->supplier_ad->update_cart($data);
+            redirect('raw_material_orders/view_cart?product_id='.$product_id);
+        }
+        else{
+            $this->supplier_ad->add_to_cart($data);
+            redirect('raw_material_orders/view_cart?product_id='.$product_id);
+        }
+     }
 
-    //         if(empty($data['quantity'])) {
-    //             $data['quantity_err'] = 'Please enter a quantity';
-    //         }
-
-    //         if(empty($data['product_description'])) {
-    //             $data['product_description_err'] = 'Please enter a product description';
-    //         }
-
-    //         // if(empty($data['raw_material_image'])) {
-    //         //     $data['raw_material_image_err'] = 'Please enter a raw material image';
-    //         // }
-
-    //         if(empty($data['image_err']) && empty($data['product_name_err']) && empty($data['price_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
-    //             if($this->supplier_ad->create($data)) {
-    //                 // flash('post_msg', 'Post is published');
-    //                 redirect('supplier_ad_management/index');
-    //             }
-    //             else {
-    //                 die('Something went wrong');
-    //             }
-    //         }
-    //         else {
-    //             // Loading the view with errors
-    //             $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_advertisment',$data);
-    //         }
-    //     }
-    //     else{
-    //         $data = [
-    //             'image' => '',
-    //             'image_name' => '',
-    //             'product_name' => '',
-    //             'price' => '',
-    //             'quantity' => '',
-    //             'product_description' => '',
-    //             'raw_material_image' => '',
-
-    //             'image_err' => ''
-    //             // 'product_name_err' => '',
-    //             // 'price_err' => '',
-    //             // 'quantity_err' => '',
-    //             // 'product_description_err' => '',
-    //             // 'raw_material_image_err' => ''
-    //         ];
-
-    //         $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_advertisment',$data);
-    //     }
+     /*for single item buy ok*/
+     function complete_order(){
+        $quantity =1;  /*change */
+        $product_id = $_GET['product_id'];
+        $price = $this->supplier_ad->find_price_from_id($product_id)->product_price;
+        $data = [
+          'product_id' => $_GET['product_id'],
+          'quantity' => $quantity,
+          'user_id' => $_SESSION['user_id'],
+        ];
+      
+        // Insert data into the database
+        $this->supplier_ad->insert_order_product_table($data);
+        $order_id = $this->supplier_ad->select_last_raw_id()->raw_id;
+        $this->supplier_ad->insert_order_table($data, $order_id);
+        $this->supplier_ad->update_raw_material_count($product_id, $quantity);
+        $order_id = $this->supplier_ad->find_order_id()->order_id;
+        $tot_bill = $price * $quantity;
+        $user_detail = $this->supplier_ad->get_user_detail();
+        $data_for_payment =[
+            'user_detail' => $user_detail,
+            'tot_bill' => $tot_bill,
+            'order_id' => $order_id
+        ];
+        $this->view('Users/component/cod_order',$data_for_payment);
+      }
 
 
+     function add_to_cart(){
+        $quantity =1; /*change */
+        $product_id = $_GET['product_id'];
+        $this->supplier_ad->update_raw_material_count($product_id, $quantity);
+        $data = [
+          'product_id' => $_GET['product_id'],
+          'quantity' => $quantity,
+          'user_id' => $_SESSION['user_id'],
+        ];
+        if($this->supplier_ad->add_to_cart($data)){
+            redirect('supplier_ad_view/indexmore?product_id='.$product_id);
+        }
+
+     }
+
+     function remove_from_cart(){
+        $product_id = $_GET['product_id'];
+        $quantity = $_GET['quantity'] ; /*change */
+        $this->supplier_ad->re_update_raw_material_count($product_id, $quantity);
+        $data = [
+            'product_id' => $_GET['product_id'],
+            'user_id' => $_SESSION['user_id'],
+          ];
+        if($this->supplier_ad->remove_from_cart($data)){
+            redirect('raw_material_orders/view_cart');
+        }
+     }
+
+
+     public function load_cash_on_deliver_page(){
+        $product_id = $_GET['product_id'];
+        $order_id = $this->supplier_ad->find_order_id()->order_id;
+        $quantity = 4; /*change */
+        $price = $this->supplier_ad->find_price_from_id($product_id)->product_price;
+        $tot_bill = $price * $quantity;
+        $user_detail = $this->supplier_ad->get_user_detail();
+        $data =[
+            'user_detail' => $user_detail,
+            'tot_bill' => $tot_bill,
+            'order_id' => $order_id
+        ];
+        $this->view('Users/component/cod_order',$data);
+     }
+
+
+     public function confirm_payment(){
+        $product_id = $_GET['product_id'];
+        $order_id = $this->supplier_ad->find_order_id()->order_id;
+        $this->supplier_ad->update_cache_on_delivery_table($order_id);
+        $this->supplier_ad->update_order_state($order_id);
+        redirect('supplier_ad_view/load_cash_on_deliver_page?product_id='.$product_id); /*load buyer view purchses */
+     }
 
 
 
-    //     // $data=[];
-    //     // $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_advertisment',$data);
-    // }
 
-    // public function view_advertisment(){
-    //     $data=[];
-    //     $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management',$data);
-    // }
 
-    // public function update_advertisement($productId){
-    //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-    //         $data = [
-    //             'image' => $_FILES['image'],
-    //             'image_name' => time().'_'.$_FILES['image']['name'],
-    //             'product_id' => $productId,
-    //             'product_name' => trim($_POST['name']),
-    //             'price' => trim($_POST['price']),
-    //             'quantity' => trim($_POST['quantity']),
-    //             'product_description' => trim($_POST['additional-info']),
-    //             // 'raw_material_image' => trim($_POST['image']),
-                
-    //             'image_err' => '',
-    //             'product_name_err' => '',
-    //             'price_err' => '',
-    //             'quantity_err' => '',
-    //             'product_description_err' => ''
-    //             // 'raw_material_image_err' => ''
-    //         ];
 
-    //         //validation
-    //         $post = $this->postsModel->getPostById($postId);
-    //         $oldImage = PUBROOT.'/img/postsImgs/'.$post->image;
 
-    //         //photo updated
-    //         //user haven't changed the existing image
-    //         if($_POST['intentially_removed'] == 'removed') {
-    //             deleteImage($oldImage);
 
-    //             $data['image_name'] = '';
-    //         }
-    //         else {
-    //             if($_FILES['image']['name'] == '') {
-    //                 $data['image_name'] = $post->image;
-    //             }
-    //             else {
-    //                 updateImage($oldImage, $data['image']['tmp_name'], $data['image_name'], '/img/postsImgs/');
-    //             }
-    //         }
 
-    //         if(empty($data['product_name'])) {
-    //             $data['product_name_err'] = 'Please enter a product_name';
-    //         }
 
-    //         if(empty($data['price'])) {
-    //             $data['price_err'] = 'Please enter a price';
-    //         }
 
-    //         if(empty($data['quantity'])) {
-    //             $data['quantity_err'] = 'Please enter a quantity';
-    //         }
 
-    //         if(empty($data['product_description'])) {
-    //             $data['product_description_err'] = 'Please enter a product description';
-    //         }
 
-    //         // if(empty($data['raw_material_image'])) {
-    //         //     $data['raw_material_image_err'] = 'Please enter a raw material image';
-    //         // }
 
-    //         if(empty($data['product_name_err']) && empty($data['price_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
-    //             if($this->supplier_ad->edit($data)) {
-    //                 // flash('post_msg', 'Post is published');
-    //                 redirect('supplier_ad_management/index');
-    //             }
-    //             else {
-    //                 die('Something went wrong');
-    //             }
-    //         }
-    //         else {
-    //             // Loading the view with errors
-    //             $this->view('Raw_material_supplier/supplier_ad_management/v_supplier_update_advertisement', $data);
-    //         }
-    //     }
-    //     else{
-    //         $post = $this->supplier_ad->getPostById($productId);
 
-    //         // Check the owner
-    //         // if($post->user_id != $_SESSION['user_id']) {
-    //         //     redirect('Posts/v_index');
-    //         // }
+      /*fertilizer_order_list for Naveendra*/
+      function view_orders(){
+        $order_list = $this-> raw_material_product -> list_order_deatils($_SESSION['user_id']);
+        $data =[
+            'order_list' => $order_list,
+        ];
 
-    //         $data = [
-    //             'image' => '',
-    //             'image_name' => '',
-    //             'product_id' => $productId,
-    //             'product_name' => $post->product_name,
-    //             'price' => $post->price,
-    //             'quantity' => $post->quantity,
-    //             'product_description' => $post->product_description,
-    //             'image_err' => '',
-    //             // 'title_err' => '',
-    //             // 'body_err' => ''
-    //         ];
+        $this->view('Seller/Seller_order/v_seller_order_list',$data);
 
-    //         $this->view('Raw_material_supplier/supplier_ad_management/v_supplier_update_advertisement', $data);
-    //     }
-    // }
+      }
 
-    // // DELETE
-    // public function delete_advertisement($productId) {
-    //     $post = $this->supplier_ad->getPostById($productId);
+      
 
-    //     // Check owner
-    //     if($post->user_id != $_SESSION['user_id']) {
-    //         redirect('supplier_ad_management/index');
-    //     }
-    //     else {
-    //         $this->postsModel->getPostById($postId);
-    //         $oldImage = PUBROOT.'/img/postsImgs/'.$post->image;
-    //         deleteImage($oldImage);
-            
-    //         if($this->supplier_ad->delete($productId)) {
-    //             // flash('post_msg', 'Post is deleted');
-    //             redirect('supplier_ad_management/index');
-    //         }
-    //         else {
-    //             die('Something went wrong');
-    //         }
-    //     }
-    // }
-}
-?>
+
+
+     
+
+
+
+
+
+    }
+    ?>

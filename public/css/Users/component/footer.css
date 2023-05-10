@@ -43,7 +43,6 @@ body{
 }
 
 .about_us{
-    margin-top:2rem;
     font-size:11px;
     text-align: justify;
     
@@ -156,8 +155,8 @@ hr{
 #openDialog{
     cursor: pointer;
     background-color: transparent;
-    color: aliceblue;
-    border-radius: 5px;
+    color: rgb(230, 160, 19);
+    /* border-radius: 5px; */
 }
 
 
@@ -176,6 +175,7 @@ hr{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background-color: #fff;
     z-index: 9999;
+    border:none;
   }
   
   .dialog-box form {
@@ -192,16 +192,24 @@ hr{
   .dialog-box textarea {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #f9f6f6;
     resize: vertical;
     font-size: 16px;
     margin-bottom: 10px;
+    font-size:13px;
+    color:gray;
   }
   
-  .dialog-box input[type="email"]:focus,
-  .dialog-box textarea:focus {
-    border-color: #1B1212;
-  }
+  .dialog-box input[type="email"]:focus
+ {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #f9f6f6;
+    resize: vertical;
+    margin-bottom: 10px;
+    font-size:13px;
+    color:gray;
+  } 
   
   .dialog-box button[type="submit"] {
     margin-top: 20px;
@@ -228,9 +236,9 @@ hr{
     border: none;
     font-size: 24px;
     font-weight: bold;
-    color: #333;
     cursor: pointer;
     background-color: transparent;
+    color:rgb(230, 160, 19);
   }
   
   .dialog-box h2.dialog-title {

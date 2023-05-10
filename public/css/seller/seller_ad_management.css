@@ -112,7 +112,7 @@ td{
 }
 
 .edit{
-  color:rgb(89, 218, 104);
+  color:rgb(124, 117, 14);
   font-size:15px;
   cursor:pointer;
   font-weight: bold;
@@ -121,10 +121,12 @@ td{
 
 
 #delete{
-  color:rgb(191, 29, 29);
-  font-size:15px;
-  cursor:pointer;
-  font-weight: bold;
+  color: rgb(251, 91, 91);
+  font-size: 15px;
+  cursor: pointer;
+  padding:10px;
+  border-radius:25px;
+  background-color: rgb(238, 210, 210);
   /* flex-grow: 1; */
 
 }

@@ -121,8 +121,14 @@ search_input.addEventListener("keyup", (e) => {
             }
         }
         else{
-          html += '<li >No results found</li>';
-          html2 += '<h1 style = "text-align:center;color:red;">No results found</h1>';
+          // html += '<img src="Sobawitha/public/images/search_result.png" ></img>';
+          // html2 += '<h1 style = "text-align:center;color:green;">No results found</h1>';
+
+          html2 += '<div style="text-align: center;">';
+          html2 += '<h1 style="color: #9FA078;">No results found</h1>';
+          html2 += '<img src=".././public/images/search_result.png" alt="No results image" style="width:450px; height:450px" />';
+          html2 += '</div>';
+
         }
 
 
@@ -242,43 +248,70 @@ function filterProducts() {
                 for (let i = 0; i < results.length; i++) {
 
 
-                  html +=`<div class="adv_card">
-                  <div class="card_image" style="background: url(../images/${results[i].fertilizer_img}.jpg); background-size: cover;
-                                                  height:75%;
-                                                  -webkit-background-size:cover ;
-                                                  background-position:center;
-                                                  margin:0px;
-                                                  padding:0px;">
-                      <div class="product_detail">
-                          <span class="product_name">${results[i].product_name}</span><br>
-                          <span class="owner">${results[i].manufacturer}</span><br>
-                      </div>
-                  </div>
+              //     html +=`<div class="adv_card">
+              //     <div class="card_image" style="background: url(../images/${results[i].fertilizer_img}.jpg); background-size: cover;
+              //                                     height:75%;
+              //                                     -webkit-background-size:cover ;
+              //                                     background-position:center;
+              //                                     margin:0px;
+              //                                     padding:0px;">
+              //         <div class="product_detail">
+              //             <span class="product_name">${results[i].product_name}</span><br>
+              //             <span class="owner">${results[i].manufacturer}</span><br>
+              //         </div>
+              //     </div>
   
-                  <i class="fa-regular fa-heart" id="heart"></i>
+              //     <i class="fa-regular fa-heart" id="heart"></i>
   
-                  <div class="discription">
-                      <i class="fa-solid fa-star" id="star"></i>
-                      <i class="fa-solid fa-star" id="star"></i>
-                      <i class="fa-solid fa-star" id="star"></i>
-                      <i class="fa-regular fa-star" id="star"></i>
-                      <i class="fa-regular fa-star" id="star"></i>
-                      <span class="price">${results[i].price}</span>
+              //     <div class="discription">
+              //         <i class="fa-solid fa-star" id="star"></i>
+              //         <i class="fa-solid fa-star" id="star"></i>
+              //         <i class="fa-solid fa-star" id="star"></i>
+              //         <i class="fa-regular fa-star" id="star"></i>
+              //         <i class="fa-regular fa-star" id="star"></i>
+              //         <span class="price">${results[i].price}</span>
                       
+              //     </div>
+              // </div>`
+
+                  html += `<div class="adv_card">
+                  <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product?product_id=<?php echo $product->Product_id ?>"><div class="card_image" style="background: url(<?php echo URLROOT;?>/upload/fertilizer_images/${results[i].fertilizer_img}; background-size: cover);
+                                                              height:75%;
+                                                              -webkit-background-size:cover ;
+                                                              background-position:center;
+                                                              margin:0px;
+                                                              padding:0px;">
+                  <div class="product_detail">
+                      <span class="product_name">${results[i].product_name} > 20 ? substr(${results[i].product_name}e,0,20)."..." : ${results[i].product_name} </span><br>
+                      <span class="owner">${results[i].manufacturer}</span>
                   </div>
-              </div>`
-
-
-
-
-
-
-
+                  </a>
+                  </div>
+                  
+              
+                              <i class="fa-regular fa-heart" id="heart"></i>
+              
+                              <div class="discription">
+                              <?php $avg_rating = round(${results[i].$avg_rating}); ?>
+                             
+                              <?php 
+                              for ($i = 1; $i <= 5; $i++) {
+                              $checked = ($i <= $avg_rating) ? 'checked' : '';
+                              echo '<span class="fas fa-star ' . $checked . ' "></span>';
+                              }
+                              ?>
+                              <span class="price"> Rs.${results[i].price}</span>
+                              </div>
+                          </div>`
                 }
         }
 
         else{
-            html += '<h1 style = {text-align:center}>No results found</h1>';
+            html += '<div style="text-align: center;">';
+            html += '<h1 style="color: #9FA078;">No results found</h1>';
+            html += '<img src=".././public/images/search_result.png" alt="No results image" style="width:450px; height:450px" />';
+            html += '</div>';
+
         }
 
         recentProductCardSection.innerHTML = html;

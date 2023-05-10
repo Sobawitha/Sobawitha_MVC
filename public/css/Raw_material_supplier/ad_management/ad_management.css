@@ -6,7 +6,7 @@
 .body{
     display:grid;
     grid-template-columns:20% 70% 10%;
-    height:100%;
+
     padding-top:80px;
     
   }
@@ -112,10 +112,13 @@
   }
   
   .edit a i{
-    color:rgb(89, 218, 104);
+    color:rgb(36, 49, 37);
     font-size:15px;
     cursor:pointer;
     font-weight: bold;
+    /* padding:5px;
+    border-radius:25px;
+    background-color: yellow;; */
     /* flex-grow: 1; */
   }
   
@@ -125,6 +128,9 @@
     font-size:15px;
     cursor:pointer;
     font-weight: bold;
+    padding:5px;
+    border-radius:25px;
+    background-color: rgb(247, 247, 195);;
     /* flex-grow: 1; */
   
   }
@@ -280,6 +286,7 @@
     padding:1rem;
     display: flex;
     flex-direction: column;
+    border:none;
     
   }
   
