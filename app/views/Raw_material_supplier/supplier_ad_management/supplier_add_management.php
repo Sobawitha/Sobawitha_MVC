@@ -74,7 +74,6 @@
                                 <td>Image</td>
                                 <td>Name</td>
                                 <td>Price(Rs.)</td>
-                                <td>Per Amount</td>
                                 <td>Avaiable Quantity</td>
                                 <td>Additional Infomation</td>
                                 <td>Options</td>
@@ -91,9 +90,8 @@
                                         </td>
                                         <td><span class="title"><?php echo $ad->product_name ?></span></td>
                                         <td><span class="category"><?php echo $ad->price ?></span></td>
-                                        <td><span class="category"><?php echo $ad->per_amount.' '.$ad->category_per ?></span></td>
 
-                                        <td><span class="certificate No<"><?php echo $ad->quantity .' '.$ad->category_avl ?></span></td>
+                                        <td><span class="certificate No<"><?php echo $ad->quantity ?></span></td>
 
                                         <td>
                                                 <span class="manufacture">
