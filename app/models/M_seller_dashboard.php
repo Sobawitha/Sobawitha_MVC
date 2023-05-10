@@ -44,6 +44,7 @@
         return $this->db->single();
     }
 
+
     public function get_order_detail() {
         $this->db->query("SELECT 
         CASE current_status 

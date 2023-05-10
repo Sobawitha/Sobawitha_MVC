@@ -130,19 +130,6 @@
         
         }  
 
-        public function forgot_password(){
-            $data=[];
-            $this->view('users/v_fogotpw', $data);
-        }
-        
-        public function logout(){
-            unset($_SESSION['user_id']);
-            unset($_SESSION['username'] );
-            unset($_SESSION['lastname']);
-            unset($_SESSION['position']);
-            session_destroy();
-            redirect('Users/login');
-        }
 
         public function isLoggedIn(){
             if(isset($_SESSION['user_id'])){

@@ -18,11 +18,14 @@
     }
 
     public function get_no_of_ongoing_order($id){
-        $this->db->query("SELECT COUNT(DISTINCT(seller_order_raw_material.order_id)) AS ongoing_orders
-        FROM seller_order_raw_material inner join raw_material on seller_order_raw_material.product_id = raw_material.product_id inner join seller_orders on 
-        seller_orders.order_id = seller_order_raw_material.order_id  
-        WHERE raw_material.user_id =  :id AND seller_orders.current_status = 0
-        AND seller_orders.created_at >= DATE_SUB(NOW(), INTERVAL 1 YEAR)");
+        $this->db->query("SELECT COUNT(DISTINCT seller_order_raw_material.order_id) AS ongoing_orders
+        FROM seller_order_raw_material
+        INNER JOIN raw_material ON seller_order_raw_material.product_id = raw_material.product_id
+        INNER JOIN seller_orders ON seller_orders.order_id = seller_order_raw_material.order_id
+        WHERE raw_material.user_id = :id
+          AND seller_orders.current_status = 0
+          AND seller_orders.created_at >= DATE_SUB(NOW(), INTERVAL 1 YEAR);
+        ");
         $this->db->bind(":id", $id);
         return $this->db->single();
     }

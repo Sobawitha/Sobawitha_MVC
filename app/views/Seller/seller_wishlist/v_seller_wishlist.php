@@ -3,7 +3,6 @@
 <?php require APPROOT.'/views/Seller/Seller/seller_topnavbar.php'?>
 <?php require APPROOT.'/views/Seller/Seller/seller_Sidebar.php'?>
 
-
 <div class="body">
     <div class="section_1">
 
@@ -11,10 +10,6 @@
 
 
     <div class="section_2">
-
-    <!-- <h3>Wishlist</h3>
-    <hr> -->
-
     <br><br>
 
     <div class="shop-items">

@@ -24,6 +24,7 @@
                 <div class="advertisment-details">
                   <div class="image_container">
 
+                  <div class="">
                     <div class="post-image1">
                       <img src="" alt="" id="image_placeholder1" style="display: none;">
                     </div>
@@ -32,7 +33,10 @@
                         <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn1" style="display:none;" onclick="removeImage1()">
                         <input type="file" name="image1" id="image1" style="display: none;">
                     </div>
-                    
+                  </div>
+
+
+                  <div>  
                     <div class="post-image2">
                       <img src="" alt="" id="image_placeholder2" style="display: none;">
                     </div>
@@ -41,7 +45,9 @@
                         <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn2" style="display:none;" onclick="removeImage2()">
                         <input type="file" name="image2" id="image2" style="display: none;">
                     </div>
-                    
+                  </div>
+
+                  <div class="">  
                     <div class="post-image3">
                       <img src="" alt="" id="image_placeholder3" style="display: none;">
                     </div>
@@ -50,15 +56,10 @@
                         <img src="<?php echo URLROOT; ?>/img/components/posts/remove-image.png" alt="" id="removeImagebtn3" style="display:none;" onclick="removeImage3()">
                         <input type="file" name="image3" id="image3" style="display: none;">
                     </div>
+                  </div>
 
                   </div>
                   
-
-
-
-
-
-
                   <!-- <input type="file"></input> -->
                   <br><br>
                   <div class="input-box">
@@ -66,34 +67,29 @@
                     <input type="text" placeholder="Enter name of the raw material" name="name" required>
                   </div>
 
-                  <div class="input-box unit-price">
-                    <span class="details">Unit Price (Rs.)</span>
-                    <input type="text" placeholder="Enter unit price" name="price" required>
-                    <span class="details">per</span>
-                    <input type="text" placeholder="Enter amount" required>
-                    <select name="category" id="category">
-                              <option value="mg">mg</option>
-                              <option value="g">g</option>
-                              <option value="kg">kg</option>
-                              <option value="ml">ml</option>
-                              <option value="l">l</option>
-                              <option value="packet">packets</option>
-                              <option value="others">others</option>
-                    </select>
-                  </div>
+                  <div class="input-box ">
+                    <div class="text_filed">
+                      <span class="details">Unit Price (Rs.)</span>
+                      <span class="details">per</span>
+                    </div>
 
-                  <!-- <div class="input-box unit">
-                    <span class="details">per</span>
-                    <select name="category" id="category">
-                              <option value="mg">mg</option>
-                              <option value="g">g</option>
-                              <option value="kg">kg</option>
-                              <option value="ml">ml</option>
-                              <option value="l">l</option>
-                              <option value="packet">packets</option>
-                              <option value="others">others</option>
-                    </select>
-                </div> -->
+                    <div class="input_flex">
+                      <input type="text" placeholder="Enter unit price" name="price" required>
+
+                      <div class="enter_amount">
+                        <input type="text" placeholder="Enter amount" required>
+                        <select name="category" id="category">
+                                  <option value="mg">mg</option>
+                                  <option value="g">g</option>
+                                  <option value="kg">kg</option>
+                                  <option value="ml">ml</option>
+                                  <option value="l">l</option>
+                                  <option value="packet">packets</option>
+                                  <option value="others">others</option>
+                        </select>
+                      </div>
+                  </div>
+                  </div>
 
                   <div class="input-box">
                     <span class="details">Type</span>
@@ -103,18 +99,20 @@
                     <span class="details">Manufacturer</span>
                     <input type="text" placeholder="" name="manufacturer" required>
                   </div>
-                  <div class="input-box available-quantity">
-                    <span class="details">Available quantity</span>
-                    <input type="text" placeholder="" name="quantity" required>
-                    <select name="category" id="category">
-                              <option value="mg">mg</option>
-                              <option value="g">g</option>
-                              <option value="kg">kg</option>
-                              <option value="ml">ml</option>
-                              <option value="l">l</option>
-                              <option value="packet">packets</option>
-                              <option value="others">others</option>
-                    </select>
+                  <div class="input-box">
+                    <span class="details">Available quantity</span><br>
+                    <div class="flex_view">
+                      <input type="text" placeholder="" name="quantity" required>
+                      <select name="category" id="category">
+                        <option value="mg">mg</option>
+                        <option value="g">g</option>
+                        <option value="kg">kg</option>
+                        <option value="ml">ml</option>
+                        <option value="l">l</option>
+                        <option value="packet">packets</option>
+                        <option value="others">others</option>
+                      </select>
+                  </div>
                   </div>
 
                   <div class="input-box">

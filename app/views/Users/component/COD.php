@@ -94,16 +94,9 @@
 
         </div>
 
-        <!-- <button class="btn btn-primary">
-          <b>Pay</b> $ <span id="payAmount">2.15</span>
-        </button> -->
+
 
       </section>
-
-
-      <!--
-        - cart section
-      -->
       <section class="cart">
 
         <div class="cart-item-box">

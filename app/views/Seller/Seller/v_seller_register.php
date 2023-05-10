@@ -1,9 +1,14 @@
-<link rel="stylesheet" href="../css/Seller/seller_register.css"></link>
+<!-- Sobawitha -->
+
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/seller/seller_register.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
 <div class="signup_seller_container">
+
     <div class="signup_seller_intro">
+
     <a href="<?php echo URLROOT?>/Login/login"><h1><i class="fa-solid fa-arrow-left"></i> Back to Login page</h1></a><br>
+
     <i class="fa-solid fa-leaf" id="leaf"></i>    
     <h2>Sobawitha </h2>
         <span class="sign_up">Seller Sign Up<span>
@@ -20,11 +25,10 @@
     </div>
     
     <form method="POST" action="<?php echo URLROOT?>/Seller/seller_register" enctype="multipart/form-data">
+    
     <div class="signup_seller_content">
 
-    
-
-        <div class="seller_signup_part_one">
+       <div class="seller_signup_part_one">
 
         <div class="s_input-box">
             <span class="ssu_details">First Name</span><br>
@@ -114,7 +118,7 @@
 
         <div class="seller_signup_part_two">
 
-          <div class="s_input-box">
+          <div class="s_input-box" id="birthday_box">
             <span class="ssu_details" >Birthday</span><br>
             <input type="date" name="birthday"><br>
             <span class="error_msg"><?php echo $data['birthday_err'] ?></span>
@@ -173,14 +177,15 @@
           <!-- <div class="sign_up_seller_btn">
           <input type="submit" id="sign_up_sell_btn" value="Sign Up">
           </div> -->
-
-        </div>
-   
-    </div>
-    <div class="sign_up_seller_btn">
+ 
+          <div class="sign_up_seller_btn">
           <input type="submit" id="sign_up_sell_btn" value="Sign Up">
           </div>
+       
+          </div>
+        </div>
 
+
+</form>
 
 </div>
-</form>
