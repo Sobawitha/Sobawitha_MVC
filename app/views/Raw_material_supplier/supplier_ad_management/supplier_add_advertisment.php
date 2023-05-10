@@ -33,6 +33,7 @@
                         <input type="file" name="image1" id="image1" style="display: none;">
                     </div>
                     
+                    
                     <div class="post-image2">
                       <img src="" alt="" id="image_placeholder2" style="display: none;">
                     </div>
@@ -52,6 +53,7 @@
                     </div>
 
                   </div>
+                  <p>Cover Image</p>
                   
 
 
@@ -70,8 +72,8 @@
                     <span class="details">Unit Price (Rs.)</span>
                     <input type="text" placeholder="Enter unit price" name="price" required>
                     <span class="details">per</span>
-                    <input type="text" placeholder="Enter amount" required>
-                    <select name="category" id="category">
+                    <input type="text" name="per" placeholder="Enter amount" required>
+                    <select name="category_per" id="category">
                               <option value="mg">mg</option>
                               <option value="g">g</option>
                               <option value="kg">kg</option>
@@ -106,7 +108,7 @@
                   <div class="input-box available-quantity">
                     <span class="details">Available quantity</span>
                     <input type="text" placeholder="" name="quantity" required>
-                    <select name="category" id="category">
+                    <select name="category_avl" id="category">
                               <option value="mg">mg</option>
                               <option value="g">g</option>
                               <option value="kg">kg</option>

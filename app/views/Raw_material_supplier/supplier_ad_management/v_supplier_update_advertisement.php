@@ -62,6 +62,7 @@
                     </div>
 
                   </div>
+                  <p>Cover Image</p>
                   
 
 
@@ -80,8 +81,8 @@
                     <span class="details">Unit Price (Rs.)</span>
                     <input type="text" name="price" placeholder="Enter unit price" value="<?php echo $data['price']; ?>" required>
                     <span class="details">per</span>
-                    <input type="text" placeholder="Enter amount" required>
-                    <select name="category" id="category">
+                    <input type="text" name="per" value="<?php echo $data['per']; ?>" placeholder="Enter amount" required>
+                    <select name="category_per" value="<?php echo $data['category_per']; ?>" id="category">
                               <option value="mg">mg</option>
                               <option value="g">g</option>
                               <option value="kg">kg</option>
@@ -116,7 +117,7 @@
                   <div class="input-box available-quantity">
                     <span class="details">Available quantity</span>
                     <input type="text" name="quantity" placeholder="" value="<?php echo $data['quantity']; ?>" required>
-                    <select name="category" id="category">
+                    <select name="category_avl" value="<?php echo $data['category_avl']; ?>" id="category">
                               <option value="mg">mg</option>
                               <option value="g">g</option>
                               <option value="kg">kg</option>
