@@ -99,12 +99,9 @@
           </tr>
           <tr>
             <td>Sub Total</td>
-            <td>Rs. <?php echo $data['tot_bill'];?></td>
+            <td>Rs.<?php echo  $data['price'].'x'.$data['quantity'] ?></td>
           </tr>
-          <tr>
-            <td>Delivery Fee</td>
-            <td>##</td>
-          </tr>
+         
           <tr>
             <td>Total Fee</td>
             <td>Rs. <?php echo $data['tot_bill'];?></td>  

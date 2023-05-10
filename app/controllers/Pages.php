@@ -57,6 +57,16 @@ class Pages extends Controller {
         );
         $this->view('Users/component/COD', $data);
     }
+
+
+    public function orderpageproducts()
+    {
+     
+
+        
+
+
+    }
 }
 
 ?>

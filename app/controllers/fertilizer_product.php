@@ -143,7 +143,7 @@ class fertilizer_product extends Controller
 
 
     function complete_order(){
-        $quantity =1;  
+        $quantity = $_GET['quantity'];  
         $product_id = $_GET['product_id'];
         $price = $this->fertilizer_product_model->find_price_from_id($product_id)->product_price;
         $data = [
@@ -164,6 +164,8 @@ class fertilizer_product extends Controller
         $data_for_payment =[
             'user_detail' => $user_detail,
             'tot_bill' => $tot_bill,
+            'quantity' => $quantity,
+            'price' => $price,
             'order_id' => $order_id
         ];
         $this->view('Users/component/cod_order',$data_for_payment);

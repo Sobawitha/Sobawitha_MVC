@@ -48,12 +48,12 @@ class M_order
             $result = $this->db->single();
             $current_quantity = $result->quantity;
           
-            // if ($current_quantity < $orderdata[$i]->quantity) {
-            //     // Return an error or throw an exception to indicate that the order cannot be fulfilled due to insufficient stock
-            //     $this->db->rollBack();
-            //     return false;
-            // }
-         //check this logic later with group members
+            if ($current_quantity < $orderdata[$i]->quantity) {
+                // Return an error or throw an exception to indicate that the order cannot be fulfilled due to insufficient stock
+                $this->db->rollBack();
+                return false;
+            }
+        //  check this logic later with group members
             $this->db->query("UPDATE  fertilizer SET quantity = quantity -:order_quantity WHERE Product_id = :product_id");
             $this->db->bind(":product_id",$orderdata[$i]->Product_id);
             $this->db->bind(":order_quantity",$orderdata[$i]->quantity);
@@ -194,17 +194,14 @@ class M_order
         // Commit the transaction
       
         $this->db->commit();
-        $this->db->query("SELECT * from user WHERE user_id = :user_id");
-        $this->db->bind(":user_id", $_SESSION['user_id']);
-        $result = $this->db->single();
-        $payer_email = $result->email;
-        $payer_name = $result->first_name;
-        $payer_password = $result->password;
+        // $this->db->query("SELECT * from user WHERE user_id = :user_id");
+        // $this->db->bind(":user_id", $_SESSION['user_id']);
+        // $result = $this->db->single();
+        // $payer_email = $result->email;
+        // $payer_name = $result->first_name;
+        // $payer_password = $result->password;
 
-        // if(sendmail($payer_email,$payer_name,$order_id,4,$payer_password));
-        // {
-        //     return true;
-        // }
+       
         return true;
     
        

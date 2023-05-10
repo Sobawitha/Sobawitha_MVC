@@ -148,7 +148,7 @@ class M_fertilizer_product
     }
 
     public function insert_order_product_table($data){
-        $this->db->query("INSERT INTO buyer_orders (cust_id, payment_type) VALUES (:user_id,'cod')");
+        $this->db->query("INSERT INTO buyer_orders (cust_id, payment_type) VALUES (:user_id,'COD')");
         $this->db->bind(":user_id", $data['user_id']);
         if($this->db->execute()){
             return true;

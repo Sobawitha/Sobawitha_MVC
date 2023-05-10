@@ -293,7 +293,77 @@ WHERE buyer_orders.status = :no AND buyer_orders.cust_id = :user_id");
     }
 
 
+    
+ public function getOrderDetailsBySearch($searchText,$orderType)
+ {
+
+    $search =  strtolower(str_replace(' ','',$searchText));
+    if(strtolower($orderType) == "ongoing")
+    {
+
+        $this->db->query("SELECT fertilizer.*,buyer_order_items.quantity,buyer_orders.created_at,buyer_orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS seller_name
+        FROM fertilizer
+        INNER JOIN buyer_order_items
+        ON fertilizer.Product_id = buyer_order_items.product_id
+        INNER JOIN buyer_orders
+        ON buyer_order_items.order_id = buyer_orders.order_id
+        
+        INNER JOIN user
+        ON fertilizer.created_by =  user.user_id
+        
+        WHERE buyer_orders.status = 0 AND buyer_orders.cust_id = :user_id AND (LOWER(fertilizer.product_name) LIKE :search OR LOWER(fertilizer.product_type) LIKE :search OR LOWER(fertilizer.product_category) LIKE :search OR LOWER(fertilizer.product_sub_category) LIKE :search) OR LOWER(user.first_name) LIKE :search OR LOWER(user.last_name) LIKE :search OR LOWER(buyer_orders.order_id) LIKE :search OR LOWER(buyer_orders.created_at) LIKE :search");
+        $this->db->bind(":user_id",$_SESSION['user_id']);
+        $this->db->bind(":search","%".$search."%");
+        $result = $this->db->resultSet();
+        if($this->db->rowCount() > 0){
+             return $result;
+        }
+        else{
+             return false;
+        }
+
+    }
+
+    else if(strtolower($orderType) == "completed")
+    {
+
+        $this->db->query("SELECT fertilizer.*,buyer_order_items.quantity,buyer_orders.created_at,buyer_orders.order_id,CONCAT(user.first_name,' ',user.last_name) AS seller_name
+        FROM fertilizer
+        INNER JOIN buyer_order_items
+        ON fertilizer.Product_id = buyer_order_items.product_id
+        INNER JOIN buyer_orders
+        ON buyer_order_items.order_id = buyer_orders.order_id
+        
+        INNER JOIN user
+        ON fertilizer.created_by =  user.user_id
+        
+        WHERE buyer_orders.status = 1 AND buyer_orders.cust_id = :user_id AND (LOWER(fertilizer.product_name) LIKE :search OR LOWER(fertilizer.product_type) LIKE :search OR LOWER(fertilizer.product_category) LIKE :search OR LOWER(fertilizer.product_sub_category) LIKE :search) OR LOWER(user.first_name) LIKE :search OR LOWER(user.last_name) LIKE :search OR LOWER(buyer_orders.order_id) LIKE :search OR LOWER(buyer_orders.created_at) LIKE :search");
+        $this->db->bind(":user_id",$_SESSION['user_id']);
+        $this->db->bind(":search","%".$search."%");
+        $result = $this->db->resultSet();
+        if($this->db->rowCount() > 0){
+             return $result;
+        }
+        else{
+             return false;
+        }
+
+
+
+
+    }
+
+
+ 
 
 
  } 
+
+
+}
+
+
+
+
+
 ?>

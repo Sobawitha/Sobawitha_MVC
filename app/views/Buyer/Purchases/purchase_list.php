@@ -16,11 +16,12 @@
         <hr>
 
         <br><br>
+      
         <div class="search_bar">
             <div class="search_content">
                 
                     
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" Product Name | Seller |  Order ID |  Date " onkeyup = "dataloader()" required/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" Product Name | Seller |  Order ID |  Date "  required/></span>
                    
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel"></i></button>
                     <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
@@ -28,6 +29,7 @@
                     
             </div>
         </div>
+      
 
                 <div class="filter_section">
                         <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing"> Onging</label>

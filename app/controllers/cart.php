@@ -160,17 +160,17 @@ public function createOrder()
          
           
           if($this->orderModel->createOnlineOrder($orderData)){
-                    $_SESSION['order_status'] = "success";
+                    $_SESSION['success_msg'] = "order placed successfully";
                     $this->cartModel->clearAll();
+                    //email
                     
-                    
-                    redirect('Cart/display_all_items');
+                    redirect('pages/home');
                 }
                 
           else {
         
-            $_SESSION['order_status'] = "failure"; 
-            redirect('Cart/display_all_items');
+            $_SESSION['failure_msg'] = "order failed";; 
+            redirect('pages/home');
         }
                 }
           
@@ -201,16 +201,14 @@ public function cashOnlyOrder()
 
    if($this->orderModel->createCOD($orderData))
      { 
-                    $_SESSION['order_status'] = "success";
+                   
                     $this->cartModel->clearAll();
                     
-                    
-                    redirect('Cart/display_all_items');
-
+                    $_SESSION['success_msg'] = "order placed successfully";
+                    redirect('pages/home');
      }        
-        $_SESSION['order_status'] = "failure"; 
-        redirect('Cart/display_all_items');
-
+     $_SESSION['failure_msg'] = "order failed";; 
+     redirect('pages/home');
 
 }
 

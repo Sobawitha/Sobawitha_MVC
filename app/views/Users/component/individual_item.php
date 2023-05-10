@@ -2,7 +2,7 @@
 </link>
 <script src="<?php echo URLROOT ?>/js/Users/component/individual_item.js" defer></script>
 
-<script>
+<script >
   /*pay popup */
 function pay_popup(price) {
   const existingQuantity = document.getElementById("existing_quantity_value").textContent;
@@ -24,13 +24,14 @@ function pay_popup(price) {
   }
 }
 
+
 function checkout() {
   const userInput = document.getElementById("quantity_input").value;
   const agreementCheckbox = document.querySelector('#terms-checkbox');
-  
+  console.log("Hello");
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>&quantity={userInput}';
   } else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
@@ -177,16 +178,18 @@ function thanku_popup_close(){
 function checkout() {
   const userInput = document.getElementById("quantity_input").value;
   const agreementCheckbox = document.querySelector('#terms-checkbox');
-  
+  console.log(userInput);
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>&quantity='+userInput;
   } else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
     document.getElementById("terms_and_condition_check").style.display="block";
   }
 }
+
+
 
 </script>
 
@@ -202,7 +205,7 @@ function checkout() {
       <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
       <br>
       <button class="checkout" onclick="checkout()">checkout</button><br>
-      <button class="paypal" >Place an Order</button><br>
+      <button class="paypal" onclick = "placeanorder()" >Place an Order</button><br>
       <i class="fa-solid fa-bag-shopping" id="bag"></i>  
     </div>
   </dialog>
@@ -508,6 +511,13 @@ foreach($data['wishlist_items'] as $wishlist_item)
 const minusButton = document.querySelector('.minus_button');
 const quantityInput = document.querySelector('input[name="quantity"]');
 const available_quantity = document.getElementById('existing_quantity');
+const quantity =  quantityInput.value;
+const productId  =  document.querySelector('input[type="hidden"]').value;
+const priceSpan = document.querySelector('.price');
+const priceText = priceSpan.textContent;  // "Rs. 750.00"
+const priceValue = priceText.replace(/[^0-9.]/g, '');  // "750.00"
+const price = parseFloat(priceValue);  // 750.00
+const name = document.querySelector('.title_2').textContent;
 
 plusButton.addEventListener('click', () => {
   let quantity = parseInt(quantityInput.value);

@@ -126,6 +126,48 @@ $pdf->Cell(40, 10, 'Rs. ', 1);
     }
 
 
+ 
+    public function  SearchPurchases(){
+
+          // retrieve the JSON data from the AJAX request
+$json = file_get_contents('php://input');
+echo  $json;
+die();
+$data = json_decode($json);
+
+
+if(isset($data) && isset($data->searchText) && isset($data->orderType)){
+    // your code here
+
+
+// extract the search text and order type from the JSON data
+$searchText = $data->searchText;
+$orderType = $data->orderType;
+$searchResults = $this->buyerModel->getOrderDetailsBySearch($searchText,$orderType);
+
+
+// format the search results as JSON and send them back as the response
+header('Content-Type: application/json');
+echo json_encode($searchResults);
+       
+
+
+
+}
+else {
+    // handle the case where $object is null or its properties are not set
+    echo "No data found";
+}
+
+
+
+
+
+
+
+
+    }
+
 
 
 }

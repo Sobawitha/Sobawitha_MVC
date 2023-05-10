@@ -2,18 +2,7 @@
 <link rel="stylesheet" href="../css/Buyer/shopping_cart/shopping_cart.css"></link>
 <!-- <script src="../js/Buyer/index_checkOut.js" defer></script> -->
 <?php require APPROOT . '/views/Users/component/Header.php'?>
-<?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
-    <div id="flash-message" class="flash-success">
-        <div class="flash-text">Order was successful. Check your email for information.</div>
-        <div class="flash-loading-bar"></div>
-    </div>
-<?php unset($_SESSION['order_status']); ?>
-<?php elseif(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'failure'): ?>
-    <div id="flash-message" class="flash-error">
-        <div class="flash-text">Order was unsuccessful. Please try again.</div>
-    </div>
-<?php unset($_SESSION['order_status']); ?>
-<?php endif; ?>
+
 
 <?php
 $sum = 0;
@@ -45,6 +34,11 @@ if ($_SESSION['user_flag'] == 1) {
 
         <div class="section_2">
          
+        <?php if (isset($_SESSION['order_msg'])): ?>
+                <div class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['order_msg']; ?> <div class="progress-bar"></div>
+               </div>
+                <?php unset($_SESSION['order_msg']); ?>
+                <?php endif; ?>
 
 
 

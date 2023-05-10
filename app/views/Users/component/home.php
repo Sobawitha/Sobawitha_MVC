@@ -59,6 +59,12 @@
                </div>
                 <?php unset($_SESSION['success_msg']); ?>
                 <?php endif; ?>
+                <?php if (isset($_SESSION['failure_msg'])): ?>
+                    <div class="failure-msg"><i class="fa-solid fa-xmark" style="color:red"></i><?php echo $_SESSION['success_msg']; ?> <div class="progress-bar"></div>
+
+                    <?php unset($_SESSION['failure_msg']); ?>
+                <?php endif; ?>
+               
             <p class="main">Find the best places to your trade</p>
             <p class=sub_main>Sobawitha is an online platform driven by agriculture nature by involving more people in their people in their in</p>
             <!-- <form method="POST">
