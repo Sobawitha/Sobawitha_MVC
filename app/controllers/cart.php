@@ -8,6 +8,7 @@ class cart extends Controller
     {
         $this->cartModel = $this->model('M_shopping_cart');
         $this->orderModel = $this->model('M_order');
+        $this->supplyModel = $this->model('M_supplier_view');
         $this->paymentModel = $this->model('M_seller_payment');
     }
 
@@ -71,6 +72,20 @@ class cart extends Controller
         http_response_code(404);
         echo "User not found";
         return;
+
+    }
+
+
+    public function checkout_from_individual_page(){
+
+        $productId = $_GET["product_id"];
+        $quantity = $_GET["quantity"];
+        $price    = $this->supplyModel
+
+
+        
+
+
 
     }
 

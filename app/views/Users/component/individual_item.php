@@ -4,6 +4,7 @@
 
 <script >
   /*pay popup */
+
 function pay_popup(price) {
   const existingQuantity = document.getElementById("existing_quantity_value").textContent;
   const quantity = parseInt(quantityInput.value);
@@ -28,6 +29,8 @@ function pay_popup(price) {
 function checkout() {
   const userInput = document.getElementById("quantity_input").value;
   const agreementCheckbox = document.querySelector('#terms-checkbox');
+  const price  = document.querySelector('.price');
+const 
   console.log("Hello");
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
@@ -181,7 +184,7 @@ function checkout() {
   console.log(userInput);
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>&quantity='+userInput;
+    window.location.href = '<?php echo URLROOT ?>/cart/checkout_from_individual_page?product_id=<?php echo $_GET['product_id'] ?>&quantity='+userInput;
   } else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
