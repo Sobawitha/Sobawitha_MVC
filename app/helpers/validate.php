@@ -251,4 +251,83 @@ function validate_discription_for_blogpost($discription) {
 }
   
 
+
+
+
+
+
+
+// validate functions for the supplier forms
+
+function validate_title($title) {
+  // Check if the title only contains below characters
+  if (!preg_match("/^[A-Za-z0-9\s.,#\-\/\(\)]+$/", $title)) {
+    return 'Title contains invalid characters.';
+  }
+
+  // Check if the length of the title is more than 2 characters
+  if (strlen($title) < 2 ) {
+    return 'Title must be more than 2 characters';
+  }
+  
+  // If all checks pass, return true
+  return true;
+}
+
+
+function validate_price($price) {
+  // Check if the fee is numeric and positive
+  if (!is_numeric($price) || $price <= 0) {
+    return "Price must be a positive number";
+  }
+  
+  // If all checks pass, return true
+  return true;
+}
+
+function validate_type($type) {
+  // Check if the type only contains below characters
+  if (!preg_match("/^[A-Za-z0-9\s.,#\-\/\(\)]+$/", $type)) {
+    return 'Type contains invalid characters.';
+  }
+  
+  // If all checks pass, return true
+  return true;
+}
+
+function validate_manufacturer($manufacturer) {
+  // Check if the manufacturer only contains below characters
+  if (!preg_match("/^[A-Za-z0-9\s.,#\-\/\(\)]+$/", $manufacturer)) {
+    return 'Manufacturer contains invalid characters.';
+  }
+
+  // If all checks pass, return true
+  return true;
+}
+
+function validate_quantity($quantity) {
+  // Check if the quantity is numeric and positive
+  if (!is_numeric($quantity) || $quantity <= 0) {
+    return "Quantity must be a positive number";
+  }
+  
+  // If all checks pass, return true
+  return true;
+}
+
+function validate_additional_info($additional_info) {
+  // Check if the additional_info only contains below characters
+  if (!preg_match("/^[A-Za-z0-9\s.,#\-\/\(\)]+$/", $additional_info)) {
+    return 'Additional_info contains invalid characters.';
+  }
+
+  // Check if the length of the additional_info is more than 2 characters
+  // if (strlen($additional_info) < 2 ) {
+  //   return 'Additional_info must be more than 2 characters';
+  // }
+  
+  // If all checks pass, return true
+  return true;
+}
+
  ?>

@@ -60,12 +60,14 @@
 
                   </div>
                   <p>Cover Image</p>
+                  <span class="error_msg"><?php echo $data['image_err1'] ?></span>
                   
                   <!-- <input type="file"></input> -->
                   <br><br>
                   <div class="input-box">
                     <span class="details">Title of the listing with unit weight</span>
                     <input type="text" placeholder="Eg:-Egg shells - 200g" name="name" required>
+                    <span class="error_msg"><?php echo $data['product_name_err'] ?></span>
                   </div>
 
                   <div class="input-box ">
@@ -75,6 +77,7 @@
 
                     <div class="input_flex">
                       <input type="text" placeholder="Enter unit price" name="price" required>
+                      <span class="error_msg"><?php echo $data['price_err'] ?></span>
 
                       
                   </div>
@@ -83,15 +86,18 @@
                   <div class="input-box">
                     <span class="details">Type</span>
                     <input type="text" placeholder="" name="type" required>
+                    <span class="error_msg"><?php echo $data['type_err'] ?></span>
                   </div>
                   <div class="input-box">
                     <span class="details">Manufacturer</span>
                     <input type="text" placeholder="" name="manufacturer" required>
+                    <span class="error_msg"><?php echo $data['manufacturer_err'] ?></span>
                   </div>
                   <div class="input-box">
                     <span class="details">Available quantity</span><br>
                     <div class="flex_view">
                       <input type="text" placeholder="" name="quantity" required>
+                      <span class="error_msg"><?php echo $data['quantity_err'] ?></span>
                       
                   </div>
                   </div>
@@ -103,6 +109,7 @@
                       name="additional-info"
                       style="height: 200px"
                     ></textarea>
+                    <span class="error_msg"><?php echo $data['product_description_err'] ?></span>
                   </div>
                   <!-- <div class="input-box">
                     <span class="details">Price</span>

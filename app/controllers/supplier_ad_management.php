@@ -56,10 +56,10 @@
 
                 'product_name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
-                'per' => trim($_POST['per']),
-                'category_per' => trim($_POST['category_per']),
+                // 'per' => trim($_POST['per']),
+                // 'category_per' => trim($_POST['category_per']),
                 'quantity' => trim($_POST['quantity']),
-                'category_avl' => trim($_POST['category_avl']),
+                // 'category_avl' => trim($_POST['category_avl']),
                 'product_description' => trim($_POST['additional-info']),
                 'type' => trim($_POST['type']),
                 'manufacturer' =>trim($_POST['manufacturer']),
@@ -73,6 +73,8 @@
                 'price_err' => '',
                 'quantity_err' => '',
                 'product_description_err' => '',
+                'type_err' => '',
+                'manufacturer_err' => '',
                 // 'raw_material_image_err' => ''
             ];
 
@@ -86,7 +88,7 @@
                 }
             }
             else {
-                $data['image_name1'] = null;
+                $data['image_err1'] = 'Cover image can not be empty';
             }
 
             //validation
@@ -99,7 +101,7 @@
                 }
             }
             else {
-                $data['image_name2'] = null;
+                // $data['image_name2'] = null;
             }
 
             //validation
@@ -112,32 +114,69 @@
                 }
             }
             else {
-                $data['image_name3'] = null;
+                // $data['image_name3'] = null;
+            }
+
+            // 2023.05.11
+
+            $titleValidationResult = validate_title($data['product_name']);
+
+            if ($titleValidationResult !== true || empty($data['product_name'])) {
+                $data['product_name_err'] = !empty($titleValidationResult) ? $titleValidationResult : 'title cannot be empty';
+            }
+
+            $priceValidationResult = validate_price($data['price']);
+
+            if ($priceValidationResult !== true || empty($data['price'])) {
+                $data['price_err'] = !empty($priceValidationResult) ? $priceValidationResult : 'price cannot be empty';
+            }
+
+            $typeValidationResult = validate_type($data['type']);
+
+            if ($typeValidationResult !== true || empty($data['type'])) {
+                $data['type_err'] = !empty($typeValidationResult) ? $typeValidationResult : 'type cannot be empty';
+            }
+
+            $manufacturerValidationResult = validate_manufacturer($data['manufacturer']);
+
+            if ($manufacturerValidationResult !== true || empty($data['manufacturer'])) {
+                $data['manufacturer_err'] = !empty($manufacturerValidationResult) ? $manufacturerValidationResult : 'manufacturer cannot be empty';
+            }
+
+            $quantityValidationResult = validate_quantity($data['quantity']);
+
+            if ($quantityValidationResult !== true || empty($data['quantity'])) {
+                $data['quantity_err'] = !empty($quantityValidationResult) ? $quantityValidationResult : 'quantity cannot be empty';
+            }
+
+            $productDescriptionValidationResult = validate_additional_info($data['product_description']);
+
+            if ($productDescriptionValidationResult !== true || empty($data['product_description'])) {
+                $data['product_description_err'] = !empty($productDescriptionValidationResult) ? $productDescriptionValidationResult : 'additional info cannot be empty';
             }
 
 
+            // if(empty($data['product_name'])) {
+            //     $data['product_name_err'] = 'Please enter a product_name';
+            // }
 
-            if(empty($data['product_name'])) {
-                $data['product_name_err'] = 'Please enter a product_name';
-            }
+            // if(empty($data['price'])) {
+            //     $data['price_err'] = 'Please enter a price';
+            // }
 
-            if(empty($data['price'])) {
-                $data['price_err'] = 'Please enter a price';
-            }
+            // if(empty($data['quantity'])) {
+            //     $data['quantity_err'] = 'Please enter a quantity';
+            // }
 
-            if(empty($data['quantity'])) {
-                $data['quantity_err'] = 'Please enter a quantity';
-            }
-
-            if(empty($data['product_description'])) {
-                $data['product_description_err'] = 'Please enter a product description';
-            }
+            // if(empty($data['product_description'])) {
+            //     $data['product_description_err'] = 'Please enter a product description';
+            // }
 
             // if(empty($data['raw_material_image'])) {
             //     $data['raw_material_image_err'] = 'Please enter a raw material image';
             // }
 
-            if(empty($data['image_err']) && empty($data['product_name_err']) && empty($data['price_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
+            if(empty($data['image_err1']) && empty($data['image_err2']) && empty($data['image_err3']) && empty($data['product_name_err']) && empty($data['price_err']) && empty($data['type_err']) && empty($data['manufacturer_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
                 if($this->supplier_ad->create($data)) {
                     // flash('post_msg', 'Post is published');
                     redirect('supplier_ad_management/indexfilter');
@@ -161,10 +200,10 @@
                 'image_name3' => '',
                 'product_name' => '',
                 'price' => '',
-                'per' => '',
-                'category_per' => '',
+                // 'per' => '',
+                // 'category_per' => '',
                 'quantity' => '',
-                'category_avl' => '',
+                // 'category_avl' => '',
                 'product_description' => '',
                 'type' => '',
                 'manufacturer' =>'',
@@ -173,10 +212,12 @@
                 'image_err1' => '',
                 'image_err2' => '',
                 'image_err3' => '',
-                // 'product_name_err' => '',
-                // 'price_err' => '',
-                // 'quantity_err' => '',
-                // 'product_description_err' => '',
+                'product_name_err' => '',
+                'price_err' => '',
+                'quantity_err' => '',
+                'product_description_err' => '',
+                'type_err' => '',
+                'manufacturer_err' => ''
                 // 'raw_material_image_err' => ''
             ];
 
@@ -211,10 +252,10 @@
                 'product_id' => $productId,
                 'product_name' => trim($_POST['name']),
                 'price' => trim($_POST['price']),
-                'per' => trim($_POST['per']),
-                'category_per' => trim($_POST['category_per']),
+                // 'per' => trim($_POST['per']),
+                // 'category_per' => trim($_POST['category_per']),
                 'quantity' => trim($_POST['quantity']),
-                'category_avl' => trim($_POST['category_avl']),
+                // 'category_avl' => trim($_POST['category_avl']),
                 'product_description' => trim($_POST['additional-info']),
                 'type' => trim($_POST['type']),
                 'manufacturer' =>trim($_POST['manufacturer']),
@@ -226,7 +267,9 @@
                 'product_name_err' => '',
                 'price_err' => '',
                 'quantity_err' => '',
-                'product_description_err' => ''
+                'product_description_err' => '',
+                'type_err' => '',
+                'manufacturer_err' => ''
                 // 'raw_material_image_err' => ''
             ];
 
@@ -244,6 +287,7 @@
                 deleteImage($oldImage1);
 
                 $data['image_name1'] = '';
+                $data['image_err1'] = 'Cover image can not be empty';
             }
             else {
                 if($_FILES['image1']['name'] == '') {
@@ -287,27 +331,66 @@
                 }
             }
 
-            if(empty($data['product_name'])) {
-                $data['product_name_err'] = 'Please enter a product_name';
+
+            // 2023.05.11
+
+            $titleValidationResult = validate_title($data['product_name']);
+
+            if ($titleValidationResult !== true || empty($data['product_name'])) {
+                $data['product_name_err'] = !empty($titleValidationResult) ? $titleValidationResult : 'title cannot be empty';
             }
 
-            if(empty($data['price'])) {
-                $data['price_err'] = 'Please enter a price';
+            $priceValidationResult = validate_price($data['price']);
+
+            if ($priceValidationResult !== true || empty($data['price'])) {
+                $data['price_err'] = !empty($priceValidationResult) ? $priceValidationResult : 'price cannot be empty';
             }
 
-            if(empty($data['quantity'])) {
-                $data['quantity_err'] = 'Please enter a quantity';
+            $typeValidationResult = validate_type($data['type']);
+
+            if ($typeValidationResult !== true || empty($data['type'])) {
+                $data['type_err'] = !empty($typeValidationResult) ? $typeValidationResult : 'type cannot be empty';
             }
 
-            if(empty($data['product_description'])) {
-                $data['product_description_err'] = 'Please enter a product description';
+            $manufacturerValidationResult = validate_manufacturer($data['manufacturer']);
+
+            if ($manufacturerValidationResult !== true || empty($data['manufacturer'])) {
+                $data['manufacturer_err'] = !empty($manufacturerValidationResult) ? $manufacturerValidationResult : 'manufacturer cannot be empty';
             }
+
+            $quantityValidationResult = validate_quantity($data['quantity']);
+
+            if ($quantityValidationResult !== true || empty($data['quantity'])) {
+                $data['quantity_err'] = !empty($quantityValidationResult) ? $quantityValidationResult : 'quantity cannot be empty';
+            }
+
+            $productDescriptionValidationResult = validate_additional_info($data['product_description']);
+
+            if ($productDescriptionValidationResult !== true || empty($data['product_description'])) {
+                $data['product_description_err'] = !empty($productDescriptionValidationResult) ? $productDescriptionValidationResult : 'additional info cannot be empty';
+            }
+
+            // if(empty($data['product_name'])) {
+            //     $data['product_name_err'] = 'Please enter a product_name';
+            // }
+
+            // if(empty($data['price'])) {
+            //     $data['price_err'] = 'Please enter a price';
+            // }
+
+            // if(empty($data['quantity'])) {
+            //     $data['quantity_err'] = 'Please enter a quantity';
+            // }
+
+            // if(empty($data['product_description'])) {
+            //     $data['product_description_err'] = 'Please enter a product description';
+            // }
 
             // if(empty($data['raw_material_image'])) {
             //     $data['raw_material_image_err'] = 'Please enter a raw material image';
             // }
 
-            if(empty($data['product_name_err']) && empty($data['price_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
+            if(empty($data['image_err1']) && empty($data['image_err2']) && empty($data['image_err3']) && empty($data['product_name_err']) && empty($data['price_err']) && empty($data['type_err']) && empty($data['manufacturer_err']) && empty($data['quantity_err']) && empty($data['product_description_err'])) {
                 if($this->supplier_ad->edit($data)) {
                     // flash('post_msg', 'Post is published');
                     redirect('supplier_ad_management/indexfilter');
@@ -340,16 +423,29 @@
                 'product_id' => $productId,
                 'product_name' => $post->product_name,
                 'price' => $post->price,
-                'per' => $post->per_amount,
-                'category_per' => $post->category_per,
+                // 'per' => $post->per_amount,
+                // 'category_per' => $post->category_per,
                 'quantity' => $post->quantity,
-                'category_avl' => $post->category_avl,
+                // 'category_avl' => $post->category_avl,
                 'product_description' => $post->product_description,
                 'type' => $post->type,
                 'manufacturer' => $post->manufacturer,
-                'image_err' => '',
+                // 'image_err' => '',
                 // 'title_err' => '',
                 // 'body_err' => ''
+
+
+                
+                'image_err1' => '',
+                'image_err2' => '',
+                'image_err3' => '',
+                'product_name_err' => '',
+                'price_err' => '',
+                'quantity_err' => '',
+                'product_description_err' => '',
+                'type_err' => '',
+                'manufacturer_err' => ''
+                
             ];
 
             $this->view('Raw_material_supplier/supplier_ad_management/v_supplier_update_advertisement', $data);
