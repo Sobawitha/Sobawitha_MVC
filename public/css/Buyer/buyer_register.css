@@ -82,7 +82,7 @@
     margin-top: 88px;
 }
 
-.s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn{
+.s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn, #address_line_four{
     border-radius: 10px;
     width: 300px;
     padding: 5px;

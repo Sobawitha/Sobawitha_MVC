@@ -78,17 +78,47 @@
 
           <div class="s_input-box">
             <span class="ssu_details">Address Line 04</span><br>
-            <input type="text" placeholder="Enter your district: " name="address_line_four" >
+            <!-- <input type="text"  placeholder="Enter your district: " name="address_line_four"><br> -->
+            <select name="address_line_four" id="address_line_four">
+            <option value="Ampara">Ampara</option>
+            <option value="Anuradhapura">Anuradhapura</option>
+            <option value="Badulla">Badulla</option>
+            <option value="Batticaloa">Batticaloa</option>
+            <option value="Colombo">Colombo</option>
+            <option value="Galle">Galle</option>
+            <option value="Gampaha">Gampaha</option>
+            <option value="Hambantota">Hambantota</option>
+            <option value="Jaffna">Jaffna</option>
+            <option value="Kalutara">Kalutara</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Kegalle">Kegalle</option>
+            <option value="Kilinochchi">Kilinochchi</option>
+            <option value="Kurunegala">Kurunegala</option>
+            <option value="Mannar">Mannar</option>
+            <option value="Matale">Matale</option>
+            <option value="Matara">Matara</option>
+            <option value="Moneragala">Moneragala</option>
+            <option value="Mullaitivu">Mullaitivu</option>
+            <option value="Nuwara Eliya">Nuwara Eliya</option>
+            <option value="Polonnaruwa">Polonnaruwa</option>
+            <option value="Puttalam">Puttalam</option>
+            <option value="Ratnapura">Ratnapura</option>
+            <option value="Trincomalee">Trincomalee</option>
+            <option value="Vavuniya">Vavuniya</option>
+            </select>
           </div>
+
 
         <div class="s_input-box">
             <span class="ssu_details" >Birthday</span><br>
             <input type="date" name="birthday" >
+            <span class="error_msg"><?php echo $data['birthday_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Choose Profile Picture</span><br>
             <input type="file" id="pro_pic" name="propic" >
+            <span class="error_msg"><?php echo $data['propic_err'] ?></span><br>
           </div> 
 
           <div class="s_input-box">
@@ -107,11 +137,13 @@
           <div class="s_input-box">
             <span class="ssu_details">Password</span><br>
             <input type="password" placeholder="Enter your password" name="password" >
+            <span class="error_msg"><?php echo $data['password_err'] ?></span><br>
           </div>
 
           <div class="s_input-box">
             <span class="ssu_details">Confirm Your Password</span><br>
             <input type="password" placeholder="Confirm your Password" name="confirm_password" >
+            <span class="error_msg"><?php echo $data['confirm_password_err'] ?></span><br>
           </div>
 
           <div class="sign_up_seller_btn">

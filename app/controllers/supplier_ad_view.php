@@ -25,6 +25,7 @@
     public function indexmore() {
         $productId = $_GET['product_id'];
         $ad = $this->supplier_ad->getPostById($productId);
+        $content = $this->supplier_ad->view_individual_product($productId);
         $type = $ad->type;
         $id=$_SESSION['user_id'];
         $no_of_cart_item = $this->supplier_ad->check_cart($id)->count_item;

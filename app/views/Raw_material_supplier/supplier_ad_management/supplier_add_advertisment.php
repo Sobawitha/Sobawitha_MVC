@@ -59,6 +59,7 @@
                   </div>
 
                   </div>
+                  <p>Cover Image</p>
                   
                   <!-- <input type="file"></input> -->
                   <br><br>
