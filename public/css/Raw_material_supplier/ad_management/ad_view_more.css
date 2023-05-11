@@ -185,8 +185,8 @@
   /* Place text to the right */
   .right {
     display: inline-block;
-    margin-top: -18px;
-    margin-left: 440px;
+    margin-top: -25px;
+    margin-left: 540px;
     background-color: #36454F;
     color: #ffffff;
     font-size: 12px;
