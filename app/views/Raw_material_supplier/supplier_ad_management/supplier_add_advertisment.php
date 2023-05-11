@@ -73,7 +73,7 @@
                       <span class="details">Unit Price (Rs.)</span>
                     </div>
 
-                    <div class="input_flex">
+                    <div class="input_box">
                       <input type="text" placeholder="Enter unit price" name="price" required>
 
                       
@@ -90,7 +90,7 @@
                   </div>
                   <div class="input-box">
                     <span class="details">Available quantity</span><br>
-                    <div class="flex_view">
+                    <div class="input-box">
                       <input type="text" placeholder="" name="quantity" required>
                       
                   </div>
