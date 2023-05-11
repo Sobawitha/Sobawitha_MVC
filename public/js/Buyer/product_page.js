@@ -82,16 +82,22 @@ search_input.addEventListener("keyup", (e) => {
        let html = '<li>Search Results</li>';
        let html2 ='';
         if(data.length > 0){
-          for (let i = 0; i < data.length; i++) {
+
+          for(let i = 0;i < 8;i++){
             html += `
             
-            <a href="http://localhost/Sobawitha/Users/product_page/${data[i].product_id}">
+            <a href="http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=${data[i].Product_id}">
              <li>${data[i].product_name}&nbsp(${data[i].manufacturer})${data[i].price}</li>
 
             </a>
             `
+          }
+          for (let i = 0; i < data.length; i++) {
+           
+          
 
             html2 += `<div class="adv_card">
+            <a href="http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=${data[i].Product_id}">
             <div class="card_image" style="background: url(../images/${data[i].fertilizer_img}.jpg); background-size: cover;
                                             height:75%;
                                             -webkit-background-size:cover ;
@@ -99,9 +105,10 @@ search_input.addEventListener("keyup", (e) => {
                                             margin:0px;
                                             padding:0px;">
                 <div class="product_detail">
-                    <span class="product_name">${data[i].product_name}</span><br>
+                    <span class="product_name">${data[i].product_name.slice(0, 20)}${data[i].product_name.length > 20 ? '...' : ''}</span><br>
                     <span class="owner">${data[i].manufacturer}</span><br>
                 </div>
+                </a>
             </div>
 
             <i class="fa-regular fa-heart" id="heart"></i>
@@ -240,7 +247,7 @@ function filterProducts() {
         {
               
               var results =  JSON.parse(this.responseText);
-
+               console.log(results);
                 var html = '';
 
                if(results.length > 0){

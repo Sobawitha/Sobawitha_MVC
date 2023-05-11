@@ -295,7 +295,9 @@
         
                  {
                     $location_filter = implode("','", $data['location']);      
-                    $query .= " AND location in  ('".$location_filter."')";
+                    $query .= "AND created_by IN (SELECT user_id FROM user WHERE address_line_four IN ($location_filter))";
+
+
         
         
         
@@ -311,7 +313,7 @@
                   
         
         
-                        echo json_encode($result); 
+                        echo json_encode($query); 
              }
  
  

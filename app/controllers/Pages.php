@@ -30,6 +30,8 @@ class Pages extends Controller {
         $data['products'] = $this->filterModel->get_all_fertilizer_details();
         $data['manufacturers'] = $this->filterModel->get_manufacturer_names();
         $data['provinces'] = SriLanka::getProvinces();
+      
+        $data['wishlist_items'] =  $this->wishlistModel->getAllItems();
         $this->view('Users/component/v_product_page', $data);
     }
 

@@ -8,7 +8,7 @@ class SriLanka{
         return array_keys(self::$SriLanka);
     }
 
-    public static function getDiscricts($province){
+    public static function getDistricts($province){
         return array_keys(self::$SriLanka[$province]);
     }
 

@@ -21,7 +21,7 @@ class purchase extends Controller {
            
         $order = $this->buyerModel->getOrderDetailsById($orderID);
         $order_items = $this->buyerModel->getOrderItemDetails($orderID);
-       
+        $sum = 0;
  
         // Generate the PDF report using the FPDF library
         require_once(APPROOT.'/fpdf/fpdf.php');
@@ -84,6 +84,7 @@ foreach ($order_items as $row) {
     $pdf->Cell(30, 10, 'Rs. '.$row->price, 1);
     $pdf->Cell(30, 10, 'Rs. '.($row->price*$row->quantity), 1);
     $pdf->Ln();
+    $sum += $row->price*$row->quantity;
 }
 
 
@@ -91,8 +92,8 @@ $pdf->Ln();
 $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 12);
 
-$pdf->Cell(40, 10, 'Total Amount:', 1);
-$pdf->Cell(40, 10, 'Rs. ', 1);
+$pdf->Cell(40, 10, 'Total Amount.', 1);
+$pdf->Cell(40, 10, 'Rs. '.$sum.'.00', 1);
          
          
 
@@ -131,19 +132,18 @@ $pdf->Cell(40, 10, 'Rs. ', 1);
 
           // retrieve the JSON data from the AJAX request
 $json = file_get_contents('php://input');
-echo  $json;
-die();
+
 $data = json_decode($json);
 
 
-if(isset($data) && isset($data->searchText) && isset($data->orderType)){
+if(isset($data) && isset($data->searchText) ){
     // your code here
 
 
 // extract the search text and order type from the JSON data
 $searchText = $data->searchText;
-$orderType = $data->orderType;
-$searchResults = $this->buyerModel->getOrderDetailsBySearch($searchText,$orderType);
+
+$searchResults = $this->buyerModel->getOrderDetailsBySearch($searchText);
 
 
 // format the search results as JSON and send them back as the response

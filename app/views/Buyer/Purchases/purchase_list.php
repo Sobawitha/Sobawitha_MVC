@@ -31,11 +31,11 @@
         </div>
       
 
-                <div class="filter_section">
+                <!-- <div class="filter_section">
                         <label for="ongoing_progress__order" id="filter_label"> <input type="radio" id="ongoing_progress" name="order_type" value="ongoing"> Onging</label>
                         <label for="ongoing_ready_order" id="filter_label"> <input type="radio" id="ongoing_ready" name="order_type" value="ongoing" checked>Completed</label>
                         
-                </div>
+                </div> -->
 
                 <div class="order_list">
                 <div class="orders">

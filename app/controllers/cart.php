@@ -78,11 +78,48 @@ class cart extends Controller
 
     public function checkout_from_individual_page(){
 
+        require '../app/vendor/autoload.php';
+        // Set your API keys
+        \Stripe\Stripe::setApiKey('sk_test_51MskWIIz6Y8hxLUJq8DTBxJ0xInEFNHtBn9H1i30ReXNtkRg6eAIrpz74kd2HYPYXN0v2TnqoT9jBMnJxWdqYXXu00gAVFTXaI');
         $productId = $_GET["product_id"];
         $quantity = $_GET["quantity"];
-        $price    = $this->supplyModel
+        $price    = $this->supplyModel->find_price_from_id_fertilizer($productId)->price;
+        $name    =  $this->supplyModel->find_name_from_id_fertilizer($productId)->name;
+       
+        
+        $lineItems[] = [
 
 
+            'quantity' => $quantity,
+            'price_data' => [
+                'currency' => 'lkr',
+                'unit_amount' => $price*100,
+                'product_data' => [
+                    'name' => $name,
+                    'metadata' => [
+                        'product_id' => $productId,
+                    ]
+                 
+
+                ]
+                
+
+            ],
+
+        ];
+        $serialized_line_items = json_encode($lineItems);
+        $success_url = URLROOT . '/cart/createOrder?line_items='.urlencode($serialized_line_items);
+             
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => $lineItems,
+            'mode' => 'payment',
+            'success_url' => $success_url,
+            'cancel_url' => 'https://example.com/cancel',
+        ]);
+    
+        // Redirect the user to the Checkout page
+        header("Location: " . $session->url);
         
 
 
