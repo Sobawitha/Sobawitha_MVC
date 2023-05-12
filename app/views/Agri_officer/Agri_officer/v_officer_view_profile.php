@@ -145,7 +145,7 @@
 
                 <div class="input-box">
                     <span class="details">Qualification File</span>
-                    <?php if(empty($data['qualifications'])){ ?>
+                    <?php if(empty($data['qualifications_all'])){ ?>
                         <button class="qualificationOne" disabled>No File to Download</button>
                     <?php } else {?>
                      <button class="qualificationTwo"><a download="<?php echo $data['qualifications']?>"  href="<?php echo URLROOT?>/upload/qualification_files/<?php echo  $data['qualifications'] ?>">Download</a></button>
@@ -199,7 +199,7 @@
                         <span class="icon" ><i class="fa-regular fa-circle-check"></i></span>
                         <span class="notification_header"><?php echo $notifications->type ?></span><br>
                         <span class="notification_body"><?php echo $notifications->message ?></span><br>
-                        <i class="fa-solid fa-xmark" id="close"></i>    
+                        <a href="<?php echo URLROOT?>/notification/delete_notification?notification_id=<?php echo $notifications->noti_id ?>"><i class="fa-solid fa-xmark" id="close"></i> </a>   
                     </div>
                     <?php endforeach;?>
 

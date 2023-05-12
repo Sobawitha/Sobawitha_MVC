@@ -431,23 +431,22 @@ foreach($data['wishlist_items'] as $wishlist_item)
       <span id="existing_quantity_value"><?php echo $content->quantity; ?></span> available
     </span>
     <br>
-    <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
-    <span id="quantity_error" style="color:red;"></span>
   </div>
+  <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
+    <span id="quantity_error" style="color:red;"></span>
 </div>
 
 <div class="buttons">
 <?php if($content->quantity > 0 ) { 
   if($data['no_of_cart_item'] ==0 ){
     ?>
-    
-      <button id="buy_now_btn" onclick="event.preventDefault()pay_popup(<?php echo $content->price ?>)">Buy Now</button>
+      <button id="buy_now_btn" type="submit" onclick="event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button>
     <?php
   }else{
     ?>
       <!-- <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a> -->
       <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
-      <button id="buy_now_btn" onclick = "event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button></a>
+      <button id="buy_now_btn" type="submit" onclick = "event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button></a>
 
     <?php
   }
@@ -456,32 +455,18 @@ foreach($data['wishlist_items'] as $wishlist_item)
 
       <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
       <!-- <button type="submit" id="add_to_cart_btn" data-product-id="<?php echo $content->Product_id ?>">Add to Cart</button> -->
-</form>
-<?php
-}else{?>
-  <span class="not_available_msg">Not awailable now. </span><br><br>
-  <button id="buy_now_btn_disable">Buy Now</button>
-  <button id="add_to_cart_btn_disable">Add to Cart</button>
-<?php
-}
-?>
-  
+  </form>
+  <?php
+  }else{?>
+    <span class="not_available_msg">Not awailable now. </span><br><br>
+    <button id="buy_now_btn_disable">Buy Now</button>
+    <button id="add_to_cart_btn_disable">Add to Cart</button>
+  <?php
+  }
+  ?>
 </div>
 
-</div>
-</div>
-
-  <?php require APPROOT . '/views/Users/component/footer.php' ?>
-
-
-
-<dialog id="my-dialog">
-  <p>Item Successfully Added to the Wishlist</p>
-  <button id="dialog-close-button">Close</button>
-</dialog>
-
-
-
+<!-- for quantity   -->
 <script>
  const plusButton = document.querySelector('.plus_button');
 const minusButton = document.querySelector('.minus_button');
@@ -494,19 +479,27 @@ plusButton.addEventListener('click', () => {
   console.log(quantity);
   console.log(available_quantity);
   quantity++;
+  //quantityInput.value = quantityInput.value +1;
   if(quantity>available_quantity){
     quantityInput.style.color="red";
+    document.getElementById("errorMsg").style.display = "block";
   }
   else{
     quantityInput.value = quantity;
+    quantityInput.style.color="black";
+    document.getElementById("errorMsg").style.display = "none";
   }
 });
 
 minusButton.addEventListener('click', () => {
   let quantity = parseInt(quantityInput.value);
   quantity--;
+  quantityInput.style.color="black";
+  document.getElementById("errorMsg").style.display = "none";
   if (quantity < 1) {
     quantity = 1;
+    quantityInput.style.color="red";
+    document.getElementById("errorMsg").style.display = "block";
   }
   quantityInput.value = quantity;
 });
@@ -547,9 +540,6 @@ minusButton.addEventListener('click', () => {
             </div>
           <?php endif; ?>
       </div>
-
-
-
           <!-- comment_section -->
         <div id="toggle_section_2" class="toggle_section">
 
@@ -565,10 +555,8 @@ minusButton.addEventListener('click', () => {
                     </div>
             </form>
 
-
             <div class="comment_reply">
             <?php
-
               foreach($data['comments'] as $comment):?>
                 <span id="user-<?php echo $comment->comment_id?>" class="user"><?php echo ucfirst(($comment->commented_by_full_name[0]))?></span> 
                 <div class="display_comment">
@@ -620,8 +608,9 @@ minusButton.addEventListener('click', () => {
                 <hr>
                 <br>
               <?php endforeach;?>
-            </div>  
-          </div>
+            </div> 
+            </div> 
+          
 
           <div id="toggle_section_3" class="toggle_section">
           <?php $product_id = $_GET['product_id']?> <!--only for testing-->

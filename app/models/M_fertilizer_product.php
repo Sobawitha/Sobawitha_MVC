@@ -147,15 +147,15 @@ class M_fertilizer_product
         return $this->db->resultset();
     }
 
-    public function insert_order_product_table($data){
-        $this->db->query("INSERT INTO buyer_orders (cust_id, payment_type) VALUES (:user_id,'cod')");
-        $this->db->bind(":user_id", $data['user_id']);
-        if($this->db->execute()){
-            return true;
-        }else{
-                return false;
-        }
-    }
+    // public function insert_order_product_table($data){
+    //     $this->db->query("INSERT INTO buyer_orders (cust_id) VALUES (:user_id,'cod')");
+    //     $this->db->bind(":user_id", $data['user_id']);
+    //     if($this->db->execute()){
+    //         return true;
+    //     }else{
+    //             return false;
+    //     }
+    // }
 
     public function update_fertilizer_count( $product_id, $count) {
         $this->db->query("UPDATE fertilizer SET quantity = quantity - :count WHERE product_id = :product_id");
@@ -244,11 +244,11 @@ class M_fertilizer_product
         return $this->db->single();
     }
 
-    public function get_user_detail(){
-        $this->db->query('SELECT first_name , last_name, concat(address_line_one,", ",address_line_two,", ",address_line_three,", ",address_line_four,".") as address, contact_no, email from user where user_id=:user_id');
-        $this->db->bind(":user_id", $_SESSION['user_id']);
-        return $this->db->single();
-    }
+    // public function get_user_detail(){
+    //     $this->db->query('SELECT first_name , last_name, concat(address_line_one,", ",address_line_two,", ",address_line_three,", ",address_line_four,".") as address, contact_no, email from user where user_id=:user_id');
+    //     $this->db->bind(":user_id", $_SESSION['user_id']);
+    //     return $this->db->single();
+    // }
 
     public function find_order_id(){
         $this->db->query('SELECT order_id as order_id FROM buyer_order_items WHERE user_id = :user_id ORDER BY order_id DESC LIMIT 1 ');
@@ -256,38 +256,38 @@ class M_fertilizer_product
         return $this->db->single();
     }
 
-    public function update_cache_on_delivery_table($order_id){
-        $this->db->query("INSERT into cache_on_delivery_orders (order_id) VALUES (:order_id)");
-        $this->db->bind(":order_id", $order_id);
-        if ($this->db->execute()) {
-            $_SESSION['order_complete_msg']="complete_order_successfully";
-            return true;
-        } else {
-            return false;
-        }
+    // public function update_cache_on_delivery_table($order_id){
+    //     $this->db->query("INSERT into cache_on_delivery_orders (order_id) VALUES (:order_id)");
+    //     $this->db->bind(":order_id", $order_id);
+    //     if ($this->db->execute()) {
+    //         $_SESSION['order_complete_msg']="complete_order_successfully";
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
 
-    }
+    // }
 
     public function list_order_deatils($id){
         if(isset($_POST['order_type'])){
             if ($_POST['order_type'] == 'all'){
-                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
+                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
                 $this->db->bind(":user_id", $id);
                 return $this->db->resultSet();
             }
             if ($_POST['order_type'] == 'pending'){
-                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=0 GROUP BY order_id;");
+                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=0 GROUP BY order_id;");
                 $this->db->bind(":user_id", $id);
                 return $this->db->resultSet();
             }
             if ($_POST['order_type'] == 'completed'){
-                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=1 GROUP BY order_id;");
+                $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=1 GROUP BY order_id;");
                 $this->db->bind(":user_id", $id);
                 return $this->db->resultSet();
             }
         }
         else{
-            $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
+            $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
             $this->db->bind(":user_id", $id);
             return $this->db->resultSet();
         }

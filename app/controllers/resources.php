@@ -2,9 +2,11 @@
 
 class resources extends Controller
 {
+    private $notification_model;
     public function __construct()
     {
         $this->resources_model = $this->model('M_resources');
+        $this->notification_model = $this->model('M_notifications');
     }
 
     public function resource_page(){
@@ -22,6 +24,8 @@ class resources extends Controller
         $resources = $this->resources_model->display_all_resources($start_from,$num_per_page); //data object array
         $best_resources = $this->resources_model->find_populerfeed();
         $row_count = $this->resources_model->count_num_of_rows()->no_of_rows;
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
 
         if(empty($resources)){
             if(isset($_POST['search_text']) && !empty($_POST['search_text'])) //seacr some text
@@ -32,7 +36,10 @@ class resources extends Controller
                     'search_text'=>($_POST['search_text']),
                     'resource_page_display_message'=> 'match not found...',
                     'best_resources' => $best_resources,
-                    'row_count' => 0
+                    'row_count' => 0,
+                    'no_of_notifications' =>$no_of_notifications,
+                     'notifications' => $notifications
+                    
                 ];
             }
             if(isset($_POST['search_text']) && empty($_POST['search_text'])) //not seacr some text press x mark
@@ -43,7 +50,9 @@ class resources extends Controller
                     'search_text'=>'search by any key-word',
                     'resource_page_display_message'=> 'match not found...',
                     'best_resources' => $best_resources,
-                    'row_count' => 0
+                    'row_count' => 0,
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                 ];
             }
             else if(!isset($_POST['search_text'])){ //no search
@@ -53,7 +62,9 @@ class resources extends Controller
                     'search_text'=>'search by any key-word',
                     'resource_page_display_message'=> 'match not found...',
                     'best_resources' => $best_resources,
-                    'row_count' => $row_count
+                    'row_count' => $row_count,
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                 ];
             }
             
@@ -69,7 +80,9 @@ class resources extends Controller
                         'resource_page_display_message'=> '',
                         'best_resources' => $best_resources,
                         'resources' => $resources,
-                        'row_count' => $row_count
+                        'row_count' => $row_count,
+                        'no_of_notifications' =>$no_of_notifications,
+                        'notifications' => $notifications
                     ];
                 
             }
@@ -82,7 +95,9 @@ class resources extends Controller
                     'resource_page_display_message'=> '',
                     'best_resources' => $best_resources,
                     'resources' => $resources,
-                    'row_count' => $row_count
+                    'row_count' => $row_count,
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                 ];
             }            
             $this->view('Agri_officer/Resources/v_resources', $data);
@@ -114,13 +129,17 @@ class resources extends Controller
                 $count_comment= $this-> resources_model ->count_all_comment($data);
                 $reply_for_comment = $this->resources_model->display_all_comment_for_reply($data);
                 $no_of_likes = $this->resources_model->count_previous_like_with_user_id($id, $_SESSION['user_id'])->previous_like;
+                $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+                $notifications = $this->notification_model->notifications();
                 $data1 = [
                     'ind_resource' => $individual_resource,
                     'related_post' => $related_post,
                     'comments' => $comments,
                     'count_comment' => $count_comment,
                     'reply_for_comment' => $reply_for_comment,
-                    'previous_like_status' => $no_of_likes
+                    'previous_like_status' => $no_of_likes,
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                 ];
                 $this->view('Agri_officer/Resources/individual_resource', $data1);
             }

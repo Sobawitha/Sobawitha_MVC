@@ -122,6 +122,16 @@ tr{
 
 }
 
+ #plus_btn{
+    background-color: transparent;
+    border:none;
+  }
+
+#minus_btn{
+    background-color: transparent;
+    border:none;
+  }
+
 .value{
     font-size:13px;
     padding:3px 5px 3px 5px;
@@ -129,8 +139,7 @@ tr{
 }
 
 #cancel_order{
-    color:slategray;
-    transform: translate(0px,-65px);
+    color:rgb(27, 32, 36);
 }
 
 #cancel_order:hover{
@@ -180,7 +189,7 @@ tr{
 .total_value{
     font-weight: bold;
     margin-left:20px;
-    font-size:13px;
+    font-size:20px;
 }
 
 .total_price_section .discription{
@@ -272,6 +281,7 @@ tr{
     display:none;
   }
 
+
   /*set quantity*/
 
 .quantity_control{
@@ -301,3 +311,4 @@ tr{
     text-align: center;
     border: none;
 }
+

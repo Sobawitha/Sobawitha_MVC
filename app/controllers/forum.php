@@ -1,8 +1,11 @@
 <?php
 
 class forum extends Controller {
+
+    private $notification_model;
     public function __construct(){
         $this-> forum_model =$this->model('M_forum');
+        $this->notification_model = $this->model('M_notifications');
     }
 
     /*start new discussion by posting forum post */
@@ -159,11 +162,14 @@ class forum extends Controller {
     /**display all forum posts */
     public function forum(){
         if(isset($_SESSION['user_id'])){
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $search_cont=$_POST['search_text'];
             $forum_discussions = $this->forum_model->display_all_discussion();
             $discussion_reply =  $this->forum_model->display_all_discussion_reply();
+            
             
             if($search_cont == '' ){
                 $data = [
@@ -171,6 +177,8 @@ class forum extends Controller {
                     'discussion_reply' => $discussion_reply,
                     'display_message'=>'',
                     'search_text'=>"Search by key-word",
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                 ];    
             }
             else{
@@ -180,14 +188,18 @@ class forum extends Controller {
                         'forum_discussions' => $search_discussions,
                         'discussion_reply' => $discussion_reply,
                         'display_message'=> '',
-                        'search_text'=>$search_cont
+                        'search_text'=>$search_cont,
+                        'no_of_notifications' =>$no_of_notifications,
+                        'notifications' => $notifications
                     ];
                 }
                 else{
                     $data = [
                         'display_message'=> 'No match found..',
                         'discussion_reply' => $discussion_reply,
-                        'search_text'=>$search_cont
+                        'search_text'=>$search_cont,
+                        'no_of_notifications' =>$no_of_notifications,
+                        'notifications' => $notifications
                     ];
                 }
                 
@@ -204,6 +216,8 @@ class forum extends Controller {
                 'discussion_reply' => $discussion_reply,
                 'search_text'=>"Search by key-word",
                 'display_message'=> '',
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
             ]; 
             $this->view('Users/forum/v_forum',$data);
         }
