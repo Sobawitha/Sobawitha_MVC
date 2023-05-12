@@ -6,6 +6,7 @@
 
         public function __construct(){
             $this->sellerModel = $this->model('M_Seller');
+            $this->notification_model = $this->model('M_notifications');
     }
     
     //
@@ -283,6 +284,8 @@
     public function profile()
     {
      if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
              
         $user= $this->sellerModel->findUserByID($_SESSION['user_id']);
         $data=[                      
@@ -303,6 +306,8 @@
           'branch'=>$user->branch,
           'account_number'=>$user->bank_account_no,
           'gender'=>$user->gender,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
   
           'first_name_err'=>'',
@@ -327,6 +332,8 @@
 
  public function change_profile_pic(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
+      $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+      $notifications = $this->notification_model->notifications();
       if(($_SERVER['REQUEST_METHOD'] ==='POST' && $_POST['submitForm'] === 'true')){
         $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
       
@@ -352,6 +359,8 @@
         'branch'=>$user->branch,
         'account_number'=>$user->bank_account_no,
         'gender'=>$user->gender,
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
         
 
         'first_name_err'=>'',
@@ -430,6 +439,8 @@
 
 public function updateProfile(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if(($_SERVER['REQUEST_METHOD']=='POST' && $_POST['submitForm'] === 'true')){
           $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
@@ -449,6 +460,8 @@ public function updateProfile(){
             'bank_account_no'=>trim($_POST['bank_account_no']),
             'bank'=>trim($_POST['bank']),
             'branch'=>trim($_POST['branch']),
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             
         
             
@@ -629,6 +642,8 @@ public function updateProfile(){
           'bank_account_name'=>$user->bank_account_name,
           'branch'=>$user->branch,
           'bank_account_no'=>$user->bank_account_no,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
   
           'first_name_err'=>'',
@@ -659,13 +674,17 @@ public function updateProfile(){
 
     public function delete_profile_pic(){
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
+          $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+          $notifications = $this->notification_model->notifications();
            
           $user_id=$_SESSION['user_id'];
           $user_gender=$_SESSION['user_gender'];
           $deleteStatus= $this->sellerModel->deleteProPic($user_id,$user_gender);
           
           $data=[
-            'delete'=>$deleteStatus
+            'delete'=>$deleteStatus,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
           ];
           
           redirect('Seller/profile');

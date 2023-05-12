@@ -295,7 +295,7 @@ class M_supplier_view
 
     /*to that */
 
-    /*according to the login user check whethe given itm in the wishlist or not */
+    /*according to the login user check whethe given itm in the wishlist or not(according to user and product) */
     public function is_in_wishlist($product_id){
         $this->db->query("SELECT count(*) as row_count from wishlist where Product_id=:product_id AND User_id=:user_id ");
         $this->db->bind(":product_id", $product_id);
@@ -303,6 +303,8 @@ class M_supplier_view
         return $this->db->single();
    
     }
+
+    
 
     public function view_individual_product($id){
         $this->db->query('SELECT r.*, COUNT(fb.id) AS total_feedback_count, 

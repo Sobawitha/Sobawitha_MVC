@@ -164,8 +164,8 @@ hr{
 /* help css */
 
 .dialog-box {
-    position: fixed;
-    top: 50%;
+    /* position: fixed; */
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
@@ -198,6 +198,7 @@ hr{
     margin-bottom: 10px;
     font-size:13px;
     color:gray;
+    width:100%;
   }
   
   .dialog-box input[type="email"]:focus

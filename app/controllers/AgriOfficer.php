@@ -82,6 +82,8 @@ public function profile()
   
 public function change_profile_pic(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==5) {
+      $notifications = $this->notification_model->notifications();
+      $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
       if(($_SERVER['REQUEST_METHOD'] ==='POST' && $_POST['submitForm'] === 'true')){
         $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
       
@@ -104,6 +106,8 @@ public function change_profile_pic(){
         'contact_number'=>$user->contact_no,
         'gender'=>$user->gender,
         'qualifications'=>$user->qualifications,
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
         
 
         'first_name_err'=>'',
@@ -160,6 +164,8 @@ public function change_profile_pic(){
 }
     
 public function delete_profile_pic(){
+    $notifications = $this->notification_model->notifications();
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==5) {
        
       $user_id=$_SESSION['user_id'];
@@ -167,7 +173,9 @@ public function delete_profile_pic(){
       $deleteStatus= $this->agriModel->deleteProPic($user_id,$user_gender);
       
       $data=[
-        'delete'=>$deleteStatus
+        'delete'=>$deleteStatus,
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
       ];
       
       redirect('AgriOfficer/Profile');
@@ -181,6 +189,8 @@ public function delete_profile_pic(){
   
   public function updateProfile(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==5) {
+      $notifications = $this->notification_model->notifications();
+      $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
         if(($_SERVER['REQUEST_METHOD']=='POST' && $_POST['submitForm'] === 'true')){
           $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
@@ -196,6 +206,8 @@ public function delete_profile_pic(){
             'contact_number'=>trim($_POST['contact_number']),
             'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             
             
         
@@ -331,6 +343,8 @@ public function delete_profile_pic(){
           'address_line_three'=>$user->address_line_three,
           'address_line_four'=>$user->address_line_four,    
           'contact_number'=>$user->contact_no,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
          
           
   
