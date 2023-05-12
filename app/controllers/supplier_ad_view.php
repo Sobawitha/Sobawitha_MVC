@@ -33,6 +33,7 @@
             $data = [
                 'adcontent' => $ad,
                 'no_of_cart_item' => $no_of_cart_item,
+                'feed' => $content,
 
             ];
 
