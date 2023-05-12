@@ -3,11 +3,14 @@
         private $seller_dashboard_model;
         public function __construct(){
             $this->seller_dashboard_model = $this->model('M_seller_dashboard');
+            $this->notification_model = $this->model('M_notifications');
     }
 
     public function seller_dashboard(){
 
         if(isset($_SESSION['user_id'])){
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
             if(isset($_GET['page'])){
                 $page = $_GET['page'];
             }
@@ -29,7 +32,10 @@
                 'ongoing_order' => $no_of_ongoing_order,
                 'complete_order' => $no_of_complete_order,
                 'stock_details' => $stock_details,
-                'no_of_products' => $no_of_orders
+                'no_of_products' => $no_of_orders,
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
+                
             ];
             $this->view('Seller/Dashboard/v_seller_dashboard', $data);
             unset($_SESSION['num_per_page']);

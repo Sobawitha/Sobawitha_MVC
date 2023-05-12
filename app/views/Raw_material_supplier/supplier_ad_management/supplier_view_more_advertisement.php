@@ -15,7 +15,7 @@ else if($_SESSION['user_flag'] == 4){
 
 <script>
   /*pay popup */
-function pay_popup(price) {
+  function pay_popup(price) {
   const existingQuantity = document.getElementById("existing_quantity_value").textContent;
   const quantity = parseInt(quantityInput.value);
 
@@ -53,133 +53,11 @@ function checkout() {
 </script>
 
 <script>
- function reset_sections(){
-    var related_item = document.getElementById("toggle_section_1");
-    var comment = document.getElementById("toggle_section_2");
-    var qna = document.getElementById("toggle_section_3");
-    var indicator = document.getElementById("indicator");
-    qna.style.transform = "translateX(0px)";
-    comment.style.transform = "translateX(0px)";
-    related_item.style.transform = "translateX(0px)";
-    indicator.style.transform = "translateX(-161px)";
-   
-}
-
-function comment_section(){
-    var related_item = document.getElementById("toggle_section_1");
-    var comment = document.getElementById("toggle_section_2");
-    var qna = document.getElementById("toggle_section_3");
-    var indicator = document.getElementById("indicator");
-    qna.style.transform = "translateX(-650px)";
-    comment.style.transform = "translateX(-650px)";
-    related_item.style.transform = "translateX(-650px)";
-    indicator.style.transform = "translateX(-5px)";
-}
-
-function qna_section(){
-    var related_item = document.getElementById("toggle_section_1");
-    var comment = document.getElementById("toggle_section_2");
-    var qna = document.getElementById("toggle_section_3");
-    var indicator = document.getElementById("indicator");
-    qna.style.transform = "translateX(-1150px)";
-    comment.style.transform = "translateX(-1170px)";
-    related_item.style.transform = "translateX(-1150px)";
-    indicator.style.transform = "translateX(130px)";
-}
 
 
 /*comment section */
 //for comment section
-function open_save_cancel_btn(){
-    document.querySelector(".btn").style.display='block';
-}
 
-function clear_comment(){
-    document.querySelector(".comment-body").value='';
-    document.querySelector(".btn").style.display='none';
-}
-
-function save_comment(){
-    document.querySelector(".btn").style.display='none';
-}
-
-//for reply-section
-function open_save_cancel_btns(id){
-    document.getElementById(`btn-${id}`).style.display='block';
-}
-
-function open_replyform(id){
-    document.getElementById(`reply_form-${id}`).style.display='block';
-}
-
-function clear_reply(id){
-    document.getElementById(`reply-body-${id}`).value='';
-    document.getElementById(`btn-${id}`).style.display='block';
-}
-
-function save_reply(id){
-    document.getElementById(`btn-${id}`).style.display='none';
-    
-}
-
-function display_reply(id){
-    if(document.getElementById(`display_reply_all-${id}`).style.display=='none'){
-        document.getElementById(`display_reply_all-${id}`).style.display='block';
-        document.getElementById(`display_reply_btn_icon-${id}`).innerHTML=document.getElementById(`arrow_down-${id}`).innerHTML;
-
-    }
-    else{
-        document.getElementById(`display_reply_all-${id}`).style.display='none';
-        document.getElementById(`display_reply_btn_icon-${id}`).innerHTML=document.getElementById(`arrow_up-${id}`).innerHTML;
-    }
-}
-
-
-/*QnA section */
-//for questions
-function open_save_cancel_btn_for_question(){
-    document.querySelector(".btn_sec").style.display='block';
-}
-
-function clear_question(){
-    document.querySelector(".comment-body").value='';
-    document.querySelector(".btn_sec").style.display='none';
-}
-
-function save_question(){
-    document.querySelector(".btn_sec").style.display='none';
-}
-
-//for reply-section
-function open_save_cancel_btns_in_answer(id){
-    document.getElementById(`ans_btn_sec-${id}`).style.display='block';
-}
-
-function open_answerform(id){
-    document.getElementById(`answer_form-${id}`).style.display='block';
-}
-
-function clear_reply(id){
-    document.getElementById(`reply-body-${id}`).value='';
-    document.getElementById(`ans_btn_sec-${id}`).style.display='block';
-}
-
-function save_reply(id){
-    document.getElementById(`ans_btn_sec-${id}`).style.display='none';
-    
-}
-
-function display_answers(id){
-    if(document.getElementById(`display_all_answers-${id}`).style.display=='none'){
-        document.getElementById(`display_all_answers-${id}`).style.display='block';
-        document.getElementById(`display_answer_btn_icon-${id}`).innerHTML=document.getElementById(`arrow_down-${id}`).innerHTML;
-
-    }
-    else{
-        document.getElementById(`display_all_answers-${id}`).style.display='none';
-        document.getElementById(`display_answer_btn_icon-${id}`).innerHTML=document.getElementById(`arrow_up-${id}`).innerHTML;
-    }
-}
 
 function thanku_popup_close(){
   document.getElementById('thank_you_dialog_box').close();
@@ -284,10 +162,20 @@ $content = $data['adcontent'];
   </div>
 
   <div class="section_3">
-  <a href="<?php echo URLROOT ?>/Pages/product_page" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
+  <a href="<?php echo URLROOT ?>/supplier_ad_view/index" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
     <span class="title_1">Raw Material</span><br>
     <span class="title_2"><?php echo $content->product_name; ?></span>
-    <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="add_wishlist_heart" data-product-id="<?php /*echo $content->Product_id*/ ?>" onclick = "editWishlist()"></i>
+    <?php if($data['wishlist_status'] >0){
+      ?>
+      <a href="<?php echo URLROOT; ?>/supplier_ad_view/remove_wishlist_from_individual_page?product_id=<?php echo $content->Product_id; ?>"><i class="fa-solid fa-heart" id="add_wishlist_heart"></i></a>
+      <?php
+    }
+      else{
+        ?>
+        <a href="<?php echo URLROOT; ?>/supplier_ad_view/add_to_wishlist_from_individual_page?product_id=<?php echo $content->Product_id; ?>"><i class="fa-regular fa-heart" id="add_wishlist_heart"></i></a>
+        <?php
+      }
+    ?>
     <br><br>
     <span class="title_3"><span class="sub_title_3">Company / Manufacturer  </span><?php echo $content->manufacturer; ?></span><br><br>
     <span class="product_type"><span class="sub_reg_no">Product Type </span><?php echo $content->type; ?></span><br><br>
@@ -370,6 +258,9 @@ $content = $data['adcontent'];
       </div>
     </section>
 
+    
+
+  <form method="POST" action="<?php echo URLROOT ?>/supplier_ad_view/add_to_cart_from_individual_page?product_id= <?php echo $content->Product_id ?>">
   <div class="select_quantity">
     <span class="header_quantity">Quantity</span>
     <div class="select_quantity_input">
@@ -385,26 +276,25 @@ $content = $data['adcontent'];
       <span class="existing_quantity" id="existing_quantity">
         <span id="existing_quantity_value"><?php echo $content->quantity; ?></span> available
       </span>
-      <br>
-      <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
-      <span id="quantity_error" style="color:red;"></span>
     </div>
+    <span class="errorMsg" style="transform:translateX(-50px);font-weight:bold;color: red; display: none;">Out of the stock.</span>
+    <span id="quantity_error" style="color:red;"></span>
   </div>
 
   <div class="buttons">
   <?php if($content->quantity > 0 ) { 
     if($data['no_of_cart_item'] ==0 ){
       ?>
-        <button id="buy_now_btn" onclick="pay_popup(<?php echo $content->price ?>)">Buy Now</button>
+        <span id="buy_now_btn_when_not_having_cart_item"  onclick="pay_popup(<?php echo $content->price ?>)">Buy Now</span>
       <?php
     }else{
       ?>
-        <a href="<?php echo URLROOT ?>/supplier_ad_view/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a>
+        <button id="buy_now_btn" type="submit">Buy Now</button>
 
       <?php
     }
     ?>
-        <a href="<?php echo URLROOT ?>/supplier_ad_view/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn">Add to Cart</button></a>
+        <button id="add_to_cart_btn" type="submit">Add to Cart</button>
 
   <?php
   }else{?>
@@ -414,9 +304,11 @@ $content = $data['adcontent'];
   <?php
   }
   ?>
+    </div>
+  </form>
     
 <div class="process_container">
-      <div class="form_button">
+      <!-- <div class="form_button">
         <span onclick="reset_sections()">What's inside</span>
         <span onclick="comment_section()">Comment</span>
         <span onclick="qna_section()">FAQ's</span>
@@ -449,198 +341,16 @@ $content = $data['adcontent'];
               No related items found.
             </div>
           <?php endif; ?>
-      </div>
+      </div> -->
 
 
 
           <!-- comment_section -->
-        <div id="toggle_section_2" class="toggle_section">
+        <!-- <div id="toggle_section_2" class="toggle_section"> -->
 
-            <?php $product_id = $_GET['product_id']?> <!--only for testing-->
-            <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_comment?product_id=<?php echo $product_id?>" >
-                    <div id="comment_form">
-                        <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span>
-                        <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn()" name="comment"  required/>
-                    </div>
-                    <div  class="btn">
-                        <button type="submit" class="cancelbtn" value="cancel" onclick="clear_comment()">Cancel</button>
-                        <button type="submit" class="commentbtn" name="commentbtn" onclick="save_comment()">Comment</button>
-                    </div>
-            </form>
-
-
-            <div class="comment_reply">
-            <?php
-
-              foreach($data['comments'] as $comment):?>
-                <span id="user-<?php echo $comment->comment_id?>" class="user"><?php echo ucfirst(($comment->commented_by_full_name[0]))?></span> 
-                <div class="display_comment">
-                    <P class="name"> <?php echo $comment->commented_by_full_name?><span class="publish_date"><?php echo $comment->comment_date?></span></P>
-                    <p class="comment_post"> <?php echo $comment->comment?> </p>
-                    <div class="icon">
-                        <i class="fa-sharp fa-solid fa-reply-all" id="replybtn" onclick="open_replyform(<?php echo $comment->comment_id?>)"></i><span class="reply">Reply</span>
-                        <?php if($comment->no_of_reply >0 ){ ?> 
-                            <br><button class="reply_visible_click_button" id="reply_visible_click_button-<?php echo $comment->comment_id?>" onclick="display_reply(<?php echo $comment->comment_id?>)">
-                            <span id="display_reply_btn_icon-<?php echo $comment->comment_id?>" class="drop_down_btn"> <i class="fa fa-chevron-circle-up" aria-hidden="true" ></i></span><span class="display_reply_btn_text">Reply</span></button>
-                            <div class="replace_dropdown_arrows" hidden>
-                                    <span id="arrow_up-<?php echo $comment->comment_id?>"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></span>
-                                    <span id="arrow_down-<?php echo $comment->comment_id?>"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
-                            </div>  
-                        <?php }?>    
-                    </div>
-              </div>
-
-                <!--Reply form-->
-                <div id="reply_form-<?php echo $comment->comment_id ?>" class="reply_form">
-                    <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_reply?product_id=<?php echo $product_id?>&comment_id=<?php echo $comment->comment_id?>">
-                        <span id="user-<?php echo $comment->comment_id?>" class="user-reply"><?php echo ucfirst($_SESSION['username'][0])?></span>
-                        <input type="text" class="reply-body" placeholder="Add a reply" id="reply-body-(<?php echo $comment->comment_id?>)" onclick="open_save_cancel_btns(<?php echo $comment->comment_id?>)" name="reply"  required/>
-                        <div id="btn-<?php echo $comment->comment_id?>" class="btn">
-                            <button type="submit"  class="cancel" id="cancelbtn-<?php echo $comment->comment_id?>" value="cancel" onclick="clear_reply()">Cancel</button>
-                            <button class="" type="submit" class="commentbtn" id="commentbtn-<?php echo $comment->comment_id?>" name="replybtn" onclick="save_reply() " value="<?php echo $comment->comment_id?>">Reply</button> 
-                        </div>
-                    </form>
-                </div>
-              
-
-                <!--display_reply-->
-                <div class="display_reply_all" id="display_reply_all-<?php echo $comment->comment_id?>">
-                <?php if($comment->no_of_reply >0){ ?> 
-                  <?php foreach ($data['reply_for_comment'] as $comment_reply):
-                    if ($comment_reply->comment_id == $comment->comment_id) {?>
-
-                      <div class="reply_section">
-                      <span id="user-<?php echo $comment_reply->reply_id?>" class="user-reply"><?php echo ucfirst(($comment_reply->reply_user_full_name[0]))?></span>
-                      <div class="display_reply">
-                          <P class="name"> <?php echo $comment_reply->reply_user_full_name?><span class="publish_date"><?php echo $comment_reply->reply_date?></span></P>
-                          <p class="comment_post"> <?php echo $comment_reply->reply ?> </p>
-                      </div>
-                      </div>
-                    <?php }?>
-                  <?php endforeach;?>
-                <?php }?>
-                </div>
-                <hr>
-                <br>
-              <?php endforeach;?>
-            </div>  
-          </div>
-
-          <div id="toggle_section_3" class="toggle_section">
-          <?php $product_id = $_GET['product_id']?> <!--only for testing-->
-            <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_question?product_id=<?php echo $product_id?>" >
-                    <div id="post_question_form">
-                        <?php if(($data['current_user_gender'])=='f' or ($data['current_user_gender'])=='F'){
-                          ?>
-                            <img src="<?php echo URLROOT ?>/public/upload/profile_images/female_img.jpg"   alt="Profile Picture"  id="user_img"/>
-                          <?php
-                        }
-                        else{
-                          ?>
-                            <img src="<?php echo URLROOT ?>/public/upload/profile_images/male_img.jpg"   alt="Profile Picture"  id="user_img"/>
-                          <?php
-                        }
-                        ?>
-                        
-                        <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn_for_question()" name="question"  required/>
-                    </div>
-                    <div class="btn_sec">
-                        <button type="submit" class="cancelbtn" value="cancel" onclick="clear_question()">Cancel</button>
-                        <button type="submit" class="commentbtn" name="commentbtn" onclick="save_question()">Comment</button>
-                    </div>
-            </form>
-
-
-            <div class="question_answers">
-            <?php
-              foreach($data['question'] as $question):?>
-                        <?php if(($question->asked_user_gender)=='f'){
-                          ?>
-                            <img src="<?php echo URLROOT ?>/public/upload/profile_images/female_img.jpg"   alt="Profile Picture"  id="user_img"/>
-                          <?php
-                        }
-                        else{
-                          ?>
-                            <img src="<?php echo URLROOT ?>/public/upload/profile_images/male_img.jpg"   alt="Profile Picture"  id="user_img"/>
-                          <?php
-                        }
-              ?>
-                <div class="display_question">
-                    <P class="name"> <?php echo $question->asked_by_full_name?><span class="publish_date"><?php echo $question->q_date?></span></P>
-                    <p class="question_post"> <?php echo $question->question?> </p>
-                    <div class="icon">
-
-                        <?php if($_SESSION['user_id']==$data['product_owner_id']){
-                          ?>
-                              <i class="fa-sharp fa-solid fa-reply-all" id="replybtn" onclick="open_answerform(<?php echo $question->question_id?>)"></i><span class="reply">Reply</span>
-                          <?php
-                        }?>
-
-                        <?php if($question->no_of_answers >0 ){ ?> 
-                            <br><button class="answer_visible_click_button" id="answer_visible_click_button-<?php echo $question->question_id?>" onclick="display_answers(<?php echo $comment->comment_id?>)">
-                            <span id="display_answer_btn_icon-<?php echo $question->question_id?>" class="drop_down_btn"> <i class="fa fa-chevron-circle-up" aria-hidden="true" ></i></span><span class="display_reply_btn_text">Reply</span></button>
-                            <div class="replace_dropdown_arrows" hidden>
-                                    <span id="arrow_up-<?php echo $question->question_id?>"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></span>
-                                    <span id="arrow_down-<?php echo $question->question_id?>"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
-                            </div>  
-                        <?php }?>    
-                    </div>
-                </div>
-
-                <!--answer form-->
-                <div id="answer_form-<?php echo $question->question_id ?>" class="answer_form">
-                    <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_answer?product_id=<?php echo $product_id?>&question_id=<?php echo $question->question_id?>">
-                    <?php if(($data['current_user_gender'])=='f'){
-                          ?>
-                            <img src="<?php echo URLROOT ?>/public/upload/profile_images/female_img.jpg"   alt="Profile Picture"  id="user_img"/>
-                          <?php
-                        }
-                        else{
-                          ?>
-                            <img src="<?php echo URLROOT ?>/public/upload/profile_images/male_img.jpg"   alt="Profile Picture"  id="user_img"/>
-                          <?php
-                        }
-                    ?>
-                        <input type="text" class="answer-body" placeholder="Add a answer" id="reply-body-(<?php echo $question->question_id?>)" onclick="open_save_cancel_btns_in_answer(<?php echo $question->question_id?>)" name="answer"  required/>
-                        <div id="ans_btn_sec-<?php echo $question->question_id?>" class="ans_btn_sec">
-                            <button type="submit"  class="cancel" id="cancelbtn-<?php echo $question->question_id?>" value="cancel" onclick="clear_reply()">Cancel</button>
-                            <button class="" type="submit" class="commentbtn" id="commentbtn-<?php echo $question->question_id?>" name="replybtn" onclick="save_reply() " value="<?php echo $question->question_id?>">Reply</button> 
-                        </div>
-                    </form>
-                </div>
-
-                <!--display_answer-->
-                <div class="display_all_answers" id="display_all_answers-<?php echo $question->question_id?>">
-                <?php if($question->no_of_answers){ ?> 
-                  <?php foreach ($data['answers'] as $answers):
-                    if ($answers->answer_question_id == $question->question_id) {?>
-                      <div class="answer_section">
-                      <?php if(($answers->answer_user_gender)=='f'){
-                          ?>
-                            <img src="<?php echo URLROOT ?>/public/upload/profile_images/female_img.jpg"   alt="Profile Picture"  id="user_img"/>
-                          <?php
-                        }
-                        else{
-                          ?>
-                            <img src="<?php echo URLROOT ?>/public/upload/profile_images/male_img.jpg"   alt="Profile Picture"  id="user_img"/>
-                          <?php
-                        }
-                        ?>
-                      <div class="display_answer">
-                          <P class="name"> <?php echo $answers->answer_user_full_name?><span class="publish_date"><?php echo $answers->answer_date?></span></P>
-                          <p class="comment_post"> <?php echo $answers->answer ?> </p>
-                      </div>
-                      </div>
-                    <?php }?>
-                  <?php endforeach;?>
-                <?php }?>
-                </div>
-                <hr>
-
-              <?php endforeach;?>
-              </div>
-          </div>
-        </div>
+            <!-- comment_section -->
+        <!-- </div> toggle div  -->
+    </div>
     </div>
   </div>
 </div>
@@ -671,17 +381,25 @@ plusButton.addEventListener('click', () => {
   quantity++;
   if(quantity>available_quantity){
     quantityInput.style.color="red";
+    document.querySelector('.errorMsg').style.display = 'block';
   }
   else{
     quantityInput.value = quantity;
+    quantityInput.style.color="black";
+    document.querySelector('.errorMsg').style.display = 'none';
   }
 });
 
 minusButton.addEventListener('click', () => {
   let quantity = parseInt(quantityInput.value);
+  
   quantity--;
+  quantityInput.style.color="black";
+  document.querySelector('.errorMsg').style.display = 'none';
+  
   if (quantity < 1) {
     quantity = 1;
+    quantityInput.style.color="red";
   }
   quantityInput.value = quantity;
 });

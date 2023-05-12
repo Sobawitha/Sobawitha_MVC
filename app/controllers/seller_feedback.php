@@ -3,10 +3,13 @@
         private $sellerFeedModel;
         public function __construct(){
             $this->sellerFeedModel = $this->model('M_seller_feedback');
+            $this->notification_model = $this->model('M_notifications');
     }
 
     public function view_all_feed(){
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==3){ 
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
             $id=$_SESSION['user_id'];
             if($_SERVER['REQUEST_METHOD'] == 'POST'){  
             
@@ -34,6 +37,8 @@
             'three_star_count' => $three_star_count,
             'two_star_count' => $two_star_count,
             'one_star_count' => $one_star_count,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
 
             ];
         
@@ -60,6 +65,8 @@
             'three_star_count' => $three_star_count,
             'two_star_count' => $two_star_count,
             'one_star_count' => $one_star_count,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
 
             ];
         

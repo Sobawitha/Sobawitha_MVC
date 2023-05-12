@@ -75,7 +75,7 @@ function setColor($tag){
                                         <?php
                                         }
                                         ?>
-                                        <th><span class="<?php echo setColor($order->payment_type)?>"><?php echo $order->payment_type;?></span></th>
+                                        <th><span class="<?php echo setColor("online")?>">online</span></th>
                                         
                                 </div>
 

@@ -24,7 +24,7 @@
     text-align: center;
     display:flex;
     flex-direction: column;
-    padding:0px 0px 20px 0px;
+    background-color: #fffef3;
 }
 
 .wishlist-item:hover{

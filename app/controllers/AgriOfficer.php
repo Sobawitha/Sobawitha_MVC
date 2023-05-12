@@ -1,9 +1,11 @@
 <?php
     class AgriOfficer extends Controller{
         private $agriModel;
+        private $notification_model;
 
         public function __construct(){
             $this->agriModel = $this->model('M_AgriOfficer');
+            $this->notification_model = $this->model('M_notifications');
     }
 
 public function profile()
@@ -11,7 +13,9 @@ public function profile()
      if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==5) {
              
         $user= $this->agriModel->findUserByID($_SESSION['user_id']);
-        $notifications = $this->agriModel->notifications();
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+        $notifications_all = $this->agriModel->notifications();
         $data=[                      
           'user_id'=>$user->user_id,
           'first_name'=>$user->first_name,
@@ -31,6 +35,9 @@ public function profile()
           'account_number'=>$user->bank_account_no,
           'gender'=>$user->gender,
           'qualifications'=>$user->qualifications,
+          'notifications_all' => $notifications_all,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
   
           'first_name_err'=>'',
@@ -43,7 +50,7 @@ public function profile()
           'account_number_err'=>'',
           'gender_err'=>'',
           'propic_err'=>'',
-          'notifications' => $notifications
+          
 
 
           

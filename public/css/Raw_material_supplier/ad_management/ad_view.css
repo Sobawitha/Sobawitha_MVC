@@ -48,7 +48,6 @@
 /*search section*/
 .search_bar{
   margin-top:20px;
-  width:65%;
 }
 .search_bar .search_content{
   /* border:1px solid lightgreen; */
@@ -56,10 +55,11 @@
   border-radius:20px;
   padding:8px;
   padding-left:15px;
+  width:650px;
 }
 
 .search_bar input{
-  width:93%;
+  width:91%;
   border-radius: 20px;
   border:none;
   font-family:'Montserrat', sans-serif;
@@ -69,6 +69,7 @@
 #search{
   /* color:lightgreen; */
   color:#a47852;
+  cursor:pointer;
 }
 
 .search_bar input:focus{
@@ -208,7 +209,7 @@
   color:rgb(98, 174, 98);
 }
 
-#cansel{
+#cancel{
   display:none;
 }
 
@@ -329,3 +330,7 @@
   width: 200px;
 }
 
+/*serch bar*/
+.highlight{
+  background-color: yellow;
+}

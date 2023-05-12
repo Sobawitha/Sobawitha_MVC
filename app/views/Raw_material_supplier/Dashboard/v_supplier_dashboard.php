@@ -16,9 +16,10 @@
             <div class="search_bar">
                 <div class="search_content">
                     
-                        <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" require/></span>
-                        <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                        <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                        <span class="search_cont"  onclick="open_cansel_btn()"><input type="text" name="search_text" id="search_text" require/></span>
+                        <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel"  ></i></button>
+                        <span  class="search_btn" onclick="search()"><i class="fa fa-search" aria-hidden="true" id="search" ></i></span>
+                        
                     
                 </div>
             </div>
@@ -99,6 +100,35 @@
 
                 
 <script>
+                
+            /*for search bar */
+            function search(){
+                let searchTerm = document.getElementById("search_text").value;
+                if (searchTerm) {
+                const regex = new RegExp(searchTerm, 'gi');
+                const elements = document.querySelectorAll('body *');
+                for (let i = 0; i < elements.length; i++) {
+                    const element = elements[i];
+                    if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) {
+                    const text = element.childNodes[0].textContent;
+                    if (text.match(regex)) {
+                        const highlightedText = text.replace(regex, '<span class="highlight">$&</span>');
+                        element.innerHTML = highlightedText;
+                    }
+                    }
+                }
+                }
+
+            }
+
+            function open_cansel_btn(){
+                document.getElementById("cansel").style.display='block';
+            }
+
+            function clear_search_bar(){
+                document.querySelector(".search_cont").value='';
+                document.getElementById("cansel").style.display='none';
+            }
                 /* donut chart */
                 fetch('<?php echo URLROOT ?>/supplier_dashboard/order_status_donut_chart')
                     .then(response => response.json())
