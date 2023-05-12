@@ -1,12 +1,12 @@
 <?php
 
-class M_supplier_rm_product extends Controller
+class supplier_rm_product extends Controller
 {
     private $rm_product_model;
     private $resources_model;
     public function __construct()
     {
-        $this->rm_model = $this->model('M_supllier_rm_product');
+        $this->rm_product_model= $this->model('M_supplier_rm_product');
         $this->wishList_model = $this->model('M_wishList');
     }
 
@@ -231,12 +231,12 @@ class M_supplier_rm_product extends Controller
 
       /*fertilizer_order_list */
       function view_orders(){
-        $order_list = $this-> _product_model -> list_order_details($_SESSION['user_id']);
+        $order_list = $this->rm_product_model-> list_order_details($_SESSION['user_id']);
         $data =[
             'order_list' => $order_list,
         ];
 
-        $this->view('Seller/Seller_order/v_seller_order_list',$data);
+        $this->view('Raw_material_supplier/Supplier_order_list/v_order_list',$data);
 
       }
 

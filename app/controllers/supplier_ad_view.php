@@ -31,6 +31,8 @@
         $productId = $_GET['product_id'];
         $wishlist_status = $this-> supplier_ad -> is_in_wishlist($productId)->row_count;
         $ad = $this->supplier_ad->getPostById($productId);
+        $content = $this->supplier_ad->view_individual_product($productId);
+        $type = $ad->type;
         $id=$_SESSION['user_id'];
         $no_of_cart_item = $this->supplier_ad->check_cart($id)->count_item;
         $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
@@ -41,7 +43,8 @@
                 'no_of_cart_item' => $no_of_cart_item,
                 'wishlist_status' => $wishlist_status,
                 'no_of_notifications' =>$no_of_notifications,
-                'notifications' => $notifications
+                'notifications' => $notifications,
+                'feed' => $content,
 
             ];
 

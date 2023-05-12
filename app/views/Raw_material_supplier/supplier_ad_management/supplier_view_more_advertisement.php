@@ -107,6 +107,7 @@ function closeModal() {
 
 <?php
 $content = $data['adcontent'];
+$feed = $data['feed'];
 ?>
 
 <div class="body">
@@ -188,14 +189,23 @@ $content = $data['adcontent'];
         <br><br>
         <span class="title_4">Supplier Rating</span><br>
 
-        <?php $avg_rating = round($content->avg_rating); ?>
+        <?php $avg_rating = round($feed->avg_rating); ?>
         <?php 
                 for ($i = 1; $i <= 5; $i++) {
                 $checked = ($i <= $avg_rating) ? 'checked' : '';
                 echo '<span class="fas fa-star ' . $checked . ' "></span>';
                 }
                 ?>           
-        <p style=font-size:14px;><?php echo $content -> avg_rating ?>  average based on <span class="num_of_reviews"><?php echo $content-> total_feedback_count ?></span> reviews.</p><br>
+        <!-- <p style=font-size:14px;><?php echo $feed -> avg_rating ?>  average based on <span class="num_of_reviews"><?php echo $data['feed']-> total_feedback_count ?></span> reviews.</p><br> -->
+        <p style="font-size: 14px;">
+        <?php echo number_format($feed->avg_rating, 2) ?>
+         average based on 
+        <span class="num_of_reviews">
+          <?php echo $feed->total_feedback_count ?>
+          <?php ($feed->total_feedback_count == 1) ? $s='' : $s='s'; ?>
+        </span>review<?php echo$s ?>.
+      </p>
+
         <hr style="border:0.1px solid #f1f1f1"><br>
 
         <div class="row">
@@ -204,55 +214,55 @@ $content = $data['adcontent'];
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-5" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_5_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-5" style="width: <?php echo ($feed->total_feedback_count > 0) ? ($feed->rating_5_count/$feed->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_5_count ?></div>
+            <div class="count_star"><?php echo $feed->rating_5_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">4 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-4" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_4_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-4" style="width: <?php echo ($feed->total_feedback_count > 0) ? ($feed->rating_4_count/$feed->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_4_count ?></div>
+            <div class="count_star"><?php echo $feed->rating_4_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">3 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-3" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_3_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-3" style="width: <?php echo ($feed->total_feedback_count > 0) ? ($feed->rating_3_count/$feed->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_3_count ?></div>
+            <div class="count_star"><?php echo $feed->rating_3_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">2 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-2" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_2_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-2" style="width: <?php echo ($feed->total_feedback_count > 0) ? ($feed->rating_2_count/$feed->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_2_count ?></div>
+            <div class="count_star"><?php echo $feed->rating_2_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">1 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-1" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_1_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-1" style="width: <?php echo ($feed->total_feedback_count > 0) ? ($feed->rating_1_count/$feed->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_1_count ?></div>
+            <div class="count_star"><?php echo $feed->rating_1_count ?></div>
           </div>
         </div>
       </div>

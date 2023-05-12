@@ -35,7 +35,7 @@ function setColor($tag){
                 </div>
                 </form>
                 <div class="filter_section">
-                        <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/view_orders">
+                        <form method="POST" action="<?php echo URLROOT?>/supplier_rm_product/view_orders">
                                 <label for="all" id="filter_label"> <input type="radio" id="all" name="order_type"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'all') echo ' checked="checked"';?> checked>All type</label>
                                 <label for="pending" id="filter_label"><input type="radio" id="pending" name="order_type" value="pending" onclick="javascript:submit()"  value = "pending"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'pending') echo ' checked="checked"';?>>Ongoing (in-progress)</label>
                                 <label for="completed" id="filter_label"> <input type="radio" id="completed" name="order_type" value="completed" onclick="javascript:submit()"  value = "completed"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'completed') echo ' checked="checked"';?>>Completed</label>                               

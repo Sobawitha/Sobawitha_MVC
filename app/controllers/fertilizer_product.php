@@ -3,6 +3,8 @@
 class fertilizer_product extends Controller
 {
     private $fertilizer_product_model;
+    private $resources_model;
+    private $wishList_model;
     public function __construct()
     {
         $this->fertilizer_product_model = $this->model('M_fertilizer_product');

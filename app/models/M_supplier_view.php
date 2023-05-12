@@ -292,10 +292,32 @@ class M_supplier_view
         $this->db->bind(":product_id", $product_id);
         $this->db->bind(":user_id", $_SESSION['user_id']);
         return $this->db->single();
+   
+    }
+
+    public function view_individual_product($id){
+        $this->db->query('SELECT r.*, COUNT(fb.id) AS total_feedback_count, 
+            COUNT(CASE WHEN fb.rating = 1 THEN 1 ELSE NULL END) AS rating_1_count,
+            COUNT(CASE WHEN fb.rating = 2 THEN 1 ELSE NULL END) AS rating_2_count,
+            COUNT(CASE WHEN fb.rating = 3 THEN 1 ELSE NULL END) AS rating_3_count,
+            COUNT(CASE WHEN fb.rating = 4 THEN 1 ELSE NULL END) AS rating_4_count,
+            COUNT(CASE WHEN fb.rating = 5 THEN 1 ELSE NULL END) AS rating_5_count,
+            (SUM(fb.rating) / COUNT(fb.id)) AS avg_rating
+            FROM raw_material r
+            LEFT JOIN feedback fb ON r.user_id = fb.receiver_id
+            WHERE r.Product_id = :id AND fb.feed_status = 1
+            GROUP BY r.Product_id');
+        $this->db->bind(':id',$id);  
+    
+        $row= $this->db->single();
+    
+        if($this->db->rowCount() > 0){
+            return $row;
+        }else{
+            return false;
+        }
     }
     
 
 }
-
-
 ?>
