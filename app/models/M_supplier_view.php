@@ -383,5 +383,7 @@ class M_supplier_view
 
 }
 
+}
+
 
 ?>

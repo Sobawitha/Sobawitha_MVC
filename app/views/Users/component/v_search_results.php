@@ -59,7 +59,7 @@ options.forEach((option) => {
            
            
            
-                <label for="brand_1" > <input type="checkbox"  name="brands[]" value="<?php echo $manufacturer->manufacturer?>" ><?php echo $manufacturer->manufacturer?></label><br>
+                <label for="brand_1" > <input type="checkbox"  name="brands[]" value="<?php echo $manufacturer->manufacturer?>" <?php if(in_array($manufacturer->manufacturer, $data['brands'])) {echo "checked";} ?>><?php echo $manufacturer->manufacturer?></label><br>
               
 
                 <?php endforeach; ?>
@@ -75,10 +75,10 @@ options.forEach((option) => {
           
 
 
-                <label> <input type="checkbox"  name="types[]" value="Liquid">Liquid</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Solid">Solid</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Packets">Packet</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Bottles">Bottles</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Liquid" <?php if(in_array('Liquid', $data['types'])) {echo "checked";} ?>>Liquid</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Solid" <?php if(in_array('Solid', $data['types'])) {echo "checked"; }?>>Solid</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Packet" <?php if(in_array('Packet', $data['types'])) {echo "checked";} ?>>Packet</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Bottles" <?php if(in_array('Bottles', $data['types'])) {echo "checked";} ?>>Bottles</label><br>
             </div>
         </div>
         
@@ -94,14 +94,14 @@ options.forEach((option) => {
             
             <div class="field">
               <span>Min</span>
-              <input type="number"  name = "min_price" class="input-min" value="2500">
+              <input type="number"  name = "min_price" class="input-min" value="<?php if(isset($data['min_price'])){ echo $data['min_price'];} ?>">
             </div>
             <div class="separator">
                 -
             </div>
             <div class="field">
              <span>Max</span>
-             <input type="number" name = "max_price" class="input-max" value="7500">
+             <input type="number" name = "max_price" class="input-max" value="<?php if(isset($data['max_price'])){ echo $data['max_price'];} ?>">
             </div>
         
         
@@ -115,9 +115,9 @@ options.forEach((option) => {
             <span class="title">Quantity</span><br>
             <div class="all_quantity">
             <label > <input type="radio"  name="quantity" value="1">5 kg or more</label><br>
-            <label > <input type="radio"  name="quanitity" value="2">1kg to 5kg</label><br>
-            <label > <input type="radio"  name="quanitity" value="3">Below 5kg</label><br>
-            <label > <input type="radio"  name="quanitity" value="4">Innovations</label><br>
+            <label > <input type="radio"  name="quantity" value="2">1kg to 5kg</label><br>
+            <label > <input type="radio"  name="quantity" value="3">Below 5kg</label><br>
+            <label > <input type="radio"  name="quantity" value="4">Innovations</label><br>
             
             </div>
         </div>
@@ -132,7 +132,7 @@ options.forEach((option) => {
                
            
                <?php foreach(SriLanka::getDistricts($province) as $district): ?>
-             <label> <input type="checkbox"  name="location" value="<?php echo $district ?>"><?php echo $district ?></label><br> 
+             <label> <input type="checkbox"  name="location[]" value="<?php echo $district ?>" <?php if( in_array($district,$data['location'])){echo  'checked';}  ?>><?php echo $district ?></label><br> 
                 
                <?php endforeach;?>
              

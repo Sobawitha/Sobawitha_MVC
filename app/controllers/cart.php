@@ -273,6 +273,7 @@ public function add_to_cart_from_individual_page()
     
     $pro_id = $_POST['product_id'];
     $quantity = $_POST['quantity'];
+   
     $url = "http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=$pro_id";
     if ($this->cartModel->findByCartId($pro_id)) {
 
@@ -286,7 +287,7 @@ public function add_to_cart_from_individual_page()
 
     
 else{
-        $this->cartModel->insertItem($pro_id,$quantity);
+        $this->cartModel->insertItemiWithQuantity($pro_id,$quantity);
         $_SESSION['cart_status'] = "added";
          header("Location: $url");
 

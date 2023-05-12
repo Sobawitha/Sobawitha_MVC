@@ -1,8 +1,8 @@
 let ongoing_orders =  document.getElementById('ongoing_progress');
 let completed_orders = document.getElementById('ongoing_ready');
 const orderTypeRadio = document.querySelectorAll('input[type="radio"]:checked');
-
-
+let reviewButtons = document.querySelectorAll('.action_button:first-Child');
+console.log(reviewButtons);
 function open_cansel_btn(){
     document.getElementById("cansel").style.display='block';
 }
@@ -43,13 +43,8 @@ fetch(`http://localhost/Sobawitha/purchase/getOrderDetails/1`, {
         <td class="unit"><span class="value">${order.order_id}</span></td>
         <td><span class="price">${order.date}</span></td>
         <td>
-         
-        <span class="disabled"><a href="http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=${order.Product_id}">Review</a></span>          
-        </td>
-        <td>
-        <td>
-        <a href="${URL}" class="link">View Order</a>
-    
+        <button class = "action_button" onclick = "rating_popup()">Review</button>          
+        <button class = "action_button"><a href="${URL}" >View Order</a></button>
         </td>
       </tr>
     `;
@@ -164,9 +159,9 @@ console.log(document.querySelector('.search_content input[type="text"]'));
         <td><span class="amount">${order.seller_name}</span></td>
         <td class="unit"><span class="value">${order.order_id}</span></td>
         <td><span class="price">${order.date}</span></td>
-       
         <td>
-          <a href="${URL}" class="link">View Order</a>
+          <button class = "action_button"  onclick = "rating_popup()">Review</a></button>          
+          <button class = "action_button"><a href="${URL}" >View Order</a></button>
         </td>
       </tr>
     `;
@@ -208,3 +203,15 @@ xhr.send(JSON.stringify(data));
 
 
 });
+
+
+function rating_popup(){
+    document.getElementById("rating_popup").showModal();
+    document.querySelector("#close").addEventListener("click", function() {
+      document.getElementById("rating_popup").close();
+    });
+
+  }
+
+
+
