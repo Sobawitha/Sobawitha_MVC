@@ -114,21 +114,46 @@ class M_fertilizer_product
 
     }
 
-    public function view_individual_product($id){
+    // public function view_individual_product($id){
     
-      $this->db->query('SELECT f.*, COUNT(fb.id) AS total_feedback_count, 
-      COUNT(CASE WHEN fb.rating = 1 THEN 1 ELSE NULL END) AS rating_1_count,
-      COUNT(CASE WHEN fb.rating = 2 THEN 1 ELSE NULL END) AS rating_2_count,
-      COUNT(CASE WHEN fb.rating = 3 THEN 1 ELSE NULL END) AS rating_3_count,
-      COUNT(CASE WHEN fb.rating = 4 THEN 1 ELSE NULL END) AS rating_4_count,
-      COUNT(CASE WHEN fb.rating = 5 THEN 1 ELSE NULL END) AS rating_5_count
-        FROM fertilizer f
-        LEFT JOIN feedback fb ON f.created_by = fb.receiver_id
-        WHERE f.Product_id = :id AND fb.feed_status = 1
-        GROUP BY f.Product_id
+    //   $this->db->query('SELECT f.*, COUNT(fb.id) AS total_feedback_count, 
+    //   COUNT(CASE WHEN fb.rating = 1 THEN 1 ELSE NULL END) AS rating_1_count,
+    //   COUNT(CASE WHEN fb.rating = 2 THEN 1 ELSE NULL END) AS rating_2_count,
+    //   COUNT(CASE WHEN fb.rating = 3 THEN 1 ELSE NULL END) AS rating_3_count,
+    //   COUNT(CASE WHEN fb.rating = 4 THEN 1 ELSE NULL END) AS rating_4_count,
+    //   COUNT(CASE WHEN fb.rating = 5 THEN 1 ELSE NULL END) AS rating_5_count
+    //     FROM fertilizer f
+    //     RIGHT  JOIN feedback fb ON f.created_by = fb.receiver_id
+    //     WHERE f.Product_id = :id AND fb.feed_status = 1
+    //     GROUP BY f.Product_id
 
+    // ');
+    //   $this->db->bind(':id',$id);  
+
+
+    //   $row= $this->db->single();
+
+    //   if($this->db->rowCount() >0){
+    //         return $row;
+    //   }else{
+    //         return false;
+    //   }
+    
+    // }
+
+    public function get_feedback_details($user_id){
+    
+      $this->db->query('SELECT COUNT(id) AS total_feedback_count, 
+      COUNT(CASE WHEN rating = 1 THEN 1 ELSE NULL END) AS rating_1_count,
+      COUNT(CASE WHEN rating = 2 THEN 1 ELSE NULL END) AS rating_2_count,
+      COUNT(CASE WHEN rating = 3 THEN 1 ELSE NULL END) AS rating_3_count,
+      COUNT(CASE WHEN rating = 4 THEN 1 ELSE NULL END) AS rating_4_count,
+      COUNT(CASE WHEN rating = 5 THEN 1 ELSE NULL END) AS rating_5_count,
+      AVG(rating) AS avg_rating
+        FROM feedback 
+        WHERE receiver_id = :id AND feed_status = 1
     ');
-      $this->db->bind(':id',$id);  
+      $this->db->bind(':id',$user_id);  
 
 
       $row= $this->db->single();
@@ -139,6 +164,21 @@ class M_fertilizer_product
             return false;
       }
     
+    }
+
+    public function view_individual_product($id){
+    
+    $this->db->query('SELECT * FROM fertilizer WHERE Product_id = :id');
+  
+    $this->db->bind(':id',$id);  
+    $row= $this->db->single();
+  
+    if($this->db->rowCount() >0){
+            return $row;
+    }else{
+            return false;
+    }
+      
     }
 
     public function show_similar($title, $crop_type, $type, $id) {

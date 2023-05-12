@@ -5,6 +5,7 @@ class fertilizer_product extends Controller
     private $fertilizer_product_model;
     private $resources_model;
     private $wishList_model;
+    private $notification_model;
     public function __construct()
     {
         $this->fertilizer_product_model = $this->model('M_fertilizer_product');
@@ -101,13 +102,16 @@ class fertilizer_product extends Controller
     public function view_individual_product(){
         $id = $_GET['product_id'];
         $content = $this->fertilizer_product_model->view_individual_product($id);
-        if (is_object($content)) {
-            $title = $content->product_name;
-        } else {
-            $title = "Unknown Product";
-        }
+        $user_id = $content->created_by;
+        // var_dump($user_id); die();
+        $feedback = $this->fertilizer_product_model->get_feedback_details($user_id);
+        
+        $title = $content->product_name;
+        
+        // var_dump($content); die();
         $crop_type = $content->crop_type;
         $type = $content->type;
+
         $similar = $this->fertilizer_product_model->show_similar($title,$crop_type,$type,$id);
          
         if(isset($_SESSION['user_id'])){
@@ -135,7 +139,8 @@ class fertilizer_product extends Controller
             'similar' => $similar,
             'owner_id'=> $product_owner_id,
             'no_of_cart_item' => $no_of_cart_item,
-            'wishlist_items' => $wishlist_items
+            'wishlist_items' => $wishlist_items,
+            'feedback' => $feedback
         ];
         
         $this->view('Users/component/individual_item',$data);

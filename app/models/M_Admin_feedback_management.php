@@ -9,12 +9,13 @@
     public function getFeedbackDetails($feed_type, $limit, $offset){
         if(isset($feed_type) && !empty($feed_type)){
             if ($feed_type == 'pending_feed'){  
-                
+                 
                 $this->db->query("SELECT COUNT(*) as total_rows FROM feedback  WHERE feed_status = 0");
                 $row_count = $this->db->single()->total_rows;
-                $this->db->query("SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name, sender.email AS sender_email, sender.first_name as firstname FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id JOIN user AS sender ON feedback.sender_id = sender.user_id WHERE feedback.feed_status = 0 LIMIT $limit OFFSET $offset");
-     
+                $this->db->query("SELECT feedback.*, user.first_name AS receiver_name, sender.email AS sender_email, sender.first_name as firstname FROM feedback JOIN user ON feedback.receiver_id = user.user_id JOIN user AS sender ON feedback.sender_id = sender.user_id WHERE feedback.feed_status = 0 LIMIT $limit OFFSET $offset");
+                // var_dump($row_count); die();
                 $result=$this->db->resultSet();
+                // var_dump($result); die();
                 return array('rows' => $result, 'row_count' => $row_count);
             }
             
@@ -39,9 +40,10 @@
         }else{
             $this->db->query("SELECT COUNT(*) as total_rows FROM feedback  WHERE feed_status = 0");
                 $row_count = $this->db->single()->total_rows;
-                $this->db->query("SELECT feedback.*, admin.first_name AS admin_first_name, user.first_name AS receiver_name, sender.email AS sender_email, sender.first_name as firstname FROM feedback JOIN user AS admin ON feedback.admin_id = admin.user_id JOIN user ON feedback.receiver_id = user.user_id JOIN user AS sender ON feedback.sender_id = sender.user_id WHERE feedback.feed_status = 0 LIMIT $limit OFFSET $offset");
-     
+                $this->db->query("SELECT feedback.*, user.first_name AS receiver_name, sender.email AS sender_email, sender.first_name as firstname FROM feedback JOIN user ON feedback.receiver_id = user.user_id JOIN user AS sender ON feedback.sender_id = sender.user_id WHERE feedback.feed_status = 0 LIMIT $limit OFFSET $offset");
+                
                 $result=$this->db->resultSet();
+                var_dump($result); die();
                 return array('rows' => $result, 'row_count' => $row_count);
     }
 }

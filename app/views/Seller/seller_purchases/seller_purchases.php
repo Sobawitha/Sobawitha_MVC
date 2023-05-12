@@ -4,26 +4,8 @@
 <?php require APPROOT.'/views/Seller/Seller/seller_Sidebar.php'?>
 
 
-<dialog  id="rating_popup">
-<i class="fa-solid fa-xmark" id="close" ></i>
-<span class="user_icon"><i class="fa-solid fa-user-pen"></i></span>
-<i class="fa-solid x-mark" id="close"></i>
-<h4>Rate your experince</h4>
-<form method="POST" action="<?php echo URLROOT ?>/seller_purchses/review_product">
-<div class="stars">
-  <i class="fa-regular fa-star" data-value="1" id="star"></i>
-  <i class="fa-regular fa-star" data-value="2" id="star"></i>
-  <i class="fa-regular fa-star" data-value="3" id="star"></i>
-  <i class="fa-regular fa-star" data-value="4" id="star"></i>
-  <i class="fa-regular fa-star" data-value="5" id="star"></i>
-</div>
 
-<br><br>
-<textarea placeholder="Add a comment to your rating..." id="rating_comment"></textarea>
-<br><br>
-<button type="submit" id="rating_submit">Send Rating</button>
-</form>
-</dialog>
+
 
 
 <body >
@@ -35,7 +17,7 @@
 
         <div class="section_2">
 
-        <h3>Recently sold items</h3>
+        <h3>Recently Purchased items</h3>
         <hr>
 
         <span class="filter_section">
@@ -71,7 +53,7 @@
                         <th>Quantity</th>
                         <th>Date</th>
                         <th>Price(Per item)</th>
-                        <th></th>
+                        <th>Actions</th>
                 </tr>
 
                 <?php foreach($data['purchase_list'] as $purchase):?>
@@ -85,8 +67,58 @@
                                 <th><span class="date" id="row_data"><?php $timestamp = strtotime($purchase->created_at);$date = date('Y-m-d', $timestamp); echo $date ?></span></th>
                                 <th><span class="price" id="row_data"><?php echo  $purchase-> price?></span></th>
                                 <th id="review">
-                                <i class="fa-solid fa-handshake" onclick="rating_popup_open(<?php echo $purchase-> purchase_id ?>)"></i>&nbsp;&nbsp;Review
-                                </td>
+                                        
+                                <?php if($purchase->review_status == 0){ ?>
+                                <button type="button" id="seller_review_btn"  onclick="rating_popup_open(<?php echo $purchase->order_id ?>)"><i class="fa-solid fa-handshake"></i>&nbsp;&nbsp;Review</button>
+                                <?php }else{ ?>
+                                <span class="feed_left">Feedback Left</span>
+                                <?php } ?>
+                                
+                                <dialog id="rating_popup">
+                                <i class="fa-solid fa-xmark" id="close"></i>
+                                <span class="user_icon"><i class="fa-solid fa-user-pen"></i></span>
+                                <h4>Rate your experience</h4>
+                                <form method="POST">
+                                        <input type="hidden" name="order_id" value="<?php echo $purchase->order_id ?>">
+                                        
+                                        <div class="stars">
+                                        <i class="fa-regular fa-star" data-value="1" id="star"></i>
+                                        <i class="fa-regular fa-star" data-value="2" id="star"></i>
+                                        <i class="fa-regular fa-star" data-value="3" id="star"></i>
+                                        <i class="fa-regular fa-star" data-value="4" id="star"></i>
+                                        <i class="fa-regular fa-star" data-value="5" id="star"></i>
+                                        </div>
+
+                                        <input type="hidden" name="selected_stars" id="selected_stars" value="1">
+
+                                        <br><br>
+                                        <div class="annonymous_rating">
+                                        <input type="radio" name="rating_user" value="1" id="anonymous_rating" checked>
+                                        <label for="anonymous_rating">Anonymous</label>
+                                        </div>
+
+                                        <textarea placeholder="Add a comment to your rating..." name="rating_comment" id="rating_comment"></textarea>
+                                        <br><br>
+
+                                        <br><br>
+                                        <button type="submit" id="rating_submit" formaction="<?php echo URLROOT ?>/seller_purchase/review_product">Send Rating</button>
+                                </form>
+                                </dialog>
+
+                                <script>
+                                const radioBtn = document.querySelector('#anonymous_rating');
+
+                                        radioBtn.addEventListener('click', () => {
+                                        radioBtn.checked = !radioBtn.checked;
+                                        });
+
+
+
+                                
+                                </script>
+                        
+                        
+                           </td>
                         </div>
                 </tr>
 
@@ -115,25 +147,49 @@
 <script>
         function rating_popup_open(id){
                 const rating_popup = document.getElementById('rating_popup')
-                document.getElementById('close').addEventListener('click',() => rating_popup.close());
+                document.getElementById('close').addEventListener('click',() => {
+                rating_popup.close();
+                window.location.reload();
+                });
                 rating_popup.showModal();
         }
 
-        const stars = document.querySelectorAll(".stars i");
+        
 
-        stars.forEach(star => {
+        const stars = document.querySelectorAll(".stars i");
+        const selectedStars = document.getElementById("selected_stars");
+
+        stars.forEach((star, index) => {
         star.addEventListener("click", () => {
-        star.classList.toggle("checked");
-        if (star.classList.contains("checked")) {
-        star.classList.replace("fa-regular", "fa-solid");
-        } else {
-        star.classList.replace("fa-solid", "fa-regular");
+                const value = star.dataset.value;
+                selectedStars.value = value;
+
+                stars.forEach((s, i) => {
+                if (i < value) {
+                        s.classList.add("checked");
+                        s.classList.replace("fa-regular", "fa-solid");
+                } else {
+                        s.classList.remove("checked");
+                        s.classList.replace("fa-solid", "fa-regular");
+                }
+                });
+        });
+
+        // Add "checked" class to the first star by default
+        if (index === 0) {
+                star.classList.add("checked");
+                star.classList.replace("fa-regular", "fa-solid");
         }
         });
-        });
 
+
+
+         
+       
 
 </script>
+
+
 
 
 

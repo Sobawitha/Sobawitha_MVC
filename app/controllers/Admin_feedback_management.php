@@ -32,8 +32,6 @@
             
             if(!empty($filter_type)){
             $feed = $this->adminFeedMgntModel->getFeedbackDetails($_SESSION['radio_admin_feed'], $records_per_page, $offset);
-            }else{
-              $feed = $this->adminFeedMgntModel->getFeedbackDetails('', $records_per_page, $offset);
             }
 
             $total_records = $feed['row_count'];

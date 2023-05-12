@@ -133,11 +133,12 @@
   
   #rating_popup{
      width:300px;
-    height:380px;
+    height:450px;
     margin-top:150px;
     text-align: center;
     padding:20px;
     border: none;
+    border-radius: 10px;
   }
 
   #rating_comment{
@@ -185,4 +186,20 @@
   .fa-star.checked {
     color: salmon;
   }
+
+  .annonymous_rating{
+    margin-right:150px;
+    padding-bottom: 10px;
+  }
+
+  
+  /* popup ends */
+
+
+  #seller_review_btn{
+    background-color:transparent;
+    border:none;
+    cursor:pointer;
+  }
+
   
