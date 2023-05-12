@@ -19,14 +19,14 @@
             $_SESSION['num_per_page'] = $num_per_page;
             $tot_income = $this->supplier_dashboard_model->calculate_total($_SESSION['user_id'])->total_income;
             $no_of_complaint = $this->supplier_dashboard_model->get_no_of_complaints($_SESSION['user_id'])->num_complaint;
-            $no_of_ongoing_order = $this->supplier_dashboard_model->get_no_of_ongoing_order($_SESSION['user_id'])->ongoing_orders;
+            $no_of_wishlist_items = $this->supplier_dashboard_model->get_no_of_wishlist_item($_SESSION['user_id'])->wishlist_item_count;
             $no_of_complete_order = $this->supplier_dashboard_model->get_no_of_complete_order($_SESSION['user_id'])->complete_orders;
             $stock_details = $this->supplier_dashboard_model->get_stock_details($start_from , $num_per_page);
             $no_of_orders = $this->supplier_dashboard_model->get_no_of_products()->no_of_products;
             $data = [
                 'tot_income' => $tot_income,
                 'no_of_complaint' => $no_of_complaint,
-                'ongoing_order' => $no_of_ongoing_order,
+                'wishlist_items' => $no_of_wishlist_items,
                 'complete_order' => $no_of_complete_order,
                 'stock_details' => $stock_details,
                 'no_of_products' => $no_of_orders
