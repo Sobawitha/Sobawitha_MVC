@@ -189,8 +189,11 @@ for (let i = 0; i < incrementButtons.length; i++) {
            val++;
            console.log(val);
            incrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
+           
+           total =  (parseInt(total_price.innerText) + price);
+            total_price.textContent = total.toFixed(2);
            price = val*price;
-      
+           
            incrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
 
 
@@ -238,6 +241,7 @@ for (let i = 0; i < incrementButtons.length; i++) {
        val--;
        console.log(val);
        decrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
+       total_price.innerText =(parseInt(total_price.innerText) - price);
        price = val*price;
       
        decrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;

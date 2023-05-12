@@ -246,23 +246,23 @@ public function createOrder()
 
 }
 
-public function cashOnlyOrder()
-{
+// public function cashOnlyOrder()
+// {
    
-   $orderData =  $this->cartModel->getAllItems();
+//    $orderData =  $this->cartModel->getAllItems();
 
-   if($this->orderModel->createCOD($orderData))
-     { 
+//    if($this->orderModel->createCOD($orderData))
+//      { 
                    
-                    $this->cartModel->clearAll();
+//                     $this->cartModel->clearAll();
                     
-                    $_SESSION['success_msg'] = "order placed successfully";
-                    redirect('pages/home');
-     }        
-     $_SESSION['failure_msg'] = "order failed";; 
-     redirect('pages/home');
+//                     $_SESSION['success_msg'] = "order placed successfully";
+//                     redirect('pages/home');
+//      }        
+//      $_SESSION['failure_msg'] = "order failed";; 
+//      redirect('pages/home');
 
-}
+// }
 
 
 public function add_to_cart_from_individual_page()

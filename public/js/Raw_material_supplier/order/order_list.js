@@ -43,7 +43,11 @@ fetch(`http://localhost/Sobawitha/purchase/getOrderDetails/1`, {
         <td class="unit"><span class="value">${order.order_id}</span></td>
         <td><span class="price">${order.date}</span></td>
         <td>
-        <button class = "action_button" onclick = "rating_popup()">Review</button>          
+        <?php if(1){ ?>
+          <button type="button"  class = "action_button" id="seller_review_btn"  onclick="rating_popup_open(${order.order_id})"><i class="fa-solid fa-handshake"></i>&nbsp;&nbsp;Review</button>
+          <?php }else{ ?>
+          <span class="feed_left">Feedback Left</span>
+          <?php } ?>         
         <button class = "action_button"><a href="${URL}" >View Order</a></button>
         </td>
       </tr>
@@ -160,7 +164,13 @@ console.log(document.querySelector('.search_content input[type="text"]'));
         <td class="unit"><span class="value">${order.order_id}</span></td>
         <td><span class="price">${order.date}</span></td>
         <td>
-          <button class = "action_button"  onclick = "rating_popup()">Review</a></button>          
+         
+        <?php if($purchase->review_status == 0){ ?>
+          <button type="button"  class = "action_button" id="seller_review_btn"  onclick="rating_popup_open(${order.order_id})"><i class="fa-solid fa-handshake"></i>&nbsp;&nbsp;Review</button>
+          <?php }else{ ?>
+          <span class="feed_left">Feedback Left</span>
+          <?php } ?>
+
           <button class = "action_button"><a href="${URL}" >View Order</a></button>
         </td>
       </tr>

@@ -5,7 +5,7 @@
 .body{
     display:grid;
     grid-template-columns:20% 60% 20%;
-    height:100%;
+    min-height:600px;
     padding-top:75px;
     
 }

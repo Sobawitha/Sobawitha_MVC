@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/individual_item.css">
-</link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/individual_item.css"></link>
 <script src="<?php echo URLROOT ?>/js/Users/component/individual_item.js" defer></script>
 
 <script >
@@ -33,7 +32,7 @@ function checkout() {
 
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>&quantity={userInput}';
+    window.location.href = '<?php echo URLROOT ?>/cart/checkout_from_individual_page';
   } else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
@@ -207,7 +206,7 @@ function checkout() {
       <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
       <br>
       <button class="checkout" onclick="checkout()">checkout</button><br>
-      <button class="paypal" onclick = "placeanorder()" >Place an Order</button><br>
+ 
       <i class="fa-solid fa-bag-shopping" id="bag"></i>  
     </div>
   </dialog>
@@ -446,13 +445,12 @@ foreach($data['wishlist_items'] as $wishlist_item)
   if($data['no_of_cart_item'] ==0 ){
     ?>
     
-      <button id="buy_now_btn" onclick="event.preventDefault()pay_popup(<?php echo $content->price ?>)">Buy Now</button>
+      <button id="buy_now_btn" onclick="event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button>
     <?php
   }else{
     ?>
-      <!-- <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a> -->
-      <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
-      <button id="buy_now_btn" onclick = "event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button></a>
+    
+      <button id="buy_now_btn"   type = "submit">Buy Now</button>
 
     <?php
   }

@@ -1,7 +1,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
 <link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/footer.css"></link>
-<script src="../js/Users/component/footer.js"></script>
+<script src="../js/Users/component/footer.js" defer></script>
 
 <div class="footer_section">
     <div class="footer_content">
@@ -52,21 +52,7 @@
                     </form>
                     </dialog>
 
-                <script>
-                    const openDialogBtn = document.querySelector('#openDialog');
-                    const dialog = document.querySelector('#helpDialog');
-
-                    openDialogBtn.addEventListener('click', function() {
-                    dialog.showModal();
-                    });
-
-                    dialog.querySelector('.dialog-close').addEventListener('click', function() {
-                    dialog.close();
-                    });
-
-
-
-                </script>
+              
 
 
 

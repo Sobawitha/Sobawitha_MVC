@@ -11,11 +11,12 @@ class M_order
 
     public function createCOD($orderdata)
     {
-        
+        echo "inside createCOD";
+        die();
         $this->db->beginTransaction();
 
-        $this->db->query("INSERT INTO buyer_orders(cust_id,payment_type) VALUES(:cust_id,:payment_type)");
-        $this->db->bind(":payment_type","COD");
+        $this->db->query("INSERT INTO buyer_orders(cust_id) VALUES(:cust_id)");
+       
       
         $this->db->bind(':cust_id', $_SESSION['user_id']);
 
@@ -121,10 +122,10 @@ class M_order
          
         
         // Insert a record into the `order_products` table
-        $this->db->query("INSERT INTO buyer_orders(cust_id,payment_type) VALUES(:cust_id,:payment_type)");
+        $this->db->query("INSERT INTO buyer_orders(cust_id,status) VALUES(:cust_id,1)");
 
         $this->db->bind(':cust_id', $_SESSION['user_id']);
-        $this->db->bind(':payment_type',"Online");
+        
         $result = $this->db->execute();
         if (!$result) {
             $this->db->rollBack();

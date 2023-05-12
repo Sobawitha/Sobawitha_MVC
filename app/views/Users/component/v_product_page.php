@@ -20,6 +20,25 @@ options.forEach((option) => {
   });
 });
 </script> -->
+<script>
+    function search() {
+    const searchTerm = document.querySelector('.search_content input[type]').value;
+    if (searchTerm) {
+      const regex = new RegExp(searchTerm, 'gi');
+      const elements = document.querySelectorAll('body *');
+      for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) {
+          const text = element.childNodes[0].textContent;
+          if (text.match(regex)) {
+            const highlightedText = text.replace(regex, '<span class="highlight">$&</span>');
+            element.innerHTML = highlightedText;
+          }
+        }
+      }
+    }
+  }
+</script>
 
 <div class="nav">
             <nav>
@@ -109,18 +128,8 @@ options.forEach((option) => {
         </div>
         </div>
 
-        <hr class="filter_hr">
+      
 
-        <div class="filter_type_4">
-            <span class="title">Quantity</span><br>
-            <div class="all_quantity">
-            <label > <input type="radio"  name="quantity" value="1">5 kg or more</label><br>
-            <label > <input type="radio"  name="quanitity" value="2">1kg to 5kg</label><br>
-            <label > <input type="radio"  name="quanitity" value="3">Below 5kg</label><br>
-            <label > <input type="radio"  name="quanitity" value="4">Innovations</label><br>
-            
-            </div>
-        </div>
 
         <hr class="filter_hr">
 
@@ -150,10 +159,10 @@ options.forEach((option) => {
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" " required/></span>
+                    <span class="search_cont" ><input type="text" name="search_text" placeholder=" " required/></span>
                     
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                    <button type="submit" class="search_btn"  onclick = "search()"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
 
                     
                     </div>
@@ -329,6 +338,6 @@ elements.forEach(element => {
 
 
 
- 
 
-</script>
+
+ 
