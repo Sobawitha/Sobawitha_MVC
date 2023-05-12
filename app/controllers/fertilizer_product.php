@@ -5,10 +5,12 @@ class fertilizer_product extends Controller
     private $fertilizer_product_model;
     private $resources_model;
     private $wishList_model;
+    private $notification_model;
     public function __construct()
     {
         $this->fertilizer_product_model = $this->model('M_fertilizer_product');
         $this->wishList_model = $this->model('M_wishList');
+        $this->notification_model = $this->model('M_notifications');
     }
 
     //save comment
@@ -100,13 +102,16 @@ class fertilizer_product extends Controller
     public function view_individual_product(){
         $id = $_GET['product_id'];
         $content = $this->fertilizer_product_model->view_individual_product($id);
-        if (is_object($content)) {
-            $title = $content->product_name;
-        } else {
-            $title = "Unknown Product";
-        }
+        $user_id = $content->created_by;
+        // var_dump($user_id); die();
+        $feedback = $this->fertilizer_product_model->get_feedback_details($user_id);
+        
+        $title = $content->product_name;
+        
+        // var_dump($content); die();
         $crop_type = $content->crop_type;
         $type = $content->type;
+
         $similar = $this->fertilizer_product_model->show_similar($title,$crop_type,$type,$id);
          
         if(isset($_SESSION['user_id'])){
@@ -134,7 +139,8 @@ class fertilizer_product extends Controller
             'similar' => $similar,
             'owner_id'=> $product_owner_id,
             'no_of_cart_item' => $no_of_cart_item,
-            'wishlist_items' => $wishlist_items
+            'wishlist_items' => $wishlist_items,
+            'feedback' => $feedback
         ];
         
         $this->view('Users/component/individual_item',$data);
@@ -174,7 +180,7 @@ class fertilizer_product extends Controller
 
 
      function add_to_cart(){
-        $quantity =1; /*change */
+        $quantity =$_POST['quantity']; /*change */
         $product_id = $_GET['product_id'];
         $data = [
           'product_id' => $_GET['product_id'],
@@ -188,7 +194,7 @@ class fertilizer_product extends Controller
      }
 
      function add_to_cart_from_individual_page(){
-        $quantity =2; /*change */
+        $quantity =$_POST['quantity'];; 
         $product_id = $_GET['product_id'];
         $user_id = $_SESSION['user_id'];
         $current_status = $this->fertilizer_product_model->check_similer_item($product_id,$user_id)->count_row;
@@ -209,34 +215,39 @@ class fertilizer_product extends Controller
      }
 
 
-     public function load_cash_on_deliver_page(){
-        $product_id = $_GET['product_id'];
-        $order_id = $this->fertilizer_product_model->find_order_id()->order_id;
-        $quantity = 4;
-        $price = $this->fertilizer_product_model->find_price_from_id($product_id)->product_price;
-        $tot_bill = $price * $quantity;
-        $user_detail = $this->fertilizer_product_model->get_user_detail();
-        $data =[
-            'user_detail' => $user_detail,
-            'tot_bill' => $tot_bill,
-            'order_id' => $order_id
-        ];
-        $this->view('Users/component/cod_order',$data);
-     }
+    //  public function load_cash_on_deliver_page(){
+    //     $product_id = $_GET['product_id'];
+    //     $order_id = $this->fertilizer_product_model->find_order_id()->order_id;
+    //     $quantity = 4;
+    //     $price = $this->fertilizer_product_model->find_price_from_id($product_id)->product_price;
+    //     $tot_bill = $price * $quantity;
+    //     $user_detail = $this->fertilizer_product_model->get_user_detail();
+    //     $data =[
+    //         'user_detail' => $user_detail,
+    //         'tot_bill' => $tot_bill,
+    //         'order_id' => $order_id
+    //     ];
+    //     $this->view('Users/component/cod_order',$data);
+    //  }
 
-     public function confirm_payment(){
-        $product_id = $_GET['product_id'];
-        $order_id = $this->fertilizer_product_model->find_order_id()->order_id;
-        $this->fertilizer_product_model->update_cache_on_delivery_table($order_id);
-        $this->fertilizer_product_model->update_order_state($order_id);
-        redirect('fertilizer_product/load_cash_on_deliver_page?product_id='.$product_id); /*load buyer view purchses */
-     }
+    //  public function confirm_payment(){
+    //     $product_id = $_GET['product_id'];
+    //     $order_id = $this->fertilizer_product_model->find_order_id()->order_id;
+    //     $this->fertilizer_product_model->update_cache_on_delivery_table($order_id);
+    //     $this->fertilizer_product_model->update_order_state($order_id);
+    //     redirect('fertilizer_product/load_cash_on_deliver_page?product_id='.$product_id); /*load buyer view purchses */
+    //  }
 
       /*fertilizer_order_list */
       function view_orders(){
         $order_list = $this-> fertilizer_product_model -> list_order_deatils($_SESSION['user_id']);
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         $data =[
             'order_list' => $order_list,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
+            
         ];
 
         $this->view('Seller/Seller_order/v_seller_order_list',$data);

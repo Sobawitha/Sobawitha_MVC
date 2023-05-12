@@ -1,8 +1,12 @@
 <?php
 
 class blog_post extends Controller {
+
+    private $notification_model;
     public function __construct(){
         $this-> blog_post_model =$this->model('M_blog_post');
+        $this->notification_model = $this->model('M_notifications');
+        
     }
 
     public function create_posts(){
@@ -85,6 +89,8 @@ class blog_post extends Controller {
     public function display_all_blogposts(){
 
     if(isset($_SESSION['user_id'])){
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
             if(isset($_POST['search_text'])){
@@ -97,14 +103,18 @@ class blog_post extends Controller {
                     $data = [
                         'blogpost' => $blogpost,
                         'search_text' => $search_cont,
-                        'search_result_message'=>''
+                        'search_result_message'=>'',
+                        'no_of_notifications' =>$no_of_notifications,
+                        'notifications' => $notifications
                     ];
                     $this->view('Agri_officer/Blog_post/v_create_blog',$data);
                 }
                 else{
                     $data = [
                         'search_result_message'=>'match not found...',
-                        'search_text' =>$search_cont 
+                        'search_text' =>$search_cont ,
+                        'no_of_notifications' =>$no_of_notifications,
+                        'notifications' => $notifications
                     ];
                     $this->view('Agri_officer/Blog_post/v_create_blog',$data);
                 }    
@@ -114,7 +124,9 @@ class blog_post extends Controller {
                 $data=[
                     'blogpost' => $blogpost,
                     'search_text' => 'Search by key-word',
-                    'search_result_message'=>''
+                    'search_result_message'=>'',
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                 ];
                 $this->view('Agri_officer/Blog_post/v_create_blog',$data);
             }
@@ -124,7 +136,9 @@ class blog_post extends Controller {
             $data=[
                 'blogpost' => $blogpost,
                 'search_text' => 'Search by key-word',
-                'search_result_message'=>''
+                'search_result_message'=>'',
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
             ];
             $this->view('Agri_officer/Blog_post/v_create_blog',$data);
         }

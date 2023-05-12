@@ -218,6 +218,7 @@ function checkout() {
 
 <?php
 $content = $data['adcontent'];
+$feedback = $data['feedback'];
 ?>
 
 <div class="body">
@@ -347,14 +348,14 @@ foreach($data['wishlist_items'] as $wishlist_item)
         <br><br>
         <span class="title_4">Seller Rating</span><br>
 
-        <?php $avg_rating = round($content->avg_rating); ?>
+        <?php $avg_rating = round($feedback->avg_rating); ?>
         <?php 
                 for ($i = 1; $i <= 5; $i++) {
                 $checked = ($i <= $avg_rating) ? 'checked' : '';
                 echo '<span class="fas fa-star ' . $checked . ' "></span>';
                 }
                 ?>           
-        <p style=font-size:14px;><?php echo $content -> avg_rating ?>  average based on <span class="num_of_reviews"><?php echo $content-> total_feedback_count ?></span> reviews.</p><br>
+        <p style=font-size:14px;><?php echo ($feedback->avg_rating == 0) ? "0.00" :  number_format($feedback->avg_rating, 2); ?> average based on <span class="num_of_reviews"><?php echo $feedback-> total_feedback_count ?></span> reviews.</p><br>
         <hr style="border:0.1px solid #f1f1f1"><br>
 
         <div class="row">
@@ -363,55 +364,55 @@ foreach($data['wishlist_items'] as $wishlist_item)
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-5" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_5_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-5" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_5_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_5_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_5_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">4 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-4" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_4_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-4" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_4_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_4_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_4_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">3 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-3" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_3_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-3" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_3_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_3_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_3_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">2 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-2" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_2_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-2" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_2_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_2_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_2_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">1 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-1" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_1_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-1" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_1_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_1_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_1_count ?></div>
           </div>
         </div>
       </div>
@@ -435,9 +436,9 @@ foreach($data['wishlist_items'] as $wishlist_item)
       <span id="existing_quantity_value"><?php echo $content->quantity; ?></span> available
     </span>
     <br>
-    <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
-    <span id="quantity_error" style="color:red;"></span>
   </div>
+  <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
+    <span id="quantity_error" style="color:red;"></span>
 </div>
 
 <div class="buttons">
@@ -449,8 +450,9 @@ foreach($data['wishlist_items'] as $wishlist_item)
     <?php
   }else{
     ?>
-    
-      <button id="buy_now_btn"   type = "submit">Buy Now</button>
+      <!-- <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a> -->
+      <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
+      <button id="buy_now_btn" type ="submit">Buy Now</button></a>
 
     <?php
   }
@@ -458,7 +460,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
 <button id="add_to_cart_btn"  type = "submit">Add to Cart</button>
 
       <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
-      <!-- <button type="submit" id="add_to_cart_btn" data-product-id="">Add to Cart</button> -->
+      <!-- <button type="submit" id="add_to_cart_btn" data-product-id="<?php echo $content->Product_id ?>">Add to Cart</button> -->
 </form>
 <?php
 }else{?>
@@ -471,20 +473,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
   
 </div>
 
-</div>
-</div>
-
-  <?php require APPROOT . '/views/Users/component/footer.php' ?>
-
-
-
-<dialog id="my-dialog">
-  <p>Item Successfully Added to the Wishlist</p>
-  <button id="dialog-close-button">Close</button>
-</dialog>
-
-
-
+<!-- for quantity   -->
 <script>
  const plusButton = document.querySelector('.plus_button');
 const minusButton = document.querySelector('.minus_button');
@@ -504,19 +493,27 @@ plusButton.addEventListener('click', () => {
   console.log(quantity);
   console.log(available_quantity);
   quantity++;
+  //quantityInput.value = quantityInput.value +1;
   if(quantity>available_quantity){
     quantityInput.style.color="red";
+    document.getElementById("errorMsg").style.display = "block";
   }
   else{
     quantityInput.value = quantity;
+    quantityInput.style.color="black";
+    document.getElementById("errorMsg").style.display = "none";
   }
 });
 
 minusButton.addEventListener('click', () => {
   let quantity = parseInt(quantityInput.value);
   quantity--;
+  quantityInput.style.color="black";
+  document.getElementById("errorMsg").style.display = "none";
   if (quantity < 1) {
     quantity = 1;
+    quantityInput.style.color="red";
+    document.getElementById("errorMsg").style.display = "block";
   }
   quantityInput.value = quantity;
 });
@@ -557,9 +554,6 @@ minusButton.addEventListener('click', () => {
             </div>
           <?php endif; ?>
       </div>
-
-
-
           <!-- comment_section -->
         <div id="toggle_section_2" class="toggle_section">
 
@@ -575,10 +569,8 @@ minusButton.addEventListener('click', () => {
                     </div>
             </form>
 
-
             <div class="comment_reply">
             <?php
-
               foreach($data['comments'] as $comment):?>
                 <span id="user-<?php echo $comment->comment_id?>" class="user"><?php echo ucfirst(($comment->commented_by_full_name[0]))?></span> 
                 <div class="display_comment">
@@ -630,8 +622,9 @@ minusButton.addEventListener('click', () => {
                 <hr>
                 <br>
               <?php endforeach;?>
-            </div>  
-          </div>
+            </div> 
+            </div> 
+          
 
           <div id="toggle_section_3" class="toggle_section">
           <?php $product_id = $_GET['product_id']?> <!--only for testing-->

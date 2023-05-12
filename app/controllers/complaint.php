@@ -2,9 +2,11 @@
 
 class complaint extends Controller
 {
+    private $notification_model;
     public function __construct()
     {
         $this->complaint_model = $this->model('M_complaint');
+        $this->notification_model = $this->model('M_notifications');
     }
 
     public function contact_us(){
@@ -68,6 +70,8 @@ class complaint extends Controller
 
     public function display_all_complaint(){
         if(isset($_SESSION['user_id'])){
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
             if(isset($_POST['search_text'])){
@@ -80,14 +84,18 @@ class complaint extends Controller
                     $data = [
                         'complaint' => $complaint,
                         'search_text' => $search_cont,
-                        'search_result_message'=>''
+                        'search_result_message'=>'',
+                        'no_of_notifications' =>$no_of_notifications,
+                        'notifications' => $notifications
                     ];
                     $this->view('Users/complaint/v_complaint', $data);
                 }
                 else{
                     $data = [
                         'search_result_message'=>'match not found...',
-                        'search_text' =>$search_cont 
+                        'search_text' =>$search_cont,
+                        'no_of_notifications' =>$no_of_notifications,
+                        'notifications' => $notifications 
                     ];
                     $this->view('Users/complaint/v_complaint', $data);
                 }    
@@ -97,7 +105,9 @@ class complaint extends Controller
                 $data=[
                     'complaint' => $complaint,
                     'search_text' => 'Search by key-word',
-                    'search_result_message'=>''
+                    'search_result_message'=>'',
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                 ];
                 $this->view('Users/complaint/v_complaint', $data);
             }
@@ -107,7 +117,9 @@ class complaint extends Controller
             $data=[
                 'complaint' => $complaint,
                 'search_text' => 'Search by key-word',
-                'search_result_message'=>''
+                'search_result_message'=>'',
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
             ];
             $this->view('Users/complaint/v_complaint', $data);
         }

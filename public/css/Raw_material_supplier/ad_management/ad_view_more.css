@@ -1002,6 +1002,16 @@
   margin-left: 160px;
 }
 
+#buy_now_btn_when_not_having_cart_item{
+  padding:15px 15px 15px 15px;
+  color:white;
+  font-weight: bold;
+  font-size:15px;
+  background-color: #dfa470;
+  border:none;
+  cursor:pointer;
+}
+
 #buy_now_btn{
   width:100px;
   height:50px;
@@ -1012,6 +1022,8 @@
   border:none;
   cursor:pointer;
 }
+
+
 
 #add_to_cart_btn{
   width:100px;
@@ -1216,7 +1228,7 @@
 }
 
 dialog button:hover {
-  background-color: #3e8e41;
+  background-color: #86735a;
 }
 
 #my-dialog {
@@ -1240,7 +1252,7 @@ dialog button:hover {
 #dialog-close-button {
   display: block;
   margin: 0 auto;
-  background-color: #0077ff;
+  background-color: #0b0d10;
   border: none;
   border-radius: 5px;
   color: #ffffff;
@@ -1252,11 +1264,11 @@ dialog button:hover {
 }
 
 #dialog-close-button:hover {
-  background-color: #005ce6;
+  background-color: #13161a;
 }
 
 #open-dialog-button {
-  background-color: #0077ff;
+  background-color: #1a1e24;
   border: none;
   border-radius: 5px;
   color: #ffffff;
@@ -1267,6 +1279,6 @@ dialog button:hover {
 }
 
 #open-dialog-button:hover {
-  background-color: #005ce6;
+  background-color: #1d1f22;
 }
 
