@@ -536,5 +536,90 @@ a{
     transform: translateX(-50%);
     font-size: 16px;
     z-index: 9999;
+    width:100px;
+    height:200px;
+ }
+  
+
+ #thank_you_dialog_box{
+    border: none;
+    padding: 0;
+    border-radius: 10px;
+    margin-left:30%;
+    margin-top:8%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    width:500px;
+    z-index: 10000;
+    padding:60px 50px;
+    text-align: center;
+    transition: 1s;
   }
   
+  #thank_you_dialog_box .fas{
+
+
+   color: #a64452 ;
+  }
+  #thank_you_dialog_box::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+  }
+  
+  #gift{
+    font-size:50px;
+    color:rgb(39, 87, 87);
+  }
+  
+  #success_button{
+    background-color: rgb(39, 87, 87);
+    color:white;
+    font-size:15px;
+    text-align:center;
+    width:250px;
+    height:50px;
+    cursor:pointer;
+  }
+  
+  #failure_button{
+    background-color:#a64452 ;
+    color:white;
+    font-size:15px;
+    text-align:center;
+    width:250px;
+    height:50px;
+    cursor:pointer;
+  }
+  .thank{
+    font-weight:bold;
+    font-size:25px;
+  }
+  
+  .thank_discription{
+    font-size:14px;
+    font-weight:800px;
+    color:gray;
+  }
+  
+  #close{
+    padding:8px 10px 8px 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius:70px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    border:none;
+    transform:translate(300px, -70px);
+    cursor:pointer;
+  }
+  
+  #close_buy_dialog{
+    padding:8px 10px 8px 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius:70px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    border:none;
+    transform:translate(240px, -45px);
+    cursor:pointer;
+  }
+  
+  #billing_detail{
+    padding-left:15px;
+  }

@@ -93,7 +93,7 @@ foreach($data['cart'] as $cart):{
         <div class="section_3">
                 <div class="total_price_section">
                         <hr id="cart_toatal_section_hr">
-                        <span class="cart_total">Cart total <span class="total_value">Rs.<?php echo $sum ?></span></span><br>
+                        <span class="cart_total">Cart total<span class="total_value">Rs.<?php echo $sum;?></span></span><br>
                         <span class="discription">Shipping and taxes calculate at checkout.</span><br />
                         <input type="checkbox" name = "agree-terms" id  = "checkvalue" /><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br><br>
                         <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
@@ -190,8 +190,7 @@ for (let i = 0; i < incrementButtons.length; i++) {
            console.log(val);
            incrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
            
-           total =  (parseInt(total_price.innerText) + price);
-            total_price.textContent = total.toFixed(2);
+          updateTotal()
            price = val*price;
            
            incrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
@@ -241,7 +240,7 @@ for (let i = 0; i < incrementButtons.length; i++) {
        val--;
        console.log(val);
        decrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
-       total_price.innerText =(parseInt(total_price.innerText) - price);
+       updateTotal()
        price = val*price;
       
        decrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
@@ -529,6 +528,34 @@ else{
 
 }
 )
+
+function updateTotal() {
+  var orderElements = document.getElementsByClassName("order");
+  var totalSum = 0;
+
+  for (var i = 0; i < orderElements.length; i++) {
+    var orderElement = orderElements[i];
+
+    var priceElement = orderElement.querySelector(".price");
+    var price = parseFloat(priceElement.innerText);
+
+    var qtyElement = orderElement.querySelector(".input-qty");
+    var qty = parseInt(qtyElement.value);
+
+    var totPriceElement = orderElement.querySelector(".tot_price");
+    var totPrice = price * qty;
+    totPriceElement.innerText = totPrice.toFixed(2);
+
+    totalSum += totPrice;
+  }
+
+  var totalValueElements = document.querySelectorAll(".total_value");
+  for (var i = 0; i < totalValueElements.length; i++) {
+    var totalValueElement = totalValueElements[i];
+    totalValueElement.innerHTML = '';
+    totalValueElement.innerText = "Rs." + totalSum.toFixed(2);
+  }
+}
 
 
 </script>

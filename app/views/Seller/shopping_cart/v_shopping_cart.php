@@ -11,7 +11,7 @@ function checkout() {
 
         if (agreementCheckbox.checked) {
                 // Checkbox is checked, continue with checkout process
-                window.location.href = '<?php echo URLROOT ?>/supplier_ad_view/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+                window.location.href = '<?php echo URLROOT ?>/supplier_ad_view/checkout_from_seller_cart';
         } else {
                 // Checkbox is not checked, show an error message
                 //alert('Please agree to the terms and conditions before proceeding to checkout.');
@@ -132,6 +132,11 @@ function checkout() {
         quantityInputs[index].value = quantity;
     });
 });
+
+
+
+
+
 </script>
         </div>
     </div>

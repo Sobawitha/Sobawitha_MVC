@@ -229,7 +229,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
                                                 margin:0px;
                                                 padding:0px;">
     <div class="product_detail">
-        <span class="product_name"><?php echo  $product->product_name ?></span><br>
+        <span class="product_name"><?php echo strlen($product->product_name) > 20? substr($product->product_name, 0, 20) . '...' :  $product->product_name ?></span><br>
         <span class="owner"><?php echo $product->manufacturer ?></span>
     </div>
     </a>
