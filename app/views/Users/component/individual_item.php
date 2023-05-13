@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/individual_item.css">
-</link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/individual_item.css"></link>
 <script src="<?php echo URLROOT ?>/js/Users/component/individual_item.js" defer></script>
 
-<script>
+<script >
   /*pay popup */
+
 function pay_popup(price) {
   const existingQuantity = document.getElementById("existing_quantity_value").textContent;
   const quantity = parseInt(quantityInput.value);
@@ -24,13 +24,15 @@ function pay_popup(price) {
   }
 }
 
+
 function checkout() {
   const userInput = document.getElementById("quantity_input").value;
   const agreementCheckbox = document.querySelector('#terms-checkbox');
-  
+
+
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+    window.location.href = '<?php echo URLROOT ?>/cart/checkout_from_individual_page';
   } else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
@@ -177,16 +179,18 @@ function thanku_popup_close(){
 function checkout() {
   const userInput = document.getElementById("quantity_input").value;
   const agreementCheckbox = document.querySelector('#terms-checkbox');
-  
+  console.log(userInput);
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+    window.location.href = '<?php echo URLROOT ?>/cart/checkout_from_individual_page?product_id=<?php echo $_GET['product_id'] ?>&quantity='+userInput;
   } else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
     document.getElementById("terms_and_condition_check").style.display="block";
   }
 }
+
+
 
 </script>
 
@@ -202,7 +206,7 @@ function checkout() {
       <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
       <br>
       <button class="checkout" onclick="checkout()">checkout</button><br>
-      <button class="paypal" >Place an Order</button><br>
+ 
       <i class="fa-solid fa-bag-shopping" id="bag"></i>  
     </div>
   </dialog>
@@ -441,30 +445,32 @@ foreach($data['wishlist_items'] as $wishlist_item)
 <?php if($content->quantity > 0 ) { 
   if($data['no_of_cart_item'] ==0 ){
     ?>
-      <button id="buy_now_btn" type="submit" onclick="event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button>
+    
+      <button id="buy_now_btn" onclick="event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button>
     <?php
   }else{
     ?>
       <!-- <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a> -->
       <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
-      <button id="buy_now_btn" type="submit" onclick = "event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button></a>
+      <button id="buy_now_btn" type ="submit">Buy Now</button></a>
 
     <?php
   }
   ?>
-      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn" data-product-id = "<?php echo $content->Product_id ?>">Add to Cart</button></a>
+<button id="add_to_cart_btn"  type = "submit">Add to Cart</button>
 
       <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
       <!-- <button type="submit" id="add_to_cart_btn" data-product-id="<?php echo $content->Product_id ?>">Add to Cart</button> -->
-  </form>
-  <?php
-  }else{?>
-    <span class="not_available_msg">Not awailable now. </span><br><br>
-    <button id="buy_now_btn_disable">Buy Now</button>
-    <button id="add_to_cart_btn_disable">Add to Cart</button>
-  <?php
-  }
-  ?>
+</form>
+<?php
+}else{?>
+  <span class="not_available_msg">Not awailable now. </span><br><br>
+  <button id="buy_now_btn_disable">Buy Now</button>
+  <button id="add_to_cart_btn_disable">Add to Cart</button>
+<?php
+}
+?>
+  
 </div>
 
 <!-- for quantity   -->
@@ -473,6 +479,13 @@ foreach($data['wishlist_items'] as $wishlist_item)
 const minusButton = document.querySelector('.minus_button');
 const quantityInput = document.querySelector('input[name="quantity"]');
 const available_quantity = document.getElementById('existing_quantity');
+const quantity =  quantityInput.value;
+const productId  =  document.querySelector('input[type="hidden"]').value;
+const priceSpan = document.querySelector('.price');
+const priceText = priceSpan.textContent;  // "Rs. 750.00"
+const priceValue = priceText.replace(/[^0-9.]/g, '');  // "750.00"
+const price = parseFloat(priceValue);  // 750.00
+const name = document.querySelector('.title_2').textContent;
 
 plusButton.addEventListener('click', () => {
   let quantity = parseInt(quantityInput.value);

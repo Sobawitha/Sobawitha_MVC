@@ -58,11 +58,12 @@ else if($_SESSION['user_flag'] == 4){
           
 
 
-          <label><input type="checkbox"  name="types[]" value="Liquid">Liquid</label><br>
-          <label><input type="checkbox"  name="types[]" value="Solid">Solid</label><br>
-          <label><input type="checkbox"  name="types[]" value="Packets">Packets</label><br>
-          <label><input type="checkbox"  name="types[]" value="Bottles">Bottles</label><br>
-          
+        
+                <label> <input type="checkbox"  name="types[]" value="Liquid" <?php if(in_array('Liquid', $data['types'])) {echo "checked";} ?>>Liquid</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Solid" <?php if(in_array('Solid', $data['types'])) {echo "checked"; }?>>Solid</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Packet" <?php if(in_array('Packet', $data['types'])) {echo "checked";} ?>>Packet</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Bottles" <?php if(in_array('Bottles', $data['types'])) {echo "checked";} ?>>Bottles</label><
+         
       </div>
         </div>
         
@@ -76,16 +77,17 @@ else if($_SESSION['user_flag'] == 4){
             <label for="price" id="price"> <input type="radio" id="price" name="diss_type" value="price">Rs.2500.00 or less</label><br>
             <label for="price" id="price"> <input type="radio" id="price" name="diss_type" value="price">Rs.1000.00 or less</label><br> -->
             
+           
             <div class="field">
               <span>Min</span>
-              <input type="number"  name = "min_price" class="input-min" value="2500">
+              <input type="number"  name = "min_price" class="input-min" value="<?php if(isset($data['min_price'])){ echo $data['min_price'];} ?>">
             </div>
             <div class="separator">
                 -
             </div>
             <div class="field">
              <span>Max</span>
-             <input type="number" name = "max_price" class="input-max" value="7500">
+             <input type="number" name = "max_price" class="input-max" value="<?php if(isset($data['max_price'])){ echo $data['max_price'];} ?>">
             </div>
         
         

@@ -382,8 +382,20 @@ a{
 }
 
 
-  
+#submit{
+ 
+    margin: 20px 0 0;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+  } 
 
 
   
-  
+  .highlight {
+    background-color: rgb(212, 212, 172);
+  }

@@ -10,6 +10,8 @@
             $this-> loginModel =$this->model('M_Login');
             $this->sellerAdModel = $this->model('M_seller_ad_management');
             $this->buyerAdModel = $this->model('M_ad_management');
+           
+            $this->wishlistModel = $this->model('M_wishlist');
         }
 
         public function register(){
@@ -295,7 +297,9 @@
         
                  {
                     $location_filter = implode("','", $data['location']);      
-                    $query .= " AND location in  ('".$location_filter."')";
+                    $query .= "AND created_by IN (SELECT user_id FROM user WHERE address_line_four IN ($location_filter))";
+
+
         
         
         
@@ -315,6 +319,84 @@
              }
  
  
+ }
+
+
+
+ public function filter_results(){
+
+   
+     if($_SERVER['REQUEST_METHOD'] == 'POST')
+
+     {
+       $brands =  isset($_POST['brands']) ? $_POST['brands']:array();
+       $location  = isset($_POST['location']) ? $_POST['location'] : array();
+       $min_price = isset($_POST['min_price']) ? $_POST['min_price'] :'';
+       $max_price = isset($_POST['max_price']) ? $_POST['max_price'] :'';
+       $quantity = isset($_POST['quantity']) ? $_POST['quantity']:'';   
+       $types = isset($_POST['types']) ? $_POST['types'] : array();
+       $query = "SELECT * FROM fertilizer WHERE 1 = 1";
+
+         if(!empty($min_price) && !empty($max_price))
+         {
+              $query .= " AND price BETWEEN '".$min_price."' AND '".$max_price."'";
+         }
+
+            if(!empty($brands))
+            {
+                $brand_filter = implode("','", $brands);
+                $query .= " AND manufacturer IN ('".$brand_filter."')";
+            }
+
+            if(!empty($types))
+            {
+                $type_filter = implode("','", $types);
+                $query .= " AND type IN ('".$type_filter."')";
+            }
+
+            if(!empty($quantity))
+            {
+                $query .= " AND quantity = '".$quantity."'";
+            }
+
+            if(!empty($location))
+            {
+                $location_filter = implode("','", $location);
+                $query .= " AND created_by IN (SELECT user_id FROM user WHERE address_line_four IN ('".$location_filter."'))";
+            }
+
+
+            $result = $this->sellerAdModel->customized_query($query);
+           
+            $manufacturers = $this->sellerAdModel->get_manufacturer_names();
+            $provinces = SriLanka::getProvinces();
+          
+            $wishlist_items =  $this->wishlistModel->getAllItems();
+            $data = [
+             
+                'brands' => $brands,
+                'location' => $location,
+                'min_price' => $min_price,
+                'max_price' => $max_price,
+                'quantity' => $quantity,
+                'types' => $types,
+                'wishlist_items' => $wishlist_items ,
+                'provinces' => $provinces,
+                'manufacturers' => $manufacturers,
+                'products' => $result
+
+
+
+
+
+            ];
+            $this->view('Users/component/v_search_results', $data);
+
+
+
+     }
+
+
  }
 
         public function verify_email($mail){
@@ -440,9 +522,10 @@
         }
     }
 
-    public function search($keyword)
+    public function search()
     {
-       
+        
+        $keyword = $_GET['keyword'];
       
        $param = "%".$keyword."%";
        
