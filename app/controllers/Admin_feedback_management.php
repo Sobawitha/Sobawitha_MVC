@@ -86,7 +86,6 @@
         $offset = ($current_page - 1) * $records_per_page; 
        
         $feed = $this->adminFeedMgntModel->getFeedbackDetails($_SESSION['radio_admin_feed'],$records_per_page, $offset);
-        
         $total_records = $feed['row_count'];
         $total_pages = ceil($total_records / $records_per_page);
 
@@ -248,8 +247,10 @@
         $id = trim($_POST['feedback_id']);
         $reason = trim($_POST['reason']);
         $more_detail = trim($_POST['more_detail']);
+        $orderId = trim($_POST['order_id']);
 
         $solveStatus= $this->adminFeedMgntModel->rejectFeed($id);
+        $this->adminFeedMgntModel->giveReaccess($orderId);
 
         if($solveStatus){
           sendMail($email,$name,'',7,'',$reason,$more_detail); 

@@ -43,7 +43,7 @@
                 $this->db->query("SELECT feedback.*, user.first_name AS receiver_name, sender.email AS sender_email, sender.first_name as firstname FROM feedback JOIN user ON feedback.receiver_id = user.user_id JOIN user AS sender ON feedback.sender_id = sender.user_id WHERE feedback.feed_status = 0 LIMIT $limit OFFSET $offset");
                 
                 $result=$this->db->resultSet();
-                var_dump($result); die();
+                // var_dump($result); die();
                 return array('rows' => $result, 'row_count' => $row_count);
     }
 }
@@ -93,6 +93,17 @@
         $this->db->bind(':id', $id); 
         $row = $this->db->single();
         return $row;
+   }
+
+   public function giveReaccess($orderId){
+    $this->db->query('UPDATE seller_order_raw_material set review_status=0 WHERE order_id = :orderId');
+    $this->db->bind(':orderId',$orderId);
+    if($this->db->execute()){
+       return true;
+    }else{
+        return false;
+    }
+
    }
    
     

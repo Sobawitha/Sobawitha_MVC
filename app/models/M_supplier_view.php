@@ -223,12 +223,21 @@ class M_supplier_view
         return $this->db->single();
     }
 
+    public function find_price_from_id_fertilizer($product_id){
+        $this->db->query("SELECT  price from fertilizer WHERE Product_id = :product_id");
+        $this->db->bind(":product_id", $product_id);
+        return $this->db->single();
+    }
     public function find_name_from_id($product_id){
         $this->db->query("SELECT product_name as product_name from raw_material WHERE product_id = :product_id");
         $this->db->bind(":product_id", $product_id);
         return $this->db->single();
     }
-
+    public function find_name_from_id_fertilizer($product_id){
+        $this->db->query("SELECT product_name as name from fertilizer WHERE Product_id = :product_id");
+        $this->db->bind(":product_id", $product_id);
+        return $this->db->single();
+    }
     
 
     /*ok */

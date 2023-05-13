@@ -24,6 +24,20 @@ class M_shopping_cart
 
     }
 
+    public function insertItemiWithQuantity($pro_id,$quantity){
+
+
+        $this->db->query("INSERT INTO cart (Product_id,User_id,quantity,CreatedAt) VALUES (:Product_id,:user_id,$quantity,NOW())");
+        $this->db->bind(':Product_id',$pro_id);
+        $this->db->bind(':user_id',$_SESSION['user_id']);
+        $this->db->execute();
+        return;
+        
+
+
+    }
+
+
 
     public function getAllItems(){
 

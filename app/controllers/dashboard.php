@@ -7,6 +7,7 @@ class dashboard extends Controller{
     public function __construct(){
         
         $this->dashboard_model = $this->model('M_dashboard');
+        $this->buyer_model = $this->model('M_buyer');
         $this->notification_model = $this->model('M_notifications');
     }
 
@@ -188,6 +189,8 @@ class dashboard extends Controller{
 
     public function buyer_dashboard(){
         $data = [];
+        $data['purchases_count'] = $this->buyer_model->getTotalPurchases();
+        $data['review_count']    = $this->buyer_model->getTotalReviews();
         $this->view('Buyer/Dashboard/v_buyer_dashboard', $data);
     }
 

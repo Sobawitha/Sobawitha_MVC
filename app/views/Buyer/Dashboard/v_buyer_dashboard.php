@@ -1,4 +1,4 @@
-<link rel="stylesheet" href= "../css/buyer/buyer_dashboard.css"></link>
+<link rel="stylesheet" href= "../css/Buyer/buyer_dashboard.css"></link>
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Buyer/Buyer/buyer_topnavbar.php'?>
 <?php require APPROOT.'/views/Buyer/Buyer/buyer_Sidebar.php'?>
@@ -24,21 +24,28 @@
         <div class="dashboard">
             <div class='card' id="card1">
                 <div class='content'>
-                    <p class="count">Rs.50000.00</p>
-                    <p class="topic">Total cost</p>
+                    <div class = "p1">
+                    <p class="count"> <?php echo $data['purchases_count']->total_completed_orders  ?></p>
+                    <p class="topic"> Completed Orders</p>
                     <p class="time_period">For last month</P>
-                    <i class="fa-solid fa-coins" id="blog_icon"></i>
-                    <i class="fa-sharp fa-solid fa-circle-info" id="demo"  onclick=()></i>
+</div>
+              <div class="p2" id="card_icon">
+                    <i class="fa-solid fa-clipboard" id="blog_icon"></i>
+                </div>
                 </div>
             </div>
 
             <div class='card' id="card2">
                 <div class='content'>
+                    <div class="p1">
                     <p class="count">10</p>
                     <p class="topic">No of deals</p>
                     <p class="time_period">For last month</P>
+                    </div>
+                    <div class="p2">
                     <i class="fa-solid fa-handshake" id="deals"></i>
-                    <i class="fa-sharp fa-solid fa-circle-info" id="demo"  onclick=()></i>
+                    </div>
+                   
                 </div>
             </div>
 <!-- 
@@ -63,13 +70,17 @@
                 </div>
             </div> -->
 
-            <div class='card' id="card1">
+            <div class='card' id="card3">
                 <div class='content'>
-                    <p class="count">05</p>
+                    <div class="p1">
+                    <p class="count"><?php echo $data['review_count']->review_count ?></p>
                     <p class="topic">No of reviews</p>
                     <p class="time_period">For last month</P>
+              
+</div>
+                    <div class="p2">
                     <i class="fa-solid fa-magnifying-glass" id="review"></i>
-                    <i class="fa-sharp fa-solid fa-circle-info" id="demo"  onclick=()></i>
+</div>
                 </div>
             </div>
 
@@ -125,7 +136,7 @@
         var count2 = [];
 
 
-        results.fertilizer_type_details.forEach(val => {
+        (results.fertilizer_type_details).forEach(val => {
           if (val !== null && val.type !== null && val.count !== null) {
                     var index = labels1.indexOf(val.type);
          if (index !== -1) {
@@ -133,13 +144,13 @@
     }
   }
 });       
-       results.crop_type_details.forEach(val => {
+       (results.crop_type_details).forEach(val => {
           if (val !== null && val.type !== null && val.count !== null) {
                     labels2.push(val.crop_type);
           }
         }
        );
-       results.crop_type_details.forEach(val => {
+       (results.crop_type_details).forEach(val => {
           if (val !== null && val.crop_type !== null && val.count !== null) {
                    var index1 = labels2.indexOf(val.crop_type);
             if (index1 !== -1) {

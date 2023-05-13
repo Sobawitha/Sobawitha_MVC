@@ -9,3 +9,21 @@ CREATE VIEW v_supplier_ads AS
     raw_material.product_description as product_description
     FROM raw_material INNER JOIN raw_material_supplier_supply
     ON raw_material.Product_id = raw_material_supplier_supply.Product_id INNER JOIN raw_material_supplier ON raw_material_supplier_supply.supplier_id = raw_material_supplier.supplier_id;
+
+User Table
+
+ALTER TABLE user
+ADD dob date DEFAULT NULL,
+ADD profile_picture text NOT NULL,
+ADD address_line_one varchar(255) NOT NULL,
+ADD address_line_two varchar(255) NOT NULL,
+ADD address_line_three varchar(255) NOT NULL,
+ADD address_line_four varchar(255) NOT NULL,
+ADD gender char(1) NOT NULL,
+ADD bank_account_no varchar(100) DEFAULT NULL,
+ADD bank varchar(255) DEFAULT NULL,
+ADD branch varchar(255) DEFAULT NULL,
+ADD bank_account_name varchar(255) DEFAULT NULL,
+ADD qualifications varchar(200) DEFAULT NULL,
+ADD active_status tinyint(1) NOT NULL,
+ADD verify_token longtext DEFAULT NULL;

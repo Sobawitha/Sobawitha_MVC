@@ -66,85 +66,93 @@ document.querySelectorAll('.dropdown-content a')[1].addEventListener('click', ()
 
 
 
-search_input.addEventListener("keyup", (e) => {
-  let search_input = e.target.value;
-  fetch(`http://localhost/Sobawitha/Users/search/${search_input}`,
-  {
+// search_input.addEventListener("keyup", (e) => {
+//   let search_input = e.target.value;
+//   fetch(`http://localhost/Sobawitha/Users/search?keyword=${search_input}`,
+//   {
 
-      method:'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      }
+//       method:'GET',
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Accept": "application/json"
+//       }
 
-  }).then(response => response.json()).then(data =>
-    {  console.log(data);
-       let html = '<li>Search Results</li>';
-       let html2 ='';
-        if(data.length > 0){
-          for (let i = 0; i < data.length; i++) {
-            html += `
+//   }).then(response => response.json()).then(data =>
+//     {  console.log(data);
+//        let html = '<li>Search Results</li>';
+//        let html2 ='';
+//         if(data.length > 0){
+
+//           for(let i = 0;i < 8;i++){
+//             html += `
             
-            <a href="http://localhost/Sobawitha/Users/product_page/${data[i].product_id}">
-             <li>${data[i].product_name}&nbsp(${data[i].manufacturer})${data[i].price}</li>
+//             <a href="http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=${data[i].Product_id}">
+//              <li>${data[i].product_name}&nbsp(${data[i].manufacturer})${data[i].price}</li>
+        
+//             </a>
+//             `
+//             console.log("Hello"+data[i].Product_id);
+//           }
+//           for (let i = 0; i < data.length; i++) {
+           
+//             console.log(data);
 
-            </a>
-            `
+//             html2 += `<div class="adv_card">
+//             <a href="http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=${data[i].Product_id}">
+//             <div class="card_image" style="background: url(../images/${data[i].fertilizer_img}.jpg); background-size: cover;
+//                                             height:75%;
+//                                             -webkit-background-size:cover ;
+//                                             background-position:center;
+//                                             margin:0px;
+//                                             padding:0px;">
+//                 <div class="product_detail">
+                  
+//                     <span class="owner">${data[i].manufacturer}</span><br>
+//                 </div>
+//                 </a>
+//             </div>
 
-            html2 += `<div class="adv_card">
-            <div class="card_image" style="background: url(../images/${data[i].fertilizer_img}.jpg); background-size: cover;
-                                            height:75%;
-                                            -webkit-background-size:cover ;
-                                            background-position:center;
-                                            margin:0px;
-                                            padding:0px;">
-                <div class="product_detail">
-                    <span class="product_name">${data[i].product_name}</span><br>
-                    <span class="owner">${data[i].manufacturer}</span><br>
-                </div>
-            </div>
+//             <i class="fa-regular fa-heart" id="heart"></i>
 
-            <i class="fa-regular fa-heart" id="heart"></i>
-
-            <div class="discription">
-                <i class="fa-solid fa-star" id="star"></i>
-                <i class="fa-solid fa-star" id="star"></i>
-                <i class="fa-solid fa-star" id="star"></i>
-                <i class="fa-regular fa-star" id="star"></i>
-                <i class="fa-regular fa-star" id="star"></i>
-                <span class="price">${data[i].price}</span>
+//             <div class="discription">
+//                 <i class="fa-solid fa-star" id="star"></i>
+//                 <i class="fa-solid fa-star" id="star"></i>
+//                 <i class="fa-solid fa-star" id="star"></i>
+//                 <i class="fa-regular fa-star" id="star"></i>
+//                 <i class="fa-regular fa-star" id="star"></i>
+//                 <span class="price">${data[i].price}</span>
                 
-            </div>
-        </div>`
+//             </div>
+//         </div>`
 
 
-            }
-        }
-        else{
-          // html += '<img src="Sobawitha/public/images/search_result.png" ></img>';
-          // html2 += '<h1 style = "text-align:center;color:green;">No results found</h1>';
+//             }
+//         }
+//         else{
+//           // html += '<img src="Sobawitha/public/images/search_result.png" ></img>';
+//           // html2 += '<h1 style = "text-align:center;color:green;">No results found</h1>';
 
-          html2 += '<div style="text-align: center;">';
-          html2 += '<h1 style="color: #9FA078;">No results found</h1>';
-          html2 += '<img src=".././public/images/search_result.png" alt="No results image" style="width:450px; height:450px" />';
-          html2 += '</div>';
+//           html2 += '<div style="text-align: center;">';
+//           html2 += '<h1 style="color: #9FA078;">No results found</h1>';
+//           html2 += '<img src=".././public/images/search_result.png" alt="No results image" style="width:450px; height:450px" />';
+//           html2 += '</div>';
 
-        }
+//         }
 
 
-        liveResults.innerHTML = html;
-        recentProductCardSection.innerHTML = html2;
-    }
+//         liveResults.innerHTML = html;
+//         recentProductCardSection.innerHTML = html2;
+//     }
     
-    );
+//     );
 
-});
-window.addEventListener('load', function() {
-    let inputs = document.getElementsByTagName('input');
-    for (let i = 0; i < inputs.length; i++) {
-      inputs[i].addEventListener('change', filterProducts);
-    }
-  });
+// });
+// window.addEventListener('load', function() {
+//     let inputs = document.getElementsByTagName('input');
+//     for (let i = 0; i < inputs.length; i++) {
+//       inputs[i].addEventListener('change', filterProducts);
+//     }
+//   });
   
 
 function open_sorttype(){
@@ -211,124 +219,124 @@ return tests;
 }
 
 
-function filterProducts() {
-   var minPrice =  document.querySelectorAll('input[type="number"]')[0].value;
-   var maxPrice =  document.querySelectorAll('input[type="number"]')[1].value;
-   var brands =   getFilter('.all_brands input[type = "checkbox"]'); 
-   var type =   getFilter('.all_types input[type = "checkbox"]');
+// function filterProducts() {
+//    var minPrice =  document.querySelectorAll('input[type="number"]')[0].value;
+//    var maxPrice =  document.querySelectorAll('input[type="number"]')[1].value;
+//    var brands =   getFilter('.all_brands input[type = "checkbox"]'); 
+//    var type =   getFilter('.all_types input[type = "checkbox"]');
 
-   var quantity =  document.querySelector('.all_quantity input[type="radio"]').value;
-   var location = getFilter('.all_locations input[type = "checkbox"]');
+//    var quantity =  document.querySelector('.all_quantity input[type="radio"]').value;
+//    var location = getFilter('.all_locations input[type = "checkbox"]');
    
 
-   let data = {
-    minPrice: minPrice,
-    maxPrice: maxPrice,
-    brands: brands,
-    type: type,
+//    let data = {
+//     minPrice: minPrice,
+//     maxPrice: maxPrice,
+//     brands: brands,
+//     type: type,
  
-    quantity: quantity,    
-    location: location
-   }
-   var  xhr =  new XMLHttpRequest();
-   xhr.open('POST',"http://localhost/Sobawitha/Users/filter_data" , true);
-   xhr.setRequestHeader('Content-Type', 'application/json');
+//     quantity: quantity,    
+//     location: location
+//    }
+//    var  xhr =  new XMLHttpRequest();
+//    xhr.open('POST',"http://localhost/Sobawitha/Users/filter_data" , true);
+//    xhr.setRequestHeader('Content-Type', 'application/json');
    
-   xhr.onload = function () {
+//    xhr.onload = function () {
 
-     if(this.readyState == 4 && this.status == 200){
-        {
+//      if(this.readyState == 4 && this.status == 200){
+//         {
               
-              var results =  JSON.parse(this.responseText);
+//               var results =  JSON.parse(this.responseText);
+//                console.log(results);
+//                 var html = '';
 
-                var html = '';
-
-               if(results.length > 0){
-                 console.log(results)
-                for (let i = 0; i < results.length; i++) {
+//                if(results.length > 0){
+//                  console.log(results)
+//                 for (let i = 0; i < results.length; i++) {
 
 
-              //     html +=`<div class="adv_card">
-              //     <div class="card_image" style="background: url(../images/${results[i].fertilizer_img}.jpg); background-size: cover;
-              //                                     height:75%;
-              //                                     -webkit-background-size:cover ;
-              //                                     background-position:center;
-              //                                     margin:0px;
-              //                                     padding:0px;">
-              //         <div class="product_detail">
-              //             <span class="product_name">${results[i].product_name}</span><br>
-              //             <span class="owner">${results[i].manufacturer}</span><br>
-              //         </div>
-              //     </div>
+//               //     html +=`<div class="adv_card">
+//               //     <div class="card_image" style="background: url(../images/${results[i].fertilizer_img}.jpg); background-size: cover;
+//               //                                     height:75%;
+//               //                                     -webkit-background-size:cover ;
+//               //                                     background-position:center;
+//               //                                     margin:0px;
+//               //                                     padding:0px;">
+//               //         <div class="product_detail">
+//               //             <span class="product_name">${results[i].product_name}</span><br>
+//               //             <span class="owner">${results[i].manufacturer}</span><br>
+//               //         </div>
+//               //     </div>
   
-              //     <i class="fa-regular fa-heart" id="heart"></i>
+//               //     <i class="fa-regular fa-heart" id="heart"></i>
   
-              //     <div class="discription">
-              //         <i class="fa-solid fa-star" id="star"></i>
-              //         <i class="fa-solid fa-star" id="star"></i>
-              //         <i class="fa-solid fa-star" id="star"></i>
-              //         <i class="fa-regular fa-star" id="star"></i>
-              //         <i class="fa-regular fa-star" id="star"></i>
-              //         <span class="price">${results[i].price}</span>
+//               //     <div class="discription">
+//               //         <i class="fa-solid fa-star" id="star"></i>
+//               //         <i class="fa-solid fa-star" id="star"></i>
+//               //         <i class="fa-solid fa-star" id="star"></i>
+//               //         <i class="fa-regular fa-star" id="star"></i>
+//               //         <i class="fa-regular fa-star" id="star"></i>
+//               //         <span class="price">${results[i].price}</span>
                       
-              //     </div>
-              // </div>`
+//               //     </div>
+//               // </div>`
 
-                  html += `<div class="adv_card">
-                  <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product?product_id=<?php echo $product->Product_id ?>"><div class="card_image" style="background: url(<?php echo URLROOT;?>/upload/fertilizer_images/${results[i].fertilizer_img}; background-size: cover);
-                                                              height:75%;
-                                                              -webkit-background-size:cover ;
-                                                              background-position:center;
-                                                              margin:0px;
-                                                              padding:0px;">
-                  <div class="product_detail">
-                      <span class="product_name">${results[i].product_name} > 20 ? substr(${results[i].product_name}e,0,20)."..." : ${results[i].product_name} </span><br>
-                      <span class="owner">${results[i].manufacturer}</span>
-                  </div>
-                  </a>
-                  </div>
+//                   html += `<div class="adv_card">
+//                   <a href="http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=${results[i].Product_id}"><div class="card_image" style="background: url(<?php echo URLROOT;?>/upload/fertilizer_images/${results[i].fertilizer_img}; background-size: cover);
+//                                                               height:75%;
+//                                                               -webkit-background-size:cover ;
+//                                                               background-position:center;
+//                                                               margin:0px;
+//                                                               padding:0px;">
+//                   <div class="product_detail">
+//                       <span class="product_name">${results[i].product_name} </span><br>
+//                       <span class="owner">${results[i].manufacturer}</span>
+//                   </div>
+//                   </a>
+//                   </div>
                   
               
-                              <i class="fa-regular fa-heart" id="heart"></i>
+//                               <i class="fa-regular fa-heart" id="heart"></i>
               
-                              <div class="discription">
-                              <?php $avg_rating = round(${results[i].$avg_rating}); ?>
+//                               <div class="discription">
+//                               <?php $avg_rating = round(${results[i].$avg_rating}); ?>
                              
-                              <?php 
-                              for ($i = 1; $i <= 5; $i++) {
-                              $checked = ($i <= $avg_rating) ? 'checked' : '';
-                              echo '<span class="fas fa-star ' . $checked . ' "></span>';
-                              }
-                              ?>
-                              <span class="price"> Rs.${results[i].price}</span>
-                              </div>
-                          </div>`
-                }
-        }
+//                               <?php 
+//                               for ($i = 1; $i <= 5; $i++) {
+//                               $checked = ($i <= $avg_rating) ? 'checked' : '';
+//                               echo '<span class="fas fa-star ' . $checked . ' "></span>';
+//                               }
+//                               ?>
+//                               <span class="price"> Rs.${results[i].price}</span>
+//                               </div>
+//                           </div>`
+//                 }
+//         }
 
-        else{
-            html += '<div style="text-align: center;">';
-            html += '<h1 style="color: #9FA078;">No results found</h1>';
-            html += '<img src=".././public/images/search_result.png" alt="No results image" style="width:450px; height:450px" />';
-            html += '</div>';
+//         else{
+//             html += '<div style="text-align: center;">';
+//             html += '<h1 style="color: #9FA078;">No results found</h1>';
+//             html += '<img src=".././public/images/search_result.png" alt="No results image" style="width:450px; height:450px" />';
+//             html += '</div>';
 
-        }
+//         }
 
-        recentProductCardSection.innerHTML = html;
+//         recentProductCardSection.innerHTML = html;
 
-    }
+//     }
 
-    }
+//     }
 
        
-}
+// }
 
-//sending the data to the server in json format
- xhr.send(JSON.stringify(data));
-//we can sebd the data in form of urlencoded
-//in that case we have to use the following code 
-// xhr.send('brands='+brands+'&type='+type+'&price='+price+'&quantity='+quant+'&location='+location);
-}
+// //sending the data to the server in json format
+//  xhr.send(JSON.stringify(data));
+// //we can sebd the data in form of urlencoded
+// //in that case we have to use the following code 
+// // xhr.send('brands='+brands+'&type='+type+'&price='+price+'&quantity='+quant+'&location='+location);
+// }
 
 
 
@@ -342,6 +350,7 @@ function clear_search_bar(){
   document.querySelector(".search_cont input[type = text]").value='';
   document.getElementById("cansel").style.display='none';
 }
+
 
 
 

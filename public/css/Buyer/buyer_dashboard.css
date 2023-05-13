@@ -65,54 +65,104 @@
     height:150px;
     width:250px;
     border-radius:10px;
-
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
 }
+
+#card1:hover{
+    background-color:black;
+}
+
+#card2:hover{
+    background-color:black;
+}
+
+#card3:hover{
+    background-color:black;
+}
+#card1:hover #blog_icon{
+    color:white;
+}
+
+#card2:hover #deals{
+    color:white;
+}
+
+#card3:hover #review{
+    color:white;
+}
+
+#card1:hover .time_period{
+    color:white;
+}
+
+#card2:hover .time_period{
+    color:white;
+}
+
+#card3:hover .time_period{
+    color:white;
+}
+
+
+
+
+
+  .p1{
+    display: flex;
+    flex-direction:column;
+  }
+
+  .p2{
+    display: flex;
+    justify-content: flex-end;
+
+  }
 #card3, #card1, #card2{
     background-color:rgb(247, 255, 255);
 }
 
 .card:hover{
     box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
-}
+    cursor:pointer;
+    background-color:rgb(0, 0, 0);
+  }
+
+  .card:hover .count{
+    color:white;
+  }
+
+  .card:hover .topic{
+    color:white;
+  }
 
 .last{
     /* background-color:beige; */
 }
 
 .card .content{
-    padding:20px;
+    padding:10px 20px;
+    display:grid;
+    grid-template-columns: 70% 30%;
+    line-height: 0px;
+    align-items:center;
 }
 
 .count{
-    font-weight:bolder;
-    font-size:17px;
-}
+    font-weight:bold;
+    font-size:30px;
+    color: rgb(0, 0, 0);
+  }
+
+  .topic{
+    font-size:15px;
+  }
+
 
 #blog_icon, #forum_icon, #complain_icon, #usage_icon, #complete_icon, #item, #deals, #review, #wishlist{
-    transform:translate(120px, -100px);
-    font-size:50px;
-    color:rgb(9, 142, 91);
-}
-#cart{
-
-    transform:translate(120px, -100px);
-    font-size:50px;
-    color:rgb(9, 142, 91);
-
-}
-
-#supplier_icon, #ad_icon{
-    transform:translate(150px, -100px);
-    
-    color:rgb(9, 142, 91);
-}
-
-
-
-#officer_icon{
-    transform:translate(160px, -100px);
-    font-size:50px;
-    color:rgb(9, 142, 91);
+    padding:20px 0px;
+    font-size:45px;
+    color: rgb(0, 0, 0);
 }
 
 .time_period{

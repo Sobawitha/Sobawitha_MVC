@@ -7,9 +7,13 @@
             $this->supplier_ad = $this->model('M_supplier_view');
             $this->raw_material_product = $this->model('M_seller_wishlist');
             $this->notification_model = $this->model('M_notifications');
+            $this->cartModel = $this->model('M_raw_material_orders');
+
+
     }
 
 
+    
     public function index() {
         $ads = $this->supplier_ad->getPostsView();
         $user_realated_wishlist_items= $this->raw_material_product->get_all_wishlist_items();
@@ -165,5 +169,55 @@
         }
      }
 
+    
+
+
+
+
+
+    
+
+     public function checkout_from_seller_cart() {
+        require '../app/vendor/autoload.php';
+        \Stripe\Stripe::setApiKey('sk_test_51MskWIIz6Y8hxLUJq8DTBxJ0xInEFNHtBn9H1i30ReXNtkRg6eAIrpz74kd2HYPYXN0v2TnqoT9jBMnJxWdqYXXu00gAVFTXaI');
+    
+        $cartItems = $this->cartModel->view_cart();
+        $lineItems = [];
+    
+        foreach ($cartItems as $item) {
+            $productId = $item->Product_id;
+            $quantity = $item->quantity;
+            $price = $item->price;
+            $name = $item->product_name;
+    
+            $lineItems[] = [
+                'quantity' => $quantity,
+                'price_data' => [
+                    'currency' => 'lkr',
+                    'unit_amount' => $price * 100,
+                    'product_data' => [
+                        'name' => $name,
+                        'metadata' => [
+                            'product_id' => $productId,
+                        ],
+                    ],
+                ],
+            ];
+        }
+    
+        $serializedLineItems = json_encode($lineItems);
+        $successUrl = URLROOT . '/cart/createOrder?line_items=' . urlencode($serializedLineItems);
+    
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => $lineItems,
+            'mode' => 'payment',
+            'success_url' => $successUrl,
+            'cancel_url' => 'https://example.com/cancel',
+        ]);
+    
+        header("Location: " . $session->url);
     }
+}
+    
     ?>

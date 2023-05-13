@@ -69,11 +69,11 @@
     public function get_fertilizer_type_details(){
 
         $this->db->query("SELECT f.type, COUNT(*) AS count
-        FROM orders o
-        JOIN order_items oi ON o.order_id = oi.order_id
+        FROM buyer_orders o
+        JOIN buyer_order_items oi ON o.order_id = oi.order_id
         JOIN fertilizer f ON oi.product_id = f.Product_id
         WHERE o.cust_id = :user_id
-        AND o.status = '0'
+        AND o.status = '1'
         GROUP BY f.type;");
         $this->db->bind(":user_id",$_SESSION['user_id']);
         $result = $this->db->resultSet();
@@ -92,11 +92,11 @@
     public  function get_fertilizer_crop_type_details()
 {
     $this->db->query("SELECT f.crop_type, COUNT(*) AS count
-    FROM orders o
-    JOIN order_items oi ON o.order_id = oi.order_id
+    FROM buyer_orders o
+    JOIN buyer_order_items oi ON o.order_id = oi.order_id
     JOIN fertilizer f ON oi.product_id = f.Product_id
     WHERE o.cust_id = :user_id
-    AND o.status = '0'
+    AND o.status = '1'
     GROUP BY f.crop_type;");
     $this->db->bind(":user_id",$_SESSION['user_id']);
     $result = $this->db->resultSet();
@@ -303,7 +303,102 @@ WHERE buyer_orders.status = :no AND buyer_orders.cust_id = :user_id");
     }
 
 
+    
+ public function getOrderDetailsBySearch($searchText)
+ {
+
+    $search =  strtolower(str_replace(' ','',$searchText));
+   
+
+        $this->db->query("SELECT 
+        fertilizer.*, 
+        buyer_order_items.quantity, 
+        buyer_orders.created_at, 
+        buyer_orders.order_id, 
+        CONCAT(user.first_name, ' ', user.last_name) AS seller_name
+      FROM 
+        fertilizer
+        INNER JOIN buyer_order_items ON fertilizer.Product_id = buyer_order_items.product_id
+        INNER JOIN buyer_orders ON buyer_order_items.order_id = buyer_orders.order_id
+        INNER JOIN user ON fertilizer.created_by = user.user_id
+      WHERE 
+        (buyer_orders.status = 1 AND buyer_orders.cust_id = :user_id) AND 
+        (
+          LOWER(fertilizer.product_name) LIKE :search OR 
+       
+          
+          LOWER(user.first_name) LIKE :search OR 
+          LOWER(user.last_name) LIKE :search OR 
+          LOWER(buyer_orders.order_id) LIKE :search OR 
+          DATE(buyer_orders.created_at) LIKE :search
+        )
+      ");
+        $this->db->bind(":user_id",$_SESSION['user_id']);
+        $this->db->bind(":search","%".$search."%");
+        $result = $this->db->resultSet();
+        if($this->db->rowCount() > 0){
+             return $result;
+        }
+        else{
+             return false;
+        }
+
+    
+
+
+
+
+    
+
+
+ 
 
 
  } 
+
+
+ 
+ 
+public function getTotalReviews(){
+
+  $this->db->query("SELECT COUNT(*) AS review_count FROM feedback WHERE sender_id = :user_id AND date BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW() ");
+  $this->db->bind(":user_id",$_SESSION["user_id"]);
+  $row= $this->db->single();
+  if($this->db->rowCount() >0){
+    return $row;
+}
+else
+{
+    return false;
+}
+
+
+}
+
+
+public function getTotalPurchases(){
+
+
+  $this->db->query('SELECT COUNT(order_id) as total_completed_orders FROM buyer_orders WHERE status = 1 AND  cust_id = :cust_id AND created_at BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()');
+  $this->db->bind(":cust_id",$_SESSION['user_id']);
+  $row= $this->db->single();
+
+  if($this->db->rowCount() >0){
+        return $row;
+  }
+  else
+  {
+        return false;
+  }
+
+
+}
+
+
+}
+
+
+
+
+
 ?>

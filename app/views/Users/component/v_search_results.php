@@ -40,6 +40,8 @@ options.forEach((option) => {
   }
 </script>
 
+
+
 <div class="nav">
             <nav>
                 <span class="site_name" id="part_a">SOBA</span><span id="part_b">WITHA</span>
@@ -78,7 +80,7 @@ options.forEach((option) => {
            
            
            
-                <label for="brand_1" > <input type="checkbox"  name="brands[]" value="<?php echo $manufacturer->manufacturer?>" ><?php echo $manufacturer->manufacturer?></label><br>
+                <label for="brand_1" > <input type="checkbox"  name="brands[]" value="<?php echo $manufacturer->manufacturer?>" <?php if(in_array($manufacturer->manufacturer, $data['brands'])) {echo "checked";} ?>><?php echo $manufacturer->manufacturer?></label><br>
               
 
                 <?php endforeach; ?>
@@ -94,10 +96,10 @@ options.forEach((option) => {
           
 
 
-                <label> <input type="checkbox"  name="types[]" value="Liquid">Liquid</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Solid">Solid</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Packets">Packet</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Bottles">Bottles</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Liquid" <?php if(in_array('Liquid', $data['types'])) {echo "checked";} ?>>Liquid</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Solid" <?php if(in_array('Solid', $data['types'])) {echo "checked"; }?>>Solid</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Packet" <?php if(in_array('Packet', $data['types'])) {echo "checked";} ?>>Packet</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Bottles" <?php if(in_array('Bottles', $data['types'])) {echo "checked";} ?>>Bottles</label><br>
             </div>
         </div>
         
@@ -113,14 +115,14 @@ options.forEach((option) => {
             
             <div class="field">
               <span>Min</span>
-              <input type="number"  name = "min_price" class="input-min" value="2500">
+              <input type="number"  name = "min_price" class="input-min" value="<?php if(isset($data['min_price'])){ echo $data['min_price'];} ?>">
             </div>
             <div class="separator">
                 -
             </div>
             <div class="field">
              <span>Max</span>
-             <input type="number" name = "max_price" class="input-max" value="7500">
+             <input type="number" name = "max_price" class="input-max" value="<?php if(isset($data['max_price'])){ echo $data['max_price'];} ?>">
             </div>
         
         
@@ -129,7 +131,7 @@ options.forEach((option) => {
         </div>
 
       
-
+     
 
         <hr class="filter_hr">
 
@@ -141,7 +143,7 @@ options.forEach((option) => {
                
            
                <?php foreach(SriLanka::getDistricts($province) as $district): ?>
-             <label> <input type="checkbox"  name="location" value="<?php echo $district ?>"><?php echo $district ?></label><br> 
+             <label> <input type="checkbox"  name="location[]" value="<?php echo $district ?>" <?php if( in_array($district,$data['location'])){echo  'checked';}  ?>><?php echo $district ?></label><br> 
                 
                <?php endforeach;?>
              
@@ -154,15 +156,16 @@ options.forEach((option) => {
 
     </div>
   
+
     <div class="section_2">
         <div class="search_and_filter">
         <div class="search_bar">
             <div class="search_content">
                 
-                    <span class="search_cont" ><input type="text" name="search_text" placeholder=" " required/></span>
+                    <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder=" " required/></span>
                     
                     <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                    <button type="submit" class="search_btn"  onclick = "search()"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                    <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
 
                     
                     </div>
@@ -229,7 +232,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
                                                 margin:0px;
                                                 padding:0px;">
     <div class="product_detail">
-        <span class="product_name"><?php echo strlen($product->product_name) > 20? substr($product->product_name, 0, 20) . '...' :  $product->product_name ?></span><br>
+        <span class="product_name"><?php echo  $product->product_name ?></span><br>
         <span class="owner"><?php echo $product->manufacturer ?></span>
     </div>
     </a>
@@ -338,6 +341,6 @@ elements.forEach(element => {
 
 
 
-
-
  
+
+</script>
