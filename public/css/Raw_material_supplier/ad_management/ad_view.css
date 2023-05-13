@@ -272,7 +272,7 @@ input[type="number"]::-webkit-inner-spin-button {
 /*products*/
 .recent_product_card_section{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap:40px;
   padding:70px 50px 50px 0px;
 }
