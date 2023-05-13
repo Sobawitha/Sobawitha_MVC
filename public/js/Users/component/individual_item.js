@@ -149,6 +149,7 @@ function editWishlist(){
 
   let heart_icon = document.getElementById('add_wishlist_heart');
   let productID =  heart_icon.dataset.productId;
+  console.log(heart_icon.dataset)
   if(heart_icon.classList.contains('fa-solid')){
     heart_icon.classList.remove('fa-solid');
     heart_icon.classList.add('fa-regular');

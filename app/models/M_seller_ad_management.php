@@ -197,5 +197,16 @@
             return false;
         }
     }
+
+
+    public function getSearchAds($userId, $search)
+    {
+        $this->db->query("SELECT * FROM fertilizer WHERE product_name LIKE '%$search%' AND created_by = '$userId'");
+    
+        $fertilizers = $this->db->resultSet(); 
+        $total_fertilizers = count($fertilizers);
+               
+        return array("ads" => $fertilizers, "total_rows" => $total_fertilizers);
+    }
 }
 ?>

@@ -242,6 +242,7 @@
                 'images' => $_FILES['images'],
 
                 'fertilizer_image_err' => '',
+                'price_err' => '',
             ];
              
              // Upload and validate images
@@ -322,6 +323,20 @@
   
           }
 
+          $price_validate_result = validatePriceadfertilizer($data['price']);
+          if ($price_validate_result !== true){
+            $data['price_err'] = $price_validate_result;
+          }
+
+          // Example usage
+            $inputPrice = $_POST['price']; // Get the value of the price input field from the form using the POST method
+            if (validatePrice($inputPrice)) {
+            // Price is valid
+            } else {
+            // Price is invalid
+            }
+
+
             $this->seller_ad_management_model->update_advertisment($data,$id);
             redirect('seller_ad_management/View_listing');
         }
@@ -362,14 +377,15 @@
                     
                     $message = '';
                    
-                  if (empty($ads)) {
+                  if (empty($ads['ads'])) {
                     $message = "No listings found on title: $search";
 
                   }
         
         
                   $data = [
-                    'ads' =>  $ads,
+                    'ads' =>  $ads['ads'],
+                    'total_rows' => $ads['total_rows'],
                     'search' =>  $search,
                     'message' => $message,
                     'emptydata' =>'',

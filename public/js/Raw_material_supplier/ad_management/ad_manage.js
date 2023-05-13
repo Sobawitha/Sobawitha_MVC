@@ -17,10 +17,10 @@ function popUpOpen() {
     
     }
     
-    function clear_search_bar(){
-      document.getElementById("searchBar").value = "";
-      document.getElementById("cancel").style.display='none';
-    }
+    // function clear_search_bar(){
+    //   document.getElementById("searchBar").value = "";
+    //   document.getElementById("cancel").style.display='none';
+    // }
     
     
     

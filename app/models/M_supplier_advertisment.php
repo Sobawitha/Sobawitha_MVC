@@ -91,7 +91,7 @@ class M_supplier_advertisment
 
 
     public function create($data) {
-        $this->db->query('INSERT INTO raw_material(product_name, manufacturer, quantity, category_avl, price, per_amount, category_per, product_description, type, raw_material_image, rm_image_two, rm_image_three, user_id, current_status) VALUES (:product_name, :manufacturer, :quantity, :category_avl, :price, :per, :category_per, :product_description, :type, :image1, :image2, :image3, :user_id, :current_status)');
+        $this->db->query('INSERT INTO raw_material(product_name, manufacturer, quantity, price, product_description, type, raw_material_image, rm_image_two, rm_image_three, user_id, current_status) VALUES (:product_name, :manufacturer, :quantity, :price, :product_description, :type, :image1, :image2, :image3, :user_id, :current_status)');
         $this->db->bind(':user_id', $_SESSION['user_id']);
         $this->db->bind(':image1', $data['image_name1']);
         $this->db->bind(':image2', $data['image_name2']);
@@ -99,11 +99,11 @@ class M_supplier_advertisment
         // $this->db->bind(':product_id', $data['Product_id']);
         $this->db->bind(':product_name', $data['product_name']);
         $this->db->bind(':quantity', $data['quantity']);
-        $this->db->bind(':category_avl', $data['category_avl']);
+        // $this->db->bind(':category_avl', $data['category_avl']);
         $this->db->bind(':manufacturer', $data['manufacturer']);
         $this->db->bind(':price', $data['price']);
-        $this->db->bind(':per', $data['per']);
-        $this->db->bind(':category_per', $data['category_per']);
+        // $this->db->bind(':per', $data['per']);
+        // $this->db->bind(':category_per', $data['category_per']);
         $this->db->bind(':product_description', $data['product_description']);
         $this->db->bind(':type', $data['type']);
         
@@ -122,17 +122,17 @@ class M_supplier_advertisment
     }
 
     public function edit($data) {
-        $this->db->query('UPDATE raw_material SET raw_material_image = :image1, rm_image_two = :image2, rm_image_three = :image3, product_name = :product_name, manufacturer = :manufacturer, quantity=:quantity, category_avl = :category_avl, price= :price, per_amount = :per, category_per = :category_per, product_description=:product_description, type=:type WHERE Product_id = :id');
+        $this->db->query('UPDATE raw_material SET raw_material_image = :image1, rm_image_two = :image2, rm_image_three = :image3, product_name = :product_name, manufacturer = :manufacturer, quantity=:quantity, price= :price, product_description=:product_description, type=:type WHERE Product_id = :id');
         $this->db->bind(':image1', $data['image_name1']);
         $this->db->bind(':image2', $data['image_name2']);
         $this->db->bind(':image3', $data['image_name3']);
         $this->db->bind(':product_name', $data['product_name']);
         $this->db->bind(':quantity', $data['quantity']);
-        $this->db->bind(':category_avl', $data['category_avl']);
+        // $this->db->bind(':category_avl', $data['category_avl']);
         $this->db->bind(':manufacturer', $data['manufacturer']);
         $this->db->bind(':price', $data['price']);
-        $this->db->bind(':per', $data['per']);
-        $this->db->bind(':category_per', $data['category_per']);
+        // $this->db->bind(':per', $data['per']);
+        // $this->db->bind(':category_per', $data['category_per']);
         $this->db->bind(':product_description', $data['product_description']);
         $this->db->bind(':type', $data['type']);
         $this->db->bind(':id', $data['product_id']);
@@ -158,6 +158,20 @@ class M_supplier_advertisment
         else {
             return false;
         }
+    }
+
+
+    // search
+    public function getSearchAds($search)
+    {
+        $user_id = $_SESSION['user_id'];
+        $this->db->query('UPDATE raw_material SET current_status = 3 WHERE date <= DATE_SUB(NOW(), INTERVAL 2 WEEK)');
+        $this->db->execute();
+
+        $this->db->query("SELECT * FROM raw_material WHERE ((ad_status != 1 AND CONCAT(product_name, price, quantity) LIKE '%$search%' ) AND user_id = :uid)");
+        $this->db->bind(':uid', $user_id);
+        $result=$this->db->resultSet();
+        return $result;
     }
 
 }
