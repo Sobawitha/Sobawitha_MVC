@@ -249,6 +249,24 @@ function validate_discription_for_blogpost($discription) {
   // If all checks pass, return true
   return true;
 }
-  
 
- ?>
+//seller add advertisement validate
+
+// function validatePriceadfertilizer($price) {
+
+//   if(!preg_match('/^\d+(\.\d{1,2})?$/',$price)){
+//     return 'Price contains invalid characters.';
+//   }
+//   else
+//   {
+//     return true;
+//   }
+// }
+
+function validatePriceadfertilizer(){
+if (!preg_match('/^[0-9]+(?:\.[0-9]+)?$/', $price)) {
+  return 'Price contains invalid characters.';
+}
+return true;
+}
+?>

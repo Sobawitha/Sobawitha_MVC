@@ -6,6 +6,7 @@
     display:grid;
     grid-template-columns:20% 70% 10%;
     padding-top:80px;
+    min-height: 60dvh;
     
   }
   
@@ -57,7 +58,7 @@
   
   .filter_section{
     display:grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 100%;
     
   }
 
