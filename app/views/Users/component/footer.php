@@ -46,6 +46,7 @@
                         <h2 class="dialog-title">Help</h2>
                         <label for="email">Email:</label>
                         <input type="email" id="email" value="<?php echo $userEmail; ?>" name="victim_mail" required>
+                        <br>
                         <label for="content">Content:</label>
                         <textarea id="content" name="content" required></textarea>
                         <button type="submit" class="dialog-submit" formaction="<?php echo URLROOT ?>/Users/help_center/">Submit</button>

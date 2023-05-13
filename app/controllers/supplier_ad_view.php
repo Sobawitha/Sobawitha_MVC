@@ -87,19 +87,38 @@
 
         /*add to cart */
         $current_status = $this->supplier_ad->check_similer_item($product_id,$user_id)->count_row;
+        $is_in_wishlist = $this-> supplier_ad -> is_in_wishlist($product_id) -> row_count;
+
+        // echo $is_in_wishlist;
+        // die();
         $data = [
           'product_id' => $_GET['product_id'],
           'quantity' => $quantity,
           'user_id' => $_SESSION['user_id'],
         ];
 
-        if($current_status>0){
-            $this->supplier_ad->update_cart($data);
+        if($current_status>0){ 
+            if($is_in_wishlist>0){
+                $this->raw_material_product->removeItem();
+                $this->supplier_ad->update_cart($data);
+                redirect('raw_material_orders/view_cart?product_id='.$product_id);
+            }
+            else{
+                $this->supplier_ad->update_cart($data);
             redirect('raw_material_orders/view_cart?product_id='.$product_id);
+            }
         }
         else{
-            $this->supplier_ad->add_to_cart($data);
-            redirect('raw_material_orders/view_cart?product_id='.$product_id);
+            
+            if($is_in_wishlist>0){
+                $this->supplier_ad->add_to_cart($data);
+                $this->raw_material_product->removeItem();
+                redirect('raw_material_orders/view_cart?product_id='.$product_id);
+            }
+            else{
+                $this->supplier_ad->add_to_cart($data);
+                redirect('raw_material_orders/view_cart?product_id='.$product_id); 
+            }    
         }
      }
 

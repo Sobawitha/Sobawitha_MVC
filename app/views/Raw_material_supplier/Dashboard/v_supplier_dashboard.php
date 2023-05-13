@@ -43,24 +43,24 @@
             <div class='card' id="card2">
                 <div class='content'>
                 <div class="p1">
-                    <p class="count"><?php echo $data['ongoing_order']?></p>
-                    <p class="topic">Ongoing Orders</p>
+                    <p class="count"><?php echo $data['complete_order']?></p>
+                    <p class="topic">complete Orders</p>
                     <p class="time_period">For previous year</P>
                 </div>
                 <div class="p2">
-                    <i class="fa-solid fa-bag-shopping" id="ongoin_order_icon"></i>
+                    <i class="fa-solid fa-bag-shopping" id="complete_order_icon"></i>
                 </div>
                 </div>
             </div>
             <div class='card' id="card3">
                 <div class='content'>
                     <div class="p1">
-                    <p class="count"><?php echo $data['ongoing_order']?></p>
-                    <p class="topic">Completed orders</p>
-                    <p class="time_period">For previous year</P>
+                    <p class="count"><?php echo $data['wishlist_items']?></p>
+                    <p class="topic">Wishlist items</p>
+                    <p class="time_period">For previous month</P>
                     </div>
                     <div class="p2">
-                    <i class="fa-solid fa-list" id="complete_order_icon"></i>
+                    <i class="fa-solid fa-gift" id="complete_order_icon"></i>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="chart" id="pie-chart">
-                    <h2>Order status</h2><br>
+                    <h2>Supply item counts</h2><br>
                     <div>
                         <canvas id="piechart"></canvas>
                     </div>

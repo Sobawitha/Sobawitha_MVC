@@ -18,7 +18,9 @@
 
         /*remove item to the wishlist(related both rawmaterials and fertilizer) */
         public function removeItem(){
-
+            // echo $_SESSION['user_id'];
+            // echo  $_GET['product_id'];
+            
             $this->db->query("DELETE FROM wishlist WHERE User_id = :user_id AND Product_id = :product_id");
             $this->db->bind(':user_id', $_SESSION['user_id']);
             $this->db->bind(':product_id', $_GET['product_id']);

@@ -5,8 +5,6 @@
 
 <script src='https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js'></script>
 
-
-
 <div class="body">
     <div class="section_1">
 
@@ -45,24 +43,24 @@
             <div class='card' id="card2">
                 <div class='content'>
                 <div class="p1">
-                    <p class="count"><?php echo $data['ongoing_order']?></p>
-                    <p class="topic">Ongoing Orders</p>
+                    <p class="count"><?php echo $data['complete_order']?></p>
+                    <p class="topic">complete Orders</p>
                     <p class="time_period">For previous year</P>
                 </div>
                 <div class="p2">
-                    <i class="fa-solid fa-bag-shopping" id="ongoin_order_icon"></i>
+                    <i class="fa-solid fa-bag-shopping" id="complete_order_icon"></i>
                 </div>
                 </div>
             </div>
             <div class='card' id="card3">
                 <div class='content'>
                     <div class="p1">
-                    <p class="count"><?php echo $data['ongoing_order']?></p>
-                    <p class="topic">Completed orders</p>
-                    <p class="time_period">For previous year</P>
+                    <p class="count"><?php echo $data['wishlist_items']?></p>
+                    <p class="topic">Wishlist items</p>
+                    <p class="time_period">For previous month</P>
                     </div>
                     <div class="p2">
-                    <i class="fa-solid fa-list" id="complete_order_icon"></i>
+                    <i class="fa-solid fa-gift" id="complete_order_icon"></i>
                     </div>
                 </div>
             </div>
@@ -94,7 +92,7 @@
                 </div>
 
                 <div class="chart" id="doughnut-chart">
-                    <h2>Order status</h2><br>
+                    <h2>Supply item counts</h2><br>
                     <div>
                         <canvas id="doughnut"></canvas>
                     </div>
@@ -133,28 +131,28 @@
                 
                 
                 /* donut chart */
-                fetch('<?php echo URLROOT ?>/seller_dashboard/order_status_donut_chart')
+                fetch('<?php echo URLROOT ?>/seller_dashboard/get_supply_item_details_chart')
                     .then(response => response.json())
                     .then(result => {
                         console.log(result); // Check the data in console
 
-                        var status = [];
+                        var month = [];
                         var count = [];
 
                         if (result.success) {
                             result.data.forEach(item => {
-                                status.push(item.status);
-                                count.push(item.num_orders);
+                                status.push(item.month);
+                                count.push(item.count);
                             });
 
                             // create chart after fetching data
                             var ctx2 = document.getElementById('doughnut').getContext('2d');
                             var myChart2 = new Chart(ctx2, {
-                                type: 'doughnut',
+                                type: 'bar',
                                 data: {
-                                    labels: status, // Corrected from categories to status
+                                    labels: month, // Corrected from categories to status
                                     datasets: [{
-                                        label: 'Count',
+                                        label: 'count',
                                         data: count,
                                         backgroundColor: [
                                             '#deeaee',
