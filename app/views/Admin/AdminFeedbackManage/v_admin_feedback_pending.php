@@ -208,7 +208,7 @@
                                                                 <button type="button" class="btn" id="clc" onclick="document.getElementById('feedback-details').close()">Close</button>
                                                                 <button type="submit" class="btn" id="reject-btn" onclick="closeFeedbackDetailsAndOpenAnotherPopup()">Reject</button>
                                                                 <script>
-                                                                                                                                function closeFeedbackDetailsAndOpenAnotherPopup() {
+                                                                function closeFeedbackDetailsAndOpenAnotherPopup() {
                                                                 // Close the feedback-details popup
                                                                 document.getElementById('feedback-details').close();
 
@@ -242,10 +242,11 @@
                                                 <br>
                                                 <label for="reason-details" class="reject_popup_labels">More details:</label>
                                                 <textarea id="reason-details" name="more_detail" rows="10"></textarea>
-                                                <input type="hidden" id="reason-details" value="<?php echo $feed->sender_email?>" name="sender_email">
+                                                <input type="text" id="reason-details" value="<?php echo $feed->sender_email?>" name="sender_email">
                                                 <!-- <input type="hidden" id="reason-details" value="<?php echo $feed->category?>" name="seller_category"> -->
                                                 <input type="hidden" id="reason-details" value="<?php echo $feed->firstname ?>" name="sender_name">
                                                 <input type="hidden" id="reason-details" value="<?php echo $feed->id?>" name="feedback_id">
+                                                <input type="text" id="reason-details" value="<?php echo $feed->order_id?>" name="order_id">
 
 
                                                 <br>
