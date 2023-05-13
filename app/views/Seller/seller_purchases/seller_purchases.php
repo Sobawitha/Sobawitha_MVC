@@ -21,17 +21,19 @@
         <hr>
 
         <span class="filter_section">
-            <form method="POST">
+            <form method="GET" class="searchForm" action="<?php echo URLROOT;?>/seller_purchase/sellerSearchAd">
             <div class="search_bar">
                 <div class="search_content">
                     
-                        <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="" require/></span>
+                        <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="" id="searchBar" require/></span>
+                        <!-- <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/></span> -->
                         <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
                         <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                     
                 </div>
             </div>
             </form>
+
         </span>
 
 
@@ -39,6 +41,7 @@
         <div class="sp_view_list">
         <div class="views">
 
+        <?php if(empty($data['message'])){ ?>
         <table class="sp_view_list_table">
                 <tr class="table_head">
                         <th>#</th>
@@ -47,7 +50,7 @@
                         <th>Quantity</th>
                         <th>Date</th>
                         <th>Price(Per item)</th>
-                        <th>Actions</th>
+                        <th>Options</th>
                 </tr>
 
                 <?php foreach($data['purchase_list'] as $purchase):?>
@@ -119,6 +122,10 @@
                 <?php endforeach?>
         </table>
 
+        <?php }else{ ?>
+        <span class="error_msg"><?php echo $data['message'];?></span>
+
+        <?php    }  ?>
         </div>
         </div>
         </div>
@@ -148,7 +155,16 @@
                 rating_popup.showModal();
         }
 
+
+
+        function open_cancel_btn(){
+        document.getElementById("cancel").style.display='block';
+        }
         
+        function clear_search_bar(){
+        document.getElementById("searchBar").value = "";
+        document.getElementById("cancel").style.display='none';
+        }
 
         const stars = document.querySelectorAll(".stars i");
         const selectedStars = document.getElementById("selected_stars");
