@@ -1,13 +1,19 @@
 <?php
     class seller_ad_management extends Controller{
         private $seller_ad_management_model;
+        private $notification_model;
+    
         public function __construct(){
             $this->seller_ad_management_model = $this->model('M_seller_ad_management');
+            $this->notification_model = $this->model('M_notifications');
     }
 
     public function View_listing(){
-        $userid = $_SESSION['user_id'];
+        
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==3){
+            $userid = $_SESSION['user_id'];
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
            
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -21,6 +27,8 @@
               'ads' =>  $ads,
               'search' => "Search by product title",
               'emptydata' => "No listings to Show...",
+              'no_of_notifications' =>$no_of_notifications,
+              'notifications' => $notifications
               
               ];
        
@@ -30,6 +38,8 @@
                     'ads' =>  $ads,
                     'search' => "Search by product title",
                     'emptydata' => '',
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                     
                     ]; 
             }
@@ -42,6 +52,8 @@
                   'ads' =>  $ads,
                   'search' => "Search by product title",
                   'emptydata' => "No listings to Show...",
+                  'no_of_notifications' =>$no_of_notifications,
+                  'notifications' => $notifications
                   
                   ];
            
@@ -51,6 +63,8 @@
                         'ads' =>  $ads,
                         'search' => "Search by product title",
                         'emptydata' => '',
+                        'no_of_notifications' =>$no_of_notifications,
+                        'notifications' => $notifications
                         ]; 
                 }
                 $this->view('Seller/Seller_add_management/v_seller_add_manage', $data);
@@ -63,13 +77,20 @@
 }
 
     public function add_listing(){
-        $userid = $_SESSION['user_id'];
+        
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==3){
+        $userid = $_SESSION['user_id'];
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+        $data=[
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
+        ];
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $userid = $_SESSION['user_id'];
-            $avg_rating = $this->seller_ad_management_model ->getAverageRating($userid);
+            $avg_rating = $this->seller_ad_management_model ->getAverageRating();
 
             $data = [
 
@@ -83,13 +104,14 @@
                 'quantity' => trim($_POST['quantity']),
                 'type' => trim($_POST['type']),
                 'current_status' => 0,
+                'category' => 'Fertilizer',
                 'created_by' => $userid,
-                'avg_rating' => $avg_rating,
+                'avg_rating' => $avg_rating->average_rating,
                 // 'fertilizer_image' =>$_FILES['fertilizer_img'],
                 // 'fertilizer_image_name' => trim($_POST['product_name']).'_'.$_FILES['fertilizer_img']['name'],
                 'fertilizer_image_err' => '',
                 'images' => $_FILES['images'],
-
+       
             ];
             
                // Upload and validate images
@@ -165,7 +187,7 @@
         }
 
         else{
-            $this->view('Seller/Seller_add_management/v_seller_add_advertisment');
+            $this->view('Seller/Seller_add_management/v_seller_add_advertisment', $data);
         }
 
     }else{
@@ -188,10 +210,14 @@
         $id = $_GET['fertilizer_id'];
 
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3){
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
             
             $fertilizer_details = $this->seller_ad_management_model->get_fertilizer_details($id);
             $data = [
                 'fertilizer_details'=>$fertilizer_details,
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
             ];
             
             $this->view('Seller/Seller_add_management/v_seller_update_add',$data);
@@ -215,7 +241,7 @@
                 'current_status'=>0,
                 'images' => $_FILES['images'],
 
-                'fertilizer_image_err' => ''
+                'fertilizer_image_err' => '',
             ];
              
              // Upload and validate images

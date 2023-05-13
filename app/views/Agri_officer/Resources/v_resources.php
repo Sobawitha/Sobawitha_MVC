@@ -24,9 +24,6 @@ else if($_SESSION['user_flag'] == 5){
     require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php';
     require APPROOT . '/views/Agri_officer/Agri_officer/Officer_Sidebar.php';
 }
-
-
-
 ?>
 
 

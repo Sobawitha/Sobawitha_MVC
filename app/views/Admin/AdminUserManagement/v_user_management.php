@@ -153,7 +153,7 @@
                       
                       <tr class="order">
                       <div class="order_detail">
-                      <td><?php echo ++$value ?></td>
+                      <td><?php echo $users->user_id ?></td>
                       <td><?php echo $users->first_name ?></td>
                       <td><?php echo $users->email ?></td>
                       <td><?php echo $users->nic_no ?></td>
@@ -236,25 +236,25 @@
                 <?php if ($data['search'] === 'Search by firstname | lastname | Address | NIC No | Email') : ?>
        
        <div class="pagination-container text-center">
-<?php if ($data['pagination']['total_pages'] > 1) : ?>
-<div class="pagination">
-   <?php if ($data['pagination']['current_page'] > 1) : ?>
-       <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>">Previous</a>
-   <?php endif; ?>
+        <?php if ($data['pagination']['total_pages'] > 1) : ?>
+        <div class="pagination">
+          <?php if ($data['pagination']['current_page'] > 1) : ?>
+              <a href="?page=<?php echo $data['pagination']['current_page'] - 1; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>">Previous</a>
+          <?php endif; ?>
 
-   <?php for ($i = 1; $i <= $data['pagination']['total_pages']; $i++) : ?>
-       <?php if ($i == $data['pagination']['current_page']) : ?>
-           <span class="current-page"><?php echo $i; ?></span>
-       <?php else : ?>
-           <a href="?page=<?php echo $i; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>"><?php echo $i; ?></a>
-       <?php endif; ?>
-   <?php endfor; ?>
+          <?php for ($i = 1; $i <= $data['pagination']['total_pages']; $i++) : ?>
+              <?php if ($i == $data['pagination']['current_page']) : ?>
+                  <span class="current-page"><?php echo $i; ?></span>
+              <?php else : ?>
+                  <a href="?page=<?php echo $i; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>"><?php echo $i; ?></a>
+              <?php endif; ?>
+          <?php endfor; ?>
 
-   <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']) : ?>
-       <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>">Next</a>
-   <?php endif; ?>
-</div>
-<?php endif; ?>
+          <?php if ($data['pagination']['current_page'] < $data['pagination']['total_pages']) : ?>
+              <a href="?page=<?php echo $data['pagination']['current_page'] + 1; ?>&user_type=<?php echo isset($_GET['user_type']) ? $_GET['user_type'] : $_SESSION['radio_admin_role']; ?>">Next</a>
+          <?php endif; ?>
+        </div>
+        <?php endif; ?>
    </div>
 
    <?php endif; ?>

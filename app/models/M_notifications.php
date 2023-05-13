@@ -46,6 +46,13 @@ class M_notifications
         return $this->db->resultSet();
     }
 
+    public function delete_notification($id){
+        $this->db->query("DELETE from notification where noti_id = :id");
+        $this->db->bind(":id", $id);
+        $this->db->execute();
+    }
+
+
    
 
 }

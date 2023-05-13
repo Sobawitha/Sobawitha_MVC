@@ -266,11 +266,17 @@
     line-height: 22px;
     margin-left:20px;
     margin-right:20px;
-    margin-top:0px;
+    margin-top:20px;
     padding-bottom:20px;
     transform: translateY(10px);
     font-weight: 900px;
     color:rgb(63, 62, 62);
+}
+
+.blog_post_content::first-letter{
+    color:green;
+    font-size:25px;
+    font-weight:bold;
 }
 .rhs{
     margin-top:35px;

@@ -16,9 +16,10 @@
             <div class="search_bar">
                 <div class="search_content">
                     
-                        <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" require/></span>
-                        <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                        <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                        <span class="search_cont"  onclick="open_cansel_btn()"><input type="text" name="search_text" id="search_text" require/></span>
+                        <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel"  ></i></button>
+                        <span  class="search_btn" onclick="search()"><i class="fa fa-search" aria-hidden="true" id="search" ></i></span>
+                        
                     
                 </div>
             </div>
@@ -42,24 +43,24 @@
             <div class='card' id="card2">
                 <div class='content'>
                 <div class="p1">
-                    <p class="count"><?php echo $data['ongoing_order']?></p>
-                    <p class="topic">Ongoing Orders</p>
+                    <p class="count"><?php echo $data['complete_order']?></p>
+                    <p class="topic">complete Orders</p>
                     <p class="time_period">For previous year</P>
                 </div>
                 <div class="p2">
-                    <i class="fa-solid fa-bag-shopping" id="ongoin_order_icon"></i>
+                    <i class="fa-solid fa-bag-shopping" id="complete_order_icon"></i>
                 </div>
                 </div>
             </div>
             <div class='card' id="card3">
                 <div class='content'>
                     <div class="p1">
-                    <p class="count"><?php echo $data['ongoing_order']?></p>
-                    <p class="topic">Completed orders</p>
-                    <p class="time_period">For previous year</P>
+                    <p class="count"><?php echo $data['pending_ads']?></p>
+                    <p class="topic">No of pending ads</p>
+                    <p class="time_period">For previous month</P>
                     </div>
                     <div class="p2">
-                    <i class="fa-solid fa-list" id="complete_order_icon"></i>
+                    <i class="fa-solid fa-gift" id="complete_order_icon"></i>
                     </div>
                 </div>
             </div>
@@ -90,48 +91,73 @@
                     </div>
                 </div>
 
-                <div class="chart" id="pie-chart">
-                    <h2>Order status</h2><br>
+                <div class="chart" id="bar-chart">
+                    <h2>Supply item counts</h2><br>
                     <div>
-                        <canvas id="piechart"></canvas>
+                        <canvas id="bar"></canvas>
                     </div>
                 </div>
 
                 
 <script>
+                
+            /*for search bar */
+            function search(){
+                let searchTerm = document.getElementById("search_text").value;
+                if (searchTerm) {
+                const regex = new RegExp(searchTerm, 'gi');
+                const elements = document.querySelectorAll('body *');
+                for (let i = 0; i < elements.length; i++) {
+                    const element = elements[i];
+                    if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) {
+                    const text = element.childNodes[0].textContent;
+                    if (text.match(regex)) {
+                        const highlightedText = text.replace(regex, '<span class="highlight">$&</span>');
+                        element.innerHTML = highlightedText;
+                    }
+                    }
+                }
+                }
+
+            }
+
+            function open_cansel_btn(){
+                document.getElementById("cansel").style.display='block';
+            }
+
+            function clear_search_bar(){
+                document.querySelector(".search_cont").value='';
+                document.getElementById("cansel").style.display='none';
+            }
                 /* donut chart */
-                fetch('<?php echo URLROOT ?>/supplier_dashboard/order_status_donut_chart')
+                fetch('<?php echo URLROOT ?>/supplier_dashboard/get_supply_item_details_chart')
                     .then(response => response.json())
                     .then(result => {
-                        console.log(result); // Check the data in console
+                        console.log('result'); // Check the data in console
 
-                        var status = [];
+                        var month = [];
                         var count = [];
 
                         if (result.success) {
                             result.data.forEach(item => {
-                                status.push(item.status);
-                                count.push(item.num_orders);
+                                month.push(item.month);
+                                count.push(item.count);
                             });
 
                             // create chart after fetching data
-                            var ctx2 = document.getElementById('piechart').getContext('2d');
+                            var ctx2 = document.getElementById('bar').getContext('2d');
                             var myChart2 = new Chart(ctx2, {
-                                type: 'pie',
+                                type: 'line',
                                 data: {
-                                    labels: status, // Corrected from categories to status
+                                    labels: month,
                                     datasets: [{
                                         label: 'Count',
                                         data: count,
                                         backgroundColor: [
-                                            '#deeaee',
-                                            '#9bf4d5',
-                                           
+                                            '#346357',   
                                         ],
                                         borderColor: [
-                                            '#deeaee',
                                             '#9bf4d5',
-                                            
                                         ],
                                         borderWidth: 1
                                     }]
@@ -143,21 +169,20 @@
 
                             // resize chart on window resize
                             $(window).resize(function() {
-                                var width = $('#piechart').width();
-                                var height = $('#piechart').height();
-                                myChart2.canvas.width = width;
-                                myChart2.canvas.height = height;
-                                myChart2.resize();
+                                var width = $('#bar').width();
+                                var height = $('#bar').height();
+                                myChart1.canvas.width = width;
+                                myChart1.canvas.height = height;
+                                myChart1.resize();
                             });
                         }
-                        else {
+                        else{
                             console.log("error");
                         }
                     })
                     .catch(error => {
                         console.error(error);
                     });
-
                 
                     /*line chart */
                     fetch('<?php echo URLROOT ?>/supplier_dashboard/income_linechart')
@@ -303,7 +328,16 @@
 </div>
 
 
-
+<style>
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+  width: 100%;
+  margin: 20px;
+  padding-top: 0px;
+}
+</style>
                
 
 

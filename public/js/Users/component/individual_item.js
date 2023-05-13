@@ -4,7 +4,7 @@
 if(document.querySelector(".hidden").textContent){
 
      
-    console.log("dummy_content");
+   
     popUpOpen("Product added to the Cart");
    
 }
@@ -217,14 +217,14 @@ xhr.send();
 
 function  popUpOpen(stmt){
     
-    const dialog = document.querySelector('#my-dialog');
+    const dialogBtn = document.querySelector('#my-dialog');
 
-    dialog.showModal();
+    dialogBtn.showModal();
 
     document.querySelector('#my-dialog p').innerHTML = stmt;
      const dialogCloseButton = document.querySelector('#dialog-close-button');
      dialogCloseButton.addEventListener('click', () => {
-     dialog.close();
+     dialogBtn.close();
         
     
 });

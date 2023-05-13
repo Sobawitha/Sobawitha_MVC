@@ -40,21 +40,26 @@
             <div class="cardholder-name">
               <label for="cardholder-name" class="label-default">First Name</label>
               <input type="text" name="cardholder-name" id="cardholder-name" class="input-default"  value = "<?php  if(isset($data['user']->first_name)){echo $data['user']->first_name;}?>"/>
+              <span></span>
             </div>
 
             <div class="card-number">
               <label for="card-number" class="label-default">Last name</label>
               <input type="text" name="card-number" id="card-number" class="input-default" value = "<?php  if(isset($data['user']->last_name)){echo $data['user']->last_name; } ?>" />
+              <span></span>
             </div>
             <div class="card-number">
               <label for="card-number" class="label-default">Address</label>
               <input type="text" name="card-number" id="card-number" class="input-default" placeholder="House number and street name"/>
-             <br><br>
+              <span></span>
+              <br><br>
               <input type="text" name="card-number" id="card-number" class="input-default" placeholder="Apartment, suite, unit etc. (optional)" />
+              <span></span>
             </div>
             <div class="card-number">
               <label for="card-number" class="label-default">Email</label>
               <input type="text" name="card-number" id="card-number" class="input-default" value = "<?php if(isset($data['user']->email)){echo $data['user']->email; } ?>" />
+              <span></span>
             </div>
 
             <div class="input-flex">
@@ -65,19 +70,19 @@
                 <div class="input-flex">
 
                   <input type="text" name="day" id="expire-date"  class="input-default"  value="<?php if(isset($data['user']->contact_no)){echo $data['user']->contact_no;} ?>"/>
-                  
+                  <span></span>
              
 
                 </div>
               </div>
-
+              
               <div class="expire-date">
-                <label for="expire-date" class="label-default">ZIP</label>
-
+                <label for="card-number" class="label-default">ZIP</label>  
+                
                 <div class="input-flex">
-
+                 
                   <input type="text" name="day" id="expire-date" placeholder="31" min="1" max="31" class="input-default" />
-                  
+                  <span></span>
              
 
                 </div>
@@ -181,8 +186,31 @@
 
 <script>
   function alertProcess(){
+
+    let inputs = document.querySelectorAll(".input-default");
+
+    for(let i = 0; i < inputs.length; i++){
+      let span = (inputs[i].nextElementSibling)
+      span.textContent = "";
+    }
+    console.log(inputs)
+   let flag = true;
+    for(let i = 0; i < inputs.length; i++){
+      let span = (inputs[i].nextElementSibling)
+      if(inputs[i].value == ''){
+        
+
+        span.style.color = "red";
+        flag = false;
+       span.textContent = "Required*";
+
+        
+      }
+    }
    
-    document.getElementById("dialog-box").style.display = "block";
+
+    if(flag == true)
+    {(document.getElementById("dialog-box")).style.display = "block";}
 
   }
 

@@ -65,21 +65,7 @@ body {
 
 
 
-.dropdown-content {
-  position: absolute;
-  top:67px;
-  right: 0;
-  display: none;
-  flex-direction: column;
-  align-items: flex-start;
-  gap:5px;
-  background-color: #fff;
-  padding:20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 5px #00000031;
-  z-index: 4000;
-  transition: all .2s ease-in-out;
-}
+
 
 .dropdown-content a {
   color: black;
@@ -87,7 +73,7 @@ body {
   text-decoration: none;
   display:inline-block;
   margin: 0;
-  font-size:13px;
+  font-size:10px;
 }
 
 .dropdown-content a:hover {
@@ -121,8 +107,10 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px 5px #00000031;
   z-index: 8000;
-  border-top:45px solid rgb(225, 225, 225);
+  border-top:45px solid rgb(72, 67, 67);
   transform:translateX(-20px);
+  width:251px;
+  text-align:center;
 }
 
 .notification_section_header{
@@ -134,16 +122,17 @@ body {
 }
 
 #gear{
-  margin-left:90px;
+  margin-left:140px;
 }
 
 .notification-dropdown-content span {
   color: black;
-  padding: 18px 21px;
+  padding: 18px 18px 18px 10px;
   text-decoration: none;
   display:inline-block;
   margin: 0;
   font-size:13px;
+  text-align:center;
 }
 
 .notification-dropdown-content span:hover {
@@ -160,22 +149,23 @@ body {
 }
 
 #mail{
-  color:rgb(188, 251, 188);
-  border:1px solid rgb(188, 251, 188);
 
-  color:rgb(107, 103, 80);;
-  border:1px solid rgb(107, 103, 80);;
+  color: salmon;
+  border: 1px solid salmon;
+  font-size:12px;
 }
 
 #forum{
   color:rgb(81, 111, 143);
   border:1px solid rgb(81, 111, 143);
+  font-size:12px;
 }
 
 #messages{
   padding:5px;
   color:rgb(228, 196, 244);
   border:1px solid rgb(228, 196, 244);
+  font-size:12px;
 }
 
 .notification_hr{
@@ -187,10 +177,9 @@ body {
   font-size:12px;
   color:rgb(187, 184, 184);
   margin-top:50px;
-  margin-left:75px;
+  margin-left:100px;
   text-align: center;
-  cursor:pointer;
-  
+  cursor:pointer;  
 }
 
 .see_more_txt{
@@ -237,4 +226,21 @@ body {
 
 #leaf1{
   display:none;
+}
+
+.dropdown-content {
+  position: absolute;
+  top:67px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap:5px;
+  background-color: #fff;
+  padding:20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 5px #00000031;
+  z-index: 4000;
+  transition: all .2s ease-in-out;
+  width:250px;
 }

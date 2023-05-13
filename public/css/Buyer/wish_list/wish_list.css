@@ -92,19 +92,13 @@
 
 .add_to_cart{
     border:none;
-    /* background-color:rgb(251, 245, 223);
-    color:rgb(8, 93, 77); */
-
-    /* border:2px solid salmon;
-    background-color: transparent;
-    color:rgb(159, 154, 154); */
     text-decoration: none;
     background-color:rgb(1, 40, 38);
     color:white;
     font-weight:bold;
     cursor:pointer;
-    padding:8px;
-    border-radius:15px;
+    padding:6px;
+    border-radius:25px;
     width:75%;
     margin-top:20px;
 }

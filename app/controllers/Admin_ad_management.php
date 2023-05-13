@@ -3,11 +3,16 @@
         private $adminAdMgmtModel;
         public function __construct(){
             $this->adminAdMgmtModel = $this->model('M_Admin_ad_management');
+            $this->notification_model = $this->model('M_notifications');
     }
    
    public function reviewed_ads(){
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+    $notifications = $this->notification_model->notifications();
     $data=[
-        'title' => 'Sobawitha'
+        'title' => 'Sobawitha',
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications
     ];
     $this->view('Admin/AdminAdManage/v_ad_manage_reviewed', $data);
   
@@ -30,6 +35,8 @@
 
 public function ad_management_view()
 {
+  $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+  $notifications = $this->notification_model->notifications();
   $records_per_page = 4;
 
 if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
@@ -61,6 +68,8 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
           'products' =>  $products['products'],
           'search' => "Search by title of the advertisement",
           'emptydata' => "No Advertisements to Show...",
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
           'pagination' => [
              'total_records' => $total_records,
@@ -76,6 +85,8 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
             'search' => "Search by title of the advertisement",
             'emptydata' => '',
             'adType' => $_SESSION['radio_admin_ad'],
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             
             'pagination' => [
                'total_records' => $total_records,
@@ -104,6 +115,8 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
             'products' =>  $products['products'],
             'search' => "Search by title of the advertisement",
             'emptydata' => "No Advertisements to Show...",
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             
             'pagination' => [
                'total_records' => $total_records,
@@ -119,6 +132,8 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
               'search' => "Search by title of the advertisement",
               'emptydata' => '',
               'adTypes' => $_SESSION['radio_admin_ad'],
+              'no_of_notifications' =>$no_of_notifications,
+              'notifications' => $notifications,
               
               'pagination' => [
                  'total_records' => $total_records,
@@ -146,6 +161,8 @@ if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
 
 public function  adminSearchAd()
 {
+  $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+  $notifications = $this->notification_model->notifications();
   $records_per_page = 4;
   if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
 
@@ -163,6 +180,8 @@ public function  adminSearchAd()
         'search' => "Search by title of the advertisement",
         'message' => '',
         'emptydata' => "No Advertisements to Show...",
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
         
         'pagination' => [
            'total_records' => $total_records,
@@ -177,6 +196,8 @@ public function  adminSearchAd()
           'search' => "Search by title of the advertisement",
           'message' => '',
           'emptydata' => '',
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
           'pagination' => [
              'total_records' => $total_records,
@@ -210,6 +231,8 @@ public function  adminSearchAd()
           'search' => $search,
           'message' => $message,
           'emptydata' => '',
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
           'pagination' => [
              'total_records' => $total_records,
