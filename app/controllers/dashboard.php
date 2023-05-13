@@ -182,15 +182,19 @@ class dashboard extends Controller{
 
     
 
-    public function supplier_dashboard(){
-        $data = [];
-        $this->view('Raw_material_supplier/Dashboard/v_supplier_dashboard', $data);
-    }
+    //for buyre dashbloard
 
     public function buyer_dashboard(){
-        $data = [];
-        $data['purchases_count'] = $this->buyer_model->getTotalPurchases();
-        $data['review_count']    = $this->buyer_model->getTotalReviews();
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+        $total = $this->buyer_model->getTotalPurchases();;
+        $totReviews = $this->buyer_model->getTotalReviews();
+        $data = [
+            'no_of_notifications' => $no_of_notifications,
+            'notifications' => $notifications,
+            'purchases_count' => $total,
+            'review_count' => $totReviews
+        ];
         $this->view('Buyer/Dashboard/v_buyer_dashboard', $data);
     }
 

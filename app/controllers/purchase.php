@@ -5,10 +5,16 @@ class purchase extends Controller {
     private $buyerModel;
     public function __construct(){
         $this->buyerModel = $this->model('M_buyer');
+        $this->notification_model = $this->model('M_notifications');
     }
 
     public function display_all_purchases(){
-        $data = [];
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+        $data = [
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
+        ];
                                                                         
         $this->view('Buyer/Purchases/purchase_list',$data);
     }

@@ -114,16 +114,7 @@ else if($_SESSION['user_flag'] == 4){
     </div>
 
 
-        <div class="dropdown-content" hidden>
-            <a href="">Best Match</a>
-            <a href="">Price Low to High</a>
-            <a href="">Price High to Low</a>
-        </div>
-
-        <div class="search_bar_filter">
-                <span class="filter_title">Sort by : </span>
-                <span class="sort_type" onclick="open_sorttype()">Best match<i class="fa-solid fa-chevron-down" id="drop_down"></i></span>
-        </div>
+        
 
         </div>
 
