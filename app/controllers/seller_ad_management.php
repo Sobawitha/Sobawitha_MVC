@@ -1,6 +1,8 @@
 <?php
     class seller_ad_management extends Controller{
         private $seller_ad_management_model;
+        private $notification_model;
+    
         public function __construct(){
             $this->seller_ad_management_model = $this->model('M_seller_ad_management');
             $this->notification_model = $this->model('M_notifications');
@@ -88,7 +90,7 @@
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $userid = $_SESSION['user_id'];
-            $avg_rating = $this->seller_ad_management_model ->getAverageRating($userid);
+            $avg_rating = $this->seller_ad_management_model ->getAverageRating();
 
             $data = [
 
@@ -102,8 +104,9 @@
                 'quantity' => trim($_POST['quantity']),
                 'type' => trim($_POST['type']),
                 'current_status' => 0,
+                'category' => 'Fertilizer',
                 'created_by' => $userid,
-                'avg_rating' => $avg_rating,
+                'avg_rating' => $avg_rating->average_rating,
                 // 'fertilizer_image' =>$_FILES['fertilizer_img'],
                 // 'fertilizer_image_name' => trim($_POST['product_name']).'_'.$_FILES['fertilizer_img']['name'],
                 'fertilizer_image_err' => '',

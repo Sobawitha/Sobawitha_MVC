@@ -208,7 +208,7 @@
                                                                 <button type="button" class="btn" id="clc" onclick="document.getElementById('feedback-details').close()">Close</button>
                                                                 <button type="submit" class="btn" id="reject-btn" onclick="closeFeedbackDetailsAndOpenAnotherPopup()">Reject</button>
                                                                 <script>
-                                                                                                                                function closeFeedbackDetailsAndOpenAnotherPopup() {
+                                                                function closeFeedbackDetailsAndOpenAnotherPopup() {
                                                                 // Close the feedback-details popup
                                                                 document.getElementById('feedback-details').close();
 
@@ -246,6 +246,7 @@
                                                 <!-- <input type="hidden" id="reason-details" value="<?php echo $feed->category?>" name="seller_category"> -->
                                                 <input type="hidden" id="reason-details" value="<?php echo $feed->firstname ?>" name="sender_name">
                                                 <input type="hidden" id="reason-details" value="<?php echo $feed->id?>" name="feedback_id">
+                                                <input type="hidden" id="reason-details" value="<?php echo $feed->order_id?>" name="order_id">
 
 
                                                 <br>
