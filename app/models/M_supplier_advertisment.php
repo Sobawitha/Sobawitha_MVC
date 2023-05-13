@@ -160,6 +160,20 @@ class M_supplier_advertisment
         }
     }
 
+
+    // search
+    public function getSearchAds($search)
+    {
+        $user_id = $_SESSION['user_id'];
+        $this->db->query('UPDATE raw_material SET current_status = 3 WHERE date <= DATE_SUB(NOW(), INTERVAL 2 WEEK)');
+        $this->db->execute();
+
+        $this->db->query("SELECT * FROM raw_material WHERE ((ad_status != 1 AND CONCAT(product_name, price, quantity) LIKE '%$search%' ) AND user_id = :uid)");
+        $this->db->bind(':uid', $user_id);
+        $result=$this->db->resultSet();
+        return $result;
+    }
+
 }
 
 

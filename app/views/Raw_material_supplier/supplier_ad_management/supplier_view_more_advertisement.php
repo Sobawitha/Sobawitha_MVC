@@ -244,8 +244,20 @@ $content = $data['adcontent'];
 
         <div class="thumbnail-images">
           <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->raw_material_image; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->raw_material_image; ?>')">
-          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->rm_image_two; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->rm_image_two; ?>')">
-          <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->rm_image_three; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->rm_image_three; ?>')">
+
+          <?php if($content->rm_image_two == ''): ?>
+            <img src="<?php echo URLROOT; ?>/img/postsImgs/default_upload.png" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/default_upload.png')">
+          <?php else: ?>
+            <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->rm_image_two; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->rm_image_two; ?>')">
+            
+          <?php endif; ?>
+
+          <?php if($content->rm_image_three == ''): ?>
+            <img src="<?php echo URLROOT; ?>/img/postsImgs/default_upload.png" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/default_upload.png')">
+          <?php else: ?>
+            <img src="<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->rm_image_three; ?>" class="thumbnail" onclick="changeImage('<?php echo URLROOT; ?>/img/postsImgs/<?php echo $content->rm_image_three; ?>')">
+            
+          <?php endif; ?>
         </div>
 
         <div id="myModal" class="modal">

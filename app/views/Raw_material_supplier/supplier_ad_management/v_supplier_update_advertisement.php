@@ -4,7 +4,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT.'/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
-<link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Raw_material_supplier/ad_management/ad_advertisment.css"></link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/Raw_material_supplier/ad_management/update_advertisement.css"></link>
 <div class="body">
     <div class="section_1">
 
@@ -90,7 +90,7 @@
                       <span class="details">Unit Price (Rs.)</span>
                     </div>
 
-                  <div class="input_flex">
+                  <div class="input_box">
                     <input type="text" name="price" placeholder="Enter unit price" value="<?php echo $data['price']; ?>" required>
                     <span class="error_msg"><?php echo $data['price_err'] ?></span>
                   </div>
@@ -111,7 +111,11 @@
 
                   <div class="input-box">
                     <span class="details">Type</span>
-                    <input type="text" name="type" placeholder="" value="<?php echo $data['type']; ?>" required>
+                    <!-- <input type="text" name="type" placeholder="" value="" required> -->
+                    <select name="type" value="" id="category" required>
+                              <option value="Solid" <?php if($data['type'] == 'Solid') echo 'selected'; ?>>Solid</option>
+                              <option value="Liquid" <?php if($data['type'] == 'Liquid') echo 'selected'; ?>>Liquid</option>
+                    </select>
                     <span class="error_msg"><?php echo $data['type_err'] ?></span>
                   </div>
                   <div class="input-box">
@@ -121,7 +125,7 @@
                   </div>
                   <div class="input-box">
                     <span class="details">Available quantity</span>
-                    <div class="flex_view">
+                    <div class="input-box">
                       <input type="text" name="quantity" placeholder="" value="<?php echo $data['quantity']; ?>" required>
                       <span class="error_msg"><?php echo $data['quantity_err'] ?></span>
                       

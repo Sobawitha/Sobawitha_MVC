@@ -4,7 +4,7 @@
 <?php require APPROOT . '/views/Users/component/Header.php'?>
 <?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>
-<link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_advertisment.css"></link>
+<link rel="stylesheet" href="../css/Raw_material_supplier/ad_management/ad_advertisement.css"></link>
 
 <!-- <script src="../js/Raw_material_supplier/ad_management/ad_add.js"></script> -->
 
@@ -75,7 +75,7 @@
                       <span class="details">Unit Price (Rs.)</span>
                     </div>
 
-                    <div class="input_flex">
+                    <div class="input_box">
                       <input type="text" placeholder="Enter unit price" name="price" required>
                       <span class="error_msg"><?php echo $data['price_err'] ?></span>
 
@@ -85,18 +85,23 @@
 
                   <div class="input-box">
                     <span class="details">Type</span>
-                    <input type="text" placeholder="" name="type" required>
+                    <!-- <input type="text" placeholder="Enter type" name="type" required> -->
+                    <select name="type" id="category" required>
+                              <option value="Solid">Solid</option>
+                              <option value="Liquid">Liquid</option>
+                    </select>
                     <span class="error_msg"><?php echo $data['type_err'] ?></span>
+                    
                   </div>
                   <div class="input-box">
                     <span class="details">Manufacturer</span>
-                    <input type="text" placeholder="" name="manufacturer" required>
+                    <input type="text" placeholder="Enter manufacturer" name="manufacturer" required>
                     <span class="error_msg"><?php echo $data['manufacturer_err'] ?></span>
                   </div>
                   <div class="input-box">
                     <span class="details">Available quantity</span><br>
-                    <div class="flex_view">
-                      <input type="text" placeholder="" name="quantity" required>
+                    <div class="input box">
+                      <input type="text" placeholder="Enter available quantity" name="quantity" required>
                       <span class="error_msg"><?php echo $data['quantity_err'] ?></span>
                       
                   </div>

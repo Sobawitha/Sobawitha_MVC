@@ -22,7 +22,8 @@
             $posts = $this->supplier_ad->getPostsfilter($filter_type);
         
             $data = [
-                'posts' => $posts
+                'posts' => $posts,
+                'search'=>'Search by Title | price | quantity'
             ];
         
             $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
@@ -31,7 +32,8 @@
             $posts = $this->supplier_ad->getPostsfilter();
         
             $data = [
-                'posts' => $posts
+                'posts' => $posts,
+                'search'=>'Search by Title | price | quantity'
             ];
         
             $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
@@ -101,7 +103,7 @@
                 }
             }
             else {
-                // $data['image_name2'] = null;
+                $data['image_name2'] = null;
             }
 
             //validation
@@ -114,7 +116,7 @@
                 }
             }
             else {
-                // $data['image_name3'] = null;
+                $data['image_name3'] = null;
             }
 
             // 2023.05.11
@@ -472,6 +474,42 @@
             else {
                 die('Something went wrong');
             }
+        }
+    }
+
+
+    // search
+    public function  supplierSearchads()
+    {
+        if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==4){  
+    
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+        $_GET=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $search=trim($_POST['search']);
+            
+            $posts= $this->supplier_ad->getSearchAds($search);
+            $message = '';
+            if (empty($posts)) {
+                $message = 'No users found...';
+            }
+            $data=[                      
+                'posts'=>$posts,
+                'search'=>$search,
+                'message' => $message
+            ];
+            $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management',$data);
+        }else{
+            $data=[                      
+                'posts'=>'',
+                'search'=>'',
+                'message' => ''
+            ];
+            $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management',$data);
+        }
+
+        }else{
+        redirect('Login/login');  
         }
     }
 }
