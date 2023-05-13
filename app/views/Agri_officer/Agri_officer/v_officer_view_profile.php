@@ -2,8 +2,8 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 <?php require APPROOT.'/views/Agri_officer/Agri_officer/officer_topnavbar.php'?>
 <?php require APPROOT.'/views/Agri_officer/Agri_officer/Officer_Sidebar.php'?>
-<!-- <script src="../js/Users/Notifications/push_notifications_profile.js"></script> -->
-<!-- <script src="../js/Admin/Profile/profile.js"></script> -->
+<script src="../js/Users/Notifications/push_notifications_profile.js"></script> 
+<script src="../js/Admin/Profile/profile.js"></script>
 
 
 

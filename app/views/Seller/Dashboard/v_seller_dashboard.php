@@ -91,10 +91,10 @@
                     </div>
                 </div>
 
-                <div class="chart" id="doughnut-chart">
+                <div class="chart" id="bar-chart">
                     <h2>Supply item counts</h2><br>
                     <div>
-                        <canvas id="doughnut"></canvas>
+                        <canvas id="bar"></canvas>
                     </div>
                 </div>
 
@@ -131,40 +131,35 @@
                 
                 
                 /* donut chart */
+                /*line chart */
                 fetch('<?php echo URLROOT ?>/seller_dashboard/get_supply_item_details_chart')
                     .then(response => response.json())
                     .then(result => {
-                        console.log(result); // Check the data in console
+                        console.log('result'); // Check the data in console
 
                         var month = [];
                         var count = [];
 
                         if (result.success) {
                             result.data.forEach(item => {
-                                status.push(item.month);
+                                month.push(item.month);
                                 count.push(item.count);
                             });
 
                             // create chart after fetching data
-                            var ctx2 = document.getElementById('doughnut').getContext('2d');
+                            var ctx2 = document.getElementById('bar').getContext('2d');
                             var myChart2 = new Chart(ctx2, {
                                 type: 'bar',
                                 data: {
-                                    labels: month, // Corrected from categories to status
+                                    labels: month,
                                     datasets: [{
-                                        label: 'count',
+                                        label: 'Count',
                                         data: count,
                                         backgroundColor: [
-                                            '#deeaee',
-                                            '#9bf4d5',
-                                            '#346357',
-                                            '#c94c4c'
+                                            '#346357',   
                                         ],
                                         borderColor: [
-                                            '#deeaee',
                                             '#9bf4d5',
-                                            '#346357',
-                                            '#c94c4c'
                                         ],
                                         borderWidth: 1
                                     }]
@@ -176,21 +171,21 @@
 
                             // resize chart on window resize
                             $(window).resize(function() {
-                                var width = $('#doughnut').width();
-                                var height = $('#doughnut').height();
-                                myChart2.canvas.width = width;
-                                myChart2.canvas.height = height;
-                                myChart2.resize();
+                                var width = $('#bar').width();
+                                var height = $('#bar').height();
+                                myChart1.canvas.width = width;
+                                myChart1.canvas.height = height;
+                                myChart1.resize();
                             });
                         }
-                        else {
+                        else{
                             console.log("error");
                         }
                     })
                     .catch(error => {
                         console.error(error);
                     });
-
+                
                 
                     /*line chart */
                     fetch('<?php echo URLROOT ?>/seller_dashboard/income_linechart')

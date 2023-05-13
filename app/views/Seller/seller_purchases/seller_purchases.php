@@ -32,12 +32,6 @@
                 </div>
             </div>
             </form>
-
-            <select name="time_period" id="time_period">
-                <option value="last_7_days">Last 7 Days</option>
-                <option value="last_month">Last Month</option>
-                <option value="last_year" >Last Year</option>
-            </select>
         </span>
 
 

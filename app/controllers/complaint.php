@@ -11,10 +11,14 @@ class complaint extends Controller
 
     public function contact_us(){
         if(isset($_SESSION['user_id'])){
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
             $userid = $_SESSION['user_id'];
             $user_email = $this->complaint_model-> find_email($userid)->user_email;
             $_SESSION['user_email']=$user_email;
-            $data = [];
+            $data = [
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications];
             $this->view('Users/complaint/v_contact_us', $data);
     
         }

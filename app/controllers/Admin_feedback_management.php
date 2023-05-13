@@ -3,17 +3,24 @@
         private $adminFeedMgntModel;
         public function __construct(){
             $this->adminFeedMgntModel = $this->model('M_Admin_feedback_management');
+            $this->notification_model = $this->model('M_notifications');
     }
    
    public function feed_reviewed(){
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+    $notifications = $this->notification_model->notifications();
     $data=[
-        'title' => 'Sobawitha'
+        'title' => 'Sobawitha',
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
     ];
     $this->view('Admin/AdminFeedbackManage/v_admin_feedback_publish', $data);
   
    }
 
    public function view_feedback(){
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+    $notifications = $this->notification_model->notifications();
     $records_per_page = 3;
      
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
@@ -45,6 +52,8 @@
         'feed' =>  $feed['rows'],
         'search' =>'Search by feedback category',
         'emptydata' => "No feedbacks to Show...",
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
          
         'pagination' => [
             'total_records' => $total_records,
@@ -59,7 +68,9 @@
                 'search' =>'Search by feedback category',
                 'emptydata' => '',
                 'feedType' => $_SESSION['radio_admin_feed'],
-                 
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
+
                 'pagination' => [
                     'total_records' => $total_records,
                     'records_per_page' => $records_per_page,
@@ -83,6 +94,8 @@
                 'feed' =>  $feed['rows'],
                 'search' =>"Search by feedback category",
                 'emptydata' => "No feedbacks to Show...",
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
                  
                 'pagination' => [
                     'total_records' => $total_records,
@@ -97,8 +110,9 @@
                     'search' => "Search by feedback category",
                     'emptydata'=>'',
                     'feedType' => $_SESSION['radio_admin_feed'],
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications,
 
-                    
                     'pagination' => [
                       'total_records' => $total_records,
                       'records_per_page' => $records_per_page,
@@ -119,6 +133,8 @@
 
   public function  adminSearchFeedback()
   {
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+    $notifications = $this->notification_model->notifications();
     $records_per_page = 3;
     if (isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
 
@@ -135,6 +151,8 @@
         'search' => "Search by feedback category",
         'message' => '',
         'emptydata' => "No Feedbacks to Show...",
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
 
         'pagination' => [
           'total_records' => $total_records,
@@ -149,6 +167,8 @@
           'search' => "Search by feedback category",
           'message' => '',
           'emptydata' =>'',
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
   
           'pagination' => [
             'total_records' => $total_records,
@@ -183,6 +203,8 @@
             'search' =>  $search,
             'message' => $message,
             'emptydata' => '',
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             'pagination' => [
               'total_records' => $total_records,
               'records_per_page' => $records_per_page,
