@@ -4,12 +4,15 @@
         private $adminPaymentModel;
         public function __construct(){
             $this->adminPaymentModel = $this->model('M_Admin_payments');
+            $this->notification_model = $this->model('M_notifications');
     }
 
     public function view_payments(){
       $records_per_page = 4;
 
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
+          $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+          $notifications = $this->notification_model->notifications();
             
            if($_SERVER['REQUEST_METHOD'] == 'POST'){
              $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -32,6 +35,8 @@
             'payments' =>  $payments['rows'],
             'search' => "Search by payer firstname or lastname",
             'emptydata' => "No Payments details to Show...",
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
               
             'pagination' => [
                'total_records' => $total_records,
@@ -47,6 +52,8 @@
             'payments' =>  $payments['rows'],
             'search' => "Search by payer firstname or lastname",
             'emptydata' => '',
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
               
             'pagination' => [
                'total_records' => $total_records,
@@ -72,6 +79,8 @@
             'payments' =>   $payments['rows'],
             'search' => "Search by payer firstname or lastname",
             'emptydata' => "No Payments details to Show...",
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
               
             'pagination' => [
                'total_records' => $total_records,
@@ -87,6 +96,8 @@
             'payments' =>   $payments['rows'],
             'search' => "Search by payer firstname or lastname",
             'emptydata' => '',
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
               
             'pagination' => [
                'total_records' => $total_records,
@@ -107,6 +118,9 @@
 
     public function generate_report(){
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
+        //for notifications
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
             // Get the data for the report from the model
         $payments = $this->adminPaymentModel->getPaymentDetailsForDoc();
         
@@ -168,7 +182,9 @@
          $pdf->Output('Payments Details.pdf', 'D');
            
             $data=[
-            'payments' =>  $payments
+            'payments' =>  $payments,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             ];
         
             $this->view('Admin/AdminPayments/v_admin_payment', $data);
@@ -181,8 +197,11 @@
 
     public function  adminSearchPayment()
       {
+        
         $records_per_page = 4;
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
+          $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+          $notifications = $this->notification_model->notifications();
 
           $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
           $offset = ($current_page - 1) * $records_per_page;
@@ -197,6 +216,8 @@
             'search'=>"Search by payer firstname or lastname",
             'message' => '',
             'emptydata' => "No Payment Details to Show...",
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
              
             'pagination' => [
               'total_records' => $total_records,
@@ -212,6 +233,8 @@
             'search'=>"Search by payer firstname or lastname",
             'message' => '',
             'emptydata' => '',
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
              
             'pagination' => [
               'total_records' => $total_records,
@@ -249,6 +272,8 @@
                 'search'=>$search,
                 'message' => $message,
                 'emptydata' =>'',
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
 
                      
             'pagination' => [

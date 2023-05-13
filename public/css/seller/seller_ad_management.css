@@ -112,21 +112,22 @@ td{
 }
 
 .edit{
-  color:rgb(124, 117, 14);
+  color:rgb(227, 225, 197);
   font-size:15px;
   cursor:pointer;
   font-weight: bold;
+  cursor:pointer;
   /* flex-grow: 1; */
 }
 
 
 #delete{
-  color: rgb(251, 91, 91);
+  color: rgb(242, 186, 180);
   font-size: 15px;
   cursor: pointer;
   padding:10px;
   border-radius:25px;
-  background-color: rgb(238, 210, 210);
+  cursor:pointer;
   /* flex-grow: 1; */
 
 }
@@ -209,7 +210,7 @@ td{
 .value{
   border:1px solid rgb(225, 200, 200);
   border-radius:40px;
-  padding:4px 6px;
+  padding:6px 8px;
   margin-left:10px;
   font-weight:bold;
 }

@@ -4,6 +4,7 @@
     private $adminComplaintsMgnt;
       public function __construct(){
         $this->adminComplaintsMgnt = $this->model('M_Admin_complaints_management');
+        $this->notification_model = $this->model('M_notifications');
       }
 
   // public function view_complaints(){
@@ -112,6 +113,8 @@
 
   public function view_complaints()
   {
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+    $notifications = $this->notification_model->notifications();
     $records_per_page = 3;
     
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
@@ -134,6 +137,8 @@
                     'complaints' =>  $complaints['rows'],
                     'search' => "Search by complaint category",
                     'emptydata' => "No Complaints to Show...",
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications,
                     
                     'pagination' => [
                         'total_records' => $total_records,
@@ -149,6 +154,8 @@
                     'search' => "Search by complaint category",
                     'emptydata' => '',
                     'compType' => $_SESSION['radio_admin_comp'], // pass filter type for display
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications,
                     'pagination' => [
                         'total_records' => $total_records,
                         'records_per_page' => $records_per_page,
@@ -174,6 +181,8 @@
                     'complaints' =>  $complaints['rows'],
                     'search' => "Search by complaint category",
                     'emptydata' => "No Complaints to Show...",
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications,
                     
                     'pagination' => [
                         'total_records' => $total_records,
@@ -189,6 +198,8 @@
                     'search' => "Search by complaint category",
                     'emptydata' => '',
                     'compType' => $_SESSION['radio_admin_comp'], // pass filter type for display
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications,
                     'pagination' => [
                         
                       'total_records' => $total_records,
@@ -209,6 +220,8 @@
 
   public function  adminSearchComplaint()
   {
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+    $notifications = $this->notification_model->notifications();
     $records_per_page = 3;
     if (isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
 
@@ -225,6 +238,8 @@
         'search' => "Search by complaint category",
         'message' => '',
         'emptydata' => "No Complaints to Show...",
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
 
         'pagination' => [
           'total_records' => $total_records,
@@ -239,6 +254,8 @@
           'search' => "Search by complaint category",
           'message' => '',
           'emptydata' =>'',
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
   
           'pagination' => [
             'total_records' => $total_records,
@@ -278,6 +295,8 @@
             'search' =>  $search,
             'message' => $message,
             'emptydata' =>'',
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             
             'pagination' => [
               'total_records' => $total_records,
@@ -317,8 +336,12 @@
 
 
     public function comp_solved(){
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         $data=[
-            'title' => 'Sobawitha'
+            'title' => 'Sobawitha',
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
         ];
         $this->view('Admin/AdminCompManage/v_admin_comp_solved', $data);
       

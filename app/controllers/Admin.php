@@ -4,6 +4,7 @@
 
         public function __construct(){
             $this->adminModel = $this->model('M_Admin');
+            $this->notification_model = $this->model('M_notifications');
         }
 
     public function profile()
@@ -11,7 +12,9 @@
      if(isset($_SESSION['user_id'])) {
     //   echo "<script>";
     //   echo "alert('" . $_SESSION['profile_updateAdmin'] . "')";
-    //  echo "</script>";      
+    //  echo "</script>";
+      $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+      $notifications = $this->notification_model->notifications();      
       $user= $this->adminModel->findUserByID($_SESSION['user_id']);
         $data=[                      
           'user_id'=>$user->user_id,
@@ -32,6 +35,8 @@
           'account_number'=>$user->bank_account_no,
           'gender'=>$user->gender,
           'qualifications'=>$user->qualifications,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
   
           'first_name_err'=>'',
@@ -73,6 +78,8 @@
 
   public function updateProfile(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==1) {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if(($_SERVER['REQUEST_METHOD']=='POST' && $_POST['submitForm'] === 'true')){
           $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
@@ -92,6 +99,8 @@
             'bank_account_no'=>trim($_POST['bank_account_no']),
             'bank'=>trim($_POST['bank']),
             'branch'=>trim($_POST['branch']),
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             
         
             
@@ -272,6 +281,8 @@
           'bank_account_name'=>$user->bank_account_name,
           'branch'=>$user->branch,
           'bank_account_no'=>$user->bank_account_no,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
   
           'first_name_err'=>'',
@@ -302,6 +313,8 @@
 
   public function change_profile_pic(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==1) {
+      $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+      $notifications = $this->notification_model->notifications();
       if(($_SERVER['REQUEST_METHOD'] ==='POST' && $_POST['submitForm'] === 'true')){
         $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
       
@@ -328,6 +341,8 @@
         'account_number'=>$user->bank_account_no,
         'gender'=>$user->gender,
         'qualifications'=>$user->qualifications,
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
         
 
         'first_name_err'=>'',

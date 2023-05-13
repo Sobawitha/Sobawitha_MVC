@@ -88,6 +88,8 @@
         /*add to cart */
         $current_status = $this->supplier_ad->check_similer_item($product_id,$user_id)->count_row;
         $is_in_wishlist = $this-> supplier_ad -> is_in_wishlist($product_id) -> row_count;
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
 
         // echo $is_in_wishlist;
         // die();
@@ -95,6 +97,8 @@
           'product_id' => $_GET['product_id'],
           'quantity' => $quantity,
           'user_id' => $_SESSION['user_id'],
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
         ];
 
         if($current_status>0){ 
@@ -126,6 +130,8 @@
         $quantity =$_POST['quantity']; /*change */
         $product_id = $_GET['product_id'];
         $user_id = $_SESSION['user_id'];
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
 
         /*add to cart */
 
@@ -133,6 +139,8 @@
           'product_id' => $_GET['product_id'],
           'quantity' => $quantity,
           'user_id' => $_SESSION['user_id'],
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
         ];
 
         $this->supplier_ad->update_cart($data);
@@ -143,9 +151,14 @@
         $product_id = $_GET['product_id'];
         $quantity = $_GET['quantity'] ;
         $this->supplier_ad->re_update_raw_material_count($product_id, $quantity);
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         $data = [
             'product_id' => $_GET['product_id'],
             'user_id' => $_SESSION['user_id'],
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
+
           ];
         if($this->supplier_ad->remove_from_cart($data)){
             redirect('raw_material_orders/view_cart');

@@ -46,7 +46,34 @@
 
 
     public function get_supply_item_details() {
-        $this->db->query("SELECT DATE_FORMAT(m.month_date, '%M') AS month, COALESCE(f.count, 0) AS count FROM ( SELECT LAST_DAY(DATE_SUB(NOW(), INTERVAL (n.n + 1) MONTH)) AS month_date FROM (SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) n ) AS m LEFT JOIN ( SELECT MONTH(date) AS month_num, COUNT(product_id) AS count FROM fertilizer WHERE current_status = 1 AND created_by = :id AND date >= DATE_SUB(NOW(), INTERVAL 1 YEAR) GROUP BY MONTH(date) ) AS f ON MONTH(m.month_date) = f.month_num ORDER BY m.month_date "); // corrected query
+        $this->db->query("SELECT
+        DATE_FORMAT(m.month_date, '%M') AS month,
+        COALESCE(f.count, 0) AS count
+    FROM
+        (
+            SELECT
+                LAST_DAY(DATE_SUB(NOW(), INTERVAL (n.n) MONTH)) AS month_date
+            FROM
+                (SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL
+                 SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL
+                 SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) n
+        ) AS m
+    LEFT JOIN
+        (
+            SELECT
+                MONTH(date) AS month_num,
+                COUNT(product_id) AS count
+            FROM
+                fertilizer
+            WHERE
+                current_status = 1
+                AND created_by = :id
+                AND date >= DATE_SUB(NOW(), INTERVAL 12 MONTH)
+            GROUP BY
+                MONTH(date)
+        ) AS f ON MONTH(m.month_date) = f.month_num
+    ORDER BY
+        m.month_date");
         $this->db->bind(":id", $_SESSION['user_id']);
         return $this->db->resultSet();
     }

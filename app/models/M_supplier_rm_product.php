@@ -12,108 +12,6 @@ class M_supplier_rm_product
 
  /*comment */
 
-
-    public function post_comment($data){
-
-        $this->db->query('INSERT INTO fertilizer_product_comment (product_id, comment, commented_by) VALUES (:product_id, :comment, :commented_by) ');
-        $this->db->bind(":product_id", $data['product_id']);
-        $this->db->bind(":comment", $data['comment']);
-        $this->db->bind(":commented_by", $data['commented_by']);
-        
-        //execute the query
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function post_reply($data){
-        $this->db->query('INSERT INTO fertilizer_product_comment_reply (comment_id, replied_by, product_id, reply) VALUES (:comment_id, :replied_by, :product_id, :reply) ');
-        $this->db->bind(":comment_id", $data['comment_id']);
-        $this->db->bind(":replied_by", $data['replied_by']);
-        $this->db->bind(":product_id", $data['product_id']);
-        $this->db->bind(":reply", $data['reply']);
-
-        //execute the query
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function display_all_comment($data){
-        $this->db->query('SELECT  comment_id,comment, comment_date, commented_by_full_name, count(reply_id) as no_of_reply FROM view_fertilizer_product_comment_reply WHERE product_id=:productid group by(comment_id)');
-        $this->db->bind(":productid", $data['product_id']);
-        return $this->db->resultSet();
-    }
-
-    public function display_all_replies($data){
-        $this->db->query('SELECT  comment_id, comment, comment_date, commented_by_full_name, reply, reply_comment_id, reply_date, reply_user_full_name  FROM view_fertilizer_product_comment_reply WHERE product_id=:productid');
-        $this->db->bind(":productid", $data['product_id']);
-        return $this->db->resultSet();
-    }
-
-    public function post_question($data){
-
-        $this->db->query('INSERT INTO fertilizer_product_related_question ( product_id, asked_by, question) VALUES (:product_id, :asked_by, :question) ');
-        $this->db->bind(":product_id", $data['product_id']);
-        $this->db->bind(":question", $data['question']);
-        $this->db->bind(":asked_by", $data['asked_by']);
-        
-        //execute the query
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function post_answer($data){
-        $this->db->query('INSERT INTO fertilizer_product_related_answers ( product_id,question_id, answered_by, answer) VALUES (:product_id, :question_id, :answered_by, :answer) ');
-        $this->db->bind(":question_id", $data['question_id']);
-        $this->db->bind(":answered_by", $data['answered_by']);
-        $this->db->bind(":product_id", $data['product_id']);
-        $this->db->bind(":answer", $data['answer']);
-
-        //execute the query
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public function display_all_questions($data){
-        $this->db->query('SELECT  question_id,question, q_date, asked_by_full_name, count(answer_id) as no_of_answers, asked_user_gender FROM view_fertilizer_product_question_answers WHERE product_id=:productid group by(question_id)');
-        $this->db->bind(":productid", $data['product_id']);
-        return $this->db->resultSet();
-    }
-
-    public function display_all_answers($data){
-        $this->db->query('SELECT  answer_id, answer, answer_date, answer_user_full_name,answer_question_id,  answer_date, answer_user_full_name, answer_user_gender  FROM view_fertilizer_product_question_answers WHERE product_id=:productid');
-        $this->db->bind(":productid", $data['product_id']);
-        return $this->db->resultSet();
-    }
-
-    public function find_gender($id){
-        $this->db->query('SELECT gender as gender from user where user_id=:id');
-        $this->db->bind(":id", $id);
-        return $this->db->single();
-    }
-
-    public function find_owner_id($product_id){
-        $this->db->query('SELECT created_by as owner_id from fertilizer where product_id=:product_id');
-        $this->db->bind(":product_id", $product_id);
-        return $this->db->single();
-
-    }
-
     public function view_individual_product($id){
     
       $this->db->query('SELECT f.*, COUNT(fb.id) AS total_feedback_count, 
@@ -147,16 +45,6 @@ class M_supplier_rm_product
         return $this->db->resultset();
     }
 
-    public function insert_order_product_table($data){
-        $this->db->query("INSERT INTO order_products (cust_id, category, payment_type) VALUES (:user_id, 'fertilizer','cod')");
-        $this->db->bind(":user_id", $data['user_id']);
-        if($this->db->execute()){
-            return true;
-        }else{
-                return false;
-        }
-    }
-
     public function update_fertilizer_count( $product_id, $count) {
         $this->db->query("UPDATE fertilizer SET quantity = quantity - :count WHERE product_id = :product_id");
         $this->db->bind(":count", $count);
@@ -168,29 +56,7 @@ class M_supplier_rm_product
         }
     }
 
-    public function update_order_state($order_id){
-        $this->db->query("UPDATE order_items set current_status=1 WHERE order_id = :order_id");
-        $this->db->bind(":order_id", $order_id);
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function insert_order_table($data, $order_id){
-        $this->db->query("INSERT INTO order_items (order_id,product_id,price,quantity,user_id) VALUES (:order_id, :product_id, :price, :quantity, :user_id)");
-        $this->db->bind(":order_id", $order_id);
-        $this->db->bind(":product_id", $data['product_id']);
-        $this->db->bind(":price", $data['price']);
-        $this->db->bind(":quantity", $data['quantity']);
-        $this->db->bind(":user_id", $data['user_id']);
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+   
 
     public function add_to_cart($data){
         $this->db->query("INSERT INTO cart (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
@@ -239,16 +105,6 @@ class M_supplier_rm_product
         return $this->db->single();
     }
 
-    public function select_last_raw_id(){
-        $this->db->query('SELECT LAST_INSERT_ID() as raw_id');
-        return $this->db->single();
-    }
-
-    public function get_user_detail(){
-        $this->db->query('SELECT first_name , last_name, concat(address_line_one,", ",address_line_two,", ",address_line_three,", ",address_line_four,".") as address, contact_no, email from user where user_id=:user_id');
-        $this->db->bind(":user_id", $_SESSION['user_id']);
-        return $this->db->single();
-    }
 
     public function find_order_id(){
         $this->db->query('SELECT order_id as order_id FROM order_items WHERE user_id = :user_id ORDER BY order_id DESC LIMIT 1 ');
@@ -256,59 +112,11 @@ class M_supplier_rm_product
         return $this->db->single();
     }
 
-    public function update_cache_on_delivery_table($order_id){
-        $this->db->query("INSERT into cache_on_delivery_orders (order_id) VALUES (:order_id)");
-        $this->db->bind(":order_id", $order_id);
-        if ($this->db->execute()) {
-            $_SESSION['order_complete_msg']="complete_order_successfully";
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
     public function list_order_details($id){
-        if(isset($_POST['order_type'])){
-            if ($_POST['order_type'] == 'all'){
-                // $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
-                // $this->db->bind(":user_id", $id);
-                // return $this->db->resultSet();
-
-                $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :user_id GROUP BY order_id;");
-                $this->db->bind(":user_id", $id);
-                return $this->db->resultSet();
-            }
-            if ($_POST['order_type'] == 'pending'){
-                // $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=0 GROUP BY order_id;");
-                // $this->db->bind(":user_id", $id);
-                // return $this->db->resultSet();
-
-                $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :user_id AND `fpr`.`current_status`=0 GROUP BY order_id;");
-                $this->db->bind(":user_id", $id);
-                return $this->db->resultSet();
-            }
-            if ($_POST['order_type'] == 'completed'){
-                // $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id AND current_status=1 GROUP BY order_id;");
-                // $this->db->bind(":user_id", $id);
-                // return $this->db->resultSet();
-
-                $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :user_id AND `fpr`.`current_status`=1 GROUP BY order_id;");
-                $this->db->bind(":user_id", $id);
-                return $this->db->resultSet();
-            }
-        }
-        else{
-            // $this->db->query("SELECT order_id, customer, DATE(created_at) as date, current_status, payment_type, GROUP_CONCAT(product_name SEPARATOR ', ') AS product_names,quantity, SUM(quantity * price) AS total_price FROM view_seller_orders WHERE owner_id = :user_id GROUP BY order_id;");
-            // $this->db->bind(":user_id", $id);
-            // return $this->db->resultSet();
-
-
-            $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, `fpr`.`current_status` AS `current_status`, `fpr`.`payment_type` AS `payment_type`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fp`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :user_id GROUP BY order_id;");
-            $this->db->bind(":user_id", $id);
-            return $this->db->resultSet();
-        }
-        
+        $this->db->query("SELECT `fp`.`order_id` AS `order_id`, concat(`u1`.`first_name`,' ',`u1`.`last_name`) AS `customer`, `fpr`.`created_at` AS `date`, GROUP_CONCAT(`fpr1`.`product_name` SEPARATOR ',') AS `product_names`, `fp`.`quantity` AS `quantity`, SUM((`fp`.`quantity`)*(`fpr1`.`price`)) AS total_price, `fpr1`.`user_id` AS `owner_id` FROM (((`seller_order_raw_material` `fp` left join `seller_orders` `fpr` on(`fp`.`order_id` = `fpr`.`order_id`)) left join `user` `u1` on(`fpr`.`seller_id` = `u1`.`user_id`)) left join `raw_material` `fpr1` on(`fp`.`product_id` = `fpr1`.`Product_id`)) WHERE `fpr1`.`user_id` = :id GROUP BY order_id");
+        $this->db->bind(":id", $id);
+        return $this->db->resultSet();
+           
     }
 
     public function calculate_total($id){

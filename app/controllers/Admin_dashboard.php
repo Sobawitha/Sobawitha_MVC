@@ -4,6 +4,7 @@
 
         public function __construct(){
             $this->adminDashModel = $this->model('M_Admin_dashboard');
+            $this->notification_model = $this->model('M_notifications');
     }
    
    public function main_view(){
@@ -31,6 +32,8 @@
         $total_row_count_forum_post = $this->adminDashModel->get_total_row_count_forum();
         $top_rated_sellers = $this->adminDashModel->get_top_sellers();
         $tot_forum_posts =  $this->adminDashModel->get_tot_forum_posts();
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
 
         $data=[
             'sellers_active' => $sellers_active,
@@ -44,6 +47,8 @@
             'forum_total_rows' => $total_row_count_forum_post,
             'top_rated_sellers' => $top_rated_sellers,
             'tot_forum_posts' => $tot_forum_posts,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
         ];
         
         $this->view('Admin/AdminDash/v_dashmain', $data);
@@ -57,6 +62,7 @@
         try {
             $post_count_details = $this->adminDashModel->get_fertilizer_ads_count_details();
             $ad_count_details = $this->adminDashModel->get_raw_material_ads_count_details();
+            
             
             if ($post_count_details || $ad_count_details ) {
                 // Create a response object with a "success" key and a "data" key

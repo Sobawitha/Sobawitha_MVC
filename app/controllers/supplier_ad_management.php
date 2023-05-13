@@ -2,27 +2,36 @@
     class supplier_ad_management extends Controller{
         public function __construct(){
             $this->supplier_ad = $this->model('M_supplier_advertisment');
+            $this->notification_model = $this->model('M_notifications');
     }
 
 
     public function index() {
         $posts = $this->supplier_ad->getPosts();
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
     
         $data = [
-            'posts' => $posts
+            'posts' => $posts,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
         ];
     
         $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
     }
     
     public function indexfilter() {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $filter_type = trim($_POST['current_status']);
             $posts = $this->supplier_ad->getPostsfilter($filter_type);
         
             $data = [
-                'posts' => $posts
+                'posts' => $posts,
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
             ];
         
             $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
@@ -31,7 +40,9 @@
             $posts = $this->supplier_ad->getPostsfilter();
         
             $data = [
-                'posts' => $posts
+                'posts' => $posts,
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
             ];
         
             $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management', $data);
@@ -43,6 +54,8 @@
 
 
     public function add_advertisment(){
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -64,6 +77,8 @@
                 'type' => trim($_POST['type']),
                 'manufacturer' =>trim($_POST['manufacturer']),
                 'current_status' => 0,
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
                 // 'raw_material_image' => trim($_POST['image']),
                 
                 'image_err1' => '',
@@ -169,6 +184,8 @@
                 'type' => '',
                 'manufacturer' =>'',
                 'raw_material_image' => '',
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
 
                 'image_err1' => '',
                 'image_err2' => '',
@@ -192,11 +209,18 @@
     }
 
     public function view_advertisment(){
-        $data=[];
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+        $data=[
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
+        ];
         $this->view('Raw_material_supplier/supplier_ad_management/supplier_add_management',$data);
     }
 
     public function update_advertisement($productId){
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -218,6 +242,8 @@
                 'product_description' => trim($_POST['additional-info']),
                 'type' => trim($_POST['type']),
                 'manufacturer' =>trim($_POST['manufacturer']),
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
                 // 'raw_material_image' => trim($_POST['image']),
                 
                 'image_err1' => '',
@@ -340,14 +366,16 @@
                 'product_id' => $productId,
                 'product_name' => $post->product_name,
                 'price' => $post->price,
-                'per' => $post->per_amount,
-                'category_per' => $post->category_per,
+                // 'per' => $post->per_amount,
+                // 'category_per' => $post->category_per,
                 'quantity' => $post->quantity,
-                'category_avl' => $post->category_avl,
+                // 'category_avl' => $post->category_avl,
                 'product_description' => $post->product_description,
                 'type' => $post->type,
                 'manufacturer' => $post->manufacturer,
                 'image_err' => '',
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
                 // 'title_err' => '',
                 // 'body_err' => ''
             ];
@@ -358,6 +386,7 @@
 
     // DELETE
     public function delete_advertisement($productId) {
+
         $post = $this->supplier_ad->getPostById($productId);
 
         // Check owner
