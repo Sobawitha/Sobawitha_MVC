@@ -4,7 +4,7 @@ class wishlist extends Controller{
 
 private $cartModel;
 private $wishlistModel;
-
+private $notification_model;
 
 public function __construct(){
 
@@ -53,17 +53,15 @@ public function addToWishlist($pro_id){
  
 
 
-if($this->wishlistModel->findByWishlistId($pro_id))
-{   
-    $_SESSION['wishlist_error'] = "Item already in wishlist";
-    redirect('Pages/home');
-    return;
-}
+// if($this->wishlistModel->findByWishlistId($pro_id))
+// {   
+//     $_SESSION['wishlist_error'] = "Item already in wishlist";
+//     redirect('Pages/home');
+//     return;
+// }
 
   
     $this->wishlistModel->insertItem($pro_id);
-    $_SESSION['showDialog'] = true;
-    redirect('Pages/home');
     return;
 
 

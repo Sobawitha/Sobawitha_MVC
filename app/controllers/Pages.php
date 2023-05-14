@@ -1,7 +1,7 @@
 <?php
 
 class Pages extends Controller {
-    private $pagesModel;
+    private $pagesModel, $supplierModel, $cartModel, $fertilizerModel, $filterModel, $wishlistModel;
     public function __construct(){
         $this-> pagesModel =$this->model('M_Pages');
         $this->supplierModel  = $this->model('M_Supplier');
@@ -15,12 +15,16 @@ class Pages extends Controller {
     //redirect home
     public function home(){
         $listings= $this->pagesModel->getLatestListings();
+        // $user_id = $listings->user_id;
+        // $latest_listing_feedbacks = $this->pagesModel->get_feedback_details($user_id);
         $allAds= $this->pagesModel->getAllListings();
+        
+        // $all_ads_feed = $this->pagesModel->get_feedback_details($user_id);
         $wishlist_items = $this->wishlistModel->getAllItems();
         $data = [
           'ads' => $listings,
           'allads' => $allAds,
-            'wishlist_items' => $wishlist_items
+           'wishlist_items' => $wishlist_items,
         ];
         $this->view('Users/component/home', $data);
     }

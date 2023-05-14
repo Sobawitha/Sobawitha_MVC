@@ -9,7 +9,7 @@ for(let i=0; i<cart_adder.length; i++)
     let id =  e.target.closest('.wishlist-item').querySelector('#remove').getAttribute("data-id");
     console.log(id);
     let  xhr  = new XMLHttpRequest();
-    xhr.open('GET', "http://localhost/Sobawitha/wishlist/addToCart/"+encodeURIComponent(id));
+    xhr.open('GET', `http://localhost/Sobawitha/wishlist/addToCart/${id}`);
     xhr.onload = function() {
              
         if (xhr.status === 200 && xhr.readyState === 4)
@@ -43,7 +43,7 @@ for(let i = 0; i <dlt.length;i++){
         let id =  e.target.getAttribute("data-id");
         console.log(id);
         let  xhr  = new XMLHttpRequest();
-        xhr.open('GET', "http://localhost/Sobawitha/wishlist/delete/"+encodeURIComponent(id));
+        xhr.open('GET', `http://localhost/Sobawitha/wishlist/delete/${id}`);
         xhr.onload = function() {
                  
             if (xhr.status === 200)

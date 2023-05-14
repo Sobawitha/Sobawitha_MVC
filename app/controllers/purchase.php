@@ -2,7 +2,7 @@
 
 class purchase extends Controller {
    
-    private $buyerModel;
+    private $buyerModel, $notification_model;
     public function __construct(){
         $this->buyerModel = $this->model('M_buyer');
         $this->notification_model = $this->model('M_notifications');

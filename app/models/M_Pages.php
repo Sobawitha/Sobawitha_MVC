@@ -38,6 +38,31 @@ class M_Pages{
         $row=$this->db->single();
         return $row->average_rating;
     }
+
+    public function get_feedback_details($user_id){
+    
+        $this->db->query('SELECT COUNT(id) AS total_feedback_count, 
+        COUNT(CASE WHEN rating = 1 THEN 1 ELSE NULL END) AS rating_1_count,
+        COUNT(CASE WHEN rating = 2 THEN 1 ELSE NULL END) AS rating_2_count,
+        COUNT(CASE WHEN rating = 3 THEN 1 ELSE NULL END) AS rating_3_count,
+        COUNT(CASE WHEN rating = 4 THEN 1 ELSE NULL END) AS rating_4_count,
+        COUNT(CASE WHEN rating = 5 THEN 1 ELSE NULL END) AS rating_5_count,
+        AVG(rating) AS avg_rating
+          FROM feedback 
+          WHERE receiver_id = :id AND feed_status = 1
+      ');
+        $this->db->bind(':id',$user_id);  
+  
+  
+        $row= $this->db->single();
+  
+        if($this->db->rowCount() >0){
+              return $row;
+        }else{
+              return false;
+        }
+      
+      }
     
     
 

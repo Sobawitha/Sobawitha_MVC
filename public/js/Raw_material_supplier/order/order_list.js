@@ -41,7 +41,7 @@ fetch(`http://localhost/Sobawitha/purchase/getOrderDetails/1`, {
         <td><span class="p_name">${order.product_name}</span></td>
         <td><span class="amount">${order.seller_name}</span></td>
         <td class="unit"><span class="value">${order.order_id}</span></td>
-        <td><span class="price">${order.date}</span></td>
+        <td><span class="price">${order.created_at}</span></td>
         <td>
            
         <button class = "action_button"><a href="${URL}" >View Order</a></button>

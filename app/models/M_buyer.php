@@ -220,7 +220,7 @@ ON buyer_order_items.order_id = buyer_orders.order_id
 INNER JOIN user
 ON fertilizer.created_by =  user.user_id
 
-WHERE buyer_orders.status = :no AND buyer_orders.cust_id = :user_id");
+WHERE buyer_orders.status = :no AND buyer_orders.cust_id = :user_id ORDER BY buyer_orders.created_at DESC");
          $this->db->bind(":no",$no);
          $this->db->bind(":user_id",41);
          $result = $this->db->resultSet();
