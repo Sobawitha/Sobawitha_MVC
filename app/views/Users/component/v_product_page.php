@@ -176,10 +176,7 @@ options.forEach((option) => {
         </div>
 
         <!-- some problem -->
-        <div class="dropdown-content" hidden>
-            <a onclick = >Price Low to High</a>
-            <a onclick >Price High to Low</a>
-        </div>
+        
 
         <!-- <div class="search_bar_filter"  class="dropdown-content">
                 <span class="filter_title">Sort by : </span>
@@ -191,10 +188,7 @@ options.forEach((option) => {
 
 
         
-        <div class="search_bar_filter">
-                <span class="filter_title">Sort by : </span>
-                <span class="sort_type" onclick="open_sorttype()">Best match<i class="fa-solid fa-chevron-down" id="drop_down"></i></span>
-        </div>
+        
 
         </div>
         <div class="recent_product_card_section">

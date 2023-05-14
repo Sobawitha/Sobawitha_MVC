@@ -66,7 +66,7 @@ foreach($data['cart'] as $cart):{
                                 <div class="order_detail"  >
                                         <td>
                                             <div class="product_detail">
-                                                <img src="http://localhost/Sobawitha/public/images/<?php echo $cart->product_img ?>" class="cart_image"></img>
+                                                <img src="./../public/upload/fertilizer_images/<?php echo $cart->product_img ?>" class="cart_image"></img>
                                                 <i class="fa-solid fa-xmark" id="cancel_order" data-id="<?php echo $cart->Product_id ?>"></i><br><br>
                                                 <span class="order_p_name"><?php echo $cart->product_name ?></span><br>
                                                 <span class="order_p_id"><?php echo $cart->Product_id ?></span><br>
@@ -98,7 +98,7 @@ foreach($data['cart'] as $cart):{
                         <input type="checkbox" name = "agree-terms" id  = "checkvalue" /><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br><br>
                         <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
                         <button class="checkout">Online</button><br>
-                        <button class="paypal">Place an Order</button><br>
+                        
                         <i class="fa-solid fa-bag-shopping" id="bag"></i>
                 </div>
         </div>

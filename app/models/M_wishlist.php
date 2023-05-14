@@ -13,9 +13,10 @@ class M_wishlist
     public function findByWishlistId($pro_id)
     {
 
-        $this->db->query("SELECT * FROM wishlist WHERE User_id = :user_id AND Product_id = :product_id");
+        // $this->db->query("SELECT wishlist.*, fertilizer.fertilizer_img FROM wishlist inner join fertilizer on fertilizer.product_id = wishlist.Product_id WHERE User_id = :user_id AND Product_id = :product_id");
+        $this->db->query("SELECT wishlist.*, fertilizer.fertilizer_img FROM wishlist inner join fertilizer on fertilizer.product_id = wishlist.Product_id WHERE User_id = :user_id");
         $this->db->bind(':user_id', $_SESSION['user_id']);
-        $this->db->bind(':product_id', $pro_id);
+        // $this->db->bind(':product_id', $pro_id);
         $wishlist = $this->db->single();
 
         if ($wishlist) {

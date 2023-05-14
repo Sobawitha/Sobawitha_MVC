@@ -41,6 +41,7 @@
                             $data['password_err'] = 'Your account is deactivated.Please contact our support team';
                         }
                         // User found
+                        
                     } else {
                         // User not found
                         $data['password_err'] = 'Invalid email or password';

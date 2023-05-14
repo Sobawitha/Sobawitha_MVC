@@ -94,14 +94,14 @@
         <div class="charts">
               
               <div class="chart">
-                  <h2>Crop types of Completed Orders</h2><br>
+                  <h2 id="title_chart">Crop types of Completed Orders</h2><br>
                   <div>
                       <canvas id="doughnut"></canvas>   
                   </div>
               </div>
 
               <div class="chart" id="doughnut-chart">
-                  <h2>Fertilizer Type Distribution in Completed Orders</h2><br>
+                  <h2 id="title_chart">Fertilizer Type Distribution</h2><br>
                   <div>
                       <canvas id="doughnut2"></canvas>
                   </div>

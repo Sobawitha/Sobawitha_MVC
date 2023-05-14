@@ -105,7 +105,7 @@ class M_order
         // $payer_email = $result->email;
         // $payer_name = $result->first_name;
         // $payer_password = $result->password;
-        // $name = $_SESSION['username'].$_SESSION['lastname'];
+        $name = $_SESSION['username'].$_SESSION['lastname'];
         sendMail($_SESSION['user_email'],$name,$order_id,4,'','','');
         return true;
             
