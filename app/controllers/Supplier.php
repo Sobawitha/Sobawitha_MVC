@@ -343,6 +343,7 @@ public function profile()
 {
   $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
   $notifications = $this->notification_model->notifications();
+  $notifications_all = $this->supplierModel->notifications();
  if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==4) {
          
     $user= $this->supplierModel->findUserByID($_SESSION['user_id']);
@@ -366,6 +367,7 @@ public function profile()
       'gender'=>$user->gender,
       'no_of_notifications' =>$no_of_notifications,
        'notifications' => $notifications,
+       'notifications_all' => $notifications_all,
       
 
       'first_name_err'=>'',
