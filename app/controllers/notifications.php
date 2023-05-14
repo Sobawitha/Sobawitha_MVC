@@ -15,7 +15,7 @@ class notifications extends Controller {
         echo "come";
         die();
         $notification_id = $_GET['notification_id'];
-        $this->notification_model->delete_nootification($notification_id);
+        $this->notification_model->delete_notification($notification_id);
         redirect('AgriOfficer/profile');
     }
 

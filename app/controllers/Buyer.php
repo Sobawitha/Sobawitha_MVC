@@ -1,14 +1,18 @@
 <?php
     class Buyer extends Controller {
-        private $buyerModel;
+        private $buyerModel , $notification_model;
         public function __construct(){
             $this-> buyerModel =$this->model('M_buyer');
+            $this->notification_model = $this->model('M_notifications');
         }
 
        
         public function profile()
         {
          if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 2) {
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
+            $notifications_all = $this->buyerModel->notifications();
                  
             $user= $this->buyerModel->findUserByID($_SESSION['user_id']);
             $data=[                      
@@ -25,6 +29,9 @@
               'address_line_four'=>$user->address_line_four,    
               'contact_number'=>$user->contact_no,
               'gender'=>$user->gender,
+              'no_of_notifications' =>$no_of_notifications,
+              'notifications' => $notifications,
+              'notifications_all' => $notifications_all,
 
               
       
@@ -63,6 +70,8 @@
 
  public function updateProfile(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==2) {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if(($_SERVER['REQUEST_METHOD']=='POST' && $_POST['submitForm'] === 'true')){
           $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
@@ -76,9 +85,9 @@
             'address_line_three'=>trim($_POST['address_line_three']),
             'address_line_four'=>trim($_POST['address_line_four']),
             'contact_number'=>trim($_POST['contact_number']),
-            'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
-         
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,      
             'first_name_err'=>'',
             'last_name_err'=>'',
             'address_line_one_err'=>'',
@@ -143,17 +152,6 @@
 
         }
 
-        if(empty($data['nic'])){
-        $data['nic_err']='nic cannot be empty';
-        }else{
-          $nicValidationResult = validateNIC($data['nic']);
-
-          if ($nicValidationResult !== true || empty($data['nic'])) {
-              $data['nic_err'] = !empty($nicValidationResult) ? $nicValidationResult : 'nic number cannot be empty';
-          }
-
-        }
-
         if(empty($data['contact_number'])){
             $data['contact_number_err']='contact number cannot be empty';
         }else{
@@ -208,6 +206,8 @@
           'address_line_three'=>$user->address_line_three,
           'address_line_four'=>$user->address_line_four,    
           'contact_number'=>$user->contact_no,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
           'first_name_err'=>'',
           'last_name_err'=>'',
@@ -233,6 +233,8 @@
     
     public function change_profile_pic(){
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==2) {
+          $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+          $notifications = $this->notification_model->notifications();
           if(($_SERVER['REQUEST_METHOD'] ==='POST' && $_POST['submitForm'] === 'true')){
             $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
           
@@ -254,6 +256,8 @@
             'address_line_four'=>$user->address_line_four,    
             'contact_number'=>$user->contact_no,
             'gender'=>$user->gender,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             
     
             'first_name_err'=>'',

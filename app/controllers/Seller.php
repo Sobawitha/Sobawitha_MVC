@@ -2,7 +2,7 @@
 <?php
 
     class Seller extends Controller{
-        private $sellerModel;
+        private $sellerModel, $sellerAdModel, $notification_model, $supplier_ad, $raw_material_product, $cartModel;
 
         public function __construct(){
           $this->sellerAdModel = $this->model('M_seller_ad_management');
@@ -291,6 +291,7 @@
      if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
         $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
         $notifications = $this->notification_model->notifications();
+        $notifications_all = $this->sellerModel->notifications();
              
         $user= $this->sellerModel->findUserByID($_SESSION['user_id']);
         $data=[                      
@@ -313,6 +314,7 @@
           'gender'=>$user->gender,
           'no_of_notifications' =>$no_of_notifications,
           'notifications' => $notifications,
+          'notifications_all' => $notifications_all,
           
   
           'first_name_err'=>'',
@@ -459,7 +461,6 @@ public function updateProfile(){
             'address_line_three'=>trim($_POST['address_line_three']),
             'address_line_four'=>trim($_POST['address_line_four']),
             'contact_number'=>trim($_POST['contact_number']),
-            'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
             'bank_account_name'=>trim($_POST['bank_account_name']),
             'bank_account_no'=>trim($_POST['bank_account_no']),
@@ -534,17 +535,6 @@ public function updateProfile(){
 
           if ($addressValidationResult !== true || empty($data['address_line_three'])) {
               $data['address_line_three_err'] = !empty($addressValidationResult) ? $addressValidationResult : 'address line 03 cannot be empty';
-          }
-
-        }
-
-        if(empty($data['nic'])){
-        $data['nic_err']='nic cannot be empty';
-        }else{
-          $nicValidationResult = validateNIC($data['nic']);
-
-          if ($nicValidationResult !== true || empty($data['nic'])) {
-              $data['nic_err'] = !empty($nicValidationResult) ? $nicValidationResult : 'nic number cannot be empty';
           }
 
         }

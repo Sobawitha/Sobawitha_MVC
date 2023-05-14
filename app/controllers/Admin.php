@@ -1,6 +1,7 @@
 <?php
     class Admin extends Controller{
         private $adminModel;
+        private $notification_model;
 
         public function __construct(){
             $this->adminModel = $this->model('M_Admin');
@@ -14,7 +15,8 @@
     //   echo "alert('" . $_SESSION['profile_updateAdmin'] . "')";
     //  echo "</script>";
       $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
-      $notifications = $this->notification_model->notifications();      
+      $notifications = $this->notification_model->notifications();
+      $notifications_all = $this->adminModel->notifications();      
       $user= $this->adminModel->findUserByID($_SESSION['user_id']);
         $data=[                      
           'user_id'=>$user->user_id,
@@ -37,6 +39,7 @@
           'qualifications'=>$user->qualifications,
           'no_of_notifications' =>$no_of_notifications,
           'notifications' => $notifications,
+          'notifications_all' => $notifications_all,
           
   
           'first_name_err'=>'',
@@ -93,7 +96,6 @@
             'address_line_three'=>trim($_POST['address_line_three']),
             'address_line_four'=>trim($_POST['address_line_four']),
             'contact_number'=>trim($_POST['contact_number']),
-            'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
             'bank_account_name'=>trim($_POST['bank_account_name']),
             'bank_account_no'=>trim($_POST['bank_account_no']),
@@ -111,7 +113,6 @@
             'address_line_three_err'=>'',
             'address_line_four_err'=>'',
             'contact_number_err'=>'',
-            'nic_err'=>'',
             'birthday_err'=>'',
             'bank_account_name_err'=>'',
             'bank_err'=>'',
@@ -168,17 +169,6 @@
 
           if ($addressValidationResult !== true || empty($data['address_line_three'])) {
               $data['address_line_three_err'] = !empty($addressValidationResult) ? $addressValidationResult : 'address line 03 cannot be empty';
-          }
-
-        }
-
-        if(empty($data['nic'])){
-        $data['nic_err']='nic cannot be empty';
-        }else{
-          $nicValidationResult = validateNIC($data['nic']);
-
-          if ($nicValidationResult !== true || empty($data['nic'])) {
-              $data['nic_err'] = !empty($nicValidationResult) ? $nicValidationResult : 'nic number cannot be empty';
           }
 
         }
@@ -244,7 +234,7 @@
           }
         }
 
-    if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err'])  && empty($data['address_line_four_err'])){
+    if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['contact_number_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err'])  && empty($data['address_line_four_err'])){
         
         if($this->adminModel->updateAdmin($data)){
             //   flash('post_msg', 'add new admin successfully');

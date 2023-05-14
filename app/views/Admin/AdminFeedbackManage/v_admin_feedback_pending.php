@@ -206,7 +206,7 @@
                                                 
                                                                 <button type="submit" class="btn" id="feed-review-btn" formaction="<?php echo URLROOT?>/Admin_feedback_management/adminReviewFeedback/<?php echo $feed->id ?>">Accept</button>
                                                                 <button type="button" class="btn" id="clc" onclick="document.getElementById('feedback-details').close()">Close</button>
-                                                                <button type="submit" class="btn" id="reject-btn" onclick="closeFeedbackDetailsAndOpenAnotherPopup()">Reject</button>
+                                                                <!-- <button type="submit" class="btn" id="reject-btn" onclick="closeFeedbackDetailsAndOpenAnotherPopup()">Reject</button> -->
                                                                 <script>
                                                                 function closeFeedbackDetailsAndOpenAnotherPopup() {
                                                                 // Close the feedback-details popup

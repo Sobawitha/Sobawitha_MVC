@@ -89,14 +89,6 @@
                
             <p class="main">Find the best places to your trade</p>
             <p class=sub_main>Sobawitha is an online platform driven by agriculture nature by involving more people in their people in their in</p>
-            <!-- <form method="POST">
-            <div class="search_bar">
-                <div class="search_content">
-                    <input type="text" name="search_text" id="search_text" placeholder="Search from home" require/>
-                    <button type="submit" class="search_btn" ><i class="fa fa-search" aria-hidden="true" id="search"></i> <span class="search">SEARCH</span></button>
-                </div>
-            </div>
-            </form> -->
 
             <form id="search_form" method="POST">
             <div class="search_bar">
@@ -203,7 +195,16 @@ foreach($data['wishlist_items'] as $wishlist_item)
                     </div> 
                  </div></a>
                 
-               <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="heart" data-product-id = "<?php echo $ads->Product_id?>"  ></i>
+                  <?php if(isset($_SESSION['user_id'])){
+                    ?>
+                    <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="heart" data-product-id = "<?php echo $ads->Product_id?>"  ></i>
+                    <?php
+                  }else{?>
+                    <i class=" fa-regular fa-heart" id="heart"></i>
+                  <?php
+                  }
+                  ?>
+                 
 
                 <div class="discription">
                 <span class="price">Rs. <?php echo $ads->price ?></span>

@@ -2,14 +2,14 @@
     class Supplier extends Controller{
 
         private $supplierModel;
+        private $notification_model;
         public function __construct(){
             $this->supplierModel = $this->model('M_Supplier');
             $this->notification_model = $this->model('M_notifications');
     }
 
     public function supplier_register(){
-        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
-        $notifications = $this->notification_model->notifications();
+        
        
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -38,8 +38,7 @@
                 // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
                 'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pro_pic']['name'],
                 'verify_token' => $verificationCode,
-                'no_of_notifications' =>$no_of_notifications,
-                'notifications' => $notifications,
+                
         
                 'first_name_err'=>'',
                 'last_name_err'=>'',
@@ -266,7 +265,7 @@
             if($this->supplierModel->addSupplier($data)){
                 //   flash('post_msg', 'add new seller successfully');
                 $flag=3;
-                sendMail($data['email'],$data['first_name'], $verificationCode, $flag, '');
+                sendMail($data['email'],$data['first_name'], $verificationCode, $flag, '','','');
                 redirect('Users/verify_email/'.$data['email']);  
               }else{
                 die('Error creating');
@@ -325,8 +324,6 @@
             'password_err'=>'',
             'confirm_password_err'=>'',
             'propic_err'=>'',
-            'no_of_notifications' =>$no_of_notifications,
-            'notifications' => $notifications,
    
   
          
@@ -343,6 +340,7 @@ public function profile()
 {
   $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
   $notifications = $this->notification_model->notifications();
+  $notifications_all = $this->supplierModel->notifications();
  if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==4) {
          
     $user= $this->supplierModel->findUserByID($_SESSION['user_id']);
@@ -366,6 +364,7 @@ public function profile()
       'gender'=>$user->gender,
       'no_of_notifications' =>$no_of_notifications,
        'notifications' => $notifications,
+       'notifications_all' => $notifications_all,
       
 
       'first_name_err'=>'',
@@ -422,7 +421,6 @@ public function updateProfile(){
             'address_line_three'=>trim($_POST['address_line_three']),
             'address_line_four'=>trim($_POST['address_line_four']),
             'contact_number'=>trim($_POST['contact_number']),
-            'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
             'bank_account_name'=>trim($_POST['bank_account_name']),
             'bank_account_no'=>trim($_POST['bank_account_no']),
@@ -440,7 +438,6 @@ public function updateProfile(){
             'address_line_three_err'=>'',
             'address_line_four_err'=>'',
             'contact_number_err'=>'',
-            'nic_err'=>'',
             'birthday_err'=>'',
             'bank_account_name_err'=>'',
             'bank_err'=>'',
@@ -562,7 +559,7 @@ public function updateProfile(){
           }
         }
 
-    if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err'])  && empty($data['address_line_four_err'])){
+    if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err']) && empty($data['contact_number_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err'])  && empty($data['address_line_four_err'])){
         
         if($this->supplierModel->updateSupplier($data)){
             //   flash('post_msg', 'add new admin successfully');

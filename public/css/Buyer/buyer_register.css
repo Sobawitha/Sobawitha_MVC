@@ -79,7 +79,7 @@
     flex-direction: column;
     height: 80vh;
     padding: 0px 100px;
-    margin-top: 88px;
+    margin-top: 2px;
 }
 
 .s_input-box input, #ssu_gender, #pro_pic, #sign_up_sell_btn, #address_line_four{

@@ -52,6 +52,8 @@ class seller_purchase extends Controller {
 
         if (isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 3 ){
         $userid = $_SESSION['user_id'];
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
 
         $items = $this->seller_purchase_model->get_purchase_list('',$userid);
         if(empty($items)){
@@ -61,6 +63,8 @@ class seller_purchase extends Controller {
                 'search' => "Search by Item name",
                 'message' => '', 
                 'emptydata' => "NO Items to Show",
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
             ];
         }
         else{
@@ -69,6 +73,8 @@ class seller_purchase extends Controller {
                 'search' => "Search by Item name",
                 'message' => '', 
                 'emptydata' => "NO Items to Show",
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications
             ];
         }
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
@@ -89,6 +95,8 @@ class seller_purchase extends Controller {
                     'search' => $search,
                     'message' => $message,
                     'emptydata' => '',
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications
                 ];
 
                 $this->view('Seller/seller_purchases/seller_purchases',$data);

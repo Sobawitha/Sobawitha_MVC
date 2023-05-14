@@ -13,16 +13,16 @@ class dashboard extends Controller{
 
     public function dashboard(){
         if($_SESSION['user_flag'] == 1){
-            redirect('dashboard/Admin_dashboard');
+            redirect('Admin_dashboard/main_view');
         }                                                
         else if($_SESSION['user_flag'] == 3){
-            redirect('dashboard/seller_dashboard');
+            redirect('seller_dashboard/seller_dashboard');
         }
         else if($_SESSION['user_flag'] == 2){
             redirect('dashboard/buyer_dashboard');
         }
         else if($_SESSION['user_flag'] == 4){
-            redirect('dashboard/supplier_dashboard');
+            redirect('supplier_dashboard/supplier_dashboard');
         }
         else if($_SESSION['user_flag'] == 5){
             redirect('dashboard/officer_dashboard');
@@ -193,7 +193,9 @@ class dashboard extends Controller{
             'no_of_notifications' => $no_of_notifications,
             'notifications' => $notifications,
             'purchases_count' => $total,
-            'review_count' => $totReviews
+            'review_count' => $totReviews,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
         ];
         $this->view('Buyer/Dashboard/v_buyer_dashboard', $data);
     }

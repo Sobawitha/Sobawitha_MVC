@@ -151,7 +151,7 @@ function setColor($type){
                         <span class="time"><?php echo $complaint->date?></span>
 
                         <div class="footer">
-                        <?php if($complaint->current_status == 1){?>
+                        <?php if($complaint->current_status == 0){?>
                                 <span onclick="updatepopUpOpen(<?php echo $complaint->complaint_id;?>,`<?php echo $complaint->email;?>`,`<?php echo $complaint->type;?>`,`<?php echo $complaint->subject;?>`,`<?php echo $complaint->discription;?>`)"><i class="fa-solid fa-pen-to-square" id="editbtn" ></i><span class="edit">Edit</span></span>
                                 <i class="fa-solid fa-trash" id="deletebtn" onclick="popUpOpen(<?php echo $complaint->complaint_id?>)"></i><span class="delete">Delete</span>
                             <?php
@@ -174,12 +174,12 @@ function setColor($type){
                     </div>
 
                     <?php 
-                    if($complaint->current_status != 1){
+                    if($complaint->current_status != 0){
                         ?>
                                 <div id="display_admin_reply-<?php echo $complaint->complaint_id?>" class="display_admin_reply">
                                 <i class="fa-solid fa-angle-right" id="angle_right"></i>
                                 <div class="admin_reply">
-                                    <span class="name"><?php echo '<img src=".././public/upload/profile_images/'.$complaint->r_user_profile_picture.'"   alt="admin Picture"  class="admin_image">'?><span class="admin_name"><?php echo $complaint->r_user_first_name." ".$complaint->r_user_last_name?></span></span>
+                                    <span class="name"><?php echo '<img src=".././public/upload/profile_images/'.$complaint->profile_picture.'"   alt="admin Picture"  class="admin_image">'?><span class="admin_name"><?php echo $complaint->replyuser_first_name." ".$complaint->replyuser_last_name?></span></span>
                                     <span class="reply">I answered your question via email.Please check your mails.</span>
                                     <br>
                                     <span class="thank">Thank you.</span>
