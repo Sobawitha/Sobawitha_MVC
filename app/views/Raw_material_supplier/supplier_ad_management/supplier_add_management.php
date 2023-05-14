@@ -45,7 +45,7 @@
                 </div> -->
 
 
-                <?php if($data['search'] === 'Search by firstname | lastname | Address | NIC No | Email' ): ?>
+                <?php if($data['search'] === 'Search by Title | price | quantity' ): ?>
                 <div class="filter_section">
                 <form method ="POST" action="<?php echo URLROOT?>/supplier_ad_management/indexfilter" id="filter_form">
 
