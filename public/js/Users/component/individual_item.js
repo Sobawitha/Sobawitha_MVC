@@ -163,7 +163,7 @@ xhr.onload = function() {
   if (xhr.status === 200) {
     // Reload the page or update the UI to reflect the removed product
     let stmt = "Product removed from the wishlist"
-    popUpOpen(stmt);
+    //popUpOpen(stmt);
 
     // Close the dialog box when the close button is clicked
    
@@ -187,7 +187,7 @@ xhr.onload = function() {
     if (xhr.status === 200) {
         // Reload the page or update the UI to reflect the added product
         let stmt = "Product added to the wishlist"
-        popUpOpen(stmt);
+        //popUpOpen(stmt);
         
         // Close the dialog box when the close button is <clicked>  </clicked>
 

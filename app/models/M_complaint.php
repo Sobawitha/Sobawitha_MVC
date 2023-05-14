@@ -51,13 +51,13 @@ class M_complaint
                     return $this->db->resultSet(); 
                 }
                 if ($_POST['complaint_type'] == 'completed'){
-                    $this->db->query('SELECT * FROM view_complaint_reply WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid AND current_status = 2 ORDER BY date');
+                    $this->db->query('SELECT * FROM view_complaint_reply WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid AND current_status = 1 ORDER BY date');
                     $this->db->bind(':userid', $_SESSION['user_id']);
                     $this->db->bind(":search_content", ($_POST['search_text']));
                     return $this->db->resultSet(); 
                 }
                 if ($_POST['complaint_type'] == 'pending'){
-                    $this->db->query('SELECT * FROM view_complaint_reply WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid AND current_status = 1 ORDER BY date');
+                    $this->db->query('SELECT * FROM view_complaint_reply WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid AND current_status = 0 ORDER BY date');
                     $this->db->bind(':userid', $_SESSION['user_id']);
                     $this->db->bind(":search_content", ($_POST['search_text']));
                     return $this->db->resultSet(); 

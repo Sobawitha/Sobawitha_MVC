@@ -173,41 +173,44 @@
                 <?php endif; ?>
       
 
-                    <p class="notification_main_header">Notifications<i class="fa-solid fa-chevron-down" id="drop_down_arrow"></i></p>
-                    <div class="individual_notification_1">
+                <p class="notification_main_header">Notifications<i class="fa-solid fa-chevron-down" id="drop_down_arrow"></i></p>   
+                <?php if(!empty($data['notifications_all'])){
+                    ?>
+                    <?php foreach ($data['notifications_all'] as $notifications): ?>
+                        <?php if($notifications->type == "success"){
+                            ?>
+                                <div class="individual_notification_1" >
+                            <?php
+                        }else if($notifications->type == "information"){
+                            ?>
+                            <div class="individual_notification_2" >
+                        <?php
+                        }else if($notifications->type == "warning"){
+                            ?>
+                            <div class="individual_notification_3" >
+                        <?php
+                        }else if($notifications->type == "error"){
+                            ?>
+                            <div class="individual_notification_4" >
+                        <?php
+                        }else if($notifications->type == "custom_Message"){
+                            ?>
+                            <div class="individual_notification_5" >
+                        <?php
+                        }?>
+                        
                         <span class="icon" ><i class="fa-regular fa-circle-check"></i></span>
-                        <span class="notification_header">Success</span><br>
-                        <span class="notification_body">Success message</span><br>
-                        <i class="fa-solid fa-xmark" id="close"></i>    
+                        <span class="notification_header"><?php echo $notifications->type ?></span><br>
+                        <span class="notification_body"><?php echo $notifications->message ?></span><br>
+                        <a href="<?php echo URLROOT?>/notification/delete_notification?notification_id=<?php echo $notifications->noti_id ?>"><i class="fa-solid fa-xmark" id="close"></i> </a>   
                     </div>
+                    <?php endforeach;?>
 
-                    <div class="individual_notification_2">
-                        <span class="icon" ><i class="fa-solid fa-triangle-exclamation"></i></span>
-                        <span class="notification_header">Warning</span><br>
-                        <span class="notification_body">Warning message</span><br>
-                        <i class="fa-solid fa-xmark" id="close"></i>   
-                    </div>
-
-                    <div class="individual_notification_3">
-                        <span class="icon" ><i class="fa-solid fa-circle-info"></i></span>
-                        <span class="notification_header">Information</span><br>
-                        <span class="notification_body">Information message</span><br>
-                        <i class="fa-solid fa-xmark" id="close"></i>    
-                    </div>
-
-                    <div class="individual_notification_4">
-                        <span class="icon" ><i class="fa-solid fa-circle-exclamation"></i></span>
-                        <span class="notification_header">Error</span><br>
-                        <span class="notification_body">Error message</span><br>
-                        <i class="fa-solid fa-xmark" id="close"></i>    
-                    </div>
-
-                    <div class="individual_notification_5">
-                        <span class="icon" ><i class="fa-regular fa-message"></i></span>
-                        <span class="notification_header">Custom Message</span><br>
-                        <span class="notification_body">Success message</span><br>
-                        <i class="fa-solid fa-xmark" id="close"></i>    
-                    </div>
+                    <?php
+                }else{?>
+                    No notifications
+                <?php
+                }?>
 
     </div>
 

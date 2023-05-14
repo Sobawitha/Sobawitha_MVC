@@ -14,7 +14,8 @@
     //   echo "alert('" . $_SESSION['profile_updateAdmin'] . "')";
     //  echo "</script>";
       $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
-      $notifications = $this->notification_model->notifications();      
+      $notifications = $this->notification_model->notifications();
+      $notifications_all = $this->adminModel->notifications();      
       $user= $this->adminModel->findUserByID($_SESSION['user_id']);
         $data=[                      
           'user_id'=>$user->user_id,
@@ -37,6 +38,7 @@
           'qualifications'=>$user->qualifications,
           'no_of_notifications' =>$no_of_notifications,
           'notifications' => $notifications,
+          'notifications_all' => $notifications_all,
           
   
           'first_name_err'=>'',
