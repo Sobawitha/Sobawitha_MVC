@@ -98,7 +98,7 @@ options.forEach((option) => {
 
                 <label> <input type="checkbox"  name="types[]" value="Liquid" <?php if(in_array('Liquid', $data['types'])) {echo "checked";} ?>>Liquid</label><br>
                 <label> <input type="checkbox"  name="types[]" value="Solid" <?php if(in_array('Solid', $data['types'])) {echo "checked"; }?>>Solid</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Packet" <?php if(in_array('Packet', $data['types'])) {echo "checked";} ?>>Packet</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Packets" <?php if(in_array('Packets', $data['types'])) {echo "checked";} ?>>Packet</label><br>
                 <label> <input type="checkbox"  name="types[]" value="Bottles" <?php if(in_array('Bottles', $data['types'])) {echo "checked";} ?>>Bottles</label><br>
             </div>
         </div>

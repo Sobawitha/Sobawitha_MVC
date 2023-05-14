@@ -10,6 +10,7 @@ class cart extends Controller
         $this->orderModel = $this->model('M_order');
         $this->supplyModel = $this->model('M_supplier_view');
         $this->paymentModel = $this->model('M_seller_payment');
+        //$this->wishListModel = $this->model('M_wishlist');
     }
 
     public function display_all_items()
@@ -269,12 +270,14 @@ public function add_to_cart_from_individual_page()
 {   
 
 
+
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     $pro_id = $_POST['product_id'];
     $quantity = $_POST['quantity'];
-   
+   //fint the existenceof item in the wishlist if so delete the item from the wishlist
     $url = "http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=$pro_id";
+    
     if ($this->cartModel->findByCartId($pro_id)) {
 
          $this->cartModel->updateItem($pro_id,$quantity);

@@ -96,7 +96,7 @@ options.forEach((option) => {
 
                 <label> <input type="checkbox"  name="types[]" value="Liquid">Liquid</label><br>
                 <label> <input type="checkbox"  name="types[]" value="Solid">Solid</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Packets">Packet</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Packets">Packets</label><br>
                 <label> <input type="checkbox"  name="types[]" value="Bottles">Bottles</label><br>
             </div>
         </div>
