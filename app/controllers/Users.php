@@ -5,6 +5,7 @@
         private $sellerAdModel;
         private $buyerAdModel;
         private $wishlistModel;
+        private $notification_model;
 
         public function __construct(){
             $this-> userModel =$this->model('M_Users');
@@ -24,13 +25,18 @@
         {
         
             if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1||2||3||4||5 ) {
+            $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+            $notifications = $this->notification_model->notifications();
+            $notifications_all = $this->userModel->notifications();
         
             //  $user= $this->userModel->changeUserPW($_SESSION['admin_id']);
             $data=[                      
                 'current_password_err'=>'',
                 'retype_new_password_err'=>'' ,
                 'new_password_err'=>'',
-                'pwd_unmatch_err'=>''  
+                'pwd_unmatch_err'=>'' ,
+                'notifications' => $notifications,
+                'notifications_all' => $notifications_all, 
             ];
             $this->view('Users/user/v_changePW',$data);
 
@@ -41,14 +47,19 @@
 
         public function updatePW($id){
             if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==1||2||3||4||5) {
+                $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+                $notifications = $this->notification_model->notifications();
+                $notifications_all = $this->userModel->notifications();
               if($_SERVER["REQUEST_METHOD"] == 'POST'){
                $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-         
+              
                $data = [
                  'user_id' => $id,  
                  'current_password'=>trim($_POST['current_password']),
                  'new_password'=>trim($_POST['new_password']),      
-                 'retype_new_password'=>trim($_POST['retype_new_password']),      
+                 'retype_new_password'=>trim($_POST['retype_new_password']),   
+                 'notifications' => $notifications,
+                 'notifications_all' => $notifications_all,    
                
                  'current_password_err'=>'',
                  'retype_new_password_err'=>'' ,
@@ -118,7 +129,9 @@
                 $data = [
               'current_password'=>'',
               'new_password'=>'',      
-              'retype_new_password'=>'',      
+              'retype_new_password'=>'',  
+              'notifications' => $notifications,
+               'notifications_all' => $notifications_all,     
             
               'current_password_err'=>'',
               'retype_new_password_err'=>'' ,

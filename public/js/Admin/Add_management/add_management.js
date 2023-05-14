@@ -39,25 +39,51 @@ function popUpOpenAdReview(product_name, img_one, img_two, img_three, img_four,i
   const imgFour = document.getElementById('image_four');
   const imgFive = document.getElementById('image_five');
 
-  if (imgOne && img_one !== '') {
+  if (imgOne && img_one !== '' && category === 'fertilizer') {
     imgOne.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_one}`;
+  }else if(imgOne && img_one !== '' && category === 'raw_material'){
+    imgOne.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_one}`;     
   }
 
-  if (imgTwo && img_two !== '') {
+  if (imgTwo && img_two !== '' && category === 'fertilizer') {
     imgTwo.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_two}`;
+  }else if(imgTwo && img_two !== '' && category === 'raw_material'){
+    imgTwo.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_two}`;     
   }
 
-  if (imgThree && img_three !== '') {
+  if (imgThree && img_three !== '' && category === 'fertilizer') {
     imgThree.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_three}`;
+  }else if(imgThree && img_three !== '' && category === 'raw_material'){
+    imgThree.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_three}`;     
   }
 
-  if (imgFour && img_four !== '') {
+  if (imgFour && img_four !== '' && category === 'fertilizer') {
     imgFour.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_four}`;
+  }else if(imgFour && img_four !== '' && category === 'raw_material'){
+    imgFour.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_four}`;     
   }
 
-  if (imgFive && img_five !== '') {
+  if (imgFive && img_five !== '' && category === 'fertilizer') {
     imgFive.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_five}`;
+  }else if(imgFive && img_five !== '' && category === 'raw_material'){
+    imgFive.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_five}`;     
   }
+
+  // if (imgTwo && img_two !== '') {
+  //   imgTwo.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_two}`;
+  // }
+
+  // if (imgThree && img_three !== '') {
+  //   imgThree.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_three}`;
+  // }
+
+  // if (imgFour && img_four !== '') {
+  //   imgFour.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_four}`;
+  // }
+
+  // if (imgFive && img_five !== '') {
+  //   imgFive.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_five}`;
+  // }
   
   document.getElementById('ad-details').showModal();
 }
@@ -85,24 +111,54 @@ function popUpOpenViewMore(product_name, img_one, img_two, img_three, img_four,i
   const imgFour = document.getElementById('image_four');
   const imgFive = document.getElementById('image_five');
 
-  if (imgOne && img_one !== '') {
+  // if (imgOne && img_one !== '') {
+  //   imgOne.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_one}`;
+  // }
+
+  // if (imgTwo && img_two !== '') {
+  //   imgTwo.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_two}`;
+  // }
+
+  // if (imgThree && img_three !== '') {
+  //   imgThree.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_three}`;
+  // }
+
+  // if (imgFour && img_four !== '') {
+  //   imgFour.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_four}`;
+  // }
+
+  // if (imgFive && img_five !== '') {
+  //   imgFive.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_five}`;
+  // }
+
+  if (imgOne && img_one !== '' && category === 'fertilizer') {
     imgOne.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_one}`;
+  }else if(imgOne && img_one !== '' && category === 'raw_material'){
+    imgOne.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_one}`;     
   }
 
-  if (imgTwo && img_two !== '') {
+  if (imgTwo && img_two !== '' && category === 'fertilizer') {
     imgTwo.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_two}`;
+  }else if(imgTwo && img_two !== '' && category === 'raw_material'){
+    imgTwo.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_two}`;     
   }
 
-  if (imgThree && img_three !== '') {
+  if (imgThree && img_three !== '' && category === 'fertilizer') {
     imgThree.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_three}`;
+  }else if(imgThree && img_three !== '' && category === 'raw_material'){
+    imgThree.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_three}`;     
   }
 
-  if (imgFour && img_four !== '') {
+  if (imgFour && img_four !== '' && category === 'fertilizer') {
     imgFour.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_four}`;
+  }else if(imgFour && img_four !== '' && category === 'raw_material'){
+    imgFour.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_four}`;     
   }
 
-  if (imgFive && img_five !== '') {
+  if (imgFive && img_five !== '' && category === 'fertilizer') {
     imgFive.src = `${window.location.origin}/Sobawitha/public/upload/fertilizer_images/${img_five}`;
+  }else if(imgFive && img_five !== '' && category === 'raw_material'){
+    imgFive.src = `${window.location.origin}/Sobawitha/public/img/postsImgs/${img_five}`;     
   }
   
   document.getElementById('ad-details').showModal();

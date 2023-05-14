@@ -261,6 +261,60 @@
                             ";
 
 
+                        }else if($bodyFlag == 9){
+                            $mail->Subject = "Account Deactivation Notice";
+
+                            $email_template = "
+                                <html>
+                                <head>
+                                <title></title>
+                                </head>
+                                <body style='font-family: Arial, sans-serif;'>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <span style='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #4CAF50; margin-right: 0.2em;'>SOBA</span><span style ='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #000;'>WITHA</span>
+                                </div>
+                                <div style='padding: 20px;'>
+                                    <h2>Dear $name,</h2>
+                                    <p>We regret to inform you that your account with Sobawitha has been deactivated by the admin due to a violation of our terms of service.</p>
+                                    <p>If you have any questions or concerns, please contact us at support@sobawitha.com.</p>
+                                    <p>Thank you for your understanding.</p>
+                                    <p>The Sobawitha Team</p>
+                                </div>
+                                <div style='background-color: #f2f2f2; padding: 20px;'>
+                                    <p>Follow us on <a href='https://twitter.com/Sobawitha' style='color: #4CAF50;'>Twitter</a> | Like us on <a href='https://www.facebook.com/Sobawitha' style='color: #4CAF50;'>Facebook</a></p>
+                                    <p>You are receiving this email because your account with Sobawitha has been deactivated by the admin.</p>
+                                </div>
+                                </body>
+                                </html>
+                            ";
+                        }else if($bodyFlag == 10){
+                            $mail->Subject = "Account Activation Notice";
+
+                            $email_template = "
+                            <html>
+                            <head>
+                            <title></title>
+                            </head>
+                            <body style='font-family: Arial, sans-serif;'>
+                            <div style='background-color: #f2f2f2; padding: 20px;'>
+                            <span style='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #4CAF50; margin-right: 0.2em;'>SOBA</span><span style ='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #000;'>WITHA</span>
+                            </div>
+                            <div style='padding: 20px;'>
+                            <h2>Dear $name,</h2>
+                            <p>We are pleased to inform you that your account with Sobawitha has been activated by the admin.</p>
+                            <p>You can now log in to your account and start using our services. If you have any questions or concerns, please do not hesitate to contact us at support@sobawitha.com.</p>
+                            <p>Thank you for choosing Sobawitha.</p>
+                            <p>The Sobawitha Team</p>
+                            </div>
+                            <div style='background-color: #f2f2f2; padding: 20px;'>
+                            <p>Follow us on <a href='https://twitter.com/Sobawitha' style='color: #4CAF50;'>Twitter</a> | Like us on <a href='https://www.facebook.com/Sobawitha' style='color: #4CAF50;'>Facebook</a></p>
+                            <p>You are receiving this email because your account with Sobawitha has been activated by the admin.</p>
+                            </div>
+                            </body>
+                            </html>
+                            ";
+
+
                         }
                         $mail->Body  =$email_template;
                         $mail->send();

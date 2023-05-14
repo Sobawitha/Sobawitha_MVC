@@ -267,6 +267,36 @@
           return false;
       }    
   } 
+
+  public function GetUserEmail($user_id)
+    {
+      $this->db->query('SELECT email FROM user WHERE user_id= :id');
+      $this->db->bind(':id',$user_id);  
+
+      $row= $this->db->single();
+
+      if($this->db->execute() >0){
+            return $row;
+      }else{
+            return false;
+      }
+    }
+
+    public function GetUserName($user_id)
+    {
+      $this->db->query('SELECT first_name FROM user WHERE user_id= :id');
+      $this->db->bind(':id',$user_id);  
+
+      $row= $this->db->single();
+
+      if($this->db->execute() >0){
+            return $row;
+      }else{
+            return false;
+      }
+    }
+
+
     
 
 }

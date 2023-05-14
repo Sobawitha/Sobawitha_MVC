@@ -644,16 +644,22 @@
         $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
         $notifications = $this->notification_model->notifications();
         $deleteStatus= $this->adminUserMngtModel->deactivateUser($user_id);
-        $user= $this->adminUserMngtModel->getUsers();
+        // $user= $this->adminUserMngtModel->getUsers();
+        $email = $this->adminUserMngtModel->getUserEmail($user_id);
+        $name = $this->adminUserMngtModel->getUserName($user_id);
+        $user_email = $email->email;
+        $user_name = $name->first_name;
    
         $data=[                      
-          'user'=>$user,
+        //   'user'=>$user,
           'deleteStatus'=>$deleteStatus,
           'search'=>'',
           'no_of_notifications' =>$no_of_notifications,
           'notifications' => $notifications,
        
          ];
+
+         sendMail($user_email,$user_name,'', 9,'','','');
         redirect('Admin_user_management/view_all_users');
      
 
@@ -804,7 +810,10 @@
           $activeStatus= $this->adminUserMngtModel->activateUser($user_id);
           $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
           $notifications = $this->notification_model->notifications();
-        
+          $email = $this->adminUserMngtModel->getUserEmail($user_id);
+          $name = $this->adminUserMngtModel->getUserName($user_id);
+          $user_email = $email->email;
+          $user_name = $name->first_name;
      
           $data=[                      
             'user'=>'',
@@ -814,6 +823,7 @@
             'notifications' => $notifications,
          
            ];
+         sendMail($user_email,$user_name,'', 10,'','','');
           redirect('Admin_user_management/view_all_users');
        
   

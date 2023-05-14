@@ -2,6 +2,8 @@
 
     class Admin_payments extends Controller{
         private $adminPaymentModel;
+        private $notification_model;
+
         public function __construct(){
             $this->adminPaymentModel = $this->model('M_Admin_payments');
             $this->notification_model = $this->model('M_notifications');
@@ -252,7 +254,7 @@
               
              
           $search=trim($_GET['search']);
-
+          
               if (!empty($search)) {
               $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
               $offset = ($current_page - 1) * $records_per_page;
