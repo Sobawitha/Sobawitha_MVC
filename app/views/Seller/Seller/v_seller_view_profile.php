@@ -174,9 +174,9 @@
       
 
                 <p class="notification_main_header">Notifications<i class="fa-solid fa-chevron-down" id="drop_down_arrow"></i></p>   
-                <?php if(!empty($data['notifications'])){
+                <?php if(!empty($data['notifications_all'])){
                     ?>
-                    <?php foreach ($data['notifications'] as $notifications): ?>
+                    <?php foreach ($data['notifications_all'] as $notifications): ?>
                         <?php if($notifications->type == "success"){
                             ?>
                                 <div class="individual_notification_1" >

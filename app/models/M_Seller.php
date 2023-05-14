@@ -168,7 +168,7 @@
             FROM notification_based_on_users
             WHERE user = :user_id AND current_status = 0
             ) AS combined_notifications  
-            ORDER BY time DESC  LIMIT 3");
+            ORDER BY time DESC");
             $this->db->bind(":user_id", $_SESSION['user_id']);
             $this->db->bind(":user_role", $_SESSION['user_flag']);
             return $this->db->resultSet();

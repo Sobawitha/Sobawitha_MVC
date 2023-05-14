@@ -8,8 +8,7 @@
     }
 
     public function supplier_register(){
-        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
-        $notifications = $this->notification_model->notifications();
+        
        
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -38,8 +37,7 @@
                 // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
                 'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pro_pic']['name'],
                 'verify_token' => $verificationCode,
-                'no_of_notifications' =>$no_of_notifications,
-                'notifications' => $notifications,
+                
         
                 'first_name_err'=>'',
                 'last_name_err'=>'',
@@ -325,8 +323,6 @@
             'password_err'=>'',
             'confirm_password_err'=>'',
             'propic_err'=>'',
-            'no_of_notifications' =>$no_of_notifications,
-            'notifications' => $notifications,
    
   
          

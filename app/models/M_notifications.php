@@ -20,7 +20,7 @@ class M_notifications
             UNION
             
             SELECT COUNT(notification_id) as count_notification
-            FROM notification_based_on_users
+            FROM notification_based_on_users 
             WHERE user = :user_id AND current_status = 0
         ) AS combined_counts;
         ");
