@@ -7,21 +7,22 @@ class dashboard extends Controller{
     public function __construct(){
         
         $this->dashboard_model = $this->model('M_dashboard');
+        $this->buyer_model = $this->model('M_buyer');
         $this->notification_model = $this->model('M_notifications');
     }
 
     public function dashboard(){
         if($_SESSION['user_flag'] == 1){
-            redirect('dashboard/Admin_dashboard');
+            redirect('Admin_dashboard/main_view');
         }                                                
         else if($_SESSION['user_flag'] == 3){
-            redirect('dashboard/seller_dashboard');
+            redirect('seller_dashboard/seller_dashboard');
         }
         else if($_SESSION['user_flag'] == 2){
             redirect('dashboard/buyer_dashboard');
         }
         else if($_SESSION['user_flag'] == 4){
-            redirect('dashboard/supplier_dashboard');
+            redirect('supplier_dashboard/supplier_dashboard');
         }
         else if($_SESSION['user_flag'] == 5){
             redirect('dashboard/officer_dashboard');
@@ -181,13 +182,21 @@ class dashboard extends Controller{
 
     
 
-    public function supplier_dashboard(){
-        $data = [];
-        $this->view('Raw_material_supplier/Dashboard/v_supplier_dashboard', $data);
-    }
+    //for buyre dashbloard
 
     public function buyer_dashboard(){
-        $data = [];
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+        $total = $this->buyer_model->getTotalPurchases();;
+        $totReviews = $this->buyer_model->getTotalReviews();
+        $data = [
+            'no_of_notifications' => $no_of_notifications,
+            'notifications' => $notifications,
+            'purchases_count' => $total,
+            'review_count' => $totReviews,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
+        ];
         $this->view('Buyer/Dashboard/v_buyer_dashboard', $data);
     }
 

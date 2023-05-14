@@ -34,13 +34,7 @@ function setColor($tag){
                 </div>
                 </div>
                 </form>
-                <div class="filter_section">
-                        <form method="POST" action="<?php echo URLROOT?>/supplier_rm_product/view_orders">
-                                <label for="all" id="filter_label"> <input type="radio" id="all" name="order_type"  onclick="javascript:submit()" value = "all"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'all') echo ' checked="checked"';?> checked>All type</label>
-                                <label for="pending" id="filter_label"><input type="radio" id="pending" name="order_type" value="pending" onclick="javascript:submit()"  value = "pending"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'pending') echo ' checked="checked"';?>>Ongoing (in-progress)</label>
-                                <label for="completed" id="filter_label"> <input type="radio" id="completed" name="order_type" value="completed" onclick="javascript:submit()"  value = "completed"<?php if (isset($_POST['order_type']) && $_POST['order_type'] == 'completed') echo ' checked="checked"';?>>Completed</label>                               
-                        </form>        
-                </div>
+                
         </div>
 
                 <div class="order_list">
@@ -65,17 +59,8 @@ function setColor($tag){
                                         <td class="products"><?php echo $order->product_names;?></td>
                                         <th><span class="price"><?php echo ($order->total_price); $tot_income = $tot_income + ($order->total_price)*95/100; ?></span></th>
                                         <th><span class="date"><?php echo $order->date ?></span></th>
-                                        <?php if($order->current_status == 0){
-                                                ?>
-                                                <th><span class="current_status" id="pending">pending</span></th>
-                                                <?php
-                                        }else{
-                                                ?>
-                                                <th><span class="current_status" id="completed">completed</span></th>
-                                        <?php
-                                        }
-                                        ?>
-                                        <th><span class="<?php echo setColor($order->payment_type)?>"><?php echo $order->payment_type;?></span></th>
+                                        <th><span class="current_status" id="completed">completed</span></th>
+                                        <th><span class="<?php echo setColor("online")?>">online</span></th>
                                         
                                 </div>
 

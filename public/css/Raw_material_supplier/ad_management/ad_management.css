@@ -6,7 +6,7 @@
 .body{
     display:grid;
     grid-template-columns:20% 70% 10%;
-
+    min-height: 650px;
     padding-top:80px;
     
   }
@@ -130,7 +130,6 @@
     font-weight: bold;
     padding:5px;
     border-radius:25px;
-    background-color: rgb(247, 247, 195);;
     /* flex-grow: 1; */
   
   }

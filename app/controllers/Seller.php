@@ -2,10 +2,16 @@
 <?php
 
     class Seller extends Controller{
-        private $sellerModel;
+        private $sellerModel, $sellerAdModel, $notification_model, $supplier_ad, $raw_material_product, $cartModel;
 
         public function __construct(){
+          $this->sellerAdModel = $this->model('M_seller_ad_management');
             $this->sellerModel = $this->model('M_Seller');
+            $this->notification_model = $this->model('M_notifications');
+            $this->supplier_ad = $this->model('M_supplier_view');
+            $this->raw_material_product = $this->model('M_seller_wishlist');
+            
+            $this->cartModel = $this->model('M_raw_material_orders');
     }
     
     //
@@ -283,6 +289,9 @@
     public function profile()
     {
      if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+        $notifications_all = $this->sellerModel->notifications();
              
         $user= $this->sellerModel->findUserByID($_SESSION['user_id']);
         $data=[                      
@@ -303,6 +312,9 @@
           'branch'=>$user->branch,
           'account_number'=>$user->bank_account_no,
           'gender'=>$user->gender,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
+          'notifications_all' => $notifications_all,
           
   
           'first_name_err'=>'',
@@ -327,6 +339,8 @@
 
  public function change_profile_pic(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
+      $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+      $notifications = $this->notification_model->notifications();
       if(($_SERVER['REQUEST_METHOD'] ==='POST' && $_POST['submitForm'] === 'true')){
         $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
       
@@ -352,6 +366,8 @@
         'branch'=>$user->branch,
         'account_number'=>$user->bank_account_no,
         'gender'=>$user->gender,
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
         
 
         'first_name_err'=>'',
@@ -430,6 +446,8 @@
 
 public function updateProfile(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if(($_SERVER['REQUEST_METHOD']=='POST' && $_POST['submitForm'] === 'true')){
           $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
@@ -443,12 +461,13 @@ public function updateProfile(){
             'address_line_three'=>trim($_POST['address_line_three']),
             'address_line_four'=>trim($_POST['address_line_four']),
             'contact_number'=>trim($_POST['contact_number']),
-            'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
             'bank_account_name'=>trim($_POST['bank_account_name']),
             'bank_account_no'=>trim($_POST['bank_account_no']),
             'bank'=>trim($_POST['bank']),
             'branch'=>trim($_POST['branch']),
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
             
         
             
@@ -520,17 +539,6 @@ public function updateProfile(){
 
         }
 
-        if(empty($data['nic'])){
-        $data['nic_err']='nic cannot be empty';
-        }else{
-          $nicValidationResult = validateNIC($data['nic']);
-
-          if ($nicValidationResult !== true || empty($data['nic'])) {
-              $data['nic_err'] = !empty($nicValidationResult) ? $nicValidationResult : 'nic number cannot be empty';
-          }
-
-        }
-
         if(empty($data['contact_number'])){
             $data['contact_number_err']='contact number cannot be empty';
         }else{
@@ -592,7 +600,7 @@ public function updateProfile(){
           }
         }
 
-    if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err'])  && empty($data['address_line_four_err'])){
+    if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['contact_number_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err'])  && empty($data['address_line_four_err'])){
         
         if($this->sellerModel->updateSeller($data)){
             //   flash('post_msg', 'add new admin successfully');
@@ -629,6 +637,8 @@ public function updateProfile(){
           'bank_account_name'=>$user->bank_account_name,
           'branch'=>$user->branch,
           'bank_account_no'=>$user->bank_account_no,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
   
           'first_name_err'=>'',
@@ -659,13 +669,17 @@ public function updateProfile(){
 
     public function delete_profile_pic(){
         if(isset($_SESSION['user_id']) && $_SESSION['user_flag']==3) {
+          $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+          $notifications = $this->notification_model->notifications();
            
           $user_id=$_SESSION['user_id'];
           $user_gender=$_SESSION['user_gender'];
           $deleteStatus= $this->sellerModel->deleteProPic($user_id,$user_gender);
           
           $data=[
-            'delete'=>$deleteStatus
+            'delete'=>$deleteStatus,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
           ];
           
           redirect('Seller/profile');
@@ -676,6 +690,88 @@ public function updateProfile(){
         }
     
       }
+
+
+      public function filter_results(){
+
+   
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+   
+        {
+          $brands =  isset($_POST['brands']) ? $_POST['brands']:array();
+          $location  = isset($_POST['location']) ? $_POST['location'] : array();
+          $min_price = isset($_POST['min_price']) ? $_POST['min_price'] :'';
+          $max_price = isset($_POST['max_price']) ? $_POST['max_price'] :'';
+          $quantity = isset($_POST['quantity']) ? $_POST['quantity']:'';   
+          $types = isset($_POST['types']) ? $_POST['types'] : array();
+          $query = "SELECT * FROM raw_material WHERE 1 = 1";
+   //AND ad_status = '0' 
+            if(!empty($min_price) && !empty($max_price))
+            {
+                 $query .= " AND price BETWEEN '".$min_price."' AND '".$max_price."'";
+            }
+   
+              //  if(!empty($brands))
+              //  {
+              //      $brand_filter = implode("','", $brands);
+              //      $query .= " AND manufacturer IN ('".$brand_filter."')";
+              //  }
+   
+               if(!empty($types))
+               {
+                   $type_filter = implode("','", $types);
+                   $query .= " AND type IN ('".$type_filter."')";
+               }
+   
+              //  if(!empty($quantity))
+              //  {
+              //      $query .= " AND quantity = '".$quantity."'";
+              //  }
+   
+              //  if(!empty($location))
+              //  {
+              //      $location_filter = implode("','", $location);
+              //      $query .= " AND created_by IN (SELECT user_id FROM user WHERE address_line_four IN ('".$location_filter."'))";
+              //  }
+   
+   
+               $ads = $this->sellerAdModel->customized_query($query);
+              
+           
+             
+               $user_realated_wishlist_items= $this->raw_material_product->get_all_wishlist_items();
+               $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+               $notifications = $this->notification_model->notifications();
+           
+           
+            
+               $data = [
+                
+                   'brands' => $brands,
+                   'notifications' => $notifications,
+                   'ads' => $ads,
+                   'min_price' => $min_price,
+                   'max_price' => $max_price,
+                   'no_of_notifications' =>$no_of_notifications,
+                   'types' => $types,
+                   'seller_wishlist' => $user_realated_wishlist_items,
+                
+               
+                   'products' => $ads
+   
+   
+   
+   
+   
+               ];
+               $this->view('Seller/v_seller_results', $data);
+   
+   
+   
+        }
+   
+   
+    }
 
 }
 ?>

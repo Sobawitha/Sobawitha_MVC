@@ -158,7 +158,7 @@ else if($_SESSION['user_flag'] == 5){
                         
                         foreach($data['forum_discussions'] as $forum_discussion):?>
                         <div class="p1">
-                                <span class="name"><?php echo '<img src=".././public/upload/profile_images/'.$forum_discussion->posted_by_profile_pic.'"   alt="author Picture"  class="author_image">'?></span>
+                                <span class="name"><?php echo '<img src=".././public/upload/user_profile_pics/'.$forum_discussion->posted_by_profile_pic.'"   alt="author Picture"  class="author_image">'?></span>
                         </div>
 
                         <div class="p2">
@@ -246,11 +246,15 @@ else if($_SESSION['user_flag'] == 5){
                                                 <i class="fa-regular fa-comment" id="comment"></i> <span class="post_details"> <?PHP echo $forum_discussion->no_of_reply?> Reply</span>
                                                 <br>
                                                 <i class="fa-solid fa-reply-all" id="reply" onclick="open_replyform(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="reply_discription">Reply</span><br>
-                                                <?php if($_SESSION['user_id']== $forum_discussion->created_by OR $_SESSION['user_flag'] == 1){
+                                                <?php if($_SESSION['user_id']== $forum_discussion->created_by){
                                                         ?>
                                                 <i class="fa-solid fa-pen-to-square" id="edit" onclick="edit_forum_post(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="edit_discription">Edit</span><br>
                                                 <i class="fa-solid fa-trash" id="delete" onclick="popUpOpen(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="delete_discription">Delete</span><br>
                                                 <?php
+                                                } else if($_SESSION['user_flag'] == 1){
+                                                        ?>
+                                                         <i class="fa-solid fa-trash" id="delete" onclick="popUpOpen(<?php echo $forum_discussion->discussion_id?>)"></i><span class="button_discription" id="delete_discription">Delete</span><br>
+                                                        <?php
                                                 }
                                                 ?>
                                         </div>
@@ -316,7 +320,7 @@ else if($_SESSION['user_flag'] == 5){
 
                                         <div class="individual_reply">
                                         <div class="p1">
-                                                <span class="name"><?php echo '<img src=".././public/upload/profile_images/'.$discussion_reply->reply_user_profile_pic.'"   alt="author Picture"  class="reply_author_image">'?></span>
+                                                <span class="name"><?php echo '<img src=".././public/upload/user_profile_pics/'.$discussion_reply->reply_user_profile_pic.'"   alt="author Picture"  class="reply_author_image">'?></span>
                                          </div>
 
                                         <div class="forum_post_reply">

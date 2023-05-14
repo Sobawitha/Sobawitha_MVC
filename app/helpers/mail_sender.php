@@ -137,7 +137,37 @@
                                 </body>
                                 </html>
                                 ";
-                        }else if($bodyFlag == 6){
+                        } 
+
+
+                        else if($bodyFlag == 4){
+                            $mail->Subject = "Your Sobawitha order has been received!";
+                            
+                            $email_template = "
+                                  <html>
+                                  <head>
+                                  <title>Thank you for your order</title>
+                                  </head>
+                                  <body style='font-family: Arial, sans-serif;'>
+                                  <div style='background-color: #f2f2f2; padding: 20px;'>
+                                      <span style='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #4CAF50; margin-right: 0.2em;'>SOBA</span><span style ='font-size: 1em; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #000;'>WITHA</span>
+                                  </div>
+                                  <div style='padding: 20px;'>
+                                      <h2>Hi $name,</h2>
+                                      <p>Just to let you know — we've received your order and it is now being processed:</p>
+                                       <a href = 'http://localhost/Sobawitha/purchase/generatePDF?$token'>See here for more details</a>
+                                      <p>Thanks for using sobawitha.com!</p>
+                                      <p>The Sobawitha Team</p>
+                                  </div>
+                                  <div style='background-color: #f2f2f2; padding: 20px;'>
+                                      <p>Follow us on <a href='https://twitter.com/Sobawitha' style='color: #4CAF50;'>Twitter</a> | Like us on <a href='https://www.facebook.com/Sobawitha' style='color: #4CAF50;'>Facebook</a></p>
+                                      <p>You are receiving this email because you requested to register with Sobawitha. If you have any questions or concerns, please contact us at <a href='mailto:support@sobawitha.com' style='color: #4CAF50;'>support@sobawitha.com</a>.
+                                  </div>
+                                  </body>
+                                  </html>
+                                  ";
+                          }
+                        else if($bodyFlag == 6){
                           $mail->Subject = "Ad Rejection Notice from Sobawitha";
                           
                           $email_template = "

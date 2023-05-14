@@ -1,14 +1,20 @@
 <?php
     class Admin_user_management extends Controller{
         private $adminUserMngtModel;
+        private $notification_model;
 
         public function __construct(){
             $this->adminUserMngtModel = $this->model('M_Admin_user_management');
+            $this->notification_model = $this->model('M_notifications');
     }
    
    public function user_manage(){
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+    $notifications = $this->notification_model->notifications();
     $data=[
-        'title' => 'Sobawitha'
+        'title' => 'Sobawitha',
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
     ];
     $this->view('Admin/AdminUserManagement/v_user_management', $data);
   
@@ -17,6 +23,8 @@
     //Add Agri
    public function add_new_agri(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     
@@ -40,6 +48,8 @@
             // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
             'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['propic']['name'],
             'qualification_file_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['qualification']['name'],
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
 
 
             'first_name_err'=>'',
@@ -262,6 +272,8 @@
         'password'=>'',
         'confirm_password'=>'',
         'propic'=>'',
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
 
 
         'first_name_err'=>'',
@@ -300,6 +312,8 @@
    //Add Admin
    public function add_new_admin(){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){ 
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $_POST=filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     
@@ -325,6 +339,8 @@
             'confirm_password'=>trim($_POST['confirm_password']),
             // 'profile_pic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['pp']['name'],
             'propic_name'=>trim($_POST['first_name']).' '.trim($_POST['last_name']).'_'.$_FILES['propic']['name'],
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
 
 
             'first_name_err'=>'',
@@ -527,6 +543,8 @@
         'password'=>'',
         'confirm_password'=>'',
         'propic'=>'',
+        'no_of_notifications' =>$no_of_notifications,
+        'notifications' => $notifications,
 
 
         'first_name_err'=>'',
@@ -563,9 +581,13 @@
 
    public function view_more_user($user_id){
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         $user= $this->adminUserMngtModel->getUserDetails($user_id);
         $data=[                      
-          'user'=>$user
+          'user'=>$user,
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
           
         ];
         $this->view('Admin/AdminUserManagement/v_view_more_info', $data);
@@ -579,7 +601,8 @@
   public function  adminSearchUser()
   {
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
-  
+    $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+    $notifications = $this->notification_model->notifications();
     if($_SERVER['REQUEST_METHOD']=='GET'){
       $_GET=filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
@@ -593,14 +616,18 @@
           $data=[                      
             'user'=>$users,
             'search'=>$search,
-            'message' => $message
+            'message' => $message,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
           ];
           $this->view('Admin/AdminUserManagement/v_user_management',$data);
      }else{
           $data=[                      
             'user'=>'',
             'search'=>'',
-            'message' => ''
+            'message' => '',
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
           ];
           $this->view('Admin/AdminUserManagement/v_user_management',$data);
      }
@@ -613,14 +640,18 @@
   //Deactivate Users
   public function  adminDeactivateUser($user_id)
   {
-    if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
+    if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         $deleteStatus= $this->adminUserMngtModel->deactivateUser($user_id);
         $user= $this->adminUserMngtModel->getUsers();
    
         $data=[                      
           'user'=>$user,
           'deleteStatus'=>$deleteStatus,
-          'search'=>''
+          'search'=>'',
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
        
          ];
         redirect('Admin_user_management/view_all_users');
@@ -639,6 +670,8 @@
     $records_per_page = 3;    
 
     if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] == 1) {
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             
@@ -672,6 +705,8 @@
                 'search' => 'Search by firstname | lastname | Address | NIC No | Email',
                 'emptydata' => "No Users to Show...",
                 'id' => $count,
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
 
                 'pagination' => [
                     'total_records' => $total_records,
@@ -689,6 +724,8 @@
                     'emptydata' => '',
                     'userType' => $_SESSION['radio_admin_role'],
                     'id' => $count,
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications,
     
                     'pagination' => [
                         'total_records' => $total_records,
@@ -720,6 +757,8 @@
                     'search' => 'Search by firstname | lastname | Address | NIC No | Email',
                     'emptydata' => 'No Users to Show...',
                     'id' => $count,
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications,
     
                     'pagination' => [
                         'total_records' => $total_records,
@@ -737,6 +776,8 @@
                     'emptydata' => '',
                     'userType' => $_SESSION['radio_admin_role'],
                     'id' => $count,
+                    'no_of_notifications' =>$no_of_notifications,
+                    'notifications' => $notifications,
     
                     'pagination' => [
                         'total_records' => $total_records,
@@ -761,12 +802,16 @@
     {
       if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
           $activeStatus= $this->adminUserMngtModel->activateUser($user_id);
+          $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+          $notifications = $this->notification_model->notifications();
         
      
           $data=[                      
             'user'=>'',
             'deleteStatus'=>$activeStatus,
-            'search'=>''
+            'search'=>'',
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
          
            ];
           redirect('Admin_user_management/view_all_users');

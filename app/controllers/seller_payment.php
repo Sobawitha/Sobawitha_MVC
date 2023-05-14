@@ -1,5 +1,6 @@
 <?php
     class seller_payment extends Controller{
+        private $seller_payment_model;
         public function __construct(){
             $this->seller_payment_model = $this->model('M_seller_payment');
     }

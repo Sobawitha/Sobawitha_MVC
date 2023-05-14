@@ -34,7 +34,7 @@
             <i class="fa-solid fa-xmark" id="xmark"></i>
             <span id="remove" data-id="<?php echo $wishlist->Product_id; ?>">Remove</span>
             <div class="pic">
-            <img src="../public/images/background2.jpg" class="wisthlist_image">
+            <img src="./../public/upload/fertilizer_images/<?php echo $wishlist->fertilizer_img ?>" class="wisthlist_image">
             </div>
             <div class="info">
             <span class="title"><?php echo strlen($wishlist->product_name) > 20 ? substr($wishlist->product_name, 0, 20) . '...' : $wishlist->product_name ?></span>

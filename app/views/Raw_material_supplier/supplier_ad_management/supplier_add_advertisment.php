@@ -1,6 +1,3 @@
-
-
-
 <?php require APPROOT . '/views/Users/component/Header.php'?>
 <?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_topnavbar.php'?>
 <?php require APPROOT . '/views/Raw_material_supplier/Raw_material_supplier/supplier_Sidebar.php'?>

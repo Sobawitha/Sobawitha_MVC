@@ -5,6 +5,7 @@
 .body{
     display:grid;
     grid-template-columns:20% 75% 5%;   
+   
 }
 
 .section_1{
@@ -298,7 +299,7 @@ nav{
 /*products*/
 .recent_product_card_section{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap:60px;
     padding:70px 50px 50px 20px;
    
@@ -373,6 +374,7 @@ a{
     color:white;
     border-radius:25px;
     transform: translate(610%, -45%);
+    cursor:pointer;
 }
 .price{
     font-size:15px;
@@ -382,8 +384,20 @@ a{
 }
 
 
-  
+#submit{
+ 
+    margin: 20px 0 0;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+  } 
 
 
   
-  
+  .highlight {
+    background-color: rgb(212, 212, 172);
+  }

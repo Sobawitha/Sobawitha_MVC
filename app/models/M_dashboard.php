@@ -78,7 +78,7 @@ class M_dashboard
           UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 10 MONTH), '%Y-%m-01') AS month_year
           UNION SELECT DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 11 MONTH), '%Y-%m-01') AS month_year
         ) AS date_list
-        LEFT JOIN blogpost ON YEAR(blogpost.created) = YEAR(date_list.month_year) AND MONTH(blogpost.created) = MONTH(date_list.month_year) AND officer_id=17
+        LEFT JOIN blogpost ON YEAR(blogpost.created) = YEAR(date_list.month_year) AND MONTH(blogpost.created) = MONTH(date_list.month_year) AND officer_id=:id
         GROUP BY YEAR(date_list.month_year), MONTH(date_list.month_year)
         ORDER BY YEAR(date_list.month_year), MONTH(date_list.month_year)");
         $this->db->bind(":id", $_SESSION['user_id']);

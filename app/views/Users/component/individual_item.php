@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/individual_item.css">
-</link>
+<link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/individual_item.css"></link>
 <script src="<?php echo URLROOT ?>/js/Users/component/individual_item.js" defer></script>
 
-<script>
+<script >
   /*pay popup */
+
 function pay_popup(price) {
   const existingQuantity = document.getElementById("existing_quantity_value").textContent;
   const quantity = parseInt(quantityInput.value);
@@ -24,13 +24,15 @@ function pay_popup(price) {
   }
 }
 
+
 function checkout() {
   const userInput = document.getElementById("quantity_input").value;
   const agreementCheckbox = document.querySelector('#terms-checkbox');
-  
+
+
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+    window.location.href = `<?php echo URLROOT ?>/cart/checkout_from_individual_page?product_id=<?php echo $_GET['product_id'] ?>&quantity=${userInput}`;
   } else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
@@ -131,7 +133,7 @@ function open_save_cancel_btn_for_question(){
 }
 
 function clear_question(){
-    document.querySelector(".comment-body").value='';
+    document.querySelector(".comment1-body").value='';
     document.querySelector(".btn_sec").style.display='none';
 }
 
@@ -177,16 +179,18 @@ function thanku_popup_close(){
 function checkout() {
   const userInput = document.getElementById("quantity_input").value;
   const agreementCheckbox = document.querySelector('#terms-checkbox');
-  
+  console.log(userInput);
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/fertilizer_product/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
+    window.location.href = '<?php echo URLROOT ?>/cart/checkout_from_individual_page?product_id=<?php echo $_GET['product_id'] ?>&quantity='+userInput;
   } else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
     document.getElementById("terms_and_condition_check").style.display="block";
   }
 }
+
+
 
 </script>
 
@@ -202,7 +206,7 @@ function checkout() {
       <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
       <br>
       <button class="checkout" onclick="checkout()">checkout</button><br>
-      <button class="paypal" >Place an Order</button><br>
+ 
       <i class="fa-solid fa-bag-shopping" id="bag"></i>  
     </div>
   </dialog>
@@ -214,6 +218,7 @@ function checkout() {
 
 <?php
 $content = $data['adcontent'];
+$feedback = $data['feedback'];
 ?>
 
 <div class="body">
@@ -324,7 +329,16 @@ foreach($data['wishlist_items'] as $wishlist_item)
     <a href="<?php echo URLROOT ?>/Pages/product_page" class="back_to_home"><i class="fa-sharp fa-solid fa-arrow-left" id="arrow"></i>&nbsp;&nbsp;Back to product page</a><br><br><br>
     <span class="title_1">fertilizer</span><br>
     <span class="title_2"><?php echo $content->product_name ?></span>
-    <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="add_wishlist_heart" data-product-id="<?php echo $content->Product_id ?>" onclick = "editWishlist()"></i>
+    <?php if(isset($_SESSION['user_id'])){
+      ?>
+      <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="add_wishlist_heart" data-product-id="<?php echo $content->Product_id ?>" onclick = "editWishlist()"></i>
+      <?php
+    }else{
+      ?>
+        <a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-heart" id="add_wishlist_heart"></i><a>
+      <?php
+    }?>
+    
     
     <br><br>
 
@@ -343,14 +357,14 @@ foreach($data['wishlist_items'] as $wishlist_item)
         <br><br>
         <span class="title_4">Seller Rating</span><br>
 
-        <?php $avg_rating = round($content->avg_rating); ?>
+        <?php $avg_rating = round($feedback->avg_rating); ?>
         <?php 
                 for ($i = 1; $i <= 5; $i++) {
                 $checked = ($i <= $avg_rating) ? 'checked' : '';
                 echo '<span class="fas fa-star ' . $checked . ' "></span>';
                 }
                 ?>           
-        <p style=font-size:14px;><?php echo $content -> avg_rating ?>  average based on <span class="num_of_reviews"><?php echo $content-> total_feedback_count ?></span> reviews.</p><br>
+        <p style=font-size:14px;><?php echo ($feedback->avg_rating == 0) ? "0.00" :  number_format($feedback->avg_rating, 2); ?> average based on <span class="num_of_reviews"><?php echo $feedback-> total_feedback_count ?></span> reviews.</p><br>
         <hr style="border:0.1px solid #f1f1f1"><br>
 
         <div class="row">
@@ -359,55 +373,55 @@ foreach($data['wishlist_items'] as $wishlist_item)
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-5" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_5_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-5" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_5_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_5_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_5_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">4 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-4" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_4_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-4" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_4_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_4_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_4_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">3 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-3" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_3_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-3" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_3_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_3_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_3_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">2 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-2" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_2_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-2" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_2_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_2_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_2_count ?></div>
           </div>
           <div class="side">
             <div class="n_star">1 star</div>
           </div>
           <div class="middle">
             <div class="bar-container">
-            <div class="bar-1" style="width: <?php echo ($content->total_feedback_count > 0) ? ($content->rating_1_count/$content->total_feedback_count*100) : 0; ?>%;"></div>
+            <div class="bar-1" style="width: <?php echo ($feedback->total_feedback_count > 0) ? ($feedback->rating_1_count/$feedback->total_feedback_count*100) : 0; ?>%;"></div>
             </div>
           </div>
           <div class="side right">
-            <div class="count_star"><?php echo $content->rating_1_count ?></div>
+            <div class="count_star"><?php echo $feedback->rating_1_count ?></div>
           </div>
         </div>
       </div>
@@ -431,28 +445,35 @@ foreach($data['wishlist_items'] as $wishlist_item)
       <span id="existing_quantity_value"><?php echo $content->quantity; ?></span> available
     </span>
     <br>
-    <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
-    <span id="quantity_error" style="color:red;"></span>
   </div>
+  <span id="errorMsg" style="padding-left:20px;font-weight:bold;color: red; display: none;">Out of the stock.</span>
+    <span id="quantity_error" style="color:red;"></span>
 </div>
 
 <div class="buttons">
-<?php if($content->quantity > 0 ) { 
+<?php if($content->quantity > 0) { 
   if($data['no_of_cart_item'] ==0 ){
     ?>
-    
-      <button id="buy_now_btn" onclick="event.preventDefault()pay_popup(<?php echo $content->price ?>)">Buy Now</button>
+    <?php if(isset($_SESSION['user_id'])) { ?>
+      <button id="buy_now_btn" onclick="event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button>
+    <?php }else{ ?>
+      <a href="<?php echo URLROOT ?>/Login/login"><span id="buy_now_btn_all">Buy Now</span></a>
+    <?php } ?>
     <?php
   }else{
     ?>
-      <!-- <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a> -->
-      <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
-      <button id="buy_now_btn" onclick = "event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button></a>
+      
+      <button id="buy_now_btn" type ="submit">Buy Now</button></a>
 
     <?php
   }
   ?>
-      <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="add_to_cart_btn" data-product-id = "<?php echo $content->Product_id ?>">Add to Cart</button></a>
+    <?php if(isset($_SESSION['user_id'])) { ?>
+      <button id="add_to_cart_btn"  type = "submit">Add to Cart</button>
+    <?php }else{ ?>
+      <a href="<?php echo URLROOT ?>/Login/login"><span id="add_to_cart_btn_all">Add to Cart</span></a>
+    <?php } ?>
+    
 
       <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
       <!-- <button type="submit" id="add_to_cart_btn" data-product-id="<?php echo $content->Product_id ?>">Add to Cart</button> -->
@@ -468,25 +489,19 @@ foreach($data['wishlist_items'] as $wishlist_item)
   
 </div>
 
-</div>
-</div>
-
-  <?php require APPROOT . '/views/Users/component/footer.php' ?>
-
-
-
-<dialog id="my-dialog">
-  <p>Item Successfully Added to the Wishlist</p>
-  <button id="dialog-close-button">Close</button>
-</dialog>
-
-
-
+<!-- for quantity   -->
 <script>
  const plusButton = document.querySelector('.plus_button');
 const minusButton = document.querySelector('.minus_button');
 const quantityInput = document.querySelector('input[name="quantity"]');
 const available_quantity = document.getElementById('existing_quantity');
+const quantity =  quantityInput.value;
+const productId  =  document.querySelector('input[type="hidden"]').value;
+const priceSpan = document.querySelector('.price');
+const priceText = priceSpan.textContent;  // "Rs. 750.00"
+const priceValue = priceText.replace(/[^0-9.]/g, '');  // "750.00"
+const price = parseFloat(priceValue);  // 750.00
+const name = document.querySelector('.title_2').textContent;
 
 plusButton.addEventListener('click', () => {
   let quantity = parseInt(quantityInput.value);
@@ -494,19 +509,27 @@ plusButton.addEventListener('click', () => {
   console.log(quantity);
   console.log(available_quantity);
   quantity++;
+  //quantityInput.value = quantityInput.value +1;
   if(quantity>available_quantity){
     quantityInput.style.color="red";
+    document.getElementById("errorMsg").style.display = "block";
   }
   else{
     quantityInput.value = quantity;
+    quantityInput.style.color="black";
+    document.getElementById("errorMsg").style.display = "none";
   }
 });
 
 minusButton.addEventListener('click', () => {
   let quantity = parseInt(quantityInput.value);
   quantity--;
+  quantityInput.style.color="black";
+  document.getElementById("errorMsg").style.display = "none";
   if (quantity < 1) {
     quantity = 1;
+    quantityInput.style.color="red";
+    document.getElementById("errorMsg").style.display = "block";
   }
   quantityInput.value = quantity;
 });
@@ -537,7 +560,7 @@ minusButton.addEventListener('click', () => {
                   echo $product_name;
                   ?>
                   </span><br>
-                  <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product/<?php echo $similar->Product_id ?>"><span class="see_more_related_item">See product details</span></a>
+                  <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product?product_id=<?php echo $similar->Product_id ?>"><span class="see_more_related_item">See product details</span></a>
                 </div>
               </div>
             <?php endforeach; ?>
@@ -547,28 +570,40 @@ minusButton.addEventListener('click', () => {
             </div>
           <?php endif; ?>
       </div>
-
-
-
           <!-- comment_section -->
         <div id="toggle_section_2" class="toggle_section">
 
             <?php $product_id = $_GET['product_id']?> <!--only for testing-->
+            
+            
+            
             <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_comment?product_id=<?php echo $product_id?>" >
+                    
+                
                     <div id="comment_form">
-                        <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span>
+                        
+                        <?php if(isset($_SESSION['user_id'])){ ?>
+                          <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span>
+                        <?php } else{ ?>
+                          <span id="usercommon"><?php echo ('U')?></span>
+                         <?php }  ?>
                         <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn()" name="comment"  required/>
                     </div>
                     <div  class="btn">
+                        
+                        <?php if(isset($_SESSION['user_id'])){ ?>
+                          <button type="submit" class="commentbtn" name="commentbtn" onclick="save_comment()">Comment</button>
+                        <?php } else {?>
+                          <a href="<?php echo URLROOT?>/Login/login"><span type="submit" class="commentbtn_for_all" >Comment</span></a>
+                        <?php } ?>
                         <button type="submit" class="cancelbtn" value="cancel" onclick="clear_comment()">Cancel</button>
-                        <button type="submit" class="commentbtn" name="commentbtn" onclick="save_comment()">Comment</button>
                     </div>
-            </form>
 
+                  
+            </form>
 
             <div class="comment_reply">
             <?php
-
               foreach($data['comments'] as $comment):?>
                 <span id="user-<?php echo $comment->comment_id?>" class="user"><?php echo ucfirst(($comment->commented_by_full_name[0]))?></span> 
                 <div class="display_comment">
@@ -620,10 +655,12 @@ minusButton.addEventListener('click', () => {
                 <hr>
                 <br>
               <?php endforeach;?>
-            </div>  
-          </div>
+            </div> 
+            </div> 
+          
 
           <div id="toggle_section_3" class="toggle_section">
+          <?php if(isset($_SESSION['user_id'])){ ?>
           <?php $product_id = $_GET['product_id']?> <!--only for testing-->
             <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_question?product_id=<?php echo $product_id?>" >
                     <div id="post_question_form">
@@ -639,7 +676,7 @@ minusButton.addEventListener('click', () => {
                         }
                         ?>
                         
-                        <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn_for_question()" name="question"  required/>
+                        <input type="text" class="comment1-body" placeholder="Add a comment"  onclick="open_save_cancel_btn_for_question()" name="question"  required/>
                     </div>
                     <div class="btn_sec">
                         <button type="submit" class="cancelbtn" value="cancel" onclick="clear_question()">Cancel</button>
@@ -648,6 +685,7 @@ minusButton.addEventListener('click', () => {
             </form>
 
 
+            
             <div class="question_answers">
             <?php
               foreach($data['question'] as $question):?>
@@ -737,6 +775,9 @@ minusButton.addEventListener('click', () => {
               <?php endforeach;?>
               </div>
           </div>
+          <?php }else{ ?>
+          <h3>Not available.</h3>
+          <?php } ?>
         </div>
     </div>
   </div>

@@ -4,7 +4,7 @@
 if(document.querySelector(".hidden").textContent){
 
      
-    console.log("dummy_content");
+   
     popUpOpen("Product added to the Cart");
    
 }
@@ -149,6 +149,7 @@ function editWishlist(){
 
   let heart_icon = document.getElementById('add_wishlist_heart');
   let productID =  heart_icon.dataset.productId;
+  console.log(heart_icon.dataset)
   if(heart_icon.classList.contains('fa-solid')){
     heart_icon.classList.remove('fa-solid');
     heart_icon.classList.add('fa-regular');
@@ -161,8 +162,9 @@ xhr.open('DELETE', `http://localhost/Sobawitha/wishlist/delete/${productID}`);
 xhr.onload = function() {
   if (xhr.status === 200) {
     // Reload the page or update the UI to reflect the removed product
-    let stmt = "Product removed from the wishlist"
-    popUpOpen(stmt);
+    // let stmt = "Product removed from the wishlist"
+    // popUpOpen(stmt);
+    console.log("Product removed from the wishlist")
 
     // Close the dialog box when the close button is clicked
    
@@ -185,9 +187,10 @@ xhr.open('POST', `http://localhost/Sobawitha/wishlist/addToWishlist/${productID}
 xhr.onload = function() {
     if (xhr.status === 200) {
         // Reload the page or update the UI to reflect the added product
-        let stmt = "Product added to the wishlist"
-        popUpOpen(stmt);
+        // let stmt = "Product added to the wishlist"
+        // popUpOpen(stmt);
         
+        console.log("Product added to the wishlist")
         // Close the dialog box when the close button is <clicked>  </clicked>
 
 
@@ -217,14 +220,14 @@ xhr.send();
 
 function  popUpOpen(stmt){
     
-    const dialog = document.querySelector('#my-dialog');
+    const dialogBtn = document.querySelector('#my-dialog');
 
-    dialog.showModal();
+    dialogBtn.showModal();
 
     document.querySelector('#my-dialog p').innerHTML = stmt;
      const dialogCloseButton = document.querySelector('#dialog-close-button');
      dialogCloseButton.addEventListener('click', () => {
-     dialog.close();
+     dialogBtn.close();
         
     
 });

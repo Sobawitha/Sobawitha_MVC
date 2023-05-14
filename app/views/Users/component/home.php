@@ -54,21 +54,41 @@
         </div>
         
         <div class="discription">
-          <?php if (isset($_SESSION['success_msg'])): ?>
-                <div class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['success_msg']; ?> <div class="progress-bar"></div>
-               </div>
-                <?php unset($_SESSION['success_msg']); ?>
-                <?php endif; ?>
+        <?php if(isset($_SESSION['success_msg'])){
+  ?>
+  <dialog id="thank_you_dialog_box" open>
+    <i class="fa-solid fa-xmark" id="close" onclick="thanku_popup_close()"></i>
+    <br>
+    <i class="fa-solid fa-gifts" id="gift"></i>
+    <p class="thank">Your Order created Successfully</p>
+    <p class="thank_discription">check if the browser supports the dialog element, and use a polyfill 
+      or alternative implementation if necessary.</p>
+    <button id="success_button" onclick="thanku_popup_close()">OK</button>
+  </dialog>
+  <?php
+  unset($_SESSION['success_msg']);
+}
+?>
+       <?php if(isset($_SESSION['failure_msg'])){
+  ?>
+  <dialog id="thank_you_dialog_box" open>
+    <i class="fa-solid fa-xmark" id="close" onclick="thanku_popup_close()"></i>
+    <br>
+    <i class="fas fa-exclamation-circle" id="gift"></i>
+    <p class="thank">Your Order was unsuccessful</p>
+    <p class="thank_discription">check if the browser supports the dialog element, and use a polyfill 
+      or alternative implementation if necessary.</p>
+    <button id="failure_button" onclick="thanku_popup_close()">OK</button>
+  </dialog>
+  <?php
+  unset($_SESSION['failure_msg']);
+}
+?>
+
+             
+               
             <p class="main">Find the best places to your trade</p>
             <p class=sub_main>Sobawitha is an online platform driven by agriculture nature by involving more people in their people in their in</p>
-            <!-- <form method="POST">
-            <div class="search_bar">
-                <div class="search_content">
-                    <input type="text" name="search_text" id="search_text" placeholder="Search from home" require/>
-                    <button type="submit" class="search_btn" ><i class="fa fa-search" aria-hidden="true" id="search"></i> <span class="search">SEARCH</span></button>
-                </div>
-            </div>
-            </form> -->
 
             <form id="search_form" method="POST">
             <div class="search_bar">
@@ -175,7 +195,16 @@ foreach($data['wishlist_items'] as $wishlist_item)
                     </div> 
                  </div></a>
                 
-               <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="heart" data-product-id = "<?php echo $ads->Product_id?>"  ></i>
+                  <?php if(isset($_SESSION['user_id'])){
+                    ?>
+                    <i class="<?php echo   $is_wishlist_item ? 'fa-solid':'fa-regular'?> fa-heart" id="heart" data-product-id = "<?php echo $ads->Product_id?>"  ></i>
+                    <?php
+                  }else{?>
+                    <i class=" fa-regular fa-heart" id="heart"></i>
+                  <?php
+                  }
+                  ?>
+                 
 
                 <div class="discription">
                 <span class="price">Rs. <?php echo $ads->price ?></span>
@@ -454,7 +483,7 @@ include 'footer.php';
 
 <script>
     const header = document.querySelector('#home_header');
-    const images = ['<?php echo URLROOT?>/public/images/background2.jpg', '<?php echo URLROOT?>/public/images/background7.jpg', '<?php echo URLROOT?>/public/images/background4.jpg', '<?php echo URLROOT?>/public/images/background3.jpg']; // array of image file names
+    const images = ['<?php echo URLROOT?>/public/images/background2.jpeg', '<?php echo URLROOT?>/public/images/background7.jpeg', '<?php echo URLROOT?>/public/images/background4.jpeg', '<?php echo URLROOT?>/public/images/background3.jpeg']; // array of image file names
     let currentIndex = 0;
 
     function changeBackground() {
@@ -463,5 +492,17 @@ include 'footer.php';
     }
 
     setInterval(changeBackground, 5000); // call the function every 5 seconds
+
+
+
+
+  function thanku_popup_close(){
+    document.getElementById('thank_you_dialog_box').close();
+  }
+
+  function thanku_popup_open(){
+    const thankuPopup = document.getElementById('thank_you_dialog_box');
+    thankuPopup.showModal();
+  }
 
 </script>

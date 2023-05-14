@@ -20,7 +20,7 @@ class M_notifications
             UNION
             
             SELECT COUNT(notification_id) as count_notification
-            FROM notification_based_on_users
+            FROM notification_based_on_users 
             WHERE user = :user_id AND current_status = 0
         ) AS combined_counts;
         ");
@@ -45,6 +45,13 @@ class M_notifications
         $this->db->bind(":user_role", $_SESSION['user_flag']);
         return $this->db->resultSet();
     }
+
+    public function delete_notification($id){
+        $this->db->query("DELETE from notification where noti_id = :id");
+        $this->db->bind(":id", $id);
+        $this->db->execute();
+    }
+
 
    
 

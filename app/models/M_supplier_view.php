@@ -141,16 +141,6 @@ class M_supplier_view
         return $this->db->resultset();
     }
 
-    /* ok*/
-    // public function insert_order_product_table($data){
-    //     $this->db->query("INSERT INTO seller_orders (payment_type, seller_id) VALUES ('cod', :user_id)");
-    //     $this->db->bind(":user_id", $data['user_id']);
-    //     if($this->db->execute()){
-    //         return true;
-    //     }else{
-    //             return false;
-    //     }
-    // }
 
     /*ok */
     public function update_raw_material_count( $product_id, $count) {
@@ -176,24 +166,6 @@ class M_supplier_view
         }
     }
 
-
-
-   
-
-    /*related only for buy single item */
-    // public function insert_order_table($data, $order_id){
-    //     $this->db->query("INSERT INTO seller_order_raw_material (order_id,product_id,quantity) VALUES (:order_id, :product_id, :quantity)");
-    //     $this->db->bind(":order_id", $order_id);
-    //     $this->db->bind(":product_id", $data['product_id']);
-    //     $this->db->bind(":quantity", $data['quantity']);
-    //     if ($this->db->execute()) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    /*ok */
     public function add_to_cart($data){
         $this->db->query("INSERT INTO cart (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
         $this->db->bind(":user_id", $data['user_id']);
@@ -246,17 +218,26 @@ class M_supplier_view
     
 /* */
     public function find_price_from_id($product_id){
-        $this->db->query("SELECT price as product_price from raw_material WHERE product_id = :product_id");
+        $this->db->query("SELECT price  from raw_material WHERE Product_id = :product_id");
         $this->db->bind(":product_id", $product_id);
         return $this->db->single();
     }
 
+    public function find_price_from_id_fertilizer($product_id){
+        $this->db->query("SELECT  price from fertilizer WHERE Product_id = :product_id");
+        $this->db->bind(":product_id", $product_id);
+        return $this->db->single();
+    }
     public function find_name_from_id($product_id){
-        $this->db->query("SELECT product_name as product_name from raw_material WHERE product_id = :product_id");
+        $this->db->query("SELECT product_name  from raw_material WHERE Product_id = :product_id");
         $this->db->bind(":product_id", $product_id);
         return $this->db->single();
     }
-
+    public function find_name_from_id_fertilizer($product_id){
+        $this->db->query("SELECT product_name as name from fertilizer WHERE Product_id = :product_id");
+        $this->db->bind(":product_id", $product_id);
+        return $this->db->single();
+    }
     
 
     /*ok */
@@ -273,43 +254,11 @@ class M_supplier_view
     }
 
     /*ok */
-    // public function get_user_detail(){
-    //     $this->db->query('SELECT first_name , last_name, concat(address_line_one,", ",address_line_two,", ",address_line_three,", ",address_line_four,".") as address, contact_no, email from user where user_id=:user_id');
-    //     $this->db->bind(":user_id", $_SESSION['user_id']);
-    //     return $this->db->single();
-    // }
-
-    /*ok */
     public function find_order_id(){
         $this->db->query('SELECT order_id as order_id FROM seller_orders WHERE seller_id = :user_id ORDER BY order_id DESC LIMIT 1 ');
         $this->db->bind(":user_id", $_SESSION['user_id']);  
         return $this->db->single();
     }
-
-    /*ok */
-    // public function update_cache_on_delivery_table($order_id){
-    //     $this->db->query("INSERT into cache_on_delivery_orders (order_id) VALUES (:order_id)");
-    //     $this->db->bind(":order_id", $order_id);
-    //     if ($this->db->execute()) {
-    //         $_SESSION['order_complete_msg']="complete_order_successfully";
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-
-    // }
-
-    /** */
-    // public function update_order_state($order_id){
-    //     $this->db->query("UPDATE seller_orders set current_status=1 WHERE order_id = :order_id");
-    //     $this->db->bind(":order_id", $order_id);
-    //     if ($this->db->execute()) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
 
     /*for order list Naveendra */
     public function list_order_deatils($id){
@@ -345,9 +294,56 @@ class M_supplier_view
     }
 
     /*to that */
+
+    /*according to the login user check whethe given itm in the wishlist or not(according to user and product) */
+    public function is_in_wishlist($product_id){
+        $this->db->query("SELECT count(*) as row_count from wishlist where Product_id=:product_id AND User_id=:user_id ");
+        $this->db->bind(":product_id", $product_id);
+        $this->db->bind(":user_id", $_SESSION['user_id']);
+        return $this->db->single();
+   
+    }
+
+    
+
+    public function view_individual_product($id){
+        $this->db->query('SELECT * FROM raw_material WHERE Product_id = :id');
+  
+        $this->db->bind(':id',$id);  
+        $row= $this->db->single();
+      
+        if($this->db->rowCount() >0){
+                return $row;
+        }else{
+                return false;
+        }
+    }
+
+    public function get_feedback_details($user_id){
+    
+        $this->db->query('SELECT COUNT(id) AS total_feedback_count, 
+        COUNT(CASE WHEN rating = 1 THEN 1 ELSE NULL END) AS rating_1_count,
+        COUNT(CASE WHEN rating = 2 THEN 1 ELSE NULL END) AS rating_2_count,
+        COUNT(CASE WHEN rating = 3 THEN 1 ELSE NULL END) AS rating_3_count,
+        COUNT(CASE WHEN rating = 4 THEN 1 ELSE NULL END) AS rating_4_count,
+        COUNT(CASE WHEN rating = 5 THEN 1 ELSE NULL END) AS rating_5_count,
+        AVG(rating) AS avg_rating
+          FROM feedback 
+          WHERE receiver_id = :id AND feed_status = 1
+      ');
+        $this->db->bind(':id',$user_id);  
+  
+  
+        $row= $this->db->single();
+  
+        if($this->db->rowCount() >0){
+              return $row;
+        }else{
+              return false;
+        }
+      
+      }
     
 
 }
-
-
 ?>

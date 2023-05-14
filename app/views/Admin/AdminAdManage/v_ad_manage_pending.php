@@ -99,7 +99,13 @@
                         <tr class="order">
                                 <div class="order_detail">
                               
-                                <td><img src="<?php echo URLROOT;?>/public/upload/fertilizer_images/<?php echo $products->listing_image?>" class="add_image"></td>
+                                <!-- <td><img src="<?php echo URLROOT;?>/public/upload/fertilizer_images/<?php echo $products->listing_image?>" class="add_image"></td> -->
+                                <?php if ($products->category == 'fertilizer'): ?>
+                                <td><img src="<?php echo URLROOT; ?>/public/upload/fertilizer_images/<?php echo $products->listing_image ?>" class="add_image"></td>
+                                <?php elseif($products->category == 'raw_material'): ?>
+                                <td><img src="<?php echo URLROOT; ?>/public/img/postsImgs/<?php echo $products->listing_image ?>" class="add_image"></td>
+                                <?php endif; ?>
+
                                 
                                 <td><span class="title"><?php echo (strlen($products->product_name) > 20) ? substr($products->product_name, 0, 20) . "..." : $products->product_name; ?></span></td>
                                 <td><span class="title"><?php echo (strlen($products->product_description) > 25) ? substr($products->product_description, 0, 25) . "...[See More]" : $products->product_description; ?></span></td>
@@ -286,7 +292,7 @@
                                         <button type="submit" class="btn" id="ad-review-btn" formaction="<?php echo URLROOT?>/Admin_ad_management/adminReviewAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Accept</button>
                                         <button type="button" class="btn" id="clc" onclick="document.getElementById('ad-details').close()">Close</button>
                                          <!-- <button type="submit" class="btn" id="reject-btn" formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Reject</button> -->
-                                         <button type="submit" class="btn" id="reject-btn"  formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Reject</button>
+                                         <!-- <button type="submit" class="btn" id="reject-btn"  formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Reject</button> -->
                                                                   
                                         </div>
                                         </form>

@@ -99,10 +99,10 @@
                                                 <span class="manufacture">
                                                         <?php
                                                         $words = explode(" ", $ad->product_description);
-                                                        if(count($words) < 50){
+                                                        if(count($words) < 20){
                                                                 echo $ad->product_description;
                                                         }else{
-                                                                for($count=0; $count<50; $count++ ){
+                                                                for($count=0; $count<20; $count++ ){
                                                                         echo $words[$count]." ";
                                                                 }
                                                                 echo "...";

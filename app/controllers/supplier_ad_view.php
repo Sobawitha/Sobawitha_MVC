@@ -3,19 +3,30 @@
 
         private $supplier_ad;
         private $raw_material_product;
+        private $notification_model;
+        private $cartModel;
         public function __construct(){
             $this->supplier_ad = $this->model('M_supplier_view');
             $this->raw_material_product = $this->model('M_seller_wishlist');
+            $this->notification_model = $this->model('M_notifications');
+            $this->cartModel = $this->model('M_raw_material_orders');
+
+
     }
 
 
+    
     public function index() {
         $ads = $this->supplier_ad->getPostsView();
         $user_realated_wishlist_items= $this->raw_material_product->get_all_wishlist_items();
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
     
         $data = [
             'ads' => $ads,
             'seller_wishlist' => $user_realated_wishlist_items,
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
         ];
     
         $this->view('Raw_material_supplier/supplier_ad_management/supplier_view_advertisement', $data);
@@ -24,22 +35,29 @@
     
     public function indexmore() {
         $productId = $_GET['product_id'];
+        $wishlist_status = $this-> supplier_ad -> is_in_wishlist($productId)->row_count;
         $ad = $this->supplier_ad->getPostById($productId);
+        $content = $this->supplier_ad->view_individual_product($productId);
+        $user_id = $content->user_id;
+        $feedback = $this->supplier_ad->get_feedback_details($user_id);
         $type = $ad->type;
         $id=$_SESSION['user_id'];
         $no_of_cart_item = $this->supplier_ad->check_cart($id)->count_item;
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
 
             $data = [
                 'adcontent' => $ad,
                 'no_of_cart_item' => $no_of_cart_item,
+                'wishlist_status' => $wishlist_status,
+                'no_of_notifications' =>$no_of_notifications,
+                'notifications' => $notifications,
+                'feed' => $feedback,
 
             ];
 
             $this->view('Raw_material_supplier/supplier_ad_management/supplier_view_more_advertisement', $data);
     }
-
-
-
 
 
 
@@ -55,147 +73,155 @@
         redirect('supplier_ad_view/index');
     }
 
+     /*add and remove from wish list from individual page*/
+     public function add_to_wishlist_from_individual_page(){
+        $rm_product_id = $_GET['product_id'];
+        $this->raw_material_product-> add_to_wishlist($rm_product_id);
+        redirect('supplier_ad_view/indexmore?product_id=' .$rm_product_id);
+    }
+
+    public function remove_wishlist_from_individual_page(){
+        $rm_product_id = $_GET['product_id'];
+        $this->raw_material_product-> removeItem();
+        redirect('supplier_ad_view/indexmore?product_id='.$rm_product_id);
+    }
+
     
     /*ok */
     function add_to_cart_from_individual_page(){
-        $quantity =2; /*change */
+        $quantity =$_POST['quantity']; /*change */
         $product_id = $_GET['product_id'];
         $user_id = $_SESSION['user_id'];
 
         /*add to cart */
         $current_status = $this->supplier_ad->check_similer_item($product_id,$user_id)->count_row;
+        $is_in_wishlist = $this-> supplier_ad -> is_in_wishlist($product_id) -> row_count;
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+
+        // echo $is_in_wishlist;
+        // die();
         $data = [
           'product_id' => $_GET['product_id'],
           'quantity' => $quantity,
           'user_id' => $_SESSION['user_id'],
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
         ];
 
-        if($current_status>0){
-            $this->supplier_ad->update_cart($data);
+        if($current_status>0){ 
+            if($is_in_wishlist>0){
+                $this->raw_material_product->removeItem();
+                $this->supplier_ad->update_cart($data);
+                redirect('raw_material_orders/view_cart?product_id='.$product_id);
+            }
+            else{
+                $this->supplier_ad->update_cart($data);
             redirect('raw_material_orders/view_cart?product_id='.$product_id);
+            }
         }
         else{
-            $this->supplier_ad->add_to_cart($data);
-            redirect('raw_material_orders/view_cart?product_id='.$product_id);
+            
+            if($is_in_wishlist>0){
+                $this->supplier_ad->add_to_cart($data);
+                $this->raw_material_product->removeItem();
+                redirect('raw_material_orders/view_cart?product_id='.$product_id);
+            }
+            else{
+                $this->supplier_ad->add_to_cart($data);
+                redirect('raw_material_orders/view_cart?product_id='.$product_id); 
+            }    
         }
      }
 
-     /*for single item buy ok*/
-    //  function complete_order(){
-    //     $quantity =1;  /*change */
-    //     $product_id = $_GET['product_id'];
-    //     $price = $this->supplier_ad->find_price_from_id($product_id)->product_price;
-    //     $data = [
-    //       'product_id' => $_GET['product_id'],
-    //       'quantity' => $quantity,
-    //       'user_id' => $_SESSION['user_id'],
-    //     ];
-      
-    //     // Insert data into the database
-    //     $this->supplier_ad->insert_order_product_table($data);
-    //     $order_id = $this->supplier_ad->select_last_raw_id()->raw_id;
-    //     $this->supplier_ad->insert_order_table($data, $order_id);
-    //     $this->supplier_ad->update_raw_material_count($product_id, $quantity);
-    //     $order_id = $this->supplier_ad->find_order_id()->order_id;
-    //     $tot_bill = $price * $quantity;
-    //     $user_detail = $this->supplier_ad->get_user_detail();
-    //     $data_for_payment =[
-    //         'user_detail' => $user_detail,
-    //         'tot_bill' => $tot_bill,
-    //         'order_id' => $order_id
-    //     ];
-    //     $this->view('Users/component/cod_order',$data_for_payment);
-    //   }
-
-
-     function add_to_cart(){
-        $quantity =1; /*change */
+     function update_cart_item_quantities(){
+        $quantity =$_POST['quantity']; /*change */
         $product_id = $_GET['product_id'];
-        $this->supplier_ad->update_raw_material_count($product_id, $quantity);
+        $user_id = $_SESSION['user_id'];
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+
+        /*add to cart */
+
         $data = [
           'product_id' => $_GET['product_id'],
           'quantity' => $quantity,
           'user_id' => $_SESSION['user_id'],
+          'no_of_notifications' =>$no_of_notifications,
+          'notifications' => $notifications,
         ];
-        if($this->supplier_ad->add_to_cart($data)){
-            redirect('supplier_ad_view/indexmore?product_id='.$product_id);
-        }
 
+        $this->supplier_ad->update_cart($data);
+        redirect('raw_material_orders/view_cart?product_id='.$product_id);
      }
 
      function remove_from_cart(){
         $product_id = $_GET['product_id'];
-        $quantity = $_GET['quantity'] ; /*change */
+        $quantity = $_GET['quantity'] ;
         $this->supplier_ad->re_update_raw_material_count($product_id, $quantity);
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
         $data = [
             'product_id' => $_GET['product_id'],
             'user_id' => $_SESSION['user_id'],
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications,
+
           ];
         if($this->supplier_ad->remove_from_cart($data)){
             redirect('raw_material_orders/view_cart');
         }
      }
 
-
-    //  public function load_cash_on_deliver_page(){
-    //     $product_id = $_GET['product_id'];
-    //     $order_id = $this->supplier_ad->find_order_id()->order_id;
-    //     $quantity = 4; /*change */
-    //     $price = $this->supplier_ad->find_price_from_id($product_id)->product_price;
-    //     $tot_bill = $price * $quantity;
-    //     $user_detail = $this->supplier_ad->get_user_detail();
-    //     $data =[
-    //         'user_detail' => $user_detail,
-    //         'tot_bill' => $tot_bill,
-    //         'order_id' => $order_id
-    //     ];
-    //     $this->view('Users/component/cod_order',$data);
-    //  }
-
-
-    //  public function confirm_payment(){
-    //     $product_id = $_GET['product_id'];
-    //     $order_id = $this->supplier_ad->find_order_id()->order_id;
-    //     $this->supplier_ad->update_cache_on_delivery_table($order_id);
-    //     $this->supplier_ad->update_order_state($order_id);
-    //     redirect('supplier_ad_view/load_cash_on_deliver_page?product_id='.$product_id); /*load buyer view purchses */
-    //  }
+    
 
 
 
 
 
+    
 
-
-
-
-
-
-
-
-
-
-
-      /*fertilizer_order_list for Naveendra*/
-    //   function view_orders(){
-    //     $order_list = $this-> raw_material_product -> list_order_deatils($_SESSION['user_id']);
-    //     $data =[
-    //         'order_list' => $order_list,
-    //     ];
-
-    //     $this->view('Seller/Seller_order/v_seller_order_list',$data);
-
-    //   }
-
-      
-
-
-
-     
-
-
-
-
-
+     public function checkout_from_seller_cart() {
+        require '../app/vendor/autoload.php';
+        \Stripe\Stripe::setApiKey('sk_test_51MskWIIz6Y8hxLUJq8DTBxJ0xInEFNHtBn9H1i30ReXNtkRg6eAIrpz74kd2HYPYXN0v2TnqoT9jBMnJxWdqYXXu00gAVFTXaI');
+    
+        $cartItems = $this->cartModel->view_cart();
+        $lineItems = [];
+    
+        foreach ($cartItems as $item) {
+            $productId = $item->Product_id;
+            $quantity = $item->quantity;
+            $price = $item->price;
+            $name = $item->product_name;
+    
+            $lineItems[] = [
+                'quantity' => $quantity,
+                'price_data' => [
+                    'currency' => 'lkr',
+                    'unit_amount' => $price * 100,
+                    'product_data' => [
+                        'name' => $name,
+                        'metadata' => [
+                            'product_id' => $productId,
+                        ],
+                    ],
+                ],
+            ];
+        }
+    
+        $serializedLineItems = json_encode($lineItems);
+        $successUrl = URLROOT . '/cart/createOrder?line_items=' . urlencode($serializedLineItems);
+    
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => $lineItems,
+            'mode' => 'payment',
+            'success_url' => $successUrl,
+            'cancel_url' => 'https://example.com/cancel',
+        ]);
+    
+        header("Location: " . $session->url);
     }
+}
+    
     ?>

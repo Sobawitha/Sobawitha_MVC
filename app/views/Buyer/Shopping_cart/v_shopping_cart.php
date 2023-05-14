@@ -2,18 +2,7 @@
 <link rel="stylesheet" href="../css/Buyer/shopping_cart/shopping_cart.css"></link>
 <!-- <script src="../js/Buyer/index_checkOut.js" defer></script> -->
 <?php require APPROOT . '/views/Users/component/Header.php'?>
-<?php if(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'success'): ?>
-    <div id="flash-message" class="flash-success">
-        <div class="flash-text">Order was successful. Check your email for information.</div>
-        <div class="flash-loading-bar"></div>
-    </div>
-<?php unset($_SESSION['order_status']); ?>
-<?php elseif(isset($_SESSION['order_status']) && $_SESSION['order_status'] == 'failure'): ?>
-    <div id="flash-message" class="flash-error">
-        <div class="flash-text">Order was unsuccessful. Please try again.</div>
-    </div>
-<?php unset($_SESSION['order_status']); ?>
-<?php endif; ?>
+
 
 <?php
 $sum = 0;
@@ -45,6 +34,11 @@ if ($_SESSION['user_flag'] == 1) {
 
         <div class="section_2">
          
+        <?php if (isset($_SESSION['order_msg'])): ?>
+                <div class="success-msg"><i class="fa-regular fa-circle-check"></i> <?php echo $_SESSION['order_msg']; ?> <div class="progress-bar"></div>
+               </div>
+                <?php unset($_SESSION['order_msg']); ?>
+                <?php endif; ?>
 
 
 
@@ -72,7 +66,7 @@ foreach($data['cart'] as $cart):{
                                 <div class="order_detail"  >
                                         <td>
                                             <div class="product_detail">
-                                                <img src="http://localhost/Sobawitha/public/images/<?php echo $cart->product_img ?>" class="cart_image"></img>
+                                                <img src="./../public/upload/fertilizer_images/<?php echo $cart->product_img ?>" class="cart_image"></img>
                                                 <i class="fa-solid fa-xmark" id="cancel_order" data-id="<?php echo $cart->Product_id ?>"></i><br><br>
                                                 <span class="order_p_name"><?php echo $cart->product_name ?></span><br>
                                                 <span class="order_p_id"><?php echo $cart->Product_id ?></span><br>
@@ -99,7 +93,7 @@ foreach($data['cart'] as $cart):{
         <div class="section_3">
                 <div class="total_price_section">
                         <hr id="cart_toatal_section_hr">
-                        <span class="cart_total">Cart total <span class="total_value">Rs.<?php echo $sum ?></span></span><br>
+                        <span class="cart_total">Cart total<span class="total_value">Rs.<?php echo $sum;?></span></span><br>
                         <span class="discription">Shipping and taxes calculate at checkout.</span><br />
                         <input type="checkbox" name = "agree-terms" id  = "checkvalue" /><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br><br>
                         <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
@@ -154,29 +148,6 @@ var hideTime = 5000; // 5 seconds
 // }, hideTime);
 
 
-placeOrderBtn.addEventListener("click", function(){
-
-  if(checkBoxVal.checked){
-
-    
-    console.log("Hell o");
-    
-    window.location.href = "http://localhost/Sobawitha/Pages/orderpage"
-  }
-
-  else{
-
-
-document.getElementById('terms_and_condition_check').style.display = "block";
-
-}
-
-
-
-
-
-
-})
 for (let i = 0; i < incrementButtons.length; i++) {
   incrementButtons[i].addEventListener('click', function(e) {
   console.log("Hello");
@@ -195,8 +166,10 @@ for (let i = 0; i < incrementButtons.length; i++) {
            val++;
            console.log(val);
            incrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
+           
+          updateTotal()
            price = val*price;
-      
+           
            incrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
 
 
@@ -244,6 +217,7 @@ for (let i = 0; i < incrementButtons.length; i++) {
        val--;
        console.log(val);
        decrementButtons[i].closest('.input-group-text').querySelector('.input-qty').value = val;
+       updateTotal()
        price = val*price;
       
        decrementButtons[i].closest(".unit").nextElementSibling.querySelector('span').innerText = price;
@@ -531,6 +505,34 @@ else{
 
 }
 )
+
+function updateTotal() {
+  var orderElements = document.getElementsByClassName("order");
+  var totalSum = 0;
+
+  for (var i = 0; i < orderElements.length; i++) {
+    var orderElement = orderElements[i];
+
+    var priceElement = orderElement.querySelector(".price");
+    var price = parseFloat(priceElement.innerText);
+
+    var qtyElement = orderElement.querySelector(".input-qty");
+    var qty = parseInt(qtyElement.value);
+
+    var totPriceElement = orderElement.querySelector(".tot_price");
+    var totPrice = price * qty;
+    totPriceElement.innerText = totPrice.toFixed(2);
+
+    totalSum += totPrice;
+  }
+
+  var totalValueElements = document.querySelectorAll(".total_value");
+  for (var i = 0; i < totalValueElements.length; i++) {
+    var totalValueElement = totalValueElements[i];
+    totalValueElement.innerHTML = '';
+    totalValueElement.innerText = "Rs." + totalSum.toFixed(2);
+  }
+}
 
 
 </script>

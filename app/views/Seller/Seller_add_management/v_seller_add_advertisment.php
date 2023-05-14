@@ -70,11 +70,12 @@
                     <select name="crop_type" id="crop_type">
                               <option value="Paddy">Paddy</option>
                               <option value="Vegetables">Vegetables</option>
+                              <option value="Vegetables">Fruits</option>
                               <option value="Tea">Tea</option>
                               <option value="Coconut">Coconut</option>
                               <option value="Flowers">Flowers</option>
                               <option value="Rubber">Rubber</option>
-                              <option value="Othercrops">Other Crops</option>
+                              <option value="Grass">Grass</option>
                               <option value="Any">Any</option>
                     </select>
                 </div>

@@ -1,7 +1,7 @@
 <?php require APPROOT.'/views/Users/component/Header.php'?>
 
 <link rel="stylesheet" href="<?php echo URLROOT ?>/css/Users/component/footer.css"></link>
-<script src="../js/Users/component/footer.js"></script>
+<script src="../js/Users/component/footer.js" defer></script>
 
 <div class="footer_section">
     <div class="footer_content">
@@ -46,27 +46,14 @@
                         <h2 class="dialog-title">Help</h2>
                         <label for="email">Email:</label>
                         <input type="email" id="email" value="<?php echo $userEmail; ?>" name="victim_mail" required>
+                        <br>
                         <label for="content">Content:</label>
                         <textarea id="content" name="content" required></textarea>
                         <button type="submit" class="dialog-submit" formaction="<?php echo URLROOT ?>/Users/help_center/">Submit</button>
                     </form>
                     </dialog>
 
-                <script>
-                    const openDialogBtn = document.querySelector('#openDialog');
-                    const dialog = document.querySelector('#helpDialog');
-
-                    openDialogBtn.addEventListener('click', function() {
-                    dialog.showModal();
-                    });
-
-                    dialog.querySelector('.dialog-close').addEventListener('click', function() {
-                    dialog.close();
-                    });
-
-
-
-                </script>
+              
 
 
 

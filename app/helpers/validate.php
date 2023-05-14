@@ -249,7 +249,6 @@ function validate_discription_for_blogpost($discription) {
   // If all checks pass, return true
   return true;
 }
-  
 
 
 
@@ -330,4 +329,12 @@ function validate_additional_info($additional_info) {
   return true;
 }
 
- ?>
+   function validatePriceadfertilizer(){
+  if (!preg_match('/^[0-9]+(?:\.[0-9]+)?$/', $price)) {
+    return 'Price contains invalid characters.';
+  }
+  return true;
+  }
+
+
+?>

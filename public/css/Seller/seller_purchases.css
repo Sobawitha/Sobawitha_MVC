@@ -6,6 +6,7 @@
     display:grid;
     grid-template-columns:20% 70% 10%;
     padding-top:80px;
+    min-height: 60dvh;
     
   }
   
@@ -57,7 +58,7 @@
   
   .filter_section{
     display:grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 100%;
     
   }
 
@@ -133,16 +134,18 @@
   
   #rating_popup{
      width:300px;
-    height:380px;
+    height:450px;
     margin-top:150px;
     text-align: center;
     padding:20px;
     border: none;
+    border-radius: 10px;
   }
 
   #rating_comment{
     font-size:12px;
     height:100px;
+    width:75%;
   }
 
   #rating_submit{
@@ -185,4 +188,20 @@
   .fa-star.checked {
     color: salmon;
   }
+
+  .annonymous_rating{
+    margin-right:150px;
+    padding-bottom: 10px;
+  }
+
+  
+  /* popup ends */
+
+
+  #seller_review_btn{
+    background-color:transparent;
+    border:none;
+    cursor:pointer;
+  }
+
   
