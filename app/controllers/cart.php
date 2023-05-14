@@ -10,7 +10,8 @@ class cart extends Controller
         $this->orderModel = $this->model('M_order');
         $this->supplyModel = $this->model('M_supplier_view');
         $this->paymentModel = $this->model('M_seller_payment');
-        //$this->wishListModel = $this->model('M_wishlist');
+
+        $this->wishListModel = $this->model('M_wishlist');
         $this->notification_model = $this->model('M_notifications');
     }
 
@@ -95,6 +96,58 @@ class cart extends Controller
 
     public function checkout_from_individual_page(){
 
+        if($_SESSION['user_flag'] == '3'){
+        require '../app/vendor/autoload.php';
+        // Set your API keys
+        \Stripe\Stripe::setApiKey('sk_test_51MskWIIz6Y8hxLUJq8DTBxJ0xInEFNHtBn9H1i30ReXNtkRg6eAIrpz74kd2HYPYXN0v2TnqoT9jBMnJxWdqYXXu00gAVFTXaI');
+        $productId = $_GET["product_id"];
+        $quantity = $_GET["quantity"];
+     
+      
+        $price    = $this->supplyModel->find_price_from_id($productId)->price;
+        $name    =  $this->supplyModel->find_name_from_id($productId)->product_name;
+       
+        echo $price.$name;
+        $lineItems[] = [
+
+
+            'quantity' => $quantity,
+            'price_data' => [
+                'currency' => 'lkr',
+                'unit_amount' => $price*100,
+                'product_data' => [
+                    'name' => $name,
+                    'metadata' => [
+                        'product_id' => $productId,
+                    ]
+                 
+
+                ]
+                
+
+            ],
+
+        ];
+        $serialized_line_items = json_encode($lineItems);
+        $success_url = URLROOT . '/cart/createOrder?line_items='.urlencode($serialized_line_items);
+             
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => $lineItems,
+            'mode' => 'payment',
+            'success_url' => $success_url,
+            'cancel_url' => 'https://example.com/cancel',
+        ]);
+    
+        // Redirect the user to the Checkout page
+        header("Location: " . $session->url);
+        
+
+
+
+    }
+
+    if($_SESSION['user_flag'] == '2'){
         require '../app/vendor/autoload.php';
         // Set your API keys
         \Stripe\Stripe::setApiKey('sk_test_51MskWIIz6Y8hxLUJq8DTBxJ0xInEFNHtBn9H1i30ReXNtkRg6eAIrpz74kd2HYPYXN0v2TnqoT9jBMnJxWdqYXXu00gAVFTXaI');
@@ -143,6 +196,9 @@ class cart extends Controller
 
     }
 
+
+
+}
     public function checkOut()
     {
         
@@ -294,6 +350,14 @@ public function add_to_cart_from_individual_page()
    //fint the existenceof item in the wishlist if so delete the item from the wishlist
     $url = "http://localhost/Sobawitha/fertilizer_product/view_individual_product?product_id=$pro_id";
     
+    if($this->wishListModel->findByWishlistId($pro_id))
+    {
+  
+      $this->wishListModel->deleteItem($pro_id);
+   
+      
+    }
+
     if ($this->cartModel->findByCartId($pro_id)) {
 
          $this->cartModel->updateItem($pro_id,$quantity);

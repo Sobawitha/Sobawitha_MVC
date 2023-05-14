@@ -41,8 +41,10 @@ function checkout() {
   
   if (agreementCheckbox.checked) {
     // Checkbox is checked, continue with checkout process
-    window.location.href = '<?php echo URLROOT ?>/supplier_ad_view/complete_order?product_id=<?php echo $_GET['product_id'] ?>';
-  } else {
+    window.location.href = `<?php echo URLROOT ?>/cart/checkout_from_individual_page?product_id=<?php echo $_GET['product_id'] ?>&quantity=${userInput}`;
+  } 
+  
+  else {
     // Checkbox is not checked, show an error message
     //alert('Please agree to the terms and conditions before proceeding to checkout.');
     document.getElementById("terms_and_condition_check").style.display="block";

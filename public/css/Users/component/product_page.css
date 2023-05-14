@@ -373,6 +373,7 @@ a{
     color:white;
     border-radius:25px;
     transform: translate(610%, -45%);
+    cursor:pointer;
 }
 .price{
     font-size:15px;

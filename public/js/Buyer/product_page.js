@@ -1,4 +1,3 @@
-
 let viewMore =  document.querySelector('.view_more'); 
 let allBrands = document.querySelector('.all_brands');
 const recentProductCardSection = document.querySelector('.recent_product_card_section');
@@ -9,55 +8,98 @@ let search_input = document.querySelector(".search_cont input");
 let list_input =  document.querySelector(".live-search-result .search-result");
 let best_match =document.querySelector('.dropdown-content');
 let  product_list = document.querySelectorAll('.adv_card');
+const elements = document.querySelectorAll('[class*=fa-heart]');
 
+console.log(elements.length)
+elements.forEach(element => {
+    element.addEventListener('click', () => {
+        console.log(element.classList);
+       if(element.classList.contains('fa-solid')){
+        element.classList.remove('fa-solid');
+        element.classList.add('fa-regular');
 
-
-
-
-
-
-
-document.querySelectorAll('.dropdown-content a')[0].addEventListener('click', () => {
-
-  console.log("Hello");
-  let sorted_Cards_Asc = Array.from(product_list).sort((a,b) => {
-
-    var  price_a = Number(a.querySelector('.price').textContent);
-    var price_b = Number(b.querySelector('.price').textContent);
-    return price_a - price_b;
-  })
-  
-  console.log(sorted_Cards_Asc)
-  recentProductCardSection.innerHTML = ''
-  sorted_Cards_Asc.forEach(card => {
-  
-  recentProductCardSection.appendChild(card);
-
-
-
+        let productID =  element.dataset.productId;
+        console.log(productID);
+        // Send an AJAX request to delete the product from the wishlist
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', `http://localhost/Sobawitha/wishlist/delete/${productID}`);
+        xhr.onload = function() {
+        if (xhr.status === 200) {
+          console.log("successfully deleted");
+        }
+        else {
+            alert('Request failed.  Returned status of ' + xhr.status);
+        }
+        };
+        xhr.send();
+    }
+    else if(element.classList.contains('fa-regular')){
+        element.classList.remove('fa-regular');
+        element.classList.add('fa-solid');
+        let productID =  element.dataset.productId;
+        // Send an AJAX request to delete the product from the wishlist
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', `http://localhost/Sobawitha/wishlist/addToWishlist/${productID}`);
+        xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Reload the page or update the UI to reflect the removed product
+            console.log("successfully added");
+        }
+        else {
+            alert('Request failed.  Returned status of ' + xhr.status);
+        }
+        };
+        xhr.send();
+    }
 })
-})
 
-document.querySelectorAll('.dropdown-content a')[1].addEventListener('click', () => {
-  console.log("Hello");
-  let sorted_Cards_Desc = Array.from(product_list).sort((a,b) => {
+});
 
-    var  price_a = Number(a.querySelector('.price').textContent);
-    var price_b = Number(b.querySelector('.price').textContent);
-    return price_b - price_a;
-  })
 
-  console.log(sorted_Cards_Desc)
+
+
+
+// document.querySelectorAll('.dropdown-content a')[0].addEventListener('click', () => {
+
+//   console.log("Hello");
+//   let sorted_Cards_Asc = Array.from(product_list).sort((a,b) => {
+
+//     var  price_a = Number(a.querySelector('.price').textContent);
+//     var price_b = Number(b.querySelector('.price').textContent);
+//     return price_a - price_b;
+//   })
   
-  recentProductCardSection.innerHTML = ''
-  sorted_Cards_Desc.forEach(card => {
+//   console.log(sorted_Cards_Asc)
+//   recentProductCardSection.innerHTML = ''
+//   sorted_Cards_Asc.forEach(card => {
   
-  recentProductCardSection.appendChild(card);
+//   recentProductCardSection.appendChild(card);
+
+
+
+// })
+// })
+
+// document.querySelectorAll('.dropdown-content a')[1].addEventListener('click', () => {
+//   console.log("Hello");
+//   let sorted_Cards_Desc = Array.from(product_list).sort((a,b) => {
+
+//     var  price_a = Number(a.querySelector('.price').textContent);
+//     var price_b = Number(b.querySelector('.price').textContent);
+//     return price_b - price_a;
+//   })
+
+//   console.log(sorted_Cards_Desc)
+  
+//   recentProductCardSection.innerHTML = ''
+//   sorted_Cards_Desc.forEach(card => {
+  
+//   recentProductCardSection.appendChild(card);
   
 
 
-})
-})
+// })
+// })
     
 
 
@@ -197,26 +239,26 @@ viewMore.addEventListener("click", () =>{
 
 
 
-function getFilter(testingCriteria){
-let tests= [];
-const checkboxes = document.querySelectorAll(testingCriteria);
+// function getFilter(testingCriteria){
+// let tests= [];
+// const checkboxes = document.querySelectorAll(testingCriteria);
 
 
-for (let i = 0; i < checkboxes.length; i++) {
-    if(checkboxes[i].checked){
+// for (let i = 0; i < checkboxes.length; i++) {
+//     if(checkboxes[i].checked){
 
-   console.log(checkboxes[i].value);
-  tests.push(checkboxes[i].value);
+//    console.log(checkboxes[i].value);
+//   tests.push(checkboxes[i].value);
   
   
-    }
+//     }
 
-}
-console.log(tests.length);
-// log the list of checked brands
-return tests;
+// }
+// console.log(tests.length);
+// // log the list of checked brands
+// return tests;
 
-}
+// }
 
 
 // function filterProducts() {
