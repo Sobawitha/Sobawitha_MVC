@@ -115,12 +115,7 @@ class fertilizer_product extends Controller
         $type = $content->type;
 
         $similar = $this->fertilizer_product_model->show_similar($title,$crop_type,$type,$id);
-        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
-        $notifications = $this->notification_model->notifications();
-         
-        if(isset($_SESSION['user_id'])){
-            $id=$_SESSION['user_id'];
-        }
+        
         
         $data =['product_id' =>  $_GET['product_id']]; 
         $comment = $this->fertilizer_product_model->display_all_comment($data);
@@ -128,28 +123,48 @@ class fertilizer_product extends Controller
         $question = $this->fertilizer_product_model->display_all_questions($data);
         $answers = $this->fertilizer_product_model->display_all_answers($data);
         $wishlist_items = $this->wishList_model->getAllItems();
-        $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
-        
         $product_owner_id = $this->fertilizer_product_model->find_owner_id($data['product_id'])->owner_id;
-        $no_of_cart_item = $this->fertilizer_product_model->check_cart($id)->count_item;
-        $data = [
-            'comments' => $comment,
-            'reply_for_comment' => $reply_for_comment,
-            'question' => $question,
-            'answers' => $answers,
-            'current_user_gender' => $current_user_gender,
-            'product_owner_id' => $product_owner_id,
-            'adcontent' => $content,
-            'similar' => $similar,
-            'owner_id'=> $product_owner_id,
-            'no_of_cart_item' => $no_of_cart_item,
-            'wishlist_items' => $wishlist_items,
-            'feedback' => $feedback,
-            'no_of_notifications' =>$no_of_notifications,
-            'notifications' => $notifications,
-        ];
         
-        $this->view('Users/component/individual_item',$data);
+        if(isset($_SESSION['user_id'])){
+            $id=$_SESSION['user_id'];
+            $current_user_gender = $this->fertilizer_product_model->find_gender($id)->gender;
+            $no_of_cart_item = $this->fertilizer_product_model->check_cart($id)->count_item;
+            $data = [
+                'comments' => $comment,
+                'reply_for_comment' => $reply_for_comment,
+                'question' => $question,
+                'answers' => $answers,
+                'current_user_gender' => $current_user_gender,
+                'product_owner_id' => $product_owner_id,
+                'adcontent' => $content,
+                'similar' => $similar,
+                'owner_id'=> $product_owner_id,
+                'no_of_cart_item' => $no_of_cart_item,
+                'wishlist_items' => $wishlist_items,
+                'feedback' => $feedback,
+
+            ];
+            
+            $this->view('Users/component/individual_item',$data);
+        }
+        else{
+            $data = [
+                'comments' => $comment,
+                'reply_for_comment' => $reply_for_comment,
+                'question' => $question,
+                'answers' => $answers,
+                'current_user_gender' =>'m',
+                'product_owner_id' => $product_owner_id,
+                'adcontent' => $content,
+                'similar' => $similar,
+                'owner_id'=> $product_owner_id,
+                'no_of_cart_item' => 0,
+                'wishlist_items' => $wishlist_items,
+                'feedback' => $feedback,
+            ];
+            $this->view('Users/component/individual_item',$data);
+        }
+        
 
 
     }
