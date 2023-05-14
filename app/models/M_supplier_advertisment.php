@@ -122,7 +122,7 @@ class M_supplier_advertisment
     }
 
     public function edit($data) {
-        $this->db->query('UPDATE raw_material SET raw_material_image = :image1, rm_image_two = :image2, rm_image_three = :image3, product_name = :product_name, manufacturer = :manufacturer, quantity=:quantity, price= :price, product_description=:product_description, type=:type WHERE Product_id = :id');
+        $this->db->query('UPDATE raw_material SET raw_material_image = :image1, rm_image_two = :image2, rm_image_three = :image3, product_name = :product_name, manufacturer = :manufacturer, quantity=:quantity, price= :price, product_description=:product_description, type=:type, current_status = 0 WHERE Product_id = :id');
         $this->db->bind(':image1', $data['image_name1']);
         $this->db->bind(':image2', $data['image_name2']);
         $this->db->bind(':image3', $data['image_name3']);
