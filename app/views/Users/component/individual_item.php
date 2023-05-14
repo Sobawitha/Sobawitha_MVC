@@ -544,7 +544,7 @@ minusButton.addEventListener('click', () => {
                   echo $product_name;
                   ?>
                   </span><br>
-                  <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product/<?php echo $similar->Product_id ?>"><span class="see_more_related_item">See product details</span></a>
+                  <a href="<?php echo URLROOT?>/fertilizer_product/view_individual_product?product_id=<?php echo $similar->Product_id ?>"><span class="see_more_related_item">See product details</span></a>
                 </div>
               </div>
             <?php endforeach; ?>
