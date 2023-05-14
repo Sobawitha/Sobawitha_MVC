@@ -130,9 +130,9 @@
  fetch("http://localhost/Sobawitha/buyer_dashboard/fertilizer_type_donut_chart").then(response => response.json()).then(results => {
         console.log(results.fertilizer_type_details);
         console.log(results.crop_type_details);
-        var labels1 = ["Liquid", "Solid", "Packets","Bottles"];
+        var labels1 = ["Liquid", "Solid"];
         var labels2 = [];
-        var count1 = [0, 0, 0, 0];
+        var count1 = [0, 0];
         var count2 = [];
 
 
@@ -175,15 +175,13 @@
                             backgroundColor: [
                         '#deeaee',
                         '#9bf4d5',
-                        '#346357',
-                        '#c94c4c',
+                       
                       
                     ],
                     borderColor: [
                         '#deeaee',
                         '#9bf4d5',
-                        '#346357',
-                        '#c94c4c',
+                       
                       
                     ],
                     borderWidth: 1

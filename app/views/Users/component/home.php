@@ -483,7 +483,7 @@ include 'footer.php';
 
 <script>
     const header = document.querySelector('#home_header');
-    const images = ['<?php echo URLROOT?>/public/images/background2.jpg', '<?php echo URLROOT?>/public/images/background7.jpg', '<?php echo URLROOT?>/public/images/background4.jpg', '<?php echo URLROOT?>/public/images/background3.jpg']; // array of image file names
+    const images = ['<?php echo URLROOT?>/public/images/background2.jpeg', '<?php echo URLROOT?>/public/images/background7.jpeg', '<?php echo URLROOT?>/public/images/background4.jpeg', '<?php echo URLROOT?>/public/images/background3.jpeg']; // array of image file names
     let currentIndex = 0;
 
     function changeBackground() {

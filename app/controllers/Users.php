@@ -4,6 +4,7 @@
         private $loginModel;
         private $sellerAdModel;
         private $buyerAdModel;
+        private $wishlistModel;
 
         public function __construct(){
             $this-> userModel =$this->model('M_Users');
@@ -358,14 +359,16 @@
             {
                 $query .= " AND quantity = '".$quantity."'";
             }
-
-            if(!empty($location))
-            {
+            if (!empty($location)) {
+                // Ensure that $location is always an array
+                if (!is_array($location)) {
+                    $location = [$location];
+                }
+                
+                // Use implode() with the array
                 $location_filter = implode("','", $location);
                 $query .= " AND created_by IN (SELECT user_id FROM user WHERE address_line_four IN ('".$location_filter."'))";
             }
-
-
             
             $result = $this->sellerAdModel->customized_query($query);
            
