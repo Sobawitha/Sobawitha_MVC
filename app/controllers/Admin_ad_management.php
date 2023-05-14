@@ -1,6 +1,8 @@
 <?php
     class Admin_ad_management extends Controller{
         private $adminAdMgmtModel;
+        private $notification_model;
+        
         public function __construct(){
             $this->adminAdMgmtModel = $this->model('M_Admin_ad_management');
             $this->notification_model = $this->model('M_notifications');

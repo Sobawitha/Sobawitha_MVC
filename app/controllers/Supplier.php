@@ -2,6 +2,7 @@
     class Supplier extends Controller{
 
         private $supplierModel;
+        private $notification_model;
         public function __construct(){
             $this->supplierModel = $this->model('M_Supplier');
             $this->notification_model = $this->model('M_notifications');
@@ -266,7 +267,7 @@
             if($this->supplierModel->addSupplier($data)){
                 //   flash('post_msg', 'add new seller successfully');
                 $flag=3;
-                sendMail($data['email'],$data['first_name'], $verificationCode, $flag, '');
+                sendMail($data['email'],$data['first_name'], $verificationCode, $flag, '','','');
                 redirect('Users/verify_email/'.$data['email']);  
               }else{
                 die('Error creating');

@@ -1,6 +1,7 @@
 <?php
     class Admin_user_management extends Controller{
         private $adminUserMngtModel;
+        private $notification_model;
 
         public function __construct(){
             $this->adminUserMngtModel = $this->model('M_Admin_user_management');

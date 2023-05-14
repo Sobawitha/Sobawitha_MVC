@@ -174,6 +174,8 @@ class M_supplier_advertisment
         return $result;
     }
 
+   
+
 }
 
 
