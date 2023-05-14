@@ -1,6 +1,8 @@
 <?php
     class supplier_dashboard extends Controller{
         private $supplier_dashboard_model;
+        private $notification_model;
+
         public function __construct(){
             $this->supplier_dashboard_model = $this->model('M_supplier_dashboard');
             $this->notification_model = $this->model('M_notifications');
@@ -20,7 +22,7 @@
             $_SESSION['num_per_page'] = $num_per_page;
             $tot_income = $this->supplier_dashboard_model->calculate_total($_SESSION['user_id'])->total_income;
             $no_of_complaint = $this->supplier_dashboard_model->get_no_of_complaints($_SESSION['user_id'])->num_complaint;
-            $pending_ad_count = $this->supplier_dashboard_model->get_no_of_pending_ads($_SESSION['user_id'])->pending_ads;
+            $pending_ad_count = $this->supplier_dashboard_model->get_no_of_published_ads($_SESSION['user_id'])->pending_ads;
             $no_of_complete_order = $this->supplier_dashboard_model->get_no_of_complete_order($_SESSION['user_id'])->complete_orders;
             $stock_details = $this->supplier_dashboard_model->get_stock_details($start_from , $num_per_page);
             $no_of_orders = $this->supplier_dashboard_model->get_no_of_products()->no_of_products;

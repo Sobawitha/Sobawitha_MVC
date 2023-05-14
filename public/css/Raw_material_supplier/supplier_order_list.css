@@ -10,6 +10,7 @@
     display:grid;
     grid-template-columns:20% 72% 8%;
     padding-top:80px;
+    min-height: 650px;
     
 }
 

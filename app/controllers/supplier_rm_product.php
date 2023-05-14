@@ -2,8 +2,8 @@
 
 class supplier_rm_product extends Controller
 {
-    private $rm_product_model;
-    private $resources_model;
+    private $rm_product_model, $notification_model , $wishList_model;
+    private $resources_model, $fertilizer_product_model;
     public function __construct()
     {
         $this->rm_product_model= $this->model('M_supplier_rm_product');

@@ -10,7 +10,7 @@
 
     </div>
     <div class="section_2">
-        <div class="dashboard_header">
+        <!-- <div class="dashboard_header">
             <h2>My tasks</h2>
             <form method="POST">
             <div class="search_bar">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             </form>
-        </div>
+        </div> -->
 
         <div class="dashboard">
             <div class='card' id="card1">
@@ -44,7 +44,7 @@
                 <div class='content'>
                 <div class="p1">
                     <p class="count"><?php echo $data['complete_order']?></p>
-                    <p class="topic">complete Orders</p>
+                    <p class="topic">Complete Orders</p>
                     <p class="time_period">For previous year</P>
                 </div>
                 <div class="p2">
@@ -56,7 +56,7 @@
                 <div class='content'>
                     <div class="p1">
                     <p class="count"><?php echo $data['pending_ads']?></p>
-                    <p class="topic">No of pending ads</p>
+                    <p class="topic">Published ads</p>
                     <p class="time_period">For previous month</P>
                     </div>
                     <div class="p2">
@@ -85,14 +85,14 @@
             <div class="charts">
               
                 <div class="chart">
-                    <h2>Income change (Past 12 month)</h2><br>
+                    <h2>Income Change Over Last 12 Months</h2><br>
                     <div>
                     <canvas id="barchart"></canvas>   
                     </div>
                 </div>
 
                 <div class="chart" id="bar-chart">
-                    <h2>Supply item counts</h2><br>
+                    <h2>Supply Item Counts</h2><br>
                     <div>
                         <canvas id="bar"></canvas>
                     </div>
@@ -254,7 +254,7 @@
                                 <th>#</th>
                                 <th>Product name</th>
                                 <th>Quantity</th>
-                                <th>Soled</th>
+                                <th>Sold</th>
                                 <th>Available</th>
                             </tr><?php 
                             foreach($data['stock_details'] as $stock_details):

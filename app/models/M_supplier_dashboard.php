@@ -17,10 +17,10 @@
         
     }
 
-    public function get_no_of_pending_ads($id){
+    public function get_no_of_published_ads($id){
       $this->db->query("SELECT COUNT(*) AS pending_ads
       FROM raw_material 
-      WHERE User_id = :id  AND current_status = 0
+      WHERE User_id = :id  AND current_status = 1
       AND date >= DATE_SUB(NOW(), INTERVAL 1 MONTH);
       ");
       $this->db->bind(":id", $id);

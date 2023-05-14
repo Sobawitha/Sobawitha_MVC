@@ -152,7 +152,6 @@
                 <div class="input-box">
                     <span class="details">NIC No</span>
                     <input type="text" placeholder="Enter your NIC no" name="nic" value="<?php echo $data['nic']?>"readonly>
-                    <span class="error_msg"><?php echo $data['nic_err'] ?></span>
                 </div>
 
                 <div class="input-box">
