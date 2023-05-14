@@ -19,13 +19,13 @@
 
 
         <div class="button_section">
-          <form method="POST">
+          <form class="searchForm" action="<?php echo URLROOT;?>/supplier_ad_management/supplierSearchads" method="POST">
           <div class="search_bar">
               <div class="search_content">
                   
-                      <span class="search_cont" onclick="open_cansel_btn()"><input type="text" name="search_text" placeholder="" " require/></span>
-                      <button type="submit" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cansel" ></i></button>
-                      <button type="submit" class="search_btn"><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
+                      <span class="search_cont" onclick="open_cancel_btn()"><input type="text" name="search" placeholder="<?php echo $data['search'] ?>" id="searchBar" require/></span>
+                      <button type="button" class="search_btn" onclick="clear_search_bar()" value=""><i class="fa-solid fa-xmark" id="cancel" ></i></button>
+                      <button type="submit" class="search_btn" onclick="open_cancel_btn()" ><i class="fa fa-search" aria-hidden="true" id="search"></i></button>
                   
               </div>
           </div>
@@ -45,6 +45,7 @@
                 </div> -->
 
 
+                <?php if($data['search'] === 'Search by firstname | lastname | Address | NIC No | Email' ): ?>
                 <div class="filter_section">
                 <form method ="POST" action="<?php echo URLROOT?>/supplier_ad_management/indexfilter" id="filter_form">
 
@@ -56,6 +57,7 @@
                         <br>
                 </form>
                 </div>
+                <?php endif?>
 
 
 
@@ -72,7 +74,7 @@
                 <table class="sm_view_list_table">
                         <tr class="table_head">
                                 <td>Image</td>
-                                <td>Name</td>
+                                <td>Title</td>
                                 <td>Price(Rs.)</td>
                                 <td>Avaiable Quantity</td>
                                 <td>Additional Infomation</td>
@@ -201,7 +203,14 @@
 
 
 
+<script>
+function clear_search_bar(){
+  document.getElementById("searchBar").value = "";
+  document.getElementById("cancel").style.display='none';
+  window.location.replace("<?php echo URLROOT?>/supplier_ad_management/indexfilter");
+}
 
+</script>
 
 
 

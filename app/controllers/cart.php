@@ -3,7 +3,7 @@
 class cart extends Controller
 {
 
-    private $cartModel,$orderModel,$paymentModel;
+    private $cartModel,$orderModel,$paymentModel, $supplyModel;
     public function __construct()
     {
         $this->cartModel = $this->model('M_shopping_cart');
@@ -11,13 +11,20 @@ class cart extends Controller
         $this->supplyModel = $this->model('M_supplier_view');
         $this->paymentModel = $this->model('M_seller_payment');
         //$this->wishListModel = $this->model('M_wishlist');
+        $this->notification_model = $this->model('M_notifications');
     }
 
     public function display_all_items()
     {
 
-        $data['title'] = 'cart';
-        $data['cart'] = $this->cartModel->getAllItems();
+        $no_of_notifications = $this->notification_model->find_notification_count()->total_count;
+        $notifications = $this->notification_model->notifications();
+        $data= [
+            'title' => 'cart',
+            'cart' => $this->cartModel->getAllItems(),
+            'no_of_notifications' =>$no_of_notifications,
+            'notifications' => $notifications
+        ];
 
         $this->view('Buyer/Shopping_cart/v_shopping_cart', $data);
 
@@ -37,9 +44,18 @@ class cart extends Controller
         }
 
         {
+            $wishlist_status = $this-> cartModel -> is_in_wishlist($pro_id)->row_count;
+            if($wishlist_status>0){
+                $this->cartModel->delete($pro_id);
+                $this->cartModel->insertItem($pro_id);
+                $this->display_all_items();
+            }
+            else{
+                $this->cartModel->insertItem($pro_id);
+                $this->display_all_items();
+            }
 
-            $this->cartModel->insertItem($pro_id);
-            $this->display_all_items();
+            
 
         }
 

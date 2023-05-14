@@ -51,5 +51,13 @@
         return $this->db->execute();
     }
     
+
+    public function getSearchAds($userId, $search)
+    {
+        $this->db->query("SELECT p.purchase_id, p.quantity, p.date, r.product_name, r.price, r.raw_material_image FROM seller_purchases AS p JOIN raw_material AS r on p.product_id = r.Product_id WHERE r.product_name LIKE '%$search%' AND p.seller_id=$userId"  );
+        $items = $this->db->resultSet(); 
+
+        return array("items" => $items);
+    }
 }
 ?>

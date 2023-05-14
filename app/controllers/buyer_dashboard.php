@@ -7,13 +7,8 @@ private $buyerModel;
 
 public function   __construct()
 {
- 
-  
     $this->buyerModel = $this->model('M_buyer');
-
-
-
-
+    
 }
 
 

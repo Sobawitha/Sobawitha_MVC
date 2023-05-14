@@ -3,6 +3,8 @@
 
         private $supplier_ad;
         private $raw_material_product;
+        private $notification_model;
+        private $cartModel;
         public function __construct(){
             $this->supplier_ad = $this->model('M_supplier_view');
             $this->raw_material_product = $this->model('M_seller_wishlist');
