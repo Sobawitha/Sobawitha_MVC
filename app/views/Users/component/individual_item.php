@@ -133,7 +133,7 @@ function open_save_cancel_btn_for_question(){
 }
 
 function clear_question(){
-    document.querySelector(".comment-body").value='';
+    document.querySelector(".comment1-body").value='';
     document.querySelector(".btn_sec").style.display='none';
 }
 
@@ -642,7 +642,7 @@ minusButton.addEventListener('click', () => {
                         }
                         ?>
                         
-                        <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn_for_question()" name="question"  required/>
+                        <input type="text" class="comment1-body" placeholder="Add a comment"  onclick="open_save_cancel_btn_for_question()" name="question"  required/>
                     </div>
                     <div class="btn_sec">
                         <button type="submit" class="cancelbtn" value="cancel" onclick="clear_question()">Cancel</button>

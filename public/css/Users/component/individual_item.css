@@ -753,7 +753,7 @@ nav{
     border:2px solid rgb(216, 218, 215);
 }
 
-.comment-body{
+.comment-body, .comment1-body{
     border-top:none;
     border-left:none;
     border-right:none;
@@ -767,6 +767,10 @@ nav{
 
 .comment-body:focus{
     outline: none;
+}
+
+.comment1-body:focus{
+  outline: none;
 }
 
 .btn{
