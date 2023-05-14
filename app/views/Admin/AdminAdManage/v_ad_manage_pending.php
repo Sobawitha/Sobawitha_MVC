@@ -286,7 +286,7 @@
                                         <button type="submit" class="btn" id="ad-review-btn" formaction="<?php echo URLROOT?>/Admin_ad_management/adminReviewAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Accept</button>
                                         <button type="button" class="btn" id="clc" onclick="document.getElementById('ad-details').close()">Close</button>
                                          <!-- <button type="submit" class="btn" id="reject-btn" formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Reject</button> -->
-                                         <button type="submit" class="btn" id="reject-btn"  formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Reject</button>
+                                         <!-- <button type="submit" class="btn" id="reject-btn"  formaction="<?php echo URLROOT?>/Admin_ad_management/adminRejectAd/<?php echo $products->Product_id ?>?category=<?php echo $products->category ?>">Reject</button> -->
                                                                   
                                         </div>
                                         </form>

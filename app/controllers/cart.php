@@ -3,7 +3,7 @@
 class cart extends Controller
 {
 
-    private $cartModel,$orderModel,$paymentModel;
+    private $cartModel,$orderModel,$paymentModel, $supplyModel;
     public function __construct()
     {
         $this->cartModel = $this->model('M_shopping_cart');
