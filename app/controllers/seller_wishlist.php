@@ -1,6 +1,8 @@
 <?php
     class seller_wishlist extends Controller{
 
+        private $seller_wishlist_model, $notification_model;
+
         public function __construct(){
             $this->seller_wishlist_model = $this->model('M_seller_wishlist');
             $this->notification_model = $this->model('M_notifications');

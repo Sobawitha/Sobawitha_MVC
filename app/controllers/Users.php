@@ -12,7 +12,7 @@
             $this-> loginModel =$this->model('M_Login');
             $this->sellerAdModel = $this->model('M_seller_ad_management');
             $this->buyerAdModel = $this->model('M_ad_management');
-           
+            $this->notification_model = $this->model('M_notifications');
             $this->wishlistModel = $this->model('M_wishlist');
         }
 
@@ -35,6 +35,7 @@
                 'retype_new_password_err'=>'' ,
                 'new_password_err'=>'',
                 'pwd_unmatch_err'=>'' ,
+                'no_of_notifications' =>$no_of_notifications,
                 'notifications' => $notifications,
                 'notifications_all' => $notifications_all, 
             ];
@@ -59,7 +60,8 @@
                  'new_password'=>trim($_POST['new_password']),      
                  'retype_new_password'=>trim($_POST['retype_new_password']),   
                  'notifications' => $notifications,
-                 'notifications_all' => $notifications_all,    
+                 'notifications_all' => $notifications_all,   
+                 'no_of_notifications' =>$no_of_notifications,
                
                  'current_password_err'=>'',
                  'retype_new_password_err'=>'' ,

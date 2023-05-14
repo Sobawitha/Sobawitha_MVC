@@ -22,7 +22,7 @@
             <a href="<?php echo URLROOT ?>/seller_wishlist/remove_wishlist_item?product_id=<?php echo $Seller_wishlist_item->Product_id ?>"  id="xmark"><i class="fa-solid fa-xmark" ></i></a>
             <!-- <span id="remove">Remove</span> -->
             <div class="pic">
-            <a href="<?php echo URLROOT?>/supplier_ad_view/indexmore?product_id=<?php echo $Seller_wishlist_item->Product_id ?>"><img src="../public/upload/raw_material_images/<?php echo $Seller_wishlist_item->raw_material_image?>" alt="raw_material_image" class="wisthlist_image"></a>
+            <a href="<?php echo URLROOT?>/supplier_ad_view/indexmore?product_id=<?php echo $Seller_wishlist_item->Product_id ?>"><img src="<?php echo URLROOT?>/public/img/postsImgs/<?php echo $Seller_wishlist_item->raw_material_image?>" alt="raw_material_image" class="wisthlist_image"></a>
             </div>
 
             <div class="info">

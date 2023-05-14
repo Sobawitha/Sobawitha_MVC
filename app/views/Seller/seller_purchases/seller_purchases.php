@@ -58,7 +58,7 @@
                 <tr class="sp_view">
                         <div class="sp_view_detail">
                                 <th><span class="no" id="row_data"><?php echo  $purchase-> order_id?></span></th>
-                                <th><span class="image" id="row_data"><img src="./../public/upload/raw_material_images/<?php echo $purchase-> raw_material_image ?>" alt="raw_material_image"  id="raw_material_image"></span></th>
+                                <th><span class="image" id="row_data"><img src="./../public/img/postsImgs/<?php echo $purchase-> raw_material_image ?>" alt="raw_material_image"  id="raw_material_image"></span></th>
                                 <th><span class="item" id="row_data"><?php echo  $purchase-> product_name?></span></th>
                                 <th><span class="quantity" id="row_data"><?php echo  $purchase-> quantity?></span></th>
                                 <th><span class="date" id="row_data"><?php $timestamp = strtotime($purchase->created_at);$date = date('Y-m-d', $timestamp); echo $date ?></span></th>

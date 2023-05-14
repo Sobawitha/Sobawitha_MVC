@@ -1,6 +1,6 @@
 <?php
     class Admin_feedback_management extends Controller{
-        private $adminFeedMgntModel;
+        private $adminFeedMgntModel, $notification_model;
         public function __construct(){
             $this->adminFeedMgntModel = $this->model('M_Admin_feedback_management');
             $this->notification_model = $this->model('M_notifications');

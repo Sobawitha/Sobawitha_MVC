@@ -1,7 +1,7 @@
 <?php
 
 class seller_purchase extends Controller {
-    private $seller_purchase_model;
+    private $seller_purchase_model, $notification_model;
     public function __construct(){
         $this-> seller_purchase_model =$this->model('M_Seller_purchase');
         $this->notification_model = $this->model('M_notifications');

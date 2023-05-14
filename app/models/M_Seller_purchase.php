@@ -22,7 +22,7 @@
 
     public function get_purchase_list(){
         // $this->db->query('SELECT seller_purchases.purchase_id, seller_purchases.quantity, seller_purchases.date, raw_material.product_name, raw_material.price, raw_material.raw_material_image from seller_purchases inner join raw_material on raw_material.product_id = seller_purchases.product_id where seller_id= :id');
-        $this->db->query('SELECT seller_orders.order_id, seller_orders.created_at, seller_order_raw_material.review_status, seller_order_raw_material.quantity, raw_material.product_name, raw_material.price, raw_material.raw_material_image
+        $this->db->query('SELECT seller_orders.order_id, seller_orders.created_at, seller_order_raw_material.review_status, seller_order_raw_material.quantity, seller_order_raw_material.product_id, raw_material.product_name, raw_material.price, raw_material.raw_material_image
         FROM seller_orders 
         INNER JOIN seller_order_raw_material ON seller_orders.order_id = seller_order_raw_material.order_id 
         INNER JOIN raw_material ON raw_material.product_id = seller_order_raw_material.product_id 

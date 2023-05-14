@@ -22,7 +22,7 @@ function setColor($tag){
         <h3>Order List</h3>
         <hr>
         <!-- search bar -->
-        <div class="filters">
+        <!-- <div class="filters">
                 <form method="POST">
                 <div class="search_bar">
                 <div class="search_content">
@@ -35,7 +35,7 @@ function setColor($tag){
                 </div>
                 </form>
                 
-        </div>
+        </div> -->
 
                 <div class="order_list">
                 <div class="orders">

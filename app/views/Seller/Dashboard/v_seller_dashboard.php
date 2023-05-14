@@ -10,7 +10,7 @@
 
     </div>
     <div class="section_2">
-        <div class="dashboard_header">
+        <!-- <div class="dashboard_header">
             <h2>My tasks</h2>
             <form method="POST">
             <div class="search_bar">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             </form>
-        </div>
+        </div> -->
 
         <div class="dashboard">
             <div class='card' id="card1">
