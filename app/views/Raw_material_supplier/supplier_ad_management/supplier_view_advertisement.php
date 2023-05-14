@@ -163,7 +163,7 @@ else if($_SESSION['user_flag'] == 4){
                         echo '<span class="fas fa-star ' . $checked . ' "></span>';
                         }
                         ?>
-                    <span class="price"><?php echo $ad->price ?></span>
+                    <span class="price">Rs. <?php echo $ad->price ?></span>
                     
                 </div>
             </div>

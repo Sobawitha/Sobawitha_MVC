@@ -133,7 +133,7 @@ function open_save_cancel_btn_for_question(){
 }
 
 function clear_question(){
-    document.querySelector(".comment-body").value='';
+    document.querySelector(".comment1-body").value='';
     document.querySelector(".btn_sec").style.display='none';
 }
 
@@ -335,7 +335,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
       <?php
     }else{
       ?>
-      <i class="fa-regular fa-heart" id="add_wishlist_heart"></i>
+        <a href="<?php echo URLROOT?>/Login/login"><i class="fa-regular fa-heart" id="add_wishlist_heart"></i><a>
       <?php
     }?>
     
@@ -451,22 +451,29 @@ foreach($data['wishlist_items'] as $wishlist_item)
 </div>
 
 <div class="buttons">
-<?php if($content->quantity > 0 ) { 
+<?php if($content->quantity > 0) { 
   if($data['no_of_cart_item'] ==0 ){
     ?>
-    
+    <?php if(isset($_SESSION['user_id'])) { ?>
       <button id="buy_now_btn" onclick="event.preventDefault();pay_popup(<?php echo $content->price ?>)">Buy Now</button>
+    <?php }else{ ?>
+      <a href="<?php echo URLROOT ?>/Login/login"><span id="buy_now_btn_all">Buy Now</span></a>
+    <?php } ?>
     <?php
   }else{
     ?>
-      <!-- <a href="<?php echo URLROOT ?>/fertilizer_product/add_to_cart_from_individual_page?product_id=<?php echo  $_GET['product_id']?>"><button id="buy_now_btn">Buy Now</button></a> -->
-      <!-- <button id="buy_now_btn" onclick="add_to_cart()">Buy Now</button> -->
+      
       <button id="buy_now_btn" type ="submit">Buy Now</button></a>
 
     <?php
   }
   ?>
-<button id="add_to_cart_btn"  type = "submit">Add to Cart</button>
+    <?php if(isset($_SESSION['user_id'])) { ?>
+      <button id="add_to_cart_btn"  type = "submit">Add to Cart</button>
+    <?php }else{ ?>
+      <a href="<?php echo URLROOT ?>/Login/login"><span id="add_to_cart_btn_all">Add to Cart</span></a>
+    <?php } ?>
+    
 
       <!-- <button id="add_to_cart_btn" onclick="add_to_cart()">Add to Cart</button> -->
       <!-- <button type="submit" id="add_to_cart_btn" data-product-id="<?php echo $content->Product_id ?>">Add to Cart</button> -->
@@ -576,19 +583,20 @@ minusButton.addEventListener('click', () => {
                     <div id="comment_form">
                         
                         <?php if(isset($_SESSION['user_id'])){ ?>
-                          <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span><button type="submit" class="commentbtn" name="commentbtn" onclick="save_comment()">Comment</button>
+                          <span id="usercommon"><?php echo ucfirst($_SESSION['username'][0])?></span>
                         <?php } else{ ?>
                           <span id="usercommon"><?php echo ('U')?></span>
                          <?php }  ?>
                         <input type="text" class="comment-body" placeholder="Add a comment"  onclick="open_save_cancel_btn()" name="comment"  required/>
                     </div>
                     <div  class="btn">
-                        <button type="submit" class="cancelbtn" value="cancel" onclick="clear_comment()">Cancel</button>
+                        
                         <?php if(isset($_SESSION['user_id'])){ ?>
-                        <button type="submit" class="commentbtn" name="commentbtn" onclick="save_comment()">Comment</button>
-                        <?php } else {?>
                           <button type="submit" class="commentbtn" name="commentbtn" onclick="save_comment()">Comment</button>
+                        <?php } else {?>
+                          <a href="<?php echo URLROOT?>/Login/login"><span type="submit" class="commentbtn_for_all" >Comment</span></a>
                         <?php } ?>
+                        <button type="submit" class="cancelbtn" value="cancel" onclick="clear_comment()">Cancel</button>
                     </div>
 
                   
@@ -652,6 +660,7 @@ minusButton.addEventListener('click', () => {
           
 
           <div id="toggle_section_3" class="toggle_section">
+          <?php if(isset($_SESSION['user_id'])){ ?>
           <?php $product_id = $_GET['product_id']?> <!--only for testing-->
             <form method="POST" action="<?php echo URLROOT?>/fertilizer_product/post_question?product_id=<?php echo $product_id?>" >
                     <div id="post_question_form">
@@ -676,6 +685,7 @@ minusButton.addEventListener('click', () => {
             </form>
 
 
+            
             <div class="question_answers">
             <?php
               foreach($data['question'] as $question):?>
@@ -765,6 +775,9 @@ minusButton.addEventListener('click', () => {
               <?php endforeach;?>
               </div>
           </div>
+          <?php }else{ ?>
+          <h3>Not available.</h3>
+          <?php } ?>
         </div>
     </div>
   </div>
