@@ -204,7 +204,6 @@ public function delete_profile_pic(){
             'address_line_three'=>trim($_POST['address_line_three']),
             'address_line_four'=>trim($_POST['address_line_four']),
             'contact_number'=>trim($_POST['contact_number']),
-            'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
             'no_of_notifications' =>$no_of_notifications,
             'notifications' => $notifications,

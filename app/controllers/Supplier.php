@@ -421,7 +421,6 @@ public function updateProfile(){
             'address_line_three'=>trim($_POST['address_line_three']),
             'address_line_four'=>trim($_POST['address_line_four']),
             'contact_number'=>trim($_POST['contact_number']),
-            'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
             'bank_account_name'=>trim($_POST['bank_account_name']),
             'bank_account_no'=>trim($_POST['bank_account_no']),
@@ -439,7 +438,6 @@ public function updateProfile(){
             'address_line_three_err'=>'',
             'address_line_four_err'=>'',
             'contact_number_err'=>'',
-            'nic_err'=>'',
             'birthday_err'=>'',
             'bank_account_name_err'=>'',
             'bank_err'=>'',
@@ -561,7 +559,7 @@ public function updateProfile(){
           }
         }
 
-    if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err'])  && empty($data['nic_err'])&& empty($data['contact_number_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err'])  && empty($data['address_line_four_err'])){
+    if(empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['address_line_one_err']) && empty($data['address_line_two_err']) && empty($data['address_line_three_err']) && empty($data['contact_number_err']) && empty($data['birthday_err']) && empty($data['bank_account_no_err']) && empty($data['bank_account_name_err']) && empty($data['bank_err']) && empty($data['branch_err'])  && empty($data['address_line_four_err'])){
         
         if($this->supplierModel->updateSupplier($data)){
             //   flash('post_msg', 'add new admin successfully');

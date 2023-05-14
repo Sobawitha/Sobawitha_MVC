@@ -2,7 +2,7 @@
 <?php
 
     class Seller extends Controller{
-        private $sellerModel;
+        private $sellerModel, $sellerAdModel, $notification_model, $supplier_ad, $raw_material_product, $cartModel;
 
         public function __construct(){
           $this->sellerAdModel = $this->model('M_seller_ad_management');
@@ -461,7 +461,6 @@ public function updateProfile(){
             'address_line_three'=>trim($_POST['address_line_three']),
             'address_line_four'=>trim($_POST['address_line_four']),
             'contact_number'=>trim($_POST['contact_number']),
-            'nic'=>trim($_POST['nic']),
             'birthday'=>trim($_POST['birthday']),
             'bank_account_name'=>trim($_POST['bank_account_name']),
             'bank_account_no'=>trim($_POST['bank_account_no']),
@@ -536,17 +535,6 @@ public function updateProfile(){
 
           if ($addressValidationResult !== true || empty($data['address_line_three'])) {
               $data['address_line_three_err'] = !empty($addressValidationResult) ? $addressValidationResult : 'address line 03 cannot be empty';
-          }
-
-        }
-
-        if(empty($data['nic'])){
-        $data['nic_err']='nic cannot be empty';
-        }else{
-          $nicValidationResult = validateNIC($data['nic']);
-
-          if ($nicValidationResult !== true || empty($data['nic'])) {
-              $data['nic_err'] = !empty($nicValidationResult) ? $nicValidationResult : 'nic number cannot be empty';
           }
 
         }
