@@ -98,7 +98,7 @@ options.forEach((option) => {
 
                 <label> <input type="checkbox"  name="types[]" value="Liquid" <?php if(in_array('Liquid', $data['types'])) {echo "checked";} ?>>Liquid</label><br>
                 <label> <input type="checkbox"  name="types[]" value="Solid" <?php if(in_array('Solid', $data['types'])) {echo "checked"; }?>>Solid</label><br>
-                <label> <input type="checkbox"  name="types[]" value="Packet" <?php if(in_array('Packet', $data['types'])) {echo "checked";} ?>>Packet</label><br>
+                <label> <input type="checkbox"  name="types[]" value="Packets" <?php if(in_array('Packets', $data['types'])) {echo "checked";} ?>>Packet</label><br>
                 <label> <input type="checkbox"  name="types[]" value="Bottles" <?php if(in_array('Bottles', $data['types'])) {echo "checked";} ?>>Bottles</label><br>
             </div>
         </div>
@@ -266,81 +266,3 @@ foreach($data['wishlist_items'] as $wishlist_item)
 </div>
 
 
-
-<script type="text/javascript" defer>
-let p = document.querySelector('.delete_dialog_heading p');
-var deletePopup = document.getElementById("deletePopup");
-; // Change the height to 300 pixels
-let button  = document.getElementById('cancelbtn');
- function popUpOpen() {
-    const deletePopup = document.getElementById('deletePopup')
-  //   document.getElementById('delete').addEventListener('click',() => deletePopup.showModal());
-  cancelbtn.style.backgroundColor =  "#AEF359";
-  cancelbtn.style.color = "white";
-  cancelbtn.style.outline = "none";
-  deletePopup.style.overflow = "hidden";
-  deletePopup.style.borderRadius = "10px";
-  p.style.fontSize = "20px";
-  deletePopup.style.width = "300px"; // Change the width to 500 pixels
-  deletePopup.style.height = "150px"
-  document.getElementById('cancelbtn').addEventListener('click',() => deletePopup.close());
-  deletePopup.showModal();
-//   document.getElementById('deletebtn').value=id;
-  
-}
-
-if(p.innerHTML != ""){
-    popUpOpen();
-}
-
-const elements = document.querySelectorAll('[class*=fa-heart]');
-console.log(elements.length)
-elements.forEach(element => {
-    element.addEventListener('click', () => {
-        console.log(element.classList);
-       if(element.classList.contains('fa-solid')){
-        element.classList.remove('fa-solid');
-        element.classList.add('fa-regular');
-
-        let productID =  element.dataset.productId;
-        console.log(productID);
-        // Send an AJAX request to delete the product from the wishlist
-        var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', `http://localhost/Sobawitha/wishlist/delete/${productID}`);
-        xhr.onload = function() {
-        if (xhr.status === 200) {
-          console.log("successfully deleted");
-        }
-        else {
-            alert('Request failed.  Returned status of ' + xhr.status);
-        }
-        };
-        xhr.send();
-    }
-    else if(element.classList.contains('fa-regular')){
-        element.classList.remove('fa-regular');
-        element.classList.add('fa-solid');
-        let productID =  element.dataset.productId;
-        // Send an AJAX request to delete the product from the wishlist
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', `http://localhost/Sobawitha/wishlist/addToWishlist/${productID}`);
-        xhr.onload = function() {
-        if (xhr.status === 200) {
-            // Reload the page or update the UI to reflect the removed product
-            console.log("successfully added");
-        }
-        else {
-            alert('Request failed.  Returned status of ' + xhr.status);
-        }
-        };
-        xhr.send();
-    }
-})
-
-});
-
-
-
- 
-
-</script>

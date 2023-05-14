@@ -162,8 +162,9 @@ xhr.open('DELETE', `http://localhost/Sobawitha/wishlist/delete/${productID}`);
 xhr.onload = function() {
   if (xhr.status === 200) {
     // Reload the page or update the UI to reflect the removed product
-    let stmt = "Product removed from the wishlist"
-    //popUpOpen(stmt);
+    // let stmt = "Product removed from the wishlist"
+    // popUpOpen(stmt);
+    console.log("Product removed from the wishlist")
 
     // Close the dialog box when the close button is clicked
    
@@ -186,9 +187,10 @@ xhr.open('POST', `http://localhost/Sobawitha/wishlist/addToWishlist/${productID}
 xhr.onload = function() {
     if (xhr.status === 200) {
         // Reload the page or update the UI to reflect the added product
-        let stmt = "Product added to the wishlist"
-        //popUpOpen(stmt);
+        // let stmt = "Product added to the wishlist"
+        // popUpOpen(stmt);
         
+        console.log("Product added to the wishlist")
         // Close the dialog box when the close button is <clicked>  </clicked>
 
 

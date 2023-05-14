@@ -366,6 +366,7 @@
             }
 
 
+            
             $result = $this->sellerAdModel->customized_query($query);
            
             $manufacturers = $this->sellerAdModel->get_manufacturer_names();

@@ -218,7 +218,7 @@ class M_supplier_view
     
 /* */
     public function find_price_from_id($product_id){
-        $this->db->query("SELECT price as product_price from raw_material WHERE product_id = :product_id");
+        $this->db->query("SELECT price  from raw_material WHERE Product_id = :product_id");
         $this->db->bind(":product_id", $product_id);
         return $this->db->single();
     }
@@ -229,7 +229,7 @@ class M_supplier_view
         return $this->db->single();
     }
     public function find_name_from_id($product_id){
-        $this->db->query("SELECT product_name as product_name from raw_material WHERE product_id = :product_id");
+        $this->db->query("SELECT product_name  from raw_material WHERE Product_id = :product_id");
         $this->db->bind(":product_id", $product_id);
         return $this->db->single();
     }

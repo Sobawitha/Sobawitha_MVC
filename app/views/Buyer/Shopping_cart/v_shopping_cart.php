@@ -148,29 +148,6 @@ var hideTime = 5000; // 5 seconds
 // }, hideTime);
 
 
-placeOrderBtn.addEventListener("click", function(){
-
-  if(checkBoxVal.checked){
-
-    
-    console.log("Hell o");
-    
-    window.location.href = "http://localhost/Sobawitha/Pages/orderpage"
-  }
-
-  else{
-
-
-document.getElementById('terms_and_condition_check').style.display = "block";
-
-}
-
-
-
-
-
-
-})
 for (let i = 0; i < incrementButtons.length; i++) {
   incrementButtons[i].addEventListener('click', function(e) {
   console.log("Hello");

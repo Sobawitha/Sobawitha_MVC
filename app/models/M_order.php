@@ -121,7 +121,7 @@ class M_order
          
         
         // Insert a record into the `order_products` table
-        $this->db->query("INSERT INTO seller_orders(seller_id,payment_type,current_status) VALUES(:cust_id,'online',1)");
+        $this->db->query("INSERT INTO seller_orders(seller_id,current_status) VALUES(:cust_id,1)");
 
         $this->db->bind(':cust_id', $_SESSION['user_id']);
         
