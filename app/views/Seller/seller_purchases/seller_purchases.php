@@ -49,7 +49,7 @@
                         <th>Item</th>
                         <th>Quantity</th>
                         <th>Date</th>
-                        <th>Price(Per item)</th>
+                        <th>Price(Rs)</th>
                         <th>Options</th>
                 </tr>
 

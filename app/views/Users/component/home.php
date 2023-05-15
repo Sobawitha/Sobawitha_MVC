@@ -295,7 +295,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
         </div>
     </div>
 
-    <div class="fifth_part">
+    <!-- <div class="fifth_part">
         <div class="acknowledgement">
             <div class="ack_author_sec"><img src="../images/dp.jpg" class="acknowledgement_img"></img><br>
             <span class="acknowledgement_author">M.R Mayunika</span>
@@ -337,7 +337,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
             </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 <div id="footer">
 <dialog id="my-dialog">

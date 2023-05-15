@@ -255,6 +255,7 @@ public function  adminSearchAd()
  
 public function  adminReviewAd($product_id,$category = null)
 {
+  
   if(isset($_SESSION['user_id']) && $_SESSION['user_flag'] ==1){  
   if (isset($_GET['category'])) {
     $category = $_GET['category'];

@@ -28,7 +28,7 @@
         INNER JOIN raw_material ON raw_material.product_id = seller_order_raw_material.product_id 
         WHERE seller_orders.seller_id = :user_id 
         GROUP BY seller_orders.order_id, seller_orders.created_at, seller_order_raw_material.product_id 
-        ORDER BY seller_orders.created_at ;');
+        ORDER BY seller_orders.order_id DESC ;');
         $this->db->bind(":user_id", $_SESSION['user_id']);
         return $this->db->resultSet();
     }

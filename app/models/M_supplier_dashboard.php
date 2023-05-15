@@ -75,9 +75,9 @@
     }
 
     public function get_stock_details($start_from,$num_per_page){
-        $this->db->query("SELECT raw_material.product_id, raw_material.product_name, raw_material.quantity, raw_material_product_starting_stock.quantity as supplied_quantity from raw_material left join raw_material_product_starting_stock on raw_material.product_id = raw_material_product_starting_stock.product_id where user_id = :id limit :start_from, :num_per_page");
-        $this->db->bind(":start_from", $start_from);
-        $this->db->bind(":num_per_page", $num_per_page);
+        $this->db->query("SELECT raw_material.product_id, raw_material.product_name, raw_material.quantity, raw_material_product_starting_stock.quantity as supplied_quantity from raw_material left join raw_material_product_starting_stock on raw_material.product_id = raw_material_product_starting_stock.product_id where user_id = :id limit 9");
+        // $this->db->bind(":start_from", $start_from);
+        // $this->db->bind(":num_per_page", $num_per_page);
         $this->db->bind(":id", $_SESSION['user_id']);
         return $this->db->resultSet();
     }

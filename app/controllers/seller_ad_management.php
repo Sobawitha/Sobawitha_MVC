@@ -104,7 +104,7 @@
                 'quantity' => trim($_POST['quantity']),
                 'type' => trim($_POST['type']),
                 'current_status' => 0,
-                'category' => 'Fertilizer',
+                'category' => 'fertilizer',
                 'created_by' => $userid,
                 'avg_rating' => $avg_rating->average_rating,
                 // 'fertilizer_image' =>$_FILES['fertilizer_img'],
@@ -323,18 +323,18 @@
   
           }
 
-          $price_validate_result = validatePriceadfertilizer($data['price']);
-          if ($price_validate_result !== true){
-            $data['price_err'] = $price_validate_result;
-          }
+        //   $price_validate_result = validatePriceadfertilizer($data['price']);
+        //   if ($price_validate_result !== true){
+        //     $data['price_err'] = $price_validate_result;
+        //   }
 
-          // Example usage
-            $inputPrice = $_POST['price']; // Get the value of the price input field from the form using the POST method
-            if (validatePrice($inputPrice)) {
-            // Price is valid
-            } else {
-            // Price is invalid
-            }
+        //   // Example usage
+        //     $inputPrice = $_POST['price']; // Get the value of the price input field from the form using the POST method
+        //     if (validatePrice($inputPrice)) {
+        //     // Price is valid
+        //     } else {
+        //     // Price is invalid
+        //     }
 
 
             $this->seller_ad_management_model->update_advertisment($data,$id);

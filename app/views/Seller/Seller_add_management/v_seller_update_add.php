@@ -83,14 +83,15 @@
                     <span class="details">Crop Type</span>
                     <select name="crop_type" id="crop_type" >
                       
-                              <option value="Paddy" <?php if($data['fertilizer_details']->crop_type == 'Paddy') echo ' selected';?>>Paddy</option>
-                              <option value="Vegetables" <?php if($data['fertilizer_details']->crop_type == 'Vegetables') echo ' selected';?>>Vegetables</option>
-                              <option value="Tea" <?php if($data['fertilizer_details']->crop_type == 'Tea') echo ' selected';?>>Tea</option>
-                              <option value="Coconut" <?php if($data['fertilizer_details']->crop_type == 'Coconut') echo ' selected';?>>Coconut</option>
-                              <option value="Flowers" <?php if($data['fertilizer_details']->crop_type == 'Flower') echo ' selected';?>>Flowers</option>
-                              <option value="Rubber" <?php if($data['fertilizer_details']->crop_type == 'Rubber') echo ' selected';?>>Rubber</option>
-                              <option value="Othercrops" <?php if($data['fertilizer_details']->crop_type == 'Othercrops') echo ' selected';?>>Other Crops</option>
-                              <option value="Any" <?php if($data['fertilizer_details']->crop_type == 'Any') echo ' selected';?>>Any</option>
+                    <option value="Paddy">Paddy</option>
+                              <option value="Vegetables">Vegetables</option>
+                              <option value="Vegetables">Fruits</option>
+                              <option value="Tea">Tea</option>
+                              <option value="Coconut">Coconut</option>
+                              <option value="Flowers">Flowers</option>
+                              <option value="Rubber">Rubber</option>
+                              <option value="Grass">Grass</option>
+                              <option value="Any">Any</option>
                     </select>
                 </div>
 

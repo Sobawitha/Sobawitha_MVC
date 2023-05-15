@@ -251,7 +251,7 @@
                         <?php if(!empty($data['stock_details'])){?>
                         <table class="forum_post_detail_table">
                             <tr>
-                                <th>#</th>
+                                <th>Product ID</th>
                                 <th>Product name</th>
                                 <th>Quantity</th>
                                 <th>Sold</th>
@@ -283,7 +283,7 @@
                                 $uri = $_SERVER['REQUEST_URI'];
                                 $total_pages = ceil($total_row_count / $_SESSION['num_per_page']);
                             
-                                if(isset($_GET['page'])){
+                                /*if(isset($_GET['page'])){
                                     $page = $_GET['page'];
                                 }
                                 else{
@@ -306,8 +306,8 @@
                                 ?>
                                 No found
                                 <?php
-                            }
-                            ?>
+                            }*/
+                        }?>
 
                         </div>
                     </div>

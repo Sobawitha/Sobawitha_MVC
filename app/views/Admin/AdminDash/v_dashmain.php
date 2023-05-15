@@ -147,7 +147,7 @@
             <div class="charts">
               
                 <div class="chart">
-                    <h2>Fertilizer Ads (Past 12 months)</h2><br>
+                    <h2>Advertisements (Past 12 months)</h2><br>
                     <div>
                         <canvas id="lineChart"></canvas>   
                     </div>

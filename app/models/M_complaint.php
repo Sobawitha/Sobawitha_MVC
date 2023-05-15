@@ -40,55 +40,61 @@ class M_complaint
                 }
             
     }
-
-    public function display_all_complaint(){
+ 
+     public function display_all_complaint(){
         if(isset($_POST['search_text']) && !empty($_POST['search_text']) ){
             if(isset($_POST['complaint_type']) && !empty($_POST['complaint_type'])){
                 if ($_POST['complaint_type'] == 'all'){            
-                    $this->db->query('SELECT * FROM complaint WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid ORDER BY date');
+                    // $this->db->query('SELECT * FROM complaint WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid ORDER BY date');
+                    $this->db->query('select complaint.* , user.first_name as replyuser_first_name, user.last_name replyuser_last_name, user.profile_picture from complaint inner join user on user.user_id = complaint.solved_by where ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by = :userid ORDER BY date');
                     $this->db->bind(':userid', $_SESSION['user_id']);
                     $this->db->bind(":search_content", ($_POST['search_text']));
                     return $this->db->resultSet(); 
                 }
                 if ($_POST['complaint_type'] == 'completed'){
-                    $this->db->query('SELECT * FROM complaint WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid AND current_status = 1 ORDER BY date');
+                    // $this->db->query('SELECT * FROM complaint WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid AND current_status = 1 ORDER BY date');
+                    $this->db->query('select complaint.* , user.first_name as replyuser_first_name, user.last_name replyuser_last_name, user.profile_picture from complaint inner join user on user.user_id = complaint.solved_by where ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND current_status=1 AND created_by = :userid ORDER BY date');
                     $this->db->bind(':userid', $_SESSION['user_id']);
                     $this->db->bind(":search_content", ($_POST['search_text']));
                     return $this->db->resultSet(); 
                 }
                 if ($_POST['complaint_type'] == 'pending'){
-                    $this->db->query('SELECT * FROM complaint WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid AND current_status = 0 ORDER BY date');
+                    // $this->db->query('SELECT * FROM complaint WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid AND current_status = 0 ORDER BY date');
+                    $this->db->query('select complaint.* , user.first_name as replyuser_first_name, user.last_name replyuser_last_name, user.profile_picture from complaint inner join user on user.user_id = complaint.solved_by where ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND current_status=0 AND created_by = :userid ORDER BY date');
                     $this->db->bind(':userid', $_SESSION['user_id']);
                     $this->db->bind(":search_content", ($_POST['search_text']));
                     return $this->db->resultSet(); 
                 }
             }
             else{
-                $this->db->query('SELECT * FROM complaint WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid ORDER BY date');
+                // $this->db->query('SELECT * FROM complaint WHERE ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by=:userid ORDER BY date');
+                $this->db->query('select complaint.* , user.first_name as replyuser_first_name, user.last_name replyuser_last_name, user.profile_picture from complaint inner join user on user.user_id = complaint.solved_by where ((upper(subject) like upper(concat("%", :search_content , "%"))) or (upper(type) like upper(concat("%", :search_content , "%")))) AND created_by = :userid ORDER BY date');
                 $this->db->bind(':userid', $_SESSION['user_id']);
                 $this->db->bind(":search_content", ($_POST['search_text']));
                 return $this->db->resultSet(); 
             }
         }
         else if(!isset($_POST['search_text']) && (isset($_POST['complaint_type']) && !empty($_POST['complaint_type']))){
-            if ($_POST['complaint_type'] == 'all'){            
-                $this->db->query('SELECT * FROM complaint WHERE created_by=:userid ORDER BY date');
+
+
+        if ($_POST['complaint_type'] == 'all'){            
+                $this->db->query('select complaint.* , user.first_name as replyuser_first_name, user.last_name replyuser_last_name, user.profile_picture from complaint inner join user on user.user_id = complaint.solved_by where created_by = :userid ORDER BY date');
                 $this->db->bind(':userid', $_SESSION['user_id']);
                 return $this->db->resultSet(); 
             }
             if ($_POST['complaint_type'] == 'completed'){
-                $this->db->query('SELECT * FROM complaint WHERE current_status = 1 ORDER BY date');
+                $this->db->query('select complaint.* , user.first_name as replyuser_first_name, user.last_name replyuser_last_name, user.profile_picture from complaint inner join user on user.user_id = complaint.solved_by where created_by = :userid AND current_status=1 ORDER BY date');
                 $this->db->bind(':userid', $_SESSION['user_id']);
                 return $this->db->resultSet(); 
             }
             if ($_POST['complaint_type'] == 'pending'){
-                $this->db->query('SELECT * FROM complaint WHERE created_by=:userid AND current_status = 0 ORDER BY date');
+                $this->db->query('select complaint.* , user.first_name as replyuser_first_name, user.last_name replyuser_last_name, user.profile_picture from complaint inner join user on user.user_id = complaint.solved_by where created_by = :userid AND current_status=0 ORDER BY date');
                 $this->db->bind(':userid', $_SESSION['user_id']);
                 return $this->db->resultSet(); 
             }
         }
         else{
-            $this->db->query('SELECT * FROM complaint WHERE created_by=:userid ORDER BY date');
+            $this->db->query('select complaint.* , user.first_name as replyuser_first_name, user.last_name replyuser_last_name, user.profile_picture from complaint inner join user on user.user_id = complaint.solved_by where created_by = :userid ORDER BY date');
             $this->db->bind(':userid', $_SESSION['user_id']);
             return $this->db->resultSet(); 
         }

@@ -250,7 +250,7 @@
 
             </div>
 
-            <div class="chartsLevel3">
+            <!-- <div class="chartsLevel3">
               
                 <div class="chart">
                     <h2>Stock details</h2><br>
@@ -320,7 +320,7 @@
                         </div>
                     </div>
                 </div>
-        </div>
+        </div> -->
 
     </div>
     </div>

@@ -126,7 +126,7 @@ else if($_SESSION['user_flag'] == 4){
             <?php foreach($data['ads'] as $ad): ?>
                 
                 <div class="adv_card">
-                <div class="card_image" style="background: url(<?php echo URLROOT;?>/img/postsImgs/<?php echo $ad->raw_material_image;?>); background-size: cover; height:75%; -webkit-background-size:cover ; background-position:center; margin:0px; padding:0px;">
+                <div class="card_image" style="background: url(<?php echo URLROOT;?>/public/img/postsImgs/<?php echo $ad->raw_material_image;?>); background-size: cover; height:75%; -webkit-background-size:cover ; background-position:center; margin:0px; padding:0px;">
                     <div class="product_detail">
                         <?php if($_SESSION['user_flag']==3){
                             

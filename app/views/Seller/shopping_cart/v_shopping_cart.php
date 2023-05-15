@@ -44,7 +44,7 @@ function checkout() {
                         <div class="order_detail">
                             <div class="product_detail">
                             <a href="<?php echo URLROOT ?>/supplier_ad_view/remove_from_cart?product_id=<?php echo $cart_item->Product_id ?>&quantity=<?php echo $cart_item->quantity ?>"><i class="fa-solid fa-xmark" id="cancel_order"></i></a><br><br>
-                                <img src="<?php echo URLROOT ?>/public/upload/raw_material_images/<?php echo $cart_item->raw_material_image ?>" class="cart_image"></img>
+                                <img src="<?php echo URLROOT ?>/public/img/postsImgs/<?php echo $cart_item->raw_material_image ?>" class="cart_image"></img>
                                 <br>
                                 <span class="order_p_name"><?php echo $cart_item->product_name ?></span><br>
                                 <span class="order_p_id">Product ID: <?php echo $cart_item->Product_id ?></span><br>
@@ -151,7 +151,7 @@ function checkout() {
                 <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
                 <button class="checkout" onclick="checkout()">checkout</button><br>  
                 <br>             
-                <button class="paypal">Paypal</button><br>
+                <button class="paypal" hidden>Paypal</button><br>
                 <i class="fa-solid fa-bag-shopping" id="bag"></i>
                 </div>
   
