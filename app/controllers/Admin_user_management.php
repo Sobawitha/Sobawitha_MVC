@@ -708,7 +708,7 @@
             $count = 0;
             $data = [
                 'user' => $users['rows'],
-                'search' => 'Search by firstname | lastname | Address | NIC No | Email',
+                'search' => 'Search by firstname | lastname | Address | NIC No | Email | Birthday',
                 'emptydata' => "No Users to Show...",
                 'id' => $count,
                 'no_of_notifications' =>$no_of_notifications,
@@ -726,7 +726,7 @@
                 $count = 0;
                 $data = [
                     'user' => $users['rows'],
-                    'search' => 'Search by firstname | lastname | Address | NIC No | Email',
+                    'search' => 'Search by firstname | lastname | Address | NIC No | Email | Birthday',
                     'emptydata' => '',
                     'userType' => $_SESSION['radio_admin_role'],
                     'id' => $count,
@@ -760,7 +760,7 @@
                 $count = 0;
                 $data = [
                     'user' => $users['rows'],
-                    'search' => 'Search by firstname | lastname | Address | NIC No | Email',
+                    'search' => 'Search by firstname | lastname | Address | NIC No | Email | Birthday',
                     'emptydata' => 'No Users to Show...',
                     'id' => $count,
                     'no_of_notifications' =>$no_of_notifications,
@@ -778,7 +778,7 @@
                 $count = 0;
                 $data = [
                     'user' => $users['rows'],
-                    'search' => 'Search by firstname | lastname | Address | NIC No | Email',
+                    'search' => 'Search by firstname | lastname | Address | NIC No | Email | Birthday',
                     'emptydata' => '',
                     'userType' => $_SESSION['radio_admin_role'],
                     'id' => $count,

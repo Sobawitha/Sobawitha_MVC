@@ -81,6 +81,7 @@
                 'current_status' => 0,
                 'no_of_notifications' =>$no_of_notifications,
                 'notifications' => $notifications,
+                'type_new'=> trim($_POST['waste-type']),
                 // 'raw_material_image' => trim($_POST['image']),
                 
                 'image_err1' => '',

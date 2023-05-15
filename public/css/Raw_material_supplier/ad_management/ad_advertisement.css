@@ -116,9 +116,7 @@ form .input-box span.details{
    background: black;
    border-color: #d9d9d9;
  }
- form input[type="radio"]{
-   display: none;
- }
+ 
 
  form .reg_button input:hover , #publish_btn:hover{
   /* transform: scale(0.99); */

@@ -146,7 +146,7 @@
 
     public function getSearchUsers($search)
     {
-      $this->db->query("SELECT * FROM user WHERE CONCAT(first_name,last_name,email,nic_no,address_line_one,address_line_two,address_line_three,address_line_four) LIKE '%$search%' ");
+      $this->db->query("SELECT * FROM user WHERE CONCAT(first_name,last_name,email,nic_no,address_line_one,address_line_two,address_line_three,address_line_four,dob) LIKE '%$search%' ");
       $result=$this->db->resultSet();
       return $result;    
     } 

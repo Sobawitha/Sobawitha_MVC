@@ -91,7 +91,7 @@ class M_supplier_advertisment
 
 
     public function create($data) {
-        $this->db->query('INSERT INTO raw_material(product_name, manufacturer, quantity, price, product_description, type, raw_material_image, rm_image_two, rm_image_three, user_id, current_status) VALUES (:product_name, :manufacturer, :quantity, :price, :product_description, :type, :image1, :image2, :image3, :user_id, :current_status)');
+        $this->db->query('INSERT INTO raw_material(product_name, manufacturer, quantity, price, product_description, type, raw_material_image, rm_image_two, rm_image_three, user_id, current_status, type_new) VALUES (:product_name, :manufacturer, :quantity, :price, :product_description, :type, :image1, :image2, :image3, :user_id, :current_status, :type_new)');
         $this->db->bind(':user_id', $_SESSION['user_id']);
         $this->db->bind(':image1', $data['image_name1']);
         $this->db->bind(':image2', $data['image_name2']);
@@ -106,6 +106,7 @@ class M_supplier_advertisment
         // $this->db->bind(':category_per', $data['category_per']);
         $this->db->bind(':product_description', $data['product_description']);
         $this->db->bind(':type', $data['type']);
+        $this->db->bind(':type_new', $data['type_new']);
         
         $this->db->bind(':current_status', $data['current_status']);
 

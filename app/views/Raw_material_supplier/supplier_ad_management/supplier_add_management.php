@@ -77,6 +77,7 @@
                                 <td>Title</td>
                                 <td>Price(Rs.)</td>
                                 <td>Avaiable Quantity</td>
+                                <td>Type</td>
                                 <td>Additional Infomation</td>
                                 <td>Options</td>
                                 <td></td>
@@ -94,7 +95,7 @@
                                         <td><span class="category"><?php echo $ad->price ?></span></td>
 
                                         <td><span class="certificate No<"><?php echo $ad->quantity ?></span></td>
-
+                                        <td><span class="certificate No<"><?php echo $ad->type_new ?></span></td>
                                         <td>
                                                 <span class="manufacture">
                                                         <?php

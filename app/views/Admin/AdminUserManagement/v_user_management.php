@@ -34,7 +34,7 @@
         </div>
               <?php if(empty($data['message'])){ ?>
 
-                <?php if($data['search'] === 'Search by firstname | lastname | Address | NIC No | Email' ): ?>
+                <?php if($data['search'] === 'Search by firstname | lastname | Address | NIC No | Email | Birthday' ): ?>
                 <div class="filter_section">
                     <form method ="POST" action="<?php echo URLROOT?>/Admin_user_management/view_all_users" id="filter_form">
 
@@ -141,6 +141,7 @@
                                 <td>User Email</td>
                                 <td>User NIC</td>
                                 <td>Contact No</td>
+                                <td>Birthday</td>
                                 <td>User Role</td>
                                 <td>Active Status</td>
                                 <td>Actions</td>
@@ -158,6 +159,7 @@
                       <td><?php echo $users->email ?></td>
                       <td><?php echo $users->nic_no ?></td>
                       <td><?php echo $users->contact_no ?></td>
+                      <td><?php echo $users->dob ?></td>
                       <?php if($users->user_flag==1): ?>
                         <td ><button class="user_role">Admin</button></td>
                         <?php elseif($users->user_flag==2): ?>

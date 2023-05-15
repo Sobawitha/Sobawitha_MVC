@@ -66,6 +66,16 @@
                     <input type="text" placeholder="Eg:-Egg shells - 200g" name="name" required>
                     <span class="error_msg"><?php echo $data['product_name_err'] ?></span>
                   </div>
+                    <div>
+                  <label>
+                    <input type="radio" name="waste-type" value="bio-waste">
+                    Bio Waste
+                  </label><br>
+                  <label>
+                    <input type="radio" name="waste-type" value="chemical-base">
+                    Chemical Base
+                  </label>
+                  </div>
 
                   <div class="input-box ">
                     <div class="text_filed">
@@ -104,6 +114,7 @@
                   </div>
                   </div>
 
+
                   <div class="input-box">
                     <span class="details">Additional information</span>
                     <textarea
@@ -113,6 +124,16 @@
                     ></textarea>
                     <span class="error_msg"><?php echo $data['product_description_err'] ?></span>
                   </div>
+
+                  
+                  <!-- <div class="">
+                  <input type="text" placeholder="Enter available quantity" name="quantity" required> -->
+                            <!-- <label for="innovations" id="filter_label"> Chemical Base</label><input type="radio"  name="tag" value="Innovations"><br>
+                            <label for="knowledge" id="filter_label">Bio Waste</label> <input type="radio" name="tag" value="Knowledge"><br> -->
+<!--                            
+                  </div> -->
+
+
                   <!-- <div class="input-box">
                     <span class="details">Price</span>
                     <input type="text" placeholder="" >
