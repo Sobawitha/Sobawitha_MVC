@@ -98,7 +98,8 @@ foreach($data['cart'] as $cart):{
                         <input type="checkbox" name = "agree-terms" id  = "checkvalue" /><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br><br>
                         <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
                         <button class="checkout">Online</button><br>
-                        <button class="paypal">Place an Order</button><br>
+                        <button class="paypal" hidden
+                        >Place an Order</button><br>
                         <i class="fa-solid fa-bag-shopping" id="bag"></i>
                 </div>
         </div>

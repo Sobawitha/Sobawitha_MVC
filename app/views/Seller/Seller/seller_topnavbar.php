@@ -25,19 +25,19 @@ $current_url = "http".(!empty($_SERVER['HTTPS'])?"s":"")."://".$_SERVER['HTTP_HO
           <?php foreach ($data['notifications'] as $notifications): ?> 
 
           <?php if($notifications->type == 'information'){?>
-            <div class="notification">
+            <div class="notificatioon">
             <i class="fa-solid fa-circle-info" id="mail"></i><span class="notification_line"><?php echo $notifications->message ?></span>
             <hr class="notification_hr">
             </div>  
           <?php
           }else if($notifications->type == 'message'){?>
-              <div class="notification">
+              <div class="notificatioon">
               <i class="fa-regular fa-message" id="messages"></i><span class="notification_line"><?php echo $notifications->message ?></span>
               <hr class="notification_hr">
               </div> 
           <?php
           }else if($notifications->type == 'annoucement'){?>
-            <div class="notification">
+            <div class="notificatioon">
             <i class="fa-brands fa-forumbee" id="forum"></i><span class="notification_line"><?php echo $notifications->message ?></span>
             <hr class="notification_hr">
             </div> 

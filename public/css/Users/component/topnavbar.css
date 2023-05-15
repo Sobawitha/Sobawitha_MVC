@@ -106,7 +106,7 @@ body {
   padding:20px;
   border-radius: 10px;
   box-shadow: 0 0 10px 5px #00000031;
-  z-index: 8000;
+  z-index: 1000000;
   border-top:45px solid rgb(72, 67, 67);
   transform:translateX(-20px);
   width:251px;

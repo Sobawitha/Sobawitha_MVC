@@ -27,8 +27,8 @@ else if($_SESSION['user_flag'] == 5){
         if($type == 'faq') return 'set-green';
         if($type == 'feedback') return 'set-yellow';
         if($type == 'annousments') return 'set-orange';
-        if($type == 'Jobs') return 'set-purple';
-        if($type == 'Introductions') return 'set-blue';
+        if($type == 'jobs') return 'set-purple';
+        if($type == 'Introductions') return 'set-blue';   
     }
 
 ?>

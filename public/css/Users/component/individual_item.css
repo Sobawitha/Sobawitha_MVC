@@ -1369,3 +1369,8 @@ dialog button:hover {
   background-color: #005ce6;
 }
 
+
+#errorMsg{
+  color:red;
+  transform: translateX(-50px);
+}

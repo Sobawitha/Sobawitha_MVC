@@ -296,47 +296,7 @@ foreach($data['wishlist_items'] as $wishlist_item)
     </div>
 
     <div class="fifth_part">
-        <div class="acknowledgement">
-            <div class="ack_author_sec"><img src="../images/dp.jpg" class="acknowledgement_img"></img><br>
-            <span class="acknowledgement_author">M.R Mayunika</span>
-            <br><br>
-            <div class="acknowledgement_content_sec">
-            <span class="acknowledgement_content">With gratitude, all praises go to Him, The Creator of all. After all obstacles and hardship that obstruct our path, finally we reach our goal. 
-                With satisfaction, 
-                now we are already finished our business plan report. Hereby, without doubt we would like to say that, during the completion of this course, 
-                ample of knowledge and experiences have been obtained. Though, undeniably, it is quite difficult for us to complete the task, it is worthy and we learn much. 
-                Alhamdulillah, thank you to the all mighty ALLAH S.W.T because of His divine guidance which has enabled us to finish our business plan.</span>
-            </div>
-            </div>
-        </div>
-
-        <div class="acknowledgement">
-            <div class="ack_author_sec"><img src="../images/dp1.jpg" class="acknowledgement_img"></img><br>
-            <span class="acknowledgement_author">M.R Mayunika</span>
-            <br><br>
-            <div class="acknowledgement_content_sec">
-            <span class="acknowledgement_content">With gratitude, all praises go to Him, The Creator of all. After all obstacles and hardship that obstruct our path, finally we reach our goal. 
-                With satisfaction, 
-                now we are already finished our business plan report. Hereby, without doubt we would like to say that, during the completion of this course, 
-                ample of knowledge and experiences have been obtained. Though, undeniably, it is quite difficult for us to complete the task, it is worthy and we learn much. 
-                Alhamdulillah, thank you to the all mighty ALLAH S.W.T because of His divine guidance which has enabled us to finish our business plan.</span>
-            </div>
-            </div>
-        </div>
-
-        <div class="acknowledgement">
-            <div class="ack_author_sec"><img src="../images/dp3.jpg" class="acknowledgement_img"></img><br>
-            <span class="acknowledgement_author">Punsara Deshan</span>
-            <br><br>
-            <div class="acknowledgement_content_sec">
-            <span class="acknowledgement_content">With gratitude, all praises go to Him, The Creator of all. After all obstacles and hardship that obstruct our path, finally we reach our goal. 
-                With satisfaction, 
-                now we are already finished our business plan report. Hereby, without doubt we would like to say that, during the completion of this course, 
-                ample of knowledge and experiences have been obtained. Though, undeniably, it is quite difficult for us to complete the task, it is worthy and we learn much. 
-                Alhamdulillah, thank you to the all mighty ALLAH S.W.T because of His divine guidance which has enabled us to finish our business plan.</span>
-            </div>
-            </div>
-        </div>
+        
     </div>
 
 <div id="footer">

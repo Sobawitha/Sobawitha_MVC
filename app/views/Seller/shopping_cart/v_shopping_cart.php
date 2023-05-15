@@ -149,7 +149,7 @@ function checkout() {
                 <span class="discription">Shipping and taxes calculate at checkout.</span>
                 <input type="checkbox" id="terms-checkbox"><label class="agreement">I agree for <span class="term">terms & conditions</span></label><br>
                 <span id="terms_and_condition_check" >Please agree to the terms and conditions before proceeding to checkout.</span>
-                <button class="checkout" onclick="checkout()">checkout</button><br>  
+                <button class="checkout" onclick="checkout()" hidden>checkout</button><br>  
                 <br>             
                 <button class="paypal">Paypal</button><br>
                 <i class="fa-solid fa-bag-shopping" id="bag"></i>
